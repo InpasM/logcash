@@ -1,0 +1,125 @@
+* 
+{
+	font-family: "Futura PT", "Futura", "Helvetica", "Sans serif";
+}
+
+body
+{
+	background: #12141a;;
+}
+
+.main-div 
+{
+	background: #1d2028;
+	box-sizing: border-box;
+	/* width: 581px; */
+	width: 100%;
+	height: 335px;
+	padding: 25px;
+}
+
+.container-logcash 
+{
+	/* background: #3a3d43; */
+	height: 100%;
+}
+
+.profile-title 
+{
+	border-bottom: 2px solid transparent;
+	text-transform: uppercase;
+	padding: 0;
+	margin: 0;
+	margin-bottom: 15px;
+	font-weight: bold;
+	
+	color: #f2f2f2;
+	font-size: 0.8em;
+}
+
+.container-month 
+{
+	padding-top: 10px;
+	/* background: #12141a; */
+	width: 100%;
+
+}
+
+.row-top, .row-bottom
+{
+	/* color: #474b54; */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.row-top p
+{
+	padding: 0;
+	margin: 0 8px;
+	font-size: 0.9em;
+}
+
+.text-month
+{
+	color: #787d87;
+}
+
+.text-cash
+{
+	color: #787d87;
+}
+
+.row-progress-bar 
+{
+	/* background: #2d313c; */
+	display: flex;
+	justify-content: space-evenly;
+	border: 2px solid #2d313c;
+	height: 40px;
+	border-radius: 5px;
+	margin: 8px 0;
+}
+
+.side-progress
+{
+	/* background: #252932; */
+	background: #2d313c;
+	min-width: 40px;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.text-progress
+{
+	padding: 5px 0 0 0;
+	margin: 0;
+	color: #a8aeb9;
+}
+
+
+.side-remaining
+{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex: 1;
+}
+
+.text-remaining
+{
+	/* background: #234a92; */
+	padding: 5px 0 0 0;
+	margin: 0;
+	color: #595d62;
+}
+
+.text-bottom
+{
+	padding: 0;
+	margin: 0 8px;
+	font-size: 0.9em;
+	color: #3b404e;
+}
