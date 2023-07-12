@@ -1,4 +1,3 @@
-// document.body.style.border = "5px solid blue";
 
 const h4Title = document.querySelectorAll(".profile-title");
 
@@ -11,12 +10,15 @@ function getDivLogtime()
 	}
 }
 
-function getLastMonth(date)
+function getLastMonth(date, short)
 {
 	const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 	const monthShort = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
-	return (month[date.getMonth()]);
+	if (short)
+		return (monthShort[date.getMonth()]);
+	else
+		return (month[date.getMonth()]);
 }
 
 function generateLogcashDiv(divLogtime)
@@ -60,7 +62,6 @@ function generateLogcashDiv(divLogtime)
 	const textRemaining = document.createElement("p");
 	textRemaining.className = "text-remaining";
 	sideRemaining.appendChild(textRemaining);
-	
 	rowProgress.appendChild(sideProgress);
 	rowProgress.appendChild(sideRemaining);
 	
@@ -78,7 +79,7 @@ function generateLogcashDiv(divLogtime)
 	containerLogcash.appendChild(containerMonth);
 
 	// calcul values
-	textMonth.innerText = getLastMonth(new Date());
+	textMonth.innerText = getLastMonth(new Date(), 0);
 	
 	const monthlySalary = 685;
 	const numHourRequired = getNumberHourRequired(new Date("7/12/2023"));
@@ -89,12 +90,9 @@ function generateLogcashDiv(divLogtime)
 	if (cashEarn > monthlySalary)
 		cashEarn = monthlySalary;
 
-	console.log(numHourRequired);
 	textCash.innerText = Math.floor(cashEarn) + "€";
-
 	if (pourcentDone >= 100)
 	{
-
 		textProgress.innerText = numDone + "h / " + numHourRequired + "h";
 		textRemaining.style.display = "none";
 	}
@@ -132,7 +130,6 @@ function generateLogcashDiv(divLogtime)
 	textCash.style.margin = "0 8px";
 	textCash.style.fontSize = "0.9em";
 	textCash.style.color = "#8e8e8f";
-	
 	
 	// row progress style
 	rowProgress.style.display = "flex";
@@ -181,24 +178,33 @@ function generateLogcashDiv(divLogtime)
 	textBottom.style.fontSize = "0.9em";
 	textBottom.style.color = "#41444a";
 
-
 	return (containerLogcash);
 }
 
 function getNumberHourDone(date)
 {
 	const calendar = document.querySelector("#user-locations");
-	const calendarElements = document.querySelector("#user-locations").childNodes;
-	
-	console.log(calendarElements.length);
+	var calendarElements = document.querySelector("svg#user-locations").childNodes;
+	const month = getLastMonth(new Date(), 1);
+
+	// console.log(calendarElements);
+	while (!calendarElements)
+		calendarElements = document.querySelector("svg#user-locations").childNodes;
 	for (var i = 0; calendarElements[i]; i++)
 	{
 		// tmpSplit = calendarElements[i].split(' ');
-		// if (calendarElements[i].tagName  == 'text')
-		// 	console.log(calendarElements[i]);
-	}
-	
+		if (!calendarElements[i].firstElementChild)
+		{
+			// console.log(calendarElements[i] + " " + month);
+			if (calendarElements[i].firstChild == month)
+				break;
+			// const 
 
+		}
+		// console.log(calendarElements[i]);
+	}
+	// console.log(calendarElements[0].firstChild);
+	
 	return (date.getMonth())
 }
 
@@ -207,7 +213,6 @@ function getNumberHourRequired(date)
 	const numHour2023 = [154,140,161,147,161,154,77,91,77,154,154,147];
 	const numHour2024 = [161,147,147,154,161,140,91,84,77,161,147,154];
 
-	console.log(date.getYear() + 1900);
 	if (date.getYear() + 1900 == 2023)
 		return (numHour2023[date.getMonth()]);
 	else if (date.getYear() + 1900 == 2024)
@@ -217,40 +222,66 @@ function getNumberHourRequired(date)
 function changeColorPage()
 {
 	const allContainer = document.querySelectorAll(".container-inner-item");
+	const noteTitle = document.querySelectorAll(".note-title");
+	const navbar = document.querySelector(".main-navbar");
 	
 	for(var i = 0; allContainer[i]; i++)
 	{
 		allContainer[i].style.backgroundColor = "#1d2028";
 		allContainer[i].style.border = "1px solid #2d313c";
 	}
+	
+	for (var i = 0; h4Title[i]; i++)
+	{
+		h4Title[i].style.color = "#eaeaeb";
+	}
+
+	for (var i = 0; noteTitle[i]; i++)
+	{
+		noteTitle[i].style.color = "rgb(65, 68, 74)";
+	}
+
 	document.body.style.backgroundColor = "#12141a";
+	navbar.style.backgroundColor = "#12141a";
 }
 
-changeColorPage();
+
+function initLogcash()
+{
+	var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+	if (isOpera)
+		changeColorPage();
+		
+	const divLogtime = getDivLogtime();
 	
-const divLogtime = getDivLogtime();
+	// divLogtime.style.backgroundColor = "#ffffff";
+	// divLogtime.style.removeProperty('max-height');
+	
+	// divLogtime.appendChild(generateLogcashDiv(divLogtime));
+	// console.log(divLogtime.parentElement.parentElement);
+	
+	// const cloneDiv = divLogtime.parentElement.cloneNode();
+	// cloneDiv.appendChild(generateLogcashDiv(cloneDiv));
+	 const cloneDiv = generateLogcashDiv(divLogtime);
+	
+	// cloneCalendar = divLogtime.lastElementChild.cloneNode(true);
+	// divLogtime.parentElement.parentElement.appendChild(generateLogcashDiv(divLogtime));
+	// console.log(cloneDiv);
+	
+	divLogtime.appendChild(cloneDiv);
+	divLogtime.className = "";
+	divLogtime.style.margin = "20px 0 0 0";
+	divLogtime.style.height = "100%";
+	divLogtime.style.backgroundColor = "#1d2028";
+	divLogtime.style.border = "1px solid #2d313c";
+	divLogtime.style.borderRadius = "3px";
+	divLogtime.style.padding = "20px 25px 25px 25px";
+	
+	// divLogtime.parentElement.parentElement.insertBefore(cloneDiv, divLogtime.parentElement.nextSibling);
+}
 
-// divLogtime.style.backgroundColor = "#ffffff";
-// divLogtime.style.removeProperty('max-height');
+// initLogcash();
 
-// divLogtime.appendChild(generateLogcashDiv(divLogtime));
-// console.log(divLogtime.parentElement.parentElement);
-
-// const cloneDiv = divLogtime.parentElement.cloneNode();
-// cloneDiv.appendChild(generateLogcashDiv(cloneDiv));
- const cloneDiv = generateLogcashDiv(divLogtime);
-
-// cloneCalendar = divLogtime.lastElementChild.cloneNode(true);
-// divLogtime.parentElement.parentElement.appendChild(generateLogcashDiv(divLogtime));
-console.log(cloneDiv);
-
-divLogtime.appendChild(cloneDiv);
-divLogtime.className = "";
-divLogtime.style.margin = "20px 0 0 0";
-divLogtime.style.height = "100%";
-divLogtime.style.backgroundColor = "#1d2028";
-divLogtime.style.border = "1px solid #2d313c";
-divLogtime.style.borderRadius = "3px";
-divLogtime.style.padding = "20px 25px 25px 25px";
-
-// divLogtime.parentElement.parentElement.insertBefore(cloneDiv, divLogtime.parentElement.nextSibling);
+window.onload = function() {
+	initLogcash();
+};
