@@ -13,9 +13,13 @@ body
 	background: #1d2028;
 	box-sizing: border-box;
 	/* width: 581px; */
-	width: 100%;
-	height: 335px;
+	/* width: 100%; */
+	/* height: 335px; */
 	padding: 25px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	/* dis */
 }
 
 .container-logcash 
@@ -29,8 +33,8 @@ body
 	border-bottom: 2px solid transparent;
 	text-transform: uppercase;
 	padding: 0;
-	margin: 0;
-	margin-bottom: 15px;
+	margin: 0 0 20px 0;
+	margin-bottom: 75px;
 	font-weight: bold;
 	
 	color: #f2f2f2;
@@ -85,7 +89,8 @@ body
 {
 	/* background: #252932; */
 	background: #2d313c;
-	min-width: 40px;
+	/* min-width: 40px; */
+	/* width: 10%; */
 	height: 100%;
 	display: flex;
 	justify-content: center;

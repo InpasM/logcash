@@ -1,10 +1,10 @@
 {
 
-	"manifest_version": 2,
-	"name": "Borderify",
+	"manifest_version": 3,
+	"name": "Logcash",
 	"version": "1.0",
 
-	"description": "Adds a red border to all webpages matching mozilla.org.",
+	"description": "Calcul and let you know how much hour you will need to do to get paid fully.",
 
 	"icons": {
 	  "48": "icons/logcash-48.png"

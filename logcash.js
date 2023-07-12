@@ -1,4 +1,4 @@
-document.body.style.border = "5px solid blue";
+// document.body.style.border = "5px solid blue";
 
 const h4Title = document.querySelectorAll(".profile-title");
 
@@ -11,9 +11,12 @@ function getDivLogtime()
 	}
 }
 
-function getLastMonth()
+function getLastMonth(date)
 {
+	const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+	const monthShort = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
+	return (month[date.getMonth()]);
 }
 
 function generateLogcashDiv(divLogtime)
@@ -74,6 +77,33 @@ function generateLogcashDiv(divLogtime)
 	// containerLogcash.appendChild(titleLogcash);
 	containerLogcash.appendChild(containerMonth);
 
+	// calcul values
+	textMonth.innerText = getLastMonth(new Date());
+	
+	const monthlySalary = 685;
+	const numHourRequired = getNumberHourRequired(new Date("7/12/2023"));
+	const numDone = getNumberHourDone(new Date());
+	const numRemaining = numHourRequired - numDone;
+	const pourcentDone = numDone / numHourRequired * 100;
+	var cashEarn = monthlySalary * (pourcentDone / 100);
+	if (cashEarn > monthlySalary)
+		cashEarn = monthlySalary;
+
+	console.log(numHourRequired);
+	textCash.innerText = Math.floor(cashEarn) + "€";
+
+	if (pourcentDone >= 100)
+	{
+
+		textProgress.innerText = numDone + "h / " + numHourRequired + "h";
+		textRemaining.style.display = "none";
+	}
+	else
+	{
+		textProgress.innerText = numDone + "h";
+		textRemaining.innerText = numRemaining + "h";
+	}
+	textBottom.innerText = Math.floor(pourcentDone) + "% of required logtime";
 
 	// apply style
 	// titleLogcash.style.margin = "20px 0 0 0";
@@ -115,12 +145,21 @@ function generateLogcashDiv(divLogtime)
 	sideProgress.style.display = "flex";
 	sideProgress.style.justifyContent = "center";
 	sideProgress.style.alignItems = "center";
-	sideProgress.style.minWidth = "30px";
+	sideProgress.style.minWidth = "50px";
+	if (pourcentDone < 10)
+		sideProgress.style.width = "50px";
+	else if (pourcentDone > 90 && pourcentDone < 100)
+		sideProgress.style.width = "90%";
+	else
+		sideProgress.style.width = pourcentDone + "%";
+	// sideProgress.style.maxWidth = "90%";
 	sideProgress.style.height = "100%";
 	sideProgress.style.backgroundColor = "#252932";
+	sideProgress.style.borderRadius = "0 4px 4px 0";
 	// text
 	textProgress.style.margin = "0";
 	textProgress.style.color = "#eaeaeb";
+	textProgress.style.fontSize = "0.8em";
 	
 	sideRemaining.style.display = "flex";
 	sideRemaining.style.justifyContent = "center";
@@ -129,6 +168,7 @@ function generateLogcashDiv(divLogtime)
 	// text
 	textRemaining.style.margin = "0";
 	textRemaining.style.color = "#8d8e8e";
+	textRemaining.style.fontSize = "0.8em";
 	
 	
 	// row bottom style
@@ -141,14 +181,52 @@ function generateLogcashDiv(divLogtime)
 	textBottom.style.fontSize = "0.9em";
 	textBottom.style.color = "#41444a";
 
-	// write text
-	textMonth.innerText = "July";
-	textCash.innerText = "0€";
-	textProgress.innerText = "0h";
-	textRemaining.innerText = "120h";
-	textBottom.innerText = "0% of required logtime";
+
 	return (containerLogcash);
 }
+
+function getNumberHourDone(date)
+{
+	const calendar = document.querySelector("#user-locations");
+	const calendarElements = document.querySelector("#user-locations").childNodes;
+	
+	console.log(calendarElements.length);
+	for (var i = 0; calendarElements[i]; i++)
+	{
+		// tmpSplit = calendarElements[i].split(' ');
+		// if (calendarElements[i].tagName  == 'text')
+		// 	console.log(calendarElements[i]);
+	}
+	
+
+	return (date.getMonth())
+}
+
+function getNumberHourRequired(date)
+{
+	const numHour2023 = [154,140,161,147,161,154,77,91,77,154,154,147];
+	const numHour2024 = [161,147,147,154,161,140,91,84,77,161,147,154];
+
+	console.log(date.getYear() + 1900);
+	if (date.getYear() + 1900 == 2023)
+		return (numHour2023[date.getMonth()]);
+	else if (date.getYear() + 1900 == 2024)
+		return (numHour2024[date.getMonth()]);
+}
+
+function changeColorPage()
+{
+	const allContainer = document.querySelectorAll(".container-inner-item");
+	
+	for(var i = 0; allContainer[i]; i++)
+	{
+		allContainer[i].style.backgroundColor = "#1d2028";
+		allContainer[i].style.border = "1px solid #2d313c";
+	}
+	document.body.style.backgroundColor = "#12141a";
+}
+
+changeColorPage();
 	
 const divLogtime = getDivLogtime();
 
