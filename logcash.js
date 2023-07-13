@@ -21,7 +21,7 @@ function getLastMonth(date, short)
 		return (month[date.getMonth()]);
 }
 
-function generateLogcashDiv(divLogtime)
+async function generateLogcashDiv(divLogtime)
 {
 	const containerLogcash = document.createElement("div");
 	// containerLogcash.className = "container-logcash";
@@ -83,9 +83,20 @@ function generateLogcashDiv(divLogtime)
 	
 	const monthlySalary = 685;
 	const numHourRequired = getNumberHourRequired(new Date("7/12/2023"));
-	const numDone = getNumberHourDone(new Date());
-	const numRemaining = numHourRequired - numDone;
-	const pourcentDone = numDone / numHourRequired * 100;
+
+	const calendar = await waitForAll('g[data-original-title]');
+
+	const time = getNumberHourDone(new Date(), calendar);
+
+	const result = user();
+	let hoursDone = (await time).hoursDone;
+	let minutesDone = (await time).minutesDone;
+	// let hoursDone = 10;
+	// let minutesDone = 0;
+
+	const hoursRemaining = numHourRequired - hoursDone;
+	const minutesRemaining = minutesDone;
+	const pourcentDone = hoursDone / numHourRequired * 100;
 	var cashEarn = monthlySalary * (pourcentDone / 100);
 	if (cashEarn > monthlySalary)
 		cashEarn = monthlySalary;
@@ -93,13 +104,19 @@ function generateLogcashDiv(divLogtime)
 	textCash.innerText = Math.floor(cashEarn) + "€";
 	if (pourcentDone >= 100)
 	{
-		textProgress.innerText = numDone + "h / " + numHourRequired + "h";
+		if (minutesDone < 10)
+			textProgress.innerText = hoursDone + "h0" + minutesDone + " / " + hoursRemaining + "h" + minutesRemaining;
+		else
+			textProgress.innerText = hoursDone + "h" + minutesDone + " / " + hoursRemaining + "h" + minutesRemaining;
 		textRemaining.style.display = "none";
 	}
 	else
 	{
-		textProgress.innerText = numDone + "h";
-		textRemaining.innerText = numRemaining + "h";
+		if (minutesDone < 10)
+			textProgress.innerText = hoursDone + "h0" + minutesDone ;
+		else
+			textProgress.innerText = hoursDone + "h" + minutesDone ;
+		textRemaining.innerText = hoursRemaining + "h" + minutesRemaining;
 	}
 	textBottom.innerText = Math.floor(pourcentDone) + "% of required logtime";
 
@@ -167,7 +184,6 @@ function generateLogcashDiv(divLogtime)
 	textRemaining.style.color = "#8d8e8e";
 	textRemaining.style.fontSize = "0.8em";
 	
-	
 	// row bottom style
 	rowBottom.style.display = "flex";
 	rowBottom.style.justifyContent = "space-between";
@@ -181,31 +197,115 @@ function generateLogcashDiv(divLogtime)
 	return (containerLogcash);
 }
 
-function getNumberHourDone(date)
+function user() {
+	return{
+		name:"Alex",
+		age:22
+	}
+}
+
+function waitForElm(selector) {
+    return new Promise(resolve => {
+        if (document.querySelector(selector)) {
+            return resolve(document.querySelector(selector));
+        }
+
+        const observer = new MutationObserver(mutations => {
+            if (document.querySelector(selector)) {
+                resolve(document.querySelector(selector));
+                observer.disconnect();
+            }
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    });
+}
+
+function waitForAll(selector) {
+    return new Promise(resolve => {
+        if (document.querySelectorAll(selector).length != 0) {
+            return resolve(document.querySelectorAll(selector));
+        }
+
+        const observer = new MutationObserver(mutations => {
+            if (document.querySelectorAll(selector).length != 0) {
+                resolve(document.querySelectorAll(selector));
+                observer.disconnect();
+            }
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    });
+}
+
+async function getNumberHourDone(date, calendar)
 {
-	const calendar = document.querySelector("#user-locations");
-	var calendarElements = document.querySelector("svg#user-locations").childNodes;
+	var tmpHours = 0;
+	var tmpMinutes = 0;
+	// const calendar = document.querySelector("#user-locations");
+	// var calendarElements = document.querySelector("svg#user-locations").childNodes;
 	const month = getLastMonth(new Date(), 1);
 
 	// console.log(calendarElements);
-	while (!calendarElements)
-		calendarElements = document.querySelector("svg#user-locations").childNodes;
-	for (var i = 0; calendarElements[i]; i++)
-	{
-		// tmpSplit = calendarElements[i].split(' ');
-		if (!calendarElements[i].firstElementChild)
-		{
-			// console.log(calendarElements[i] + " " + month);
-			if (calendarElements[i].firstChild == month)
-				break;
-			// const 
+	// console.log("test");
+	// while (!calendarElements[0])
+	// 	calendarElements = document.querySelector("svg#user-locations").childNodes;
 
-		}
-		// console.log(calendarElements[i]);
-	}
-	// console.log(calendarElements[0].firstChild);
 	
-	return (date.getMonth())
+
+	// waitForElm('svg#user-locations').then((calendar) => {
+	// waitForAll('g[data-original-title]').then((calendar) => {
+		// const calendarElements = calendar.childNodes;
+		// console.log('Element is ready');
+		// console.log(calendarElements.length);
+		// console.log(calendar[0]);
+		// if (calendarElements.length == 0)
+		// 	getNumberHourDone(date);
+
+		// for (var i = calendar.length - 1; i > 0; i--)
+		// {
+		// 	// if (calendarElements[i])
+		// 	console.log(calendar[i - 1].firstElementChild);
+		// }
+
+		for (var i = 0; i < calendar.length - 1; i++)
+		{
+			if (!calendar[i].nextSibling.firstElementChild && calendar[i].nextSibling.firstChild.data == month)
+			{
+				// console.log(calendar[i].nextSibling.firstChild.data);
+				// i++;
+				break;
+			}
+		}
+		// console.log(i);
+
+		while (calendar[++i])
+		{
+			var tmpSplit = calendar[i].getAttribute("data-original-title").split('h');
+			// console.log(calendar[i]);
+			tmpHours += parseInt(tmpSplit[0]);
+			tmpMinutes += parseInt(tmpSplit[1]);
+
+			if (tmpMinutes >= 60)
+			{
+				tmpHours++;
+				tmpMinutes -= 60;
+			}
+			// console.log(totalHours + " " + tmpSplit[0] + " " + tmpSplit[1]);
+		}
+		
+		// return [hours, minutes];
+
+		return Promise.resolve({
+			hoursDone:parseInt(tmpHours),
+			minutesDone:parseInt(tmpMinutes)
+		})
 }
 
 function getNumberHourRequired(date)
@@ -245,15 +345,10 @@ function changeColorPage()
 	navbar.style.backgroundColor = "#12141a";
 }
 
-
 function initLogcash()
 {
-	var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-	if (isOpera)
-		changeColorPage();
-		
 	const divLogtime = getDivLogtime();
-	
+
 	// divLogtime.style.backgroundColor = "#ffffff";
 	// divLogtime.style.removeProperty('max-height');
 	
@@ -262,26 +357,30 @@ function initLogcash()
 	
 	// const cloneDiv = divLogtime.parentElement.cloneNode();
 	// cloneDiv.appendChild(generateLogcashDiv(cloneDiv));
-	 const cloneDiv = generateLogcashDiv(divLogtime);
-	
-	// cloneCalendar = divLogtime.lastElementChild.cloneNode(true);
-	// divLogtime.parentElement.parentElement.appendChild(generateLogcashDiv(divLogtime));
-	// console.log(cloneDiv);
-	
-	divLogtime.appendChild(cloneDiv);
-	divLogtime.className = "";
-	divLogtime.style.margin = "20px 0 0 0";
-	divLogtime.style.height = "100%";
-	divLogtime.style.backgroundColor = "#1d2028";
-	divLogtime.style.border = "1px solid #2d313c";
-	divLogtime.style.borderRadius = "3px";
-	divLogtime.style.padding = "20px 25px 25px 25px";
+	const cloneDiv = generateLogcashDiv(divLogtime).then(function(result){
+		// console.log(result)
+
+		divLogtime.appendChild(result);
+		divLogtime.className = "";
+		divLogtime.style.margin = "20px 0 0 0";
+		divLogtime.style.height = "100%";
+		divLogtime.style.backgroundColor = "#1d2028";
+		divLogtime.style.border = "1px solid #2d313c";
+		divLogtime.style.borderRadius = "3px";
+		divLogtime.style.padding = "20px 25px 25px 25px";
+	});
 	
 	// divLogtime.parentElement.parentElement.insertBefore(cloneDiv, divLogtime.parentElement.nextSibling);
 }
 
-// initLogcash();
+var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+if (isOpera)
+	changeColorPage();
 
-window.onload = function() {
-	initLogcash();
-};
+// waitForElm('svg#user-locations').then((elm) => {
+// 	initLogcash();
+// });
+
+initLogcash();
+
+// window.addEventListener('load', initLogcash)
