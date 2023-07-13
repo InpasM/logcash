@@ -24,7 +24,7 @@ function getLastMonth(date, short)
 async function generateLogcashDiv(divLogtime)
 {
 	const containerLogcash = document.createElement("div");
-	// containerLogcash.className = "container-logcash";
+	containerLogcash.id = "container-logcash";
 	containerLogcash.style.height = "100%"
 	
 	const titleLogcash = document.createElement("h4");
@@ -65,17 +65,8 @@ async function generateLogcashDiv(divLogtime)
 	rowProgress.appendChild(sideProgress);
 	rowProgress.appendChild(sideRemaining);
 	
-	// generate row bottom
-	const rowBottom = document.createElement("div");
-	rowBottom.className = "row-bottom";
-	const textBottom = document.createElement("p");
-	textBottom.className = "text-bottom";
-	rowBottom.appendChild(textBottom);
-
 	containerMonth.appendChild(rowTop);
 	containerMonth.appendChild(rowProgress);
-	containerMonth.appendChild(rowBottom);
-	// containerLogcash.appendChild(titleLogcash);
 	containerLogcash.appendChild(containerMonth);
 
 	// calcul values
@@ -83,31 +74,44 @@ async function generateLogcashDiv(divLogtime)
 	
 	const monthlySalary = 685;
 	const numHourRequired = getNumberHourRequired(new Date("7/12/2023"));
+	const numMinutesRequired = 0;
 
 	const calendar = await waitForAll('g[data-original-title]');
-
 	const time = getNumberHourDone(new Date(), calendar);
-
-	const result = user();
 	let hoursDone = (await time).hoursDone;
 	let minutesDone = (await time).minutesDone;
-	// let hoursDone = 10;
+
+	// let hoursDone = 77;
 	// let minutesDone = 0;
 
-	const hoursRemaining = numHourRequired - hoursDone;
-	const minutesRemaining = minutesDone;
-	const pourcentDone = hoursDone / numHourRequired * 100;
+	let hoursRemaining = numHourRequired - hoursDone;
+	let minutesRemaining = numMinutesRequired - minutesDone;
+
+	let timeFloat = hoursDone + (minutesDone / 60)
+	
+	const pourcentDone = timeFloat / numHourRequired * 100;
 	var cashEarn = monthlySalary * (pourcentDone / 100);
 	if (cashEarn > monthlySalary)
 		cashEarn = monthlySalary;
 
-	textCash.innerText = Math.floor(cashEarn) + "€";
+	if (minutesRemaining < 0)
+	{
+		minutesRemaining += 60;
+		hoursRemaining--;
+	}
+	else if (minutesRemaining >= 60)
+	{
+		minutesRemaining -= 60;
+		hoursRemaining++;
+	}
+	// textCash.innerText = Math.floor(cashEarn) + "€";
+	textCash.innerText = cashEarn.toFixed(2) + "€";
 	if (pourcentDone >= 100)
 	{
 		if (minutesDone < 10)
-			textProgress.innerText = hoursDone + "h0" + minutesDone + " / " + hoursRemaining + "h" + minutesRemaining;
-		else
-			textProgress.innerText = hoursDone + "h" + minutesDone + " / " + hoursRemaining + "h" + minutesRemaining;
+			textProgress.innerText = hoursDone + "h0" + minutesDone + " / " + numHourRequired + "h00";
+			else
+			textProgress.innerText = hoursDone + "h" + minutesDone + " / " + numHourRequired + "h00";
 		textRemaining.style.display = "none";
 	}
 	else
@@ -115,65 +119,84 @@ async function generateLogcashDiv(divLogtime)
 		if (minutesDone < 10)
 			textProgress.innerText = hoursDone + "h0" + minutesDone ;
 		else
-			textProgress.innerText = hoursDone + "h" + minutesDone ;
+		textProgress.innerText = hoursDone + "h" + minutesDone ;
+			
+		if (minutesRemaining < 10)
+		textRemaining.innerText = hoursRemaining + "h0" + minutesRemaining;
+		else
 		textRemaining.innerText = hoursRemaining + "h" + minutesRemaining;
 	}
-	textBottom.innerText = Math.floor(pourcentDone) + "% of required logtime";
+	let textPourcent = "  (" + Math.floor(pourcentDone) + "%)";
+	textProgress.innerText += textPourcent;
+	// textBottom.innerText = Math.floor(pourcentDone) + "% of required logtime";
 
 	// apply style
-	// titleLogcash.style.margin = "20px 0 0 0";
-
-	containerLogcash.style.margin = "-40px 0 0 0";
-	// containerLogcash.style.margin = "20px 0 0 0";
-	// containerLogcash.style.height = "100%";
-	// containerLogcash.style.backgroundColor = "#1d2028";
-	// containerLogcash.style.border = "1px solid #2d313c";
-	// containerLogcash.style.borderRadius = "3px";
-	// containerLogcash.style.padding = "20px 25px 25px 25px";
+	// containerLogcash.style.margin = "-40px 0 0 0";	//
 	
 	containerMonth.style.width = "100%";
 	containerMonth.style.padding = "0 20px";
-	// containerMonth.style.margin = "0 0 20px 0";
 
 	// row top style
 	rowTop.style.display = "flex";
 	rowTop.style.justifyContent = "space-between";
 	rowTop.style.alignItems = "center";
 	textMonth.style.padding = "0";
-	textMonth.style.margin = "0 8px";
-	textMonth.style.fontSize = "0.9em";
+	textMonth.style.margin = "0 8px 0 4px";	//
+	textMonth.style.fontSize = "0.8em";		//
 	textMonth.style.color = "#8e8e8f";
 	textCash.style.padding = "0";
-	textCash.style.margin = "0 8px";
-	textCash.style.fontSize = "0.9em";
+	textCash.style.margin = "0 8px 0 4px";	//
+	textCash.style.fontSize = "0.8em";	//
 	textCash.style.color = "#8e8e8f";
 	
 	// row progress style
 	rowProgress.style.display = "flex";
 	rowProgress.style.justifyContent = "space-between";
-	rowProgress.style.border = "2px solid #2d313c";
-	rowProgress.style.height = "40px";
+	
+	const mainNavbar = document.querySelector(".main-navbar");
+	var style = window.getComputedStyle(mainNavbar,"");
+	var bgColor = style.getPropertyValue("background-color");
+
+	if (bgColor == "rgb(30, 33, 42)")	// black
+	{
+		rowProgress.style.border = "2px solid #2d313c";
+		textProgress.style.color = "#f2f2f2";
+	}
+	else
+	{
+		rowProgress.style.border = "2px solid #e5e5e5";
+		textProgress.style.color = "#2c2c34";
+	}
+
+	// rowProgress.style.height = "40px";	//
 	rowProgress.style.borderRadius = "3px";
-	rowProgress.style.margin = "8px 0";
+	rowProgress.style.margin = "4px 0";
 	
 	sideProgress.style.display = "flex";
 	sideProgress.style.justifyContent = "center";
 	sideProgress.style.alignItems = "center";
-	sideProgress.style.minWidth = "50px";
+	sideProgress.style.minWidth = "70px";
 	if (pourcentDone < 10)
-		sideProgress.style.width = "50px";
+		sideProgress.style.width = "70px";
 	else if (pourcentDone > 90 && pourcentDone < 100)
 		sideProgress.style.width = "90%";
 	else
 		sideProgress.style.width = pourcentDone + "%";
-	// sideProgress.style.maxWidth = "90%";
+
+	// color gestion progress bar
+	if (pourcentDone == 0)
+		sideProgress.style.backgroundColor = "#252932";
+	else
+		sideProgress.style.backgroundColor = "rgba(0, 186, 188, " + (pourcentDone / 100) + ")";
+
 	sideProgress.style.height = "100%";
-	sideProgress.style.backgroundColor = "#252932";
-	sideProgress.style.borderRadius = "0 4px 4px 0";
+	sideProgress.style.borderRadius = "3px 4px 4px 3px";
+	// sideProgress.style.borderRadius = "4px";
 	// text
 	textProgress.style.margin = "0";
-	textProgress.style.color = "#eaeaeb";
-	textProgress.style.fontSize = "0.8em";
+	// textProgress.style.color = "#eaeaeb";
+	
+	textProgress.style.fontSize = "0.8em";	//
 	
 	sideRemaining.style.display = "flex";
 	sideRemaining.style.justifyContent = "center";
@@ -182,46 +205,67 @@ async function generateLogcashDiv(divLogtime)
 	// text
 	textRemaining.style.margin = "0";
 	textRemaining.style.color = "#8d8e8e";
-	textRemaining.style.fontSize = "0.8em";
-	
-	// row bottom style
-	rowBottom.style.display = "flex";
-	rowBottom.style.justifyContent = "space-between";
-	rowBottom.style.alignItems = "center";
-	// text
-	textBottom.style.padding = "0";
-	textBottom.style.margin = "0 8px";
-	textBottom.style.fontSize = "0.9em";
-	textBottom.style.color = "#41444a";
+	textRemaining.style.fontSize = "0.8em";	//
 
 	return (containerLogcash);
 }
 
-function user() {
-	return{
-		name:"Alex",
-		age:22
-	}
+function getRatio(windowWidth) {
+	
+	if (windowWidth <= 480)
+		return (windowWidth / 480);
+	else if (windowWidth <= 770)
+		return (windowWidth / 770);
+	else if (windowWidth <= 990)
+		return (windowWidth / 990);
+	else if (windowWidth <= 1600)
+		return (windowWidth / 1600);
+	else if (windowWidth <= 3000)
+		return (windowWidth / 3000);
+	else
+		return (1);
 }
 
-function waitForElm(selector) {
-    return new Promise(resolve => {
-        if (document.querySelector(selector)) {
-            return resolve(document.querySelector(selector));
-        }
+function resizeProgress() {
+	var windowWidth = window.innerWidth;
+	var containerLogcash = document.querySelector("#container-logcash");
+	var rowProgressBar = document.querySelector(".row-progress-bar");
+	var ratio = getRatio(windowWidth);
 
-        const observer = new MutationObserver(mutations => {
-            if (document.querySelector(selector)) {
-                resolve(document.querySelector(selector));
-                observer.disconnect();
-            }
-        });
+	// console.log("width: " + window.innerWidth + "  " + ratio);
+	rowProgressBar.style.height = (ratio * 30) + "px";
+	containerLogcash.style.margin = "-" + (ratio * 70) + "px 0 0 0";
+	
+	if (windowWidth <= 480)
+	{
+		containerLogcash.style.margin = "-" + (ratio * 40) + "px 0 0 0";
+		
+	}
+	else if (windowWidth <= 770)
+	{
+		
+		// containerLogcash.style.margin = "-" + (ratio * 70) + "px 0 0 0";
+	}
+	else if (windowWidth <= 990)
+	{
+		
+		containerLogcash.style.margin = "-" + (ratio * 75) + "px 0 0 0";
+	}
+	else if (windowWidth <= 1600)
+	{
+		// containerLogcash.style.margin = "-" + (ratio * 70) + "px 0 0 0";
+		
+	}
+	else if (windowWidth <= 3000)
+	{
+		// containerLogcash.style.margin = "-" + (ratio * 70) + "px 0 0 0";
+		
+	}
+	else
+	{
+		// containerLogcash.style.margin = "-" + (ratio * 70) + "px 0 0 0";
 
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
-    });
+	}
 }
 
 function waitForAll(selector) {
@@ -229,14 +273,12 @@ function waitForAll(selector) {
         if (document.querySelectorAll(selector).length != 0) {
             return resolve(document.querySelectorAll(selector));
         }
-
         const observer = new MutationObserver(mutations => {
             if (document.querySelectorAll(selector).length != 0) {
                 resolve(document.querySelectorAll(selector));
                 observer.disconnect();
             }
         });
-
         observer.observe(document.body, {
             childList: true,
             subtree: true
@@ -248,64 +290,29 @@ async function getNumberHourDone(date, calendar)
 {
 	var tmpHours = 0;
 	var tmpMinutes = 0;
-	// const calendar = document.querySelector("#user-locations");
-	// var calendarElements = document.querySelector("svg#user-locations").childNodes;
 	const month = getLastMonth(new Date(), 1);
 
-	// console.log(calendarElements);
-	// console.log("test");
-	// while (!calendarElements[0])
-	// 	calendarElements = document.querySelector("svg#user-locations").childNodes;
+	for (var i = 0; i < calendar.length - 1; i++)
+	{
+		if (!calendar[i].nextSibling.firstElementChild && calendar[i].nextSibling.firstChild.data == month)
+			break;
+	}
+	while (calendar[++i])
+	{
+		var tmpSplit = calendar[i].getAttribute("data-original-title").split('h');
+		tmpHours += parseInt(tmpSplit[0]);
+		tmpMinutes += parseInt(tmpSplit[1]);
 
-	
-
-	// waitForElm('svg#user-locations').then((calendar) => {
-	// waitForAll('g[data-original-title]').then((calendar) => {
-		// const calendarElements = calendar.childNodes;
-		// console.log('Element is ready');
-		// console.log(calendarElements.length);
-		// console.log(calendar[0]);
-		// if (calendarElements.length == 0)
-		// 	getNumberHourDone(date);
-
-		// for (var i = calendar.length - 1; i > 0; i--)
-		// {
-		// 	// if (calendarElements[i])
-		// 	console.log(calendar[i - 1].firstElementChild);
-		// }
-
-		for (var i = 0; i < calendar.length - 1; i++)
+		if (tmpMinutes >= 60)
 		{
-			if (!calendar[i].nextSibling.firstElementChild && calendar[i].nextSibling.firstChild.data == month)
-			{
-				// console.log(calendar[i].nextSibling.firstChild.data);
-				// i++;
-				break;
-			}
+			tmpHours++;
+			tmpMinutes -= 60;
 		}
-		// console.log(i);
-
-		while (calendar[++i])
-		{
-			var tmpSplit = calendar[i].getAttribute("data-original-title").split('h');
-			// console.log(calendar[i]);
-			tmpHours += parseInt(tmpSplit[0]);
-			tmpMinutes += parseInt(tmpSplit[1]);
-
-			if (tmpMinutes >= 60)
-			{
-				tmpHours++;
-				tmpMinutes -= 60;
-			}
-			// console.log(totalHours + " " + tmpSplit[0] + " " + tmpSplit[1]);
-		}
-		
-		// return [hours, minutes];
-
-		return Promise.resolve({
-			hoursDone:parseInt(tmpHours),
-			minutesDone:parseInt(tmpMinutes)
-		})
+	}
+	return Promise.resolve({
+		hoursDone:parseInt(tmpHours),
+		minutesDone:parseInt(tmpMinutes)
+	})
 }
 
 function getNumberHourRequired(date)
@@ -348,39 +355,25 @@ function changeColorPage()
 function initLogcash()
 {
 	const divLogtime = getDivLogtime();
-
-	// divLogtime.style.backgroundColor = "#ffffff";
-	// divLogtime.style.removeProperty('max-height');
-	
-	// divLogtime.appendChild(generateLogcashDiv(divLogtime));
-	// console.log(divLogtime.parentElement.parentElement);
-	
-	// const cloneDiv = divLogtime.parentElement.cloneNode();
-	// cloneDiv.appendChild(generateLogcashDiv(cloneDiv));
 	const cloneDiv = generateLogcashDiv(divLogtime).then(function(result){
-		// console.log(result)
 
 		divLogtime.appendChild(result);
-		divLogtime.className = "";
-		divLogtime.style.margin = "20px 0 0 0";
-		divLogtime.style.height = "100%";
-		divLogtime.style.backgroundColor = "#1d2028";
-		divLogtime.style.border = "1px solid #2d313c";
-		divLogtime.style.borderRadius = "3px";
-		divLogtime.style.padding = "20px 25px 25px 25px";
+		result.style.display = "none";
+		resizeProgress();
+		window.addEventListener("resize", resizeProgress);
+		result.style.display = "";
+		// divLogtime.className = "";
+		// divLogtime.style.margin = "20px 0 0 0";
+		// divLogtime.style.height = "100%";
+		// divLogtime.style.backgroundColor = "#1d2028";
+		// divLogtime.style.border = "1px solid #2d313c";
+		// divLogtime.style.borderRadius = "3px";
+		// divLogtime.style.padding = "20px 25px 25px 25px";
 	});
-	
-	// divLogtime.parentElement.parentElement.insertBefore(cloneDiv, divLogtime.parentElement.nextSibling);
 }
 
 var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 if (isOpera)
 	changeColorPage();
 
-// waitForElm('svg#user-locations').then((elm) => {
-// 	initLogcash();
-// });
-
 initLogcash();
-
-// window.addEventListener('load', initLogcash)

@@ -81,14 +81,14 @@ body
 	justify-content: space-evenly;
 	border: 2px solid #2d313c;
 	height: 40px;
-	border-radius: 5px;
+	/* border-radius: 5px; */
 	margin: 8px 0;
 }
 
 .side-progress
 {
 	/* background: #252932; */
-	background: #2d313c;
+	/* background: #2d313c; */
 	/* min-width: 40px; */
 	/* width: 10%; */
 	height: 100%;
