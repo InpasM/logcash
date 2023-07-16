@@ -21,11 +21,13 @@ function getLastMonth(date, short)
 		return (month[date.getMonth()]);
 }
 
-async function generateLogcashDiv(divLogtime)
+async function generateLogcashDiv(dev)
 {
 	const containerLogcash = document.createElement("div");
 	containerLogcash.id = "container-logcash";
-	containerLogcash.style.height = "100%"
+	containerLogcash.style.zIndex = "1";
+	containerLogcash.style.position = "relative";
+	// containerLogcash.style.height = "100%"
 	
 	const titleLogcash = document.createElement("h4");
 	titleLogcash.innerText = "LOGCASH";
@@ -70,19 +72,24 @@ async function generateLogcashDiv(divLogtime)
 	containerLogcash.appendChild(containerMonth);
 
 	// calcul values
-	textMonth.innerText = getLastMonth(new Date(), 0);
+	textMonth.innerText = getLastMonth(new Date(), 1);
 	
 	const monthlySalary = 685;
-	const numHourRequired = getNumberHourRequired(new Date("7/12/2023"));
+	const numHourRequired = getNumberHourRequired(new Date());
 	const numMinutesRequired = 0;
 
-	const calendar = await waitForAll('g[data-original-title]');
-	const time = getNumberHourDone(new Date(), calendar);
-	let hoursDone = (await time).hoursDone;
-	let minutesDone = (await time).minutesDone;
-
-	// let hoursDone = 77;
-	// let minutesDone = 0;
+	if (dev)
+	{
+		var hoursDone = 28;
+		var minutesDone = 52;
+	}
+	else
+	{
+		const calendar = await waitForAll('g[data-original-title]');
+		const time = getNumberHourDone(new Date(), calendar);
+		var hoursDone = (await time).hoursDone;
+		var minutesDone = (await time).minutesDone;
+	}
 
 	let hoursRemaining = numHourRequired - hoursDone;
 	let minutesRemaining = numMinutesRequired - minutesDone;
@@ -104,13 +111,12 @@ async function generateLogcashDiv(divLogtime)
 		minutesRemaining -= 60;
 		hoursRemaining++;
 	}
-	// textCash.innerText = Math.floor(cashEarn) + "€";
 	textCash.innerText = cashEarn.toFixed(2) + "€";
 	if (pourcentDone >= 100)
 	{
 		if (minutesDone < 10)
 			textProgress.innerText = hoursDone + "h0" + minutesDone + " / " + numHourRequired + "h00";
-			else
+		else
 			textProgress.innerText = hoursDone + "h" + minutesDone + " / " + numHourRequired + "h00";
 		textRemaining.style.display = "none";
 	}
@@ -120,42 +126,40 @@ async function generateLogcashDiv(divLogtime)
 			textProgress.innerText = hoursDone + "h0" + minutesDone ;
 		else
 		textProgress.innerText = hoursDone + "h" + minutesDone ;
-			
 		if (minutesRemaining < 10)
-		textRemaining.innerText = hoursRemaining + "h0" + minutesRemaining;
+			textRemaining.innerText = hoursRemaining + "h0" + minutesRemaining;
 		else
-		textRemaining.innerText = hoursRemaining + "h" + minutesRemaining;
+			textRemaining.innerText = hoursRemaining + "h" + minutesRemaining;
 	}
 	let textPourcent = "  (" + Math.floor(pourcentDone) + "%)";
 	textProgress.innerText += textPourcent;
-	// textBottom.innerText = Math.floor(pourcentDone) + "% of required logtime";
 
 	// apply style
-	// containerLogcash.style.margin = "-40px 0 0 0";	//
-	
 	containerMonth.style.width = "100%";
-	containerMonth.style.padding = "0 20px";
 
 	// row top style
 	rowTop.style.display = "flex";
 	rowTop.style.justifyContent = "space-between";
 	rowTop.style.alignItems = "center";
 	textMonth.style.padding = "0";
-	textMonth.style.margin = "0 8px 0 4px";	//
-	textMonth.style.fontSize = "0.8em";		//
+	textMonth.style.cursor = "pointer";
+	textMonth.style.borderRadius = "2px";
 	textMonth.style.color = "#8e8e8f";
 	textCash.style.padding = "0";
-	textCash.style.margin = "0 8px 0 4px";	//
-	textCash.style.fontSize = "0.8em";	//
 	textCash.style.color = "#8e8e8f";
 	
 	// row progress style
 	rowProgress.style.display = "flex";
 	rowProgress.style.justifyContent = "space-between";
 	
-	const mainNavbar = document.querySelector(".main-navbar");
-	var style = window.getComputedStyle(mainNavbar,"");
-	var bgColor = style.getPropertyValue("background-color");
+	if (!dev)
+	{
+		var mainNavbar = document.querySelector(".main-navbar");
+		var style = window.getComputedStyle(mainNavbar,"");
+		var bgColor = style.getPropertyValue("background-color");
+	}
+	else
+		var bgColor = "rgb(30, 33, 42)";
 
 	if (bgColor == "rgb(30, 33, 42)")	// black
 	{
@@ -170,7 +174,7 @@ async function generateLogcashDiv(divLogtime)
 
 	// rowProgress.style.height = "40px";	//
 	rowProgress.style.borderRadius = "3px";
-	rowProgress.style.margin = "4px 0";
+	rowProgress.style.margin = "4px 0 0 0";
 	
 	sideProgress.style.display = "flex";
 	sideProgress.style.justifyContent = "center";
@@ -191,12 +195,7 @@ async function generateLogcashDiv(divLogtime)
 
 	sideProgress.style.height = "100%";
 	sideProgress.style.borderRadius = "3px 4px 4px 3px";
-	// sideProgress.style.borderRadius = "4px";
-	// text
 	textProgress.style.margin = "0";
-	// textProgress.style.color = "#eaeaeb";
-	
-	textProgress.style.fontSize = "0.8em";	//
 	
 	sideRemaining.style.display = "flex";
 	sideRemaining.style.justifyContent = "center";
@@ -205,7 +204,6 @@ async function generateLogcashDiv(divLogtime)
 	// text
 	textRemaining.style.margin = "0";
 	textRemaining.style.color = "#8d8e8e";
-	textRemaining.style.fontSize = "0.8em";	//
 
 	return (containerLogcash);
 }
@@ -229,12 +227,36 @@ function getRatio(windowWidth) {
 function resizeProgress() {
 	var windowWidth = window.innerWidth;
 	var containerLogcash = document.querySelector("#container-logcash");
+	var containerMonth = document.querySelector(".container-month");
 	var rowProgressBar = document.querySelector(".row-progress-bar");
+	var textMonth = document.querySelector(".text-month");
+	var textCash = document.querySelector(".text-cash");
+	var textProgress = document.querySelector(".text-progress");
+	var textRemaining = document.querySelector(".text-remaining");
+
+	// textMonth.style.margin = "0 0 0 8px";	//
+	// textCash.style.margin = "0 8px 0 0";	//
+
 	var ratio = getRatio(windowWidth);
 
 	// console.log("width: " + window.innerWidth + "  " + ratio);
 	rowProgressBar.style.height = (ratio * 30) + "px";
 	containerLogcash.style.margin = "-" + (ratio * 70) + "px 0 0 0";
+	// containerMonth.style.padding = "0 " + (ratio * 20) + "px";
+	var smallText = ratio * 0.8;
+	textMonth.style.fontSize = smallText + "em";
+	textCash.style.fontSize = smallText + "em";
+	// 3px 8px
+	textMonth.style.padding = (ratio * 3) + "px " + (ratio * 8) + "px";
+	textCash.style.padding = (ratio * 3) + "px " + (ratio * 8) + "px";
+
+
+	var smallMargin = ratio * 8;
+	textMonth.style.margin = "0 0 0 " + smallMargin + "px";
+	textCash.style.margin = "0 " + smallMargin + "px 0 0";
+	var bigText = ratio;
+	textProgress.style.fontSize = bigText + "em";
+	textRemaining.style.fontSize = bigText + "em";
 	
 	if (windowWidth <= 480)
 	{
@@ -244,16 +266,16 @@ function resizeProgress() {
 	else if (windowWidth <= 770)
 	{
 		
-		// containerLogcash.style.margin = "-" + (ratio * 70) + "px 0 0 0";
+		containerLogcash.style.margin = "-" + (ratio * 60) + "px 0 0 0";
 	}
 	else if (windowWidth <= 990)
 	{
 		
-		containerLogcash.style.margin = "-" + (ratio * 75) + "px 0 0 0";
+		// containerLogcash.style.margin = "-" + (ratio * 75) + "px 0 0 0";
 	}
 	else if (windowWidth <= 1600)
 	{
-		// containerLogcash.style.margin = "-" + (ratio * 70) + "px 0 0 0";
+		containerLogcash.style.margin = "-" + (ratio * 60) + "px 0 0 0";
 		
 	}
 	else if (windowWidth <= 3000)
@@ -326,11 +348,12 @@ function getNumberHourRequired(date)
 		return (numHour2024[date.getMonth()]);
 }
 
-function changeColorPage()
+async function changeColorPage(dev)
 {
 	const allContainer = document.querySelectorAll(".container-inner-item");
 	const noteTitle = document.querySelectorAll(".note-title");
 	const navbar = document.querySelector(".main-navbar");
+	// const allG = document.querySelectorAll("g[data-original-title]");
 	
 	for(var i = 0; allContainer[i]; i++)
 	{
@@ -347,33 +370,101 @@ function changeColorPage()
 	{
 		noteTitle[i].style.color = "rgb(65, 68, 74)";
 	}
-
-	document.body.style.backgroundColor = "#12141a";
-	navbar.style.backgroundColor = "#12141a";
+	if (!dev)
+	{
+		const allG = await waitForAll('g[data-original-title]');
+		for (var i = 0; allG[i]; i++)
+		{
+			var style = window.getComputedStyle(allG[i].firstElementChild,"");
+			var fillColor = style.getPropertyValue("fill");
+	
+			allG[i].firstElementChild.style.stroke = "#1d2028";
+			if (fillColor == "rgb(250, 250, 250)")
+				allG[i].firstElementChild.style.fill = "#242831";
+		}
+		navbar.style.backgroundColor = "#1e212a";
+	}
+	document.body.style.backgroundColor = "#131419";
 }
 
-function initLogcash()
+function mOverMonth(e)
 {
-	const divLogtime = getDivLogtime();
-	const cloneDiv = generateLogcashDiv(divLogtime).then(function(result){
+	devPos = document.querySelector(".dev-pos");
+	// window.addEventListener('mousemove', (event) => {
+	// 	mousePos = { x: event.clientX, y: event.clientY };
+	// 	devPos.textContent = `(${mousePos.x}, ${mousePos.y})`;
+	// });
+	// console.log(e.target.parentElement.parentElement.clientHeight);
+	e.target.style.backgroundColor = "rgb(0, 186, 188)";
+	e.target.style.color = "white";
 
+	containerLogcash = document.querySelector("#container-logcash");
+	const containerSelection = document.createElement("div");
+	containerSelection.style.backgroundColor = "white";
+	containerSelection.style.width = "100%";
+	containerSelection.style.height = e.target.parentElement.parentElement.clientHeight + "px";
+
+	containerLogcash.children[0].style.display = "none";
+	containerLogcash.appendChild(containerSelection);
+
+	containerSelection.addEventListener("mouseleave", function () {
+		containerLogcash.children[0].style.display = "";
+		containerSelection.remove();
+	});
+}
+
+function mOutMonth(e)
+{
+	e.target.style.backgroundColor = "";
+	e.target.style.color = "#8e8e8f";
+}
+
+function clickMonth(e)
+{
+	containerLogcash = document.querySelector("#container-logcash");
+	const containerSelection = document.createElement("div");
+	containerSelection.style.backgroundColor = "white";
+	containerSelection.style.width = "100%";
+	containerSelection.style.height = e.target.parentElement.parentElement.clientHeight + "px";
+	
+	containerLogcash.appendChild(containerSelection);
+	// console.log(containerLogcash.children);
+	// containerLogcash.children[0].style.visibility = "hidden";
+}
+
+function initButtons()
+{
+	textMonth = document.querySelector(".text-month");
+	
+	textMonth.addEventListener("mouseover", mOverMonth);
+	textMonth.addEventListener("mouseout", mOutMonth);
+	textMonth.addEventListener("click", clickMonth);
+}
+
+async function initLogcash(dev)
+{
+	generateLogcashDiv(dev).then(function(result){
+		var divLogtime;
+		if (dev)
+			divLogtime = document.querySelector(".main-div");
+		else
+			divLogtime = document.querySelector("svg#user-locations").parentElement;
+		// console.log(divLogtime.parentElement);
 		divLogtime.appendChild(result);
 		result.style.display = "none";
 		resizeProgress();
 		window.addEventListener("resize", resizeProgress);
+		initButtons();
 		result.style.display = "";
-		// divLogtime.className = "";
-		// divLogtime.style.margin = "20px 0 0 0";
-		// divLogtime.style.height = "100%";
-		// divLogtime.style.backgroundColor = "#1d2028";
-		// divLogtime.style.border = "1px solid #2d313c";
-		// divLogtime.style.borderRadius = "3px";
-		// divLogtime.style.padding = "20px 25px 25px 25px";
 	});
 }
 
+var dev = 0;
+
+initLogcash(dev);
+
 var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 if (isOpera)
-	changeColorPage();
-
-initLogcash();
+{
+	changeColorPage(dev);
+}
