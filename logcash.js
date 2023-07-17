@@ -390,11 +390,6 @@ async function changeColorPage(dev)
 function mOverMonth(e)
 {
 	devPos = document.querySelector(".dev-pos");
-	// window.addEventListener('mousemove', (event) => {
-	// 	mousePos = { x: event.clientX, y: event.clientY };
-	// 	devPos.textContent = `(${mousePos.x}, ${mousePos.y})`;
-	// });
-	// console.log(e.target.parentElement.parentElement.clientHeight);
 	e.target.style.backgroundColor = "rgb(0, 186, 188)";
 	e.target.style.color = "white";
 
@@ -432,9 +427,43 @@ function clickMonth(e)
 	// containerLogcash.children[0].style.visibility = "hidden";
 }
 
+function mOverProgress(e)
+{
+	blocProgress = document.querySelector(".side-progress");
+	var oldColor = window.getComputedStyle(blocProgress,"").getPropertyValue("background-color");
+	var tmpSplit = oldColor.split(' ');
+	var newAlpha = tmpSplit[3].replace(')', '');
+	if ((parseInt(newAlpha) + 0.1) > 1)
+		var newColor = "rgb(0, 189, 190)";
+	else
+		var newColor = tmpSplit[0] + " " + tmpSplit[1] + tmpSplit[2] + " " + (parseFloat(newAlpha) + 0.1) + ")";
+	console.log(oldColor + "  " + newColor);
+	blocProgress.style.backgroundColor = newColor;
+	blocProgress.style.color = "white";
+	
+
+	// containerLogcash = document.querySelector("#container-logcash");
+	// const containerSelection = document.createElement("div");
+	// containerSelection.style.backgroundColor = "white";
+	// containerSelection.style.width = "100%";
+	// containerSelection.style.height = e.target.parentElement.parentElement.clientHeight + "px";
+	
+	// containerLogcash.children[0].style.display = "none";
+	// containerLogcash.appendChild(containerSelection);
+	
+	blocProgress.addEventListener("mouseleave", function () {
+		blocProgress.style.backgroundColor = oldColor;
+		// containerLogcash.children[0].style.display = "";
+		// containerSelection.remove();
+	});
+}
+
 function initButtons()
 {
+	sideProgress = document.querySelector(".side-progress");
 	textMonth = document.querySelector(".text-month");
+
+	sideProgress.addEventListener("mouseover", mOverProgress);
 	
 	textMonth.addEventListener("mouseover", mOverMonth);
 	textMonth.addEventListener("mouseout", mOutMonth);
@@ -459,7 +488,7 @@ async function initLogcash(dev)
 	});
 }
 
-var dev = 0;
+var dev = 1;
 
 initLogcash(dev);
 
