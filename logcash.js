@@ -1,12 +1,12 @@
 
 const h4Title = document.querySelectorAll(".profile-title");
 
-function getDivLogtime()
+function getTitleLogtime()
 {
 	for (var i = 0; h4Title[i]; i++)
 	{
 		if (h4Title[i].innerText == "LOGTIME")
-			return (h4Title[i].parentNode);
+			return (h4Title[i]);
 	}
 }
 
@@ -15,25 +15,22 @@ function getLastMonth(index, short)
 	const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 	const monthShort = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
-	if (short)
+	if (short == 0)
 		return (monthShort[index]);
 	else
 		return (month[index]);
 }
 
-async function updateValues()
+function updateValues()
 {
-	log.monthName = getLastMonth(log.monthIndex, 0);
+	log.monthName = getLastMonth(log.monthIndex, 1);
 	log.nbHourReq = getNumberHourRequired();
 	if (!log.dev)
-	{
-		const calendar = await waitForAll('g[data-original-title]');
-		log.time = getNumberHourDone(calendar);
-	}
-	let timeFloat = log.time.nbHourDone + (log.time.nbMinDone / 60)
+		getNumberHourDone();
+	let timeFloat = log.nbHourDone + (log.nbMinDone / 60)
 
-	log.nbHourRem = log.nbHourReq - log.time.nbHourDone;
-	log.nbMinRem = log.nbMinReq - log.time.nbMinDone;
+	log.nbHourRem = log.nbHourReq - log.nbHourDone;
+	log.nbMinRem = log.nbMinReq - log.nbMinDone;
 	log.pourcent = timeFloat / log.nbHourReq * 100;
 	log.cashEarn = log.salary * (log.pourcent / 100);
 	if (log.cashEarn > log.salary)
@@ -50,32 +47,17 @@ async function updateValues()
 	}
 }
 
-async function generateLogcashDiv()
+function generateLogcashDiv()
 {
 	const containerLogcash = document.createElement("div");
-	containerLogcash.id = "container-logcash";
-	// containerLogcash.style.zIndex = "1";
-	// containerLogcash.style.position = "relative";
-	containerLogcash.style.display = "flex";
-	// containerLogcash.style.backgroundColor = "red";
+	containerLogcash.className = "container-logcash";
 	
 	const titleLogcash = document.createElement("h4");
 	titleLogcash.innerText = "LOGCASH";
 	titleLogcash.className = "profile-title";
 	
-	// generate container month
-	// const containerMonth = document.createElement("div");
-	// containerMonth.className = "container-month";
-	
-	// generate row top
-	// const rowTop = document.createElement("div");
-	// rowTop.className = "row-top";
 	const textMonth = document.createElement("p");
 	textMonth.className = "text-month";
-	// const textCash = document.createElement("p");
-	// textCash.className = "text-cash";
-	// rowTop.appendChild(textMonth);
-	// rowTop.appendChild(textCash);
 	
 	// generate row progress
 	const rowProgress = document.createElement("div");
@@ -97,54 +79,48 @@ async function generateLogcashDiv()
 	rowProgress.appendChild(sideProgress);
 	rowProgress.appendChild(sideRemaining);
 	
-	// containerMonth.appendChild(rowTop);
-	// containerMonth.appendChild(rowProgress);
+	// containerLogcash.style.display = "flex";
+
+	let oldLogTitle = getTitleLogtime();
+	// let oldLogTitle = document.querySelector(".profile-title");
+	let cloneNode = oldLogTitle.cloneNode();
+	console.log(cloneNode);
+	oldLogTitle.style.display = "none";
+
+	containerLogcash.appendChild(cloneNode);
 	containerLogcash.appendChild(textMonth);
 	containerLogcash.appendChild(rowProgress);
 
-	// calcul values
-	// log.monthIndex = 6;
-	// updateValues().then;
-	updateValues().then(function(){
-		textMonth.innerText = log.monthName;
-		console.log(log.nbHourDone);
-		// textCash.innerText = log.cashEarn.toFixed(2) + "€";
-		if (log.pourcent >= 100)
-		{
-			if (log.time.nbMinDone < 10)
-				textProgress.innerText = log.time.nbHourDone + "h0" + log.time.nbMinDone + " / " + log.nbHourReq + "h00";
-			else
-				textProgress.innerText = log.time.nbHourDone + "h" + log.time.nbMinDone + " / " + log.nbHourReq + "h00";
-			textRemaining.style.display = "none";
-		}
+	updateValues();
+	textMonth.innerText = log.monthName;
+	// textCash.innerText = log.cashEarn.toFixed(2) + "€";
+	if (log.pourcent >= 100)
+	{
+		if (log.nbMinDone < 10)
+			textProgress.innerText = log.nbHourDone + "h0" + log.nbMinDone + " / " + log.nbHourReq + "h00";
 		else
-		{
-			if (log.time.nbMinDone < 10)
-				textProgress.innerText = log.time.nbHourDone + "h0" + log.time.nbMinDone ;
-			else
-			textProgress.innerText = log.time.nbHourDone + "h" + log.time.nbMinDone ;
-			if (log.nbMinRem < 10)
-				textRemaining.innerText = log.nbHourRem + "h0" + log.nbMinRem;
-			else
-				textRemaining.innerText = log.nbHourRem + "h" + log.nbMinRem;
-		}
-		let textPourcent = "  (" + Math.floor(log.pourcent) + "%)";
-		textProgress.innerText += textPourcent;
-	});
+			textProgress.innerText = log.nbHourDone + "h" + log.nbMinDone + " / " + log.nbHourReq + "h00";
+		textRemaining.style.display = "none";
+	}
+	else
+	{
+		if (log.nbMinDone < 10)
+			textProgress.innerText = log.nbHourDone + "h0" + log.nbMinDone ;
+		else
+		textProgress.innerText = log.nbHourDone + "h" + log.nbMinDone ;
+		if (log.nbMinRem < 10)
+			textRemaining.innerText = log.nbHourRem + "h0" + log.nbMinRem;
+		else
+			textRemaining.innerText = log.nbHourRem + "h" + log.nbMinRem;
+	}
+	let textPourcent = "  (" + Math.floor(log.pourcent) + "%)";
+	textProgress.innerText += textPourcent;
 
-	// apply style
-	// containerMonth.style.width = "100%";
-
-	// row top style
-	// rowTop.style.display = "flex";
-	// rowTop.style.justifyContent = "space-between";
-	// rowTop.style.alignItems = "center";
 	textMonth.style.padding = "0";
 	// textMonth.style.margin = "0";
 	textMonth.style.cursor = "pointer";
 	textMonth.style.borderRadius = "2px";
 	textMonth.style.color = "#8e8e8f";
-	// textMonth.style.backgroundColor = "blue";
 	// textCash.style.padding = "0";
 	// textCash.style.color = "#8e8e8f";
 	
@@ -162,8 +138,7 @@ async function generateLogcashDiv()
 	else
 		var bgColor = "#1e212a";
 
-	// console.log(bgColor);
-	if (bgColor == "#1e212a")	// black
+	if (bgColor == "#1e212a" || "rgb(30, 33, 42)")
 	{
 		rowProgress.style.border = "2px solid #2d313c";
 		textProgress.style.color = "#f2f2f2";
@@ -173,10 +148,7 @@ async function generateLogcashDiv()
 		rowProgress.style.border = "2px solid #e5e5e5";
 		textProgress.style.color = "#2c2c34";
 	}
-
-	// rowProgress.style.height = "40px";	//
 	rowProgress.style.borderRadius = "3px";
-	// rowProgress.style.margin = "4px 0 0 0";
 	
 	sideProgress.style.display = "flex";
 	sideProgress.style.justifyContent = "center";
@@ -203,7 +175,7 @@ async function generateLogcashDiv()
 	sideRemaining.style.justifyContent = "center";
 	sideRemaining.style.alignItems = "center";
 	sideRemaining.style.flex = "1";
-	// text
+
 	textRemaining.style.margin = "0";
 	textRemaining.style.color = "#8d8e8e";
 
@@ -228,7 +200,7 @@ function getRatio(windowWidth) {
 
 function resizeProgress() {
 	var windowWidth = window.innerWidth;
-	var containerLogcash = document.querySelector("#container-logcash");
+	var containerLogcash = document.querySelector(".container-logcash");
 	// var containerMonth = document.querySelector(".container-month");
 	var rowProgressBar = document.querySelector(".row-progress-bar");
 	var textMonth = document.querySelector(".text-month");
@@ -238,8 +210,10 @@ function resizeProgress() {
 
 	var ratio = getRatio(windowWidth);
 
+	// console.log(containerLogcash);		/////////////////////////////////////////////
 	rowProgressBar.style.height = (ratio * 30) + "px";
-	containerLogcash.style.margin = "-" + (ratio * 70) + "px 0 0 0";
+	// containerLogcash.style.margin = "-" + (ratio * 70) + "px 0 0 0";
+	containerLogcash.style.display = "flex";
 	// var smallText = ratio * 1;
 	textMonth.style.fontSize = "0.9em";
 	// textCash.style.fontSize = smallText + "em";
@@ -297,20 +271,25 @@ function waitForAll(selector) {
     });
 }
 
-function getNumberHourDone(calendar)
+function getNumberHourDone()
 {
 	var tmpHours = 0;
 	var tmpMinutes = 0;
 	var tmpMonth = getLastMonth(log.monthIndex, 0);
 
-	for (var i = 0; i < calendar.length - 1; i++)
+	for (var i = 0; i < log.elem.calendar.length - 1; i++)
 	{
-		if (!calendar[i].nextSibling.firstElementChild && calendar[i].nextSibling.firstChild.data == tmpMonth)
-			break;
+		if (!log.elem.calendar[i].nextSibling.firstElementChild)
+		{
+			let tmpSplit = log.elem.calendar[i].nextSibling.firstChild.data.split(' ')[0];
+			
+			if (tmpSplit == tmpMonth)
+				break;
+		}
 	}
-	while (calendar[++i])
+	while (log.elem.calendar[++i])
 	{
-		var tmpSplit = calendar[i].getAttribute("data-original-title").split('h');
+		var tmpSplit = log.elem.calendar[i].getAttribute("data-original-title").split('h');
 		tmpHours += parseInt(tmpSplit[0]);
 		tmpMinutes += parseInt(tmpSplit[1]);
 
@@ -320,12 +299,8 @@ function getNumberHourDone(calendar)
 			tmpMinutes -= 60;
 		}
 	}
-	return Promise.resolve({
-		nbHourDone:parseInt(tmpHours),
-		nbMinDone:parseInt(tmpMinutes),
-	})
-	// log.nbHourDone = parseInt(tmpHours);
-	// log.nbMinDone = parseInt(tmpMinutes);
+	log.nbHourDone = parseInt(tmpHours);
+	log.nbMinDone = parseInt(tmpMinutes);
 }
 
 function getNumberHourRequired()
@@ -463,25 +438,34 @@ function initButtons()
 	// textMonth.addEventListener("click", clickMonth);
 }
 
+async function fetchCalendar()
+{
+	const calendar = await waitForAll('g[data-original-title]');
+	return Promise.resolve({
+		calendar,
+	})
+}
+
 async function initLogcash()
 {
-	generateLogcashDiv().then(function(result){
-		var divLogtime;
-		if (log.dev)
-			divLogtime = document.querySelector(".main-div");
-		else
-			divLogtime = document.querySelector("svg#user-locations").parentElement;
-		// console.log(divLogtime.parentElement);
-		divLogtime.appendChild(result);
-		result.style.display = "none";
-		resizeProgress();
-		window.addEventListener("resize", resizeProgress);
-		initButtons();
-		result.style.display = "";
-	});
+	var divLogtime;
+
+	log.elem = await fetchCalendar();
+	logCashDiv = generateLogcashDiv();
+	if (log.dev)
+		divLogtime = document.querySelector(".main-div");
+	else
+		divLogtime = document.querySelector("svg#user-locations").parentElement;
+	divLogtime.insertBefore(logCashDiv, divLogtime.firstChild);
+	// logCashDiv.style.display = "none";
+	resizeProgress();
+	window.addEventListener("resize", resizeProgress);
+	initButtons();
+	// logCashDiv.style.display = "";
 }
 
 var log = {
+	elem: 0,
 	dev: 0,
     monthIndex: new Date().getMonth(),
     yearIndex: new Date().getYear(),

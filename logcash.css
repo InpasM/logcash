@@ -22,13 +22,13 @@ body
 	/* dis */
 }
 
-#container-logcash 
+.container-logcash 
 {
-	/* background: #3a3d43; */
+	background-color: red;
 	/* height: 100%; */
 	/* z-index: 1; */
-	display: flex;
-	justify-content: space-between;
+	/* display: flex;
+	justify-content: space-between; */
 }
 
 .profile-title 
