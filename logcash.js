@@ -25,14 +25,14 @@ function updateValues()
 {
 	log.monthName = getLastMonth(log.monthIndex, 1);
 	log.nbHourReq = getNumberHourRequired();
-	if (!log.dev)
+	if (log.dev == 0)
 		getNumberHourDone();
 	let timeFloat = log.nbHourDone + (log.nbMinDone / 60)
 
 	log.nbHourRem = log.nbHourReq - log.nbHourDone;
 	log.nbMinRem = log.nbMinReq - log.nbMinDone;
-	log.pourcent = timeFloat / log.nbHourReq * 100;
-	log.cashEarn = log.salary * (log.pourcent / 100);
+	log.percent = timeFloat / log.nbHourReq * 100;
+	log.cashEarn = log.salary * (log.percent / 100);
 	if (log.cashEarn > log.salary)
 		log.cashEarn = log.salary;
 	if (log.nbMinRem < 0)
@@ -78,58 +78,33 @@ function generateLogcashDiv()
 	sideRemaining.appendChild(textRemaining);
 	rowProgress.appendChild(sideProgress);
 	rowProgress.appendChild(sideRemaining);
-	
-	// containerLogcash.style.display = "flex";
 
 	let oldLogTitle = getTitleLogtime();
-	// let oldLogTitle = document.querySelector(".profile-title");
 	let cloneNode = oldLogTitle.cloneNode();
-	console.log(cloneNode);
+	cloneNode.innerText = "LOGTIME";
+	cloneNode.style.margin = "0";
+	// console.log(cloneNode);
 	oldLogTitle.style.display = "none";
 
 	containerLogcash.appendChild(cloneNode);
 	containerLogcash.appendChild(textMonth);
 	containerLogcash.appendChild(rowProgress);
 
-	updateValues();
-	textMonth.innerText = log.monthName;
-	// textCash.innerText = log.cashEarn.toFixed(2) + "€";
-	if (log.pourcent >= 100)
-	{
-		if (log.nbMinDone < 10)
-			textProgress.innerText = log.nbHourDone + "h0" + log.nbMinDone + " / " + log.nbHourReq + "h00";
-		else
-			textProgress.innerText = log.nbHourDone + "h" + log.nbMinDone + " / " + log.nbHourReq + "h00";
-		textRemaining.style.display = "none";
-	}
-	else
-	{
-		if (log.nbMinDone < 10)
-			textProgress.innerText = log.nbHourDone + "h0" + log.nbMinDone ;
-		else
-		textProgress.innerText = log.nbHourDone + "h" + log.nbMinDone ;
-		if (log.nbMinRem < 10)
-			textRemaining.innerText = log.nbHourRem + "h0" + log.nbMinRem;
-		else
-			textRemaining.innerText = log.nbHourRem + "h" + log.nbMinRem;
-	}
-	let textPourcent = "  (" + Math.floor(log.pourcent) + "%)";
-	textProgress.innerText += textPourcent;
 
-	textMonth.style.padding = "0";
-	// textMonth.style.margin = "0";
+	// textMonth.style.padding = "0";
 	textMonth.style.cursor = "pointer";
-	textMonth.style.borderRadius = "2px";
+	textMonth.style.borderRadius = "4px";
 	textMonth.style.color = "#8e8e8f";
-	// textCash.style.padding = "0";
-	// textCash.style.color = "#8e8e8f";
+	textMonth.style.display = "flex";
+	textMonth.style.justifyContent = "center";
+	textMonth.style.alignItems = "center";
 	
 	// row progress style
 	rowProgress.style.display = "flex";
 	rowProgress.style.flex = "1";
 	rowProgress.style.justifyContent = "space-between";
 	
-	if (!log.dev)
+	if (log.dev == 0)
 	{
 		var mainNavbar = document.querySelector(".main-navbar");
 		var style = window.getComputedStyle(mainNavbar,"");
@@ -141,6 +116,10 @@ function generateLogcashDiv()
 	if (bgColor == "#1e212a" || "rgb(30, 33, 42)")
 	{
 		rowProgress.style.border = "2px solid #2d313c";
+		textMonth.style.border = "2px solid rgba(0,0,0,0)";
+		// textMonth.style.borderColor = "#2d313c";
+		// textMonth.style.borderStyle = "solid";
+		// textMonth.style.borderWidth = "2px";
 		textProgress.style.color = "#f2f2f2";
 	}
 	else
@@ -148,28 +127,19 @@ function generateLogcashDiv()
 		rowProgress.style.border = "2px solid #e5e5e5";
 		textProgress.style.color = "#2c2c34";
 	}
-	rowProgress.style.borderRadius = "3px";
+	rowProgress.style.borderRadius = "4px";
+	// textMonth.style.borderRadius = "4px";
 	
+	sideProgress.style.cursor = "pointer";
 	sideProgress.style.display = "flex";
 	sideProgress.style.justifyContent = "center";
 	sideProgress.style.alignItems = "center";
 	sideProgress.style.minWidth = "70px";
-	if (log.pourcent < 10)
-		sideProgress.style.width = "70px";
-	else if (log.pourcent > 90 && log.pourcent < 100)
-		sideProgress.style.width = "90%";
-	else
-		sideProgress.style.width = log.pourcent + "%";
-
-	// color gestion progress bar
-	if (log.pourcent == 0)
-		sideProgress.style.backgroundColor = "#252932";
-	else
-		sideProgress.style.backgroundColor = "rgba(0, 186, 188, " + (log.pourcent / 100) + ")";
 
 	sideProgress.style.height = "100%";
-	sideProgress.style.borderRadius = "3px 4px 4px 3px";
-	textProgress.style.margin = "0";
+	// sideProgress.style.borderRadius = "3px 4px 4px 3px";
+	// sideProgress.style.borderRadius = "3px 8px 8px 3px";
+	sideProgress.style.borderRadius = "3px";
 	
 	sideRemaining.style.display = "flex";
 	sideRemaining.style.justifyContent = "center";
@@ -180,6 +150,73 @@ function generateLogcashDiv()
 	textRemaining.style.color = "#8d8e8e";
 
 	return (containerLogcash);
+}
+
+function reGenerate() {
+
+	var textMonth = document.querySelector(".text-month");
+	var textProgress = document.querySelector(".text-progress");
+	var textRemaining = document.querySelector(".text-remaining");
+	var sideProgress = document.querySelector(".side-progress");
+
+	textMonth.innerText = log.monthName;
+	var tmpProgress;
+	
+		// textCash.innerText = log.cashEarn.toFixed(2) + "€";
+	if (log.percent >= 100)
+	{
+		if (log.switchHourCash == 0)
+		{
+			if (log.nbMinDone < 10)
+				tmpProgress = log.nbHourDone + "h0" + log.nbMinDone + " / " + log.nbHourReq + "h00";
+			else
+				tmpProgress = log.nbHourDone + "h" + log.nbMinDone + " / " + log.nbHourReq + "h00";
+		}
+		else if (log.switchHourCash == 1)
+			tmpProgress = log.cashEarn.toFixed(2) + "€";
+		textRemaining.style.display = "none";
+	}
+	else
+	{
+		if (log.switchHourCash == 0)
+		{
+			if (log.nbMinDone < 10)
+				tmpProgress = log.nbHourDone + "h0" + log.nbMinDone ;
+			else
+				tmpProgress = log.nbHourDone + "h" + log.nbMinDone ;
+		}
+		else if (log.switchHourCash == 1)
+			tmpProgress = log.cashEarn.toFixed(2) + "€";
+		if (log.nbMinRem < 10)
+			textRemaining.innerText = log.nbHourRem + "h0" + log.nbMinRem;
+		else
+			textRemaining.innerText = log.nbHourRem + "h" + log.nbMinRem;
+		textRemaining.style.display = "";
+	}
+
+	textProgress.innerText = tmpProgress;
+
+	let textPercent = "  (" + Math.floor(log.percent) + "%)";
+	textProgress.innerText += textPercent;
+
+	if (log.percent < 10)
+		sideProgress.style.width = "70px";
+	else if (log.percent > 90 && log.percent < 100)
+		sideProgress.style.width = "90%";
+	else
+		sideProgress.style.width = log.percent + "%";
+
+	// color gestion progress bar
+	if (log.percent == 0)
+	{
+		log.progressColor = "rgba(37, 41, 50, 0.8)";
+		sideProgress.style.backgroundColor = log.progressColor;
+	}
+	else
+	{
+		log.progressColor = "rgba(0, 186, 188, " + (log.percent / 100) + ")";
+		sideProgress.style.backgroundColor = log.progressColor;
+	}
 }
 
 function getRatio(windowWidth) {
@@ -201,56 +238,25 @@ function getRatio(windowWidth) {
 function resizeProgress() {
 	var windowWidth = window.innerWidth;
 	var containerLogcash = document.querySelector(".container-logcash");
-	// var containerMonth = document.querySelector(".container-month");
 	var rowProgressBar = document.querySelector(".row-progress-bar");
 	var textMonth = document.querySelector(".text-month");
-	// var textCash = document.querySelector(".text-cash");
 	var textProgress = document.querySelector(".text-progress");
 	var textRemaining = document.querySelector(".text-remaining");
 
 	var ratio = getRatio(windowWidth);
 
-	// console.log(containerLogcash);		/////////////////////////////////////////////
 	rowProgressBar.style.height = (ratio * 30) + "px";
-	// containerLogcash.style.margin = "-" + (ratio * 70) + "px 0 0 0";
 	containerLogcash.style.display = "flex";
-	// var smallText = ratio * 1;
+	var smallMargin = ratio * 8;
 	textMonth.style.fontSize = "0.9em";
-	// textCash.style.fontSize = smallText + "em";
-	// textMonth.style.padding = (ratio * 3) + "px " + (ratio * 8) + "px";
-	// textCash.style.padding = (ratio * 3) + "px " + (ratio * 8) + "px";
+	textMonth.style.padding = "0 10px";
+	textMonth.style.height = (ratio * 30) + "px";
+	textMonth.style.margin = "auto " + smallMargin + "px auto " + (ratio * 16) + "px";
 
-	var smallMargin = ratio * 10;
-	textMonth.style.margin = "0 " + smallMargin + "px 0 0";
-	// textCash.style.margin = "0 " + smallMargin + "px 0 0";
 	var bigText = ratio;
 	textProgress.style.fontSize = bigText + "em";
 	textRemaining.style.fontSize = bigText + "em";
-	
-	// if (windowWidth <= 480)
-	// {
-	// 	containerLogcash.style.margin = "-" + (ratio * 40) + "px 0 0 0";
-	// }
-	// else if (windowWidth <= 770)
-	// {
-	// 	containerLogcash.style.margin = "-" + (ratio * 60) + "px 0 0 0";
-	// }
-	// else if (windowWidth <= 990)
-	// {
-	// 	// containerLogcash.style.margin = "-" + (ratio * 75) + "px 0 0 0";
-	// }
-	// else if (windowWidth <= 1600)
-	// {
-	// 	containerLogcash.style.margin = "-" + (ratio * 60) + "px 0 0 0";
-	// }
-	// else if (windowWidth <= 3000)
-	// {
-	// 	// containerLogcash.style.margin = "-" + (ratio * 70) + "px 0 0 0";
-	// }
-	// else
-	// {
-	// 	// containerLogcash.style.margin = "-" + (ratio * 70) + "px 0 0 0";
-	// }
+	textProgress.style.margin = 0;
 }
 
 function waitForAll(selector) {
@@ -314,12 +320,11 @@ function getNumberHourRequired()
 		return (numHour2024[log.monthIndex]);
 }
 
-async function changeColorPage(dev)
+async function changeColorPage()
 {
 	const allContainer = document.querySelectorAll(".container-inner-item");
 	const noteTitle = document.querySelectorAll(".note-title");
 	const navbar = document.querySelector(".main-navbar");
-	// const allG = document.querySelectorAll("g[data-original-title]");
 	const progressBar = document.querySelector(".row-progress-bar");
 	
 	for(var i = 0; allContainer[i]; i++)
@@ -351,15 +356,16 @@ async function changeColorPage(dev)
 		}
 	}
 	navbar.style.backgroundColor = "#1e212a";
-	// progressBar.style.borderColor = "#1e212a";
 	document.body.style.backgroundColor = "#131419";
 }
 
 function mOverMonth(e)
 {
 	devPos = document.querySelector(".dev-pos");
-	e.target.style.backgroundColor = "rgb(0, 186, 188)";
+	// e.target.style.backgroundColor = "rgb(0, 186, 188)";
+	e.target.style.backgroundColor = log.progressColor;
 	e.target.style.color = "white";
+	e.target.style.border = "2px solid #2d313c";
 
 	containerLogcash = document.querySelector("#container-logcash");
 	const containerSelection = document.createElement("div");
@@ -380,6 +386,7 @@ function mOutMonth(e)
 {
 	e.target.style.backgroundColor = "";
 	e.target.style.color = "#8e8e8f";
+	e.target.style.border = "2px solid rgba(0,0,0,0)";
 }
 
 function clickMonth(e)
@@ -398,14 +405,14 @@ function clickMonth(e)
 function mOverProgress(e)
 {
 	blocProgress = document.querySelector(".side-progress");
-	var oldColor = window.getComputedStyle(blocProgress,"").getPropertyValue("background-color");
-	var tmpSplit = oldColor.split(' ');
+	// var oldColor = window.getComputedStyle(blocProgress,"").getPropertyValue("background-color");
+	var tmpSplit = log.progressColor.split(' ');
 	var newAlpha = tmpSplit[3].replace(')', '');
 	if ((parseInt(newAlpha) + 0.1) > 1)
 		var newColor = "rgb(0, 189, 190)";
 	else
 		var newColor = tmpSplit[0] + " " + tmpSplit[1] + tmpSplit[2] + " " + (parseFloat(newAlpha) + 0.1) + ")";
-	console.log(oldColor + "  " + newColor);
+	// console.log(oldColor + "  " + newColor);
 	blocProgress.style.backgroundColor = newColor;
 	blocProgress.style.color = "white";
 	
@@ -419,23 +426,45 @@ function mOverProgress(e)
 	// containerLogcash.children[0].style.display = "none";
 	// containerLogcash.appendChild(containerSelection);
 	
-	blocProgress.addEventListener("mouseleave", function () {
-		blocProgress.style.backgroundColor = oldColor;
-		// containerLogcash.children[0].style.display = "";
-		// containerSelection.remove();
-	});
+	// blocProgress.addEventListener("mouseleave", function () {
+	// 	blocProgress.style.backgroundColor = oldColor;
+	// 	// containerLogcash.children[0].style.display = "";
+	// 	// containerSelection.remove();
+	// });
+}
+
+function mOutProgress(e) {
+	var blocProgress = document.querySelector(".side-progress");
+	// e.target.style.backgroundColor = log.progressColor;
+	elems.blocProgress.style.backgroundColor = log.progressColor;
+}
+
+function clickProgress(e) {
+	var blocProgress = document.querySelector(".side-progress");
+
+	if (log.switchHourCash == 0)
+		log.switchHourCash = 1;
+	else if (log.switchHourCash == 1)
+		log.switchHourCash = 0;
+	reGenerate();
 }
 
 function initButtons()
 {
-	sideProgress = document.querySelector(".side-progress");
-	// textMonth = document.querySelector(".text-month");
+	// var blocProgress = document.querySelector(".side-progress");
+	elems.blocProgress = document.querySelector(".side-progress");
+	elems.textProgress = document.querySelector(".text-progress");
 
-	// sideProgress.addEventListener("mouseover", mOverProgress);
+	sideProgress = document.querySelector(".side-progress");
+	textMonth = document.querySelector(".text-month");
+
+	sideProgress.addEventListener("mouseover", mOverProgress);
+	sideProgress.addEventListener("mouseout", mOutProgress);
+	sideProgress.addEventListener("click", clickProgress);
 	
-	// textMonth.addEventListener("mouseover", mOverMonth);
-	// textMonth.addEventListener("mouseout", mOutMonth);
-	// textMonth.addEventListener("click", clickMonth);
+	textMonth.addEventListener("mouseover", mOverMonth);
+	textMonth.addEventListener("mouseout", mOutMonth);
+	textMonth.addEventListener("click", clickMonth);
 }
 
 async function fetchCalendar()
@@ -450,18 +479,21 @@ async function initLogcash()
 {
 	var divLogtime;
 
-	log.elem = await fetchCalendar();
 	logCashDiv = generateLogcashDiv();
-	if (log.dev)
-		divLogtime = document.querySelector(".main-div");
+	if (log.dev == 1)
+	divLogtime = document.querySelector(".main-div");
 	else
+	{
+		log.elem = await fetchCalendar();
 		divLogtime = document.querySelector("svg#user-locations").parentElement;
+	}
+	console.log(divLogtime);
 	divLogtime.insertBefore(logCashDiv, divLogtime.firstChild);
-	// logCashDiv.style.display = "none";
 	resizeProgress();
+	updateValues();
+	reGenerate();
 	window.addEventListener("resize", resizeProgress);
 	initButtons();
-	// logCashDiv.style.display = "";
 }
 
 var log = {
@@ -471,20 +503,28 @@ var log = {
     yearIndex: new Date().getYear(),
     monthName: "",
 	salary: 685,
-	pourcent: 0.0,
+	percent: 0.0,
 	nbHourReq: 0,
 	nbMinReq: 0,
-	nbHourDone: 28,
-	nbMinDone: 52,
+	nbHourDone: 25,
+	nbMinDone: 0,
 	nbHourRem: 0,
 	nbMinRem: 0,
 	cashEarn: 0,
 	time: 0,
+	switchHourCash: 0,
+	progressColor: 0,
 }
 
-// log.dev = 1;
+var elems = {
+	blocProgress: 0,
+	textProgress: 0,
+}
 
-if (log.dev)
+log.dev = 1;
+// log.switchHourCash = 0;
+
+if (log.dev == 1)
 {
 	var refreshButton = document.querySelector(".dev-refresh");
 
@@ -493,11 +533,11 @@ if (log.dev)
 	});
 }
 
-initLogcash(log.dev);
+initLogcash();
 
 var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 if (isOpera)
 {
-	changeColorPage(log.dev);
+	changeColorPage();
 }
 
