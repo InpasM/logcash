@@ -1,8 +1,8 @@
 
-const h4Title = document.querySelectorAll(".profile-title");
 
 function getTitleLogtime()
 {
+	const h4Title = document.querySelectorAll(".profile-title");
 	for (var i = 0; h4Title[i]; i++)
 	{
 		if (h4Title[i].innerText == "LOGTIME")
@@ -25,8 +25,8 @@ function updateValues()
 {
 	log.monthName = getLastMonth(log.monthIndex, 1);
 	log.nbHourReq = getNumberHourRequired();
-	if (log.dev == 0)
-		getNumberHourDone();
+	// if (log.dev == 0)
+	// 	getNumberHourDone();
 	let timeFloat = log.nbHourDone + (log.nbMinDone / 60)
 
 	log.nbHourRem = log.nbHourReq - log.nbHourDone;
@@ -51,11 +51,14 @@ function generateLogcashDiv()
 {
 	const containerLogcash = document.createElement("div");
 	containerLogcash.className = "container-logcash";
+	containerLogcash.style.display = "flex";
+	containerLogcash.style.alignItems = "center";
 	
 	const titleLogcash = document.createElement("h4");
 	titleLogcash.innerText = "LOGCASH";
 	titleLogcash.className = "profile-title";
 	
+	const divMonth = document.createElement("div");
 	const textMonth = document.createElement("p");
 	textMonth.className = "text-month";
 	
@@ -80,21 +83,29 @@ function generateLogcashDiv()
 	rowProgress.appendChild(sideRemaining);
 
 	let oldLogTitle = getTitleLogtime();
-	let cloneNode = oldLogTitle.cloneNode();
-	cloneNode.innerText = "LOGTIME";
-	cloneNode.style.margin = "0";
-	// console.log(cloneNode);
+	// let cloneNode = oldLogTitle.cloneNode();
+	elems.h4Title = oldLogTitle.cloneNode();
+	elems.h4Title.innerText = "LOGTIME";
+	elems.h4Title.style.margin = "0";
+	// console.log(elems.h4Title);
 	oldLogTitle.style.display = "none";
 
-	containerLogcash.appendChild(cloneNode);
-	containerLogcash.appendChild(textMonth);
+	divMonth.appendChild(textMonth);
+
+	containerLogcash.appendChild(elems.h4Title);
+	containerLogcash.appendChild(divMonth);
 	containerLogcash.appendChild(rowProgress);
 
 
+	divMonth.style.display = "flex";
+	divMonth.style.justifyContent = "center";
+	divMonth.style.alignItems = "center";
+
 	// textMonth.style.padding = "0";
+	textMonth.style.color = "#8e8e8f";
+
 	textMonth.style.cursor = "pointer";
 	textMonth.style.borderRadius = "4px";
-	textMonth.style.color = "#8e8e8f";
 	textMonth.style.display = "flex";
 	textMonth.style.justifyContent = "center";
 	textMonth.style.alignItems = "center";
@@ -116,7 +127,7 @@ function generateLogcashDiv()
 	if (bgColor == "#1e212a" || "rgb(30, 33, 42)")
 	{
 		rowProgress.style.border = "2px solid #2d313c";
-		textMonth.style.border = "2px solid rgba(0,0,0,0)";
+		divMonth.style.border = "2px solid rgba(0,0,0,0)";
 		// textMonth.style.borderColor = "#2d313c";
 		// textMonth.style.borderStyle = "solid";
 		// textMonth.style.borderWidth = "2px";
@@ -247,7 +258,7 @@ function resizeProgress() {
 
 	rowProgressBar.style.height = (ratio * 30) + "px";
 	containerLogcash.style.display = "flex";
-	var smallMargin = ratio * 8;
+	var smallMargin = ratio * 6;
 	textMonth.style.fontSize = "0.9em";
 	textMonth.style.padding = "0 10px";
 	textMonth.style.height = (ratio * 30) + "px";
@@ -326,7 +337,17 @@ async function changeColorPage()
 	const noteTitle = document.querySelectorAll(".note-title");
 	const navbar = document.querySelector(".main-navbar");
 	const progressBar = document.querySelector(".row-progress-bar");
+	// const logTitle = getTitleLogtime();
+	const h4Title = document.querySelectorAll(".profile-title");
+	const h4 = document.querySelectorAll("h4");
+
+	for (var i = 0; h4[i]; i++)
+	{
+		// h4[i].style.color = "#eaeaeb";
+		console.log(h4[i]);
+	}
 	
+	elems.h4Title.style.color = "rgb(234, 234, 235)";
 	for(var i = 0; allContainer[i]; i++)
 	{
 		allContainer[i].style.backgroundColor = "#1d2028";
@@ -367,19 +388,21 @@ function mOverMonth(e)
 	e.target.style.color = "white";
 	e.target.style.border = "2px solid #2d313c";
 
-	containerLogcash = document.querySelector("#container-logcash");
-	const containerSelection = document.createElement("div");
-	containerSelection.style.backgroundColor = "white";
-	containerSelection.style.width = "100%";
-	containerSelection.style.height = e.target.parentElement.parentElement.clientHeight + "px";
+	// containerLogcash = document.querySelector("#container-logcash");
+	// const containerSelection = document.createElement("div");
+	const tmpJune = document.createElement("p");
+	tmpJune.innerText = "June";
+	// containerSelection.style.backgroundColor = "white";
+	// containerSelection.style.width = "100%";
+	// containerSelection.style.height = e.target.parentElement.parentElement.clientHeight + "px";
 
-	containerLogcash.children[0].style.display = "none";
-	containerLogcash.appendChild(containerSelection);
+	// containerLogcash.children[0].style.display = "none";
+	// containerLogcash.appendChild(containerSelection);
 
-	containerSelection.addEventListener("mouseleave", function () {
-		containerLogcash.children[0].style.display = "";
-		containerSelection.remove();
-	});
+	// containerSelection.addEventListener("mouseleave", function () {
+	// 	containerLogcash.children[0].style.display = "";
+	// 	containerSelection.remove();
+	// });
 }
 
 function mOutMonth(e)
@@ -391,13 +414,13 @@ function mOutMonth(e)
 
 function clickMonth(e)
 {
-	containerLogcash = document.querySelector("#container-logcash");
-	const containerSelection = document.createElement("div");
-	containerSelection.style.backgroundColor = "white";
-	containerSelection.style.width = "100%";
-	containerSelection.style.height = e.target.parentElement.parentElement.clientHeight + "px";
+	// containerLogcash = document.querySelector("#container-logcash");
+	// const containerSelection = document.createElement("div");
+	// containerSelection.style.backgroundColor = "white";
+	// containerSelection.style.width = "100%";
+	// containerSelection.style.height = e.target.parentElement.parentElement.clientHeight + "px";
 	
-	containerLogcash.appendChild(containerSelection);
+	// containerLogcash.appendChild(containerSelection);
 	// console.log(containerLogcash.children);
 	// containerLogcash.children[0].style.visibility = "hidden";
 }
@@ -519,9 +542,10 @@ var log = {
 var elems = {
 	blocProgress: 0,
 	textProgress: 0,
+	h4Title: 0,
 }
 
-log.dev = 1;
+log.dev = 0;
 // log.switchHourCash = 0;
 
 if (log.dev == 1)
