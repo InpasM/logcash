@@ -57,7 +57,9 @@ function generateLogcashDiv()
 	titleLogcash.className = "profile-title";
 	
 	const textMonth = document.createElement("p");
+	const rowMonth = document.createElement("div");
 	textMonth.className = "text-month";
+	rowMonth.className = "row-month";
 	
 	// generate row progress
 	const rowProgress = document.createElement("div");
@@ -85,11 +87,13 @@ function generateLogcashDiv()
 	cloneNode.style.margin = "0";
 	// console.log(cloneNode);
 	oldLogTitle.style.display = "none";
+	rowMonth.appendChild(textMonth);
 
 	containerLogcash.appendChild(cloneNode);
-	containerLogcash.appendChild(textMonth);
+	containerLogcash.appendChild(rowMonth);
 	containerLogcash.appendChild(rowProgress);
 
+	// rowMonth.style.flex = "1";
 
 	// textMonth.style.padding = "0";
 	textMonth.style.cursor = "pointer";
@@ -134,7 +138,7 @@ function generateLogcashDiv()
 	sideProgress.style.display = "flex";
 	sideProgress.style.justifyContent = "center";
 	sideProgress.style.alignItems = "center";
-	sideProgress.style.minWidth = "70px";
+	sideProgress.style.minWidth = "90px";
 
 	sideProgress.style.height = "100%";
 	// sideProgress.style.borderRadius = "3px 4px 4px 3px";
@@ -200,7 +204,7 @@ function reGenerate() {
 	textProgress.innerText += textPercent;
 
 	if (log.percent < 10)
-		sideProgress.style.width = "70px";
+		sideProgress.style.width = "50px";
 	else if (log.percent > 90 && log.percent < 100)
 		sideProgress.style.width = "90%";
 	else
@@ -240,6 +244,7 @@ function resizeProgress() {
 	var containerLogcash = document.querySelector(".container-logcash");
 	var rowProgressBar = document.querySelector(".row-progress-bar");
 	var textMonth = document.querySelector(".text-month");
+	var rowMonth = document.querySelector(".row-month");
 	var textProgress = document.querySelector(".text-progress");
 	var textRemaining = document.querySelector(".text-remaining");
 
@@ -248,10 +253,19 @@ function resizeProgress() {
 	rowProgressBar.style.height = (ratio * 30) + "px";
 	containerLogcash.style.display = "flex";
 	var smallMargin = ratio * 8;
+
+	// textMonth.style.backgroundColor = "red";
+
 	textMonth.style.fontSize = "0.9em";
 	textMonth.style.padding = "0 10px";
 	textMonth.style.height = (ratio * 30) + "px";
-	textMonth.style.margin = "auto " + smallMargin + "px auto " + (ratio * 16) + "px";
+	// textMonth.style.margin = "auto";
+	textMonth.style.margin = "auto " + smallMargin + "px auto " + "0";
+
+	// rowMonth.style.backgroundColor = "blue";
+
+	// rowMonth.style.height = (ratio * 30) + "px";
+	rowMonth.style.margin = "auto 0" + "px auto " + (ratio * 16) + "px";
 
 	var bigText = ratio;
 	textProgress.style.fontSize = bigText + "em";
@@ -367,18 +381,25 @@ function mOverMonth(e)
 	e.target.style.color = "white";
 	e.target.style.border = "2px solid #2d313c";
 
-	containerLogcash = document.querySelector("#container-logcash");
-	const containerSelection = document.createElement("div");
-	containerSelection.style.backgroundColor = "white";
-	containerSelection.style.width = "100%";
-	containerSelection.style.height = e.target.parentElement.parentElement.clientHeight + "px";
+	containerLogcash = document.querySelector(".container-logcash");
+	rowMonth = document.querySelector(".row-month");
+	// const containerSelection = document.createElement("div");
+	// containerSelection.style.backgroundColor = "white";
+	// containerSelection.style.width = "100%";
+	// containerSelection.style.height = e.target.parentElement.parentElement.clientHeight + "px";
 
-	containerLogcash.children[0].style.display = "none";
-	containerLogcash.appendChild(containerSelection);
+	rowMonth.style.backgroundColor = "white";
+	rowMonth.style.height = e.target.parentElement.parentElement.clientHeight + "px";
 
-	containerSelection.addEventListener("mouseleave", function () {
-		containerLogcash.children[0].style.display = "";
-		containerSelection.remove();
+	// containerLogcash.children[2].style.display = "none";
+	// containerLogcash.appendChild(containerSelection);
+	// rowMonth.style.flex = "1";
+	
+	rowMonth.addEventListener("mouseleave", function () {
+		containerLogcash.children[2].style.display = "flex";
+		// rowMonth.style.flex = "0";
+		rowMonth.style.backgroundColor = "";
+		// rowMonth.remove();
 	});
 }
 
@@ -391,7 +412,7 @@ function mOutMonth(e)
 
 function clickMonth(e)
 {
-	containerLogcash = document.querySelector("#container-logcash");
+	containerLogcash = document.querySelector(".container-logcash");
 	const containerSelection = document.createElement("div");
 	containerSelection.style.backgroundColor = "white";
 	containerSelection.style.width = "100%";
@@ -475,19 +496,57 @@ async function fetchCalendar()
 	})
 }
 
+function getInfoMonth() {
+	
+	// console.log(log.elem.calendar.length);
+	// for (var i = 0; i < log.elem.calendar.length; i++)
+	// {
+	// 	console.log(log.elem.calendar[i].nextSibling);
+
+	// 	if (!log.elem.calendar[i].nextSibling.firstElementChild)
+	// 	{
+	// 		// let tmpSplit = log.elem.calendar[i].nextSibling.firstChild.data.split(' ')[0];
+			
+	// 		// if (tmpSplit == tmpMonth)
+	// 		// 	break;
+	// 		// console.log(tmpSplit[0]);
+	// 	}
+	// }
+
+	for (var i = 0; i < log.elem.calendar.length - 1; i++)
+	{
+		if (!log.elem.calendar[i].nextSibling.firstElementChild)
+		{
+			console.log(log.elem.calendar[i].nextSibling.firstChild.data.split(' ')[0]);
+			// let tmpSplit = log.elem.calendar[i].nextSibling.firstChild.data.split(' ')[0];
+			
+			// if (tmpSplit == tmpMonth)
+			// 	break;
+		}
+	}
+}
+
 async function initLogcash()
 {
 	var divLogtime;
 
 	logCashDiv = generateLogcashDiv();
 	if (log.dev == 1)
-	divLogtime = document.querySelector(".main-div");
+	{
+		// log.elem.calendar = document.querySelectorAll("g");
+		log.elem = await fetchCalendar();
+		divLogtime = document.querySelector(".main-div");
+	}
 	else
 	{
 		log.elem = await fetchCalendar();
 		divLogtime = document.querySelector("svg#user-locations").parentElement;
 	}
-	console.log(divLogtime);
+
+	// console.log(log.elem.length);
+	getInfoMonth();
+
+	// console.log(divLogtime);
 	divLogtime.insertBefore(logCashDiv, divLogtime.firstChild);
 	resizeProgress();
 	updateValues();
@@ -514,6 +573,8 @@ var log = {
 	time: 0,
 	switchHourCash: 0,
 	progressColor: 0,
+
+	nbMonth: 0,
 }
 
 var elems = {
