@@ -61,6 +61,7 @@ function generateLogcashDiv()
 	const divMonth = document.createElement("div");
 	const textMonth = document.createElement("p");
 	textMonth.className = "text-month";
+	divMonth.className = "div-month";
 	
 	// generate row progress
 	const rowProgress = document.createElement("div");
@@ -145,7 +146,7 @@ function generateLogcashDiv()
 	sideProgress.style.display = "flex";
 	sideProgress.style.justifyContent = "center";
 	sideProgress.style.alignItems = "center";
-	sideProgress.style.minWidth = "70px";
+	sideProgress.style.minWidth = "90px";
 
 	sideProgress.style.height = "100%";
 	// sideProgress.style.borderRadius = "3px 4px 4px 3px";
@@ -211,7 +212,7 @@ function reGenerate() {
 	textProgress.innerText += textPercent;
 
 	if (log.percent < 10)
-		sideProgress.style.width = "70px";
+		sideProgress.style.width = "50px";
 	else if (log.percent > 90 && log.percent < 100)
 		sideProgress.style.width = "90%";
 	else
@@ -251,6 +252,7 @@ function resizeProgress() {
 	var containerLogcash = document.querySelector(".container-logcash");
 	var rowProgressBar = document.querySelector(".row-progress-bar");
 	var textMonth = document.querySelector(".text-month");
+	var divMonth = document.querySelector(".div-month");
 	var textProgress = document.querySelector(".text-progress");
 	var textRemaining = document.querySelector(".text-remaining");
 
@@ -262,7 +264,13 @@ function resizeProgress() {
 	textMonth.style.fontSize = "0.9em";
 	textMonth.style.padding = "0 10px";
 	textMonth.style.height = (ratio * 30) + "px";
-	textMonth.style.margin = "auto " + smallMargin + "px auto " + (ratio * 16) + "px";
+	// textMonth.style.margin = "auto " + smallMargin + "px auto " + (ratio * 16) + "px";
+	textMonth.style.margin = "auto " + smallMargin + "px auto " + "0";
+
+	// divMonth.style.backgroundColor = "blue";
+
+	// divMonth.style.height = (ratio * 30) + "px";
+	divMonth.style.margin = "auto 0" + "px auto " + (ratio * 16) + "px";
 
 	var bigText = ratio;
 	textProgress.style.fontSize = bigText + "em";
@@ -376,7 +384,8 @@ async function changeColorPage()
 				allG[i].firstElementChild.style.fill = "#242831";
 		}
 	}
-	navbar.style.backgroundColor = "#1e212a";
+	if (navbar)
+		navbar.style.backgroundColor = "#1e212a";
 	document.body.style.backgroundColor = "#131419";
 }
 
@@ -390,8 +399,23 @@ function mOverMonth(e)
 
 	// containerLogcash = document.querySelector("#container-logcash");
 	// const containerSelection = document.createElement("div");
-	const tmpJune = document.createElement("p");
-	tmpJune.innerText = "June";
+
+	// const tmpJune = document.createElement("p");
+	// tmpJune.innerText = "June";
+
+	containerLogcash = document.querySelector(".container-logcash");
+	rowMonth = document.querySelector(".row-month");
+
+	rowMonth.style.backgroundColor = "white";
+	rowMonth.style.height = e.target.parentElement.parentElement.clientHeight + "px";
+
+	rowMonth.addEventListener("mouseleave", function () {
+		containerLogcash.children[2].style.display = "flex";
+		// rowMonth.style.flex = "0";
+		rowMonth.style.backgroundColor = "";
+		// rowMonth.remove();
+	});
+
 	// containerSelection.style.backgroundColor = "white";
 	// containerSelection.style.width = "100%";
 	// containerSelection.style.height = e.target.parentElement.parentElement.clientHeight + "px";
@@ -472,6 +496,36 @@ function clickProgress(e) {
 	reGenerate();
 }
 
+function getInfoMonth() {
+
+	// console.log(log.elem.calendar.length);
+	// for (var i = 0; i < log.elem.calendar.length; i++)
+	// {
+	// 	console.log(log.elem.calendar[i].nextSibling);
+
+	// 	if (!log.elem.calendar[i].nextSibling.firstElementChild)
+	// 	{
+	// 		// let tmpSplit = log.elem.calendar[i].nextSibling.firstChild.data.split(' ')[0];
+
+	// 		// if (tmpSplit == tmpMonth)
+	// 		// 	break;
+	// 		// console.log(tmpSplit[0]);
+	// 	}
+	// }
+
+	for (var i = 0; i < log.elem.calendar.length - 1; i++)
+	{
+		if (!log.elem.calendar[i].nextSibling.firstElementChild)
+		{
+			console.log(log.elem.calendar[i].nextSibling.firstChild.data.split(' ')[0]);
+			// let tmpSplit = log.elem.calendar[i].nextSibling.firstChild.data.split(' ')[0];
+
+			// if (tmpSplit == tmpMonth)
+			// 	break;
+		}
+	}
+}
+
 function initButtons()
 {
 	// var blocProgress = document.querySelector(".side-progress");
@@ -504,13 +558,20 @@ async function initLogcash()
 
 	logCashDiv = generateLogcashDiv();
 	if (log.dev == 1)
-	divLogtime = document.querySelector(".main-div");
+	{
+		// log.elem.calendar = document.querySelectorAll("g");
+		log.elem = await fetchCalendar();
+		divLogtime = document.querySelector(".main-div");
+	}
 	else
 	{
 		log.elem = await fetchCalendar();
 		divLogtime = document.querySelector("svg#user-locations").parentElement;
 	}
-	console.log(divLogtime);
+	// console.log(divLogtime);
+
+	getInfoMonth();
+
 	divLogtime.insertBefore(logCashDiv, divLogtime.firstChild);
 	resizeProgress();
 	updateValues();
@@ -537,6 +598,7 @@ var log = {
 	time: 0,
 	switchHourCash: 0,
 	progressColor: 0,
+	nbMonth: 0,
 }
 
 var elems = {
@@ -545,7 +607,7 @@ var elems = {
 	h4Title: 0,
 }
 
-log.dev = 0;
+log.dev = 1;
 // log.switchHourCash = 0;
 
 if (log.dev == 1)
