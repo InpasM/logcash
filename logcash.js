@@ -10,7 +10,7 @@ function getTitleLogtime()
 	}
 }
 
-function getLastMonth(index, short)
+function getMonth(index, short)
 {
 	const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 	const monthShort = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -21,29 +21,29 @@ function getLastMonth(index, short)
 		return (month[index]);
 }
 
-function updateValues()
+function updateValues(month)
 {
-	log.monthName = getLastMonth(log.monthIndex, 1);
-	log.nbHourReq = getNumberHourRequired();
-	// if (log.dev == 0)
-		getNumberHourDone();
-	let timeFloat = log.nbHourDone + (log.nbMinDone / 60)
 
-	log.nbHourRem = log.nbHourReq - log.nbHourDone;
-	log.nbMinRem = log.nbMinReq - log.nbMinDone;
-	log.percent = timeFloat / log.nbHourReq * 100;
-	log.cashEarn = log.salary * (log.percent / 100);
-	if (log.cashEarn > log.salary)
-		log.cashEarn = log.salary;
-	if (log.nbMinRem < 0)
+	month.nbHourReq = getNumberHourRequired(month.monthIndex, month.yearIndex);
+	getNumberHourDone(month);
+
+	let timeFloat = month.nbHourDone + (month.nbMinDone / 60)
+
+	month.nbHourRem = month.nbHourReq - month.nbHourDone;
+	month.nbMinRem = month.nbMinReq - month.nbMinDone;
+	month.percent = timeFloat / month.nbHourReq * 100;
+	month.cashEarn = month.salary * (month.percent / 100);
+	if (month.cashEarn > month.salary)
+		month.cashEarn = month.salary;
+	if (month.nbMinRem < 0)
 	{
-		log.nbMinRem += 60;
-		log.nbHourRem--;
+		month.nbMinRem += 60;
+		month.nbHourRem--;
 	}
-	else if (log.nbMinRem >= 60)
+	else if (month.nbMinRem >= 60)
 	{
-		log.nbMinRem -= 60;
-		log.nbHourRem++;
+		month.nbMinRem -= 60;
+		month.nbHourRem++;
 	}
 }
 
@@ -84,11 +84,9 @@ function generateLogcashDiv()
 	rowProgress.appendChild(sideRemaining);
 
 	let oldLogTitle = getTitleLogtime();
-	// let cloneNode = oldLogTitle.cloneNode();
 	elems.h4Title = oldLogTitle.cloneNode();
 	elems.h4Title.innerText = "LOGTIME";
 	elems.h4Title.style.margin = "0";
-	// console.log(elems.h4Title);
 	oldLogTitle.style.display = "none";
 
 	divMonth.appendChild(textMonth);
@@ -97,12 +95,10 @@ function generateLogcashDiv()
 	containerLogcash.appendChild(divMonth);
 	containerLogcash.appendChild(rowProgress);
 
-
 	divMonth.style.display = "flex";
 	divMonth.style.justifyContent = "center";
 	divMonth.style.alignItems = "center";
 
-	// textMonth.style.padding = "0";
 	textMonth.style.color = "#8e8e8f";
 
 	textMonth.style.cursor = "pointer";
@@ -130,9 +126,6 @@ function generateLogcashDiv()
 	{
 		rowProgress.style.border = "2px solid #2d313c";
 		divMonth.style.border = "2px solid rgba(0,0,0,0)";
-		// textMonth.style.borderColor = "#2d313c";
-		// textMonth.style.borderStyle = "solid";
-		// textMonth.style.borderWidth = "2px";
 		textProgress.style.color = "#f2f2f2";
 	}
 	else
@@ -141,7 +134,6 @@ function generateLogcashDiv()
 		textProgress.style.color = "#2c2c34";
 	}
 	rowProgress.style.borderRadius = "4px";
-	// textMonth.style.borderRadius = "4px";
 	
 	sideProgress.style.cursor = "pointer";
 	sideProgress.style.display = "flex";
@@ -150,8 +142,6 @@ function generateLogcashDiv()
 	sideProgress.style.minWidth = "90px";
 
 	sideProgress.style.height = "100%";
-	// sideProgress.style.borderRadius = "3px 4px 4px 3px";
-	// sideProgress.style.borderRadius = "3px 8px 8px 3px";
 	sideProgress.style.borderRadius = "3px";
 	
 	sideRemaining.style.display = "flex";
@@ -165,70 +155,71 @@ function generateLogcashDiv()
 	return (containerLogcash);
 }
 
-function reGenerate() {
+function reGenerate(month) {
 
 	var textMonth = document.querySelector(".text-month");
 	var textProgress = document.querySelector(".text-progress");
 	var textRemaining = document.querySelector(".text-remaining");
 	var sideProgress = document.querySelector(".side-progress");
 
-	textMonth.innerText = log.monthName;
+	// console.log(month.name)
+
+	textMonth.innerText = month.nameLong;
 	var tmpProgress;
-	
-		// textCash.innerText = log.cashEarn.toFixed(2) + "€";
-	if (log.percent >= 100)
+
+	if (month.percent >= 100)
 	{
-		if (log.switchHourCash == 0)
+		if (month.switchHourCash == 0)
 		{
-			if (log.nbMinDone < 10)
-				tmpProgress = log.nbHourDone + "h0" + log.nbMinDone + " / " + log.nbHourReq + "h00";
+			if (month.nbMinDone < 10)
+				tmpProgress = month.nbHourDone + "h0" + month.nbMinDone + " / " + month.nbHourReq + "h00";
 			else
-				tmpProgress = log.nbHourDone + "h" + log.nbMinDone + " / " + log.nbHourReq + "h00";
+				tmpProgress = month.nbHourDone + "h" + month.nbMinDone + " / " + month.nbHourReq + "h00";
 		}
-		else if (log.switchHourCash == 1)
-			tmpProgress = log.cashEarn.toFixed(2) + "€";
+		else if (month.switchHourCash == 1)
+			tmpProgress = month.cashEarn.toFixed(2) + "€";
 		textRemaining.style.display = "none";
 	}
 	else
 	{
-		if (log.switchHourCash == 0)
+		if (month.switchHourCash == 0)
 		{
-			if (log.nbMinDone < 10)
-				tmpProgress = log.nbHourDone + "h0" + log.nbMinDone ;
+			if (month.nbMinDone < 10)
+				tmpProgress = month.nbHourDone + "h0" + month.nbMinDone ;
 			else
-				tmpProgress = log.nbHourDone + "h" + log.nbMinDone ;
+				tmpProgress = month.nbHourDone + "h" + month.nbMinDone ;
 		}
-		else if (log.switchHourCash == 1)
-			tmpProgress = log.cashEarn.toFixed(2) + "€";
-		if (log.nbMinRem < 10)
-			textRemaining.innerText = log.nbHourRem + "h0" + log.nbMinRem;
+		else if (month.switchHourCash == 1)
+			tmpProgress = month.cashEarn.toFixed(2) + "€";
+		if (month.nbMinRem < 10)
+			textRemaining.innerText = month.nbHourRem + "h0" + month.nbMinRem;
 		else
-			textRemaining.innerText = log.nbHourRem + "h" + log.nbMinRem;
+			textRemaining.innerText = month.nbHourRem + "h" + month.nbMinRem;
 		textRemaining.style.display = "";
 	}
 
 	textProgress.innerText = tmpProgress;
 
-	let textPercent = "  (" + Math.floor(log.percent) + "%)";
+	let textPercent = "  (" + Math.floor(month.percent) + "%)";
 	textProgress.innerText += textPercent;
 
-	if (log.percent < 10)
+	if (month.percent < 10)
 		sideProgress.style.width = "50px";
-	else if (log.percent > 90 && log.percent < 100)
+	else if (month.percent > 90 && month.percent < 100)
 		sideProgress.style.width = "90%";
 	else
-		sideProgress.style.width = log.percent + "%";
+		sideProgress.style.width = month.percent + "%";
 
 	// color gestion progress bar
-	if (log.percent == 0)
+	if (month.percent == 0)
 	{
-		log.progressColor = "rgba(37, 41, 50, 0.8)";
-		sideProgress.style.backgroundColor = log.progressColor;
+		month.progressColor = "rgba(37, 41, 50, 0.8)";
+		sideProgress.style.backgroundColor = month.progressColor;
 	}
 	else
 	{
-		log.progressColor = "rgba(0, 186, 188, " + (log.percent / 100) + ")";
-		sideProgress.style.backgroundColor = log.progressColor;
+		month.progressColor = "rgba(0, 186, 188, " + (month.percent / 100) + ")";
+		sideProgress.style.backgroundColor = month.progressColor;
 	}
 }
 
@@ -266,10 +257,7 @@ function resizeProgress() {
 	textMonth.style.padding = "0 10px";
 	textMonth.style.height = (ratio * 30) + "px";
 	textMonth.style.margin = "0 " + smallMargin + "px 0 0";
-	
-	// divMonth.style.backgroundColor = "blue";
-	
-	// divMonth.style.height = (ratio * 30) + "px";
+
 	divMonth.style.margin = "0 0 0 " + (ratio * 16) + "px";
 
 	var bigText = ratio;
@@ -296,50 +284,52 @@ function waitForAll(selector) {
     });
 }
 
-function getNumberHourDone()
+function getNumberHourDone(month)
 {
 	var tmpHours = 0;
 	var tmpMinutes = 0;
-	var tmpMonth = getLastMonth(log.monthIndex, 0);
 
-	// console.log(log.elem.calendar);
-	for (var i = 0; i < log.elem.calendar.length - 1; i++)
+	var i = -1;
+	while (calendar.elems[++i])
 	{
-		// console.log(log.elem.calendar[i]);
-		if (!log.elem.calendar[i].nextSibling.firstElementChild)
+		if (!calendar.elems[i].firstElementChild)
 		{
-			let tmpSplit = log.elem.calendar[i].nextSibling.firstChild.data.split(' ')[0];
+			let tmpSplit = calendar.elems[i].firstChild.data.split(' ')[0];
 			
-			if (tmpSplit == tmpMonth)
+			if (tmpSplit == month.nameShort)
 				break;
 		}
 	}
-
-	while (log.elem.calendar[++i])
+	while (calendar.elems[++i])
 	{
-		var tmpSplit = log.elem.calendar[i].getAttribute("data-original-title").split('h');
-		tmpHours += parseInt(tmpSplit[0]);
-		tmpMinutes += parseInt(tmpSplit[1]);
-
-		if (tmpMinutes >= 60)
+		if (calendar.elems[i].firstElementChild)
 		{
-			tmpHours++;
-			tmpMinutes -= 60;
+			var tmpSplit = calendar.elems[i].getAttribute("data-original-title").split('h');
+			tmpHours += parseInt(tmpSplit[0]);
+			tmpMinutes += parseInt(tmpSplit[1]);
+
+			if (tmpMinutes >= 60)
+			{
+				tmpHours++;
+				tmpMinutes -= 60;
+			}
 		}
+		else
+			break ;
 	}
-	log.nbHourDone = parseInt(tmpHours);
-	log.nbMinDone = parseInt(tmpMinutes);
+	month.nbHourDone = parseInt(tmpHours);
+	month.nbMinDone = parseInt(tmpMinutes);
 }
 
-function getNumberHourRequired()
+function getNumberHourRequired(monthIndex, yearIndex)
 {
 	const numHour2023 = [154,140,161,147,161,154,42,91,77,154,154,147];
 	const numHour2024 = [161,147,147,154,161,140,91,84,77,161,147,154];
 
-	if (log.yearIndex + 1900 == 2023)
-		return (numHour2023[log.monthIndex]);
-	else if (log.yearIndex + 1900 == 2024)
-		return (numHour2024[log.monthIndex]);
+	if (yearIndex + 1900 == 2023)
+		return (numHour2023[monthIndex]);
+	else if (yearIndex + 1900 == 2024)
+		return (numHour2024[monthIndex]);
 }
 
 async function changeColorPage()
@@ -369,6 +359,8 @@ async function changeColorPage()
 	// if (!log.dev)
 	// {
 		const allG = await waitForAll('g[data-original-title]');
+
+		// console.log(allG.length);
 		for (var i = 0; allG[i]; i++)
 		{
 			var style = window.getComputedStyle(allG[i].firstElementChild,"");
@@ -476,40 +468,65 @@ function clickProgress(e) {
 		log.switchHourCash = 1;
 	else if (log.switchHourCash == 1)
 		log.switchHourCash = 0;
-	reGenerate();
+	reGenerate(calendar.months[log.indexMonthDisplay - calendar.nbMonth]);
 }
 
 function getInfoMonth() {
 
-	// console.log(log.elem.calendar.length);
-	// for (var i = 0; i < log.elem.calendar.length; i++)
-	// {
-	// 	console.log(log.elem.calendar[i].nextSibling);
+	var tmpMonth = getMonth(log.monthIndex, 0);
 
-	// 	if (!log.elem.calendar[i].nextSibling.firstElementChild)
-	// 	{
-	// 		// let tmpSplit = log.elem.calendar[i].nextSibling.firstChild.data.split(' ')[0];
+	calendar.nbMonth = 0;
+	for (var i = 0; i < calendar.elems.length; i++)
+	{
+		if (!calendar.elems[i].firstElementChild)
+			calendar.nbMonth++;
+	}
+	
+	var array = Array(calendar.nbMonth);
 
-	// 		// if (tmpSplit == tmpMonth)
-	// 		// 	break;
-	// 		// console.log(tmpSplit[0]);
-	// 	}
-	// }
+	var indexMonth = -1;
+	var indexElems = -1;
+	while (++indexElems < calendar.elems.length)
+	{
+		var tmpMonth = {
+			nameLong: "",
+			nameShort: "",
+			monthIndex: new Date().getMonth(),
+			yearIndex: new Date().getYear(),
+			percent: 0.0,
+			nbHourReq: 0,
+			nbMinReq: 0,
+			nbHourDone: 0,
+			nbMinDone: 0,
+			nbHourRem: 0,
+			nbMinRem: 0,
+			salary: 685,
+			cashEarn: 0,
+			time: 0,
+			switchHourCash: 0,
+			progressColor: 0,
+		};
 
-	// var calendarElems = log.elem.calendar.childNodes;
-	// console.log(log.elem.calendar[0].childNodes);
-	// for (var i = 0; i < log.elem.calendar.length - 1; i++)
-	// {
-	// 	console.log(log.elem.calendar[i]);
-	// 	// if (!log.elem.calendar[i].nextSibling.firstElementChild)
-	// 	// {
-	// 	// 	console.log(log.elem.calendar[i].nextSibling.firstChild.data.split(' ')[0]);
-	// 	// 	// let tmpSplit = log.elem.calendar[i].nextSibling.firstChild.data.split(' ')[0];
+		if (calendar.elems[indexElems].tagName == 'text')
+		{
+			indexMonth++;
+			tmpMonth.monthIndex -= (calendar.nbMonth - indexMonth - 1);
+			if (tmpMonth.monthIndex < 0)
+			{
+				tmpMonth.yearIndex--;
+				tmpMonth.monthIndex = 12 - (calendar.nbMonth - indexMonth - 1);
+			}
+			tmpMonth.nameLong = getMonth(tmpMonth.monthIndex, 1);
+			tmpMonth.nameShort = getMonth(tmpMonth.monthIndex, 0);
 
-	// 	// 	// if (tmpSplit == tmpMonth)
-	// 	// 	// 	break;
-	// 	// }
-	// }
+			updateValues(tmpMonth);
+
+			console.log(tmpMonth.nameLong + " " + tmpMonth.monthIndex + " " + tmpMonth.yearIndex + 
+			" hourRequired: " + tmpMonth.nbHourReq + " hourDone: " + tmpMonth.nbHourDone + " minDone: " + tmpMonth.nbMinDone);
+			array[indexMonth] = tmpMonth;
+		}
+	}
+	return (array);
 }
 
 function initButtons()
@@ -532,10 +549,11 @@ function initButtons()
 
 async function fetchCalendar()
 {
-	const calendar = await waitForAll('g[data-original-title]');
+	// const calendar = await waitForAll('g[data-original-title]');
 	// const calendar = await waitForAll('svg[data-url]');
+	const elems = await waitForAll('svg[data-url] > *');
 	return Promise.resolve({
-		calendar,
+		elems,
 	})
 }
 
@@ -545,44 +563,28 @@ async function initLogcash()
 
 	logCashDiv = generateLogcashDiv();
 
-	log.elem = await fetchCalendar();
+	calendar = await fetchCalendar();
 	// const tmpCalendar = await fetchCalendar();
 	// log.calendar = tmpCalendar.childNodes;
 	// log.calendar = tmpCalendar.querySelectorAll("text, g");
 	// log.calendar = document.querySelectorAll("text, g[data-original-title]");
-	// console.log(log.calendar);
+	// console.log(log.elem);
 	divLogtime = document.querySelector("svg#user-locations").parentElement;	
 
-	// getInfoMonth();
+	months = getInfoMonth();
+	// console.log(calendar.elems);
 	divLogtime.insertBefore(logCashDiv, divLogtime.firstChild);
 	resizeProgress();
-	updateValues();
-	reGenerate();
+	// updateValues();
+	// console.log(months[0]);
+	reGenerate(months[log.indexMonthDisplay - calendar.nbMonth]);
 	window.addEventListener("resize", resizeProgress);
 	initButtons();
 }
 
 var log = {
-	elem: 0,
-	// calendar: 0,
-	monthList: 0,
 	dev: 0,
-    monthIndex: new Date().getMonth(),
-    yearIndex: new Date().getYear(),
-    monthName: "",
-	salary: 685,
-	percent: 0.0,
-	nbHourReq: 0,
-	nbMinReq: 0,
-	nbHourDone: 25,
-	nbMinDone: 0,
-	nbHourRem: 0,
-	nbMinRem: 0,
-	cashEarn: 0,
-	time: 0,
-	switchHourCash: 0,
-	progressColor: 0,
-	nbMonth: 0,
+	indexMonthDisplay: new Date().getMonth(),
 }
 
 var elems = {
@@ -591,8 +593,16 @@ var elems = {
 	h4Title: 0,
 }
 
+var calendar = {
+	elems: 0,
+}
+
+var months = {
+	months: 0,
+	nbMonth: 0,
+}
+
 log.dev = 1;
-// log.switchHourCash = 0;
 
 if (log.dev == 1)
 {
@@ -613,4 +623,3 @@ if (isOpera)
 {
 	changeColorPage();
 }
-
