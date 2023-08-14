@@ -23,19 +23,19 @@ function getMonth(index, short)
 
 function updateValues(month)
 {
-
 	month.nbHourReq = getNumberHourRequired(month.monthIndex, month.yearIndex);
 	getNumberHourDone(month);
 
+	
 	let timeFloat = month.nbHourDone + (month.nbMinDone / 60)
-
+	
 	month.nbHourRem = month.nbHourReq - month.nbHourDone;
 	month.nbMinRem = month.nbMinReq - month.nbMinDone;
 	month.percent = timeFloat / month.nbHourReq * 100;
 	month.cashEarn = month.salary * (month.percent / 100);
 	if (month.cashEarn > month.salary)
 		month.cashEarn = month.salary;
-	if (month.nbMinRem < 0)
+		if (month.nbMinRem < 0)
 	{
 		month.nbMinRem += 60;
 		month.nbHourRem--;
@@ -45,6 +45,7 @@ function updateValues(month)
 		month.nbMinRem -= 60;
 		month.nbHourRem++;
 	}
+	// console.log(month.nbHourDone);
 }
 
 function generateLogcashDiv()
@@ -289,6 +290,8 @@ function getNumberHourDone(month)
 	var tmpHours = 0;
 	var tmpMinutes = 0;
 
+	// console.log(month.nbHourReq);
+
 	var i = -1;
 	while (calendar.elems[++i])
 	{
@@ -300,13 +303,17 @@ function getNumberHourDone(month)
 				break;
 		}
 	}
+	// console.log(calendar.elems[i]);
 	while (calendar.elems[++i])
 	{
 		if (calendar.elems[i].firstElementChild)
 		{
 			var tmpSplit = calendar.elems[i].getAttribute("data-original-title").split('h');
+			// console.log(tmpSplit);
 			tmpHours += parseInt(tmpSplit[0]);
 			tmpMinutes += parseInt(tmpSplit[1]);
+
+			// console.log("tmpHours: " + tmpHours + " hourDone: " + month.nbHourDone);
 
 			if (tmpMinutes >= 60)
 			{
@@ -319,6 +326,8 @@ function getNumberHourDone(month)
 	}
 	month.nbHourDone = parseInt(tmpHours);
 	month.nbMinDone = parseInt(tmpMinutes);
+
+	// console.log("tmpHours: " + tmpHours + " hourDone: " + month.nbHourDone);
 }
 
 function getNumberHourRequired(monthIndex, yearIndex)
@@ -475,6 +484,8 @@ function getInfoMonth() {
 
 	var tmpMonth = getMonth(log.monthIndex, 0);
 
+	// console.log(calendar.elems[0]);
+
 	calendar.nbMonth = 0;
 	for (var i = 0; i < calendar.elems.length; i++)
 	{
@@ -564,15 +575,14 @@ async function initLogcash()
 	logCashDiv = generateLogcashDiv();
 
 	calendar = await fetchCalendar();
-	// const tmpCalendar = await fetchCalendar();
-	// log.calendar = tmpCalendar.childNodes;
-	// log.calendar = tmpCalendar.querySelectorAll("text, g");
-	// log.calendar = document.querySelectorAll("text, g[data-original-title]");
-	// console.log(log.elem);
+	  
+	// if (calendar.elems[calendar.elems.length - 1].getAttribute("data-original-title").split('h')[0] == "0"
+	// && calendar.elems[calendar.elems.length - 1].getAttribute("data-original-title").split('h')[1] == "00")
+	// 	setTimeout(initLogcash, 500); // try again in 300 milliseconds
+	
 	divLogtime = document.querySelector("svg#user-locations").parentElement;	
-
 	months = getInfoMonth();
-	// console.log(calendar.elems);
+	console.log(calendar.elems);
 	divLogtime.insertBefore(logCashDiv, divLogtime.firstChild);
 	resizeProgress();
 	// updateValues();
