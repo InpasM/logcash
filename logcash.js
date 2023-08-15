@@ -26,7 +26,6 @@ function updateValues(month)
 	month.nbHourReq = getNumberHourRequired(month.monthIndex, month.yearIndex);
 	getNumberHourDone(month);
 
-	
 	let timeFloat = month.nbHourDone + (month.nbMinDone / 60)
 	
 	month.nbHourRem = month.nbHourReq - month.nbHourDone;
@@ -389,7 +388,7 @@ function mOverMonth(e)
 {
 	devPos = document.querySelector(".dev-pos");
 	// e.target.style.backgroundColor = "rgb(0, 186, 188)";
-	e.target.style.backgroundColor = log.progressColor;
+	e.target.style.backgroundColor = months[log.indexMonthDisplay - calendar.nbMonth].progressColor;
 	e.target.style.color = "white";
 	e.target.style.border = "2px solid #2d313c";
 
@@ -437,7 +436,7 @@ function mOverProgress(e)
 {
 	blocProgress = document.querySelector(".side-progress");
 	// var oldColor = window.getComputedStyle(blocProgress,"").getPropertyValue("background-color");
-	var tmpSplit = log.progressColor.split(' ');
+	var tmpSplit = months[log.indexMonthDisplay - calendar.nbMonth].progressColor.split(' ');
 	var newAlpha = tmpSplit[3].replace(')', '');
 	if ((parseInt(newAlpha) + 0.1) > 1)
 		var newColor = "rgb(0, 189, 190)";
@@ -447,7 +446,6 @@ function mOverProgress(e)
 	blocProgress.style.backgroundColor = newColor;
 	blocProgress.style.color = "white";
 	
-
 	// containerLogcash = document.querySelector("#container-logcash");
 	// const containerSelection = document.createElement("div");
 	// containerSelection.style.backgroundColor = "white";
@@ -467,36 +465,41 @@ function mOverProgress(e)
 function mOutProgress(e) {
 	var blocProgress = document.querySelector(".side-progress");
 	// e.target.style.backgroundColor = log.progressColor;
-	elems.blocProgress.style.backgroundColor = log.progressColor;
+	elems.blocProgress.style.backgroundColor = months[log.indexMonthDisplay - calendar.nbMonth].progressColor;
 }
 
 function clickProgress(e) {
 	var blocProgress = document.querySelector(".side-progress");
 
-	if (log.switchHourCash == 0)
-		log.switchHourCash = 1;
-	else if (log.switchHourCash == 1)
-		log.switchHourCash = 0;
-	reGenerate(calendar.months[log.indexMonthDisplay - calendar.nbMonth]);
+	if (months[log.indexMonthDisplay - calendar.nbMonth].switchHourCash == 0)
+		months[log.indexMonthDisplay - calendar.nbMonth].switchHourCash = 1;
+	else if (months[log.indexMonthDisplay - calendar.nbMonth].switchHourCash == 1)
+		months[log.indexMonthDisplay - calendar.nbMonth].switchHourCash = 0;
+	reGenerate(months[log.indexMonthDisplay - calendar.nbMonth]);
 }
 
 function getInfoMonth() {
 
 	var tmpMonth = getMonth(log.monthIndex, 0);
 
-	// console.log(calendar.elems[0]);
+	console.log(calendar.elems);
 
 	calendar.nbMonth = 0;
 	for (var i = 0; i < calendar.elems.length; i++)
 	{
 		if (!calendar.elems[i].firstElementChild)
+		{
+			console.log(calendar.elems[i]);
 			calendar.nbMonth++;
+		}
 	}
 	
 	var array = Array(calendar.nbMonth);
 
 	var indexMonth = -1;
 	var indexElems = -1;
+
+	console.log(calendar.nbMonth);
 	while (++indexElems < calendar.elems.length)
 	{
 		var tmpMonth = {
@@ -521,6 +524,8 @@ function getInfoMonth() {
 		if (calendar.elems[indexElems].tagName == 'text')
 		{
 			indexMonth++;
+			// if (indexMonth == months.nbMonth)
+			// 	break ;
 			tmpMonth.monthIndex -= (calendar.nbMonth - indexMonth - 1);
 			if (tmpMonth.monthIndex < 0)
 			{
@@ -575,18 +580,16 @@ async function initLogcash()
 	logCashDiv = generateLogcashDiv();
 
 	calendar = await fetchCalendar();
-	  
+
 	// if (calendar.elems[calendar.elems.length - 1].getAttribute("data-original-title").split('h')[0] == "0"
 	// && calendar.elems[calendar.elems.length - 1].getAttribute("data-original-title").split('h')[1] == "00")
 	// 	setTimeout(initLogcash, 500); // try again in 300 milliseconds
 	
 	divLogtime = document.querySelector("svg#user-locations").parentElement;	
 	months = getInfoMonth();
-	console.log(calendar.elems);
+
 	divLogtime.insertBefore(logCashDiv, divLogtime.firstChild);
 	resizeProgress();
-	// updateValues();
-	// console.log(months[0]);
 	reGenerate(months[log.indexMonthDisplay - calendar.nbMonth]);
 	window.addEventListener("resize", resizeProgress);
 	initButtons();
@@ -626,10 +629,20 @@ if (log.dev == 1)
 	}
 }
 
-initLogcash();
-
-var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-if (isOpera)
-{
-	changeColorPage();
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+async function delayedInit() {
+
+	await sleep(3000);
+	initLogcash();
+
+	var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+	if (isOpera)
+	{
+		changeColorPage();
+	}
+}
+
+delayedInit();
