@@ -68,11 +68,19 @@ body
 	font-size: 0.9em;
 }
 
-/* .text-month
+.text-month
 {
 	color: #787d87;
 	padding: 3px 8px;
-} */
+	/* textMonth.style.color = "#8e8e8f";
+
+	textMonth.style.cursor = "pointer";
+	textMonth.style.borderRadius = "4px";
+	textMonth.style.display = "flex";
+	textMonth.style.justifyContent = "center";
+	textMonth.style.alignItems = "center";
+	textMonth.style.border = "2px solid rgba(0,0,0,0)"; */
+}
 
 /* .text-month:hover
 {
@@ -161,8 +169,6 @@ body
 
 .div-month
 {
-	/* background: white; */
-	display: flex;
 	justify-content: center;
 	align-items: center;
 }

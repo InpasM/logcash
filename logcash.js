@@ -58,10 +58,33 @@ function generateLogcashDiv()
 	titleLogcash.innerText = "LOGCASH";
 	titleLogcash.className = "profile-title";
 	
-	const divMonth = document.createElement("div");
-	const textMonth = document.createElement("p");
-	textMonth.className = "text-month";
-	divMonth.className = "div-month";
+	elems.containerDivMonth = document.createElement("div");
+	elems.containerDivMonth.style.display = "flex";
+	elems.containerDivMonth.style.justifyContent = "space-between";
+	var	arrayDivMonth = Array(months.nbMonth);
+	for (var i = 0; i < months.nbMonth; i++)
+	{
+		const	tmpText = document.createElement("p");
+		tmpText.className = "text-month";
+
+		tmpText.style.color = "#8e8e8f";
+		tmpText.style.cursor = "pointer";
+		tmpText.style.borderRadius = "4px";
+		tmpText.style.display = "flex";
+		tmpText.style.justifyContent = "center";
+		tmpText.style.alignItems = "center";
+		tmpText.style.border = "2px solid rgba(0,0,0,0)";
+
+		arrayDivMonth[i] = document.createElement("div");
+		arrayDivMonth[i].className = "div-month";
+		if (i == months.indexArray)
+			arrayDivMonth[i].style.display = "flex"
+		else
+			arrayDivMonth[i].style.display = "none"
+
+		arrayDivMonth[i].appendChild(tmpText);
+		elems.containerDivMonth.appendChild(arrayDivMonth[i])
+	}
 	
 	// generate row progress
 	const rowProgress = document.createElement("div");
@@ -89,24 +112,9 @@ function generateLogcashDiv()
 	elems.h4Title.style.margin = "0";
 	oldLogTitle.style.display = "none";
 
-	divMonth.appendChild(textMonth);
-
 	containerLogcash.appendChild(elems.h4Title);
-	containerLogcash.appendChild(divMonth);
+	containerLogcash.appendChild(elems.containerDivMonth);
 	containerLogcash.appendChild(rowProgress);
-
-	divMonth.style.display = "flex";
-	divMonth.style.justifyContent = "center";
-	divMonth.style.alignItems = "center";
-
-	textMonth.style.color = "#8e8e8f";
-
-	textMonth.style.cursor = "pointer";
-	textMonth.style.borderRadius = "4px";
-	textMonth.style.display = "flex";
-	textMonth.style.justifyContent = "center";
-	textMonth.style.alignItems = "center";
-	textMonth.style.border = "2px solid rgba(0,0,0,0)";
 	
 	// row progress style
 	rowProgress.style.display = "flex";
@@ -124,8 +132,7 @@ function generateLogcashDiv()
 
 	if (bgColor == "#1e212a" || "rgb(30, 33, 42)")
 	{
-		rowProgress.style.border = "2px solid #414555";
-		divMonth.style.border = "2px solid rgba(0,0,0,0)";
+		rowProgress.style.border = "2px solid #2d313c";
 		textProgress.style.color = "#f2f2f2";
 	}
 	else
@@ -157,12 +164,14 @@ function generateLogcashDiv()
 
 function reGenerate(month) {
 
-	var textMonth = document.querySelector(".text-month");
+	var textMonths = document.querySelectorAll(".text-month");
 	var textProgress = document.querySelector(".text-progress");
 	var textRemaining = document.querySelector(".text-remaining");
 	var sideProgress = document.querySelector(".side-progress");
 
-	textMonth.innerText = month.nameLong;
+	// console.log(textMonths);
+	for (var i = 0; i < months.nbMonth; i++)
+		textMonths[i].innerText = months[i].nameShort;
 	var tmpProgress;
 
 	if (month.percent >= 100)
@@ -241,8 +250,10 @@ function resizeProgress() {
 	var windowWidth = window.innerWidth;
 	var containerLogcash = document.querySelector(".container-logcash");
 	var rowProgressBar = document.querySelector(".row-progress-bar");
-	var textMonth = document.querySelector(".text-month");
-	var divMonth = document.querySelector(".div-month");
+
+	var textMonths = document.querySelectorAll(".text-month");
+	var divMonths = document.querySelectorAll(".div-month");
+
 	var textProgress = document.querySelector(".text-progress");
 	var textRemaining = document.querySelector(".text-remaining");
 
@@ -251,12 +262,18 @@ function resizeProgress() {
 	rowProgressBar.style.height = (ratio * 30) + "px";
 	containerLogcash.style.display = "flex";
 	var smallMargin = ratio * 6;
-	textMonth.style.fontSize = "0.9em";
-	textMonth.style.padding = "0 10px";
-	textMonth.style.height = (ratio * 30) + "px";
-	textMonth.style.margin = "0 " + smallMargin + "px 0 0";
 
-	divMonth.style.margin = "0 0 0 " + (ratio * 16) + "px";
+	elems.containerDivMonth.style.margin = "0 0 0 " + (ratio * 16) + "px";
+	for (var i = 0; i < months.nbMonth; i++)
+	{
+		textMonths[i].style.fontSize = "0.9em";
+		textMonths[i].style.padding = "0 10px";
+		textMonths[i].style.height = (ratio * 30) + "px";
+		textMonths[i].style.margin = "0 " + smallMargin + "px 0 0";
+
+		divMonths[i].setAttribute('id', i);
+		textMonths[i].setAttribute('id', i);
+	}
 
 	var bigText = ratio;
 	textProgress.style.fontSize = bigText + "em";
@@ -383,29 +400,9 @@ async function changeColorPage()
 function mOverMonth(e)
 {
 	devPos = document.querySelector(".dev-pos");
-	// e.target.style.backgroundColor = "rgb(0, 186, 188)";
 	e.target.style.backgroundColor = months[months.indexArray].progressColor;
 	e.target.style.color = "white";
-	e.target.style.border = "2px solid #2d313c";
-
-	// containerLogcash = document.querySelector("#container-logcash");
-	// const containerSelection = document.createElement("div");
-
-	// const tmpJune = document.createElement("p");
-	// tmpJune.innerText = "June";
-
-	containerLogcash = document.querySelector(".container-logcash");
-	divMonth = document.querySelector(".div-month");
-
-	divMonth.style.backgroundColor = "white";
-	// divMonth.style.height = e.target.parentElement.parentElement.clientHeight + "px";
-
-	divMonth.addEventListener("mouseleave", function () {
-		// containerLogcash.children[2].style.display = "flex";
-		// divMonth.style.flex = "0";
-		divMonth.style.backgroundColor = "";
-		// divMonth.remove();
-	});
+	e.target.style.border = "2px solid #2d313c";	
 }
 
 function mOutMonth(e)
@@ -417,15 +414,18 @@ function mOutMonth(e)
 
 function clickMonth(e)
 {
-	// containerLogcash = document.querySelector("#container-logcash");
-	// const containerSelection = document.createElement("div");
-	// containerSelection.style.backgroundColor = "white";
-	// containerSelection.style.width = "100%";
-	// containerSelection.style.height = e.target.parentElement.parentElement.clientHeight + "px";
-	
-	// containerLogcash.appendChild(containerSelection);
-	// console.log(containerLogcash.children);
-	// containerLogcash.children[0].style.visibility = "hidden";
+	containerLogcash = document.querySelector(".container-logcash");
+	for (var i = 0; i < months.nbMonth; i++)
+		elems.divMonths[i].style.display = "flex";
+	containerLogcash.addEventListener("mouseleave", function () {
+		for (var i = 0; i < months.nbMonth; i++)
+		{
+			if (i != months.indexArray)
+				elems.divMonths[i].style.display = "none";
+		}
+	});
+	months.indexArray = e.target.id;
+	reGenerate(months[months.indexArray]);
 }
 
 function mOverProgress(e)
@@ -533,20 +533,23 @@ function getInfoMonth() {
 
 function initButtons()
 {
-	// var blocProgress = document.querySelector(".side-progress");
 	elems.blocProgress = document.querySelector(".side-progress");
 	elems.textProgress = document.querySelector(".text-progress");
 
 	sideProgress = document.querySelector(".side-progress");
-	textMonth = document.querySelector(".text-month");
+	elems.divMonths = document.querySelectorAll(".div-month");
+	elems.textMonths = document.querySelectorAll(".text-month");
 
 	sideProgress.addEventListener("mouseover", mOverProgress);
 	sideProgress.addEventListener("mouseout", mOutProgress);
 	sideProgress.addEventListener("click", clickProgress);
 	
-	textMonth.addEventListener("mouseover", mOverMonth);
-	textMonth.addEventListener("mouseout", mOutMonth);
-	textMonth.addEventListener("click", clickMonth);
+	for (var i = 0; i < months.nbMonth; i++)
+	{
+		elems.textMonths[i].addEventListener("mouseover", mOverMonth);
+		elems.textMonths[i].addEventListener("mouseout", mOutMonth);
+		elems.textMonths[i].addEventListener("click", clickMonth);
+	}
 }
 
 function notDublicates(ltMonths) {
@@ -572,12 +575,6 @@ function waitForLogTimesChartToLoad(ltSvg) {
 
 async function fetchCalendar()
 {
-	// const calendar = await waitForAll('g[data-original-title]');
-	// const calendar = await waitForAll('svg[data-url]');
-	// const elems = await waitForAll('svg[data-url] > *');
-	// return Promise.resolve({
-	// 	elems,
-	// })
 	const ltSvg = document.getElementById("user-locations");
 	if (ltSvg) { // check if logtimes chart is on page
 		waitForLogTimesChartToLoad(ltSvg);
@@ -587,15 +584,13 @@ async function fetchCalendar()
 
 async function initLogcash()
 {
-	var divLogtime;
-
-	logCashDiv = generateLogcashDiv();
 	calendar = await fetchCalendar();
 
-	divLogtime = document.querySelector("svg#user-locations").parentElement;	
+	elems.divLogtime = document.querySelector("svg#user-locations").parentElement;	
 	months = getInfoMonth();
+	logCashDiv = generateLogcashDiv();
 
-	divLogtime.insertBefore(logCashDiv, divLogtime.firstChild);
+	elems.divLogtime.insertBefore(logCashDiv, elems.divLogtime.firstChild);
 	resizeProgress();
 
 	reGenerate(months[months.indexArray]);
