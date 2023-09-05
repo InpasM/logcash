@@ -14,7 +14,7 @@ function getMonth(index, short)
 {
 	const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 	const monthShort = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-
+	
 	if (short == 0)
 		return (monthShort[index]);
 	else
@@ -124,7 +124,7 @@ function generateLogcashDiv()
 
 	if (bgColor == "#1e212a" || "rgb(30, 33, 42)")
 	{
-		rowProgress.style.border = "2px solid #2d313c";
+		rowProgress.style.border = "2px solid #414555";
 		divMonth.style.border = "2px solid rgba(0,0,0,0)";
 		textProgress.style.color = "#f2f2f2";
 	}
@@ -384,7 +384,7 @@ function mOverMonth(e)
 {
 	devPos = document.querySelector(".dev-pos");
 	// e.target.style.backgroundColor = "rgb(0, 186, 188)";
-	e.target.style.backgroundColor = months[log.indexMonthDisplay - months.nbMonth].progressColor;
+	e.target.style.backgroundColor = months[months.indexArray].progressColor;
 	e.target.style.color = "white";
 	e.target.style.border = "2px solid #2d313c";
 
@@ -432,13 +432,13 @@ function mOverProgress(e)
 {
 	blocProgress = document.querySelector(".side-progress");
 	// var oldColor = window.getComputedStyle(blocProgress,"").getPropertyValue("background-color");
-	var tmpSplit = months[log.indexMonthDisplay - months.nbMonth].progressColor.split(' ');
+	var tmpSplit = months[months.indexArray].progressColor.split(' ');
 	var newAlpha = tmpSplit[3].replace(')', '');
+
 	if ((parseInt(newAlpha) + 0.1) > 1)
 		var newColor = "rgb(0, 189, 190)";
 	else
 		var newColor = tmpSplit[0] + " " + tmpSplit[1] + tmpSplit[2] + " " + (parseFloat(newAlpha) + 0.1) + ")";
-	// console.log(oldColor + "  " + newColor);
 	blocProgress.style.backgroundColor = newColor;
 	blocProgress.style.color = "white";
 	
@@ -461,17 +461,18 @@ function mOverProgress(e)
 function mOutProgress(e) {
 	var blocProgress = document.querySelector(".side-progress");
 	// e.target.style.backgroundColor = log.progressColor;
-	elems.blocProgress.style.backgroundColor = months[log.indexMonthDisplay - months.nbMonth].progressColor;
+	elems.blocProgress.style.backgroundColor = months[months.indexArray].progressColor;
 }
 
 function clickProgress(e) {
 	var blocProgress = document.querySelector(".side-progress");
+	// var	tmpIndex = log.indexMonthDisplay - months.nbMonth - 1;
 
-	if (months[log.indexMonthDisplay - months.nbMonth].switchHourCash == 0)
-		months[log.indexMonthDisplay - months.nbMonth].switchHourCash = 1;
-	else if (months[log.indexMonthDisplay - months.nbMonth].switchHourCash == 1)
-		months[log.indexMonthDisplay - months.nbMonth].switchHourCash = 0;
-	reGenerate(months[log.indexMonthDisplay - months.nbMonth]);
+	if (months[months.indexArray].switchHourCash == 0)
+		months[months.indexArray].switchHourCash = 1;
+	else if (months[months.indexArray].switchHourCash == 1)
+		months[months.indexArray].switchHourCash = 0;
+	reGenerate(months[months.indexArray]);
 }
 
 function getInfoMonth() {
@@ -483,6 +484,8 @@ function getInfoMonth() {
 
 	var array = Array(months.nbMonth);
 	array.nbMonth = months.nbMonth;
+	array.indexDisplay = new Date().getMonth(),
+	array.indexArray = array.indexDisplay - array.nbMonth - 1;
 
 	var indexMonth = -1;
 	for (var i = 0; i < months.nbMonth; i++)
@@ -594,7 +597,8 @@ async function initLogcash()
 
 	divLogtime.insertBefore(logCashDiv, divLogtime.firstChild);
 	resizeProgress();
-	reGenerate(months[log.indexMonthDisplay - months.nbMonth]);
+
+	reGenerate(months[months.indexArray]);
 	window.addEventListener("resize", resizeProgress);
 	initButtons();
 }
@@ -640,7 +644,7 @@ function sleep(ms) {
 
 async function delayedInit() {
 
-	await sleep(3000);
+	await sleep(1000);
 	initLogcash();
 
 	var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
