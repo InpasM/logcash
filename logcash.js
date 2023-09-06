@@ -1,5 +1,4 @@
 
-
 function getTitleLogtime()
 {
 	const h4Title = document.querySelectorAll(".profile-title");
@@ -24,8 +23,6 @@ function getMonth(index, short)
 function updateValues(month)
 {
 	month.nbHourReq = getNumberHourRequired(month.monthIndex, month.yearIndex);
-	// getNumberHourDone(month);
-
 	let timeFloat = month.nbHourDone + (month.nbMinDone / 60)
 	
 	month.nbHourRem = month.nbHourReq - month.nbHourDone;
@@ -44,7 +41,6 @@ function updateValues(month)
 		month.nbMinRem -= 60;
 		month.nbHourRem++;
 	}
-	// console.log(month.nbHourDone);
 }
 
 function generateLogcashDiv()
@@ -169,7 +165,6 @@ function reGenerate(month) {
 	var textRemaining = document.querySelector(".text-remaining");
 	var sideProgress = document.querySelector(".side-progress");
 
-	// console.log(textMonths);
 	for (var i = 0; i < months.nbMonth; i++)
 		textMonths[i].innerText = months[i].nameShort;
 	var tmpProgress;
@@ -315,18 +310,14 @@ function getNumberHourDone(month)
 				break;
 		}
 	}
-	// console.log(calendar.elems[i]);
 	while (calendar.elems[++i])
 	{
 		if (calendar.elems[i].firstElementChild)
 		{
 			var tmpSplit = calendar.elems[i].getAttribute("data-original-title").split('h');
-			// console.log(tmpSplit);
+
 			tmpHours += parseInt(tmpSplit[0]);
 			tmpMinutes += parseInt(tmpSplit[1]);
-
-			// console.log("tmpHours: " + tmpHours + " hourDone: " + month.nbHourDone);
-
 			if (tmpMinutes >= 60)
 			{
 				tmpHours++;
@@ -338,8 +329,6 @@ function getNumberHourDone(month)
 	}
 	month.nbHourDone = parseInt(tmpHours);
 	month.nbMinDone = parseInt(tmpMinutes);
-
-	// console.log("tmpHours: " + tmpHours + " hourDone: " + month.nbHourDone);
 }
 
 function getNumberHourRequired(monthIndex, yearIndex)
@@ -358,10 +347,7 @@ async function changeColorPage()
 	const allContainer = document.querySelectorAll(".container-inner-item");
 	const noteTitle = document.querySelectorAll(".note-title");
 	const navbar = document.querySelector(".main-navbar");
-	const progressBar = document.querySelector(".row-progress-bar");
-	// const logTitle = getTitleLogtime();
 	const h4Title = document.querySelectorAll(".profile-title");
-	const h4 = document.querySelectorAll("h4");
 	
 	elems.h4Title.style.color = "rgb(234, 234, 235)";
 	for(var i = 0; allContainer[i]; i++)
@@ -377,21 +363,17 @@ async function changeColorPage()
 	{
 		noteTitle[i].style.color = "rgb(65, 68, 74)";
 	}
-	// if (!log.dev)
-	// {
-		const allG = await waitForAll('g[data-original-title]');
+	const allG = await waitForAll('g[data-original-title]');
 
-		// console.log(allG.length);
-		for (var i = 0; allG[i]; i++)
-		{
-			var style = window.getComputedStyle(allG[i].firstElementChild,"");
-			var fillColor = style.getPropertyValue("fill");
-	
-			allG[i].firstElementChild.style.stroke = "#1d2028";
-			if (fillColor == "rgb(250, 250, 250)")
-				allG[i].firstElementChild.style.fill = "#242831";
-		}
-	// }
+	for (var i = 0; allG[i]; i++)
+	{
+		var style = window.getComputedStyle(allG[i].firstElementChild,"");
+		var fillColor = style.getPropertyValue("fill");
+
+		allG[i].firstElementChild.style.stroke = "#1d2028";
+		if (fillColor == "rgb(250, 250, 250)")
+			allG[i].firstElementChild.style.fill = "#242831";
+	}
 	if (navbar)
 		navbar.style.backgroundColor = "#1e212a";
 	document.body.style.backgroundColor = "#131419";
@@ -431,7 +413,6 @@ function clickMonth(e)
 function mOverProgress(e)
 {
 	blocProgress = document.querySelector(".side-progress");
-	// var oldColor = window.getComputedStyle(blocProgress,"").getPropertyValue("background-color");
 	var tmpSplit = months[months.indexArray].progressColor.split(' ');
 	var newAlpha = tmpSplit[3].replace(')', '');
 
@@ -441,32 +422,13 @@ function mOverProgress(e)
 		var newColor = tmpSplit[0] + " " + tmpSplit[1] + tmpSplit[2] + " " + (parseFloat(newAlpha) + 0.1) + ")";
 	blocProgress.style.backgroundColor = newColor;
 	blocProgress.style.color = "white";
-	
-	// containerLogcash = document.querySelector("#container-logcash");
-	// const containerSelection = document.createElement("div");
-	// containerSelection.style.backgroundColor = "white";
-	// containerSelection.style.width = "100%";
-	// containerSelection.style.height = e.target.parentElement.parentElement.clientHeight + "px";
-	
-	// containerLogcash.children[0].style.display = "none";
-	// containerLogcash.appendChild(containerSelection);
-	
-	// blocProgress.addEventListener("mouseleave", function () {
-	// 	blocProgress.style.backgroundColor = oldColor;
-	// 	// containerLogcash.children[0].style.display = "";
-	// 	// containerSelection.remove();
-	// });
 }
 
 function mOutProgress(e) {
-	var blocProgress = document.querySelector(".side-progress");
-	// e.target.style.backgroundColor = log.progressColor;
 	elems.blocProgress.style.backgroundColor = months[months.indexArray].progressColor;
 }
 
 function clickProgress(e) {
-	var blocProgress = document.querySelector(".side-progress");
-	// var	tmpIndex = log.indexMonthDisplay - months.nbMonth - 1;
 
 	if (months[months.indexArray].switchHourCash == 0)
 		months[months.indexArray].switchHourCash = 1;
@@ -524,8 +486,8 @@ function getInfoMonth() {
 		tmpMonth.nbMinDone = parseInt(tmpSplit[1]);
 		updateValues(tmpMonth);
 
-		console.log(tmpMonth.nameLong + " " + tmpMonth.monthIndex + " " + tmpMonth.yearIndex + 
-		" hourRequired: " + tmpMonth.nbHourReq + " hourDone: " + tmpMonth.nbHourDone + " minDone: " + tmpMonth.nbMinDone);
+		// console.log(tmpMonth.nameLong + " " + tmpMonth.monthIndex + " " + tmpMonth.yearIndex + 
+		// " hourRequired: " + tmpMonth.nbHourReq + " hourDone: " + tmpMonth.nbHourDone + " minDone: " + tmpMonth.nbMinDone);
 		array[indexMonth] = tmpMonth;
 	}
 	return (array);
@@ -608,10 +570,6 @@ var elems = {
 	textProgress: 0,
 	h4Title: 0,
 	textMonth: 0,
-}
-
-var calendar = {
-	elems: 0,
 }
 
 var months = {
