@@ -333,7 +333,7 @@ function getNumberHourDone(month)
 
 function getNumberHourRequired(monthIndex, yearIndex)
 {
-	const numHour2023 = [154,140,161,147,161,154,42,91,77,154,154,147];
+	const numHour2023 = [154,140,161,147,161,154,42,91,42,154,154,147];
 	const numHour2024 = [161,147,147,154,161,140,91,84,77,161,147,154];
 
 	if (yearIndex + 1900 == 2023)
@@ -464,7 +464,7 @@ function getInfoMonth() {
 			nbMinDone: 0,
 			nbHourRem: 0,
 			nbMinRem: 0,
-			salary: 685,
+			salary: 723,
 			cashEarn: 0,
 			time: 0,
 			switchHourCash: 0,
