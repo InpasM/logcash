@@ -29,6 +29,9 @@ function updateValues(month)
 	month.nbMinRem = month.nbMinReq - month.nbMinDone;
 	month.percent = timeFloat / month.nbHourReq * 100;
 	month.cashEarn = month.salary * (month.percent / 100);
+
+	// console.log(month.percent);
+
 	if (month.cashEarn > month.salary)
 		month.cashEarn = month.salary;
 		if (month.nbMinRem < 0)
@@ -73,7 +76,7 @@ function generateLogcashDiv()
 
 		arrayDivMonth[i] = document.createElement("div");
 		arrayDivMonth[i].className = "div-month";
-		if (i == months.indexArray)
+		if (i == months.indexArray - 1)
 			arrayDivMonth[i].style.display = "flex"
 		else
 			arrayDivMonth[i].style.display = "none"
@@ -169,6 +172,7 @@ function reGenerate(month) {
 		textMonths[i].innerText = months[i].nameShort;
 	var tmpProgress;
 
+	// console.log(month);
 	if (month.percent >= 100)
 	{
 		if (month.switchHourCash == 0)
@@ -382,7 +386,7 @@ async function changeColorPage()
 function mOverMonth(e)
 {
 	devPos = document.querySelector(".dev-pos");
-	e.target.style.backgroundColor = months[months.indexArray].progressColor;
+	e.target.style.backgroundColor = months[months.indexArray - 1].progressColor;
 	e.target.style.color = "white";
 	e.target.style.border = "2px solid #2d313c";	
 }
@@ -402,7 +406,7 @@ function clickMonth(e)
 	containerLogcash.addEventListener("mouseleave", function () {
 		for (var i = 0; i < months.nbMonth; i++)
 		{
-			if (i != months.indexArray)
+			if (i != months.indexArray - 1)
 				elems.divMonths[i].style.display = "none";
 		}
 	});
@@ -413,7 +417,7 @@ function clickMonth(e)
 function mOverProgress(e)
 {
 	blocProgress = document.querySelector(".side-progress");
-	var tmpSplit = months[months.indexArray].progressColor.split(' ');
+	var tmpSplit = months[months.indexArray - 1].progressColor.split(' ');
 	var newAlpha = tmpSplit[3].replace(')', '');
 
 	if ((parseInt(newAlpha) + 0.1) > 1)
@@ -425,16 +429,16 @@ function mOverProgress(e)
 }
 
 function mOutProgress(e) {
-	elems.blocProgress.style.backgroundColor = months[months.indexArray].progressColor;
+	elems.blocProgress.style.backgroundColor = months[months.indexArray - 1].progressColor;
 }
 
 function clickProgress(e) {
 
-	if (months[months.indexArray].switchHourCash == 0)
-		months[months.indexArray].switchHourCash = 1;
-	else if (months[months.indexArray].switchHourCash == 1)
-		months[months.indexArray].switchHourCash = 0;
-	reGenerate(months[months.indexArray]);
+	if (months[months.indexArray - 1].switchHourCash == 0)
+		months[months.indexArray - 1].switchHourCash = 1;
+	else if (months[months.indexArray - 1].switchHourCash == 1)
+		months[months.indexArray - 1].switchHourCash = 0;
+	reGenerate(months[months.indexArray - 1]);
 }
 
 function getInfoMonth() {
@@ -555,7 +559,9 @@ async function initLogcash()
 	elems.divLogtime.insertBefore(logCashDiv, elems.divLogtime.firstChild);
 	resizeProgress();
 
-	reGenerate(months[months.indexArray]);
+	// console.log("months: " + months + " index: " + months.indexArray);
+
+	reGenerate(months[months.indexArray - 1]);
 	window.addEventListener("resize", resizeProgress);
 	initButtons();
 }
