@@ -606,50 +606,66 @@ async function delayedInit() {
 	await sleep(1000);
 	initLogcash();
 
-	var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-	if (isOpera)
-	{
-		changeColorPage();
-	}
+	// var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+	// if (isOpera)
+	// {
+	// 	changeColorPage();
+	// }
 }
 
-function getFirstDayOfMonth(numberDay, actualDay) {
+function getFirstDayOfMonth(year, month) {
 
-	var thisDay = new Date().getDate();
+	// const date = new Date();
+	// const monthNumber = date.getMonth() + 1;
+	var dateFirstDay = String(year) + "-";
+	if (month < 10)
+		dateFirstDay += "0";
+	dateFirstDay += String(month) + "-01";
 
-	while (thisDay > 0)
-	{
-		// console.log(actualDay);
-		if (actualDay == 0)
-			actualDay = 6;
-		else
-			actualDay--;
-		thisDay--;
-	}
-	// if (actualDay == 6)
-	// 	return 0
-	return actualDay;
+	return new Date(dateFirstDay).getDay()
 }
 
 function getNumberOpenDays() {
-	const numberDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-	const numberDay = new Date().getDay();
-	const thisDay = new Date().getDate();
+	const listMonth = ["January", "Febrary", "March", "April", "Mai", "June", "July", "August", "September", "October", "November", "December"];
+	const listDayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+	const date = new Date();
 
-	var totalNumberDay = numberDays[new Date().getMonth()];
-	var openDayTotal = 0;
-	var openDayPassed = 0;
-	// var firstDayMonth = getFirstDayOfMonth(totalNumberDay, thisDay);
-	var firstDayMonth = getFirstDayOfMonth(31, 3);
+	// tmp
+	// const numberYear = 2023;
+	// var numberMonth = -1;
 
-	console.log(firstDayMonth);
+	var numberYear = date.getFullYear();
+	var numberMonth = date.getMonth();
+	var numberDay = date.getDate();
 
-	// for (var i = 0; i < numberDays[new Date().getMonth()]; i++)
+	const numberDaysInMonth = new Date(numberYear, numberMonth + 1, 0).getDate();
+	var numberFirstDay = getFirstDayOfMonth(numberYear, numberMonth + 1);
+	var openDaysSince = 0;
+	var openDaysTotal = 0;
+
+	var i = -1;
+	while (++i < numberDaysInMonth)
+	{
+		if (numberFirstDay == 7)
+			numberFirstDay = 0;
+		if (numberFirstDay >= 1 && numberFirstDay <= 5)
+		{
+			if (i < numberDay)
+				openDaysSince++;
+			openDaysTotal++;
+		}
+		numberFirstDay++;
+	}
+
+	console.log("Open day since: " + openDaysSince + "   Open day total: " + openDaysTotal);
+
+	// while (++numberMonth < 12)
 	// {
+	// 	const numberDaysInMonth = new Date(numberYear, numberMonth + 1, 0).getDate();
+	// 	const numberFirstDay = getFirstDayOfMonth(numberYear, numberMonth + 1);
 
+	// 	console.log(listMonth[numberMonth] + ":  " + numberDaysInMonth + " in total,   first day: " + listDayOfWeek[numberFirstDay]);
 	// }
-
-	console.log("Number of days for this month: " + numberDays[new Date().getMonth()] + "\nDay number: " + thisDay);
 }
 
 // getNumberOpenDays();
