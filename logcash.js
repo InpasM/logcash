@@ -613,4 +613,45 @@ async function delayedInit() {
 	}
 }
 
+function getFirstDayOfMonth(numberDay, actualDay) {
+
+	var thisDay = new Date().getDate();
+
+	while (thisDay > 0)
+	{
+		// console.log(actualDay);
+		if (actualDay == 0)
+			actualDay = 6;
+		else
+			actualDay--;
+		thisDay--;
+	}
+	// if (actualDay == 6)
+	// 	return 0
+	return actualDay;
+}
+
+function getNumberOpenDays() {
+	const numberDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+	const numberDay = new Date().getDay();
+	const thisDay = new Date().getDate();
+
+	var totalNumberDay = numberDays[new Date().getMonth()];
+	var openDayTotal = 0;
+	var openDayPassed = 0;
+	// var firstDayMonth = getFirstDayOfMonth(totalNumberDay, thisDay);
+	var firstDayMonth = getFirstDayOfMonth(31, 3);
+
+	console.log(firstDayMonth);
+
+	// for (var i = 0; i < numberDays[new Date().getMonth()]; i++)
+	// {
+
+	// }
+
+	console.log("Number of days for this month: " + numberDays[new Date().getMonth()] + "\nDay number: " + thisDay);
+}
+
+// getNumberOpenDays();
+
 delayedInit();
