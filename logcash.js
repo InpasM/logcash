@@ -76,7 +76,7 @@ function generateLogcashDiv()
 
 		arrayDivMonth[i] = document.createElement("div");
 		arrayDivMonth[i].className = "div-month";
-		if (i == months.indexArray - 1)
+		if (i == months.indexArray)
 			arrayDivMonth[i].style.display = "flex"
 		else
 			arrayDivMonth[i].style.display = "none"
@@ -172,7 +172,6 @@ function reGenerate(month) {
 		textMonths[i].innerText = months[i].nameShort;
 	var tmpProgress;
 
-	// console.log(month);
 	if (month.percent >= 100)
 	{
 		if (month.switchHourCash == 0)
@@ -386,7 +385,7 @@ async function changeColorPage()
 function mOverMonth(e)
 {
 	devPos = document.querySelector(".dev-pos");
-	e.target.style.backgroundColor = months[months.indexArray - 1].progressColor;
+	e.target.style.backgroundColor = months[parseInt(e.target.id)].progressColor;
 	e.target.style.color = "white";
 	e.target.style.border = "2px solid #2d313c";	
 }
@@ -406,18 +405,19 @@ function clickMonth(e)
 	containerLogcash.addEventListener("mouseleave", function () {
 		for (var i = 0; i < months.nbMonth; i++)
 		{
-			if (i != months.indexArray - 1)
+			// if (i != months.indexArray - 1)
+			if (i != months.indexArray)
 				elems.divMonths[i].style.display = "none";
 		}
 	});
-	months.indexArray = e.target.id;
+	months.indexArray = parseInt(e.target.id);
 	reGenerate(months[months.indexArray]);
 }
 
 function mOverProgress(e)
 {
 	blocProgress = document.querySelector(".side-progress");
-	var tmpSplit = months[months.indexArray - 1].progressColor.split(' ');
+	var tmpSplit = months[months.indexArray].progressColor.split(' ');
 	var newAlpha = tmpSplit[3].replace(')', '');
 
 	if ((parseInt(newAlpha) + 0.1) > 1)
@@ -429,16 +429,16 @@ function mOverProgress(e)
 }
 
 function mOutProgress(e) {
-	elems.blocProgress.style.backgroundColor = months[months.indexArray - 1].progressColor;
+	elems.blocProgress.style.backgroundColor = months[months.indexArray].progressColor;
 }
 
 function clickProgress(e) {
 
-	if (months[months.indexArray - 1].switchHourCash == 0)
-		months[months.indexArray - 1].switchHourCash = 1;
-	else if (months[months.indexArray - 1].switchHourCash == 1)
-		months[months.indexArray - 1].switchHourCash = 0;
-	reGenerate(months[months.indexArray - 1]);
+	if (months[months.indexArray].switchHourCash == 0)
+		months[months.indexArray].switchHourCash = 1;
+	else if (months[months.indexArray].switchHourCash == 1)
+		months[months.indexArray].switchHourCash = 0;
+	reGenerate(months[months.indexArray]);
 }
 
 function getInfoMonth() {
@@ -451,7 +451,8 @@ function getInfoMonth() {
 	var array = Array(months.nbMonth);
 	array.nbMonth = months.nbMonth;
 	array.indexDisplay = new Date().getMonth(),
-	array.indexArray = array.indexDisplay - array.nbMonth - 1;
+	// array.indexArray = array.indexDisplay - array.nbMonth - 2;
+	array.indexArray = 3;
 
 	var indexMonth = -1;
 	for (var i = 0; i < months.nbMonth; i++)
@@ -473,6 +474,9 @@ function getInfoMonth() {
 			time: 0,
 			switchHourCash: 0,
 			progressColor: 0,
+			openDaysSince: 0,
+			openDaysTotal: 0,
+			
 		};
 
 		indexMonth++;
@@ -552,17 +556,17 @@ async function initLogcash()
 {
 	calendar = await fetchCalendar();
 
-	elems.divLogtime = document.querySelector("svg#user-locations").parentElement;	
+	elems.divLogtime = document.querySelector("svg#user-locations").parentElement;
+
 	months = getInfoMonth();
+
 	logCashDiv = generateLogcashDiv();
 
 	elems.divLogtime.insertBefore(logCashDiv, elems.divLogtime.firstChild);
 	resizeProgress();
 
-	// console.log("months: " + months + " index: " + months.indexArray);
-
-	reGenerate(months[months.indexArray - 1]);
-	window.addEventListener("resize", resizeProgress);
+	reGenerate(months[months.indexArray]);
+	// window.addEventListener("resize", resizeProgress);
 	initButtons();
 }
 
@@ -579,8 +583,8 @@ var elems = {
 }
 
 var months = {
-	months: 0,
-	nbMonth: 0,
+	// months: 0,
+	// nbMonth: 0,
 }
 
 log.dev = 1;
@@ -605,18 +609,10 @@ async function delayedInit() {
 
 	await sleep(1000);
 	initLogcash();
-
-	// var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-	// if (isOpera)
-	// {
-	// 	changeColorPage();
-	// }
 }
 
 function getFirstDayOfMonth(year, month) {
 
-	// const date = new Date();
-	// const monthNumber = date.getMonth() + 1;
 	var dateFirstDay = String(year) + "-";
 	if (month < 10)
 		dateFirstDay += "0";
@@ -625,25 +621,20 @@ function getFirstDayOfMonth(year, month) {
 	return new Date(dateFirstDay).getDay()
 }
 
-function getNumberOpenDays() {
-	const listMonth = ["January", "Febrary", "March", "April", "Mai", "June", "July", "August", "September", "October", "November", "December"];
-	const listDayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-	const date = new Date();
+function displayMessage(message) {
+	const reset = "\x1b[0m";
 
-	// tmp
-	// const numberYear = 2023;
-	// var numberMonth = -1;
+	console.log('%c[LogCash]%c %s', 'color: #ffa91f', reset, message);
+}
 
-	var numberYear = date.getFullYear();
-	var numberMonth = date.getMonth();
-	var numberDay = date.getDate();
+function getNumberOpenDays(numberYear, numberMonth, numberDay) {
 
 	const numberDaysInMonth = new Date(numberYear, numberMonth + 1, 0).getDate();
 	var numberFirstDay = getFirstDayOfMonth(numberYear, numberMonth + 1);
 	var openDaysSince = 0;
 	var openDaysTotal = 0;
-
 	var i = -1;
+
 	while (++i < numberDaysInMonth)
 	{
 		if (numberFirstDay == 7)
@@ -656,18 +647,23 @@ function getNumberOpenDays() {
 		}
 		numberFirstDay++;
 	}
-
-	console.log("Open day since: " + openDaysSince + "   Open day total: " + openDaysTotal);
-
-	// while (++numberMonth < 12)
-	// {
-	// 	const numberDaysInMonth = new Date(numberYear, numberMonth + 1, 0).getDate();
-	// 	const numberFirstDay = getFirstDayOfMonth(numberYear, numberMonth + 1);
-
-	// 	console.log(listMonth[numberMonth] + ":  " + numberDaysInMonth + " in total,   first day: " + listDayOfWeek[numberFirstDay]);
-	// }
+	return [openDaysSince, openDaysTotal];
 }
 
-// getNumberOpenDays();
+// // test only
+// const listMonth = ["January", "Febrary", "March", "April", "Mai", "June", "July", "August", "September", "October", "November", "December"];
+// const listDayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+// const date = new Date();
+// var numberYear = date.getFullYear();
+// var numberMonth = date.getMonth();
+// var numberDay = date.getDate();
+
+// var i = -1;
+// while (++i < 12) {
+// 	const listMonth = ["January", "Febrary", "March", "April", "Mai", "June", "July", "August", "September", "October", "November", "December"];
+// 	var openDays = getNumberOpenDays(numberYear, i, numberDay);
+
+// 	displayMessage(listMonth[i] + ":  Open day since: " + openDays[0] + "   Open day total: " + openDays[1]);
+// }
 
 delayedInit();
