@@ -441,18 +441,41 @@ function clickProgress(e) {
 	reGenerate(months[months.indexArray]);
 }
 
+function isMonthInArray(array, node) {
+
+	for (var i = 0; i < array.length; i++)
+	{
+		if (array[i].innerHTML == node.innerHTML)
+			// return console.log(array[i].innerHTML + " vs " + node.innerHTML + " already in list"), true;
+			return true;
+	}
+	return false;
+}
+
+function getNbUniqueMonth(nodesList) {
+	var tmpList = [];
+
+	for (var i = 0; i < nodesList.length; i++)
+	{
+		if (!isMonthInArray(tmpList, nodesList[i]))
+			tmpList.push(nodesList[i]);
+		// for (var j = 0; j < tmpList.length; j++)
+		// {
+		// }
+	}
+	return tmpList.length;
+}
+
 function getInfoMonth() {
 
-	if (elems.textMonth.length > 3)
-		months.nbMonth = 4;
-	else
-		months.nbMonth = elems.textMonth.length;
+	months.nbMonth = getNbUniqueMonth(elems.textMonth);
+	// console.log("number month: " + months.nbMonth);
+	displayMessage("number month: " + months.nbMonth);
 
 	var array = Array(months.nbMonth);
 	array.nbMonth = months.nbMonth;
 	array.indexDisplay = new Date().getMonth(),
-	// array.indexArray = array.indexDisplay - array.nbMonth - 2;
-	array.indexArray = 3;
+	array.indexArray = months.nbMonth - 1;
 
 	var indexMonth = -1;
 	for (var i = 0; i < months.nbMonth; i++)
@@ -476,7 +499,6 @@ function getInfoMonth() {
 			progressColor: 0,
 			openDaysSince: 0,
 			openDaysTotal: 0,
-			
 		};
 
 		indexMonth++;
@@ -489,6 +511,7 @@ function getInfoMonth() {
 		tmpMonth.nameLong = getMonth(tmpMonth.monthIndex, 1);
 		tmpMonth.nameShort = getMonth(tmpMonth.monthIndex, 0);
 
+		// console.log(elems.textMonth[i].innerHTML);
 		var tmpSplit = elems.textMonth[i].textContent.split('(')[1].split(')')[0].split('h');
 		tmpMonth.nbHourDone = parseInt(tmpSplit[0]);
 		tmpMonth.nbMinDone = parseInt(tmpSplit[1]);
