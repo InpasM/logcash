@@ -336,7 +336,7 @@ function getNumberHourDone(month)
 
 function getNumberHourRequired(monthIndex, yearIndex)
 {
-	const numHour2023 = [154,140,161,147,161,154,42,91,42,147,154,147];
+	const numHour2023 = [154,140,161,147,161,154,42,91,42,147,147,147];
 	const numHour2024 = [161,147,147,154,161,140,91,84,77,161,147,154];
 
 	if (yearIndex + 1900 == 2023)
