@@ -97,10 +97,21 @@ function generateLogcashDiv()
 	sideProgress.appendChild(textProgress);
 	
 	// generate side remaining
+	const popupRemaining = document.createElement("div");
+	popupRemaining.className = "popup-remaining";
+	popupRemaining.style.position = "absolute";
+	popupRemaining.style.width = "70px";
+	popupRemaining.style.height = "40px";
+	popupRemaining.style.top = "80px";
+	popupRemaining.style.right = "20px";
+	popupRemaining.style.zIndex = "1";
+	popupRemaining.style.background = "rgb(45, 49, 60)";
+
 	const sideRemaining = document.createElement("div");
 	sideRemaining.className = "side-remaining";
 	const textRemaining = document.createElement("p");
 	textRemaining.className = "text-remaining";
+	sideRemaining.appendChild(popupRemaining);
 	sideRemaining.appendChild(textRemaining);
 	rowProgress.appendChild(sideProgress);
 	rowProgress.appendChild(sideRemaining);
@@ -154,6 +165,7 @@ function generateLogcashDiv()
 	sideRemaining.style.justifyContent = "center";
 	sideRemaining.style.alignItems = "center";
 	sideRemaining.style.flex = "1";
+	sideRemaining.style.cursor = "pointer";
 
 	textRemaining.style.margin = "0";
 	textRemaining.style.color = "#8d8e8e";
@@ -524,18 +536,35 @@ function getInfoMonth() {
 	return (array);
 }
 
+function mouseOverRemaining() {
+	displayMessage("mouseOverRemaining");
+}
+
+function mouseOutRemaining() {
+	displayMessage("mouseOutRemaining");
+}
+
+function clickRemaining() {
+	displayMessage("clickRemaining");
+}
+
 function initButtons()
 {
 	elems.blocProgress = document.querySelector(".side-progress");
 	elems.textProgress = document.querySelector(".text-progress");
 
 	sideProgress = document.querySelector(".side-progress");
+	sideRemaining = document.querySelector(".side-remaining");
 	elems.divMonths = document.querySelectorAll(".div-month");
 	elems.textMonths = document.querySelectorAll(".text-month");
 
 	sideProgress.addEventListener("mouseover", mOverProgress);
 	sideProgress.addEventListener("mouseout", mOutProgress);
 	sideProgress.addEventListener("click", clickProgress);
+
+	sideRemaining.addEventListener("mouseover", mouseOverRemaining);
+	sideRemaining.addEventListener("mouseout", mouseOutRemaining);
+	sideRemaining.addEventListener("click", clickRemaining);
 	
 	for (var i = 0; i < months.nbMonth; i++)
 	{
