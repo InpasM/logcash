@@ -97,21 +97,22 @@ function generateLogcashDiv()
 	sideProgress.appendChild(textProgress);
 	
 	// generate side remaining
-	const popupRemaining = document.createElement("div");
-	popupRemaining.className = "popup-remaining";
-	popupRemaining.style.position = "absolute";
-	popupRemaining.style.width = "70px";
-	popupRemaining.style.height = "40px";
-	popupRemaining.style.top = "80px";
-	popupRemaining.style.right = "20px";
-	popupRemaining.style.zIndex = "1";
-	popupRemaining.style.background = "rgb(45, 49, 60)";
+	elems.popupRemaining = document.createElement("div");
+	elems.popupRemaining.className = "popup-remaining";
+	// elems.popupRemaining.style.display = "none";
+	elems.popupRemaining.style.position = "absolute";
+	elems.popupRemaining.style.height = "100px";
+	elems.popupRemaining.style.borderRadius = "4px";
+	elems.popupRemaining.style.top = "40px";
+	elems.popupRemaining.style.right = "0px";
+	elems.popupRemaining.style.zIndex = "1";
+	elems.popupRemaining.style.background = "rgb(45, 49, 60)";
 
 	const sideRemaining = document.createElement("div");
 	sideRemaining.className = "side-remaining";
 	const textRemaining = document.createElement("p");
 	textRemaining.className = "text-remaining";
-	sideRemaining.appendChild(popupRemaining);
+	sideRemaining.appendChild(elems.popupRemaining);
 	sideRemaining.appendChild(textRemaining);
 	rowProgress.appendChild(sideProgress);
 	rowProgress.appendChild(sideRemaining);
@@ -289,6 +290,14 @@ function resizeProgress() {
 	textProgress.style.fontSize = bigText + "em";
 	textRemaining.style.fontSize = bigText + "em";
 	textProgress.style.margin = 0;
+
+	// const popupRemaining = document.querySelector(".popup-remaining");
+	elems.popupRemaining.style.width = elems.popupRemaining.parentElement.parentElement.offsetWidth + "px";
+	elems.popupRemaining.style.top = (ratio * 30) + 10 + "px";;
+	// console.log(popupRemaining.parentElement.parentElement.parentElement.parentElement.offsetWidth);
+	console.log(elems.popupRemaining.parentElement.parentElement.offsetWidth);
+	// const containerLog = document.querySelector(".container-inner-item");
+	// console.log(containerLog.offsetWidth);
 }
 
 function waitForAll(selector) {
@@ -536,16 +545,32 @@ function getInfoMonth() {
 	return (array);
 }
 
+var eventPopup = 0;
 function mouseOverRemaining() {
+
 	displayMessage("mouseOverRemaining");
+	clearTimeout(eventPopup);
+	elems.popupRemaining.style.display = "flex";
 }
 
 function mouseOutRemaining() {
+
 	displayMessage("mouseOutRemaining");
+	eventPopup = setTimeout(function() {
+		elems.popupRemaining.style.display = "none";
+		console.log("timeout");
+	}, 150);
 }
 
 function clickRemaining() {
+
+	var windowWidth = window.innerWidth;
+	var ratio = getRatio(windowWidth);
+	
 	displayMessage("clickRemaining");
+	elems.popupRemaining.style.width = elems.popupRemaining.parentElement.parentElement.offsetWidth + "px";
+	elems.popupRemaining.style.top = (ratio * 30) + 10 + "px";
+	elems.popupRemaining.style.display = "flex";
 }
 
 function initButtons()
@@ -562,9 +587,12 @@ function initButtons()
 	sideProgress.addEventListener("mouseout", mOutProgress);
 	sideProgress.addEventListener("click", clickProgress);
 
-	sideRemaining.addEventListener("mouseover", mouseOverRemaining);
+	// sideRemaining.addEventListener("mouseover", mouseOverRemaining);
 	sideRemaining.addEventListener("mouseout", mouseOutRemaining);
 	sideRemaining.addEventListener("click", clickRemaining);
+	
+	elems.popupRemaining.addEventListener("mouseover", mouseOverRemaining);
+	elems.popupRemaining.addEventListener("mouseout", mouseOutRemaining);
 	
 	for (var i = 0; i < months.nbMonth; i++)
 	{
@@ -618,7 +646,20 @@ async function initLogcash()
 	resizeProgress();
 
 	reGenerate(months[months.indexArray]);
-	// window.addEventListener("resize", resizeProgress);
+
+	// var index = 0;
+	// setInterval(function() {
+
+	// 	var tmpHours = index++;
+	// 	var tmpMinutes = 50;
+	// 	// displayMessage("call: " + (++index));
+	// 	months[months.indexArray].nbHourDone = parseInt(tmpHours);
+	// 	months[months.indexArray].nbMinDone = parseInt(tmpMinutes);
+
+	// 	reGenerate(months[months.indexArray]);
+	// }, 1000);
+
+	window.addEventListener("resize", resizeProgress);
 	initButtons();
 }
 
@@ -659,7 +700,7 @@ function sleep(ms) {
 
 async function delayedInit() {
 
-	await sleep(1000);
+	await sleep(2000);
 	initLogcash();
 }
 
