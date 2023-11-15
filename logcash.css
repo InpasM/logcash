@@ -153,7 +153,8 @@ body
     top: 80px;
 	right: 20px;
     z-index: 1;
-    background: rgb(45, 49, 60);
+    /* background: rgb(45, 49, 60); */
+    background: rgb(35, 39, 46);
     padding: 8px;
     font-size: 1rem;
     color: #fff;

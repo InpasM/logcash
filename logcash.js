@@ -551,6 +551,7 @@ function mouseOverRemaining() {
 	displayMessage("mouseOverRemaining");
 	clearTimeout(eventPopup);
 	elems.popupRemaining.style.display = "flex";
+	sideRemaining.style.backgroundColor = "red";
 }
 
 function mouseOutRemaining() {
@@ -558,6 +559,7 @@ function mouseOutRemaining() {
 	displayMessage("mouseOutRemaining");
 	eventPopup = setTimeout(function() {
 		elems.popupRemaining.style.display = "none";
+		sideRemaining.style.backgroundColor = "";
 		console.log("timeout");
 	}, 150);
 }
@@ -571,6 +573,8 @@ function clickRemaining() {
 	elems.popupRemaining.style.width = elems.popupRemaining.parentElement.parentElement.offsetWidth + "px";
 	elems.popupRemaining.style.top = (ratio * 30) + 10 + "px";
 	elems.popupRemaining.style.display = "flex";
+	// sideRemaining.style.backgroundColor = "rgb(35, 39, 46)";
+	sideRemaining.style.backgroundColor = "";
 }
 
 function initButtons()
@@ -588,11 +592,17 @@ function initButtons()
 	sideProgress.addEventListener("click", clickProgress);
 
 	// sideRemaining.addEventListener("mouseover", mouseOverRemaining);
+	sideRemaining.addEventListener("mouseover", function() {
+		sideRemaining.style.backgroundColor = "rgb(35, 39, 46)";
+	});
 	sideRemaining.addEventListener("mouseout", mouseOutRemaining);
+	// sideRemaining.addEventListener("mouseout", function() {
+	// 	sideRemaining.style.backgroundColor = "";
+	// });
 	sideRemaining.addEventListener("click", clickRemaining);
 	
 	elems.popupRemaining.addEventListener("mouseover", mouseOverRemaining);
-	elems.popupRemaining.addEventListener("mouseout", mouseOutRemaining);
+	// elems.popupRemaining.addEventListener("mouseout", mouseOutRemaining);
 	
 	for (var i = 0; i < months.nbMonth; i++)
 	{
