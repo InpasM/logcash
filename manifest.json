@@ -13,7 +13,7 @@
 	"content_scripts": [
 	{
 		"matches": ["*://*.profile.intra.42.fr/*"],
-		"js": ["logcash.js"],
+		"js": ["logcash.init-elems.js", "logcash.js"],
 		"run_at": "document_end"
 	}
 	]
