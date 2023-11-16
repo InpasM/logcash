@@ -48,137 +48,142 @@ function updateValues(month)
 
 function generateLogcashDiv()
 {
-	const containerLogcash = document.createElement("div");
-	containerLogcash.className = "container-logcash";
-	containerLogcash.style.display = "flex";
-	containerLogcash.style.alignItems = "center";
+	// const elems.containerLogcash = document.createElement("div");
+	// elems.containerLogcash = document.createElement("div");
+	// elems.containerLogcash.className = "container-logcash";
+	// elems.containerLogcash.style.display = "flex";
+	// elems.containerLogcash.style.alignItems = "center";
 	
-	const titleLogcash = document.createElement("h4");
-	titleLogcash.innerText = "LOGCASH";
-	titleLogcash.className = "profile-title";
+	// const titleLogcash = document.createElement("h4");
+	// titleLogcash.innerText = "LOGCASH";
+	// titleLogcash.className = "profile-title";
 	
-	elems.containerDivMonth = document.createElement("div");
-	elems.containerDivMonth.style.display = "flex";
-	elems.containerDivMonth.style.justifyContent = "space-between";
-	var	arrayDivMonth = Array(months.nbMonth);
-	for (var i = 0; i < months.nbMonth; i++)
-	{
-		const	tmpText = document.createElement("p");
-		tmpText.className = "text-month";
+	// elems.containerDivMonth = document.createElement("div");
+	// elems.containerDivMonth.style.display = "flex";
+	// elems.containerDivMonth.style.justifyContent = "space-between";
 
-		tmpText.style.color = "#8e8e8f";
-		tmpText.style.cursor = "pointer";
-		tmpText.style.borderRadius = "4px";
-		tmpText.style.display = "flex";
-		tmpText.style.justifyContent = "center";
-		tmpText.style.alignItems = "center";
-		tmpText.style.border = "2px solid rgba(0,0,0,0)";
+	// var	arrayDivMonth = Array(months.nbMonth);
 
-		arrayDivMonth[i] = document.createElement("div");
-		arrayDivMonth[i].className = "div-month";
-		if (i == months.indexArray)
-			arrayDivMonth[i].style.display = "flex"
-		else
-			arrayDivMonth[i].style.display = "none"
+	// for (var i = 0; i < months.nbMonth; i++)
+	// {
+	// 	const	tmpText = document.createElement("p");
+	// 	tmpText.className = "text-month";
 
-		arrayDivMonth[i].appendChild(tmpText);
-		elems.containerDivMonth.appendChild(arrayDivMonth[i])
-	}
+	// 	tmpText.style.color = "#8e8e8f";
+	// 	tmpText.style.cursor = "pointer";
+	// 	tmpText.style.borderRadius = "4px";
+	// 	tmpText.style.display = "flex";
+	// 	tmpText.style.justifyContent = "center";
+	// 	tmpText.style.alignItems = "center";
+	// 	tmpText.style.border = "2px solid rgba(0,0,0,0)";
+
+	// 	arrayDivMonth[i] = document.createElement("div");
+	// 	arrayDivMonth[i].className = "div-month";
+	// 	if (i == months.indexArray)
+	// 		arrayDivMonth[i].style.display = "flex"
+	// 	else
+	// 		arrayDivMonth[i].style.display = "none"
+
+	// 	arrayDivMonth[i].appendChild(tmpText);
+	// 	elems.containerDivMonth.appendChild(arrayDivMonth[i])
+	// }
 	
-	// generate row progress
-	const rowProgress = document.createElement("div");
-	rowProgress.className = "row-progress-bar";
+	// // generate row progress
+	// const rowProgress = document.createElement("div");
+	// rowProgress.className = "row-progress-bar";
 
 	// generate side progress
-	const sideProgress = document.createElement("div");
-	sideProgress.className = "side-progress";
-	const textProgress = document.createElement("p");
-	textProgress.className = "text-progress";
-	sideProgress.appendChild(textProgress);
+	// const sideProgress = document.createElement("div");
+	// sideProgress.className = "side-progress";
+	// const textProgress = document.createElement("p");
+	// textProgress.className = "text-progress";
+	// sideProgress.appendChild(textProgress);
 	
-	// generate side remaining
-	elems.popupRemaining = document.createElement("div");
-	elems.popupRemaining.className = "popup-remaining";
+	// // generate side remaining
+	// elems.popupRemaining = document.createElement("div");
+	// elems.popupRemaining.className = "popup-remaining";
 	// elems.popupRemaining.style.display = "none";
-	elems.popupRemaining.style.position = "absolute";
-	elems.popupRemaining.style.height = "100px";
-	elems.popupRemaining.style.borderRadius = "4px";
-	elems.popupRemaining.style.top = "40px";
-	elems.popupRemaining.style.right = "0px";
-	elems.popupRemaining.style.zIndex = "1";
-	elems.popupRemaining.style.background = "rgb(45, 49, 60)";
+	// // elems.popupRemaining.style.display = "flex";
+	// elems.popupRemaining.style.position = "absolute";
+	// elems.popupRemaining.style.height = "100px";
+	// elems.popupRemaining.style.borderRadius = "4px";
+	// elems.popupRemaining.style.top = "40px";
+	// elems.popupRemaining.style.right = "0px";
+	// elems.popupRemaining.style.cursor = "move";
+	// elems.popupRemaining.style.zIndex = "1";
+	// elems.popupRemaining.style.background = "rgb(45, 49, 60)";
 
-	const sideRemaining = document.createElement("div");
-	sideRemaining.className = "side-remaining";
-	const textRemaining = document.createElement("p");
-	textRemaining.className = "text-remaining";
-	sideRemaining.appendChild(elems.popupRemaining);
-	sideRemaining.appendChild(textRemaining);
-	rowProgress.appendChild(sideProgress);
-	rowProgress.appendChild(sideRemaining);
+	// const sideRemaining = document.createElement("div");
+	// sideRemaining.className = "side-remaining";
+	// const textRemaining = document.createElement("p");
+	// textRemaining.className = "text-remaining";
+	// sideRemaining.appendChild(elems.popupRemaining);
+	// sideRemaining.appendChild(textRemaining);
+	// rowProgress.appendChild(sideProgress);
+	// rowProgress.appendChild(sideRemaining);
 
-	let oldLogTitle = getTitleLogtime();
-	elems.h4Title = oldLogTitle.cloneNode();
-	elems.h4Title.innerText = "LOGTIME";
-	elems.h4Title.style.margin = "0";
-	oldLogTitle.style.display = "none";
+	// let oldLogTitle = getTitleLogtime();
+	// elems.h4Title = oldLogTitle.cloneNode();
+	// elems.h4Title.innerText = "LOGTIME";
+	// elems.h4Title.style.margin = "0";
+	// oldLogTitle.style.display = "none";
 
-	containerLogcash.appendChild(elems.h4Title);
-	containerLogcash.appendChild(elems.containerDivMonth);
-	containerLogcash.appendChild(rowProgress);
+	// elems.containerLogcash.appendChild(elems.h4Title);
+	// elems.containerLogcash.appendChild(elems.containerDivMonth);
+	// elems.containerLogcash.appendChild(rowProgress);
 	
 	// row progress style
-	rowProgress.style.display = "flex";
-	rowProgress.style.flex = "1";
-	rowProgress.style.justifyContent = "space-between";
+	// rowProgress.style.display = "flex";
+	// rowProgress.style.flex = "1";
+	// rowProgress.style.justifyContent = "space-between";
 	
-	if (log.dev == 0)
-	{
-		var mainNavbar = document.querySelector(".main-navbar");
-		var style = window.getComputedStyle(mainNavbar,"");
-		var bgColor = style.getPropertyValue("background-color");
-	}
-	else
-		var bgColor = "#1e212a";
+	// if (log.dev == 0)
+	// {
+	// 	var mainNavbar = document.querySelector(".main-navbar");
+	// 	var style = window.getComputedStyle(mainNavbar,"");
+	// 	var bgColor = style.getPropertyValue("background-color");
+	// }
+	// else
+	// 	var bgColor = "#1e212a";
 
-	if (bgColor == "#1e212a" || "rgb(30, 33, 42)")
-	{
-		rowProgress.style.border = "2px solid #2d313c";
-		textProgress.style.color = "#f2f2f2";
-	}
-	else
-	{
-		rowProgress.style.border = "2px solid #e5e5e5";
-		textProgress.style.color = "#2c2c34";
-	}
-	rowProgress.style.borderRadius = "4px";
+	// if (bgColor == "#1e212a" || "rgb(30, 33, 42)")
+	// {
+	// 	rowProgress.style.border = "2px solid #2d313c";
+	// 	textProgress.style.color = "#f2f2f2";
+	// }
+	// else
+	// {
+	// 	rowProgress.style.border = "2px solid #e5e5e5";
+	// 	textProgress.style.color = "#2c2c34";
+	// }
+	// rowProgress.style.borderRadius = "4px";
 	
-	sideProgress.style.cursor = "pointer";
-	sideProgress.style.display = "flex";
-	sideProgress.style.justifyContent = "center";
-	sideProgress.style.alignItems = "center";
-	sideProgress.style.minWidth = "90px";
+	// sideProgress.style.cursor = "pointer";
+	// sideProgress.style.display = "flex";
+	// sideProgress.style.justifyContent = "center";
+	// sideProgress.style.alignItems = "center";
+	// sideProgress.style.minWidth = "90px";
 
-	sideProgress.style.height = "100%";
-	sideProgress.style.borderRadius = "3px";
+	// sideProgress.style.height = "100%";
+	// sideProgress.style.borderRadius = "3px";
 	
-	sideRemaining.style.display = "flex";
-	sideRemaining.style.justifyContent = "center";
-	sideRemaining.style.alignItems = "center";
-	sideRemaining.style.flex = "1";
-	sideRemaining.style.cursor = "pointer";
+	// sideRemaining.style.display = "flex";
+	// sideRemaining.style.justifyContent = "center";
+	// sideRemaining.style.alignItems = "center";
+	// sideRemaining.style.flex = "1";
+	// sideRemaining.style.cursor = "pointer";
 
-	textRemaining.style.margin = "0";
-	textRemaining.style.color = "#8d8e8e";
+	// textRemaining.style.margin = "0";
+	// textRemaining.style.color = "#8d8e8e";
 
-	return (containerLogcash);
+	// return (elems.containerLogcash);
 }
 
 function reGenerate(month) {
 
 	var textMonths = document.querySelectorAll(".text-month");
-	var textProgress = document.querySelector(".text-progress");
-	var textRemaining = document.querySelector(".text-remaining");
+	// var textProgress = document.querySelector(".text-progress");
+	// var textRemaining = document.querySelector(".text-remaining");
 	var sideProgress = document.querySelector(".side-progress");
 
 	for (var i = 0; i < months.nbMonth; i++)
@@ -196,7 +201,7 @@ function reGenerate(month) {
 		}
 		else if (month.switchHourCash == 1)
 			tmpProgress = month.cashEarn.toFixed(2) + "€";
-		textRemaining.style.display = "none";
+			elems.textRemaining.style.display = "none";
 	}
 	else
 	{
@@ -210,34 +215,34 @@ function reGenerate(month) {
 		else if (month.switchHourCash == 1)
 			tmpProgress = month.cashEarn.toFixed(2) + "€";
 		if (month.nbMinRem < 10)
-			textRemaining.innerText = month.nbHourRem + "h0" + month.nbMinRem;
+			elems.textRemaining.innerText = month.nbHourRem + "h0" + month.nbMinRem;
 		else
-			textRemaining.innerText = month.nbHourRem + "h" + month.nbMinRem;
-		textRemaining.style.display = "";
+			elems.textRemaining.innerText = month.nbHourRem + "h" + month.nbMinRem;
+		elems.textRemaining.style.display = "";
 	}
 
-	textProgress.innerText = tmpProgress;
+	elems.sideProgress.innerText = tmpProgress;
 
 	let textPercent = "  (" + Math.floor(month.percent) + "%)";
-	textProgress.innerText += textPercent;
+	elems.sideProgress.innerText += textPercent;
 
 	if (month.percent < 10)
-		sideProgress.style.width = "50px";
+		elems.sideProgress.style.width = "50px";
 	else if (month.percent > 90 && month.percent < 100)
-		sideProgress.style.width = "90%";
+		elems.sideProgress.style.width = "90%";
 	else
-		sideProgress.style.width = month.percent + "%";
+		elems.sideProgress.style.width = month.percent + "%";
 
 	// color gestion progress bar
 	if (month.percent == 0)
 	{
 		month.progressColor = "rgba(37, 41, 50, 0.8)";
-		sideProgress.style.backgroundColor = month.progressColor;
+		elems.sideProgress.style.backgroundColor = month.progressColor;
 	}
 	else
 	{
 		month.progressColor = "rgba(0, 186, 188, " + (month.percent / 100) + ")";
-		sideProgress.style.backgroundColor = month.progressColor;
+		elems.sideProgress.style.backgroundColor = month.progressColor;
 	}
 }
 
@@ -258,20 +263,22 @@ function getRatio(windowWidth) {
 }
 
 function resizeProgress() {
+
 	var windowWidth = window.innerWidth;
-	var containerLogcash = document.querySelector(".container-logcash");
-	var rowProgressBar = document.querySelector(".row-progress-bar");
+
+	// elems.containerLogcash = document.querySelector(".container-logcash");
+	// var rowProgressBar = document.querySelector(".row-progress-bar");
 
 	var textMonths = document.querySelectorAll(".text-month");
 	var divMonths = document.querySelectorAll(".div-month");
 
-	var textProgress = document.querySelector(".text-progress");
-	var textRemaining = document.querySelector(".text-remaining");
+	// var textProgress = document.querySelector(".text-progress");
+	// var textRemaining = document.querySelector(".text-remaining");
 
 	var ratio = getRatio(windowWidth);
 
-	rowProgressBar.style.height = (ratio * 30) + "px";
-	containerLogcash.style.display = "flex";
+	elems.rowProgress.style.height = (ratio * 30) + "px";
+	elems.containerLogcash.style.display = "flex";
 	var smallMargin = ratio * 6;
 
 	elems.containerDivMonth.style.margin = "0 0 0 " + (ratio * 16) + "px";
@@ -287,9 +294,9 @@ function resizeProgress() {
 	}
 
 	var bigText = ratio;
-	textProgress.style.fontSize = bigText + "em";
-	textRemaining.style.fontSize = bigText + "em";
-	textProgress.style.margin = 0;
+	elems.sideProgress.style.fontSize = bigText + "em";
+	elems.textRemaining.style.fontSize = bigText + "em";
+	elems.sideProgress.style.margin = 0;
 
 	// const popupRemaining = document.querySelector(".popup-remaining");
 	elems.popupRemaining.style.width = elems.popupRemaining.parentElement.parentElement.offsetWidth + "px";
@@ -420,10 +427,10 @@ function mOutMonth(e)
 
 function clickMonth(e)
 {
-	containerLogcash = document.querySelector(".container-logcash");
+	// elems.containerLogcash = document.querySelector(".container-logcash");
 	for (var i = 0; i < months.nbMonth; i++)
 		elems.divMonths[i].style.display = "flex";
-	containerLogcash.addEventListener("mouseleave", function () {
+	elems.containerLogcash.addEventListener("mouseleave", function () {
 		for (var i = 0; i < months.nbMonth; i++)
 		{
 			// if (i != months.indexArray - 1)
@@ -564,17 +571,49 @@ function mouseOutRemaining() {
 	}, 150);
 }
 
-function clickRemaining() {
+function mouseOverPopup(e) {
 
-	var windowWidth = window.innerWidth;
-	var ratio = getRatio(windowWidth);
+	e.stopPropagation();
+
+	console.log(e.target);
+
+	e.target.addEventListener("mousedown", function(e) {
+		console.log("mouse down on pop " + e.target);
+	});
+}
+
+var isPanelVisible = false;
+function clickRemaining(e) {
+
+	e.stopPropagation();
+
+	if (e.target.className == "side-remaining")
+	{
+		console.log(e.target.className);
+		
+		displayMessage("clickRemaining");
+		var windowWidth = window.innerWidth;
+		var ratio = getRatio(windowWidth);
 	
-	displayMessage("clickRemaining");
-	elems.popupRemaining.style.width = elems.popupRemaining.parentElement.parentElement.offsetWidth + "px";
-	elems.popupRemaining.style.top = (ratio * 30) + 10 + "px";
-	elems.popupRemaining.style.display = "flex";
-	// sideRemaining.style.backgroundColor = "rgb(35, 39, 46)";
-	sideRemaining.style.backgroundColor = "";
+		if (!isPanelVisible)
+		{
+			elems.popupRemaining.style.width = elems.popupRemaining.parentElement.parentElement.offsetWidth + "px";
+			// elems.popupRemaining.style.top = (ratio * 30) + 10 + "px";
+			elems.popupRemaining.style.display = "flex";
+			sideRemaining.style.backgroundColor = "";
+	
+			elems.popupRemaining.addEventListener("mouseover", mouseOverPopup);
+			isPanelVisible = true;
+		}
+		else
+		{
+			elems.popupRemaining.style.width = elems.popupRemaining.parentElement.parentElement.offsetWidth + "px";
+			// elems.popupRemaining.style.top = (ratio * 30) + 10 + "px";
+			elems.popupRemaining.style.display = "none";
+			sideRemaining.style.backgroundColor = "";
+			isPanelVisible = false;
+		}
+	}
 }
 
 function initButtons()
@@ -592,16 +631,16 @@ function initButtons()
 	sideProgress.addEventListener("click", clickProgress);
 
 	// sideRemaining.addEventListener("mouseover", mouseOverRemaining);
-	sideRemaining.addEventListener("mouseover", function() {
-		sideRemaining.style.backgroundColor = "rgb(35, 39, 46)";
-	});
-	sideRemaining.addEventListener("mouseout", mouseOutRemaining);
+	// sideRemaining.addEventListener("mouseover", function() {
+	// 	sideRemaining.style.backgroundColor = "rgb(35, 39, 46)";
+	// });
+	// sideRemaining.addEventListener("mouseout", mouseOutRemaining);
 	// sideRemaining.addEventListener("mouseout", function() {
 	// 	sideRemaining.style.backgroundColor = "";
 	// });
 	sideRemaining.addEventListener("click", clickRemaining);
 	
-	elems.popupRemaining.addEventListener("mouseover", mouseOverRemaining);
+	// elems.popupRemaining.addEventListener("mouseover", mouseOverRemaining);
 	// elems.popupRemaining.addEventListener("mouseout", mouseOutRemaining);
 	
 	for (var i = 0; i < months.nbMonth; i++)
@@ -650,27 +689,31 @@ async function initLogcash()
 
 	months = getInfoMonth();
 
-	logCashDiv = generateLogcashDiv();
+	// logCashDiv = generateLogcashDiv();
+	// console.log(logCashDiv);
+	elems.generateContainerLogcash();
+	console.log(elems.containerLogcash);
 
-	elems.divLogtime.insertBefore(logCashDiv, elems.divLogtime.firstChild);
+	// // elems.divLogtime.insertBefore(logCashDiv, elems.divLogtime.firstChild);
+	elems.divLogtime.insertBefore(elems.containerLogcash, elems.divLogtime.firstChild);
 	resizeProgress();
 
 	reGenerate(months[months.indexArray]);
 
-	// var index = 0;
-	// setInterval(function() {
+	// // var index = 0;
+	// // setInterval(function() {
 
-	// 	var tmpHours = index++;
-	// 	var tmpMinutes = 50;
-	// 	// displayMessage("call: " + (++index));
-	// 	months[months.indexArray].nbHourDone = parseInt(tmpHours);
-	// 	months[months.indexArray].nbMinDone = parseInt(tmpMinutes);
+	// // 	var tmpHours = index++;
+	// // 	var tmpMinutes = 50;
+	// // 	// displayMessage("call: " + (++index));
+	// // 	months[months.indexArray].nbHourDone = parseInt(tmpHours);
+	// // 	months[months.indexArray].nbMinDone = parseInt(tmpMinutes);
 
-	// 	reGenerate(months[months.indexArray]);
-	// }, 1000);
+	// // 	reGenerate(months[months.indexArray]);
+	// // }, 1000);
 
-	window.addEventListener("resize", resizeProgress);
-	initButtons();
+	// window.addEventListener("resize", resizeProgress);
+	// initButtons();
 }
 
 var log = {
@@ -678,12 +721,12 @@ var log = {
 	indexMonthDisplay: new Date().getMonth(),
 }
 
-var elems = {
-	blocProgress: 0,
-	textProgress: 0,
-	h4Title: 0,
-	textMonth: 0,
-}
+// var elems = {
+// 	blocProgress: 0,
+// 	textProgress: 0,
+// 	h4Title: 0,
+// 	textMonth: 0,
+// }
 
 var months = {
 	// months: 0,
@@ -710,7 +753,8 @@ function sleep(ms) {
 
 async function delayedInit() {
 
-	await sleep(2000);
+	// await sleep(2000);
+	await sleep(500);
 	initLogcash();
 }
 
@@ -752,6 +796,8 @@ function getNumberOpenDays(numberYear, numberMonth, numberDay) {
 	}
 	return [openDaysSince, openDaysTotal];
 }
+
+
 
 // // test only
 // const listMonth = ["January", "Febrary", "March", "April", "Mai", "June", "July", "August", "September", "October", "November", "December"];
