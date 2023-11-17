@@ -30,8 +30,6 @@ function updateValues(month)
 	month.percent = timeFloat / month.nbHourReq * 100;
 	month.cashEarn = month.salary * (month.percent / 100);
 
-	// console.log(month.percent);
-
 	if (month.cashEarn > month.salary)
 		month.cashEarn = month.salary;
 		if (month.nbMinRem < 0)
@@ -46,145 +44,12 @@ function updateValues(month)
 	}
 }
 
-function generateLogcashDiv()
-{
-	// const elems.containerLogcash = document.createElement("div");
-	// elems.containerLogcash = document.createElement("div");
-	// elems.containerLogcash.className = "container-logcash";
-	// elems.containerLogcash.style.display = "flex";
-	// elems.containerLogcash.style.alignItems = "center";
-	
-	// const titleLogcash = document.createElement("h4");
-	// titleLogcash.innerText = "LOGCASH";
-	// titleLogcash.className = "profile-title";
-	
-	// elems.containerDivMonth = document.createElement("div");
-	// elems.containerDivMonth.style.display = "flex";
-	// elems.containerDivMonth.style.justifyContent = "space-between";
-
-	// var	arrayDivMonth = Array(months.nbMonth);
-
-	// for (var i = 0; i < months.nbMonth; i++)
-	// {
-	// 	const	tmpText = document.createElement("p");
-	// 	tmpText.className = "text-month";
-
-	// 	tmpText.style.color = "#8e8e8f";
-	// 	tmpText.style.cursor = "pointer";
-	// 	tmpText.style.borderRadius = "4px";
-	// 	tmpText.style.display = "flex";
-	// 	tmpText.style.justifyContent = "center";
-	// 	tmpText.style.alignItems = "center";
-	// 	tmpText.style.border = "2px solid rgba(0,0,0,0)";
-
-	// 	arrayDivMonth[i] = document.createElement("div");
-	// 	arrayDivMonth[i].className = "div-month";
-	// 	if (i == months.indexArray)
-	// 		arrayDivMonth[i].style.display = "flex"
-	// 	else
-	// 		arrayDivMonth[i].style.display = "none"
-
-	// 	arrayDivMonth[i].appendChild(tmpText);
-	// 	elems.containerDivMonth.appendChild(arrayDivMonth[i])
-	// }
-	
-	// // generate row progress
-	// const rowProgress = document.createElement("div");
-	// rowProgress.className = "row-progress-bar";
-
-	// generate side progress
-	// const sideProgress = document.createElement("div");
-	// sideProgress.className = "side-progress";
-	// const textProgress = document.createElement("p");
-	// textProgress.className = "text-progress";
-	// sideProgress.appendChild(textProgress);
-	
-	// // generate side remaining
-	// elems.popupRemaining = document.createElement("div");
-	// elems.popupRemaining.className = "popup-remaining";
-	// elems.popupRemaining.style.display = "none";
-	// // elems.popupRemaining.style.display = "flex";
-	// elems.popupRemaining.style.position = "absolute";
-	// elems.popupRemaining.style.height = "100px";
-	// elems.popupRemaining.style.borderRadius = "4px";
-	// elems.popupRemaining.style.top = "40px";
-	// elems.popupRemaining.style.right = "0px";
-	// elems.popupRemaining.style.cursor = "move";
-	// elems.popupRemaining.style.zIndex = "1";
-	// elems.popupRemaining.style.background = "rgb(45, 49, 60)";
-
-	// const sideRemaining = document.createElement("div");
-	// sideRemaining.className = "side-remaining";
-	// const textRemaining = document.createElement("p");
-	// textRemaining.className = "text-remaining";
-	// sideRemaining.appendChild(elems.popupRemaining);
-	// sideRemaining.appendChild(textRemaining);
-	// rowProgress.appendChild(sideProgress);
-	// rowProgress.appendChild(sideRemaining);
-
-	// let oldLogTitle = getTitleLogtime();
-	// elems.h4Title = oldLogTitle.cloneNode();
-	// elems.h4Title.innerText = "LOGTIME";
-	// elems.h4Title.style.margin = "0";
-	// oldLogTitle.style.display = "none";
-
-	// elems.containerLogcash.appendChild(elems.h4Title);
-	// elems.containerLogcash.appendChild(elems.containerDivMonth);
-	// elems.containerLogcash.appendChild(rowProgress);
-	
-	// row progress style
-	// rowProgress.style.display = "flex";
-	// rowProgress.style.flex = "1";
-	// rowProgress.style.justifyContent = "space-between";
-	
-	// if (log.dev == 0)
-	// {
-	// 	var mainNavbar = document.querySelector(".main-navbar");
-	// 	var style = window.getComputedStyle(mainNavbar,"");
-	// 	var bgColor = style.getPropertyValue("background-color");
-	// }
-	// else
-	// 	var bgColor = "#1e212a";
-
-	// if (bgColor == "#1e212a" || "rgb(30, 33, 42)")
-	// {
-	// 	rowProgress.style.border = "2px solid #2d313c";
-	// 	textProgress.style.color = "#f2f2f2";
-	// }
-	// else
-	// {
-	// 	rowProgress.style.border = "2px solid #e5e5e5";
-	// 	textProgress.style.color = "#2c2c34";
-	// }
-	// rowProgress.style.borderRadius = "4px";
-	
-	// sideProgress.style.cursor = "pointer";
-	// sideProgress.style.display = "flex";
-	// sideProgress.style.justifyContent = "center";
-	// sideProgress.style.alignItems = "center";
-	// sideProgress.style.minWidth = "90px";
-
-	// sideProgress.style.height = "100%";
-	// sideProgress.style.borderRadius = "3px";
-	
-	// sideRemaining.style.display = "flex";
-	// sideRemaining.style.justifyContent = "center";
-	// sideRemaining.style.alignItems = "center";
-	// sideRemaining.style.flex = "1";
-	// sideRemaining.style.cursor = "pointer";
-
-	// textRemaining.style.margin = "0";
-	// textRemaining.style.color = "#8d8e8e";
-
-	// return (elems.containerLogcash);
-}
-
-function reGenerate(month) {
+function reGenerate(month, elems) {
 
 	var textMonths = document.querySelectorAll(".text-month");
 	// var textProgress = document.querySelector(".text-progress");
 	// var textRemaining = document.querySelector(".text-remaining");
-	var sideProgress = document.querySelector(".side-progress");
+	// var sideProgress = document.querySelector(".side-progress");
 
 	for (var i = 0; i < months.nbMonth; i++)
 		textMonths[i].innerText = months[i].nameShort;
@@ -265,23 +130,15 @@ function getRatio(windowWidth) {
 function resizeProgress() {
 
 	var windowWidth = window.innerWidth;
-
-	// elems.containerLogcash = document.querySelector(".container-logcash");
-	// var rowProgressBar = document.querySelector(".row-progress-bar");
-
 	var textMonths = document.querySelectorAll(".text-month");
 	var divMonths = document.querySelectorAll(".div-month");
-
-	// var textProgress = document.querySelector(".text-progress");
-	// var textRemaining = document.querySelector(".text-remaining");
-
 	var ratio = getRatio(windowWidth);
 
 	elems.rowProgress.style.height = (ratio * 30) + "px";
 	elems.containerLogcash.style.display = "flex";
+	elems.containerDivMonth.style.margin = "0 0 0 " + (ratio * 16) + "px";
 	var smallMargin = ratio * 6;
 
-	elems.containerDivMonth.style.margin = "0 0 0 " + (ratio * 16) + "px";
 	for (var i = 0; i < months.nbMonth; i++)
 	{
 		textMonths[i].style.fontSize = "0.9em";
@@ -292,8 +149,8 @@ function resizeProgress() {
 		divMonths[i].setAttribute('id', i);
 		textMonths[i].setAttribute('id', i);
 	}
-
 	var bigText = ratio;
+
 	elems.sideProgress.style.fontSize = bigText + "em";
 	elems.textRemaining.style.fontSize = bigText + "em";
 	elems.sideProgress.style.margin = 0;
@@ -439,12 +296,11 @@ function clickMonth(e)
 		}
 	});
 	months.indexArray = parseInt(e.target.id);
-	reGenerate(months[months.indexArray]);
+	reGenerate(months[months.indexArray], elems);
 }
 
 function mOverProgress(e)
 {
-	blocProgress = document.querySelector(".side-progress");
 	var tmpSplit = months[months.indexArray].progressColor.split(' ');
 	var newAlpha = tmpSplit[3].replace(')', '');
 
@@ -452,12 +308,12 @@ function mOverProgress(e)
 		var newColor = "rgb(0, 189, 190)";
 	else
 		var newColor = tmpSplit[0] + " " + tmpSplit[1] + tmpSplit[2] + " " + (parseFloat(newAlpha) + 0.1) + ")";
-	blocProgress.style.backgroundColor = newColor;
-	blocProgress.style.color = "white";
+	elems.sideProgress.style.backgroundColor = newColor;
+	elems.sideProgress.style.color = "white";
 }
 
 function mOutProgress(e) {
-	elems.blocProgress.style.backgroundColor = months[months.indexArray].progressColor;
+	elems.sideProgress.style.backgroundColor = months[months.indexArray].progressColor;
 }
 
 function clickProgress(e) {
@@ -466,7 +322,7 @@ function clickProgress(e) {
 		months[months.indexArray].switchHourCash = 1;
 	else if (months[months.indexArray].switchHourCash == 1)
 		months[months.indexArray].switchHourCash = 0;
-	reGenerate(months[months.indexArray]);
+	reGenerate(months[months.indexArray], elems);
 }
 
 function isMonthInArray(array, node) {
@@ -494,7 +350,7 @@ function getNbUniqueMonth(nodesList) {
 	return tmpList.length;
 }
 
-function getInfoMonth() {
+function getInfoMonth(elems) {
 
 	months.nbMonth = getNbUniqueMonth(elems.textMonth);
 	// console.log("number month: " + months.nbMonth);
@@ -600,7 +456,7 @@ function clickRemaining(e) {
 			elems.popupRemaining.style.width = elems.popupRemaining.parentElement.parentElement.offsetWidth + "px";
 			// elems.popupRemaining.style.top = (ratio * 30) + 10 + "px";
 			elems.popupRemaining.style.display = "flex";
-			sideRemaining.style.backgroundColor = "";
+			elems.sideRemaining.style.backgroundColor = "";
 	
 			elems.popupRemaining.addEventListener("mouseover", mouseOverPopup);
 			isPanelVisible = true;
@@ -610,25 +466,20 @@ function clickRemaining(e) {
 			elems.popupRemaining.style.width = elems.popupRemaining.parentElement.parentElement.offsetWidth + "px";
 			// elems.popupRemaining.style.top = (ratio * 30) + 10 + "px";
 			elems.popupRemaining.style.display = "none";
-			sideRemaining.style.backgroundColor = "";
+			elems.sideRemaining.style.backgroundColor = "";
 			isPanelVisible = false;
 		}
 	}
 }
 
-function initButtons()
+function initButtons(elems)
 {
-	elems.blocProgress = document.querySelector(".side-progress");
-	elems.textProgress = document.querySelector(".text-progress");
-
-	sideProgress = document.querySelector(".side-progress");
-	sideRemaining = document.querySelector(".side-remaining");
 	elems.divMonths = document.querySelectorAll(".div-month");
 	elems.textMonths = document.querySelectorAll(".text-month");
 
-	sideProgress.addEventListener("mouseover", mOverProgress);
-	sideProgress.addEventListener("mouseout", mOutProgress);
-	sideProgress.addEventListener("click", clickProgress);
+	elems.sideProgress.addEventListener("mouseover", mOverProgress);
+	elems.sideProgress.addEventListener("mouseout", mOutProgress);
+	elems.sideProgress.addEventListener("click", clickProgress);
 
 	// sideRemaining.addEventListener("mouseover", mouseOverRemaining);
 	// sideRemaining.addEventListener("mouseover", function() {
@@ -638,7 +489,7 @@ function initButtons()
 	// sideRemaining.addEventListener("mouseout", function() {
 	// 	sideRemaining.style.backgroundColor = "";
 	// });
-	sideRemaining.addEventListener("click", clickRemaining);
+	elems.sideRemaining.addEventListener("click", clickRemaining);
 	
 	// elems.popupRemaining.addEventListener("mouseover", mouseOverRemaining);
 	// elems.popupRemaining.addEventListener("mouseout", mouseOutRemaining);
@@ -672,7 +523,7 @@ function waitForLogTimesChartToLoad(ltSvg) {
 	}
 }
 
-async function fetchCalendar()
+async function fetchCalendar(elems)
 {
 	const ltSvg = document.getElementById("user-locations");
 	if (ltSvg) { // check if logtimes chart is on page
@@ -683,22 +534,20 @@ async function fetchCalendar()
 
 async function initLogcash()
 {
-	calendar = await fetchCalendar();
+	const elems = {};
 
+	calendar = await fetchCalendar(elems);
 	elems.divLogtime = document.querySelector("svg#user-locations").parentElement;
+	months = getInfoMonth(elems);
 
-	months = getInfoMonth();
-
-	// logCashDiv = generateLogcashDiv();
-	// console.log(logCashDiv);
-	elems.generateContainerLogcash();
-	console.log(elems.containerLogcash);
-
-	// // elems.divLogtime.insertBefore(logCashDiv, elems.divLogtime.firstChild);
+	init.generateContainerLogcash(elems);
 	elems.divLogtime.insertBefore(elems.containerLogcash, elems.divLogtime.firstChild);
-	resizeProgress();
 
-	reGenerate(months[months.indexArray]);
+	window.elems = elems;
+	resizeProgress();
+	reGenerate(months[months.indexArray], elems);
+	window.addEventListener("resize", resizeProgress);
+	initButtons(elems);
 
 	// // var index = 0;
 	// // setInterval(function() {
@@ -711,22 +560,12 @@ async function initLogcash()
 
 	// // 	reGenerate(months[months.indexArray]);
 	// // }, 1000);
-
-	// window.addEventListener("resize", resizeProgress);
-	// initButtons();
 }
 
 var log = {
 	dev: 0,
 	indexMonthDisplay: new Date().getMonth(),
 }
-
-// var elems = {
-// 	blocProgress: 0,
-// 	textProgress: 0,
-// 	h4Title: 0,
-// 	textMonth: 0,
-// }
 
 var months = {
 	// months: 0,
@@ -753,9 +592,15 @@ function sleep(ms) {
 
 async function delayedInit() {
 
-	// await sleep(2000);
-	await sleep(500);
+	await sleep(2000);
+	// await sleep(500);
 	initLogcash();
+}
+
+function displayMessage(message) {
+	const reset = "\x1b[0m";
+
+	console.log('%c[LogCash]%c %s', 'color: #ffa91f', reset, message);
 }
 
 function getFirstDayOfMonth(year, month) {
@@ -766,12 +611,6 @@ function getFirstDayOfMonth(year, month) {
 	dateFirstDay += String(month) + "-01";
 
 	return new Date(dateFirstDay).getDay()
-}
-
-function displayMessage(message) {
-	const reset = "\x1b[0m";
-
-	console.log('%c[LogCash]%c %s', 'color: #ffa91f', reset, message);
 }
 
 function getNumberOpenDays(numberYear, numberMonth, numberDay) {
@@ -796,8 +635,6 @@ function getNumberOpenDays(numberYear, numberMonth, numberDay) {
 	}
 	return [openDaysSince, openDaysTotal];
 }
-
-
 
 // // test only
 // const listMonth = ["January", "Febrary", "March", "April", "Mai", "June", "July", "August", "September", "October", "November", "December"];

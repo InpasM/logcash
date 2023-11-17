@@ -1,7 +1,10 @@
 
-window.elems = window.elems || {};
+const htmlElems = {};
 
-function initPopup() {
+window.htmlElems = htmlElems;
+window.init = window.init || {};
+
+function initPopup(elems) {
 
 	elems.popupRemaining = document.createElement("div");
 	elems.popupRemaining.className = "popup-remaining";
@@ -17,7 +20,7 @@ function initPopup() {
 	elems.popupRemaining.style.background = "rgb(45, 49, 60)";
 }
 
-function initContainerLogcash() {
+function initContainerLogcash(elems) {
 
 	elems.containerLogcash = document.createElement("div");
 	elems.containerLogcash.className = "container-logcash";
@@ -37,7 +40,7 @@ function initContainerLogcash() {
 	elems.sideProgress.className = "text-progress";
 	elems.sideProgress.appendChild(elems.textProgress);
 
-	initPopup();
+	initPopup(elems);
 
 	elems.sideRemaining = document.createElement("div");
 	elems.sideRemaining.className = "side-remaining";
@@ -59,9 +62,8 @@ function initContainerLogcash() {
 	elems.containerLogcash.appendChild(elems.rowProgress);
 }
 
-function initDivMonths() {
+function initDivMonths(elems) {
 
-	// var	arrayDivMonth = Array(months.nbMonth);
 	var tmpMonth = [];
 
 	for (var i = 0; i < months.nbMonth; i++)
@@ -86,44 +88,38 @@ function initDivMonths() {
 
 		tmpMonth.appendChild(tmpText);
 		elems.containerDivMonth.appendChild(tmpMonth)
-		// arrayDivMonth[i] = document.createElement("div");
-		// arrayDivMonth[i].className = "div-month";
-		// if (i == months.indexArray)
-		// 	arrayDivMonth[i].style.display = "flex"
-		// else
-		// 	arrayDivMonth[i].style.display = "none"
-
-		// arrayDivMonth[i].appendChild(tmpText);
-		// elems.containerDivMonth.appendChild(arrayDivMonth[i])
 	}
 }
 
-function setStyle() {
+function setStyle(elems) {
 
 	var bgColor = "#1e212a";
+	let border, color;
+
+	if (bgColor == "#1e212a" || "rgb(30, 33, 42)")
+	{
+		border = "2px solid #2d313c";
+		color = "#f2f2f2";
+	}
+	else
+	{
+		border = "2px solid #e5e5e5";
+		color = "#2c2c34";
+	}
 
 	elems.rowProgress.style.display = "flex";
 	elems.rowProgress.style.flex = "1";
 	elems.rowProgress.style.justifyContent = "space-between";
-
-	if (bgColor == "#1e212a" || "rgb(30, 33, 42)")
-	{
-		elems.rowProgress.style.border = "2px solid #2d313c";
-		elems.textProgress.style.color = "#f2f2f2";
-	}
-	else
-	{
-		elems.rowProgress.style.border = "2px solid #e5e5e5";
-		elems.textProgress.style.color = "#2c2c34";
-	}
 	elems.rowProgress.style.borderRadius = "4px";
-	
+	elems.rowProgress.style.border = border;
+
+	elems.textProgress.style.color = color;
+
 	elems.sideProgress.style.cursor = "pointer";
 	elems.sideProgress.style.display = "flex";
 	elems.sideProgress.style.justifyContent = "center";
 	elems.sideProgress.style.alignItems = "center";
 	elems.sideProgress.style.minWidth = "90px";
-
 	elems.sideProgress.style.height = "100%";
 	elems.sideProgress.style.borderRadius = "3px";
 	
@@ -137,10 +133,9 @@ function setStyle() {
 	elems.textRemaining.style.color = "#8d8e8e";
 }
 
-elems.generateContainerLogcash = function() {
+init.generateContainerLogcash = function(elems) {
 
-	initContainerLogcash();
-	initDivMonths();
-	setStyle();
-	console.log(elems.containerDivMonth);
+	initContainerLogcash(elems);
+	initDivMonths(elems);
+	setStyle(elems);
 }
