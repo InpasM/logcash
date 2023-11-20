@@ -8,16 +8,17 @@ function initPopup(elems) {
 
 	elems.popupRemaining = document.createElement("div");
 	elems.popupRemaining.className = "popup-remaining";
-	elems.popupRemaining.style.display = "none";
+	// elems.popupRemaining.style.display = "none";
 	// elems.popupRemaining.style.display = "flex";
 	elems.popupRemaining.style.position = "absolute";
 	elems.popupRemaining.style.height = "100px";
 	elems.popupRemaining.style.borderRadius = "4px";
-	elems.popupRemaining.style.top = "40px";
-	elems.popupRemaining.style.right = "0px";
+	elems.popupRemaining.style.zIndex = "1000";
+	elems.popupRemaining.style.top = "10px";
+	elems.popupRemaining.style.left = "10px";
 	elems.popupRemaining.style.cursor = "move";
-	elems.popupRemaining.style.zIndex = "1";
 	elems.popupRemaining.style.background = "rgb(45, 49, 60)";
+	document.body.appendChild(elems.popupRemaining);
 }
 
 function initContainerLogcash(elems) {
@@ -46,7 +47,7 @@ function initContainerLogcash(elems) {
 	elems.sideRemaining.className = "side-remaining";
 	elems.textRemaining = document.createElement("p");
 	elems.textRemaining.className = "text-remaining";
-	elems.sideRemaining.appendChild(elems.popupRemaining);
+	// elems.sideRemaining.appendChild(elems.popupRemaining);
 	elems.sideRemaining.appendChild(elems.textRemaining);
 	elems.rowProgress.appendChild(elems.sideProgress);
 	elems.rowProgress.appendChild(elems.sideRemaining);
