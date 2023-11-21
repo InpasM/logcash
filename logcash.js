@@ -550,14 +550,15 @@ function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-var isDev = false;
+var isDev = true;
 async function delayedInit() {
 
 	if (!isDev)
 	{
 		await sleep(2000);
 	}
-	// await sleep(500);
+	else
+		await sleep(500);
 	initLogcash();
 }
 
@@ -615,5 +616,16 @@ function getNumberOpenDays(numberYear, numberMonth, numberDay) {
 
 // 	displayMessage(listMonth[i] + ":  Open day since: " + openDays[0] + "   Open day total: " + openDays[1]);
 // }
+
+const login = document.querySelector(".login").innerText;
+// localStorage.setItem("msapin", "stud");
+const allLocalStorage = localStorage.getItem(login);
+
+if (allLocalStorage)
+{
+	displayMessage(allLocalStorage + " found!");
+}
+// console.log(allLocalStorage);
+// console.log("number localstorage: " + localStorage.length);
 
 delayedInit();
