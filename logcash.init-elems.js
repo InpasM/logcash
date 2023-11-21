@@ -8,16 +8,25 @@ function initPopup(elems) {
 
 	elems.popupRemaining = document.createElement("div");
 	elems.popupRemaining.className = "popup-remaining";
-	// elems.popupRemaining.style.display = "none";
-	// elems.popupRemaining.style.display = "flex";
+	// elems.popupRemaining.style.opacity = "0";
+	elems.popupRemaining.style.opacity = "1";
 	elems.popupRemaining.style.position = "absolute";
 	elems.popupRemaining.style.height = "100px";
 	elems.popupRemaining.style.borderRadius = "4px";
 	elems.popupRemaining.style.zIndex = "1000";
-	elems.popupRemaining.style.top = "10px";
-	elems.popupRemaining.style.left = "10px";
 	elems.popupRemaining.style.cursor = "move";
-	elems.popupRemaining.style.background = "rgb(45, 49, 60)";
+	elems.popupRemaining.style.backgroundColor = "#252932";
+
+	elems.popupTopDiv = document.createElement("div");
+	elems.popupTopDiv.className = "popup-top-div";
+	
+	elems.popupTopText = document.createElement("p");
+	elems.popupTopText.className = "popup-top-text";
+	elems.popupTopText.innerText = "Logcash Panel";
+
+	elems.popupRemaining.appendChild(elems.popupTopDiv);
+	elems.popupTopDiv.appendChild(elems.popupTopText);
+	
 	document.body.appendChild(elems.popupRemaining);
 }
 
@@ -115,6 +124,7 @@ function setStyle(elems) {
 	elems.rowProgress.style.border = border;
 
 	elems.textProgress.style.color = color;
+	elems.textProgress.style.pointerEvents = "none";
 
 	elems.sideProgress.style.cursor = "pointer";
 	elems.sideProgress.style.display = "flex";
@@ -132,6 +142,25 @@ function setStyle(elems) {
 
 	elems.textRemaining.style.margin = "0";
 	elems.textRemaining.style.color = "#8d8e8e";
+	elems.textRemaining.style.pointerEvents = "none";
+
+	border: ;
+	top: 80px;
+	right: 20px;
+	width: fit-content;
+	display: flex;
+	position: absolute;
+	z-index: 1;
+	box-shadow: 0px 10px 20px #12141a3a;
+
+	elems.popupTopText.style.border = "1px solid #2d313c";
+
+
+	elems.popupTopText.style.color = "#c5c5c6";
+	elems.popupTopText.style.fontSize = "0.9em";
+	elems.popupTopText.style.fontWeight = "bold";
+	elems.popupTopText.style.margin = "10px 20px";
+
 }
 
 init.generateContainerLogcash = function(elems) {

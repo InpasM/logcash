@@ -154,16 +154,6 @@ function resizeProgress() {
 	elems.sideProgress.style.fontSize = bigText + "em";
 	elems.textRemaining.style.fontSize = bigText + "em";
 	elems.sideProgress.style.margin = 0;
-
-	elems.popupRemaining.style.width = "100px";
-	// const popupRemaining = document.querySelector(".popup-remaining");
-	// elems.popupRemaining.style.width = elems.popupRemaining.parentElement.parentElement.offsetWidth + "px";
-	// elems.popupRemaining.style.top = (ratio * 30) + 10 + "px";
-	// elems.popupRemaining.style.top = (ratio * 30) + 10 + "0px";
-	// console.log(popupRemaining.parentElement.parentElement.parentElement.parentElement.offsetWidth);
-	// console.log(elems.popupRemaining.parentElement.parentElement.offsetWidth);
-	// const containerLog = document.querySelector(".container-inner-item");
-	// console.log(containerLog.offsetWidth);
 }
 
 function waitForAll(selector) {
@@ -410,116 +400,34 @@ function getInfoMonth(elems) {
 	return (array);
 }
 
-var eventPopup = 0;
-function mouseOverRemaining() {
-
-	displayMessage("mouseOverRemaining");
-	clearTimeout(eventPopup);
-	elems.popupRemaining.style.display = "flex";
-	sideRemaining.style.backgroundColor = "red";
-}
-
-function mouseOutRemaining() {
-
-	displayMessage("mouseOutRemaining");
-	eventPopup = setTimeout(function() {
-		elems.popupRemaining.style.display = "none";
-		sideRemaining.style.backgroundColor = "";
-		console.log("timeout");
-	}, 150);
-}
-
-function mouseDownPopup(e) {
-	console.log("mouse down on pop " + e.clientX);
-}
-
-function movePopup(e) {
-	e.stopPropagation();
-	// console.log("Popup move: " + e.clientX);
-
-	var ratio = getRatio(window.innerWidth);
-	const popupDimension = elems.popupRemaining.getBoundingClientRect();
-
-	// let topPopup = e.pageY + (ratio * 30) + (targetDimension.top - e.clientY) + 5;
-	// let topPopup = e.pageY + e.clientY - popupDimension.top;
-	// let topPopup = e.pageY + (e.clientY - e.target.offsetTop);
-
-	let localY = e.clientY - e.target.offsetTop;
-	let localX = e.clientX - e.target.offsetLeft;
-
-	let topPopup = e.pageY - localY;
-	let leftPopup = e.pageX - localX;
-
-	// console.log("e.pageY: " + e.pageY);
-	// console.log("topPopup: " + topPopup + "  e.target.offsetHeight: " + e.target.offsetHeight);
-	console.log("localY: " + localY + "  localX: " + localX);
-
-	elems.popupRemaining.style.top = topPopup + "px";
-	elems.popupRemaining.style.left = leftPopup + "px";
-}
-
-function mouseOverPopup(e) {
-
-	e.stopPropagation();
-
-	console.log(e.target);
-
-	// const tmpEvent = e.target.addEventListener("mousedown", mouseDownPopup);
-
-	let popupMoveEvent;
-	const tmpEvent = e.target.addEventListener("mousedown", function() {
-		popupMoveEvent = e.target.addEventListener("mousemove", movePopup);
-	});
-
-	e.target.addEventListener("mouseup", function(e) {
-		// removeEventListener("mousedown", tmpEvent);
-		e.target.removeEventListener("mousemove", movePopup);
-	});
-}
-
 var isPanelVisible = false;
-// let 
+
 function clickRemaining(e) {
 
 	e.stopPropagation();
 
 	if (e.target.className == "side-remaining")
 	{
-		const popupDimension = elems.popupRemaining.getBoundingClientRect();
-		const sideRemaining = elems.sideRemaining.getBoundingClientRect();
-		const targetDimension = e.target.getBoundingClientRect();
-		let windowWidth = window.innerWidth;
-		let windowHeight = window.innerHeight;
-		var ratio = getRatio(windowWidth);
-
-		// let topPopup = e.pageY + sideRemaining.top - e.clientY + (ratio * 30) + 10;
-		let topPopup = e.pageY + (ratio * 30) + (targetDimension.top - e.clientY) + 5;
-		let leftPopup = e.pageX - 10;
-
-		elems.popupRemaining.style.top = topPopup + "px";
-		elems.popupRemaining.style.left = leftPopup + "px";
-
-		console.log("popupDimension.left: " + popupDimension.left + "  targetDimension: " + (targetDimension.top - e.clientY) + "  leftPopup: " + leftPopup + " topPopup: " + topPopup);
-
-		// console.log("window width: " + windowWidth + "  height: " + windowHeight + " ");
-		// console.log("window scrollHeight: " + document.body.scrollHeight + "  topPopup: " + topPopup + " ");
-		
-		// displayMessage("clickRemaining");
-		// var windowWidth = window.innerWidth;
-		// var ratio = getRatio(windowWidth);
-	
 		if (!isPanelVisible)
 		{
-			// elems.popupRemaining.style.display = "flex";
-			elems.sideRemaining.style.backgroundColor = "";
+			const popupDimension = elems.popupRemaining.getBoundingClientRect();
+			const sideRemaining = elems.sideRemaining.getBoundingClientRect();
+			const targetDimension = e.target.getBoundingClientRect();
 	
-			// elems.popupRemaining.addEventListener("mouseover", mouseOverPopup);
+			let topPopup = e.pageY + sideRemaining.height + (targetDimension.top - e.clientY) + 5;
+			let leftPopup = e.pageX - (popupDimension.width / 2);
+	
+			elems.popupRemaining.style.top = topPopup + "px";
+			elems.popupRemaining.style.left = leftPopup + "px";
+
+			elems.sideRemaining.style.backgroundColor = "";
+			elems.popupRemaining.style.opacity = "1";
 			isPanelVisible = true;
 		}
 		else
 		{
-			// elems.popupRemaining.style.display = "none";
 			elems.sideRemaining.style.backgroundColor = "";
+			elems.popupRemaining.style.opacity = "0";
 			isPanelVisible = false;
 		}
 	}
@@ -543,11 +451,9 @@ function initButtons(elems)
 	// 	sideRemaining.style.backgroundColor = "";
 	// });
 	elems.sideRemaining.addEventListener("click", clickRemaining);
-	elems.popupRemaining.addEventListener("mouseover", mouseOverPopup);
-	
-	// elems.popupRemaining.addEventListener("mouseover", mouseOverRemaining);
-	// elems.popupRemaining.addEventListener("mouseout", mouseOutRemaining);
-	
+	popup.initPopup(elems);
+	// elems.popupRemaining.addEventListener("mouseover", mouseOverPopup);
+
 	for (var i = 0; i < months.nbMonth; i++)
 	{
 		elems.textMonths[i].addEventListener("mouseover", mOverMonth);
@@ -644,9 +550,13 @@ function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+var isDev = false;
 async function delayedInit() {
 
-	await sleep(2000);
+	if (!isDev)
+	{
+		await sleep(2000);
+	}
 	// await sleep(500);
 	initLogcash();
 }
