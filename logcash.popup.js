@@ -16,9 +16,9 @@ popup.initPopup = function(elems) {
 		popupOffset = [0, 0];
 
 	disableTextSelection();
-	elems.popupRemaining.addEventListener("mousedown", function(e) {
+	elems.popupTopDiv.addEventListener("mousedown", function(e) {
 		mouseDown = true;
-		popupOffset = [e.target.offsetLeft - e.clientX, e.target.offsetTop - e.clientY];
+		popupOffset = [elems.popupRemaining.offsetLeft - e.clientX, elems.popupRemaining.offsetTop - e.clientY];
 	})
 	document.body.addEventListener("mousemove", function(e) {
 
