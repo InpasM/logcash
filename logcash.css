@@ -146,14 +146,14 @@ body
 
 .popup-remaining
 {
-	border: 1px solid #2d313c;
+	/* border: 1px solid #2d313c;
 	top: 80px;
 	right: 20px;
 	width: fit-content;
 	display: flex;
 	position: absolute;
 	z-index: 1;
-	box-shadow: 0px 10px 20px #12141a3a;
+	box-shadow: 0px 10px 20px #12141a3a; */
 }
 
 .popup-top-div {
@@ -164,6 +164,7 @@ body
 	display: flex;
 	justify-content: center;
 	white-space: nowrap;
+	/* color: #e2e2e2; */
 }
 
 /* .popup-top-text {
