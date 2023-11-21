@@ -8,21 +8,13 @@ function initPopup(elems) {
 
 	elems.popupRemaining = document.createElement("div");
 	elems.popupRemaining.className = "popup-remaining";
-	// elems.popupRemaining.style.opacity = "0";
-	elems.popupRemaining.style.opacity = "1";
-	elems.popupRemaining.style.position = "absolute";
-	elems.popupRemaining.style.height = "100px";
-	elems.popupRemaining.style.borderRadius = "4px";
-	elems.popupRemaining.style.zIndex = "1000";
-	elems.popupRemaining.style.cursor = "move";
-	elems.popupRemaining.style.backgroundColor = "#252932";
 
 	elems.popupTopDiv = document.createElement("div");
 	elems.popupTopDiv.className = "popup-top-div";
 	
 	elems.popupTopText = document.createElement("p");
 	elems.popupTopText.className = "popup-top-text";
-	elems.popupTopText.innerText = "Logcash Panel";
+	elems.popupTopText.innerText = "Logcash";
 
 	elems.popupRemaining.appendChild(elems.popupTopDiv);
 	elems.popupTopDiv.appendChild(elems.popupTopText);
@@ -144,22 +136,37 @@ function setStyle(elems) {
 	elems.textRemaining.style.color = "#8d8e8e";
 	elems.textRemaining.style.pointerEvents = "none";
 
-	border: ;
-	top: 80px;
-	right: 20px;
-	width: fit-content;
-	display: flex;
-	position: absolute;
-	z-index: 1;
-	box-shadow: 0px 10px 20px #12141a3a;
+	// elems.popupRemaining.style.opacity = "0";
+	elems.popupRemaining.style.opacity = "1";
+	elems.popupRemaining.style.display = "flex";
+	elems.popupRemaining.style.position = "absolute";
+	elems.popupRemaining.style.height = "100px";
+	elems.popupRemaining.style.width = "fit-content";
+	elems.popupRemaining.style.borderRadius = "4px";
+	elems.popupRemaining.style.zIndex = "1000";
+	elems.popupRemaining.style.backgroundColor = "#252932";
+	elems.popupRemaining.style.border = "1px solid #2d313c";
+	elems.popupRemaining.style.boxShadow = "0px 10px 15px #12141a3a";
+	elems.popupRemaining.style.top = "80px";
+	elems.popupRemaining.style.right = "20px";
+	
+	elems.popupTopDiv.style.height = "30px";
+	elems.popupTopDiv.style.cursor = "move";
+	elems.popupTopDiv.style.width = "100%";
+	elems.popupTopDiv.style.borderRadius = "4px";
+	elems.popupTopDiv.style.backgroundColor = "rgb(45, 49, 60)";
+	elems.popupTopDiv.style.display = "flex";
+	elems.popupTopDiv.style.justifyContent = "center";
+	elems.popupTopDiv.style.alignItems = "center";
+	elems.popupTopDiv.style.whiteSpace = "nowrap";
+	// elems.popupTopDiv.style.pointerEvents = "none";
 
-	elems.popupTopText.style.border = "1px solid #2d313c";
-
-
-	elems.popupTopText.style.color = "#c5c5c6";
-	elems.popupTopText.style.fontSize = "0.9em";
+	// elems.popupTopText.style.color = "#c5c5c6";
+	elems.popupTopText.style.color = "#e2e2e2";
+	elems.popupTopText.style.fontSize = "0.7em";
 	elems.popupTopText.style.fontWeight = "bold";
 	elems.popupTopText.style.margin = "10px 20px";
+	elems.popupTopText.style.pointerEvents = "none";
 
 }
 
