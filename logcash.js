@@ -345,7 +345,6 @@ function getNbUniqueMonth(nodesList) {
 function getInfoMonth(elems) {
 
 	months.nbMonth = getNbUniqueMonth(elems.textMonth);
-	// console.log("number month: " + months.nbMonth);
 	displayMessage("number month: " + months.nbMonth);
 
 	var array = Array(months.nbMonth);
@@ -509,41 +508,22 @@ async function initLogcash()
 	window.addEventListener("resize", resizeProgress);
 	initButtons(elems);
 
-	// // var index = 0;
-	// // setInterval(function() {
+	var index = 0;
+	setInterval(function() {
 
-	// // 	var tmpHours = index++;
-	// // 	var tmpMinutes = 50;
-	// // 	// displayMessage("call: " + (++index));
-	// // 	months[months.indexArray].nbHourDone = parseInt(tmpHours);
-	// // 	months[months.indexArray].nbMinDone = parseInt(tmpMinutes);
+		var tmpHours = index++;
+		var tmpMinutes = 50;
+		// displayMessage("call: " + (++index));
+		months[months.indexArray].nbHourDone = parseInt(tmpHours);
+		months[months.indexArray].nbMinDone = parseInt(tmpMinutes);
 
-	// // 	reGenerate(months[months.indexArray]);
-	// // }, 1000);
-}
-
-var log = {
-	dev: 0,
-	indexMonthDisplay: new Date().getMonth(),
+		reGenerate(months[months.indexArray]);
+	}, 1000);
 }
 
 var months = {
 	// months: 0,
 	// nbMonth: 0,
-}
-
-log.dev = 1;
-
-if (log.dev == 1)
-{
-	var refreshButton = document.querySelector(".dev-refresh");
-
-	if (refreshButton)
-	{
-		refreshButton.addEventListener("click", function() {
-			location.reload();
-		});
-	}
 }
 
 function sleep(ms) {
@@ -558,7 +538,17 @@ async function delayedInit() {
 		await sleep(2000);
 	}
 	else
+	{
 		await sleep(500);
+		var refreshButton = document.querySelector(".dev-refresh");
+
+		if (refreshButton)
+		{
+			refreshButton.addEventListener("click", function() {
+				location.reload();
+			});
+		}
+	}
 	initLogcash();
 }
 
@@ -617,9 +607,11 @@ function getNumberOpenDays(numberYear, numberMonth, numberDay) {
 // 	displayMessage(listMonth[i] + ":  Open day since: " + openDays[0] + "   Open day total: " + openDays[1]);
 // }
 
+
+
 const login = document.querySelector(".login").innerText;
-// localStorage.setItem("msapin", "stud");
 const allLocalStorage = localStorage.getItem(login);
+localStorage.setItem("msapin", "stud");
 
 if (allLocalStorage)
 {
