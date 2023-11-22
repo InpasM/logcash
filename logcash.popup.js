@@ -28,26 +28,33 @@ popup.setStyle = function(elems) {
 	
 	// elems.popupTopDiv.style.height = "30px";
 	elems.popupTopDiv.style.cursor = "move";
+	elems.popupTopDiv.style.height = "fit-content";
 	elems.popupTopDiv.style.width = "100%";
 	elems.popupTopDiv.style.borderRadius = "4px";
 	elems.popupTopDiv.style.borderBottom = "1px solid #2d313c";
 	elems.popupTopDiv.style.display = "flex";
+	elems.popupTopDiv.style.flexDirection = "column";
+	elems.popupTopDiv.style.justifyContent = "flex-start";
+	elems.popupTopDiv.style.color = "#9b9b9b";
+	elems.popupTopDiv.style.padding = "6px 30px 6px 6px";
 	// elems.popupTopDiv.style.alignItems = "center";
 	elems.popupTopDiv.style.whiteSpace = "nowrap";
 
 	elems.popupTopLeftText.style.color = "#e2e2e2";
 	elems.popupTopLeftText.style.fontSize = "0.8em";
 	elems.popupTopLeftText.style.fontWeight = "bold";
-	// elems.popupTopLeftText.style.margin = "10px 20px 10px 10px";
 	elems.popupTopLeftText.style.marginBottom = "2px";
 	elems.popupTopLeftText.style.pointerEvents = "none";
-
-	// elems.popupTopRightText.style.color = "#c5c5c6";
-	// elems.popupTopRightText.style.color = "#e2e2e2";
+	elems.popupTopLeftText.style.margin = "0";
+	elems.popupTopLeftText.style.padding = "0 4px";
+	elems.popupTopLeftText.style.textShadow = "rgb(0, 0, 0) 0px 0px 3px";
+	
+	elems.popupTopRightText.style.color = "#9b9b9b";
 	elems.popupTopRightText.style.fontSize = "0.6em";
-	// elems.popupTopRightText.style.fontWeight = "bold";
-	// elems.popupTopRightText.style.margin = "10px 20px";
+	elems.popupTopRightText.style.margin = "0";
+	elems.popupTopRightText.style.padding = "0 4px";
 	elems.popupTopRightText.style.pointerEvents = "none";
+	elems.popupTopRightText.style.textShadow = "rgb(0, 0, 0) 0px 0px 3px";
 }
 
 popup.initPopup = function(elems) {
