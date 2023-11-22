@@ -611,18 +611,8 @@ function getNumberOpenDays(numberYear, numberMonth, numberDay) {
 // 	displayMessage(listMonth[i] + ":  Open day since: " + openDays[0] + "   Open day total: " + openDays[1]);
 // }
 
+data.init();
 
-console.log(window.location.href);
-
-const login = document.querySelector(".login").innerText;
-const allLocalStorage = localStorage.getItem(login);
-localStorage.setItem("msapin", "stud");
-
-if (allLocalStorage)
-{
-	displayMessage(allLocalStorage + " found!");
-}
-// console.log(allLocalStorage);
-// console.log("number localstorage: " + localStorage.length);
+console.log(data.student.pseudo + " found in storage");
 
 delayedInit();
