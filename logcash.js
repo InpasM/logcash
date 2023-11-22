@@ -534,7 +534,7 @@ function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-var isDev = true;
+var isDev = false;
 async function delayedInit() {
 
 	if (!isDev)
@@ -613,6 +613,6 @@ function getNumberOpenDays(numberYear, numberMonth, numberDay) {
 
 data.init();
 
-console.log(data.student.pseudo + " found in storage");
+displayMessage(data.student.pseudo + " found in storage");
 
 delayedInit();
