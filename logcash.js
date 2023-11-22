@@ -442,13 +442,13 @@ function initButtons(elems)
 	elems.sideProgress.addEventListener("click", clickProgress);
 
 	// sideRemaining.addEventListener("mouseover", mouseOverRemaining);
-	// sideRemaining.addEventListener("mouseover", function() {
-	// 	sideRemaining.style.backgroundColor = "rgb(35, 39, 46)";
-	// });
+	elems.sideRemaining.addEventListener("mouseover", function() {
+		elems.sideRemaining.style.backgroundColor = "rgb(35, 39, 46)";
+	});
 	// sideRemaining.addEventListener("mouseout", mouseOutRemaining);
-	// sideRemaining.addEventListener("mouseout", function() {
-	// 	sideRemaining.style.backgroundColor = "";
-	// });
+	elems.sideRemaining.addEventListener("mouseout", function() {
+		elems.sideRemaining.style.backgroundColor = "";
+	});
 	elems.sideRemaining.addEventListener("click", clickRemaining);
 	popup.initPopup(elems);
 	// elems.popupRemaining.addEventListener("mouseover", mouseOverPopup);
@@ -508,17 +508,21 @@ async function initLogcash()
 	window.addEventListener("resize", resizeProgress);
 	initButtons(elems);
 
-	var index = 0;
 	setInterval(function() {
 
-		var tmpHours = index++;
-		var tmpMinutes = 50;
-		// displayMessage("call: " + (++index));
-		months[months.indexArray].nbHourDone = parseInt(tmpHours);
-		months[months.indexArray].nbMinDone = parseInt(tmpMinutes);
+		var tmpHours = months[months.length - 1].nbHourDone;
+		var tmpMinutes = months[months.length - 1].nbMinDone + 1;
 
-		reGenerate(months[months.indexArray]);
-	}, 1000);
+		if (tmpMinutes >= 60) {
+			tmpMinutes = 0;
+			tmpHours += 1;
+		}
+		months[months.length - 1].nbHourDone = parseInt(tmpHours);
+		months[months.length - 1].nbMinDone = parseInt(tmpMinutes);
+		if (months.indexArray == months.length - 1)
+			reGenerate(months[months.length - 1], elems);
+			updateValues(months[months.length - 1]);
+	}, 10000);
 }
 
 var months = {
@@ -608,6 +612,7 @@ function getNumberOpenDays(numberYear, numberMonth, numberDay) {
 // }
 
 
+console.log(window.location.href);
 
 const login = document.querySelector(".login").innerText;
 const allLocalStorage = localStorage.getItem(login);
