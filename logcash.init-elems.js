@@ -12,12 +12,19 @@ function initPopup(elems) {
 	elems.popupTopDiv = document.createElement("div");
 	elems.popupTopDiv.className = "popup-top-div";
 	
-	elems.popupTopText = document.createElement("p");
-	elems.popupTopText.className = "popup-top-text";
-	elems.popupTopText.innerText = "Logcash";
+	elems.popupTopLeftText = document.createElement("p");
+	elems.popupTopLeftText.className = "popup-top-left-text";
+	// elems.popupTopText.innerText = "Logcash";
+	elems.popupTopLeftText.innerText = "Logcash";
+
+	elems.popupTopRightText = document.createElement("p");
+	elems.popupTopRightText.className = "popup-top-right-text";
+	// elems.popupTopText.innerText = "Logcash";
+	elems.popupTopRightText.innerText = "msapin";
 
 	elems.popupRemaining.appendChild(elems.popupTopDiv);
-	elems.popupTopDiv.appendChild(elems.popupTopText);
+	elems.popupTopDiv.appendChild(elems.popupTopLeftText);
+	elems.popupTopDiv.appendChild(elems.popupTopRightText);
 	
 	document.body.appendChild(elems.popupRemaining);
 }
@@ -154,19 +161,28 @@ function setStyle(elems) {
 	elems.popupTopDiv.style.cursor = "move";
 	elems.popupTopDiv.style.width = "100%";
 	elems.popupTopDiv.style.borderRadius = "4px";
-	elems.popupTopDiv.style.backgroundColor = "rgb(45, 49, 60)";
+	elems.popupTopDiv.style.borderBottom = "1px solid #2d313c";
+	// elems.popupTopDiv.style.backgroundColor = "rgb(45, 49, 60)";
 	elems.popupTopDiv.style.display = "flex";
-	elems.popupTopDiv.style.justifyContent = "center";
+	// elems.popupTopDiv.style.justifyContent = "center";
+	// elems.popupTopDiv.style.justifyContent = "start";
 	elems.popupTopDiv.style.alignItems = "center";
 	elems.popupTopDiv.style.whiteSpace = "nowrap";
 	// elems.popupTopDiv.style.pointerEvents = "none";
 
-	// elems.popupTopText.style.color = "#c5c5c6";
-	elems.popupTopText.style.color = "#e2e2e2";
-	elems.popupTopText.style.fontSize = "0.7em";
-	elems.popupTopText.style.fontWeight = "bold";
-	elems.popupTopText.style.margin = "10px 20px";
-	elems.popupTopText.style.pointerEvents = "none";
+	// elems.popupTopLeftText.style.color = "#c5c5c6";
+	elems.popupTopLeftText.style.color = "#e2e2e2";
+	elems.popupTopLeftText.style.fontSize = "0.8em";
+	elems.popupTopLeftText.style.fontWeight = "bold";
+	elems.popupTopLeftText.style.margin = "10px 20px";
+	elems.popupTopLeftText.style.pointerEvents = "none";
+
+	// elems.popupTopRightText.style.color = "#c5c5c6";
+	// elems.popupTopRightText.style.color = "#e2e2e2";
+	elems.popupTopRightText.style.fontSize = "0.8em";
+	elems.popupTopRightText.style.fontWeight = "bold";
+	elems.popupTopRightText.style.margin = "10px 20px";
+	elems.popupTopRightText.style.pointerEvents = "none";
 
 }
 
