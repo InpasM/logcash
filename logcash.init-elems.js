@@ -14,12 +14,10 @@ function initPopup(elems) {
 	
 	elems.popupTopLeftText = document.createElement("p");
 	elems.popupTopLeftText.className = "popup-top-left-text";
-	// elems.popupTopText.innerText = "Logcash";
 	elems.popupTopLeftText.innerText = "Logcash";
 
 	elems.popupTopRightText = document.createElement("p");
 	elems.popupTopRightText.className = "popup-top-right-text";
-	// elems.popupTopText.innerText = "Logcash";
 	elems.popupTopRightText.innerText = "msapin";
 
 	elems.popupRemaining.appendChild(elems.popupTopDiv);
@@ -143,47 +141,7 @@ function setStyle(elems) {
 	elems.textRemaining.style.color = "#8d8e8e";
 	elems.textRemaining.style.pointerEvents = "none";
 
-	// elems.popupRemaining.style.opacity = "0";
-	elems.popupRemaining.style.opacity = "1";
-	elems.popupRemaining.style.display = "flex";
-	elems.popupRemaining.style.position = "absolute";
-	elems.popupRemaining.style.height = "100px";
-	elems.popupRemaining.style.width = "fit-content";
-	elems.popupRemaining.style.borderRadius = "4px";
-	elems.popupRemaining.style.zIndex = "1000";
-	elems.popupRemaining.style.backgroundColor = "#252932";
-	elems.popupRemaining.style.border = "1px solid #2d313c";
-	elems.popupRemaining.style.boxShadow = "0px 10px 15px #12141a3a";
-	elems.popupRemaining.style.top = "80px";
-	elems.popupRemaining.style.right = "20px";
-	
-	elems.popupTopDiv.style.height = "30px";
-	elems.popupTopDiv.style.cursor = "move";
-	elems.popupTopDiv.style.width = "100%";
-	elems.popupTopDiv.style.borderRadius = "4px";
-	elems.popupTopDiv.style.borderBottom = "1px solid #2d313c";
-	// elems.popupTopDiv.style.backgroundColor = "rgb(45, 49, 60)";
-	elems.popupTopDiv.style.display = "flex";
-	// elems.popupTopDiv.style.justifyContent = "center";
-	// elems.popupTopDiv.style.justifyContent = "start";
-	elems.popupTopDiv.style.alignItems = "center";
-	elems.popupTopDiv.style.whiteSpace = "nowrap";
-	// elems.popupTopDiv.style.pointerEvents = "none";
-
-	// elems.popupTopLeftText.style.color = "#c5c5c6";
-	elems.popupTopLeftText.style.color = "#e2e2e2";
-	elems.popupTopLeftText.style.fontSize = "0.8em";
-	elems.popupTopLeftText.style.fontWeight = "bold";
-	elems.popupTopLeftText.style.margin = "10px 20px";
-	elems.popupTopLeftText.style.pointerEvents = "none";
-
-	// elems.popupTopRightText.style.color = "#c5c5c6";
-	// elems.popupTopRightText.style.color = "#e2e2e2";
-	elems.popupTopRightText.style.fontSize = "0.8em";
-	elems.popupTopRightText.style.fontWeight = "bold";
-	elems.popupTopRightText.style.margin = "10px 20px";
-	elems.popupTopRightText.style.pointerEvents = "none";
-
+	popup.setStyle(elems);
 }
 
 init.generateContainerLogcash = function(elems) {
