@@ -5,9 +5,9 @@ data.init = function() {
 	
 	// localStorage.removeItem("student42");
 	let localStorageStud = localStorage.getItem("student42");
-	const isHomePage = window.location.href.indexOf("users");
+	data.isHomePage = window.location.href.indexOf("users");
 
-	if (isHomePage === -1)
+	if (data.isHomePage === -1)
 	{
 		displayMessage("On personal page");
 
