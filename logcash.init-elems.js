@@ -43,9 +43,6 @@ function initContainerLogcash(elems) {
 
 	elems.sideProgress = document.createElement("div");
 	elems.sideProgress.className = "side-progress";
-	elems.textProgress = document.createElement("p");
-	elems.sideProgress.className = "text-progress";
-	elems.sideProgress.appendChild(elems.textProgress);
 
 	initPopup(elems);
 
@@ -119,10 +116,8 @@ function setStyle(elems) {
 	elems.rowProgress.style.justifyContent = "space-between";
 	elems.rowProgress.style.borderRadius = "4px";
 	elems.rowProgress.style.border = border;
-
-	elems.textProgress.style.color = color;
-	elems.textProgress.style.pointerEvents = "none";
-
+	
+	elems.sideProgress.style.color = "#f2f2f2";
 	elems.sideProgress.style.cursor = "pointer";
 	elems.sideProgress.style.display = "flex";
 	elems.sideProgress.style.justifyContent = "center";
