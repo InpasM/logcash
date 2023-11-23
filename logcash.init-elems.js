@@ -55,18 +55,20 @@ function initContainerLogcash(elems) {
 	elems.rowProgress.appendChild(elems.sideProgress);
 	elems.rowProgress.appendChild(elems.sideRemaining);
 
-	elems.oldLogTitle = getTitleLogtime();
-	elems.h4Title = elems.oldLogTitle.cloneNode();
-	elems.h4Title.innerText = "LOGTIME";
-	elems.h4Title.style.margin = "0";
-	elems.oldLogTitle.style.display = "none";
+	// elems.oldLogTitle = getTitleLogtime();
+	// console.log(elems.oldLogTitle);
 
-	elems.containerLogcash.appendChild(elems.h4Title);
+	// elems.h4Title = elems.oldLogTitle.cloneNode();
+	// elems.h4Title.innerText = "LOGTIME";
+	// elems.h4Title.style.margin = "0";
+	// elems.oldLogTitle.style.display = "none";
+
+	// elems.containerLogcash.appendChild(elems.h4Title);
 	elems.containerLogcash.appendChild(elems.containerDivMonth);
 	elems.containerLogcash.appendChild(elems.rowProgress);
 }
 
-function initDivMonths(elems) {
+function initDivMonths(elems, months) {
 
 	var tmpMonth = [];
 
@@ -139,9 +141,10 @@ function setStyle(elems) {
 	popup.setStyle(elems);
 }
 
-init.generateContainerLogcash = function(elems) {
+init.generateContainerLogcash = function(elems, months, calendar) {
 
+	// console.log(calendar);
 	initContainerLogcash(elems);
-	initDivMonths(elems);
+	initDivMonths(elems, months);
 	setStyle(elems);
 }
