@@ -583,20 +583,27 @@ async function initLogcash()
 	window.addEventListener("resize", resizeProgress);
 	initButtons(elems);
 
-	// setInterval(function() {
-	// 	var tmpHours = months[months.length - 1].nbHourDone;
-	// 	var tmpMinutes = months[months.length - 1].nbMinDone + 1;
+	const userPosteStatus = document.querySelector(".user-poste-status");
 
-	// 	if (tmpMinutes >= 60) {
-	// 		tmpMinutes = 0;
-	// 		tmpHours += 1;
-	// 	}
-	// 	months[months.length - 1].nbHourDone = parseInt(tmpHours);
-	// 	months[months.length - 1].nbMinDone = parseInt(tmpMinutes);
-	// 	if (months.indexArray == months.length - 1)
-	// 		reGenerate(months[months.length - 1], elems);
-	// 		updateValues(months[months.length - 1]);
-	// }, 10000);
+	if (userPosteStatus.innerText !== "Unavailable")
+	{
+		displayMessage("Start setInterval each minutes");
+		setInterval(function() {
+	
+			var tmpHours = months[months.length - 1].nbHourDone;
+			var tmpMinutes = months[months.length - 1].nbMinDone + 1;
+	
+			if (tmpMinutes >= 60) {
+				tmpMinutes = 0;
+				tmpHours += 1;
+			}
+			months[months.length - 1].nbHourDone = parseInt(tmpHours);
+			months[months.length - 1].nbMinDone = parseInt(tmpMinutes);
+			if (months.indexArray == months.length - 1)
+				reGenerate(months[months.length - 1], elems);
+				updateValues(months[months.length - 1]);
+		}, 60000);
+	}
 }
 
 function startLogcash() {
