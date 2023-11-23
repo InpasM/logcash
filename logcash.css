@@ -122,8 +122,8 @@ body
 .text-progress
 {
 	/* padding: 5px 0 0 0; */
-	margin: 0;
-	color: #a8aeb9;
+	/* margin: 0;
+	color: #a8aeb9; */
 }
 
 
@@ -138,10 +138,10 @@ body
 .text-remaining
 {
 	/* background: #234a92; */
-	padding: 5px 0 0 0;
+	/* padding: 5px 0 0 0;
 	margin: 0;
 	color: #595d62;
-	cursor: pointer;
+	cursor: pointer; */
 }
 
 /*------------------------------------------------------------------------------*/
