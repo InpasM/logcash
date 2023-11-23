@@ -351,10 +351,95 @@ function getNbUniqueMonth(nodesList) {
 	return tmpList.length;
 }
 
-function getInfoMonth(elems) {
+function getInfoMonth(elems, calendar) {
 
 	const nbMonth = getNbUniqueMonth(elems.textMonth);
-	displayMessage("number month: " + nbMonth);
+	// displayMessage("number month: " + nbMonth);
+
+	// console.log(calendar);
+	const calendarElem = calendar.childNodes;
+
+	const date = new Date();
+	var numberYear = date.getFullYear();
+	var numberMonth = date.getMonth() + 1;
+	var numberDay = date.getDate();
+
+	const objectMonth = {};
+
+	let actualDate = numberYear + "-";
+	if (numberMonth < 10)
+		actualDate += "0";
+	actualDate += numberMonth + "-";
+	if (numberDay < 10)
+		actualDate += "0";
+	actualDate += numberDay;
+
+	objectMonth.lastDays = [actualDate];
+	// objectMonth.lastDays.push(actualDate);
+
+	--numberMonth;
+	let newDate;
+	if (numberMonth == 1)
+	{
+		numberMonth = 12;
+		newDate = new Date(--numberYear, numberMonth, 0);
+	}
+	else
+		newDate = new Date(numberYear, numberMonth, 0);
+
+	let previousDay = newDate.getDate();
+	let previousDate = newDate.getFullYear() + "-";
+
+	if (numberMonth < 10)
+		previousDate += "0";
+	previousDate += numberMonth + "-";
+	if (numberDay < 10)
+		previousDate += "0";
+	previousDate += previousDay;
+
+	// objectMonth.lastDays += previousDate;
+	objectMonth.lastDays.push(previousDate);
+	console.log("previous: " + previousDate);
+
+	const arrayMonthsG = [];
+	const tmpMonthG = [];
+	for (var i = calendarElem.length - 1; i > 0; i--)
+	{
+		console.log(calendarElem[i].getAttribute("data-iidate") + " === " + previousDate);
+		if (calendarElem[i].getAttribute("data-iidate") === previousDate)
+		{
+			if (objectMonth.lastDays.length === 4)
+				break;
+			console.log("next month " + previousDate);
+
+			--numberMonth;
+			if (numberMonth == 1)
+			{
+				numberMonth = 12;
+				newDate = new Date(--numberYear, numberMonth, 0);
+			}
+			else
+				newDate = new Date(numberYear, numberMonth, 0);
+		
+			previousDay = newDate.getDate();
+			previousDate = newDate.getFullYear() + "-";
+		
+			if (numberMonth < 10)
+				previousDate += "0";
+			previousDate += numberMonth + "-";
+			if (numberDay < 10)
+				previousDate += "0";
+			previousDate += previousDay;
+			objectMonth.lastDays.push(previousDate);
+			arrayMonthsG.push(tmpMonthG);
+		}
+		tmpMonthG.push(calendarElem[i]);
+		// if (calendarElem[i].getAttribute("data-iidate") === actualDate)
+		// 	console.log(actualDate + " found!");
+		// console.log(calendarElem[i]);
+
+	}
+	console.log(arrayMonthsG);
 
 	var array = Array(nbMonth);
 	var indexMonth = -1;
@@ -376,7 +461,7 @@ function getInfoMonth(elems) {
 			nbMinDone: 0,
 			nbHourRem: 0,
 			nbMinRem: 0,
-			salary: 723,
+			// salary: 723,
 			cashEarn: 0,
 			time: 0,
 			switchHourCash: 0,
@@ -393,6 +478,11 @@ function getInfoMonth(elems) {
 		}
 		tmpMonth.nameLong = getMonth(tmpMonth.monthIndex, 1);
 		tmpMonth.nameShort = getMonth(tmpMonth.monthIndex, 0);
+
+		// displayMessage("try to get number of hours and minutes done per month");
+		// console.log(elems.textMonth[i]);
+
+
 
 		// old way of getting number of hour
 		// var tmpSplit = elems.textMonth[i].textContent.split('(')[1].split(')')[0].split('h');
@@ -485,7 +575,6 @@ function waitForLogTimesChartToLoad(ltSvg) {
 	const ltDays = ltSvg.getElementsByTagName("g");
 	const ltMonths = ltSvg.querySelectorAll("svg > text");
 	if (ltDays.length == 0 || ltMonths.length == 0 || notDublicates(ltMonths)) {
-		// logtimes chart hasn't finished loading yet, try again in 100ms
 		setTimeout(function() {
 			waitForLogTimesChartToLoad(ltSvg);
 		}, 100);
@@ -497,11 +586,10 @@ async function fetchCalendar(elems)
 {
 	const ltSvg = document.getElementById("user-locations");
 
-	if (ltSvg) { // check if logtimes chart is on page
+	if (ltSvg) {
 		waitForLogTimesChartToLoad(ltSvg);
 	}
 	elems.textMonth = ltSvg.querySelectorAll("svg > text");
-	// console.log(elems.textMonth);
 	return ltSvg;
 }
 
@@ -566,28 +654,12 @@ function getNumberOpenDays(numberYear, numberMonth, numberDay) {
 
 // getNumberHourDone();
 
-// var months = {
-// 	// months: 0,
-// 	// nbMonth: 0,
-// }
 async function initLogcash()
 {
 	const elems = {};
 
 	calendar = await fetchCalendar(elems);
-	const months = getInfoMonth(elems);
-
-	// if (data.isHomePage === -1)
-	// {
-	// 	console.log(calendar.parentElement.parentElement.firstElementChild);
-	// 	calendar.parentElement.parentElement.firstElementChild.style.display = "none";
-	// }
-	// else
-	// {
-	// 	console.log("not home page");
-	// 	console.log(calendar.parentElement.parentElement.parentElement.parentElement.firstElementChild);
-	// 	// calendar.parentElement.parentElement.parentElement.firstElementChild.style.display = "none";
-	// }
+	const months = getInfoMonth(elems, calendar);
 
 	init.generateContainerLogcash(elems, months, calendar);
 	calendar.parentElement.insertBefore(elems.containerLogcash, calendar.parentElement.firstChild);
@@ -638,5 +710,4 @@ function startLogcash() {
 	// 	sleep(2000);
 	initLogcash();
 }
-
 startLogcash();
