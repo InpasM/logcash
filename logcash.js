@@ -307,6 +307,7 @@ function mOverProgress(e)
 
 function mOutProgress(e) {
 	elems.sideProgress.style.backgroundColor = months[months.indexArray].progressColor;
+	elems.sideProgress.style.color = "#f2f2f2";
 }
 
 function clickProgress(e) {
@@ -387,14 +388,17 @@ function getInfoMonth(elems) {
 		tmpMonth.nameLong = getMonth(tmpMonth.monthIndex, 1);
 		tmpMonth.nameShort = getMonth(tmpMonth.monthIndex, 0);
 
-		// console.log(elems.textMonth[i].innerHTML);
-		var tmpSplit = elems.textMonth[i].textContent.split('(')[1].split(')')[0].split('h');
-		tmpMonth.nbHourDone = parseInt(tmpSplit[0]);
-		tmpMonth.nbMinDone = parseInt(tmpSplit[1]);
+		// old way of getting number of hour
+		// var tmpSplit = elems.textMonth[i].textContent.split('(')[1].split(')')[0].split('h');
+		// tmpMonth.nbHourDone = parseInt(tmpSplit[0]);
+		// tmpMonth.nbMinDone = parseInt(tmpSplit[1]);
+
+		// tempory hour
+		tmpMonth.nbHourDone = 103;
+		tmpMonth.nbMinDone = 31;
+
 		updateValues(tmpMonth);
 
-		// console.log(tmpMonth.nameLong + " " + tmpMonth.monthIndex + " " + tmpMonth.yearIndex + 
-		// " hourRequired: " + tmpMonth.nbHourReq + " hourDone: " + tmpMonth.nbHourDone + " minDone: " + tmpMonth.nbMinDone);
 		array[indexMonth] = tmpMonth;
 	}
 	return (array);
@@ -491,45 +495,8 @@ async function fetchCalendar(elems)
 		waitForLogTimesChartToLoad(ltSvg);
 	}
 	elems.textMonth = ltSvg.querySelectorAll("svg > text");
-	console.log(elems.textMonth);
+	// console.log(elems.textMonth);
 	return ltSvg;
-}
-
-async function initLogcash()
-{
-	const elems = {};
-
-	calendar = await fetchCalendar(elems);
-	// elems.divLogtime = document.querySelector("svg#user-locations").parentElement;
-	months = getInfoMonth(elems);
-
-	console.log(months);
-
-	// init.generateContainerLogcash(elems);
-	// elems.divLogtime.insertBefore(elems.containerLogcash, elems.divLogtime.firstChild);
-
-	// window.elems = elems;
-	// resizeProgress();
-	// reGenerate(months[months.indexArray], elems);
-	// window.addEventListener("resize", resizeProgress);
-	// initButtons(elems);
-
-	console.log(calendar);
-
-	// setInterval(function() {
-	// 	var tmpHours = months[months.length - 1].nbHourDone;
-	// 	var tmpMinutes = months[months.length - 1].nbMinDone + 1;
-
-	// 	if (tmpMinutes >= 60) {
-	// 		tmpMinutes = 0;
-	// 		tmpHours += 1;
-	// 	}
-	// 	months[months.length - 1].nbHourDone = parseInt(tmpHours);
-	// 	months[months.length - 1].nbMinDone = parseInt(tmpMinutes);
-	// 	if (months.indexArray == months.length - 1)
-	// 		reGenerate(months[months.length - 1], elems);
-	// 		updateValues(months[months.length - 1]);
-	// }, 10000);
 }
 
 var months = {
@@ -597,6 +564,40 @@ function getNumberOpenDays(numberYear, numberMonth, numberDay) {
 // }
 
 // getNumberHourDone();
+
+async function initLogcash()
+{
+	const elems = {};
+
+	calendar = await fetchCalendar(elems);
+	months = getInfoMonth(elems);
+
+	console.log(months);
+
+	init.generateContainerLogcash(elems);
+	calendar.parentElement.insertBefore(elems.containerLogcash, calendar.parentElement.firstChild);
+
+	window.elems = elems;
+	resizeProgress();
+	reGenerate(months[months.indexArray], elems);
+	window.addEventListener("resize", resizeProgress);
+	initButtons(elems);
+
+	// setInterval(function() {
+	// 	var tmpHours = months[months.length - 1].nbHourDone;
+	// 	var tmpMinutes = months[months.length - 1].nbMinDone + 1;
+
+	// 	if (tmpMinutes >= 60) {
+	// 		tmpMinutes = 0;
+	// 		tmpHours += 1;
+	// 	}
+	// 	months[months.length - 1].nbHourDone = parseInt(tmpHours);
+	// 	months[months.length - 1].nbMinDone = parseInt(tmpMinutes);
+	// 	if (months.indexArray == months.length - 1)
+	// 		reGenerate(months[months.length - 1], elems);
+	// 		updateValues(months[months.length - 1]);
+	// }, 10000);
+}
 
 function startLogcash() {
 
