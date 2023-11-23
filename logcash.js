@@ -2,11 +2,18 @@
 function getTitleLogtime()
 {
 	const h4Title = document.querySelectorAll(".profile-title");
+	// const h4Title = document.querySelectorAll("h4");
+
 	for (var i = 0; h4Title[i]; i++)
 	{
-		if (h4Title[i].innerText == "LOGTIME")
+		// console.log(h4Title[i].innerText);
+		if (h4Title[i].innerText === "LOGTIME")
 			return (h4Title[i]);
 	}
+	// setTimeout(function() {
+	// 	getTitleLogtime();
+	// }, 100);
+	// getTitleLogtime();
 }
 
 function getMonth(index, short)
@@ -346,16 +353,16 @@ function getNbUniqueMonth(nodesList) {
 
 function getInfoMonth(elems) {
 
-	months.nbMonth = getNbUniqueMonth(elems.textMonth);
-	displayMessage("number month: " + months.nbMonth);
+	const nbMonth = getNbUniqueMonth(elems.textMonth);
+	displayMessage("number month: " + nbMonth);
 
-	var array = Array(months.nbMonth);
-	array.nbMonth = months.nbMonth;
-	array.indexDisplay = new Date().getMonth(),
-	array.indexArray = months.nbMonth - 1;
-
+	var array = Array(nbMonth);
 	var indexMonth = -1;
-	for (var i = 0; i < months.nbMonth; i++)
+
+	array.nbMonth = nbMonth;
+	array.indexDisplay = new Date().getMonth(),
+	array.indexArray = nbMonth - 1;
+	for (var i = 0; i < nbMonth; i++)
 	{
 		var tmpMonth = {
 			nameLong: "",
@@ -377,13 +384,12 @@ function getInfoMonth(elems) {
 			openDaysSince: 0,
 			openDaysTotal: 0,
 		};
-
 		indexMonth++;
-		tmpMonth.monthIndex -= (months.nbMonth - indexMonth - 1);
+		tmpMonth.monthIndex -= (nbMonth - indexMonth - 1);
 		if (tmpMonth.monthIndex < 0)
 		{
 			tmpMonth.yearIndex--;
-			tmpMonth.monthIndex = 12 - (months.nbMonth - indexMonth - 1);
+			tmpMonth.monthIndex = 12 - (nbMonth - indexMonth - 1);
 		}
 		tmpMonth.nameLong = getMonth(tmpMonth.monthIndex, 1);
 		tmpMonth.nameShort = getMonth(tmpMonth.monthIndex, 0);
@@ -499,11 +505,6 @@ async function fetchCalendar(elems)
 	return ltSvg;
 }
 
-var months = {
-	// months: 0,
-	// nbMonth: 0,
-}
-
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -565,19 +566,34 @@ function getNumberOpenDays(numberYear, numberMonth, numberDay) {
 
 // getNumberHourDone();
 
+// var months = {
+// 	// months: 0,
+// 	// nbMonth: 0,
+// }
 async function initLogcash()
 {
 	const elems = {};
 
 	calendar = await fetchCalendar(elems);
-	months = getInfoMonth(elems);
+	const months = getInfoMonth(elems);
 
-	console.log(months);
+	// if (data.isHomePage === -1)
+	// {
+	// 	console.log(calendar.parentElement.parentElement.firstElementChild);
+	// 	calendar.parentElement.parentElement.firstElementChild.style.display = "none";
+	// }
+	// else
+	// {
+	// 	console.log("not home page");
+	// 	console.log(calendar.parentElement.parentElement.parentElement.parentElement.firstElementChild);
+	// 	// calendar.parentElement.parentElement.parentElement.firstElementChild.style.display = "none";
+	// }
 
-	init.generateContainerLogcash(elems);
+	init.generateContainerLogcash(elems, months, calendar);
 	calendar.parentElement.insertBefore(elems.containerLogcash, calendar.parentElement.firstChild);
 
 	window.elems = elems;
+	window.months = months;
 	resizeProgress();
 	reGenerate(months[months.indexArray], elems);
 	window.addEventListener("resize", resizeProgress);
@@ -609,7 +625,7 @@ async function initLogcash()
 function startLogcash() {
 
 	data.init();
-	displayMessage(data.student.pseudo + " found in storage");
+	// displayMessage(data.student.pseudo + " found in storage");
 	if (window.location.href.indexOf("logcash.html") !== -1)
 	{
 		var refreshButton = document.querySelector(".dev-refresh");
