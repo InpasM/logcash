@@ -180,6 +180,7 @@ function getNumberHourDone(month)
 	var tmpMinutes = 0;
 	var i = -1;
 
+	console.log(calendar);
 	while (calendar.elems[++i])
 	{
 		if (!calendar.elems[i].firstElementChild)
@@ -485,10 +486,13 @@ function waitForLogTimesChartToLoad(ltSvg) {
 async function fetchCalendar(elems)
 {
 	const ltSvg = document.getElementById("user-locations");
+
 	if (ltSvg) { // check if logtimes chart is on page
 		waitForLogTimesChartToLoad(ltSvg);
 	}
 	elems.textMonth = ltSvg.querySelectorAll("svg > text");
+	console.log(elems.textMonth);
+	return ltSvg;
 }
 
 async function initLogcash()
@@ -496,33 +500,36 @@ async function initLogcash()
 	const elems = {};
 
 	calendar = await fetchCalendar(elems);
-	elems.divLogtime = document.querySelector("svg#user-locations").parentElement;
+	// elems.divLogtime = document.querySelector("svg#user-locations").parentElement;
 	months = getInfoMonth(elems);
 
-	init.generateContainerLogcash(elems);
-	elems.divLogtime.insertBefore(elems.containerLogcash, elems.divLogtime.firstChild);
+	console.log(months);
 
-	window.elems = elems;
-	resizeProgress();
-	reGenerate(months[months.indexArray], elems);
-	window.addEventListener("resize", resizeProgress);
-	initButtons(elems);
+	// init.generateContainerLogcash(elems);
+	// elems.divLogtime.insertBefore(elems.containerLogcash, elems.divLogtime.firstChild);
 
-	setInterval(function() {
+	// window.elems = elems;
+	// resizeProgress();
+	// reGenerate(months[months.indexArray], elems);
+	// window.addEventListener("resize", resizeProgress);
+	// initButtons(elems);
 
-		var tmpHours = months[months.length - 1].nbHourDone;
-		var tmpMinutes = months[months.length - 1].nbMinDone + 1;
+	console.log(calendar);
 
-		if (tmpMinutes >= 60) {
-			tmpMinutes = 0;
-			tmpHours += 1;
-		}
-		months[months.length - 1].nbHourDone = parseInt(tmpHours);
-		months[months.length - 1].nbMinDone = parseInt(tmpMinutes);
-		if (months.indexArray == months.length - 1)
-			reGenerate(months[months.length - 1], elems);
-			updateValues(months[months.length - 1]);
-	}, 10000);
+	// setInterval(function() {
+	// 	var tmpHours = months[months.length - 1].nbHourDone;
+	// 	var tmpMinutes = months[months.length - 1].nbMinDone + 1;
+
+	// 	if (tmpMinutes >= 60) {
+	// 		tmpMinutes = 0;
+	// 		tmpHours += 1;
+	// 	}
+	// 	months[months.length - 1].nbHourDone = parseInt(tmpHours);
+	// 	months[months.length - 1].nbMinDone = parseInt(tmpMinutes);
+	// 	if (months.indexArray == months.length - 1)
+	// 		reGenerate(months[months.length - 1], elems);
+	// 		updateValues(months[months.length - 1]);
+	// }, 10000);
 }
 
 var months = {
@@ -532,28 +539,6 @@ var months = {
 
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-var isDev = false;
-async function delayedInit() {
-
-	if (!isDev)
-	{
-		await sleep(2000);
-	}
-	else
-	{
-		await sleep(500);
-		var refreshButton = document.querySelector(".dev-refresh");
-
-		if (refreshButton)
-		{
-			refreshButton.addEventListener("click", function() {
-				location.reload();
-			});
-		}
-	}
-	initLogcash();
 }
 
 function displayMessage(message) {
@@ -611,8 +596,23 @@ function getNumberOpenDays(numberYear, numberMonth, numberDay) {
 // 	displayMessage(listMonth[i] + ":  Open day since: " + openDays[0] + "   Open day total: " + openDays[1]);
 // }
 
-data.init();
+// getNumberHourDone();
 
-displayMessage(data.student.pseudo + " found in storage");
+function startLogcash() {
 
-delayedInit();
+	data.init();
+	displayMessage(data.student.pseudo + " found in storage");
+	if (window.location.href.indexOf("logcash.html") !== -1)
+	{
+		var refreshButton = document.querySelector(".dev-refresh");
+
+		refreshButton.addEventListener("click", function() {
+			location.reload();
+		});
+	}
+	// else
+	// 	sleep(2000);
+	initLogcash();
+}
+
+startLogcash();
