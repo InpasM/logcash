@@ -157,6 +157,8 @@ body
 	box-shadow: 0px 10px 20px #12141a3a; */
 	/* background-color: #f4f4f4; */
 	/* background-color: #191919d2; */
+	flex-direction: column;
+
 }
 
 .popup-top-div {
@@ -206,6 +208,77 @@ body
 	background-color: #1b1e25;
 	color: #e2e2e2;
 }
+
+.pop-bottom-div {
+	/* background-color: red; */
+	/* width: 100%; */
+	/* flex: 1; */
+	/* height: 100%; */
+	padding: 7px;
+	display: flex;
+}
+
+.pop-bottom-div-left {
+	/* background-color: orange; */
+	display: flex;
+	/* width: 220px; */
+	height: 100%;
+	border-right: 1px solid rgb(45, 49, 60);
+}
+
+.pop-bottom-div-right {
+	background-color: grey;
+	width: 100px;
+	/* height: 100%; */
+}
+
+.pop-input {
+	background-color: #313c48;
+	height: 20px;
+	width: 80px;
+	/* padding: 0; */
+	padding: 6px;
+	color: white;
+	
+	/* line-height: 1.42; */
+	border: 1px solid #4b4b4b;
+	border-radius: 6px;
+	margin-right: 7px;
+	/* display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-evenly; */
+}
+
+.inputText, .inputText:focus {
+	background-color: #313c48;
+	/* font-size: 0.6em; */
+	color: white;
+	outline: none;
+	border: none;
+	width: 100%;
+	position: relative;
+	top: 4px;
+}
+
+input:focus ~ .floating-label,
+input:not(:focus):valid ~ .floating-label {
+	top: -30px;
+	font-size: 0.5em;
+	opacity: 1;
+  }
+
+.floating-label {
+	position: relative;
+	pointer-events: none;
+	color: rgb(122, 122, 122);
+	font-size: 1.2em;
+	font-size: 0.7em;
+	top: -18px;
+	white-space: nowrap;
+	transition: 0.2s ease all;
+  }
+
 /*------------------------------------------------------------------------------*/
 
 

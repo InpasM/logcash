@@ -40,7 +40,7 @@ popup.setStyle = function(elems) {
 	elems.popupRemaining.style.display = "flex";
 	elems.popupRemaining.style.position = "absolute";
 	elems.popupRemaining.style.height = "100px";
-	elems.popupRemaining.style.width = "fit-content";
+	// elems.popupRemaining.style.width = "fit-content";
 	elems.popupRemaining.style.borderRadius = "4px";
 	elems.popupRemaining.style.zIndex = "1000";
 	elems.popupRemaining.style.backgroundColor = "#252932";
@@ -52,7 +52,7 @@ popup.setStyle = function(elems) {
 	
 	elems.popupTopDiv.style.cursor = "move";
 	elems.popupTopDiv.style.height = "fit-content";
-	elems.popupTopDiv.style.width = "100%";
+	// elems.popupTopDiv.style.width = "100%";
 	elems.popupTopDiv.style.borderRadius = "4px";
 	elems.popupTopDiv.style.borderBottom = "1px solid #2d313c";
 	elems.popupTopDiv.style.display = "flex";
