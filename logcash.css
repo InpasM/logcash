@@ -220,10 +220,14 @@ body
 
 .pop-bottom-div-left {
 	/* background-color: orange; */
-	display: flex;
+	/* display: flex; */
 	/* width: 220px; */
 	height: 100%;
 	border-right: 1px solid rgb(45, 49, 60);
+}
+
+.bottom-line-1, .bottom-line-2 {
+	display: flex;
 }
 
 .pop-bottom-div-right {
@@ -272,12 +276,37 @@ input:not(:focus):valid ~ .floating-label {
 	position: relative;
 	pointer-events: none;
 	color: rgb(122, 122, 122);
-	font-size: 1.2em;
 	font-size: 0.7em;
 	top: -18px;
 	white-space: nowrap;
 	transition: 0.2s ease all;
   }
+
+  .bottom-line-2 {
+	/* background-color: red; */
+	margin: 7px 7px 0 0;
+	border-top: 1px solid #4b4b4b;
+  }
+
+.weekly-habit {
+	width: 100%;
+	padding: 5px 5px 0 0;
+	font-size: 0.7em;
+	color: rgb(122, 122, 122);
+}
+
+.weekly-habit span {
+	margin-left: 6px;
+	/* margin-bottom: 6px; */
+	/* margin: 0 7px 7px 7px; */
+}
+
+.line-habit {
+	margin-top: 6px;
+	/* background-color: red; */
+	height: 20px;
+	/* width: 100%; */
+}
 
 /*------------------------------------------------------------------------------*/
 
