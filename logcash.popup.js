@@ -1,6 +1,30 @@
 
 window.popup = window.popup || {};
 
+popup.createElems = function(elems) {
+
+	elems.popupRemaining = document.createElement("div");
+	elems.popupRemaining.className = "popup-remaining";
+
+	elems.popupTopDiv = document.createElement("div");
+	elems.popupTopDiv.className = "popup-top-div";
+	
+	elems.popupTopLeftText = document.createElement("p");
+	elems.popupTopLeftText.className = "popup-top-left-text";
+	elems.popupTopLeftText.innerText = "Logcash";
+
+	elems.popupTopRightText = document.createElement("p");
+	elems.popupTopRightText.className = "popup-top-right-text";
+	// elems.popupTopRightText.innerText = "msapin";
+
+	elems.popupRemaining.appendChild(elems.popupTopDiv);
+	elems.popupTopDiv.appendChild(elems.popupTopLeftText);
+	elems.popupTopDiv.appendChild(elems.popupTopRightText);
+	
+	// console.log(elems.popupRemaining);
+	document.body.appendChild(elems.popupRemaining);
+}
+
 function disableTextSelection() {
 
 	document.body.style.MozUserSelect = "none";
@@ -23,7 +47,7 @@ popup.setStyle = function(elems) {
 	elems.popupRemaining.style.border = "1px solid #2d313c";
 	elems.popupRemaining.style.boxShadow = "0px 10px 15px #12141a3a";
 
-	elems.popupRemaining.style.top = "80px"; // remove
+	elems.popupRemaining.style.top = "60px"; // remove
 	elems.popupRemaining.style.left = "20px"; // remove
 	
 	elems.popupTopDiv.style.cursor = "move";
@@ -48,6 +72,7 @@ popup.setStyle = function(elems) {
 	
 	// elems.popupTopRightText.style.color = "#9b9b9b";
 	elems.popupTopRightText.style.fontSize = "0.7em";
+	
 	// elems.popupTopRightText.style.margin = "0";
 	// elems.popupTopRightText.style.padding = "2px 1px 2px 2px";
 	// elems.popupTopRightText.style.pointerEvents = "none";
@@ -55,11 +80,19 @@ popup.setStyle = function(elems) {
 	elems.popupTopRightText.style.textShadow = "rgb(0, 0, 0) 0px 0px 3px";
 }
 
+function setData(elems) {
+
+	elems.popupTopRightText.innerText = data.student.pseudo;
+}
+
 popup.initPopup = function(elems) {
 
 	var mouseDown = false,
 		popupOffset = [0, 0];
 
+	popup.createElems(elems);
+	popup.setStyle(elems);
+	setData(elems);
 	disableTextSelection();
 	elems.popupTopDiv.addEventListener("mousedown", function(e) {
 		mouseDown = true;

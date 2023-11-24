@@ -4,28 +4,28 @@ const htmlElems = {};
 window.htmlElems = htmlElems;
 window.init = window.init || {};
 
-function initPopup(elems) {
+// function initPopup(elems) {
 
-	elems.popupRemaining = document.createElement("div");
-	elems.popupRemaining.className = "popup-remaining";
+// 	elems.popupRemaining = document.createElement("div");
+// 	elems.popupRemaining.className = "popup-remaining";
 
-	elems.popupTopDiv = document.createElement("div");
-	elems.popupTopDiv.className = "popup-top-div";
+// 	elems.popupTopDiv = document.createElement("div");
+// 	elems.popupTopDiv.className = "popup-top-div";
 	
-	elems.popupTopLeftText = document.createElement("p");
-	elems.popupTopLeftText.className = "popup-top-left-text";
-	elems.popupTopLeftText.innerText = "Logcash";
+// 	elems.popupTopLeftText = document.createElement("p");
+// 	elems.popupTopLeftText.className = "popup-top-left-text";
+// 	elems.popupTopLeftText.innerText = "Logcash";
 
-	elems.popupTopRightText = document.createElement("p");
-	elems.popupTopRightText.className = "popup-top-right-text";
-	elems.popupTopRightText.innerText = "msapin";
+// 	elems.popupTopRightText = document.createElement("p");
+// 	elems.popupTopRightText.className = "popup-top-right-text";
+// 	// elems.popupTopRightText.innerText = "msapin";
 
-	elems.popupRemaining.appendChild(elems.popupTopDiv);
-	elems.popupTopDiv.appendChild(elems.popupTopLeftText);
-	elems.popupTopDiv.appendChild(elems.popupTopRightText);
+// 	elems.popupRemaining.appendChild(elems.popupTopDiv);
+// 	elems.popupTopDiv.appendChild(elems.popupTopLeftText);
+// 	elems.popupTopDiv.appendChild(elems.popupTopRightText);
 	
-	document.body.appendChild(elems.popupRemaining);
-}
+// 	document.body.appendChild(elems.popupRemaining);
+// }
 
 function initContainerLogcash(elems) {
 
@@ -44,7 +44,7 @@ function initContainerLogcash(elems) {
 	elems.sideProgress = document.createElement("div");
 	elems.sideProgress.className = "side-progress";
 
-	initPopup(elems);
+	// initPopup(elems);
 
 	elems.sideRemaining = document.createElement("div");
 	elems.sideRemaining.className = "side-remaining";
@@ -137,8 +137,6 @@ function setStyle(elems) {
 	elems.textRemaining.style.margin = "0";
 	elems.textRemaining.style.color = "#8d8e8e";
 	elems.textRemaining.style.pointerEvents = "none";
-
-	popup.setStyle(elems);
 }
 
 init.generateContainerLogcash = function(elems, months, calendar) {
@@ -147,4 +145,5 @@ init.generateContainerLogcash = function(elems, months, calendar) {
 	initContainerLogcash(elems);
 	initDivMonths(elems, months);
 	setStyle(elems);
+	popup.initPopup(elems);
 }
