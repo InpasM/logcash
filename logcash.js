@@ -2,18 +2,12 @@
 function getTitleLogtime()
 {
 	const h4Title = document.querySelectorAll(".profile-title");
-	// const h4Title = document.querySelectorAll("h4");
 
 	for (var i = 0; h4Title[i]; i++)
 	{
-		// console.log(h4Title[i].innerText);
 		if (h4Title[i].innerText === "LOGTIME")
 			return (h4Title[i]);
 	}
-	// setTimeout(function() {
-	// 	getTitleLogtime();
-	// }, 100);
-	// getTitleLogtime();
 }
 
 function getMonth(index, short)
@@ -54,9 +48,6 @@ function updateValues(month)
 function reGenerate(month, elems) {
 
 	var textMonths = document.querySelectorAll(".text-month");
-	// var textProgress = document.querySelector(".text-progress");
-	// var textRemaining = document.querySelector(".text-remaining");
-	// var sideProgress = document.querySelector(".side-progress");
 
 	for (var i = 0; i < months.nbMonth; i++)
 		textMonths[i].innerText = months[i].nameShort;
@@ -356,8 +347,8 @@ function getInfoMonth(elems, calendar) {
 	const nbMonth = getNbUniqueMonth(elems.textMonth);
 	// displayMessage("number month: " + nbMonth);
 
-	// console.log(calendar);
-	const calendarElem = calendar.childNodes;
+	// tests on getting hour reading calendar elements
+	/*const calendarElem = calendar.childNodes;
 
 	const date = new Date();
 	var numberYear = date.getFullYear();
@@ -429,10 +420,10 @@ function getInfoMonth(elems, calendar) {
 		else
 			dateToFound = objMonth.array[indexMonth - 1].lastDay;
 
-		// let elemAttribute = calendarElem[i].getAttribute("data-iidate");
-		let elemAttribute = calendarElem[i].getAttribute("data-original-title");
+		let elemAttribute = calendarElem[i].getAttribute("data-iidate");
+		// let elemAttribute = calendarElem[i].getAttribute("data-original-title");
 
-		console.log(elemAttribute + " === " + dateToFound);
+		// console.log(elemAttribute + " === " + dateToFound);
 		if (elemAttribute === dateToFound)
 		{
 			if (indexMonth === 0)
@@ -445,8 +436,7 @@ function getInfoMonth(elems, calendar) {
 			tmpMonthG.push(calendarElem[i]);
 	}
 	arrayMonthsG = arrayMonthsG.reverse();
-	console.log(arrayMonthsG);
-
+	console.log(arrayMonthsG);*/
 
 	var array = Array(nbMonth);
 	indexMonth = -1;
@@ -468,7 +458,7 @@ function getInfoMonth(elems, calendar) {
 			nbMinDone: 0,
 			nbHourRem: 0,
 			nbMinRem: 0,
-			// salary: 723,
+			salary: 0,
 			cashEarn: 0,
 			time: 0,
 			switchHourCash: 0,
@@ -486,28 +476,21 @@ function getInfoMonth(elems, calendar) {
 		tmpMonth.nameLong = getMonth(tmpMonth.monthIndex, 1);
 		tmpMonth.nameShort = getMonth(tmpMonth.monthIndex, 0);
 
-		// displayMessage("try to get number of hours and minutes done per month");
-		// console.log(elems.textMonth[i]);
+		var tmpSplit = elems.textMonth[i].textContent.split('(')[1].split(')')[0].split('h');
+		tmpMonth.nbHourDone = parseInt(tmpSplit[0]);
+		tmpMonth.nbMinDone = parseInt(tmpSplit[1]);
 
-		// old way of getting number of hour
-		// var tmpSplit = elems.textMonth[i].textContent.split('(')[1].split(')')[0].split('h');
-		// tmpMonth.nbHourDone = parseInt(tmpSplit[0]);
-		// tmpMonth.nbMinDone = parseInt(tmpSplit[1]);
+		// const getHourDone = function(arrayDay, tmpMonth) {
 
-		const getHourDone = function(arrayDay, tmpMonth) {
-
-			// for (var i = 0; i < arrayDay.length; i++)
-			// {
-			// 	console.log(arrayDay[i]);
-				
-			// }
-
-			// tempory hour
-			tmpMonth.nbHourDone = 103;
-			tmpMonth.nbMinDone = 31;
-		}
-
-		getHourDone(arrayMonthsG[i], tmpMonth);
+		// 	// for (var i = 0; i < arrayDay.length; i++)
+		// 	// {
+		// 	// 	console.log(arrayDay[i]);
+		// 	// }
+		// 	// tempory hour
+		// 	tmpMonth.nbHourDone = 103;
+		// 	tmpMonth.nbMinDone = 31;
+		// }
+		// getHourDone(arrayMonthsG[i], tmpMonth);
 		updateValues(tmpMonth);
 
 		array[indexMonth] = tmpMonth;
@@ -553,21 +536,22 @@ function initButtons(elems)
 	elems.divMonths = document.querySelectorAll(".div-month");
 	elems.textMonths = document.querySelectorAll(".text-month");
 
-	elems.sideProgress.addEventListener("mouseover", mOverProgress);
-	elems.sideProgress.addEventListener("mouseout", mOutProgress);
-	elems.sideProgress.addEventListener("click", clickProgress);
+	// console.log(data.student);
+	if (data.student)
+	{
+		elems.sideProgress.addEventListener("mouseover", mOverProgress);
+		elems.sideProgress.addEventListener("mouseout", mOutProgress);
+		elems.sideProgress.addEventListener("click", clickProgress);
+	}
 
-	// sideRemaining.addEventListener("mouseover", mouseOverRemaining);
 	elems.sideRemaining.addEventListener("mouseover", function() {
 		elems.sideRemaining.style.backgroundColor = "rgb(35, 39, 46)";
 	});
-	// sideRemaining.addEventListener("mouseout", mouseOutRemaining);
 	elems.sideRemaining.addEventListener("mouseout", function() {
 		elems.sideRemaining.style.backgroundColor = "";
 	});
 	elems.sideRemaining.addEventListener("click", clickRemaining);
-	popup.initPopup(elems);
-	// elems.popupRemaining.addEventListener("mouseover", mouseOverPopup);
+	// popup.initPopup(elems);
 
 	for (var i = 0; i < months.nbMonth; i++)
 	{
@@ -712,7 +696,9 @@ async function initLogcash()
 function startLogcash() {
 
 	data.init();
-	// displayMessage(data.student.pseudo + " found in storage");
+	
+	// if (data.student)
+	// 	displayMessage(data.student.pseudo + " found in storage");
 	if (window.location.href.indexOf("logcash.html") !== -1)
 	{
 		var refreshButton = document.querySelector(".dev-refresh");
@@ -724,12 +710,12 @@ function startLogcash() {
 	}
 	else
 	{
-		// sleep(20000);
 		setTimeout(function() {
 			initLogcash();
-		}, 2000);
+		}, 1000);
 
 	}
-	// initLogcash();
 }
-startLogcash();
+setTimeout(function() {
+	startLogcash();
+}, 100);

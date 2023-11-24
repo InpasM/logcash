@@ -3,10 +3,10 @@ window.data = window.data || {};
 
 data.init = function() {
 	
-	// localStorage.removeItem("student42");
 	let localStorageStud = localStorage.getItem("student42");
-	data.isHomePage = window.location.href.indexOf("users");
+	data.student = 0;
 
+	data.isHomePage = window.location.href.indexOf("users");
 	if (data.isHomePage === -1)
 	{
 		displayMessage("On personal page");
@@ -15,8 +15,11 @@ data.init = function() {
 		{
 			const login = document.querySelector(".login").innerText;
 
+			data.object = {
+				pseudo: login,
+			}
 			localStorage.setItem("student42", 
-				JSON.stringify({pseudo: login}));
+				JSON.stringify(data.object));
 			displayMessage("student not found in localstorage, check for login: " + login);
 			localStorageStud = localStorage.getItem("student42");
 		}
@@ -24,6 +27,6 @@ data.init = function() {
 	}
 	else
 	{
-		displayMessage("on other intra page");
+		displayMessage("On other intra page");
 	}
 }
