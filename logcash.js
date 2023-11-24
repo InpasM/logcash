@@ -364,85 +364,92 @@ function getInfoMonth(elems, calendar) {
 	var numberMonth = date.getMonth() + 1;
 	var numberDay = date.getDate();
 
-	const objectMonth = {};
+	const objMonth = {
+		actualDate: 0,
+		array: [
+			{},
+			{},
+			{},
+			{}
+		],
+	};
 
-	let actualDate = numberYear + "-";
+	objMonth.actualDate = numberYear + "-";
 	if (numberMonth < 10)
-		actualDate += "0";
-	actualDate += numberMonth + "-";
+		objMonth.actualDate += "0";
+	objMonth.actualDate += numberMonth + "-";
 	if (numberDay < 10)
-		actualDate += "0";
-	actualDate += numberDay;
+		objMonth.actualDate += "0";
+	objMonth.actualDate += numberDay;
 
-	objectMonth.lastDays = [actualDate];
-	// objectMonth.lastDays.push(actualDate);
-
-	--numberMonth;
-	let newDate;
-	if (numberMonth == 1)
+	let tmpFirst, tmpLast, newDateLast;
+	for (var i = 3; i >= 0; i--)
 	{
-		numberMonth = 12;
-		newDate = new Date(--numberYear, numberMonth, 0);
+		if (numberMonth == 1)
+		{
+			numberMonth = 12;
+			newDateLast = new Date(--numberYear, numberMonth, 0);
+		}
+		else
+			newDateLast = new Date(numberYear, numberMonth, 0);
+
+		tmpFirst = numberYear + "-";
+		if (numberMonth < 10)
+			tmpFirst += "0";
+		tmpFirst += numberMonth + "-01";
+		if (i === 3)
+			tmpLast = objMonth.actualDate;
+		else
+		{
+			tmpLast = newDateLast.getFullYear() + "-";
+			if (numberMonth < 10)
+				tmpLast += "0";
+			tmpLast += numberMonth + "-";
+			if (numberDay < 10)
+				tmpLast += "0";
+			tmpLast += newDateLast.getDate();
+		}
+		objMonth.array[i] = {firstDay: tmpFirst, lastDay: tmpLast};
+		--numberMonth;
 	}
-	else
-		newDate = new Date(numberYear, numberMonth, 0);
+	console.log(objMonth.array);
 
-	let previousDay = newDate.getDate();
-	let previousDate = newDate.getFullYear() + "-";
+	let arrayMonthsG = [];
+	let tmpMonthG = [];
+	let indexMonth = 3;
+	let dateToFound;
 
-	if (numberMonth < 10)
-		previousDate += "0";
-	previousDate += numberMonth + "-";
-	if (numberDay < 10)
-		previousDate += "0";
-	previousDate += previousDay;
-
-	// objectMonth.lastDays += previousDate;
-	objectMonth.lastDays.push(previousDate);
-	console.log("previous: " + previousDate);
-
-	const arrayMonthsG = [];
-	const tmpMonthG = [];
 	for (var i = calendarElem.length - 1; i > 0; i--)
 	{
-		console.log(calendarElem[i].getAttribute("data-iidate") + " === " + previousDate);
-		if (calendarElem[i].getAttribute("data-iidate") === previousDate)
-		{
-			if (objectMonth.lastDays.length === 4)
-				break;
-			console.log("next month " + previousDate);
-
-			--numberMonth;
-			if (numberMonth == 1)
-			{
-				numberMonth = 12;
-				newDate = new Date(--numberYear, numberMonth, 0);
-			}
-			else
-				newDate = new Date(numberYear, numberMonth, 0);
-		
-			previousDay = newDate.getDate();
-			previousDate = newDate.getFullYear() + "-";
-		
-			if (numberMonth < 10)
-				previousDate += "0";
-			previousDate += numberMonth + "-";
-			if (numberDay < 10)
-				previousDate += "0";
-			previousDate += previousDay;
-			objectMonth.lastDays.push(previousDate);
-			arrayMonthsG.push(tmpMonthG);
-		}
-		tmpMonthG.push(calendarElem[i]);
-		// if (calendarElem[i].getAttribute("data-iidate") === actualDate)
-		// 	console.log(actualDate + " found!");
 		// console.log(calendarElem[i]);
+		if (indexMonth === -1)
+			break;
+		if (indexMonth === 0)
+			dateToFound = objMonth.array[indexMonth].firstDay;
+		else
+			dateToFound = objMonth.array[indexMonth - 1].lastDay;
 
+		// let elemAttribute = calendarElem[i].getAttribute("data-iidate");
+		let elemAttribute = calendarElem[i].getAttribute("data-original-title");
+
+		console.log(elemAttribute + " === " + dateToFound);
+		if (elemAttribute === dateToFound)
+		{
+			if (indexMonth === 0)
+				tmpMonthG.push(calendarElem[i]);
+			arrayMonthsG.push(tmpMonthG);
+			tmpMonthG = [];
+			--indexMonth;
+		}
+		if (calendarElem[i].getAttribute("data-iidate"))
+			tmpMonthG.push(calendarElem[i]);
 	}
+	arrayMonthsG = arrayMonthsG.reverse();
 	console.log(arrayMonthsG);
 
+
 	var array = Array(nbMonth);
-	var indexMonth = -1;
+	indexMonth = -1;
 
 	array.nbMonth = nbMonth;
 	array.indexDisplay = new Date().getMonth(),
@@ -482,17 +489,25 @@ function getInfoMonth(elems, calendar) {
 		// displayMessage("try to get number of hours and minutes done per month");
 		// console.log(elems.textMonth[i]);
 
-
-
 		// old way of getting number of hour
 		// var tmpSplit = elems.textMonth[i].textContent.split('(')[1].split(')')[0].split('h');
 		// tmpMonth.nbHourDone = parseInt(tmpSplit[0]);
 		// tmpMonth.nbMinDone = parseInt(tmpSplit[1]);
 
-		// tempory hour
-		tmpMonth.nbHourDone = 103;
-		tmpMonth.nbMinDone = 31;
+		const getHourDone = function(arrayDay, tmpMonth) {
 
+			// for (var i = 0; i < arrayDay.length; i++)
+			// {
+			// 	console.log(arrayDay[i]);
+				
+			// }
+
+			// tempory hour
+			tmpMonth.nbHourDone = 103;
+			tmpMonth.nbMinDone = 31;
+		}
+
+		getHourDone(arrayMonthsG[i], tmpMonth);
 		updateValues(tmpMonth);
 
 		array[indexMonth] = tmpMonth;
@@ -705,9 +720,16 @@ function startLogcash() {
 		refreshButton.addEventListener("click", function() {
 			location.reload();
 		});
+		initLogcash();
 	}
-	// else
-	// 	sleep(2000);
-	initLogcash();
+	else
+	{
+		// sleep(20000);
+		setTimeout(function() {
+			initLogcash();
+		}, 2000);
+
+	}
+	// initLogcash();
 }
 startLogcash();
