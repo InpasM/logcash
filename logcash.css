@@ -225,30 +225,32 @@ body
 	display: flex;
 }
 
-.pop-bottom-div-right {
-	background-color: grey;
-	padding-left: 7px;
-	width: 100px;
-}
-
 .pop-input {
 	background-color: #313c48;
-	height: 20px;
-	width: 80px;
+	/* background-color: red; */
+	height: 18px;
+	width: 70px;
 	padding: 6px;
 	color: white;
-	border: 1px solid #4b4b4b;
+	border: 2px solid rgb(45, 49, 60);
 	border-radius: 6px;
 }
 
 .inputText, .inputText:focus {
 	background-color: #313c48;
-	color: white;
+	/* color: white; */
 	outline: none;
 	border: none;
 	width: 100%;
 	position: relative;
 	top: 4px;
+	left: -2px;
+}
+
+.pop-input:focus-within {
+	border: 2px solid rgb(78, 85, 101);
+	/* height: 18px;
+	width: 78px; */
 }
 
 input:focus ~ .floating-label,
@@ -262,23 +264,23 @@ input:not(:focus):valid ~ .floating-label {
 	position: relative;
 	pointer-events: none;
 	color: rgb(122, 122, 122);
-	font-size: 0.7em;
-	top: -18px;
+	font-size: 0.6em;
+	top: -16px;
 	white-space: nowrap;
 	transition: 0.2s ease all;
   }
 
-  .bottom-line-2 {
+.bottom-line-2 {
 	width: 100%;
 	margin: 7px 7px 0 0;
-	border-top: 1px solid #4b4b4b;
-  }
+	border-top: 1px solid rgb(45, 49, 60);
+}
 
 .weekly-habit {
 	width: 100%;
 	padding: 5px 5px 0 0;
 	font-size: 0.7em;
-	color: rgb(122, 122, 122);
+	color: rgb(155, 155, 155);
 }
 
 .weekly-habit span {
@@ -286,8 +288,58 @@ input:not(:focus):valid ~ .floating-label {
 }
 
 .line-habit {
-	margin-top: 6px;
-	height: 20px;
+	/* background-color: orange; */
+	margin-top: 10px;
+	display: flex;
+	/* padding: 0 4px; */
+	/* height: 20px; */
+}
+
+.checkbox-habit {
+	background-color: #313c48;
+	color: rgb(198, 198, 198);
+	width: 16px;
+	height: 16px;
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	/* font-size: 0.9em; */
+	font-size: 8px;
+	font-weight: bold;
+	margin: 0 1px;
+	border: 2px solid rgb(45, 49, 60);
+}
+
+.pop-bottom-div-right {
+	/* background-color: grey; */
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	padding-left: 7px;
+	width: 125px;
+}
+
+.div-info {
+	/* background-color: red; */
+	margin: 2px 2px 2px 0;
+	display: flex;
+	justify-content: space-between;
+}
+
+.title-info {
+	color: rgb(155, 155, 155);
+	margin: 0;
+	padding: 0;
+	font-size: 0.7em;
+}
+
+.p-open-day-result {
+	color: aliceblue;
+	margin: 0;
+	padding: 0;
+	font-size: 0.7em;
 }
 
 /*------------------------------------------------------------------------------*/
