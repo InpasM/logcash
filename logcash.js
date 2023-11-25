@@ -693,6 +693,10 @@ async function initLogcash()
 	}
 }
 
+function setRefreshInterval() {
+	return setInterval(function() {location.reload();}, 5000);
+}
+
 function startLogcash() {
 
 	data.init();
@@ -702,6 +706,24 @@ function startLogcash() {
 	if (window.location.href.indexOf("logcash.html") !== -1)
 	{
 		var refreshButton = document.querySelector(".dev-refresh");
+		var refreshButtonActivator = document.querySelector(".dev-refresh-button");
+		var refreshOn = true;
+		var cycleRefresh = setRefreshInterval();
+
+		refreshButtonActivator.addEventListener("click", function() {
+			if (refreshOn)
+			{
+				refreshButtonActivator.innerText = "REFRESH: OFF";
+				clearInterval(cycleRefresh);
+				refreshOn = false;
+			}
+			else
+			{
+				refreshButtonActivator.innerText = "REFRESH: ON";
+				cycleRefresh = setRefreshInterval();
+				refreshOn = true;
+			}
+		});
 
 		refreshButton.addEventListener("click", function() {
 			location.reload();

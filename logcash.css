@@ -210,18 +210,13 @@ body
 }
 
 .pop-bottom-div {
-	/* background-color: red; */
-	/* width: 100%; */
-	/* flex: 1; */
-	/* height: 100%; */
 	padding: 7px;
 	display: flex;
 }
 
 .pop-bottom-div-left {
 	/* background-color: orange; */
-	/* display: flex; */
-	/* width: 220px; */
+	padding-right: 7px;
 	height: 100%;
 	border-right: 1px solid rgb(45, 49, 60);
 }
@@ -232,31 +227,22 @@ body
 
 .pop-bottom-div-right {
 	background-color: grey;
+	padding-left: 7px;
 	width: 100px;
-	/* height: 100%; */
 }
 
 .pop-input {
 	background-color: #313c48;
 	height: 20px;
 	width: 80px;
-	/* padding: 0; */
 	padding: 6px;
 	color: white;
-	
-	/* line-height: 1.42; */
 	border: 1px solid #4b4b4b;
 	border-radius: 6px;
-	margin-right: 7px;
-	/* display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: space-evenly; */
 }
 
 .inputText, .inputText:focus {
 	background-color: #313c48;
-	/* font-size: 0.6em; */
 	color: white;
 	outline: none;
 	border: none;
@@ -283,7 +269,7 @@ input:not(:focus):valid ~ .floating-label {
   }
 
   .bottom-line-2 {
-	/* background-color: red; */
+	width: 100%;
 	margin: 7px 7px 0 0;
 	border-top: 1px solid #4b4b4b;
   }
@@ -297,15 +283,11 @@ input:not(:focus):valid ~ .floating-label {
 
 .weekly-habit span {
 	margin-left: 6px;
-	/* margin-bottom: 6px; */
-	/* margin: 0 7px 7px 7px; */
 }
 
 .line-habit {
 	margin-top: 6px;
-	/* background-color: red; */
 	height: 20px;
-	/* width: 100%; */
 }
 
 /*------------------------------------------------------------------------------*/
@@ -339,4 +321,15 @@ input:not(:focus):valid ~ .floating-label {
 {
 	justify-content: center;
 	align-items: center;
+}
+
+.dev-refresh-button {
+	position: absolute;
+	width: 120px;
+	right: 10px;
+	top: 10px;
+	padding: 8px 0;
+	background: orange;
+	border-radius: 6px;
+	color: white;
 }
