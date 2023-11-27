@@ -238,7 +238,7 @@ body
 
 .inputText, .inputText:focus {
 	background-color: #313c48;
-	/* color: white; */
+	color: white;
 	outline: none;
 	border: none;
 	width: 100%;

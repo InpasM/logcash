@@ -109,4 +109,16 @@ popup.initPopup = function(elems) {
 	document.body.addEventListener("mouseup", function() {
 		mouseDown = false;
 	})
+
+	// tmp
+	const inputSalary = document.querySelector("#inputSalary");
+	elems.popupRemaining.style.display = "none";
+
+	inputSalary.addEventListener("blur", function(e) {
+		if (isNaN(e.target.value))
+			e.target.value = 0;
+	});
+
+	inputSalary.addEventListener("click", function(e) { this.select(); });
+
 }
