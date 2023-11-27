@@ -110,15 +110,32 @@ popup.initPopup = function(elems) {
 		mouseDown = false;
 	})
 
-	// tmp
-	const inputSalary = document.querySelector("#inputSalary");
-	elems.popupRemaining.style.display = "none";
+	// // tmp
+	// const inputSalary = document.querySelector("#inputSalary");
+	// const inputDeducted = document.querySelector("#inputDeducted");
 
-	inputSalary.addEventListener("blur", function(e) {
-		if (isNaN(e.target.value))
-			e.target.value = 0;
-	});
+	// elems.popupRemaining.style.display = "none";
 
-	inputSalary.addEventListener("click", function(e) { this.select(); });
+	// inputSalary.addEventListener("blur", function(e) {
+	// 	if (isNaN(e.target.value))
+	// 		e.target.value = 0;
+	// 	else
+	// 	{
+	// 		data.object.salary = e.target.value;
+	// 		data.updateLocalStorage();
+	// 	}
+	// });
+
+	// inputDeducted.addEventListener("blur", function(e) {
+	// 	if (isNaN(e.target.value))
+	// 		e.target.value = 0;
+	// 	else
+	// 	{
+	// 		data.object.hoursDeducted = e.target.value;
+	// 		data.updateLocalStorage();
+	// 	}
+	// });
+
+	// inputSalary.addEventListener("click", function(e) { this.select(); });
 
 }
