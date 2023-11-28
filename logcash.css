@@ -332,14 +332,41 @@ input:not(:focus):valid ~ .floating-label {
 	color: rgb(155, 155, 155);
 	margin: 0;
 	padding: 0;
-	font-size: 0.7em;
+	font-size: 0.6em;
 }
+
 
 .p-open-day-result {
 	color: aliceblue;
 	margin: 0;
 	padding: 0;
 	font-size: 0.7em;
+}
+
+.number-days-container {
+	/* background-color: orange; */
+	height: 20px;
+	width: 100%;
+}
+
+.line-number-days {
+	background-color: rgb(60, 60, 184);
+	height: 20px;
+	width: 100%;
+}
+
+.main-title-info {
+	/* background-color: red; */
+	/* text-align: center; */
+	color: rgb(148, 148, 148);
+	margin: 0;
+	padding: 0;
+	font-size: 0.6em;
+}
+
+.line-number-days-left {
+	background-color: grey;
+	flex: 1;
 }
 
 /*------------------------------------------------------------------------------*/
