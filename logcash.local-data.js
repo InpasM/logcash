@@ -9,15 +9,6 @@ data.student = {
 	pseudo: 0,
 	salary: 0,
 	hoursDeducted: 0,
-	// habit: {
-	// 	one:false,
-	// 	two:false,
-	// 	three: false,
-	// 	four: false,
-	// 	five: false,
-	// 	six: false,
-	// 	seven: false
-	// },
 	habit: [false, false, false, false, false, false, false],
 };
 
@@ -42,7 +33,6 @@ data.init = function() {
 			localStorageStud = localStorage.getItem("student42");
 		}
 		data.student = JSON.parse(localStorageStud);
-		// console.log(data.student.pseudo);
 	}
 	else
 	{
