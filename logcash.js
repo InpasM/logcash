@@ -697,6 +697,7 @@ function setRefreshInterval() {
 	return setInterval(function() {location.reload();}, 5000);
 }
 
+let devMode;
 function startLogcash() {
 
 	data.init();
@@ -705,6 +706,7 @@ function startLogcash() {
 	// 	displayMessage(data.student.pseudo + " found in storage");
 	if (window.location.href.indexOf("logcash.html") !== -1)
 	{
+		devMode = true;
 		var refreshButton = document.querySelector(".dev-refresh");
 		var refreshButtonActivator = document.querySelector(".dev-refresh-button");
 		var refreshOn = true;
@@ -732,6 +734,7 @@ function startLogcash() {
 	}
 	else
 	{
+		devMode = false;
 		setTimeout(function() {
 			initLogcash();
 		}, 1000);

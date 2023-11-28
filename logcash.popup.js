@@ -110,32 +110,38 @@ popup.initPopup = function(elems) {
 		mouseDown = false;
 	})
 
-	// // tmp
-	// const inputSalary = document.querySelector("#inputSalary");
-	// const inputDeducted = document.querySelector("#inputDeducted");
+	if (devMode)
+	{
+		// tmp
+		const inputSalary = document.querySelector("#inputSalary");
+		const inputDeducted = document.querySelector("#inputDeducted");
+	
+		elems.popupRemaining.style.display = "none";
 
-	// elems.popupRemaining.style.display = "none";
-
-	// inputSalary.addEventListener("blur", function(e) {
-	// 	if (isNaN(e.target.value))
-	// 		e.target.value = 0;
-	// 	else
-	// 	{
-	// 		data.object.salary = e.target.value;
-	// 		data.updateLocalStorage();
-	// 	}
-	// });
-
-	// inputDeducted.addEventListener("blur", function(e) {
-	// 	if (isNaN(e.target.value))
-	// 		e.target.value = 0;
-	// 	else
-	// 	{
-	// 		data.object.hoursDeducted = e.target.value;
-	// 		data.updateLocalStorage();
-	// 	}
-	// });
-
-	// inputSalary.addEventListener("click", function(e) { this.select(); });
-
+		// put in setStyle
+		inputSalary.value = data.student.salary;
+		inputDeducted.value = data.student.hoursDeducted;
+	
+		inputSalary.addEventListener("blur", function(e) {
+			if (isNaN(e.target.value))
+				e.target.value = 0;
+			else
+			{
+				data.student.salary = e.target.value;
+				data.updateLocalStorage(data.student);
+			}
+		});
+	
+		inputDeducted.addEventListener("blur", function(e) {
+			if (isNaN(e.target.value))
+				e.target.value = 0;
+			else
+			{
+				data.student.hoursDeducted = e.target.value;
+				data.updateLocalStorage(data.student);
+			}
+		});
+	
+		inputSalary.addEventListener("click", function(e) { this.select(); });
+	}
 }
