@@ -238,7 +238,7 @@ body
 
 .inputText, .inputText:focus {
 	background-color: #313c48;
-	color: white;
+	color: rgb(198, 198, 198);
 	outline: none;
 	border: none;
 	width: 100%;
@@ -249,8 +249,6 @@ body
 
 .pop-input:focus-within {
 	border: 2px solid rgb(78, 85, 101);
-	/* height: 18px;
-	width: 78px; */
 }
 
 input:focus ~ .floating-label,
@@ -268,7 +266,7 @@ input:not(:focus):valid ~ .floating-label {
 	top: -16px;
 	white-space: nowrap;
 	transition: 0.2s ease all;
-  }
+}
 
 .bottom-line-2 {
 	width: 100%;
@@ -289,7 +287,7 @@ input:not(:focus):valid ~ .floating-label {
 
 .line-habit {
 	/* background-color: orange; */
-	margin-top: 10px;
+	margin-top: 4px;
 	display: flex;
 	/* padding: 0 4px; */
 	/* height: 20px; */
@@ -349,24 +347,71 @@ input:not(:focus):valid ~ .floating-label {
 	width: 100%;
 }
 
-.line-number-days {
-	background-color: rgb(60, 60, 184);
-	height: 20px;
-	width: 100%;
-}
-
 .main-title-info {
-	/* background-color: red; */
-	/* text-align: center; */
-	color: rgb(148, 148, 148);
+	font-size: 0.7em;
+	color: rgb(155, 155, 155);
+	/* margin: 0 0 0 2px; */
 	margin: 0;
 	padding: 0;
-	font-size: 0.6em;
+}
+
+.line-number-days {
+	/* background-color: rgb(60, 60, 184); */
+	/* height: 20px; */
+	width: 100%;
+	height: fit-content;
+	display: flex;
+	margin-top: 4px;
 }
 
 .line-number-days-left {
-	background-color: grey;
-	flex: 1;
+	display: flex;
+	flex-direction: column;
+	padding-right: 7px;
+	border-right: 1px solid rgb(45, 49, 60);
+}
+
+.line-number-days-right {
+	/* background-color: red; */
+	display: flex;
+	padding-left: 7px;
+	flex-direction: column;
+	/* flex: 1; */
+}
+
+.number-label {
+	/* position: relative; */
+	/* background-color: orange; */
+	pointer-events: none;
+	color: rgb(122, 122, 122);
+	font-size: 0.5em;
+	margin: 0 0 2px 2px;
+	padding: 0;
+	top: -6px;
+	white-space: nowrap;
+	transition: 0.2s ease all;
+}
+
+.number-result {
+	/* font-size: 0.9em; */
+	background-color: #313c48;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: fit-content;
+	padding: 4px 6px 1px 6px;
+	/* padding: 0; */
+	margin: 0;
+	font-size: 0.8em;
+	border-radius: 4px;
+	color: rgb(198, 198, 198);
+	border: 2px solid rgb(45, 49, 60);
+}
+
+.line-separator {
+	background-color: red;
+	width: 2px;
+	height: 100%;
 }
 
 /*------------------------------------------------------------------------------*/
