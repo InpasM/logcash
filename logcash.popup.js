@@ -80,9 +80,85 @@ popup.setStyle = function(elems) {
 	elems.popupTopRightText.style.textShadow = "rgb(0, 0, 0) 0px 0px 3px";
 }
 
+function isCheckboxUse() {
+
+	for (var i = 0; i < data.student.habit.length; i++)
+	{
+		if (data.student.habit[i])
+			return true;
+	}
+	return false;
+}
+
+function getOpenDays(numberYear, numberMonth, numberDay) {
+
+	const numberDaysInMonth = new Date(numberYear, numberMonth + 1, 0).getDate();
+	const todayDate = new Date();
+	var actualDay = todayDate.getDay();
+	var openDays = 0;
+	var totalDays = 0;
+
+	// numberDay = 1;	// tmp
+
+	var i = numberDay - 1;
+	var indexHabit = actualDay - 1;
+	var useAll = isCheckboxUse();
+
+	while (++i <= numberDaysInMonth)
+	{
+		if (indexHabit === 7)
+		{
+			indexHabit = 0;
+		}
+		// console.log("check data for day: " + actualDay);
+		if (actualDay == 7)
+			actualDay = 0;
+		if (actualDay >= 1 && actualDay <= 5)
+		{
+			if (data.student.habit[indexHabit] || !useAll)
+				openDays++;
+		}
+		// console.log(i + " / " + numberDaysInMonth + "  -  habit: " + data.student.habit[indexHabit]);
+		if (data.student.habit[indexHabit] || !useAll)
+		{
+			totalDays++;
+		}
+		
+		indexHabit++;
+		actualDay++;
+	}
+	return ({open: openDays, total: totalDays});
+}
+
 function setData(elems) {
 
 	elems.popupTopRightText.innerText = data.student.pseudo;
+
+
+	// TMP
+	const checkboxes = document.querySelectorAll(".checkbox-habit");
+	for (var i = 0; i < checkboxes.length; i++)
+	{
+
+		if (data.student.habit[i])
+		{
+			checkboxes[i].style.borderColor = "rgb(0, 186, 188)";
+		}
+		else
+		{
+			checkboxes[i].style.borderColor = "rgb(45, 49, 60)";
+		}
+		// data.updateLocalStorage(data.student);
+	}
+
+	const date = new Date();
+	var numberYear = date.getFullYear();
+	var numberMonth = date.getMonth();
+	var numberDay = date.getDate();
+
+	var numberDays = getOpenDays(numberYear, numberMonth, numberDay);
+
+	console.log("Number total day remaining: " + numberDays.total + "  -  Number open day: " + numberDays.open);
 }
 
 popup.initPopup = function(elems) {
@@ -115,6 +191,7 @@ popup.initPopup = function(elems) {
 		// tmp
 		const inputSalary = document.querySelector("#inputSalary");
 		const inputDeducted = document.querySelector("#inputDeducted");
+		const checkboxes = document.querySelectorAll(".checkbox-habit");
 	
 		elems.popupRemaining.style.display = "none";
 
@@ -141,7 +218,30 @@ popup.initPopup = function(elems) {
 				data.updateLocalStorage(data.student);
 			}
 		});
-	
+
+		for (var i = 0; i < checkboxes.length; i++)
+		{
+			checkboxes[i].addEventListener("click", function(e) {
+
+				const index = parseInt(e.target.id);
+
+				// console.log(data.student.habit[parseInt(e.target.id)]);
+				// console.log(data.student.habit.one);
+
+				if (data.student.habit[index])
+				{
+					data.student.habit[index] = false;
+					e.target.style.borderColor = "rgb(45, 49, 60)";
+				}
+				else
+				{
+					data.student.habit[index] = true;
+					e.target.style.borderColor = "rgb(0, 186, 188)";
+				}
+				data.updateLocalStorage(data.student);
+			});
+		}
 		inputSalary.addEventListener("click", function(e) { this.select(); });
+		inputDeducted.addEventListener("click", function(e) { this.select(); });
 	}
 }
