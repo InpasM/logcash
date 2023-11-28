@@ -43,12 +43,14 @@ popup.setStyle = function(elems) {
 	// elems.popupRemaining.style.width = "fit-content";
 	elems.popupRemaining.style.borderRadius = "4px";
 	elems.popupRemaining.style.zIndex = "1000";
-	elems.popupRemaining.style.backgroundColor = "#252932";
+	// elems.popupRemaining.style.backgroundColor = "#252932";
+	elems.popupRemaining.style.backgroundColor = "rgba(37, 41, 50, 0.8)";
 	elems.popupRemaining.style.border = "1px solid #2d313c";
 	elems.popupRemaining.style.boxShadow = "0px 10px 15px #12141a3a";
+	elems.popupRemaining.style.backdropFilter = "blur(6px)";
 
-	elems.popupRemaining.style.top = "60px"; // remove
-	elems.popupRemaining.style.left = "20px"; // remove
+	elems.popupRemaining.style.top = "80px"; // remove
+	elems.popupRemaining.style.right = "40px"; // remove
 	
 	elems.popupTopDiv.style.cursor = "move";
 	elems.popupTopDiv.style.height = "fit-content";
@@ -134,31 +136,35 @@ function setData(elems) {
 
 	elems.popupTopRightText.innerText = data.student.pseudo;
 
+	// // TMP
+	// const checkboxes = document.querySelectorAll(".checkbox-habit");
+	// for (var i = 0; i < checkboxes.length; i++)
+	// {
 
-	// TMP
-	const checkboxes = document.querySelectorAll(".checkbox-habit");
-	for (var i = 0; i < checkboxes.length; i++)
-	{
+	// 	if (data.student.habit[i])
+	// 	{
+	// 		checkboxes[i].style.borderColor = "rgb(0, 186, 188)";
+	// 	}
+	// 	else
+	// 	{
+	// 		checkboxes[i].style.borderColor = "rgb(45, 49, 60)";
+	// 	}
+	// 	// data.updateLocalStorage(data.student);
+	// }
 
-		if (data.student.habit[i])
-		{
-			checkboxes[i].style.borderColor = "rgb(0, 186, 188)";
-		}
-		else
-		{
-			checkboxes[i].style.borderColor = "rgb(45, 49, 60)";
-		}
-		// data.updateLocalStorage(data.student);
-	}
+	// const date = new Date();
+	// var numberYear = date.getFullYear();
+	// var numberMonth = date.getMonth();
+	// var numberDay = date.getDate();
 
-	const date = new Date();
-	var numberYear = date.getFullYear();
-	var numberMonth = date.getMonth();
-	var numberDay = date.getDate();
+	// var numberDays = getOpenDays(numberYear, numberMonth, numberDay);
 
-	var numberDays = getOpenDays(numberYear, numberMonth, numberDay);
+	// const resultOpen = document.querySelector("#result-open");
+	// const resultTotal = document.querySelector("#result-total");
+	// resultOpen.innerText = numberDays.open;
+	// resultTotal.innerText = numberDays.total;
 
-	console.log("Number total day remaining: " + numberDays.total + "  -  Number open day: " + numberDays.open);
+	// console.log("Number total day remaining: " + numberDays.total + "  -  Number open day: " + numberDays.open);
 }
 
 popup.initPopup = function(elems) {
@@ -193,7 +199,7 @@ popup.initPopup = function(elems) {
 		const inputDeducted = document.querySelector("#inputDeducted");
 		const checkboxes = document.querySelectorAll(".checkbox-habit");
 	
-		elems.popupRemaining.style.display = "none";
+		// elems.popupRemaining.style.display = "none";
 
 		// put in setStyle
 		inputSalary.value = data.student.salary;
