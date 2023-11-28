@@ -157,6 +157,7 @@ body
 	box-shadow: 0px 10px 20px #12141a3a; */
 	/* background-color: #f4f4f4; */
 	/* background-color: #191919d2; */
+	background-color: red;
 	flex-direction: column;
 
 }
@@ -341,10 +342,11 @@ input:not(:focus):valid ~ .floating-label {
 	font-size: 0.7em;
 }
 
-.number-days-container {
+.results-container {
 	/* background-color: orange; */
-	height: 20px;
+	/* height: 20px; */
 	width: 100%;
+	margin-bottom: 8px;
 }
 
 .main-title-info {
@@ -355,7 +357,7 @@ input:not(:focus):valid ~ .floating-label {
 	padding: 0;
 }
 
-.line-number-days {
+.line-results {
 	/* background-color: rgb(60, 60, 184); */
 	/* height: 20px; */
 	width: 100%;
@@ -364,14 +366,14 @@ input:not(:focus):valid ~ .floating-label {
 	margin-top: 4px;
 }
 
-.line-number-days-left {
+.line-results-left {
 	display: flex;
 	flex-direction: column;
 	padding-right: 7px;
 	border-right: 1px solid rgb(45, 49, 60);
 }
 
-.line-number-days-right {
+.line-results-right {
 	/* background-color: red; */
 	display: flex;
 	padding-left: 7px;
@@ -398,7 +400,8 @@ input:not(:focus):valid ~ .floating-label {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: fit-content;
+	/* width: fit-content; */
+	min-width: 25px;
 	padding: 4px 6px 1px 6px;
 	/* padding: 0; */
 	margin: 0;
