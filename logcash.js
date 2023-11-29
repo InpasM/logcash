@@ -301,6 +301,9 @@ function mOverProgress(e)
 		var newColor = tmpSplit[0] + " " + tmpSplit[1] + tmpSplit[2] + " " + (parseFloat(newAlpha) + 0.1) + ")";
 	elems.sideProgress.style.backgroundColor = newColor;
 	elems.sideProgress.style.color = "white";
+
+	if (months[months.indexArray].percent >= 100)
+		displayMessage("Money full display option button");
 }
 
 function mOutProgress(e) {
