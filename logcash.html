@@ -12,18 +12,18 @@
 	<body>
 		<button class="dev-refresh-button">REFRESH: ON</button>
 
-		<!-- <div class="popup-remaining" style="opacity: 1; display: flex; position: absolute; border-radius: 4px; z-index: 1000; background-color: rgba(37, 41, 50, 0.8); border: 1px solid rgb(45, 49, 60); box-shadow: rgba(18, 20, 26, 0.227) 0px 10px 15px; top: 60px; left: 20px; backdrop-filter: blur(6px);"> -->
+		<div class="popup-remaining" style="opacity: 1; display: flex; position: absolute; border-radius: 4px; z-index: 1000; background-color: rgba(37, 41, 50, 0.8); border: 1px solid rgb(45, 49, 60); box-shadow: rgba(18, 20, 26, 0.227) 0px 10px 15px; top: 60px; left: 20px; backdrop-filter: blur(6px);">
 		<!-- <div class="popup-remaining" style="opacity: 1; display: flex; position: absolute; border-radius: 4px; z-index: 1000; background-color: rgb(37, 41, 50); border: 1px solid rgb(45, 49, 60); box-shadow: rgba(18, 20, 26, 0.227) 0px 10px 15px; top: 60px; left: 20px;"> -->
 
-			<!-- <div class="popup-top-div" style="cursor: move; height: fit-content; border-radius: 4px; border-bottom: 1px solid rgb(45, 49, 60); display: flex; flex-direction: column; justify-content: flex-start; color: rgb(155, 155, 155); white-space: nowrap;">
+			<div class="popup-top-div" style="cursor: move; height: fit-content; border-radius: 4px; border-bottom: 1px solid rgb(45, 49, 60); display: flex; flex-direction: column; justify-content: flex-start; color: rgb(155, 155, 155); white-space: nowrap;">
 				<p class="popup-top-left-text" style="color: rgb(226, 226, 226); font-size: 0.9em; font-weight: bold; pointer-events: none; text-shadow: rgb(0, 0, 0) 0px 0px 3px;">Logcash</p>
 				<p class="popup-top-right-text" style="font-size: 0.7em; text-shadow: rgb(0, 0, 0) 0px 0px 3px;">msapin</p>
-			</div> -->
+			</div>
 
 			<!-- TO ADD -->
-			<!-- <div class="pop-bottom-div">
-				<div class="pop-bottom-div-left">
-					<div class="bottom-line-1">
+			<div class="pop-middle-div">
+				<div class="pop-middle-div-left">
+					<div class="middle-line-1">
 						<div class="pop-input" style="margin-right: 7px;">
 							<input type="text" class="inputText" id="inputSalary" required/>
 							<span class="floating-label">Your salary</span>
@@ -33,7 +33,7 @@
 							<span class="floating-label">Hours Deducted</span>
 						</div>
 					</div>
-					<div class="bottom-line-2">
+					<div class="middle-line-2">
 						<div class="weekly-habit">
 							<span>Weekly Habit</span>
 							<div class="line-habit">
@@ -46,37 +46,86 @@
 								<div class="checkbox-habit" id="6">S</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				<div class="pop-bottom-div-right">
-					<div class="results-container">
-						<p class="main-title-info">Days Remaining</p>
-						<div class="line-results">
-							<div class="line-results-left">
-								<span class="number-label">Open</span>
-								<p class="number-result" id="result-open">0</p>
-							</div>
-							<div class="line-separator"></div>
-							<div class="line-results-right">
-								<span class="number-label">Total</span>
-								<p class="number-result" id="result-total">0</p>
-							</div>
-						</div>
-					</div>
-					<div class="results-container">
-						<p class="main-title-info">Salary</p>
-						<div class="line-results">
-							<div class="line-results-left">
-								<span class="number-label">Earned</span>
-								<p class="number-result" id="result-earned">0</p>
-							</div>
-							<div class="line-separator"></div>
-						</div>
-					</div>
-				</div>
-			</div> -->
-		</div>
 
+					</div>
+				</div>
+				<div class="pop-middle-div-right">
+
+					<div class="salary-container">
+						<p class="main-title-info">Earned</p>
+						<div class="line-this-selection">
+							<div class="this-button selected" style="margin-right: 6px;">Month</div>
+							<div class="this-button">Week</div>
+						</div>
+						<div class="salary-circle-container">
+							<div class="salary-circle">
+								<div class="salary-info-container">
+									<div class="salary-amount-line">
+										<p class="salary-euro-sign">€</p>
+										<p class="salary-integer">0</p>
+										<p class="salary-float">.00</p>
+									</div>
+									<div class="salary-percent-line">
+										<p class="salary-percent">0%</p>
+									</div>
+								</div>
+								<div class="salary-slide"></div>
+							</div>
+						</div>
+						<div class="salary-graph-container">
+							<div class="line-graph">
+								<div class="day-graph">
+									<div class="day-slide" style="height: 60%;"></div>
+									<div class="day-base"></div>
+								</div>
+								<div class="day-graph">
+									<div class="day-slide" style="height: 0%;"></div>
+									<div class="day-base"></div>
+								</div>
+								<div class="day-graph">
+									<div class="day-slide" style="height: 100%;"></div>
+									<div class="day-base"></div>
+								</div>
+								<div class="day-graph">
+									<div class="day-slide" style="height: 10%;"></div>
+									<div class="day-base"></div>
+								</div>
+								<div class="day-graph">
+									<div class="day-slide" style="height: 30%;"></div>
+									<div class="day-base"></div>
+								</div>
+								<div class="day-graph">
+									<div class="day-slide" style="height: 50%;"></div>
+									<div class="day-base actual"></div>
+								</div>
+								<div class="day-graph">
+									<div class="day-slide" style="height: 0%;"></div>
+									<div class="day-base remaining"></div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="pop-bottom-div">
+				<div class="results-container">
+					<p class="main-title-info">Days Remaining</p>
+					<div class="line-results">
+						<div class="line-results-left">
+							<span class="number-label">Open</span>
+							<p class="number-result" id="result-open">0</p>
+						</div>
+						<div class="line-results-right">
+							<span class="number-label">Total</span>
+							<p class="number-result" id="result-total">0</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<span class="login" data-login="msapin">msapin</span>
 		<div class="user-poste-status">

@@ -210,19 +210,20 @@ body
 	color: #e2e2e2;
 }
 
-.pop-bottom-div {
-	padding: 7px;
+.pop-middle-div {
+	padding: 7px 7px 0 7px;
 	display: flex;
 }
 
-.pop-bottom-div-left {
+.pop-middle-div-left {
 	/* background-color: orange; */
 	padding-right: 7px;
+
 	/* height: 100%; */
 	border-right: 1px solid rgb(45, 49, 60);
 }
 
-.bottom-line-1, .bottom-line-2 {
+.middle-line-1, .middle-line-2 {
 	display: flex;
 }
 
@@ -269,7 +270,7 @@ input:not(:focus):valid ~ .floating-label {
 	transition: 0.2s ease all;
 }
 
-.bottom-line-2 {
+.middle-line-2 {
 	width: 100%;
 	margin: 7px 7px 0 0;
 	border-top: 1px solid rgb(45, 49, 60);
@@ -288,7 +289,7 @@ input:not(:focus):valid ~ .floating-label {
 
 .line-habit {
 	/* background-color: orange; */
-	margin-top: 4px;
+	margin-top: 8px;
 	display: flex;
 	/* padding: 0 4px; */
 	/* height: 20px; */
@@ -311,13 +312,14 @@ input:not(:focus):valid ~ .floating-label {
 	border: 2px solid rgb(45, 49, 60);
 }
 
-.pop-bottom-div-right {
+.pop-middle-div-right {
 	/* background-color: grey; */
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	padding-left: 7px;
-	width: 125px;
+	padding-left: 8px;
+	padding-bottom: 8px;
+	/* width: 125px; */
 }
 
 .div-info {
@@ -341,6 +343,213 @@ input:not(:focus):valid ~ .floating-label {
 	padding: 0;
 	font-size: 0.7em;
 }
+
+.salary-container {
+	/* background-color: red; */
+	width: 100%;
+	/* height: 20px; */
+	/* margin-bottom: 8px; */
+	/* padding-bottom: 8px; */
+	/* border-bottom: 1px solid rgb(45, 49, 60); */
+	display: flex;
+	flex-direction: column;
+	/* align-items: center; */
+	
+}
+
+.line-this-selection {
+	height: 18px;
+	/* background-color: orange; */
+	margin-top: 8px;
+	display: flex;
+	justify-content: center;
+}
+
+.this-button {
+	/* background-color: white; */
+	font-size: 0.5em;
+	font-weight: bold;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0 6px;
+	border-radius: 9px;
+	color: rgb(155, 155, 155);
+	/* border: 1px solid rgb(78, 85, 101); */
+	/* border: 1px solid rgb(65, 70, 84); */
+	border: 1px solid rgb(51, 55, 67);
+	cursor: pointer;
+}
+
+.selected {
+	background-color: white;
+	color: #191919;
+}
+
+/************************* SALARY *************************/
+
+.salary-circle-container {
+	/* background-color: orange; */
+	padding: 8px;
+}
+
+.salary-circle {
+	background-color: rgba(37, 41, 50, 0.5);
+	box-shadow: inset 0px 0px 10px rgba(16, 16, 16, 0.5);
+	/* background-color: red; */
+	width: 90px;
+	height: 90px;
+	border-radius: 50%;
+	overflow: hidden;
+	border: 1px solid rgb(51, 55, 67);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+	position: relative;
+	/* align-items: flex-end; */
+	/* background-color: rgb(37, 37, 143); */
+}
+
+.salary-info-container {
+	/* background-color: pink; */
+	position: absolute;
+	top: 35%;
+	/* left: 50%; */
+	/* background-color: rgb(182, 214, 182); */
+	/* opacity: 0; */
+}
+
+.salary-amount-line {
+	height: fit-content;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	padding: 0 4px;
+	border-radius: 6px;
+}
+
+.salary-euro-sign {
+	margin: 3px 2px 0 0;
+	padding: 0;
+	color: rgb(176, 176, 176);
+	font-size: 0.6em;
+	text-shadow: rgb(0, 0, 0) 0px 0px 1px;
+}
+
+.salary-integer {
+	margin: 0 2px;
+	padding: 0;
+	font-size: 1.2em;
+	color: white;
+	text-shadow: rgb(0, 0, 0) 0px 0px 3px;
+}
+
+.salary-float {
+	margin: 3px 0 0 1px;
+	padding: 0;
+	font-size: 0.8em;
+	/* color: rgb(233, 233, 233); */
+	color: rgb(211, 211, 211);
+	text-shadow: rgb(0, 0, 0) 0px 0px 3px;
+}
+
+.salary-percent-line {
+	/* background-color: green; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.salary-percent {
+	margin: 0;
+	padding: 0;
+	font-size: 0.6em;
+	/* color: rgb(169, 169, 169); */
+	color: rgb(176, 176, 176);
+	text-shadow: rgb(0, 0, 0) 0px 0px 1px;
+}
+
+.salary-slide {
+	background-color: rgba(0, 186, 188, 0.40);
+	height: 0%;
+	width: 100%;
+	bottom: 0;
+	border-radius: 50%/8px 8px 0 0;
+	box-shadow: inset 0px -10px 30px rgba(16, 16, 16, 0.4);
+	/* position: absolute; */
+}
+
+/***************************** GRAPH *****************************/
+
+
+.salary-graph-container {
+	/* background-color: red; */
+	/* height: 20px; */
+	/* width: 100px; */
+	display: flex;
+	justify-content: center;
+}
+
+.line-graph {
+	height: 40px;
+	/* width: 100%; */
+	/* background-color: orange; */
+	flex: 1;
+	display: flex;
+	justify-content: center;
+}
+
+.day-graph {
+	/* background-color: blue; */
+	/* width: 3px; */
+	/* width: 100%; */
+	flex: 1;
+	height: 100%;
+	margin: 0 1px;		/* depending of month or week displayed */
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+.day-slide {
+	background-color: rgba(0, 186, 188, 0.40);
+	/* background-color: #313c48; */
+	height: 100%;
+	/* border-radius: 2px 2px 0 0; */
+}
+
+.day-base {
+	/* background-color: rgb(117, 117, 117); */
+	/* background-color: #313c48; */
+	background-color: rgb(120, 120, 120);
+	height: 2px;
+	margin-top: 2px;
+	/* border-radius: 4px; */
+}
+
+.actual {
+	background-color: rgb(215, 215, 215);
+}
+
+.remaining {
+	background-color: rgb(120, 120, 120);
+}
+
+
+/***************************** BOTTOM *****************************/
+
+.pop-bottom-div {
+	/* background-color: red; */
+	/* height: 25px; */
+	border-top: 1px solid rgb(45, 49, 60);
+	margin: 0 8px;
+	padding-top: 8px;
+	/*padding: 0 8px; */
+}
+
+
+
 
 .results-container {
 	/* background-color: orange; */
@@ -411,11 +620,11 @@ input:not(:focus):valid ~ .floating-label {
 	border: 2px solid rgb(45, 49, 60);
 }
 
-.line-separator {
+/* .line-separator {
 	background-color: red;
 	width: 2px;
 	height: 100%;
-}
+} */
 
 /*------------------------------------------------------------------------------*/
 
