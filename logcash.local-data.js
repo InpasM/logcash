@@ -14,7 +14,7 @@ data.student = {
 
 data.init = function() {
 	
-	localStorage.removeItem("student42");
+	// localStorage.removeItem("student42");
 	let localStorageStud = localStorage.getItem("student42");
 
 	data.isHomePage = window.location.href.indexOf("users");
