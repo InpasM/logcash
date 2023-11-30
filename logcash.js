@@ -23,6 +23,8 @@ function getMonth(index, short)
 
 function updateValues(month)
 {
+	console.log(month);
+
 	month.nbHourReq = getNumberHourRequired(month.monthIndex, month.yearIndex);
 	let timeFloat = month.nbHourDone + (month.nbMinDone / 60)
 	
@@ -345,9 +347,21 @@ function getNbUniqueMonth(nodesList) {
 	return tmpList.length;
 }
 
+function isMonthAlreadyAdd(array, monthName) {
+
+	for (var i = 0; i < array.length; i++)
+	{
+		if (array[i].monthShort === monthName)
+			return true;
+		// console.log(array[i]);
+	}
+	return false;
+}
+
 function getInfoMonth(elems, calendar) {
 
 	const nbMonth = getNbUniqueMonth(elems.textMonth);
+
 	// displayMessage("number month: " + nbMonth);
 
 	// tests on getting hour reading calendar elements
@@ -441,64 +455,119 @@ function getInfoMonth(elems, calendar) {
 	arrayMonthsG = arrayMonthsG.reverse();
 	console.log(arrayMonthsG);*/
 
-	var array = Array(nbMonth);
-	indexMonth = -1;
 
-	array.nbMonth = nbMonth;
-	array.indexDisplay = new Date().getMonth(),
-	array.indexArray = nbMonth - 1;
-	for (var i = 0; i < nbMonth; i++)
+	const calendarElem = calendar.childNodes;
+
+	var arrayCalendar = Array();
+	let indexMonth = 0;
+
+	let objMonth = {};
+	let arrayMonthsG = [];
+	for (var i = calendarElem.length - 1; i >= 0; i--)
 	{
-		var tmpMonth = {
-			nameLong: "",
-			nameShort: "",
-			monthIndex: new Date().getMonth(),
-			yearIndex: new Date().getYear(),
-			percent: 0.0,
-			nbHourReq: 0,
-			nbMinReq: 0,
-			nbHourDone: 0,
-			nbMinDone: 0,
-			nbHourRem: 0,
-			nbMinRem: 0,
-			salary: 0,
-			cashEarn: 0,
-			time: 0,
-			switchHourCash: 0,
-			progressColor: 0,
-			openDaysSince: 0,
-			openDaysTotal: 0,
-		};
-		indexMonth++;
-		tmpMonth.monthIndex -= (nbMonth - indexMonth - 1);
-		if (tmpMonth.monthIndex < 0)
+		if (calendarElem[i].tagName === "g")
+			arrayMonthsG.push(calendarElem[i]);
+		else if (calendarElem[i].tagName === "text")
 		{
-			tmpMonth.yearIndex--;
-			tmpMonth.monthIndex = 12 - (nbMonth - indexMonth - 1);
+			const monthName = calendarElem[i].innerHTML.split(' ')[0];
+
+			if (isMonthAlreadyAdd(arrayCalendar, monthName))
+				break;
+
+			objMonth.monthShort = monthName;
+			objMonth.arrayElems = arrayMonthsG;
+
+			objMonth.monthIndex = 0;
+			objMonth.yearIndex = 0;
+			objMonth.percent = 0.0;
+			objMonth.nbHourReq = 0;
+			objMonth.nbMinReq = 0;
+			objMonth.nbHourDone = 0;
+			objMonth.nbMinDone = 0;
+			objMonth.nbHourRem = 0;
+			objMonth.nbMinRem = 0;
+			objMonth.salary = 0;
+			objMonth.cashEarn = 0;
+			objMonth.time = 0;
+			objMonth.switchHourCash = 0;
+			objMonth.progressColor = 0;
+			objMonth.openDaysSince = 0;
+			objMonth.openDaysTotal = 0;
+
+			arrayCalendar[indexMonth] = objMonth;
+			indexMonth++;
+			objMonth = {};
+			arrayMonthsG = [];
 		}
-		tmpMonth.nameLong = getMonth(tmpMonth.monthIndex, 1);
-		tmpMonth.nameShort = getMonth(tmpMonth.monthIndex, 0);
-
-		var tmpSplit = elems.textMonth[i].textContent.split('(')[1].split(')')[0].split('h');
-		tmpMonth.nbHourDone = parseInt(tmpSplit[0]);
-		tmpMonth.nbMinDone = parseInt(tmpSplit[1]);
-
-		// const getHourDone = function(arrayDay, tmpMonth) {
-
-		// 	// for (var i = 0; i < arrayDay.length; i++)
-		// 	// {
-		// 	// 	console.log(arrayDay[i]);
-		// 	// }
-		// 	// tempory hour
-		// 	tmpMonth.nbHourDone = 103;
-		// 	tmpMonth.nbMinDone = 31;
-		// }
-		// getHourDone(arrayMonthsG[i], tmpMonth);
-		updateValues(tmpMonth);
-
-		array[indexMonth] = tmpMonth;
 	}
-	return (array);
+	arrayCalendar.indexArray = arrayCalendar.length - 1;
+
+	arrayCalendar = arrayCalendar.reverse();
+
+
+	// var array = Array(nbMonth);
+	// indexMonth = -1;
+
+	// array.nbMonth = nbMonth;
+	// array.indexDisplay = new Date().getMonth(),
+	// array.indexArray = nbMonth - 1;
+	// for (var i = 0; i < nbMonth; i++)
+	// {
+	// 	var tmpMonth = {
+	// 		// nameLong: "",
+	// 		nameShort: "",
+	// 		monthIndex: new Date().getMonth(),
+	// 		yearIndex: new Date().getYear(),
+	// 		percent: 0.0,
+	// 		nbHourReq: 0,
+	// 		nbMinReq: 0,
+	// 		nbHourDone: 0,
+	// 		nbMinDone: 0,
+	// 		nbHourRem: 0,
+	// 		nbMinRem: 0,
+	// 		salary: 0,
+	// 		cashEarn: 0,
+	// 		time: 0,
+	// 		switchHourCash: 0,
+	// 		progressColor: 0,
+	// 		openDaysSince: 0,
+	// 		openDaysTotal: 0,
+	// 	};
+	// 	indexMonth++;
+	// 	tmpMonth.monthIndex -= (nbMonth - indexMonth - 1);
+	// 	if (tmpMonth.monthIndex < 0)
+	// 	{
+	// 		tmpMonth.yearIndex--;
+	// 		tmpMonth.monthIndex = 12 - (nbMonth - indexMonth - 1);
+	// 	}
+	// 	// tmpMonth.nameLong = getMonth(tmpMonth.monthIndex, 1);
+	// 	tmpMonth.nameShort = getMonth(tmpMonth.monthIndex, 0);
+
+	// 	// need protection
+	// 	// var tmpSplit = elems.textMonth[i].textContent.split('(')[1].split(')')[0].split('h');
+	// 	// tmpMonth.nbHourDone = parseInt(tmpSplit[0]);
+	// 	// tmpMonth.nbMinDone = parseInt(tmpSplit[1]);
+
+
+	// 	// const getHourDone = function(arrayDay, tmpMonth) {
+
+	// 	// 	// for (var i = 0; i < arrayDay.length; i++)
+	// 	// 	// {
+	// 	// 	// 	console.log(arrayDay[i]);
+	// 	// 	// }
+	// 	// 	// tempory hour
+	// 	// 	tmpMonth.nbHourDone = 103;
+	// 	// 	tmpMonth.nbMinDone = 31;
+	// 	// }
+	// 	// getHourDone(arrayMonthsG[i], tmpMonth);
+
+	// 	updateValues(tmpMonth);
+
+	// 	array[indexMonth] = tmpMonth;
+	// }
+	// return (array);
+	
+	return (arrayCalendar);
 }
 
 var isPanelVisible = false;
@@ -669,31 +738,34 @@ async function initLogcash()
 	window.elems = elems;
 	window.months = months;
 	resizeProgress();
+
+	// console.log(months[months.indexArray]);
+
 	reGenerate(months[months.indexArray], elems);
 	window.addEventListener("resize", resizeProgress);
 	initButtons(elems);
 
-	const userPosteStatus = document.querySelector(".user-poste-status");
+	// const userPosteStatus = document.querySelector(".user-poste-status");
 
-	if (userPosteStatus.innerText !== "Unavailable")
-	{
-		displayMessage("Start setInterval each minutes");
-		setInterval(function() {
+	// if (userPosteStatus.innerText !== "Unavailable")
+	// {
+	// 	displayMessage("Start setInterval each minutes");
+	// 	setInterval(function() {
 	
-			var tmpHours = months[months.length - 1].nbHourDone;
-			var tmpMinutes = months[months.length - 1].nbMinDone + 1;
+	// 		var tmpHours = months[months.length - 1].nbHourDone;
+	// 		var tmpMinutes = months[months.length - 1].nbMinDone + 1;
 	
-			if (tmpMinutes >= 60) {
-				tmpMinutes = 0;
-				tmpHours += 1;
-			}
-			months[months.length - 1].nbHourDone = parseInt(tmpHours);
-			months[months.length - 1].nbMinDone = parseInt(tmpMinutes);
-			if (months.indexArray == months.length - 1)
-				reGenerate(months[months.length - 1], elems);
-				updateValues(months[months.length - 1]);
-		}, 60000);
-	}
+	// 		if (tmpMinutes >= 60) {
+	// 			tmpMinutes = 0;
+	// 			tmpHours += 1;
+	// 		}
+	// 		months[months.length - 1].nbHourDone = parseInt(tmpHours);
+	// 		months[months.length - 1].nbMinDone = parseInt(tmpMinutes);
+	// 		if (months.indexArray == months.length - 1)
+	// 			reGenerate(months[months.length - 1], elems);
+	// 			updateValues(months[months.length - 1]);
+	// 	}, 60000);
+	// }
 }
 
 function setRefreshInterval() {
