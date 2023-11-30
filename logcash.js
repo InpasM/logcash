@@ -51,8 +51,6 @@ function reGenerate(month, elems) {
 
 	var textMonths = document.querySelectorAll(".text-month");
 
-	for (var i = 0; i < months.nbMonth; i++)
-		textMonths[i].innerText = months[i].nameShort;
 	var tmpProgress;
 
 	if (month.percent >= 100)
@@ -180,7 +178,7 @@ function getNumberHourDone(month)
 	var tmpMinutes = 0;
 	var i = -1;
 
-	console.log(calendar);
+	// console.log(calendar);
 	while (calendar.elems[++i])
 	{
 		if (!calendar.elems[i].firstElementChild)
@@ -351,9 +349,8 @@ function isMonthAlreadyAdd(array, monthName) {
 
 	for (var i = 0; i < array.length; i++)
 	{
-		if (array[i].monthShort === monthName)
+		if (array[i].nameShort === monthName)
 			return true;
-		// console.log(array[i]);
 	}
 	return false;
 }
@@ -474,7 +471,7 @@ function getInfoMonth(elems, calendar) {
 			if (isMonthAlreadyAdd(arrayCalendar, monthName))
 				break;
 
-			objMonth.monthShort = monthName;
+			objMonth.nameShort = monthName;
 			objMonth.arrayElems = arrayMonthsG;
 
 			objMonth.monthIndex = 0;
@@ -501,6 +498,7 @@ function getInfoMonth(elems, calendar) {
 		}
 	}
 	arrayCalendar.indexArray = arrayCalendar.length - 1;
+	arrayCalendar.nbMonth = arrayCalendar.length;
 
 	arrayCalendar = arrayCalendar.reverse();
 
@@ -566,7 +564,7 @@ function getInfoMonth(elems, calendar) {
 	// 	array[indexMonth] = tmpMonth;
 	// }
 	// return (array);
-	
+
 	return (arrayCalendar);
 }
 

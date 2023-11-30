@@ -85,6 +85,8 @@ function initDivMonths(elems, months) {
 		tmpText.style.alignItems = "center";
 		tmpText.style.border = "2px solid rgba(0,0,0,0)";
 
+		tmpText.innerHTML = months[i].nameShort;
+
 		tmpMonth = document.createElement("div");
 		tmpMonth.className = "div-month";
 		if (i == months.indexArray)
