@@ -213,8 +213,10 @@ function disableTextSelection() {
 
 popup.setStyle = function(elems) {
 
-	elems.popupRemaining.style.opacity = "1"; // set to zero
-	elems.popupRemaining.style.display = "flex";
+	elems.popupRemaining.style.opacity = "0"; // set to zero
+	// elems.popupRemaining.style.display = "flex";
+	elems.popupRemaining.style.display = "none";
+	// elems.popupRemaining.style.width = "fit-contain";
 	elems.popupRemaining.style.position = "absolute";
 	elems.popupRemaining.style.borderRadius = "4px";
 	elems.popupRemaining.style.zIndex = "1000";
@@ -223,8 +225,8 @@ popup.setStyle = function(elems) {
 	elems.popupRemaining.style.boxShadow = "0px 10px 15px #12141a3a";
 	elems.popupRemaining.style.backdropFilter = "blur(6px)";
 
-	// elems.popupRemaining.style.top = "80px"; // remove
-	// elems.popupRemaining.style.right = "40px"; // remove
+	elems.popupRemaining.style.top = "80px"; // remove
+	elems.popupRemaining.style.right = "40px"; // remove
 	
 	elems.popupTopDiv.style.cursor = "move";
 	elems.popupTopDiv.style.height = "fit-content";

@@ -497,7 +497,7 @@ function clickRemaining(e) {
 
 	e.stopPropagation();
 
-	if (e.target.className == "side-remaining")
+	if (e.target.className == "setting-button")
 	{
 		if (!isPanelVisible)
 		{
@@ -507,34 +507,35 @@ function clickRemaining(e) {
 	
 			let topPopup = e.pageY + sideRemaining.height + (targetDimension.top - e.clientY) + 5;
 			let leftPopup = e.pageX - (popupDimension.width / 2);
-	
+
 			elems.popupRemaining.style.top = topPopup + "px";
-			elems.popupRemaining.style.left = leftPopup + "px";
+			elems.popupRemaining.style.left = leftPopup - 200 + "px";
 
 			elems.sideRemaining.style.backgroundColor = "";
 			elems.popupRemaining.style.opacity = "1";
+			elems.popupRemaining.style.display = "flex";
 			isPanelVisible = true;
 		}
 		else
 		{
 			elems.sideRemaining.style.backgroundColor = "";
 			elems.popupRemaining.style.opacity = "0";
+			elems.popupRemaining.style.display = "none";
 			isPanelVisible = false;
 		}
 	}
 }
 
 let timeOut;
-// let eventClickSetting;
 
-function clickSetting() {
+function clickSetting(e) {
 
 	const settingButton = document.querySelector(".setting-button");
 
 	settingButton.style.opacity = "0";
 	settingButton.style.cursor = "default";
-
-	displayMessage("click setting");
+	
+	clickRemaining(e);
 }
 
 function mouseoverProgress() {
@@ -544,10 +545,10 @@ function mouseoverProgress() {
 
 	const settingButton = document.querySelector(".setting-button");
 
-	settingButton.addEventListener("click", clickSetting);
-
 	settingButton.style.opacity = "1";
 	settingButton.style.cursor = "pointer";
+	settingButton.addEventListener("click", clickSetting);
+
 	// settingButton.style.top = "0";
 }
 
