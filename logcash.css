@@ -100,10 +100,36 @@ body
 	/* background: #2d313c; */
 	display: flex;
 	justify-content: space-evenly;
-	/* border: 2px solid #2d313c; */
+	/* border: 2px solid #3a3f4c; */
+	border: 2px solid #2d313c;
+	/* box-shadow: 0 0px 10px #12141a75; */
 	/* height: 40px; */
 	/* border-radius: 5px; */
 	/* margin: 8px 0; */
+	position: relative;
+}
+
+.setting-div {
+	/* background-color: red; */
+	height: 100%;
+	right: 5px;
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.setting-button {
+	/* background-color: pink; */
+	height: 70%;
+	aspect-ratio: 1/1;
+	background-image: url("icons/settings-5.svg");
+	background-size: contain;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	opacity: 0;
+	border-radius: 50%;
+	transition: 0.4s ease opacity;
 }
 
 .side-progress
