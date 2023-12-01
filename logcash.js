@@ -134,7 +134,7 @@ function resizeProgress() {
 
 	elems.rowProgress.style.height = (ratio * 30) + "px";
 	elems.containerLogcash.style.display = "flex";
-	elems.containerDivMonth.style.margin = "0 0 0 " + (ratio * 16) + "px";
+	// elems.containerDivMonth.style.margin = "0 0 0 " + (ratio * 16) + "px";
 	var smallMargin = ratio * 6;
 
 	for (var i = 0; i < months.nbMonth; i++)
@@ -143,7 +143,7 @@ function resizeProgress() {
 		textMonths[i].style.padding = "0 10px";
 		textMonths[i].style.height = (ratio * 30) + "px";
 		textMonths[i].style.margin = "0 " + smallMargin + "px 0 0";
-
+		
 		divMonths[i].setAttribute('id', i);
 		textMonths[i].setAttribute('id', i);
 	}
@@ -613,10 +613,15 @@ function getInfoMonth(elems, calendar) {
 		}
 		arrayCalendar[i].percent = (arrayCalendar[i].nbHourDone + (arrayCalendar[i].nbMinDone / 60)) / arrayCalendar[i].nbHourReq * 100;
 
-		console.log("nbHourRem: " + arrayCalendar[i].nbHourRem + " nbMinRem: " + arrayCalendar[i].nbMinRem  + " percent: " + arrayCalendar[i].percent);
+		if (arrayCalendar[i].percent == 0)
+			arrayCalendar[i].progressColor = "rgba(37, 41, 50, 0.8)";
+		else
+			arrayCalendar[i].progressColor = "rgba(0, 186, 188, " + (arrayCalendar[i].percent / 100) + ")";
 
-		console.log("monthName " + arrayCalendar[i].nameShort + " hourDone: " + 
-		arrayCalendar[i].nbHourDone + " minuteDone: " + arrayCalendar[i].nbMinDone);
+		// console.log("nbHourRem: " + arrayCalendar[i].nbHourRem + " nbMinRem: " + arrayCalendar[i].nbMinRem  + " percent: " + arrayCalendar[i].percent);
+
+		// console.log("monthName " + arrayCalendar[i].nameShort + " hourDone: " + 
+		// arrayCalendar[i].nbHourDone + " minuteDone: " + arrayCalendar[i].nbMinDone);
 	}
 
 	console.log(arrayCalendar[3]);

@@ -4,29 +4,6 @@ const htmlElems = {};
 window.htmlElems = htmlElems;
 window.init = window.init || {};
 
-// function initPopup(elems) {
-
-// 	elems.popupRemaining = document.createElement("div");
-// 	elems.popupRemaining.className = "popup-remaining";
-
-// 	elems.popupTopDiv = document.createElement("div");
-// 	elems.popupTopDiv.className = "popup-top-div";
-	
-// 	elems.popupTopLeftText = document.createElement("p");
-// 	elems.popupTopLeftText.className = "popup-top-left-text";
-// 	elems.popupTopLeftText.innerText = "Logcash";
-
-// 	elems.popupTopRightText = document.createElement("p");
-// 	elems.popupTopRightText.className = "popup-top-right-text";
-// 	// elems.popupTopRightText.innerText = "msapin";
-
-// 	elems.popupRemaining.appendChild(elems.popupTopDiv);
-// 	elems.popupTopDiv.appendChild(elems.popupTopLeftText);
-// 	elems.popupTopDiv.appendChild(elems.popupTopRightText);
-	
-// 	document.body.appendChild(elems.popupRemaining);
-// }
-
 function initContainerLogcash(elems) {
 
 	elems.containerLogcash = document.createElement("div");
