@@ -495,11 +495,11 @@ function getInfoMonth(elems, calendar) {
 				objMonth.time = 0;
 				objMonth.switchHourCash = 0;
 				objMonth.progressColor = 0;
-				objMonth.openDaysSince = 0;
+				objMonth.openDaysRemaining = 0;
 				objMonth.openDaysTotal = 0;
 
 				objMonth.days = [];
-				objMonth.weeks = [[], [], [], [], []];
+				objMonth.weeks = [[], [], [], [], [], []];
 	
 				arrayCalendar[indexMonth] = objMonth;
 				indexMonth++;
@@ -518,22 +518,35 @@ function getInfoMonth(elems, calendar) {
 	arrayCalendar.nbMonth = arrayCalendar.length;
 	arrayCalendar = arrayCalendar.reverse();
 
-	// for (var i = 0; i < arrayCalendar.length; i++)
-	for (var i = 0; i < 1; i++)
+	for (var i = 0; i < arrayCalendar.length; i++)
+	// for (var i = 0; i < 1; i++)
 	{
-		// console.log(arrayCalendar[i].nameShort + " / monthIndex: " + arrayCalendar[i].monthIndex);
 		console.log((i + 1) + "/ monthName: " + arrayCalendar[i].nameShort + " monthIndex: " + arrayCalendar[i].monthIndex + " yearIndex: " + arrayCalendar[i].yearIndex);
 
-		var totalHour = 0;
-		var totalMinute = 0;
-
 		var indexWeek = 0;
+		var lengthMonth = 0;
 
-		for (var j = 0; j < arrayCalendar[i].arrayElems.length; j++)
+		if (i === arrayCalendar.length - 1)
+			lengthMonth = new Date(arrayCalendar[i].yearIndex + 1900, arrayCalendar[i].monthIndex + 1, 0).getDate();
+		else
+			lengthMonth = arrayCalendar[i].arrayElems.length;
+
+		for (var j = 0; j < lengthMonth; j++)
 		{
-			const tmpTimeDone = arrayCalendar[i].arrayElems[j].getAttribute("data-original-title");
-			const numberDay = arrayCalendar[i].arrayElems[j].firstElementChild.nextSibling.innerHTML;
-			const splitTimeDone = tmpTimeDone.split('h');
+			var tmpTimeDone, splitTimeDone;
+
+			if (!arrayCalendar[i].arrayElems[j])
+			{
+				tmpTimeDone = "0h00";
+				splitTimeDone = [0, 0];
+			}
+			else
+			{
+				tmpTimeDone = arrayCalendar[i].arrayElems[j].getAttribute("data-original-title");
+				splitTimeDone = tmpTimeDone.split('h');
+			}
+
+			const numberDay = j + 1;
 			let fullDate = (arrayCalendar[i].yearIndex + 1900) + '-';
 
 			if (arrayCalendar[i].monthIndex + 1 < 10)
@@ -558,6 +571,7 @@ function getInfoMonth(elems, calendar) {
 				// console.log("start of new week: " + arrayCalendar[i].days[j].dayDate);
 				indexWeek++;
 			}
+			// console.log(arrayCalendar[i].days[j]);
 			arrayCalendar[i].weeks[indexWeek].push(arrayCalendar[i].days[j]);
 
 			arrayCalendar[i].nbHourDone += arrayCalendar[i].days[j].hourDone;
@@ -566,8 +580,10 @@ function getInfoMonth(elems, calendar) {
 			if (arrayCalendar[i].days[j].dayNumber >= 1 && arrayCalendar[i].days[j].dayNumber <= 5)
 			{
 				// console.log("start of new week: " + arrayCalendar[i].days[j].dayDate);
-				// indexWeek++;
 				arrayCalendar[i].nbHourReq += 7;
+				arrayCalendar[i].openDaysTotal++;
+				if (!arrayCalendar[i].arrayElems[j])
+					arrayCalendar[i].openDaysRemaining++;
 			}
 		}
 
@@ -582,8 +598,7 @@ function getInfoMonth(elems, calendar) {
 		}
 		arrayCalendar[i].nbHourRem = arrayCalendar[i].nbHourReq - arrayCalendar[i].nbHourDone;
 		arrayCalendar[i].nbMinRem = arrayCalendar[i].nbMinReq - arrayCalendar[i].nbMinDone;
-		arrayCalendar[i].percent = arrayCalendar[i].nbHourDone + (arrayCalendar[i].nbMinDone / 60);
-
+		
 		// if (arrayCalendar[i].cashEarn > arrayCalendar[i].salary)
 		// 	arrayCalendar[i].cashEarn = arrayCalendar[i].salary;
 		if (arrayCalendar[i].nbMinRem < 0)
@@ -596,6 +611,7 @@ function getInfoMonth(elems, calendar) {
 			arrayCalendar[i].nbMinRem -= 60;
 			arrayCalendar[i].nbHourRem++;
 		}
+		arrayCalendar[i].percent = (arrayCalendar[i].nbHourDone + (arrayCalendar[i].nbMinDone / 60)) / arrayCalendar[i].nbHourReq * 100;
 
 		console.log("nbHourRem: " + arrayCalendar[i].nbHourRem + " nbMinRem: " + arrayCalendar[i].nbMinRem  + " percent: " + arrayCalendar[i].percent);
 
@@ -603,7 +619,7 @@ function getInfoMonth(elems, calendar) {
 		arrayCalendar[i].nbHourDone + " minuteDone: " + arrayCalendar[i].nbMinDone);
 	}
 
-	console.log(arrayCalendar[0]);
+	console.log(arrayCalendar[3]);
 
 
 	// var array = Array(nbMonth);
@@ -631,7 +647,7 @@ function getInfoMonth(elems, calendar) {
 	// 		time: 0,
 	// 		switchHourCash: 0,
 	// 		progressColor: 0,
-	// 		openDaysSince: 0,
+	// 		openDaysRemaining: 0,
 	// 		openDaysTotal: 0,
 	// 	};
 	// 	indexMonth++;
@@ -789,7 +805,7 @@ function getNumberOpenDays(numberYear, numberMonth, numberDay) {
 
 	const numberDaysInMonth = new Date(numberYear, numberMonth + 1, 0).getDate();
 	var numberFirstDay = getFirstDayOfMonth(numberYear, numberMonth + 1);
-	var openDaysSince = 0;
+	var openDaysRemaining = 0;
 	var openDaysTotal = 0;
 	var i = -1;
 
@@ -800,12 +816,12 @@ function getNumberOpenDays(numberYear, numberMonth, numberDay) {
 		if (numberFirstDay >= 1 && numberFirstDay <= 5)
 		{
 			if (i < numberDay)
-				openDaysSince++;
+				openDaysRemaining++;
 			openDaysTotal++;
 		}
 		numberFirstDay++;
 	}
-	return [openDaysSince, openDaysTotal];
+	return [openDaysRemaining, openDaysTotal];
 }
 
 // // test only
