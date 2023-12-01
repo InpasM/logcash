@@ -1,14 +1,14 @@
 
-function getTitleLogtime()
-{
-	const h4Title = document.querySelectorAll(".profile-title");
+// function getTitleLogtime()
+// {
+// 	const h4Title = document.querySelectorAll(".profile-title");
 
-	for (var i = 0; h4Title[i]; i++)
-	{
-		if (h4Title[i].innerText === "LOGTIME")
-			return (h4Title[i]);
-	}
-}
+// 	for (var i = 0; h4Title[i]; i++)
+// 	{
+// 		if (h4Title[i].innerText === "LOGTIME")
+// 			return (h4Title[i]);
+// 	}
+// }
 
 function getMonth(index, short)
 {
@@ -21,31 +21,31 @@ function getMonth(index, short)
 		return (month[index]);
 }
 
-function updateValues(month)
-{
-	console.log(month);
+// function updateValues(month)
+// {
+// 	console.log(month);
 
-	month.nbHourReq = getNumberHourRequired(month.monthIndex, month.yearIndex);
-	let timeFloat = month.nbHourDone + (month.nbMinDone / 60)
+// 	month.nbHourReq = getNumberHourRequired(month.monthIndex, month.yearIndex);
+// 	let timeFloat = month.nbHourDone + (month.nbMinDone / 60)
 	
-	month.nbHourRem = month.nbHourReq - month.nbHourDone;
-	month.nbMinRem = month.nbMinReq - month.nbMinDone;
-	month.percent = timeFloat / month.nbHourReq * 100;
-	month.cashEarn = month.salary * (month.percent / 100);
+// 	month.nbHourRem = month.nbHourReq - month.nbHourDone;
+// 	month.nbMinRem = month.nbMinReq - month.nbMinDone;
+// 	month.percent = timeFloat / month.nbHourReq * 100;
+// 	month.cashEarn = month.salary * (month.percent / 100);
 
-	if (month.cashEarn > month.salary)
-		month.cashEarn = month.salary;
-		if (month.nbMinRem < 0)
-	{
-		month.nbMinRem += 60;
-		month.nbHourRem--;
-	}
-	else if (month.nbMinRem >= 60)
-	{
-		month.nbMinRem -= 60;
-		month.nbHourRem++;
-	}
-}
+// 	if (month.cashEarn > month.salary)
+// 		month.cashEarn = month.salary;
+// 		if (month.nbMinRem < 0)
+// 	{
+// 		month.nbMinRem += 60;
+// 		month.nbHourRem--;
+// 	}
+// 	else if (month.nbMinRem >= 60)
+// 	{
+// 		month.nbMinRem -= 60;
+// 		month.nbHourRem++;
+// 	}
+// }
 
 function reGenerate(month, elems) {
 
@@ -210,16 +210,16 @@ function getNumberHourDone(month)
 	month.nbMinDone = parseInt(tmpMinutes);
 }
 
-function getNumberHourRequired(monthIndex, yearIndex)
-{
-	const numHour2023 = [154,140,161,147,161,154,42,91,42,147,119,147];
-	const numHour2024 = [161,147,147,154,161,140,91,84,77,161,147,154];
+// function getNumberHourRequired(monthIndex, yearIndex)
+// {
+// 	const numHour2023 = [154,140,161,147,161,154,42,91,42,147,119,147];
+// 	const numHour2024 = [161,147,147,154,161,140,91,84,77,161,147,154];
 
-	if (yearIndex + 1900 == 2023)
-		return (numHour2023[monthIndex]);
-	else if (yearIndex + 1900 == 2024)
-		return (numHour2024[monthIndex]);
-}
+// 	if (yearIndex + 1900 == 2023)
+// 		return (numHour2023[monthIndex]);
+// 	else if (yearIndex + 1900 == 2024)
+// 		return (numHour2024[monthIndex]);
+// }
 
 async function changeColorPage()
 {
@@ -338,9 +338,6 @@ function getNbUniqueMonth(nodesList) {
 	{
 		if (!isMonthInArray(tmpList, nodesList[i]))
 			tmpList.push(nodesList[i]);
-		// for (var j = 0; j < tmpList.length; j++)
-		// {
-		// }
 	}
 	return tmpList.length;
 }
@@ -453,54 +450,160 @@ function getInfoMonth(elems, calendar) {
 	console.log(arrayMonthsG);*/
 
 
-	const calendarElem = calendar.childNodes;
+	function initArrayCalendar(calendarElem, arrayCalendar) {
 
-	var arrayCalendar = Array();
-	let indexMonth = 0;
+		let objMonth = {};
+		let arrayMonthsG = [];
+		let indexMonth = 0;
 
-	let objMonth = {};
-	let arrayMonthsG = [];
-	for (var i = calendarElem.length - 1; i >= 0; i--)
-	{
-		if (calendarElem[i].tagName === "g")
-			arrayMonthsG.push(calendarElem[i]);
-		else if (calendarElem[i].tagName === "text")
+		let tmpArray = [];
+
+		for (var i = calendarElem.length - 1; i >= 0; i--)
 		{
-			const monthName = calendarElem[i].innerHTML.split(' ')[0];
+			if (calendarElem[i].tagName === "g")
+				arrayMonthsG.push(calendarElem[i]);
+			else if (calendarElem[i].tagName === "text")
+			{
+				const monthName = calendarElem[i].innerHTML.split(' ')[0];
 
-			if (isMonthAlreadyAdd(arrayCalendar, monthName))
-				break;
+				if (isMonthAlreadyAdd(tmpArray, monthName))
+					break;
 
-			objMonth.nameShort = monthName;
-			objMonth.arrayElems = arrayMonthsG;
+				/////////////////////////////////// TEMPORARY to test different date
+				tmpArray[indexMonth] = {nameShort: monthName};
+				// const actualDate = new Date("2023-02-15");
+				const actualDate = new Date();
 
-			objMonth.monthIndex = 0;
-			objMonth.yearIndex = 0;
-			objMonth.percent = 0.0;
-			objMonth.nbHourReq = 0;
-			objMonth.nbMinReq = 0;
-			objMonth.nbHourDone = 0;
-			objMonth.nbMinDone = 0;
-			objMonth.nbHourRem = 0;
-			objMonth.nbMinRem = 0;
-			objMonth.salary = 0;
-			objMonth.cashEarn = 0;
-			objMonth.time = 0;
-			objMonth.switchHourCash = 0;
-			objMonth.progressColor = 0;
-			objMonth.openDaysSince = 0;
-			objMonth.openDaysTotal = 0;
+				objMonth.arrayElems = arrayMonthsG.reverse();
+				objMonth.monthIndex = actualDate.getMonth() - indexMonth;
+				objMonth.yearIndex = actualDate.getYear();
+				if (objMonth.monthIndex < 0)
+				{
+					objMonth.yearIndex--;
+					objMonth.monthIndex += 12;
+				}
+				objMonth.nameShort = getMonth(objMonth.monthIndex, 0);
+				objMonth.nbHourDone = 0;
+				objMonth.nbMinDone = 0;
+				objMonth.nbHourReq = 0;
+				objMonth.nbMinReq = 0;
+				objMonth.nbHourRem = 0;
+				objMonth.nbMinRem = 0;
+				objMonth.percent = 0.0;
+				objMonth.salary = 0;
+				objMonth.cashEarn = 0;
+				objMonth.time = 0;
+				objMonth.switchHourCash = 0;
+				objMonth.progressColor = 0;
+				objMonth.openDaysSince = 0;
+				objMonth.openDaysTotal = 0;
 
-			arrayCalendar[indexMonth] = objMonth;
-			indexMonth++;
-			objMonth = {};
-			arrayMonthsG = [];
+				objMonth.days = [];
+				objMonth.weeks = [[], [], [], [], []];
+	
+				arrayCalendar[indexMonth] = objMonth;
+				indexMonth++;
+				objMonth = {};
+				arrayMonthsG = [];
+			}
 		}
 	}
+
+	const calendarElem = calendar.childNodes;
+	var arrayCalendar = Array();
+
+	initArrayCalendar(calendarElem, arrayCalendar);
+
 	arrayCalendar.indexArray = arrayCalendar.length - 1;
 	arrayCalendar.nbMonth = arrayCalendar.length;
-
 	arrayCalendar = arrayCalendar.reverse();
+
+	// for (var i = 0; i < arrayCalendar.length; i++)
+	for (var i = 0; i < 1; i++)
+	{
+		// console.log(arrayCalendar[i].nameShort + " / monthIndex: " + arrayCalendar[i].monthIndex);
+		console.log((i + 1) + "/ monthName: " + arrayCalendar[i].nameShort + " monthIndex: " + arrayCalendar[i].monthIndex + " yearIndex: " + arrayCalendar[i].yearIndex);
+
+		var totalHour = 0;
+		var totalMinute = 0;
+
+		var indexWeek = 0;
+
+		for (var j = 0; j < arrayCalendar[i].arrayElems.length; j++)
+		{
+			const tmpTimeDone = arrayCalendar[i].arrayElems[j].getAttribute("data-original-title");
+			const numberDay = arrayCalendar[i].arrayElems[j].firstElementChild.nextSibling.innerHTML;
+			const splitTimeDone = tmpTimeDone.split('h');
+			let fullDate = (arrayCalendar[i].yearIndex + 1900) + '-';
+
+			if (arrayCalendar[i].monthIndex + 1 < 10)
+				fullDate += "0";
+			fullDate += (arrayCalendar[i].monthIndex + 1) + "-";
+			if (numberDay < 10)
+				fullDate += "0";
+			fullDate += numberDay;
+
+			var tmpDate = new Date(fullDate);
+
+			arrayCalendar[i].days[j] = {
+				dayDate: fullDate,
+				dayNumber: tmpDate.getDay(),
+				timeDone: tmpTimeDone,
+				hourDone: parseInt(splitTimeDone[0]),
+				minuteDone: parseInt(splitTimeDone[1]),
+			};
+
+			if (arrayCalendar[i].days[j].dayNumber === 0 && j !== 0)
+			{
+				// console.log("start of new week: " + arrayCalendar[i].days[j].dayDate);
+				indexWeek++;
+			}
+			arrayCalendar[i].weeks[indexWeek].push(arrayCalendar[i].days[j]);
+
+			arrayCalendar[i].nbHourDone += arrayCalendar[i].days[j].hourDone;
+			arrayCalendar[i].nbMinDone += arrayCalendar[i].days[j].minuteDone;
+
+			if (arrayCalendar[i].days[j].dayNumber >= 1 && arrayCalendar[i].days[j].dayNumber <= 5)
+			{
+				// console.log("start of new week: " + arrayCalendar[i].days[j].dayDate);
+				// indexWeek++;
+				arrayCalendar[i].nbHourReq += 7;
+			}
+		}
+
+		///////////////////////////////////////////////////////// calcul all other value
+		if (arrayCalendar[i].nbMinDone >= 60)
+		{
+			var extraHour = parseInt(arrayCalendar[i].nbMinDone / 60);
+
+			arrayCalendar[i].nbHourDone += extraHour;
+			arrayCalendar[i].nbMinDone = arrayCalendar[i].nbMinDone - (extraHour * 60);
+			// console.log("extraHour: " + parseInt(extraHour) + " remainingMinute: " + remainingMinute);
+		}
+		arrayCalendar[i].nbHourRem = arrayCalendar[i].nbHourReq - arrayCalendar[i].nbHourDone;
+		arrayCalendar[i].nbMinRem = arrayCalendar[i].nbMinReq - arrayCalendar[i].nbMinDone;
+		arrayCalendar[i].percent = arrayCalendar[i].nbHourDone + (arrayCalendar[i].nbMinDone / 60);
+
+		// if (arrayCalendar[i].cashEarn > arrayCalendar[i].salary)
+		// 	arrayCalendar[i].cashEarn = arrayCalendar[i].salary;
+		if (arrayCalendar[i].nbMinRem < 0)
+		{
+			arrayCalendar[i].nbMinRem += 60;
+			arrayCalendar[i].nbHourRem--;
+		}
+		else if (arrayCalendar[i].nbMinRem >= 60)
+		{
+			arrayCalendar[i].nbMinRem -= 60;
+			arrayCalendar[i].nbHourRem++;
+		}
+
+		console.log("nbHourRem: " + arrayCalendar[i].nbHourRem + " nbMinRem: " + arrayCalendar[i].nbMinRem  + " percent: " + arrayCalendar[i].percent);
+
+		console.log("monthName " + arrayCalendar[i].nameShort + " hourDone: " + 
+		arrayCalendar[i].nbHourDone + " minuteDone: " + arrayCalendar[i].nbMinDone);
+	}
+
+	console.log(arrayCalendar[0]);
 
 
 	// var array = Array(nbMonth);
