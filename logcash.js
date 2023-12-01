@@ -524,6 +524,48 @@ function clickRemaining(e) {
 	}
 }
 
+let timeOut;
+// let eventClickSetting;
+
+function clickSetting() {
+
+	const settingButton = document.querySelector(".setting-button");
+
+	settingButton.style.opacity = "0";
+	settingButton.style.cursor = "default";
+
+	displayMessage("click setting");
+}
+
+function mouseoverProgress() {
+	clearTimeout(timeOut);
+	// elems.rowProgress.style.border = "2px solid #3a3f4c";
+	// elems.rowProgress.style.boxShadow = "0 0px 2px #12141a75";
+
+	const settingButton = document.querySelector(".setting-button");
+
+	settingButton.addEventListener("click", clickSetting);
+
+	settingButton.style.opacity = "1";
+	settingButton.style.cursor = "pointer";
+	// settingButton.style.top = "0";
+}
+
+function mouseoutProgress() {
+	// elems.rowProgress.style.border = "2px solid #2d313c";
+	// elems.rowProgress.style.boxShadow = "0 0px 10px #12141a75";
+
+	timeOut = setTimeout(function() {
+		const settingButton = document.querySelector(".setting-button");
+
+		settingButton.removeEventListener("click", clickSetting);
+		settingButton.style.opacity = "0";
+		settingButton.style.cursor = "default";
+		// settingButton.style.display = "none";
+		// settingButton.style.top = "2px";
+	}, 800);
+}
+
 function initButtons(elems)
 {
 	elems.divMonths = document.querySelectorAll(".div-month");
@@ -531,18 +573,20 @@ function initButtons(elems)
 
 	if (data.student)
 	{
-		elems.sideProgress.addEventListener("mouseover", mOverProgress);
-		elems.sideProgress.addEventListener("mouseout", mOutProgress);
-		elems.sideProgress.addEventListener("click", clickProgress);
+		elems.rowProgress.addEventListener("mouseover", mouseoverProgress)
+		elems.rowProgress.addEventListener("mouseout", mouseoutProgress)
+		// elems.sideProgress.addEventListener("mouseover", mOverProgress);
+		// elems.sideProgress.addEventListener("mouseout", mOutProgress);
+		// elems.sideProgress.addEventListener("click", clickProgress);
 	}
 
-	elems.sideRemaining.addEventListener("mouseover", function() {
-		elems.sideRemaining.style.backgroundColor = "rgb(35, 39, 46)";
-	});
-	elems.sideRemaining.addEventListener("mouseout", function() {
-		elems.sideRemaining.style.backgroundColor = "";
-	});
-	elems.sideRemaining.addEventListener("click", clickRemaining);
+	// elems.sideRemaining.addEventListener("mouseover", function() {
+	// 	elems.sideRemaining.style.backgroundColor = "rgb(35, 39, 46)";
+	// });
+	// elems.sideRemaining.addEventListener("mouseout", function() {
+	// 	elems.sideRemaining.style.backgroundColor = "";
+	// });
+	// elems.sideRemaining.addEventListener("click", clickRemaining);
 	// popup.initPopup(elems);
 
 	for (var i = 0; i < months.nbMonth; i++)

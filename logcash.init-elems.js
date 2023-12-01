@@ -9,6 +9,7 @@ function initContainerLogcash(elems) {
 	elems.containerLogcash = document.createElement("div");
 	elems.containerLogcash.className = "container-logcash";
 	elems.containerLogcash.style.display = "flex";
+	// elems.containerLogcash.style.cursor = "pointer";
 	elems.containerLogcash.style.alignItems = "center";
 
 	elems.containerDivMonth = document.createElement("div");
@@ -96,22 +97,24 @@ function setStyle(elems) {
 	elems.rowProgress.style.flex = "1";
 	elems.rowProgress.style.justifyContent = "space-between";
 	elems.rowProgress.style.borderRadius = "4px";
-	elems.rowProgress.style.border = border;
+	// elems.rowProgress.style.border = "2px solid #2d313c";
+	// elems.rowProgress.style.cursor = "pointer";
 	
 	elems.sideProgress.style.color = "#f2f2f2";
-	elems.sideProgress.style.cursor = "pointer";
+	// elems.sideProgress.style.cursor = "pointer";
 	elems.sideProgress.style.display = "flex";
 	elems.sideProgress.style.justifyContent = "center";
 	elems.sideProgress.style.alignItems = "center";
 	elems.sideProgress.style.minWidth = "90px";
 	elems.sideProgress.style.height = "100%";
 	elems.sideProgress.style.borderRadius = "3px";
+	// elems.sideProgress.style.cursor = "pointer";
 	
 	elems.sideRemaining.style.display = "flex";
 	elems.sideRemaining.style.justifyContent = "center";
 	elems.sideRemaining.style.alignItems = "center";
 	elems.sideRemaining.style.flex = "1";
-	elems.sideRemaining.style.cursor = "pointer";
+	// elems.sideRemaining.style.cursor = "pointer";
 
 	elems.textRemaining.style.margin = "0";
 	elems.textRemaining.style.color = "#8d8e8e";
