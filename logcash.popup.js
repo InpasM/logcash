@@ -71,8 +71,82 @@ popup.createElems = function(elems) {
 		elems.checkboxes[i].innerText = arrayDaysLetter[i];
 	}
 
-	elems.floatingLabel2.className = "floating-label";
-	elems.floatingLabel2.innerText = "Hours Deducted";
+
+	//////////////////////////////////////////////////////////////////////  MIDDLE RIGHT DIV
+	elems.popMiddleDivRight = document.createElement("div");
+	elems.popMiddleDivRight.className = "pop-middle-div-right";
+
+	elems.salaryContainer = document.createElement("div");
+	elems.salaryContainer.className = "salary-container";
+
+	elems.mainTitleInfo = document.createElement("p");
+	elems.mainTitleInfo.className = "main-title-info";
+	elems.mainTitleInfo.innerText = "Earned";
+	elems.lineThisSelection = document.createElement("div");
+	elems.lineThisSelection.className = "line-this-selection";
+	elems.salaryCircleContainer = document.createElement("div");
+	elems.salaryCircleContainer.className = "salary-circle-container";
+
+	elems.thisButtonMonth = document.createElement("div");
+	elems.thisButtonMonth.className = "this-button selected";
+	elems.thisButtonMonth.innerText = "Month";
+	elems.thisButtonMonth.style.marginRight = "6px";
+	elems.thisButtonWeek = document.createElement("div");
+	elems.thisButtonWeek.className = "this-button";
+	elems.thisButtonWeek.innerText = "Week";
+
+	elems.lineThisSelection.appendChild(elems.thisButtonMonth);
+	elems.lineThisSelection.appendChild(elems.thisButtonWeek);
+
+	elems.salaryCircle = document.createElement("div");
+	elems.salaryCircle.className = "salary-circle";
+	elems.salaryInfoContainer = document.createElement("div");
+	elems.salaryInfoContainer.className = "salary-info-container";
+	elems.salaryAmountLine = document.createElement("div");
+	elems.salaryAmountLine.className = "salary-amount-line";
+	elems.salaryEuroSign = document.createElement("p");
+	elems.salaryEuroSign.className = "salary-euro-sign";
+	elems.salaryEuroSign.innerText = "€";
+	elems.salaryInteger = document.createElement("p");
+	elems.salaryInteger.className = "salary-integer";
+	elems.salaryInteger.innerText = "0";
+	elems.salaryFloat = document.createElement("p");
+	elems.salaryFloat.className = "salary-float";
+	elems.salaryFloat.innerText = ".00";
+
+	elems.salaryPercentLine = document.createElement("div");
+	elems.salaryPercentLine.className = "salary-percent-line";
+	elems.salaryPercent = document.createElement("div");
+	elems.salaryPercent.className = "salary-percent";
+	elems.salaryPercent.innerText = "0%";
+
+	elems.salarySlide = document.createElement("div");
+	elems.salarySlide.className = "salary-slide";
+
+	elems.salaryInfoContainer.appendChild(elems.salaryAmountLine);
+	elems.salaryInfoContainer.appendChild(elems.salaryPercentLine);
+
+	elems.salaryCircle.appendChild(elems.salaryInfoContainer);
+	elems.salaryCircleContainer.appendChild(elems.salaryCircle);
+
+	elems.salaryAmountLine.appendChild(elems.salaryEuroSign);
+	elems.salaryAmountLine.appendChild(elems.salaryInteger);
+	elems.salaryAmountLine.appendChild(elems.salaryFloat);
+
+	elems.salaryPercentLine.appendChild(elems.salaryPercent);
+
+	elems.salaryContainer.appendChild(elems.mainTitleInfo);
+	elems.salaryContainer.appendChild(elems.lineThisSelection);
+	elems.salaryContainer.appendChild(elems.salaryCircleContainer);
+	elems.popMiddleDivRight.appendChild(elems.salaryContainer);
+
+
+	//////////////////////////////////////////////////////////////////////  BOTTOM DIV
+	elems.popBottomDiv = document.createElement("div");
+	elems.popBottomDiv.className = "pop-bottom-div";
+
+
+
 	
 	// elems.popBottomDivRight = document.createElement("div");
 	// elems.popBottomDivRight.className = "pop-bottom-div-right";
@@ -145,6 +219,7 @@ popup.createElems = function(elems) {
 	// elems.lineHabit.appendChild(elems.checkboxHabit7);
 
 	elems.popMiddleDiv.appendChild(elems.popMiddleDivLeft);
+	elems.popMiddleDiv.appendChild(elems.popMiddleDivRight);
 	elems.popMiddleDivLeft.appendChild(elems.middleLine1);
 	elems.popMiddleDivLeft.appendChild(elems.middleLine2);
 	elems.middleLine1.appendChild(elems.popInput1);
@@ -179,6 +254,7 @@ popup.createElems = function(elems) {
 	// elems.popBottomDiv.appendChild(elems.popBottomDivRight);
 
 	elems.popupRemaining.appendChild(elems.popMiddleDiv);
+	elems.popupRemaining.appendChild(elems.popBottomDiv);
 	document.body.appendChild(elems.popupRemaining);
 
 	// elems.checkboxes = document.querySelectorAll(".checkbox-habit");
