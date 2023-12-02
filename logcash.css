@@ -123,8 +123,8 @@ body
 	/* background-color: pink; */
 	height: 70%;
 	aspect-ratio: 1/1;
-	/* background-image: url("icons/settings-5.svg"); */
-	background-image: url(setting);
+	background-image: url("icons/settings-5.svg");
+	/* background-image: url(setting); */
 	background-size: contain;
 	background-repeat: no-repeat;
 	cursor: pointer;
