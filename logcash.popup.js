@@ -21,15 +21,15 @@ popup.createElems = function(elems) {
 	elems.popupTopDiv.appendChild(elems.popupTopRightText);
 
 	// POPUP INFO
-	elems.popBottomDiv = document.createElement("div");
-	elems.popBottomDiv.className = "pop-bottom-div";
+	elems.popMiddleDiv = document.createElement("div");
+	elems.popMiddleDiv.className = "pop-middle-div";
 	
-	elems.popBottomDivLeft = document.createElement("div");
-	elems.popBottomDivLeft.className = "pop-bottom-div-left";
-	elems.bottomLine1 = document.createElement("div");
-	elems.bottomLine1.className = "bottom-line-1";
-	elems.bottomLine2 = document.createElement("div");
-	elems.bottomLine2.className = "bottom-line-2";
+	elems.popMiddleDivLeft = document.createElement("div");
+	elems.popMiddleDivLeft.className = "pop-middle-div-left";
+	elems.middleLine1 = document.createElement("div");
+	elems.middleLine1.className = "middle-line-1";
+	elems.middleLine2 = document.createElement("div");
+	elems.middleLine2.className = "middle-line-2";
 
 	elems.popInput1 = document.createElement("div");
 	elems.popInput1.className = "pop-input";
@@ -61,112 +61,94 @@ popup.createElems = function(elems) {
 	elems.lineHabit = document.createElement("div");
 	elems.lineHabit.className = "line-habit";
 
-	elems.checkboxHabit1 = document.createElement("div");
-	elems.checkboxHabit1.className = "checkbox-habit";
-	elems.checkboxHabit1.id = "0";
-	elems.checkboxHabit1.innerText = "M";
-	elems.checkboxHabit2 = document.createElement("div");
-	elems.checkboxHabit2.className = "checkbox-habit";
-	elems.checkboxHabit2.id = "1";
-	elems.checkboxHabit2.innerText = "T";
-	elems.checkboxHabit3 = document.createElement("div");
-	elems.checkboxHabit3.className = "checkbox-habit";
-	elems.checkboxHabit3.id = "2";
-	elems.checkboxHabit3.innerText = "W";
-	elems.checkboxHabit4 = document.createElement("div");
-	elems.checkboxHabit4.className = "checkbox-habit";
-	elems.checkboxHabit4.id = "3";
-	elems.checkboxHabit4.innerText = "T";
-	elems.checkboxHabit5 = document.createElement("div");
-	elems.checkboxHabit5.className = "checkbox-habit";
-	elems.checkboxHabit5.id = "4";
-	elems.checkboxHabit5.innerText = "F";
-	elems.checkboxHabit6 = document.createElement("div");
-	elems.checkboxHabit6.className = "checkbox-habit";
-	elems.checkboxHabit6.id = "5";
-	elems.checkboxHabit6.innerText = "S";
-	elems.checkboxHabit7 = document.createElement("div");
-	elems.checkboxHabit7.className = "checkbox-habit";
-	elems.checkboxHabit7.id = "6";
-	elems.checkboxHabit7.innerText = "S";
+	elems.checkboxes = [];
+	const arrayDaysLetter = ["S", "M", "T", "W", "T", "F", "S"];
+	for (var i = 0; i < 7; i++)
+	{
+		elems.checkboxes[i] = document.createElement("div");
+		elems.checkboxes[i].className = "checkbox-habit";
+		elems.checkboxes[i].id = i;
+		elems.checkboxes[i].innerText = arrayDaysLetter[i];
+	}
 
 	elems.floatingLabel2.className = "floating-label";
 	elems.floatingLabel2.innerText = "Hours Deducted";
 	
-	elems.popBottomDivRight = document.createElement("div");
-	elems.popBottomDivRight.className = "pop-bottom-div-right";
-	elems.resultsContainer1 = document.createElement("div");
-	elems.resultsContainer1.className = "results-container";
-	elems.mainTitleInfo1 = document.createElement("p");
-	elems.mainTitleInfo1.className = "main-title-info";
-	elems.mainTitleInfo1.innerText = "Days Remaining";
-	elems.lineResults1 = document.createElement("div");
-	elems.lineResults1.className = "line-results";
-	elems.lineResultsLeft1 = document.createElement("div");
-	elems.lineResultsLeft1.className = "line-results-left";
-	elems.numberLabel1 = document.createElement("span");
-	elems.numberLabel1.className = "number-label";
-	elems.numberLabel1.innerText = "Open";
-	elems.numberResult1 = document.createElement("p");
-	elems.numberResult1.className = "number-result";
-	elems.numberResult1.id = "result-open";
-	elems.numberResult1.innerText = "0";
+	// elems.popBottomDivRight = document.createElement("div");
+	// elems.popBottomDivRight.className = "pop-bottom-div-right";
+	// elems.resultsContainer1 = document.createElement("div");
+	// elems.resultsContainer1.className = "results-container";
+	// elems.mainTitleInfo1 = document.createElement("p");
+	// elems.mainTitleInfo1.className = "main-title-info";
+	// elems.mainTitleInfo1.innerText = "Days Remaining";
+	// elems.lineResults1 = document.createElement("div");
+	// elems.lineResults1.className = "line-results";
+	// elems.lineResultsLeft1 = document.createElement("div");
+	// elems.lineResultsLeft1.className = "line-results-left";
+	// elems.numberLabel1 = document.createElement("span");
+	// elems.numberLabel1.className = "number-label";
+	// elems.numberLabel1.innerText = "Open";
+	// elems.numberResult1 = document.createElement("p");
+	// elems.numberResult1.className = "number-result";
+	// elems.numberResult1.id = "result-open";
+	// elems.numberResult1.innerText = "0";
 
+	// // elems.numberLabel2 = document.createElement("span");
+	// // elems.numberLabel2.className = "number-label";
+	// // elems.numberLabel2.innerText = "Total";
+
+	// elems.lineSeparator1 = document.createElement("div");
+	// elems.lineSeparator1.className = "line-separator";
+	// elems.lineSeparator2 = document.createElement("div");
+	// elems.lineSeparator2.className = "line-separator";
+
+	// elems.lineResultsRight1 = document.createElement("div");
+	// elems.lineResultsRight1.className = "line-results-right";
+	// elems.numberLabel2 = document.createElement("span");
+	// elems.numberLabel2.className = "number-label";
+	// elems.numberLabel2.innerText = "Total";
+	// elems.numberResult2 = document.createElement("p");
+	// elems.numberResult2.className = "number-result";
+	// elems.numberResult2.innerText = "0";
+
+	// elems.lineResultsLeft2 = document.createElement("div");
+	// elems.lineResultsLeft2.className = "line-results-left";
 	// elems.numberLabel2 = document.createElement("span");
 	// elems.numberLabel2.className = "number-label";
 	// elems.numberLabel2.innerText = "Total";
 
-	elems.lineSeparator1 = document.createElement("div");
-	elems.lineSeparator1.className = "line-separator";
-	elems.lineSeparator2 = document.createElement("div");
-	elems.lineSeparator2.className = "line-separator";
+	// elems.numberLabel3 = document.createElement("span");
+	// elems.numberLabel3.className = "number-label";
+	// elems.numberLabel3.innerText = "Earned";
+	// elems.numberResult3 = document.createElement("p");
+	// elems.numberResult3.className = "number-result";
+	// elems.numberResult3.id = "result-earned";
+	// elems.numberResult3.innerText = "0";
 
-	elems.lineResultsRight1 = document.createElement("div");
-	elems.lineResultsRight1.className = "line-results-right";
-	elems.numberLabel2 = document.createElement("span");
-	elems.numberLabel2.className = "number-label";
-	elems.numberLabel2.innerText = "Total";
-	elems.numberResult2 = document.createElement("p");
-	elems.numberResult2.className = "number-result";
-	elems.numberResult2.innerText = "0";
-
-	elems.lineResultsLeft2 = document.createElement("div");
-	elems.lineResultsLeft2.className = "line-results-left";
-	elems.numberLabel2 = document.createElement("span");
-	elems.numberLabel2.className = "number-label";
-	elems.numberLabel2.innerText = "Total";
-
-	elems.numberLabel3 = document.createElement("span");
-	elems.numberLabel3.className = "number-label";
-	elems.numberLabel3.innerText = "Earned";
-	elems.numberResult3 = document.createElement("p");
-	elems.numberResult3.className = "number-result";
-	elems.numberResult3.id = "result-earned";
-	elems.numberResult3.innerText = "0";
-
-	elems.resultsContainer2 = document.createElement("div");
-	elems.resultsContainer2.className = "results-container";
-	elems.mainTitleInfo2 = document.createElement("p");
-	elems.mainTitleInfo2.className = "main-title-info";
-	elems.mainTitleInfo2.innerText = "Salary";
-	elems.lineResults2 = document.createElement("div");
-	elems.lineResults2.className = "line-results";
+	// elems.resultsContainer2 = document.createElement("div");
+	// elems.resultsContainer2.className = "results-container";
+	// elems.mainTitleInfo2 = document.createElement("p");
+	// elems.mainTitleInfo2.className = "main-title-info";
+	// elems.mainTitleInfo2.innerText = "Salary";
+	// elems.lineResults2 = document.createElement("div");
+	// elems.lineResults2.className = "line-results";
 	
 	elems.weeklyHabit.appendChild(elems.weeklySpan);
 	elems.weeklyHabit.appendChild(elems.lineHabit);
-	elems.lineHabit.appendChild(elems.checkboxHabit1);
-	elems.lineHabit.appendChild(elems.checkboxHabit2);
-	elems.lineHabit.appendChild(elems.checkboxHabit3);
-	elems.lineHabit.appendChild(elems.checkboxHabit4);
-	elems.lineHabit.appendChild(elems.checkboxHabit5);
-	elems.lineHabit.appendChild(elems.checkboxHabit6);
-	elems.lineHabit.appendChild(elems.checkboxHabit7);
+	for (var i = 0; i < 7; i++)
+		elems.lineHabit.appendChild(elems.checkboxes[i]);
+	// elems.lineHabit.appendChild(elems.checkboxHabit2);
+	// elems.lineHabit.appendChild(elems.checkboxHabit3);
+	// elems.lineHabit.appendChild(elems.checkboxHabit4);
+	// elems.lineHabit.appendChild(elems.checkboxHabit5);
+	// elems.lineHabit.appendChild(elems.checkboxHabit6);
+	// elems.lineHabit.appendChild(elems.checkboxHabit7);
 
-	elems.popBottomDiv.appendChild(elems.popBottomDivLeft);
-	elems.popBottomDivLeft.appendChild(elems.bottomLine1);
-	elems.popBottomDivLeft.appendChild(elems.bottomLine2);
-	elems.bottomLine1.appendChild(elems.popInput1);
-	elems.bottomLine1.appendChild(elems.popInput2);
+	elems.popMiddleDiv.appendChild(elems.popMiddleDivLeft);
+	elems.popMiddleDivLeft.appendChild(elems.middleLine1);
+	elems.popMiddleDivLeft.appendChild(elems.middleLine2);
+	elems.middleLine1.appendChild(elems.popInput1);
+	elems.middleLine1.appendChild(elems.popInput2);
 	
 	elems.popInput1.appendChild(elems.inputText1);
 	elems.popInput1.appendChild(elems.floatingLabel1);
@@ -174,32 +156,32 @@ popup.createElems = function(elems) {
 	elems.popInput2.appendChild(elems.inputText2);
 	elems.popInput2.appendChild(elems.floatingLabel2);
 
-	elems.bottomLine2.appendChild(elems.weeklyHabit);
+	elems.middleLine2.appendChild(elems.weeklyHabit);
 	
-	elems.resultsContainer1.appendChild(elems.mainTitleInfo1);
-	elems.resultsContainer1.appendChild(elems.lineResults1);
-	elems.lineResultsLeft1.appendChild(elems.numberLabel1);
-	elems.lineResultsLeft1.appendChild(elems.numberResult1);
-	elems.lineResultsLeft2.appendChild(elems.numberLabel3);
-	elems.lineResultsLeft2.appendChild(elems.numberResult3);
-	elems.lineResultsRight1.appendChild(elems.numberLabel2);
-	elems.lineResultsRight1.appendChild(elems.numberResult2);
-	elems.lineResults1.appendChild(elems.lineResultsLeft1);
-	elems.lineResults1.appendChild(elems.lineResultsRight1);
+	// elems.resultsContainer1.appendChild(elems.mainTitleInfo1);
+	// elems.resultsContainer1.appendChild(elems.lineResults1);
+	// elems.lineResultsLeft1.appendChild(elems.numberLabel1);
+	// elems.lineResultsLeft1.appendChild(elems.numberResult1);
+	// elems.lineResultsLeft2.appendChild(elems.numberLabel3);
+	// elems.lineResultsLeft2.appendChild(elems.numberResult3);
+	// elems.lineResultsRight1.appendChild(elems.numberLabel2);
+	// elems.lineResultsRight1.appendChild(elems.numberResult2);
+	// elems.lineResults1.appendChild(elems.lineResultsLeft1);
+	// elems.lineResults1.appendChild(elems.lineResultsRight1);
 	
-	elems.resultsContainer2.appendChild(elems.mainTitleInfo2);
-	elems.resultsContainer2.appendChild(elems.lineResults2);
-	elems.lineResults2.appendChild(elems.lineResultsLeft2);
-	elems.lineResults2.appendChild(elems.lineSeparator2);
+	// elems.resultsContainer2.appendChild(elems.mainTitleInfo2);
+	// elems.resultsContainer2.appendChild(elems.lineResults2);
+	// elems.lineResults2.appendChild(elems.lineResultsLeft2);
+	// elems.lineResults2.appendChild(elems.lineSeparator2);
 
-	elems.popBottomDivRight.appendChild(elems.resultsContainer1);
-	elems.popBottomDivRight.appendChild(elems.resultsContainer2);
-	elems.popBottomDiv.appendChild(elems.popBottomDivRight);
+	// elems.popBottomDivRight.appendChild(elems.resultsContainer1);
+	// elems.popBottomDivRight.appendChild(elems.resultsContainer2);
+	// elems.popBottomDiv.appendChild(elems.popBottomDivRight);
 
-	elems.popupRemaining.appendChild(elems.popBottomDiv);
+	elems.popupRemaining.appendChild(elems.popMiddleDiv);
 	document.body.appendChild(elems.popupRemaining);
 
-	elems.checkboxes = document.querySelectorAll(".checkbox-habit");
+	// elems.checkboxes = document.querySelectorAll(".checkbox-habit");
 }
 
 function disableTextSelection() {
@@ -213,10 +195,10 @@ function disableTextSelection() {
 
 popup.setStyle = function(elems) {
 
-	elems.popupRemaining.style.opacity = "0"; // set to zero
-	// elems.popupRemaining.style.display = "flex";
-	elems.popupRemaining.style.display = "none";
-	// elems.popupRemaining.style.width = "fit-contain";
+	elems.popupRemaining.style.opacity = "1"; // set to zero
+	elems.popupRemaining.style.display = "flex";
+	// elems.popupRemaining.style.opacity = "0"; // set to zero
+	// elems.popupRemaining.style.display = "none";
 	elems.popupRemaining.style.position = "absolute";
 	elems.popupRemaining.style.borderRadius = "4px";
 	elems.popupRemaining.style.zIndex = "1000";
@@ -225,8 +207,8 @@ popup.setStyle = function(elems) {
 	elems.popupRemaining.style.boxShadow = "0px 10px 15px #12141a3a";
 	elems.popupRemaining.style.backdropFilter = "blur(6px)";
 
-	elems.popupRemaining.style.top = "80px"; // remove
-	elems.popupRemaining.style.right = "40px"; // remove
+	elems.popupRemaining.style.top = "60px"; // remove
+	elems.popupRemaining.style.right = "10px"; // remove
 	
 	elems.popupTopDiv.style.cursor = "move";
 	elems.popupTopDiv.style.height = "fit-content";
@@ -265,10 +247,8 @@ function getOpenDays(numberYear, numberMonth, numberDay) {
 	var actualDay = todayDate.getDay();
 	var openDays = 0;
 	var totalDays = 0;
-
-	// numberDay = 1;	// tmp
 	var i = numberDay - 1;
-	var indexHabit = actualDay - 1;
+	var indexHabit = actualDay;
 	var useAll = isCheckboxUse();
 
 	while (++i <= numberDaysInMonth)
@@ -299,8 +279,6 @@ function getOpenDays(numberYear, numberMonth, numberDay) {
 
 function setData(elems) {
 
-	// const checkboxes = document.querySelectorAll(".checkbox-habit");
-
 	elems.popupTopRightText.innerText = data.student.pseudo;
 	for (var i = 0; i < elems.checkboxes.length; i++)
 	{
@@ -318,8 +296,8 @@ function setData(elems) {
 
 	var numberDays = getOpenDays(numberYear, numberMonth, numberDay);
 
-	elems.numberResult1.innerText = numberDays.open;
-	elems.numberResult2.innerText = numberDays.total;
+	// elems.numberResult1.innerText = numberDays.open;
+	// elems.numberResult2.innerText = numberDays.total;
 
 	// const resultOpen = document.querySelector("#result-open");
 	// const resultTotal = document.querySelector("#result-total");
