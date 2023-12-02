@@ -566,23 +566,93 @@ input:not(:focus):valid ~ .floating-label {
 
 /***************************** BOTTOM *****************************/
 
+.pop-bottom-container {
+	/* background-color: pink; */
+	
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	/* display: flex;
+	align-items: center;
+	justify-content: center; */
+}
+
 .pop-bottom-div {
-	/* background-color: red; */
-	/* height: 25px; */
+	/* background-color: green; */
+	/* background-color: rgba(30, 35, 42, 0.8); */
 	border-top: 1px solid rgb(45, 49, 60);
-	margin: 0 8px;
-	padding-top: 8px;
+	/* margin: 8px 0; */
+
+	/* padding-top: 8px; */
 	/*padding: 0 8px; */
+	/* transition: ease 2s box-shadow; */
+	transition: ease 0.5s background-color, ease 0.5s box-shadow;
+	/* box-shadow: -8px 0 8px rgba(30, 35, 42, 0.7), 8px 0 8px rgba(30, 35, 42, 0.8), 0px 8px 8px rgba(30, 35, 42, 0.8); */
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+/* .pop-bottom-container:hover { */
+.pop-bottom-div:hover {
+	/* background-color: red; */
+	/* box-shadow: -4px 0 4px rgba(30, 35, 42, 0.7), 4px 0 4px rgba(30, 35, 42, 0.8); */
+}
+
+.more-info-container {
+	/* background-color: green; */
+	display: flex;
+	justify-content: center;
+	/* margin: 8px 8px 0 8px; */
+	/* padding: 4px; */
+	/* margin: 8px 0; */
+	padding: 4px 0;
+	width: 100%;
+	/* border-top: 1px solid rgb(45, 49, 60); */
+	/* border-top: 1px solid rgba(45, 49, 60, 0); */
+	/* transition: ease 0.5s background-color, ease 0.5s border-top, ease 0.5s padding; */
+	transition: ease 0.5s background-color, ease 0.5s padding;
+}
+
+.more-info-logo {
+	/* background-color: red; */
+	background-image: url("icons/more-1.svg");
+	aspect-ratio: 1/1;
+	background-size: contain;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	/* height: 20px; */
+	height: 0px;
+	border-radius: 50%;
+	margin-top: 0px;
+	
+	transition: ease 0.5s height, ease 0.5s margin-top;
+	
+	/* display: none; */
+	/* margin: 4px; */
+	/* width: 10px;
+	height: 10px; */
 }
 
 
 
 
 .results-container {
-	/* background-color: orange; */
-	/* height: 20px; */
 	width: 100%;
-	margin-bottom: 8px;
+	/* margin-top: 8px; */
+	display: flex;
+	justify-content: flex-start;
+}
+
+.results-div {
+	/* background-color: red; */
+	width: fit-content;
+	display: none;
+	/* display: block; */
+	border-right: 1px solid rgb(45, 49, 60);
+	padding: 8px 8px 8px 8px;
 }
 
 .main-title-info {
@@ -599,20 +669,25 @@ input:not(:focus):valid ~ .floating-label {
 	width: 100%;
 	height: fit-content;
 	display: flex;
+	justify-content: space-between;
 	margin-top: 4px;
 }
 
 .line-results-left {
+	/* background-color: green; */
+	flex: 1;
 	display: flex;
 	flex-direction: column;
-	padding-right: 7px;
+	/* padding-right: 7px; */
 	border-right: 1px solid rgb(45, 49, 60);
 }
 
 .line-results-right {
+	/* background-color: blue; */
+	flex: 1;
 	/* background-color: red; */
 	display: flex;
-	padding-left: 7px;
+	/* padding-left: 4px; */
 	flex-direction: column;
 	/* flex: 1; */
 }
@@ -623,16 +698,20 @@ input:not(:focus):valid ~ .floating-label {
 	pointer-events: none;
 	color: rgb(122, 122, 122);
 	font-size: 0.5em;
-	margin: 0 0 2px 2px;
+	/* margin: 0 0 2px 4px; */
+	margin: 0;
 	padding: 0;
-	top: -6px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	/* top: -6px; */
 	white-space: nowrap;
 	transition: 0.2s ease all;
 }
 
 .number-result {
 	/* font-size: 0.9em; */
-	background-color: #313c48;
+	/* background-color: #313c48; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -643,8 +722,9 @@ input:not(:focus):valid ~ .floating-label {
 	margin: 0;
 	font-size: 0.8em;
 	border-radius: 4px;
-	color: rgb(198, 198, 198);
-	border: 2px solid rgb(45, 49, 60);
+	/* color: rgb(198, 198, 198); */
+	color: white;
+	/* border: 2px solid rgb(45, 49, 60); */
 }
 
 /* .line-separator {

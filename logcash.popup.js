@@ -142,12 +142,101 @@ popup.createElems = function(elems) {
 
 
 	//////////////////////////////////////////////////////////////////////  BOTTOM DIV
+	elems.popBottomContainer = document.createElement("div");
+	elems.popBottomContainer.className = "pop-bottom-container";
+	
 	elems.popBottomDiv = document.createElement("div");
 	elems.popBottomDiv.className = "pop-bottom-div";
 
+	elems.resultsContainer = document.createElement("div");
+	elems.resultsContainer.className = "results-container";
 
+	elems.resultsDiv = document.createElement("div");
+	elems.resultsDiv.className = "results-div";
 
+	elems.mainTitleDays = document.createElement("p");
+	elems.mainTitleDays.className = "main-title-info";
+	elems.mainTitleDays.innerText = "Days Remaining";
+	elems.lineResultsDays = document.createElement("div");
+	elems.lineResultsDays.className = "line-results";
+
+	elems.lineResultsDaysLeft = document.createElement("div");
+	elems.lineResultsDaysLeft.className = "line-results-left";
+	elems.numberLabelOpen = document.createElement("span");
+	elems.numberLabelOpen.className = "number-label";
+	elems.numberLabelOpen.innerText = "Open";
+	elems.numberResultOpen = document.createElement("p");
+	elems.numberResultOpen.className = "number-result";
+	elems.numberResultOpen.id = "result-open";
+	elems.numberResultOpen.innerText = "0";
+	elems.lineResultsDaysLeft.appendChild(elems.numberLabelOpen);
+	elems.lineResultsDaysLeft.appendChild(elems.numberResultOpen);
+
+	elems.lineResultsDaysRight = document.createElement("div");
+	elems.lineResultsDaysRight.className = "line-results-right";
+	elems.numberLabelTotal = document.createElement("span");
+	elems.numberLabelTotal.className = "number-label";
+	elems.numberLabelTotal.innerText = "Total";
+	elems.numberLabelTotal.style.marginLeft = "4px";
+	elems.numberResultTotal = document.createElement("p");
+	elems.numberResultTotal.className = "number-result";
+	elems.numberResultTotal.id = "result-Total";
+	elems.numberResultTotal.innerText = "0";
+	elems.lineResultsDaysRight.appendChild(elems.numberLabelTotal);
+	elems.lineResultsDaysRight.appendChild(elems.numberResultTotal);
+
+	elems.lineResultsDays.appendChild(elems.lineResultsDaysLeft);
+	elems.lineResultsDays.appendChild(elems.lineResultsDaysRight);
+
+	elems.moreInfoContainer = document.createElement("div");
+	elems.moreInfoContainer.className = "more-info-container";
+	elems.moreInfoLogo = document.createElement("div");
+	elems.moreInfoLogo.className = "more-info-logo";
+	elems.moreInfoContainer.appendChild(elems.moreInfoLogo);
+
+	elems.resultsContainer.appendChild(elems.resultsDiv);
+
+	elems.resultsDiv.appendChild(elems.mainTitleDays);
+	elems.resultsDiv.appendChild(elems.lineResultsDays);
+
+	elems.popBottomDiv.appendChild(elems.resultsContainer);
+	elems.popBottomDiv.appendChild(elems.moreInfoContainer);
+	elems.popBottomContainer.appendChild(elems.popBottomDiv);
+
+	function mouseoverPopBottom(e) {
+		elems.moreInfoLogo.style.height = "20px";
+		elems.moreInfoContainer.style.backgroundColor = "rgba(30, 35, 42, 0.8)";
+	}
+
+	function mouseoutPopBottom(e) {
+		elems.moreInfoLogo.style.height = "0px";
+		elems.moreInfoContainer.style.backgroundColor = "";
+	}
 	
+	elems.popBottomContainer.addEventListener("mouseover", mouseoverPopBottom);
+	elems.popBottomContainer.addEventListener("mouseout", mouseoutPopBottom);
+
+	var optionClicked = false;
+
+	elems.moreInfoLogo.addEventListener("click", function(e) {
+
+		if (optionClicked)
+		{
+			elems.resultsDiv.style.display = "none";
+			elems.moreInfoLogo.style.height = "0px";
+			elems.moreInfoContainer.style.backgroundColor = "";
+			elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
+			optionClicked = false;
+		}
+		else
+		{
+			elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60)";
+			elems.moreInfoContainer.style.padding = "4px 0";
+			elems.resultsDiv.style.display = "block";
+			optionClicked = true;
+		}
+	});
+
 	// elems.popBottomDivRight = document.createElement("div");
 	// elems.popBottomDivRight.className = "pop-bottom-div-right";
 	// elems.resultsContainer1 = document.createElement("div");
@@ -254,7 +343,7 @@ popup.createElems = function(elems) {
 	// elems.popBottomDiv.appendChild(elems.popBottomDivRight);
 
 	elems.popupRemaining.appendChild(elems.popMiddleDiv);
-	elems.popupRemaining.appendChild(elems.popBottomDiv);
+	elems.popupRemaining.appendChild(elems.popBottomContainer);
 	document.body.appendChild(elems.popupRemaining);
 
 	// elems.checkboxes = document.querySelectorAll(".checkbox-habit");
