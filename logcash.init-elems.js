@@ -22,6 +22,12 @@ function initContainerLogcash(elems) {
 	elems.sideProgress = document.createElement("div");
 	elems.sideProgress.className = "side-progress";
 
+	elems.settingDiv = document.createElement("div");
+	elems.settingDiv.className = "setting-div";
+	elems.settingButton = document.createElement("div");
+	elems.settingButton.className = "setting-button";
+	elems.settingDiv.appendChild(elems.settingButton);
+
 	// initPopup(elems);
 
 	elems.sideRemaining = document.createElement("div");
@@ -32,6 +38,7 @@ function initContainerLogcash(elems) {
 	elems.sideRemaining.appendChild(elems.textRemaining);
 	elems.rowProgress.appendChild(elems.sideProgress);
 	elems.rowProgress.appendChild(elems.sideRemaining);
+	elems.rowProgress.appendChild(elems.settingDiv);
 
 	// elems.oldLogTitle = getTitleLogtime();
 	// console.log(elems.oldLogTitle);

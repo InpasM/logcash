@@ -530,10 +530,10 @@ let timeOut;
 
 function clickSetting(e) {
 
-	const settingButton = document.querySelector(".setting-button");
+	// const settingButton = document.querySelector(".setting-button");
 
-	settingButton.style.opacity = "0";
-	settingButton.style.cursor = "default";
+	elems.settingButton.style.opacity = "0";
+	elems.settingButton.style.cursor = "default";
 	
 	clickRemaining(e);
 }
@@ -543,13 +543,13 @@ function mouseoverProgress() {
 	// elems.rowProgress.style.border = "2px solid #3a3f4c";
 	// elems.rowProgress.style.boxShadow = "0 0px 2px #12141a75";
 
-	const settingButton = document.querySelector(".setting-button");
+	// const elems.settingButton = document.querySelector(".setting-button");
 
-	settingButton.style.opacity = "1";
-	settingButton.style.cursor = "pointer";
-	settingButton.addEventListener("click", clickSetting);
+	elems.settingButton.style.opacity = "1";
+	elems.settingButton.style.cursor = "pointer";
+	elems.settingButton.addEventListener("click", clickSetting);
 
-	// settingButton.style.top = "0";
+	// elems.settingButton.style.top = "0";
 }
 
 function mouseoutProgress() {
@@ -557,13 +557,13 @@ function mouseoutProgress() {
 	// elems.rowProgress.style.boxShadow = "0 0px 10px #12141a75";
 
 	timeOut = setTimeout(function() {
-		const settingButton = document.querySelector(".setting-button");
+		// const elems.settingButton = document.querySelector(".setting-button");
 
-		settingButton.removeEventListener("click", clickSetting);
-		settingButton.style.opacity = "0";
-		settingButton.style.cursor = "default";
-		// settingButton.style.display = "none";
-		// settingButton.style.top = "2px";
+		elems.settingButton.removeEventListener("click", clickSetting);
+		elems.settingButton.style.opacity = "0";
+		elems.settingButton.style.cursor = "default";
+		// elems.settingButton.style.display = "none";
+		// elems.settingButton.style.top = "2px";
 	}, 800);
 }
 

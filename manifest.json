@@ -14,6 +14,7 @@
 	{
 		"matches": ["*://*.profile.intra.42.fr/*"],
 		"js": ["logcash.local-data.js", "logcash.popup.js", "logcash.init-elems.js", "logcash.js"],
+		"css": ["logcash.css"],
 		"run_at": "document_end"
 	}
 	]
