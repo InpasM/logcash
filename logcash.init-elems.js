@@ -136,5 +136,5 @@ init.generateContainerLogcash = function(elems, months, calendar) {
 	initContainerLogcash(elems);
 	initDivMonths(elems, months);
 	setStyle(elems);
-	popup.initPopup(elems);
+	popup.initPopup(elems, months);
 }

@@ -141,7 +141,7 @@ popup.createElems = function(elems) {
 	elems.salaryEuroSign.innerText = "€";
 	elems.salaryInteger = document.createElement("p");
 	elems.salaryInteger.className = "salary-integer";
-	elems.salaryInteger.innerText = "1000";
+	elems.salaryInteger.innerText = "0";
 	elems.salaryFloat = document.createElement("p");
 	elems.salaryFloat.className = "salary-float";
 	elems.salaryFloat.innerText = ".00";
@@ -159,6 +159,7 @@ popup.createElems = function(elems) {
 	elems.salaryInfoContainer.appendChild(elems.salaryPercentLine);
 
 	elems.salaryCircle.appendChild(elems.salaryInfoContainer);
+	elems.salaryCircle.appendChild(elems.salarySlide);
 	elems.salaryCircleContainer.appendChild(elems.salaryCircle);
 
 	elems.salaryAmountLine.appendChild(elems.salaryEuroSign);
@@ -518,15 +519,20 @@ function setData(elems) {
 
 	var numberDays = getOpenDays(numberYear, numberMonth, numberDay);
 
-	// elems.numberResult1.innerText = numberDays.open;
-	// elems.numberResult2.innerText = numberDays.total;
+	elems.numberResultOpen.innerText = numberDays.open;
+	elems.numberResultTotal.innerText = numberDays.total;
 
-	// const resultOpen = document.querySelector("#result-open");
-	// const resultTotal = document.querySelector("#result-total");
-	// resultOpen.innerText = numberDays.open;
-	// resultTotal.innerText = numberDays.total;
+	var totalSalaryEarn = parseFloat(popup.months[popup.months.indexArray].percent / 100 * data.student.salary);
+	var integerSalary = parseInt(totalSalaryEarn);
+	var floatSalary = totalSalaryEarn - integerSalary;
+	// console.log("salary earn: " + totalSalaryEarn);
+	// console.log("integer earn: " + integerSalary);
+	// console.log("float earn: " + floatSalary.toFixed(2).split('.')[1]);
 
-	// console.log("Number total day remaining: " + numberDays.total + "  -  Number open day: " + numberDays.open);
+	elems.salaryInteger.innerText = integerSalary;
+	elems.salaryFloat.innerText = "." + floatSalary.toFixed(2).split('.')[1];
+	elems.salaryPercent.innerText = popup.months[popup.months.indexArray].percent.toFixed(1) + '%';
+	elems.salarySlide.style.height = popup.months[popup.months.indexArray].percent + "%";
 }
 
 function clickHabit(e) {
@@ -547,9 +553,12 @@ function clickHabit(e) {
 		e.target.style.borderColor = "rgb(0, 186, 188)";
 	}
 	data.updateLocalStorage(data.student);
+	setData(elems);
 }
 
-popup.initPopup = function(elems) {
+popup.initPopup = function(elems, months) {
+
+	popup.months = months;
 
 	var mouseDown = false,
 		popupOffset = [0, 0];
@@ -592,6 +601,7 @@ popup.initPopup = function(elems) {
 			data.student.salary = e.target.value;
 			data.updateLocalStorage(data.student);
 		}
+		setData(elems);
 	});
 
 	elems.inputDeducted.addEventListener("blur", function(e) {
@@ -602,6 +612,7 @@ popup.initPopup = function(elems) {
 			data.student.hoursDeducted = e.target.value;
 			data.updateLocalStorage(data.student);
 		}
+		setData(elems);
 	});
 
 	for (var i = 0; i < elems.checkboxes.length; i++)
