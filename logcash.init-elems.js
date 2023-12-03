@@ -27,8 +27,6 @@ function initContainerLogcash(elems) {
 
 	elems.settingButton = document.createElement("div");
 	elems.settingButton.className = "setting-button";
-	// const url = chrome.runtime.getURL("icons/settings-5.svg");
-	// elems.settingButton.style.backgroundImage = "url(" + 48 + ")";	// STYLE
 
 	elems.settingDiv.appendChild(elems.settingButton);
 

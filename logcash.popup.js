@@ -31,64 +31,60 @@ popup.createElems = function(elems) {
 	elems.middleLine2 = document.createElement("div");
 	elems.middleLine2.className = "middle-line-2";
 
-	elems.popInput1 = document.createElement("div");
-	// elems.popInput1.className = "pop-input";
-	elems.popInput1.style.marginRight = "7px";			/// STYLE
-	elems.popInput1.style.backgroundColor = "#373c48";
-	elems.popInput1.style.maxHeight = "42px";
-	elems.popInput1.style.width = "80px";
-	elems.popInput1.style.padding = "6px";
-	elems.popInput1.style.color = "white";
-	elems.popInput1.style.border = "2px solid rgb(45, 49, 60)";
-	elems.popInput1.style.borderRadius = "6px";
+	elems.inputContainerSalary = document.createElement("div");
+	// elems.inputContainerSalary.className = "pop-input-container";
+	elems.inputContainerSalary.style.marginRight = "7px";			/// STYLE
+	elems.inputContainerSalary.style.backgroundColor = "#373c48";
+	elems.inputContainerSalary.style.maxHeight = "fit-content";
+	elems.inputContainerSalary.style.maxWidth = "80px";
+	elems.inputContainerSalary.style.padding = "6px";
+	elems.inputContainerSalary.style.color = "white";
+	elems.inputContainerSalary.style.border = "2px solid rgb(45, 49, 60)";
+	elems.inputContainerSalary.style.borderRadius = "6px";
+	elems.inputContainerSalary.style.display = "flex";
+	elems.inputContainerSalary.style.flexDirection = "column";
 
-	elems.inputText1 = document.createElement("input");
-	// elems.inputText1.className = "inputText";
-	elems.inputText1.type = "text";
-	elems.inputText1.id = "inputSalary";
-	elems.inputText1.setAttribute('required', '');
-	elems.inputText1.style.backgroundColor = "#373c48";			/// STYLE
-	elems.inputText1.style.color = "rgb(198, 198, 198)";
-	elems.inputText1.style.outline = "none";
-	elems.inputText1.style.border = "none";
-	elems.inputText1.style.width = "100%";
-	elems.inputText1.style.position = "relative";
-	elems.inputText1.style.top = "8px";
-	elems.inputText1.style.left = "-2px";
+	elems.inputSalary = document.createElement("input");
+	// elems.inputSalary.className = "inputText";
+	elems.inputSalary.type = "text";
+	elems.inputSalary.setAttribute('required', '');
+	elems.inputSalary.style.backgroundColor = "#373c48";			/// STYLE
+	elems.inputSalary.style.color = "rgb(198, 198, 198)";
+	elems.inputSalary.style.outline = "none";
+	elems.inputSalary.style.border = "none";
+	elems.inputSalary.style.fontSize = "16px";
 
-	elems.floatingLabel1 = document.createElement("span");
-	elems.floatingLabel1.className = "floating-label";
-	// elems.floatingLabel1.fontSize = "10px";
-	elems.floatingLabel1.innerText = "Your salary";
+	elems.labelSalary = document.createElement("span");
+	elems.labelSalary.className = "label-input";
+	// elems.labelSalary.fontSize = "10px";
+	elems.labelSalary.innerText = "Your salary";
 	
-	elems.popInput2 = document.createElement("div");
-	// elems.popInput2.className = "pop-input";
-	elems.popInput2.style.marginRight = "7px";			/// STYLE
-	elems.popInput2.style.backgroundColor = "#373c48";
-	elems.popInput2.style.maxHeight = "42px";
-	elems.popInput2.style.width = "80px";
-	elems.popInput2.style.padding = "6px";
-	elems.popInput2.style.color = "white";
-	elems.popInput2.style.border = "2px solid rgb(45, 49, 60)";
-	elems.popInput2.style.borderRadius = "6px";
 
-	elems.inputText2 = document.createElement("input");
-	// elems.inputText2.className = "inputText";
-	elems.inputText2.style.backgroundColor = "#373c48";			/// STYLE
-	elems.inputText2.style.color = "rgb(198, 198, 198)";
-	elems.inputText2.style.outline = "none";
-	elems.inputText2.style.border = "none";
-	elems.inputText2.style.width = "100%";
-	elems.inputText2.style.position = "relative";
-	elems.inputText2.style.top = "8px";
-	elems.inputText2.style.left = "-2px";
-	elems.inputText2.type = "text";
-	elems.inputText2.id = "inputDeducted";
-	elems.inputText2.setAttribute('required', '');
+	elems.inputContainerHours = document.createElement("div");
+	// elems.inputContainerHours.className = "pop-input-container";
+	elems.inputContainerHours.style.backgroundColor = "#373c48";			/// STYLE
+	elems.inputContainerHours.style.maxHeight = "fit-content";
+	elems.inputContainerHours.style.maxWidth = "80px";
+	elems.inputContainerHours.style.padding = "6px";
+	elems.inputContainerHours.style.color = "white";
+	elems.inputContainerHours.style.border = "2px solid rgb(45, 49, 60)";
+	elems.inputContainerHours.style.borderRadius = "6px";
+	elems.inputContainerHours.style.display = "flex";
+	elems.inputContainerHours.style.flexDirection = "column";
 
-	elems.floatingLabel2 = document.createElement("span");
-	elems.floatingLabel2.className = "floating-label";
-	elems.floatingLabel2.innerText = "Hours Deducted";
+	elems.inputDeducted = document.createElement("input");
+	// elems.inputDeducted.className = "inputText";
+	elems.inputDeducted.type = "text";
+	elems.inputDeducted.setAttribute('required', '');
+	elems.inputDeducted.style.backgroundColor = "#373c48";			/// STYLE
+	elems.inputDeducted.style.color = "rgb(198, 198, 198)";
+	elems.inputDeducted.style.outline = "none";
+	elems.inputDeducted.style.border = "none";
+	elems.inputDeducted.style.fontSize = "16px";
+
+	elems.labelHours = document.createElement("span");
+	elems.labelHours.className = "label-input";
+	elems.labelHours.innerText = "Hours Deducted";
 
 	elems.weeklyHabit = document.createElement("div");
 	elems.weeklyHabit.className = "weekly-habit";
@@ -347,14 +343,14 @@ popup.createElems = function(elems) {
 	elems.popMiddleDiv.appendChild(elems.popMiddleDivRight);
 	elems.popMiddleDivLeft.appendChild(elems.middleLine1);
 	elems.popMiddleDivLeft.appendChild(elems.middleLine2);
-	elems.middleLine1.appendChild(elems.popInput1);
-	elems.middleLine1.appendChild(elems.popInput2);
+	elems.middleLine1.appendChild(elems.inputContainerSalary);
+	elems.middleLine1.appendChild(elems.inputContainerHours);
 	
-	elems.popInput1.appendChild(elems.inputText1);
-	elems.popInput1.appendChild(elems.floatingLabel1);
+	elems.inputContainerSalary.appendChild(elems.labelSalary);
+	elems.inputContainerSalary.appendChild(elems.inputSalary);
 	
-	elems.popInput2.appendChild(elems.inputText2);
-	elems.popInput2.appendChild(elems.floatingLabel2);
+	elems.inputContainerHours.appendChild(elems.labelHours);
+	elems.inputContainerHours.appendChild(elems.inputDeducted);
 
 	elems.middleLine2.appendChild(elems.weeklyHabit);
 	
@@ -396,10 +392,10 @@ function disableTextSelection() {
 
 popup.setStyle = function(elems) {
 
-	elems.popupRemaining.style.opacity = "1"; // set to zero
-	elems.popupRemaining.style.display = "flex";
-	// elems.popupRemaining.style.opacity = "0"; // set to zero
-	// elems.popupRemaining.style.display = "none";
+	// elems.popupRemaining.style.opacity = "1"; // dev
+	// elems.popupRemaining.style.display = "flex";
+	elems.popupRemaining.style.opacity = "0"; // normal
+	elems.popupRemaining.style.display = "none";
 	elems.popupRemaining.style.position = "absolute";
 	elems.popupRemaining.style.borderRadius = "4px";
 	elems.popupRemaining.style.zIndex = "1000";
@@ -408,8 +404,8 @@ popup.setStyle = function(elems) {
 	elems.popupRemaining.style.boxShadow = "0px 10px 15px #12141a3a";
 	elems.popupRemaining.style.backdropFilter = "blur(6px)";
 
-	elems.popupRemaining.style.top = "60px"; // remove
-	elems.popupRemaining.style.right = "10px"; // remove
+	// elems.popupRemaining.style.top = "60px"; // remove dev only
+	// elems.popupRemaining.style.right = "10px"; // remove dev only
 	
 	elems.popupTopDiv.style.cursor = "move";
 	elems.popupTopDiv.style.height = "fit-content";
@@ -580,33 +576,29 @@ popup.initPopup = function(elems) {
 
 	// put in setStyle
 	if (!data.student.salary)
-		elems.inputText1.value = 0;
+		elems.inputSalary.value = 0;
 	else
-		elems.inputText1.value = data.student.salary;
+		elems.inputSalary.value = data.student.salary;
 	if (!data.student.hoursDeducted)
-		elems.inputText2.value = 0;
+		elems.inputDeducted.value = 0;
 	else
-		elems.inputText2.value = data.student.hoursDeducted;
+		elems.inputDeducted.value = data.student.hoursDeducted;
 
-	console.log(elems.inputText2.value);
-
-	elems.inputText1.addEventListener("blur", function(e) {
+	elems.inputSalary.addEventListener("blur", function(e) {
 		if (isNaN(e.target.value) || !e.target.value)
 			e.target.value = 0;
 		else
 		{
-			console.log(e.target.value);
 			data.student.salary = e.target.value;
 			data.updateLocalStorage(data.student);
 		}
 	});
 
-	elems.inputText2.addEventListener("blur", function(e) {
+	elems.inputDeducted.addEventListener("blur", function(e) {
 		if (isNaN(e.target.value)  || !e.target.value)
 			e.target.value = 0;
 		else
 		{
-			console.log(e.target.value);
 			data.student.hoursDeducted = e.target.value;
 			data.updateLocalStorage(data.student);
 		}
@@ -616,6 +608,6 @@ popup.initPopup = function(elems) {
 	{
 		elems.checkboxes[i].addEventListener("click", clickHabit);
 	}
-	elems.inputText1.addEventListener("click", function(e) { this.select(); });
-	elems.inputText2.addEventListener("click", function(e) { this.select(); });
+	elems.inputSalary.addEventListener("click", function(e) { this.select(); });
+	elems.inputDeducted.addEventListener("click", function(e) { this.select(); });
 }
