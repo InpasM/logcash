@@ -202,7 +202,7 @@ body
 	/* white-space: nowrap; */
 	/* color: #9b9b9b;
 	padding: 6px 30px 6px 6px; */
-	padding: 4px 30px 4px 4px;
+	/* padding: 4px 30px 4px 4px; */
 }
 
 .popup-top-left-text {
@@ -214,8 +214,8 @@ body
 	/* padding: 0 4px; */
 	/* text-shadow: rgb(0, 0, 0) 0px 0px 3px; */
 	/* padding: 1px 3px 2px 3px; */
-	margin: 3px 0 0 3px;
-	padding: 0;
+	/* margin: 3px 0 0 3px;
+	padding: 0; */
 }
 
 .popup-top-right-text {
@@ -224,11 +224,10 @@ body
 	font-weight: bold;
 	margin: 10px 20px; */
 	/* margin: 10px 10; */
-	margin: 2px 0 0 0;
-	/* background-color: red; */
+	/* margin: 2px 0 0 0;
 	padding: 2px 3px;
 	width: fit-content;
-	border-radius: 2px;
+	border-radius: 2px; */
 	/* text-shadow: rgb(0, 0, 0) 0px 0px 3px; */
 }
 
@@ -255,14 +254,15 @@ body
 }
 
 .pop-input {
-	background-color: #313c48;
+	/* background-color: #313c48; */
 	/* background-color: red; */
-	height: 18px;
+	/* height: 18px; */
+	/* max-height: 20px;
 	width: 70px;
 	padding: 6px;
 	color: white;
 	border: 2px solid rgb(45, 49, 60);
-	border-radius: 6px;
+	border-radius: 6px; */
 }
 
 .inputText, .inputText:focus {

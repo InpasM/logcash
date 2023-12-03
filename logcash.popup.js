@@ -10,11 +10,11 @@ popup.createElems = function(elems) {
 	elems.popupTopDiv.className = "popup-top-div";
 	
 	elems.popupTopLeftText = document.createElement("p");
-	elems.popupTopLeftText.className = "popup-top-left-text";
+	// elems.popupTopLeftText.className = "popup-top-left-text";
 	elems.popupTopLeftText.innerText = "Logcash";
 
 	elems.popupTopRightText = document.createElement("p");
-	elems.popupTopRightText.className = "popup-top-right-text";
+	// elems.popupTopRightText.className = "popup-top-right-text";
 
 	elems.popupRemaining.appendChild(elems.popupTopDiv);
 	elems.popupTopDiv.appendChild(elems.popupTopLeftText);
@@ -32,19 +32,45 @@ popup.createElems = function(elems) {
 	elems.middleLine2.className = "middle-line-2";
 
 	elems.popInput1 = document.createElement("div");
-	elems.popInput1.className = "pop-input";
+	// elems.popInput1.className = "pop-input";
 	elems.popInput1.style.marginRight = "7px";			/// STYLE
+	elems.popInput1.style.backgroundColor = "#373c48";
+	elems.popInput1.style.maxHeight = "40px";
+	elems.popInput1.style.width = "70px";
+	elems.popInput1.style.padding = "6px";
+	elems.popInput1.style.color = "white";
+	elems.popInput1.style.border = "2px solid rgb(45, 49, 60)";
+	elems.popInput1.style.borderRadius = "6px";
+
 	elems.inputText1 = document.createElement("input");
-	elems.inputText1.className = "inputText";
+	// elems.inputText1.className = "inputText";
 	elems.inputText1.type = "text";
 	elems.inputText1.id = "inputSalary";
 	elems.inputText1.setAttribute('required', '');
+	elems.inputText1.style.backgroundColor = "#373c48";			/// STYLE
+	elems.inputText1.style.color = "rgb(198, 198, 198)";
+	elems.inputText1.style.outline = "none";
+	elems.inputText1.style.border = "none";
+	elems.inputText1.style.width = "100%";
+	elems.inputText1.style.position = "relative";
+	elems.inputText1.style.top = "6px";
+	elems.inputText1.style.left = "-2px";
+
 	elems.floatingLabel1 = document.createElement("span");
 	elems.floatingLabel1.className = "floating-label";
 	elems.floatingLabel1.innerText = "Your salary";
 	
 	elems.popInput2 = document.createElement("div");
-	elems.popInput2.className = "pop-input";
+	// elems.popInput2.className = "pop-input";
+	elems.popInput2.style.marginRight = "7px";			/// STYLE
+	elems.popInput2.style.backgroundColor = "#373c48";
+	elems.popInput2.style.maxHeight = "40px";
+	elems.popInput2.style.width = "70px";
+	elems.popInput2.style.padding = "6px";
+	elems.popInput2.style.color = "white";
+	elems.popInput2.style.border = "2px solid rgb(45, 49, 60)";
+	elems.popInput2.style.borderRadius = "6px";
+
 	elems.inputText2 = document.createElement("input");
 	elems.inputText2.className = "inputText";
 	elems.inputText2.type = "text";
@@ -380,19 +406,44 @@ popup.setStyle = function(elems) {
 	elems.popupTopDiv.style.borderRadius = "4px";
 	elems.popupTopDiv.style.borderBottom = "1px solid #2d313c";
 	elems.popupTopDiv.style.display = "flex";
-	elems.popupTopDiv.style.flexDirection = "column";
-	elems.popupTopDiv.style.justifyContent = "flex-start";
+	// elems.popupTopDiv.style.flexDirection = "column";
+	// elems.popupTopDiv.style.justifyContent = "flex-start";
+	elems.popupTopDiv.style.justifyContent = "space-between";
+	elems.popupTopDiv.style.alignItems = "center";
 	elems.popupTopDiv.style.color = "#9b9b9b";
 	elems.popupTopDiv.style.whiteSpace = "nowrap";
+	// elems.popupTopDiv.style.padding = "4px 30px 4px 4px";
+	elems.popupTopDiv.style.padding = "4px";
 
 	elems.popupTopLeftText.style.color = "#e2e2e2";
-	elems.popupTopLeftText.style.fontSize = "0.9em";
+	// elems.popupTopLeftText.style.fontSize = "0.9em";
+	elems.popupTopLeftText.style.fontSize = "16px";
+	// elems.popupTopLeftText.style.margin = "3px 0 0 3px";
+	elems.popupTopLeftText.style.margin = "3px";
+	elems.popupTopLeftText.style.padding = "0";
 	elems.popupTopLeftText.style.fontWeight = "bold";
 	elems.popupTopLeftText.style.pointerEvents = "none";
 	elems.popupTopLeftText.style.textShadow = "rgb(0, 0, 0) 0px 0px 3px";
 	
-	elems.popupTopRightText.style.fontSize = "0.7em";
+	// elems.popupTopRightText.style.fontSize = "0.7em";
+	elems.popupTopRightText.style.fontSize = "14px";
+	elems.popupTopRightText.style.margin = "0 2px 0 0";
+	// elems.popupTopRightText.style.padding = "2px 3px";
+	elems.popupTopRightText.style.padding = "2px 4px";
+	elems.popupTopRightText.style.width = "fit-content";
+	elems.popupTopRightText.style.borderRadius = "2px";
 	elems.popupTopRightText.style.textShadow = "rgb(0, 0, 0) 0px 0px 3px";
+
+	elems.popupTopRightText.addEventListener("mouseover", function(e) {
+		e.target.style.backgroundColor = "#1b1e25";
+		e.target.style.color = "#e2e2e2";
+		e.target.style.cursor = "pointer";
+	});
+
+	elems.popupTopRightText.addEventListener("mouseout", function(e) {
+		e.target.style.backgroundColor = "";
+		e.target.style.color = "#9b9b9b";
+	});
 }
 
 function isCheckboxUse() {
