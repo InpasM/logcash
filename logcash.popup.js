@@ -269,76 +269,11 @@ popup.createElems = function(elems) {
 			optionClicked = true;
 		}
 	});
-
-	// elems.popBottomDivRight = document.createElement("div");
-	// elems.popBottomDivRight.className = "pop-bottom-div-right";
-	// elems.resultsContainer1 = document.createElement("div");
-	// elems.resultsContainer1.className = "results-container";
-	// elems.mainTitleInfo1 = document.createElement("p");
-	// elems.mainTitleInfo1.className = "main-title-info";
-	// elems.mainTitleInfo1.innerText = "Days Remaining";
-	// elems.lineResults1 = document.createElement("div");
-	// elems.lineResults1.className = "line-results";
-	// elems.lineResultsLeft1 = document.createElement("div");
-	// elems.lineResultsLeft1.className = "line-results-left";
-	// elems.numberLabel1 = document.createElement("span");
-	// elems.numberLabel1.className = "number-label";
-	// elems.numberLabel1.innerText = "Open";
-	// elems.numberResult1 = document.createElement("p");
-	// elems.numberResult1.className = "number-result";
-	// elems.numberResult1.id = "result-open";
-	// elems.numberResult1.innerText = "0";
-
-	// // elems.numberLabel2 = document.createElement("span");
-	// // elems.numberLabel2.className = "number-label";
-	// // elems.numberLabel2.innerText = "Total";
-
-	// elems.lineSeparator1 = document.createElement("div");
-	// elems.lineSeparator1.className = "line-separator";
-	// elems.lineSeparator2 = document.createElement("div");
-	// elems.lineSeparator2.className = "line-separator";
-
-	// elems.lineResultsRight1 = document.createElement("div");
-	// elems.lineResultsRight1.className = "line-results-right";
-	// elems.numberLabel2 = document.createElement("span");
-	// elems.numberLabel2.className = "number-label";
-	// elems.numberLabel2.innerText = "Total";
-	// elems.numberResult2 = document.createElement("p");
-	// elems.numberResult2.className = "number-result";
-	// elems.numberResult2.innerText = "0";
-
-	// elems.lineResultsLeft2 = document.createElement("div");
-	// elems.lineResultsLeft2.className = "line-results-left";
-	// elems.numberLabel2 = document.createElement("span");
-	// elems.numberLabel2.className = "number-label";
-	// elems.numberLabel2.innerText = "Total";
-
-	// elems.numberLabel3 = document.createElement("span");
-	// elems.numberLabel3.className = "number-label";
-	// elems.numberLabel3.innerText = "Earned";
-	// elems.numberResult3 = document.createElement("p");
-	// elems.numberResult3.className = "number-result";
-	// elems.numberResult3.id = "result-earned";
-	// elems.numberResult3.innerText = "0";
-
-	// elems.resultsContainer2 = document.createElement("div");
-	// elems.resultsContainer2.className = "results-container";
-	// elems.mainTitleInfo2 = document.createElement("p");
-	// elems.mainTitleInfo2.className = "main-title-info";
-	// elems.mainTitleInfo2.innerText = "Salary";
-	// elems.lineResults2 = document.createElement("div");
-	// elems.lineResults2.className = "line-results";
 	
 	elems.weeklyHabit.appendChild(elems.weeklySpan);
 	elems.weeklyHabit.appendChild(elems.lineHabit);
 	for (var i = 0; i < 7; i++)
 		elems.lineHabit.appendChild(elems.checkboxes[i]);
-	// elems.lineHabit.appendChild(elems.checkboxHabit2);
-	// elems.lineHabit.appendChild(elems.checkboxHabit3);
-	// elems.lineHabit.appendChild(elems.checkboxHabit4);
-	// elems.lineHabit.appendChild(elems.checkboxHabit5);
-	// elems.lineHabit.appendChild(elems.checkboxHabit6);
-	// elems.lineHabit.appendChild(elems.checkboxHabit7);
 
 	elems.popMiddleDiv.appendChild(elems.popMiddleDivLeft);
 	elems.popMiddleDiv.appendChild(elems.popMiddleDivRight);
@@ -354,32 +289,10 @@ popup.createElems = function(elems) {
 	elems.inputContainerHours.appendChild(elems.inputDeducted);
 
 	elems.middleLine2.appendChild(elems.weeklyHabit);
-	
-	// elems.resultsContainer1.appendChild(elems.mainTitleInfo1);
-	// elems.resultsContainer1.appendChild(elems.lineResults1);
-	// elems.lineResultsLeft1.appendChild(elems.numberLabel1);
-	// elems.lineResultsLeft1.appendChild(elems.numberResult1);
-	// elems.lineResultsLeft2.appendChild(elems.numberLabel3);
-	// elems.lineResultsLeft2.appendChild(elems.numberResult3);
-	// elems.lineResultsRight1.appendChild(elems.numberLabel2);
-	// elems.lineResultsRight1.appendChild(elems.numberResult2);
-	// elems.lineResults1.appendChild(elems.lineResultsLeft1);
-	// elems.lineResults1.appendChild(elems.lineResultsRight1);
-	
-	// elems.resultsContainer2.appendChild(elems.mainTitleInfo2);
-	// elems.resultsContainer2.appendChild(elems.lineResults2);
-	// elems.lineResults2.appendChild(elems.lineResultsLeft2);
-	// elems.lineResults2.appendChild(elems.lineSeparator2);
-
-	// elems.popBottomDivRight.appendChild(elems.resultsContainer1);
-	// elems.popBottomDivRight.appendChild(elems.resultsContainer2);
-	// elems.popBottomDiv.appendChild(elems.popBottomDivRight);
 
 	elems.popupRemaining.appendChild(elems.popMiddleDiv);
 	elems.popupRemaining.appendChild(elems.popBottomContainer);
 	document.body.appendChild(elems.popupRemaining);
-
-	// elems.checkboxes = document.querySelectorAll(".checkbox-habit");
 }
 
 function disableTextSelection() {
