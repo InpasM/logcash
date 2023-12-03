@@ -35,8 +35,8 @@ popup.createElems = function(elems) {
 	// elems.popInput1.className = "pop-input";
 	elems.popInput1.style.marginRight = "7px";			/// STYLE
 	elems.popInput1.style.backgroundColor = "#373c48";
-	elems.popInput1.style.maxHeight = "40px";
-	elems.popInput1.style.width = "70px";
+	elems.popInput1.style.maxHeight = "42px";
+	elems.popInput1.style.width = "80px";
 	elems.popInput1.style.padding = "6px";
 	elems.popInput1.style.color = "white";
 	elems.popInput1.style.border = "2px solid rgb(45, 49, 60)";
@@ -53,29 +53,39 @@ popup.createElems = function(elems) {
 	elems.inputText1.style.border = "none";
 	elems.inputText1.style.width = "100%";
 	elems.inputText1.style.position = "relative";
-	elems.inputText1.style.top = "6px";
+	elems.inputText1.style.top = "8px";
 	elems.inputText1.style.left = "-2px";
 
 	elems.floatingLabel1 = document.createElement("span");
 	elems.floatingLabel1.className = "floating-label";
+	// elems.floatingLabel1.fontSize = "10px";
 	elems.floatingLabel1.innerText = "Your salary";
 	
 	elems.popInput2 = document.createElement("div");
 	// elems.popInput2.className = "pop-input";
 	elems.popInput2.style.marginRight = "7px";			/// STYLE
 	elems.popInput2.style.backgroundColor = "#373c48";
-	elems.popInput2.style.maxHeight = "40px";
-	elems.popInput2.style.width = "70px";
+	elems.popInput2.style.maxHeight = "42px";
+	elems.popInput2.style.width = "80px";
 	elems.popInput2.style.padding = "6px";
 	elems.popInput2.style.color = "white";
 	elems.popInput2.style.border = "2px solid rgb(45, 49, 60)";
 	elems.popInput2.style.borderRadius = "6px";
 
 	elems.inputText2 = document.createElement("input");
-	elems.inputText2.className = "inputText";
+	// elems.inputText2.className = "inputText";
+	elems.inputText2.style.backgroundColor = "#373c48";			/// STYLE
+	elems.inputText2.style.color = "rgb(198, 198, 198)";
+	elems.inputText2.style.outline = "none";
+	elems.inputText2.style.border = "none";
+	elems.inputText2.style.width = "100%";
+	elems.inputText2.style.position = "relative";
+	elems.inputText2.style.top = "8px";
+	elems.inputText2.style.left = "-2px";
 	elems.inputText2.type = "text";
 	elems.inputText2.id = "inputDeducted";
 	elems.inputText2.setAttribute('required', '');
+
 	elems.floatingLabel2 = document.createElement("span");
 	elems.floatingLabel2.className = "floating-label";
 	elems.floatingLabel2.innerText = "Hours Deducted";
@@ -135,7 +145,7 @@ popup.createElems = function(elems) {
 	elems.salaryEuroSign.innerText = "€";
 	elems.salaryInteger = document.createElement("p");
 	elems.salaryInteger.className = "salary-integer";
-	elems.salaryInteger.innerText = "0";
+	elems.salaryInteger.innerText = "1000";
 	elems.salaryFloat = document.createElement("p");
 	elems.salaryFloat.className = "salary-float";
 	elems.salaryFloat.innerText = ".00";
@@ -569,24 +579,34 @@ popup.initPopup = function(elems) {
 	})
 
 	// put in setStyle
-	elems.inputText1.value = data.student.salary;
-	elems.inputText2.value = data.student.hoursDeducted;
+	if (!data.student.salary)
+		elems.inputText1.value = 0;
+	else
+		elems.inputText1.value = data.student.salary;
+	if (!data.student.hoursDeducted)
+		elems.inputText2.value = 0;
+	else
+		elems.inputText2.value = data.student.hoursDeducted;
+
+	console.log(elems.inputText2.value);
 
 	elems.inputText1.addEventListener("blur", function(e) {
-		if (isNaN(e.target.value))
+		if (isNaN(e.target.value) || !e.target.value)
 			e.target.value = 0;
 		else
 		{
+			console.log(e.target.value);
 			data.student.salary = e.target.value;
 			data.updateLocalStorage(data.student);
 		}
 	});
 
 	elems.inputText2.addEventListener("blur", function(e) {
-		if (isNaN(e.target.value))
+		if (isNaN(e.target.value)  || !e.target.value)
 			e.target.value = 0;
 		else
 		{
+			console.log(e.target.value);
 			data.student.hoursDeducted = e.target.value;
 			data.updateLocalStorage(data.student);
 		}
