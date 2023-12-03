@@ -153,6 +153,7 @@ function clickMonth(e)
 	});
 	months.indexArray = parseInt(e.target.id);
 	reGenerate(months[months.indexArray], elems);
+	popup.setData(elems);
 }
 
 function mOverProgress(e)
@@ -452,43 +453,85 @@ function getInfoMonth(elems, calendar) {
 			}
 		}
 
-		///////////////////////////////////////////////////////// calcul all other value
-		if (arrayCalendar[i].nbMinDone >= 60)
-		{
-			var extraHour = parseInt(arrayCalendar[i].nbMinDone / 60);
-
-			arrayCalendar[i].nbHourDone += extraHour;
-			arrayCalendar[i].nbMinDone = arrayCalendar[i].nbMinDone - (extraHour * 60);
-			// console.log("extraHour: " + parseInt(extraHour) + " remainingMinute: " + remainingMinute);
-		}
-		arrayCalendar[i].nbHourRem = arrayCalendar[i].nbHourReq - arrayCalendar[i].nbHourDone;
-		arrayCalendar[i].nbMinRem = arrayCalendar[i].nbMinReq - arrayCalendar[i].nbMinDone;
-		
-		// if (arrayCalendar[i].cashEarn > arrayCalendar[i].salary)
-		// 	arrayCalendar[i].cashEarn = arrayCalendar[i].salary;
-		if (arrayCalendar[i].nbMinRem < 0)
-		{
-			arrayCalendar[i].nbMinRem += 60;
-			arrayCalendar[i].nbHourRem--;
-		}
-		else if (arrayCalendar[i].nbMinRem >= 60)
-		{
-			arrayCalendar[i].nbMinRem -= 60;
-			arrayCalendar[i].nbHourRem++;
-		}
-		arrayCalendar[i].percent = (arrayCalendar[i].nbHourDone + (arrayCalendar[i].nbMinDone / 60)) / arrayCalendar[i].nbHourReq * 100;
-
-		if (arrayCalendar[i].percent == 0)
-			arrayCalendar[i].progressColor = "rgba(37, 41, 50, 0.8)";
+		// console.log("reduce number hour require depending of data");
+		if (data.student.hoursDeducted > arrayCalendar[i].nbHourReq)
+			arrayCalendar[i].nbHourReq = 0;
 		else
-			arrayCalendar[i].progressColor = "rgba(0, 186, 188, " + (arrayCalendar[i].percent / 100) + ")";
+			arrayCalendar[i].nbHourReq -= data.student.hoursDeducted;
 
-		// console.log("nbHourRem: " + arrayCalendar[i].nbHourRem + " nbMinRem: " + arrayCalendar[i].nbMinRem  + " percent: " + arrayCalendar[i].percent);
+		// ///////////////////////////////////////////////////////// calcul all other value
+		// if (arrayCalendar[i].nbMinDone >= 60)
+		// {
+		// 	var extraHour = parseInt(arrayCalendar[i].nbMinDone / 60);
 
-		// console.log("monthName " + arrayCalendar[i].nameShort + " hourDone: " + 
-		// arrayCalendar[i].nbHourDone + " minuteDone: " + arrayCalendar[i].nbMinDone);
+		// 	arrayCalendar[i].nbHourDone += extraHour;
+		// 	arrayCalendar[i].nbMinDone = arrayCalendar[i].nbMinDone - (extraHour * 60);
+		// 	// console.log("extraHour: " + parseInt(extraHour) + " remainingMinute: " + remainingMinute);
+		// }
+		// arrayCalendar[i].nbHourRem = arrayCalendar[i].nbHourReq - arrayCalendar[i].nbHourDone;
+		// arrayCalendar[i].nbMinRem = arrayCalendar[i].nbMinReq - arrayCalendar[i].nbMinDone;
+		
+		// if (arrayCalendar[i].nbMinRem < 0)
+		// {
+		// 	arrayCalendar[i].nbMinRem += 60;
+		// 	arrayCalendar[i].nbHourRem--;
+		// }
+		// else if (arrayCalendar[i].nbMinRem >= 60)
+		// {
+		// 	arrayCalendar[i].nbMinRem -= 60;
+		// 	arrayCalendar[i].nbHourRem++;
+		// }
+		// arrayCalendar[i].percent = (arrayCalendar[i].nbHourDone + (arrayCalendar[i].nbMinDone / 60)) / arrayCalendar[i].nbHourReq * 100;
+
+		// if (arrayCalendar[i].percent == 0)
+		// 	arrayCalendar[i].progressColor = "rgba(37, 41, 50, 0.8)";
+		// else
+		// 	arrayCalendar[i].progressColor = "rgba(0, 186, 188, " + (arrayCalendar[i].percent / 100) + ")";
+
+		// // console.log("nbHourRem: " + arrayCalendar[i].nbHourRem + " nbMinRem: " + arrayCalendar[i].nbMinRem  + " percent: " + arrayCalendar[i].percent);
+
+		// // console.log("monthName " + arrayCalendar[i].nameShort + " hourDone: " + 
+		// // arrayCalendar[i].nbHourDone + " minuteDone: " + arrayCalendar[i].nbMinDone);
+		calculProgress(arrayCalendar[i]);
 	}
 	return (arrayCalendar);
+}
+
+function calculProgress(arrayCalendar) {
+
+	///////////////////////////////////////////////////////// calcul all other value
+	if (arrayCalendar.nbMinDone >= 60)
+	{
+		var extraHour = parseInt(arrayCalendar.nbMinDone / 60);
+
+		arrayCalendar.nbHourDone += extraHour;
+		arrayCalendar.nbMinDone = arrayCalendar.nbMinDone - (extraHour * 60);
+		// console.log("extraHour: " + parseInt(extraHour) + " remainingMinute: " + remainingMinute);
+	}
+	arrayCalendar.nbHourRem = arrayCalendar.nbHourReq - arrayCalendar.nbHourDone;
+	arrayCalendar.nbMinRem = arrayCalendar.nbMinReq - arrayCalendar.nbMinDone;
+	
+	if (arrayCalendar.nbMinRem < 0)
+	{
+		arrayCalendar.nbMinRem += 60;
+		arrayCalendar.nbHourRem--;
+	}
+	else if (arrayCalendar.nbMinRem >= 60)
+	{
+		arrayCalendar.nbMinRem -= 60;
+		arrayCalendar.nbHourRem++;
+	}
+	arrayCalendar.percent = (arrayCalendar.nbHourDone + (arrayCalendar.nbMinDone / 60)) / arrayCalendar.nbHourReq * 100;
+
+	if (arrayCalendar.percent == 0)
+		arrayCalendar.progressColor = "rgba(37, 41, 50, 0.8)";
+	else
+		arrayCalendar.progressColor = "rgba(0, 186, 188, " + (arrayCalendar.percent / 100) + ")";
+
+	// console.log("nbHourRem: " + arrayCalendar.nbHourRem + " nbMinRem: " + arrayCalendar.nbMinRem  + " percent: " + arrayCalendar.percent);
+
+	// console.log("monthName " + arrayCalendar.nameShort + " hourDone: " + 
+	// arrayCalendar.nbHourDone + " minuteDone: " + arrayCalendar.nbMinDone);
 }
 
 var isPanelVisible = false;
@@ -710,27 +753,30 @@ async function initLogcash()
 	window.addEventListener("resize", resizeProgress);
 	initButtons(elems);
 
-	// const userPosteStatus = document.querySelector(".user-poste-status");
+	const userPosteStatus = document.querySelector(".user-poste-status");
 
-	// if (userPosteStatus.innerText !== "Unavailable")
-	// {
-	// 	displayMessage("Start setInterval each minutes");
-	// 	setInterval(function() {
+	if (userPosteStatus.innerText !== "Unavailable")
+	{
+		displayMessage("Start setInterval each minutes");
+		setInterval(function() {
 	
-	// 		var tmpHours = months[months.length - 1].nbHourDone;
-	// 		var tmpMinutes = months[months.length - 1].nbMinDone + 1;
+			var tmpHours = months[months.length - 1].nbHourDone;
+			var tmpMinutes = months[months.length - 1].nbMinDone + 1;
 	
-	// 		if (tmpMinutes >= 60) {
-	// 			tmpMinutes = 0;
-	// 			tmpHours += 1;
-	// 		}
-	// 		months[months.length - 1].nbHourDone = parseInt(tmpHours);
-	// 		months[months.length - 1].nbMinDone = parseInt(tmpMinutes);
-	// 		if (months.indexArray == months.length - 1)
-	// 			reGenerate(months[months.length - 1], elems);
-	// 			updateValues(months[months.length - 1]);
-	// 	}, 60000);
-	// }
+			if (tmpMinutes >= 60) {
+				tmpMinutes = 0;
+				tmpHours += 1;
+			}
+			months[months.length - 1].nbHourDone = parseInt(tmpHours);
+			months[months.length - 1].nbMinDone = parseInt(tmpMinutes);
+			if (months.indexArray == months.length - 1)
+			{
+				calculProgress(months[months.indexArray]);
+				reGenerate(months[months.length - 1], elems);
+				popup.setData(elems);
+			}
+		}, 60000);
+	}
 }
 
 function setRefreshInterval() {

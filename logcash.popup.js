@@ -500,7 +500,7 @@ function getOpenDays(numberYear, numberMonth, numberDay) {
 	return ({open: openDays, total: totalDays});
 }
 
-function setData(elems) {
+popup.setData = function(elems) {
 
 	elems.popupTopRightText.innerText = data.student.pseudo;
 	for (var i = 0; i < elems.checkboxes.length; i++)
@@ -522,17 +522,29 @@ function setData(elems) {
 	elems.numberResultOpen.innerText = numberDays.open;
 	elems.numberResultTotal.innerText = numberDays.total;
 
-	var totalSalaryEarn = parseFloat(popup.months[popup.months.indexArray].percent / 100 * data.student.salary);
+	if (popup.months[popup.months.indexArray].percent >= 100)
+	{
+		var totalSalaryEarn = parseFloat(data.student.salary);
+		var percentSalary = 100.0;
+		// var integerSalary = parseInt(totalSalaryEarn);
+		// var floatSalary = totalSalaryEarn - integerSalary;
+	}
+	else
+	{
+		var totalSalaryEarn = parseFloat(popup.months[popup.months.indexArray].percent / 100 * data.student.salary);
+		var percentSalary = popup.months[popup.months.indexArray].percent;
+	}
 	var integerSalary = parseInt(totalSalaryEarn);
 	var floatSalary = totalSalaryEarn - integerSalary;
+
 	// console.log("salary earn: " + totalSalaryEarn);
 	// console.log("integer earn: " + integerSalary);
 	// console.log("float earn: " + floatSalary.toFixed(2).split('.')[1]);
 
 	elems.salaryInteger.innerText = integerSalary;
 	elems.salaryFloat.innerText = "." + floatSalary.toFixed(2).split('.')[1];
-	elems.salaryPercent.innerText = popup.months[popup.months.indexArray].percent.toFixed(1) + '%';
-	elems.salarySlide.style.height = popup.months[popup.months.indexArray].percent + "%";
+	elems.salaryPercent.innerText = percentSalary.toFixed(1) + '%';
+	elems.salarySlide.style.height = percentSalary + "%";
 }
 
 function clickHabit(e) {
@@ -553,7 +565,7 @@ function clickHabit(e) {
 		e.target.style.borderColor = "rgb(0, 186, 188)";
 	}
 	data.updateLocalStorage(data.student);
-	setData(elems);
+	popup.setData(elems);
 }
 
 popup.initPopup = function(elems, months) {
@@ -565,7 +577,7 @@ popup.initPopup = function(elems, months) {
 
 	popup.createElems(elems);
 	popup.setStyle(elems);
-	setData(elems);
+	popup.setData(elems);
 	disableTextSelection();
 	elems.popupTopDiv.addEventListener("mousedown", function(e) {
 		mouseDown = true;
@@ -594,6 +606,7 @@ popup.initPopup = function(elems, months) {
 		elems.inputDeducted.value = data.student.hoursDeducted;
 
 	elems.inputSalary.addEventListener("blur", function(e) {
+
 		if (isNaN(e.target.value) || !e.target.value)
 			e.target.value = 0;
 		else
@@ -601,10 +614,11 @@ popup.initPopup = function(elems, months) {
 			data.student.salary = e.target.value;
 			data.updateLocalStorage(data.student);
 		}
-		setData(elems);
+		popup.setData(elems);
 	});
 
 	elems.inputDeducted.addEventListener("blur", function(e) {
+
 		if (isNaN(e.target.value)  || !e.target.value)
 			e.target.value = 0;
 		else
@@ -612,7 +626,15 @@ popup.initPopup = function(elems, months) {
 			data.student.hoursDeducted = e.target.value;
 			data.updateLocalStorage(data.student);
 		}
-		setData(elems);
+		var newRequire = months[months.indexArray].openDaysTotal * 7 - e.target.value;
+
+		if (newRequire < 0)
+			months[months.indexArray].nbHourReq = 0;
+		else
+			months[months.indexArray].nbHourReq = newRequire;
+		calculProgress(months[months.indexArray]);
+		reGenerate(months[months.indexArray], elems);
+		popup.setData(elems);
 	});
 
 	for (var i = 0; i < elems.checkboxes.length; i++)
