@@ -161,6 +161,8 @@ popup.createElems = function(elems) {
 	var showWeekly = true;
 	elems.weeklySpan.addEventListener("click", function(e) {
 
+		console.log(data.student);
+
 		if (showWeekly)
 		{
 			elems.monthContainer.style.display = "flex";
@@ -434,9 +436,9 @@ popup.setStyle = function(elems) {
 
 function isCheckboxUse() {
 
-	for (var i = 0; i < data.student.habit.length; i++)
+	for (var i = 0; i < data.student.weeklyHabit.length; i++)
 	{
-		if (data.student.habit[i])
+		if (data.student.weeklyHabit[i])
 			return true;
 	}
 	return false;
@@ -464,11 +466,11 @@ function getOpenDays(numberYear, numberMonth, numberDay) {
 			actualDay = 0;
 		if (actualDay >= 1 && actualDay <= 5)
 		{
-			if (data.student.habit[indexHabit] || !useAll)
+			if (data.student.weeklyHabit[indexHabit] || !useAll)
 				openDays++;
 		}
 		// console.log(i + " / " + numberDaysInMonth + "  -  habit: " + data.student.habit[indexHabit]);
-		if (data.student.habit[indexHabit] || !useAll)
+		if (data.student.weeklyHabit[indexHabit] || !useAll)
 		{
 			totalDays++;
 		}
@@ -484,8 +486,8 @@ popup.setData = function(elems) {
 	elems.popupTopRightText.innerText = data.student.pseudo;
 	for (var i = 0; i < elems.checkboxes.length; i++)
 	{
-		// console.log(i + " " + data.student.habit[i]);
-		if (data.student.habit[i])
+		// console.log(i + " " + data.student.weeklyHabit[i]);
+		if (data.student.weeklyHabit[i])
 			elems.checkboxes[i].style.borderColor = "rgb(0, 186, 188)";
 		else
 			elems.checkboxes[i].style.borderColor = "rgb(45, 49, 60)";
@@ -531,19 +533,20 @@ function clickHabit(e) {
 	const index = parseInt(e.target.id);
 
 	// console.log(e.target.id);
-	if (data.student.habit[index])
+	if (data.student.weeklyHabit[index])
 	{
 		// console.log(e.target.id + ": false");
-		data.student.habit[index] = false;
+		data.student.weeklyHabit[index] = false;
 		e.target.style.borderColor = "rgb(45, 49, 60)";
 	}
 	else
 	{
 		// console.log(e.target.id + ": true");
-		data.student.habit[index] = true;
+		data.student.weeklyHabit[index] = true;
 		e.target.style.borderColor = "rgb(0, 186, 188)";
 	}
-	data.updateLocalStorage(data.student);
+	if (data.isHomePage === -1)
+		data.updateLocalStorage(data.student);
 	popup.setData(elems);
 }
 
@@ -591,7 +594,8 @@ popup.initPopup = function(elems, months) {
 		else
 		{
 			data.student.salary = e.target.value;
-			data.updateLocalStorage(data.student);
+			if (data.isHomePage === -1)
+				data.updateLocalStorage(data.student);
 		}
 		popup.setData(elems);
 	});
@@ -603,7 +607,8 @@ popup.initPopup = function(elems, months) {
 		else
 		{
 			data.student.hoursDeducted = e.target.value;
-			data.updateLocalStorage(data.student);
+			if (data.isHomePage === -1)
+				data.updateLocalStorage(data.student);
 		}
 		var newRequire = months[months.indexArray].openDaysTotal * 7 - e.target.value;
 
