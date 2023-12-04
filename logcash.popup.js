@@ -128,8 +128,6 @@ popup.createElems = function(elems) {
 
 	for (var i = 0; i < popup.months[popup.months.indexArray].weeks.length; i++)
 	{
-		const tmpCheckbox = [];
-
 		elems.monthLineHabit[i] = document.createElement("div");
 		elems.monthLineHabit[i].className = "line-habit";
 		if (i === 0)
@@ -141,10 +139,9 @@ popup.createElems = function(elems) {
 			tmpDay.id = ++indexMonth;
 			tmpDay.innerText = indexMonth;
 
-			tmpCheckbox.push(tmpDay);
-			elems.monthLineHabit[i].appendChild(tmpCheckbox[j]);
+			elems.checkboxesMonth.push(tmpDay);
+			elems.monthLineHabit[i].appendChild(tmpDay);
 		}
-		elems.checkboxesMonth.push(tmpCheckbox);
 		elems.monthContainer.appendChild(elems.monthLineHabit[i]);
 	}
 
@@ -528,7 +525,7 @@ popup.setData = function(elems) {
 	elems.salarySlide.style.height = percentSalary + "%";
 }
 
-function clickHabit(e) {
+function clickWeeklyHabit(e) {
 	
 	const index = parseInt(e.target.id);
 
@@ -548,6 +545,28 @@ function clickHabit(e) {
 	if (data.isHomePage === -1)
 		data.updateLocalStorage(data.student);
 	popup.setData(elems);
+}
+
+function clickMonthlyHabit(e) {
+	
+	const index = parseInt(e.target.id);
+
+	console.log("click on day " + index);
+	// if (data.student.weeklyHabit[index])
+	// {
+	// 	// console.log(e.target.id + ": false");
+	// 	data.student.weeklyHabit[index] = false;
+	// 	e.target.style.borderColor = "rgb(45, 49, 60)";
+	// }
+	// else
+	// {
+	// 	// console.log(e.target.id + ": true");
+	// 	data.student.weeklyHabit[index] = true;
+	// 	e.target.style.borderColor = "rgb(0, 186, 188)";
+	// }
+	// if (data.isHomePage === -1)
+	// 	data.updateLocalStorage(data.student);
+	// popup.setData(elems);
 }
 
 popup.initPopup = function(elems, months) {
@@ -623,7 +642,7 @@ popup.initPopup = function(elems, months) {
 
 	for (var i = 0; i < elems.checkboxes.length; i++)
 	{
-		elems.checkboxes[i].addEventListener("click", clickHabit);
+		elems.checkboxes[i].addEventListener("click", clickWeeklyHabit);
 	}
 	elems.inputSalary.addEventListener("click", function(e) { this.select(); });
 	elems.inputDeducted.addEventListener("click", function(e) { this.select(); });
