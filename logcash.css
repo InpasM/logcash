@@ -12,14 +12,10 @@ body
 {
 	background: #1d2028;
 	box-sizing: border-box;
-	/* width: 581px; */
-	/* width: 100%;
-	height: 335px; */
 	padding: 25px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	/* dis */
 }
 
 .container-logcash 
@@ -31,30 +27,13 @@ body
 	justify-content: space-between; */
 }
 
-.profile-title 
-{
-	border-bottom: 2px solid transparent;
-	text-transform: uppercase;
-	padding: 0;
-	margin: 0 0 20px 0;
-	margin-bottom: 75px;
-	font-weight: bold;
-	
-	color: #f2f2f2;
-	font-size: 0.8em;
-}
-
 .container-month 
 {
-	/* padding-top: 10px; */
-	/* background: #12141a; */
 	width: 100%;
-
 }
 
 .row-top, .row-bottom
 {
-	/* color: #474b54; */
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -62,9 +41,6 @@ body
 
 .row-top p
 {
-	/* padding: 0; */
-	/* margin: 0 8px; */
-	/* margin: 0 4px; */
 	font-size: 0.9em;
 }
 
@@ -72,23 +48,7 @@ body
 {
 	color: #787d87;
 	padding: 3px 8px;
-	/* textMonth.style.color = "#8e8e8f";
-
-	textMonth.style.cursor = "pointer";
-	textMonth.style.borderRadius = "4px";
-	textMonth.style.display = "flex";
-	textMonth.style.justifyContent = "center";
-	textMonth.style.alignItems = "center";
-	textMonth.style.border = "2px solid rgba(0,0,0,0)"; */
 }
-
-/* .text-month:hover
-{
-	background-color: rgb(0, 186, 188);
-	border-radius: 2px;
-	cursor: pointer;
-	color: white;
-} */
 
 .text-cash
 {
@@ -120,11 +80,9 @@ body
 }
 
 .setting-button {
-	/* background-color: pink; */
 	height: 70%;
 	aspect-ratio: 1/1;
 	background-image: url("icons/settings-5.svg");
-	/* background-image: url(setting); */
 	background-size: contain;
 	background-repeat: no-repeat;
 	cursor: pointer;
@@ -287,7 +245,6 @@ body
 	white-space: nowrap;
 }
 
-
 .middle-line-2 {
 	width: 100%;
 	margin: 7px 7px 0 0;
@@ -354,7 +311,6 @@ body
 	padding: 0;
 	font-size: 0.6em;
 }
-
 
 .p-open-day-result {
 	color: aliceblue;
