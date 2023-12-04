@@ -285,6 +285,7 @@ body
 	/* width: 100%; */
 	padding: 2px 4px;
 	cursor: pointer;
+	transition: ease 0.5s all;
 }
 
 .week-container, .month-container {
