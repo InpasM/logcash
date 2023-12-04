@@ -9,10 +9,23 @@ data.student = {
 	pseudo: 0,
 	salary: 0,
 	hoursDeducted: 0,
-	habit: [false, false, false, false, false, false, false],
+	weeklyHabit: [false, false, false, false, false, false, false],
+	monthlyHabit: [],
+};
+
+var localStorageSpace = function(){
+	var allStrings = '';
+	for(var key in window.localStorage){
+		if(window.localStorage.hasOwnProperty(key)){
+			allStrings += window.localStorage[key];
+		}
+	}
+	return allStrings ? 3 + ((allStrings.length*16)/(8*1024)) + ' KB' : 'Empty (0 KB)';
 };
 
 data.init = function() {
+
+	console.log(localStorageSpace());
 	
 	// localStorage.removeItem("student42");
 	let localStorageStud = localStorage.getItem("student42");
