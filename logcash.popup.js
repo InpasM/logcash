@@ -90,6 +90,7 @@ popup.createElems = function(elems) {
 	elems.weeklyHabit.className = "weekly-habit";
 	elems.weeklySpan = document.createElement("span");
 	elems.weeklySpan.innerText = "Weekly Habit";
+	elems.weeklySpan.style.marginLeft = "6px";
 	elems.lineHabit = document.createElement("div");
 	elems.lineHabit.className = "line-habit";
 
@@ -102,6 +103,83 @@ popup.createElems = function(elems) {
 		elems.checkboxes[i].id = i;
 		elems.checkboxes[i].innerText = arrayDaysLetter[i];
 	}
+
+
+	elems.monthlyHabit = document.createElement("div");
+	elems.monthlyHabit.className = "monthly-habit";
+	elems.monthlySpan = document.createElement("span");
+	elems.monthlySpan.innerText = "Monthly Habit";
+	elems.monthlySpan.style.marginLeft = "6px";
+
+	elems.monthlyHabit.appendChild(elems.monthlySpan);
+
+	elems.monthLineHabit = [0, 0, 0, 0, 0, 0];
+
+	// console.log(popup.months[popup.months.indexArray].weeks.length);
+	elems.checkboxesMonth = [];
+	var indexMonth = 0;
+	var nbWeeks = popup.months[popup.months.indexArray].weeks.length;
+
+	for (var i = 0; i < nbWeeks; i++)
+	{
+		const tmpCheckbox = [0, 0, 0, 0, 0, 0, 0];
+
+		elems.monthLineHabit[i] = document.createElement("div");
+		elems.monthLineHabit[i].className = "line-habit";
+
+		var nbDayWeek = popup.months[popup.months.indexArray].weeks[i].length;
+		var nbDayExtra = 7 - nbDayWeek;
+
+		if (i === 0)
+		{
+			// console.log("add " + nbDayExtra + " before");
+			for (var k = 0; k < nbDayExtra; k++)
+			{
+				tmpCheckbox[k] = document.createElement("div");
+				tmpCheckbox[k].className = "habit-hide";
+				elems.monthLineHabit[i].appendChild(tmpCheckbox[k]);
+			}
+		}
+		// else if (i === nbWeeks - 1)
+		// {
+		// 	console.log("number week");
+		// 	nbDayExtra = 7;
+		// }
+
+		for (var j = nbDayExtra; j < 7; j++)
+		{
+			tmpCheckbox[j] = document.createElement("div");
+			tmpCheckbox[j].className = "checkbox-habit";
+			tmpCheckbox[j].id = i;
+			tmpCheckbox[j].innerText = ++indexMonth;
+			elems.monthLineHabit[i].appendChild(tmpCheckbox[j]);
+		}
+
+
+		elems.checkboxesMonth.push(tmpCheckbox);
+		elems.monthlyHabit.appendChild(elems.monthLineHabit[i]);
+	}
+
+	console.log(elems.checkboxesMonth);
+
+	// elems.monthLineHabit[1] = document.createElement("div");
+	// elems.monthLineHabit[1].className = "line-habit";
+
+	// elems.lineHabit = document.createElement("div");
+	// elems.lineHabit.className = "line-habit";
+
+	// elems.monthlyHabit.appendChild(elems.monthLineHabit[0]);
+	// elems.monthlyHabit.appendChild(elems.monthLineHabit[1]);
+
+	// elems.checkboxes = [];
+	// const arrayDaysLetter = ["S", "M", "T", "W", "T", "F", "S"];
+	// for (var i = 0; i < 7; i++)
+	// {
+	// 	elems.checkboxes[i] = document.createElement("div");
+	// 	elems.checkboxes[i].className = "checkbox-habit";
+	// 	elems.checkboxes[i].id = i;
+	// 	elems.checkboxes[i].innerText = arrayDaysLetter[i];
+	// }
 
 
 	//////////////////////////////////////////////////////////////////////  MIDDLE RIGHT DIV
@@ -289,6 +367,7 @@ popup.createElems = function(elems) {
 	elems.inputContainerHours.appendChild(elems.inputDeducted);
 
 	elems.middleLine2.appendChild(elems.weeklyHabit);
+	elems.middleLine2.appendChild(elems.monthlyHabit);
 
 	elems.popupRemaining.appendChild(elems.popMiddleDiv);
 	elems.popupRemaining.appendChild(elems.popBottomContainer);
@@ -306,10 +385,10 @@ function disableTextSelection() {
 
 popup.setStyle = function(elems) {
 
-	// elems.popupRemaining.style.opacity = "1"; // dev
-	// elems.popupRemaining.style.display = "flex";
-	elems.popupRemaining.style.opacity = "0"; // normal
-	elems.popupRemaining.style.display = "none";
+	elems.popupRemaining.style.opacity = "1"; // dev
+	elems.popupRemaining.style.display = "flex";
+	// elems.popupRemaining.style.opacity = "0"; // normal
+	// elems.popupRemaining.style.display = "none";
 	elems.popupRemaining.style.position = "absolute";
 	elems.popupRemaining.style.borderRadius = "4px";
 	elems.popupRemaining.style.zIndex = "1000";
@@ -318,8 +397,8 @@ popup.setStyle = function(elems) {
 	elems.popupRemaining.style.boxShadow = "0px 10px 15px #12141a3a";
 	elems.popupRemaining.style.backdropFilter = "blur(6px)";
 
-	// elems.popupRemaining.style.top = "60px"; // remove dev only
-	// elems.popupRemaining.style.right = "10px"; // remove dev only
+	elems.popupRemaining.style.top = "60px"; // remove dev only
+	elems.popupRemaining.style.right = "10px"; // remove dev only
 	
 	elems.popupTopDiv.style.cursor = "move";
 	elems.popupTopDiv.style.height = "fit-content";
