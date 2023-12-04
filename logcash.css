@@ -256,7 +256,7 @@ body
 }
 
 /*******************************  BLOC WEEK/MONTH  ********************************/
-.weekly-habit {
+.habit-container {
 	/* width: 100%; */
 	/* background-color: blue; */
 	width: fit-content;
@@ -278,11 +278,13 @@ body
 	align-items: stretch; */
 }
 
-.weekly-habit span {
+.habit-container span {
 	/* margin-left: 6px; */
 	/* background-color: white; */
 	/* flex: 1; */
 	/* width: 100%; */
+	padding: 2px 4px;
+	cursor: pointer;
 }
 
 .week-container, .month-container {
@@ -291,7 +293,7 @@ body
 	display: flex;
 	/* justify-content: center; */
 	flex-direction: column;
-	margin-top: 4px;
+	margin-top: 6px;
 	/* margin: 4px 0 8px 4px; */
 }
 
