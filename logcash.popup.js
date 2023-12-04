@@ -490,6 +490,21 @@ popup.setData = function(elems) {
 			elems.checkboxes[i].style.borderColor = "rgb(45, 49, 60)";
 	}
 
+	var needToUpdateData = false;
+	for (var i = 0; i < elems.checkboxesMonth.length; i++)
+	{
+		if (!data.student.monthlyHabit[i])
+		{
+			data.student.monthlyHabit[i] = false;
+			needToUpdateData = true;
+			elems.checkboxesMonth[i].style.borderColor = "rgb(45, 49, 60)";
+		}
+		else
+			elems.checkboxesMonth[i].style.borderColor = "rgb(0, 186, 188)";
+	}
+	if (needToUpdateData)
+		data.updateLocalStorage(data.student);
+
 	const date = new Date();
 	var numberYear = date.getFullYear();
 	var numberMonth = date.getMonth();
@@ -549,24 +564,22 @@ function clickWeeklyHabit(e) {
 
 function clickMonthlyHabit(e) {
 	
-	const index = parseInt(e.target.id);
+	const index = parseInt(e.target.id) - 1;
 
-	console.log("click on day " + index);
-	// if (data.student.weeklyHabit[index])
-	// {
-	// 	// console.log(e.target.id + ": false");
-	// 	data.student.weeklyHabit[index] = false;
-	// 	e.target.style.borderColor = "rgb(45, 49, 60)";
-	// }
-	// else
-	// {
-	// 	// console.log(e.target.id + ": true");
-	// 	data.student.weeklyHabit[index] = true;
-	// 	e.target.style.borderColor = "rgb(0, 186, 188)";
-	// }
-	// if (data.isHomePage === -1)
-	// 	data.updateLocalStorage(data.student);
-	// popup.setData(elems);
+	// console.log("click on day " + index);
+	if (data.student.monthlyHabit[index])
+	{
+		data.student.monthlyHabit[index] = false;
+		e.target.style.borderColor = "rgb(45, 49, 60)";
+	}
+	else
+	{
+		data.student.monthlyHabit[index] = true;
+		e.target.style.borderColor = "rgb(0, 186, 188)";
+	}
+	if (data.isHomePage === -1)
+		data.updateLocalStorage(data.student);
+	popup.setData(elems);
 }
 
 popup.initPopup = function(elems, months) {
@@ -643,6 +656,10 @@ popup.initPopup = function(elems, months) {
 	for (var i = 0; i < elems.checkboxes.length; i++)
 	{
 		elems.checkboxes[i].addEventListener("click", clickWeeklyHabit);
+	}
+	for (var i = 0; i < elems.checkboxesMonth.length; i++)
+	{
+		elems.checkboxesMonth[i].addEventListener("click", clickMonthlyHabit);
 	}
 	elems.inputSalary.addEventListener("click", function(e) { this.select(); });
 	elems.inputDeducted.addEventListener("click", function(e) { this.select(); });
