@@ -91,8 +91,19 @@ popup.createElems = function(elems) {
 	elems.weeklySpan = document.createElement("span");
 	elems.weeklySpan.innerText = "Weekly Habit";
 	elems.weeklySpan.style.marginLeft = "6px";
+	// elems.weeklySpan.style.backgroundColor = "white";
+	// elems.weeklySpan.style.width = "100%";
 	elems.lineHabit = document.createElement("div");
 	elems.lineHabit.className = "line-habit";
+
+	elems.weekContainer = document.createElement("div");
+	elems.weekContainer.className = "week-container";
+
+	elems.weeklyHabit.appendChild(elems.weeklySpan);
+	// elems.weeklyHabit.appendChild(elems.lineHabit);
+	elems.weeklyHabit.appendChild(elems.weekContainer);
+
+	elems.weekContainer.appendChild(elems.lineHabit);
 
 	elems.checkboxes = [];
 	const arrayDaysLetter = ["S", "M", "T", "W", "T", "F", "S"];
@@ -103,83 +114,46 @@ popup.createElems = function(elems) {
 		elems.checkboxes[i].id = i;
 		elems.checkboxes[i].innerText = arrayDaysLetter[i];
 	}
-
-
+	
 	elems.monthlyHabit = document.createElement("div");
 	elems.monthlyHabit.className = "monthly-habit";
 	elems.monthlySpan = document.createElement("span");
 	elems.monthlySpan.innerText = "Monthly Habit";
 	elems.monthlySpan.style.marginLeft = "6px";
+	
+	elems.monthContainer = document.createElement("div");
+	elems.monthContainer.className = "month-container";
 
 	elems.monthlyHabit.appendChild(elems.monthlySpan);
+	elems.monthlyHabit.appendChild(elems.monthContainer);
 
 	elems.monthLineHabit = [0, 0, 0, 0, 0, 0];
-
-	// console.log(popup.months[popup.months.indexArray].weeks.length);
 	elems.checkboxesMonth = [];
 	var indexMonth = 0;
-	var nbWeeks = popup.months[popup.months.indexArray].weeks.length;
 
-	for (var i = 0; i < nbWeeks; i++)
+	for (var i = 0; i < popup.months[popup.months.indexArray].weeks.length; i++)
 	{
-		const tmpCheckbox = [0, 0, 0, 0, 0, 0, 0];
+		const tmpCheckbox = [];
 
 		elems.monthLineHabit[i] = document.createElement("div");
 		elems.monthLineHabit[i].className = "line-habit";
-
-		var nbDayWeek = popup.months[popup.months.indexArray].weeks[i].length;
-		var nbDayExtra = 7 - nbDayWeek;
-
 		if (i === 0)
+			elems.monthLineHabit[i].style.justifyContent = "flex-end";
+		for (var j = 0; j < popup.months[popup.months.indexArray].weeks[i].length; j++)
 		{
-			// console.log("add " + nbDayExtra + " before");
-			for (var k = 0; k < nbDayExtra; k++)
-			{
-				tmpCheckbox[k] = document.createElement("div");
-				tmpCheckbox[k].className = "habit-hide";
-				elems.monthLineHabit[i].appendChild(tmpCheckbox[k]);
-			}
-		}
-		// else if (i === nbWeeks - 1)
-		// {
-		// 	console.log("number week");
-		// 	nbDayExtra = 7;
-		// }
+			var tmpDay = document.createElement("div");
+			tmpDay.className = "checkbox-habit";
+			tmpDay.id = ++indexMonth;
+			tmpDay.innerText = indexMonth;
 
-		for (var j = nbDayExtra; j < 7; j++)
-		{
-			tmpCheckbox[j] = document.createElement("div");
-			tmpCheckbox[j].className = "checkbox-habit";
-			tmpCheckbox[j].id = i;
-			tmpCheckbox[j].innerText = ++indexMonth;
+			tmpCheckbox.push(tmpDay);
 			elems.monthLineHabit[i].appendChild(tmpCheckbox[j]);
 		}
-
-
 		elems.checkboxesMonth.push(tmpCheckbox);
-		elems.monthlyHabit.appendChild(elems.monthLineHabit[i]);
+		elems.monthContainer.appendChild(elems.monthLineHabit[i]);
 	}
 
-	console.log(elems.checkboxesMonth);
-
-	// elems.monthLineHabit[1] = document.createElement("div");
-	// elems.monthLineHabit[1].className = "line-habit";
-
-	// elems.lineHabit = document.createElement("div");
-	// elems.lineHabit.className = "line-habit";
-
-	// elems.monthlyHabit.appendChild(elems.monthLineHabit[0]);
-	// elems.monthlyHabit.appendChild(elems.monthLineHabit[1]);
-
-	// elems.checkboxes = [];
-	// const arrayDaysLetter = ["S", "M", "T", "W", "T", "F", "S"];
-	// for (var i = 0; i < 7; i++)
-	// {
-	// 	elems.checkboxes[i] = document.createElement("div");
-	// 	elems.checkboxes[i].className = "checkbox-habit";
-	// 	elems.checkboxes[i].id = i;
-	// 	elems.checkboxes[i].innerText = arrayDaysLetter[i];
-	// }
+	// console.log(elems.checkboxesMonth);
 
 
 	//////////////////////////////////////////////////////////////////////  MIDDLE RIGHT DIV
@@ -348,8 +322,7 @@ popup.createElems = function(elems) {
 		}
 	});
 	
-	elems.weeklyHabit.appendChild(elems.weeklySpan);
-	elems.weeklyHabit.appendChild(elems.lineHabit);
+
 	for (var i = 0; i < 7; i++)
 		elems.lineHabit.appendChild(elems.checkboxes[i]);
 
