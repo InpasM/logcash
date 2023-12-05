@@ -126,6 +126,12 @@ popup.createElems = function(elems) {
 	elems.checkboxesMonth = [];
 	var indexMonth = 0;
 
+	// const date = new Date();
+	// var numberDay = date.getDate();
+	// var numberDay = 25;
+
+	// console.log(numberDay);
+
 	for (var i = 0; i < popup.months[popup.months.indexArray].weeks.length; i++)
 	{
 		elems.monthLineHabit[i] = document.createElement("div");
@@ -135,9 +141,25 @@ popup.createElems = function(elems) {
 		for (var j = 0; j < popup.months[popup.months.indexArray].weeks[i].length; j++)
 		{
 			var tmpDay = document.createElement("div");
-			tmpDay.className = "checkbox-habit";
 			tmpDay.id = ++indexMonth;
 			tmpDay.innerText = indexMonth;
+			tmpDay.className = "checkbox-habit";
+
+			if (indexMonth < popup.numberDay)
+			{
+				// console.log("passed " + indexMonth);
+				tmpDay.style.backgroundColor = "#202830";
+				tmpDay.style.color = "#64676a";
+				tmpDay.style.borderColor = "rgba(45, 49, 60, 0.5)";
+				tmpDay.style.opacity = "0.5";
+				tmpDay.style.cursor = "default";
+				tmpDay.style.pointerEvents = "none";
+			}
+			else if (indexMonth === popup.numberDay)
+			{
+				tmpDay.style.backgroundColor = "white";
+				tmpDay.style.color = "#191919";
+			}
 
 			elems.checkboxesMonth.push(tmpDay);
 			elems.monthLineHabit[i].appendChild(tmpDay);
@@ -478,16 +500,19 @@ function getOpenDays(numberYear, numberMonth, numberDay) {
 	return ({open: openDays, total: totalDays});
 }
 
+popup.date = new Date();
+popup.numberYear = popup.date.getFullYear();
+popup.numberMonth = popup.date.getMonth();
+popup.numberDay = popup.date.getDate();
+// popup.numberDay = 5;
+
 popup.setData = function(elems) {
 
 	elems.popupTopRightText.innerText = data.student.pseudo;
 	for (var i = 0; i < elems.checkboxes.length; i++)
 	{
-		// console.log(i + " " + data.student.weeklyHabit[i]);
 		if (data.student.weeklyHabit[i])
 			elems.checkboxes[i].style.borderColor = "rgb(0, 186, 188)";
-		else
-			elems.checkboxes[i].style.borderColor = "rgb(45, 49, 60)";
 	}
 
 	var needToUpdateData = false;
@@ -497,20 +522,24 @@ popup.setData = function(elems) {
 		{
 			data.student.monthlyHabit[i] = false;
 			needToUpdateData = true;
-			elems.checkboxesMonth[i].style.borderColor = "rgb(45, 49, 60)";
 		}
 		else
-			elems.checkboxesMonth[i].style.borderColor = "rgb(0, 186, 188)";
+		{
+			if (i + 1 < popup.numberDay)
+			{
+				data.student.monthlyHabit[i] = false;
+				needToUpdateData = true;
+			}
+			else
+				elems.checkboxesMonth[i].style.borderColor = "rgb(0, 186, 188)";
+		}
 	}
 	if (needToUpdateData)
 		data.updateLocalStorage(data.student);
 
-	const date = new Date();
-	var numberYear = date.getFullYear();
-	var numberMonth = date.getMonth();
-	var numberDay = date.getDate();
 
-	var numberDays = getOpenDays(numberYear, numberMonth, numberDay);
+
+	var numberDays = getOpenDays(popup.numberYear, popup.numberMonth, popup.numberDay);
 
 	elems.numberResultOpen.innerText = numberDays.open;
 	elems.numberResultTotal.innerText = numberDays.total;

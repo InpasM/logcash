@@ -325,21 +325,18 @@ body
 	border: 2px solid rgb(45, 49, 60);
 }
 
-.habit-hide {
+.day-passed-habit {
 	/* background-color: #313c48; */
-	background-color: "none";
-	/* color: rgb(198, 198, 198); */
-	width: 20px;
-	height: 20px;
-	/* border-radius: 50%; */
-	/* display: flex; */
-	/* align-items: center; */
-	/* justify-content: center; */
-	/* cursor: pointer; */
-	/* font-size: 8px; */
-	/* font-weight: bold; */
-	margin: 0 1px;
-	border: 2px solid rgba(45, 49, 60, 0);
+	background-color: "red";
+	/* margin: 0 1px;
+	border: 2px solid rgba(45, 49, 60, 0); */
+}
+
+.actual-day-habit {
+	/* background-color: #313c48; */
+	background-color: "blue";
+	/* margin: 0 1px;
+	border: 2px solid rgba(45, 49, 60, 0); */
 }
 
 
