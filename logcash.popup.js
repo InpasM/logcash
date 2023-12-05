@@ -307,7 +307,7 @@ popup.createElems = function(elems) {
 	elems.numberLabelTotal = document.createElement("span");
 	elems.numberLabelTotal.className = "number-label";
 	elems.numberLabelTotal.innerText = "Total";
-	elems.numberLabelTotal.style.marginLeft = "4px";
+	// elems.numberLabelTotal.style.marginLeft = "4px";
 	elems.numberResultTotal = document.createElement("p");
 	elems.numberResultTotal.className = "number-result";
 	elems.numberResultTotal.id = "result-Total";
@@ -435,6 +435,7 @@ popup.createElems = function(elems) {
 	///////////////////////////////////////////////////////// CONTAINER ESTIMATION
 	elems.estimationContainer = document.createElement("div");
 	elems.estimationContainer.className = "results-div";
+	elems.estimationContainer.style.border = "none";
 
 	elems.mainTitleLogtime = document.createElement("p");
 	elems.mainTitleLogtime.className = "main-title-info";
@@ -445,7 +446,6 @@ popup.createElems = function(elems) {
 
 	elems.lineResultsLogtime1 = document.createElement("div");
 	elems.lineResultsLogtime1.className = "line-estimation-block";
-	elems.lineResultsLogtime1.style.marginRight = "4px";
 	elems.labelLogtime1 = document.createElement("span");
 	elems.labelLogtime1.className = "number-label";
 	elems.labelLogtime1.innerText = "Each Day";
@@ -458,6 +458,7 @@ popup.createElems = function(elems) {
 
 	elems.lineResultsLogtime2 = document.createElement("div");
 	elems.lineResultsLogtime2.className = "line-estimation-block";
+	elems.lineResultsLogtime2.style.border = "none";
 	elems.labelLogtime2 = document.createElement("span");
 	elems.labelLogtime2.className = "number-label";
 	elems.labelLogtime2.innerText = "Remaining today";
@@ -473,7 +474,6 @@ popup.createElems = function(elems) {
 
 	elems.estimationContainer.appendChild(elems.mainTitleLogtime);
 	elems.estimationContainer.appendChild(elems.lineResultsLogtime);
-
 
 
 	elems.moreInfoContainer = document.createElement("div");
@@ -688,6 +688,11 @@ popup.numberDay = popup.date.getDate();
 
 popup.setData = function(elems) {
 
+	if (data.student.pseudo === 0)
+	{
+		const tmpPseudo = document.querySelector(".login").innerText;
+		data.student.pseudo = tmpPseudo;
+	}
 	elems.popupTopRightText.innerText = data.student.pseudo;
 	for (var i = 0; i < elems.checkboxes.length; i++)
 	{
@@ -737,13 +742,16 @@ popup.setData = function(elems) {
 	var integerSalary = parseInt(totalSalaryEarn);
 	var floatSalary = totalSalaryEarn - integerSalary;
 
-	// console.log("require: " + popup.months[popup.months.indexArray].nbHourRem);
-	// console.log("remaining days: " + numberDays.total);
+	var actualHourDone = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone;
+	var actualMinuteDone = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone;
+	var newActualDone = actualHourDone + actualMinuteDone / 60;
 
 	var newTimeRemaining = popup.months[popup.months.indexArray].nbHourRem + (popup.months[popup.months.indexArray].nbMinRem / 60);
+	if (data.student.monthlyHabit[popup.numberDay - 1])
+		newTimeRemaining += newActualDone;
+
 	var resultEachDay = newTimeRemaining / numberDays.total;
 
-	// console.log(resultEachDay);
 	if (data.student.addBoostHalf)
 		resultEachDay -= 0.7;
 	else if (data.student.addBoostFull)
@@ -752,10 +760,6 @@ popup.setData = function(elems) {
 	var resultInteger = parseInt(resultEachDay);
 	var resultFloat = (resultEachDay - resultInteger) * 60;
 
-	var actualHourDone = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone;
-	var actualMinuteDone = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone;
-
-	var newActualDone = actualHourDone + actualMinuteDone / 60;
 	var resultRemaining = resultEachDay - newActualDone;
 
 	var doneInteger = parseInt(resultRemaining);
@@ -765,7 +769,7 @@ popup.setData = function(elems) {
 	if (resultRemaining < 0)
 	{
 		elems.resultLogtime2.innerText = "DONE";
-		elems.resultLogtime2.style.color = "green";
+		elems.resultLogtime2.style.color = "rgb(0, 186, 188)";
 	}
 	else
 	{
