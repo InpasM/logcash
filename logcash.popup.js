@@ -393,6 +393,7 @@ popup.createElems = function(elems) {
 			elems.checkboxHalfCenter.style.backgroundColor = "rgb(0, 186, 188)";
 		}
 		data.updateLocalStorage(data.student);
+		popup.setData(elems);
 	});
 
 	elems.checkboxFull.addEventListener("click", function(e) {
@@ -416,6 +417,7 @@ popup.createElems = function(elems) {
 			elems.checkboxFullCenter.style.backgroundColor = "rgb(0, 186, 188)";
 		}
 		data.updateLocalStorage(data.student);
+		popup.setData(elems);
 	});
 
 	elems.lineResultsBoostLeft.appendChild(elems.labelHalfBoost);
@@ -434,43 +436,43 @@ popup.createElems = function(elems) {
 	elems.estimationContainer = document.createElement("div");
 	elems.estimationContainer.className = "results-div";
 
-	elems.mainTitleEstimation = document.createElement("p");
-	elems.mainTitleEstimation.className = "main-title-info";
-	elems.mainTitleEstimation.innerText = "Estimation";
+	elems.mainTitleLogtime = document.createElement("p");
+	elems.mainTitleLogtime.className = "main-title-info";
+	elems.mainTitleLogtime.innerText = "Logtime";
 
-	elems.lineResultsEstimation = document.createElement("div");
-	elems.lineResultsEstimation.className = "line-results";
+	elems.lineResultsLogtime = document.createElement("div");
+	elems.lineResultsLogtime.className = "line-results";
 
-	elems.lineResultsEstimation1 = document.createElement("div");
-	elems.lineResultsEstimation1.className = "line-estimation-block";
-	elems.lineResultsEstimation1.style.marginRight = "4px";
-	elems.labelEstimation1 = document.createElement("span");
-	elems.labelEstimation1.className = "number-label";
-	elems.labelEstimation1.innerText = "Logtime each Day";
-	elems.resultEstimation1 = document.createElement("p");
-	elems.resultEstimation1.className = "number-result";
-	elems.resultEstimation1.id = "result-open";
-	elems.resultEstimation1.innerText = "0";
-	elems.lineResultsEstimation1.appendChild(elems.labelEstimation1);
-	elems.lineResultsEstimation1.appendChild(elems.resultEstimation1);
+	elems.lineResultsLogtime1 = document.createElement("div");
+	elems.lineResultsLogtime1.className = "line-estimation-block";
+	elems.lineResultsLogtime1.style.marginRight = "4px";
+	elems.labelLogtime1 = document.createElement("span");
+	elems.labelLogtime1.className = "number-label";
+	elems.labelLogtime1.innerText = "Each Day";
+	elems.resultLogtime1 = document.createElement("p");
+	elems.resultLogtime1.className = "number-result";
+	elems.resultLogtime1.id = "result-open";
+	elems.resultLogtime1.innerText = "0";
+	elems.lineResultsLogtime1.appendChild(elems.labelLogtime1);
+	elems.lineResultsLogtime1.appendChild(elems.resultLogtime1);
 
-	elems.lineResultsEstimation2 = document.createElement("div");
-	elems.lineResultsEstimation2.className = "line-estimation-block";
-	elems.labelEstimation2 = document.createElement("span");
-	elems.labelEstimation2.className = "number-label";
-	elems.labelEstimation2.innerText = "Remaining today";
-	elems.resultEstimation2 = document.createElement("p");
-	elems.resultEstimation2.className = "number-result";
-	elems.resultEstimation2.id = "result-open";
-	elems.resultEstimation2.innerText = "0";
-	elems.lineResultsEstimation2.appendChild(elems.labelEstimation2);
-	elems.lineResultsEstimation2.appendChild(elems.resultEstimation2);
+	elems.lineResultsLogtime2 = document.createElement("div");
+	elems.lineResultsLogtime2.className = "line-estimation-block";
+	elems.labelLogtime2 = document.createElement("span");
+	elems.labelLogtime2.className = "number-label";
+	elems.labelLogtime2.innerText = "Remaining today";
+	elems.resultLogtime2 = document.createElement("p");
+	elems.resultLogtime2.className = "number-result";
+	elems.resultLogtime2.id = "result-open";
+	elems.resultLogtime2.innerText = "0";
+	elems.lineResultsLogtime2.appendChild(elems.labelLogtime2);
+	elems.lineResultsLogtime2.appendChild(elems.resultLogtime2);
 
-	elems.lineResultsEstimation.appendChild(elems.lineResultsEstimation1);
-	elems.lineResultsEstimation.appendChild(elems.lineResultsEstimation2);
+	elems.lineResultsLogtime.appendChild(elems.lineResultsLogtime1);
+	elems.lineResultsLogtime.appendChild(elems.lineResultsLogtime2);
 
-	elems.estimationContainer.appendChild(elems.mainTitleEstimation);
-	elems.estimationContainer.appendChild(elems.lineResultsEstimation);
+	elems.estimationContainer.appendChild(elems.mainTitleLogtime);
+	elems.estimationContainer.appendChild(elems.lineResultsLogtime);
 
 
 
@@ -741,16 +743,35 @@ popup.setData = function(elems) {
 	var newTimeRemaining = popup.months[popup.months.indexArray].nbHourRem + (popup.months[popup.months.indexArray].nbMinRem / 60);
 	var resultEachDay = newTimeRemaining / numberDays.total;
 
+	// console.log(resultEachDay);
+	if (data.student.addBoostHalf)
+		resultEachDay -= 0.7;
+	else if (data.student.addBoostFull)
+		resultEachDay -= 1.4;
+
 	var resultInteger = parseInt(resultEachDay);
 	var resultFloat = (resultEachDay - resultInteger) * 60;
 
-	console.log("newTimeRemaining: " + newTimeRemaining);
-	console.log("resultEachDay: " + resultEachDay);
-	console.log("resultInteger: " + resultInteger);
-	console.log("resultFloat: " + resultFloat);
+	var actualHourDone = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone;
+	var actualMinuteDone = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone;
 
-	elems.resultEstimation1.innerText = resultInteger + "h" + parseInt(resultFloat);
+	var newActualDone = actualHourDone + actualMinuteDone / 60;
+	var resultRemaining = resultEachDay - newActualDone;
 
+	var doneInteger = parseInt(resultRemaining);
+	var doneFloat = (resultRemaining - doneInteger) * 60;
+
+	elems.resultLogtime1.innerText = resultInteger + "h" + parseInt(resultFloat);
+	if (resultRemaining < 0)
+	{
+		elems.resultLogtime2.innerText = "DONE";
+		elems.resultLogtime2.style.color = "green";
+	}
+	else
+	{
+		elems.resultLogtime2.innerText = doneInteger + "h" + parseInt(doneFloat);
+		elems.resultLogtime2.style.color = "white";
+	}
 	elems.salaryInteger.innerText = integerSalary;
 	elems.salaryFloat.innerText = "." + floatSalary.toFixed(2).split('.')[1];
 	elems.salaryPercent.innerText = percentSalary.toFixed(1) + '%';
