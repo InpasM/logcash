@@ -28,7 +28,7 @@ var localStorageSpace = function(){
 
 data.init = function() {
 
-	// console.log(localStorageSpace());
+	console.log(localStorageSpace());
 	
 	// localStorage.removeItem("student42");
 	let localStorageStud = localStorage.getItem("student42");

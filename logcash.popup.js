@@ -319,7 +319,7 @@ popup.createElems = function(elems) {
 	elems.lineResultsDays.appendChild(elems.lineResultsDaysRight);
 
 
-	////////////////////////////// CONTAINER BOOST LOCK
+	///////////////////////////////////////////////////////// CONTAINER BOOST LOCK
 	elems.boostLockContainer = document.createElement("div");
 	elems.boostLockContainer.className = "results-div";
 
@@ -335,7 +335,6 @@ popup.createElems = function(elems) {
 	elems.lineResultsBoostLeft.style.display = "flex";
 	elems.lineResultsBoostLeft.style.justifyContent = "center";
 	elems.lineResultsBoostLeft.style.alignItems = "center";
-	// elems.lineResultsBoostLeft.style.backgroundColor = "red";
 	elems.labelHalfBoost = document.createElement("span");
 	elems.labelHalfBoost.className = "number-label";
 	elems.labelHalfBoost.innerText = "42min";
@@ -361,7 +360,6 @@ popup.createElems = function(elems) {
 	elems.checkboxFullCenter.className = "checkbox-boost-center";
 	elems.checkboxFull.appendChild(elems.checkboxFullCenter);
 
-
 	/////////////// SET STYLE CHECKBOX BOOST WITH DATA.STUDENT
 	if (data.student.addBoostHalf)
 	{
@@ -373,8 +371,7 @@ popup.createElems = function(elems) {
 		elems.checkboxFull.style.borderColor = "rgb(0, 186, 188)";
 		elems.checkboxFullCenter.style.backgroundColor = "rgb(0, 186, 188)";
 	}
-	
-	
+
 	elems.checkboxHalf.addEventListener("click", function(e) {
 
 		if (data.student.addBoostHalf)
@@ -433,6 +430,50 @@ popup.createElems = function(elems) {
 	elems.boostLockContainer.appendChild(elems.lineResultsBoost);
 
 
+	///////////////////////////////////////////////////////// CONTAINER ESTIMATION
+	elems.estimationContainer = document.createElement("div");
+	elems.estimationContainer.className = "results-div";
+
+	elems.mainTitleEstimation = document.createElement("p");
+	elems.mainTitleEstimation.className = "main-title-info";
+	elems.mainTitleEstimation.innerText = "Estimation";
+
+	elems.lineResultsEstimation = document.createElement("div");
+	elems.lineResultsEstimation.className = "line-results";
+
+	elems.lineResultsEstimation1 = document.createElement("div");
+	elems.lineResultsEstimation1.className = "line-estimation-block";
+	elems.lineResultsEstimation1.style.marginRight = "4px";
+	elems.labelEstimation1 = document.createElement("span");
+	elems.labelEstimation1.className = "number-label";
+	elems.labelEstimation1.innerText = "Logtime each Day";
+	elems.resultEstimation1 = document.createElement("p");
+	elems.resultEstimation1.className = "number-result";
+	elems.resultEstimation1.id = "result-open";
+	elems.resultEstimation1.innerText = "0";
+	elems.lineResultsEstimation1.appendChild(elems.labelEstimation1);
+	elems.lineResultsEstimation1.appendChild(elems.resultEstimation1);
+
+	elems.lineResultsEstimation2 = document.createElement("div");
+	elems.lineResultsEstimation2.className = "line-estimation-block";
+	elems.labelEstimation2 = document.createElement("span");
+	elems.labelEstimation2.className = "number-label";
+	elems.labelEstimation2.innerText = "Remaining today";
+	elems.resultEstimation2 = document.createElement("p");
+	elems.resultEstimation2.className = "number-result";
+	elems.resultEstimation2.id = "result-open";
+	elems.resultEstimation2.innerText = "0";
+	elems.lineResultsEstimation2.appendChild(elems.labelEstimation2);
+	elems.lineResultsEstimation2.appendChild(elems.resultEstimation2);
+
+	elems.lineResultsEstimation.appendChild(elems.lineResultsEstimation1);
+	elems.lineResultsEstimation.appendChild(elems.lineResultsEstimation2);
+
+	elems.estimationContainer.appendChild(elems.mainTitleEstimation);
+	elems.estimationContainer.appendChild(elems.lineResultsEstimation);
+
+
+
 	elems.moreInfoContainer = document.createElement("div");
 	elems.moreInfoContainer.className = "more-info-container";
 	elems.moreInfoLogo = document.createElement("div");
@@ -441,6 +482,7 @@ popup.createElems = function(elems) {
 
 	elems.resultsContainer.appendChild(elems.resultsDiv);
 	elems.resultsContainer.appendChild(elems.boostLockContainer);
+	elems.resultsContainer.appendChild(elems.estimationContainer);
 
 	elems.resultsDiv.appendChild(elems.mainTitleDays);
 	elems.resultsDiv.appendChild(elems.lineResultsDays);
