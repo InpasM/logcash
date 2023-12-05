@@ -196,6 +196,7 @@ popup.createElems = function(elems) {
 			selectHabitContainer();
 		}
 		data.updateLocalStorage(data.student);
+		popup.setData(elems);
 	}
 
 	elems.weeklySpan.addEventListener("click", switchHabitContainer);
@@ -317,6 +318,108 @@ popup.createElems = function(elems) {
 	elems.lineResultsDays.appendChild(elems.lineResultsDaysLeft);
 	elems.lineResultsDays.appendChild(elems.lineResultsDaysRight);
 
+
+	////////////////////////////// CONTAINER BOOST LOCK
+	elems.boostLockContainer = document.createElement("div");
+	elems.boostLockContainer.className = "results-div";
+
+	elems.mainTitleBoost = document.createElement("p");
+	elems.mainTitleBoost.className = "main-title-info";
+	elems.mainTitleBoost.innerText = "Add Boost Lock";
+
+	elems.lineResultsBoost = document.createElement("div");
+	elems.lineResultsBoost.className = "line-results";
+
+	elems.lineResultsBoostLeft = document.createElement("div");
+	elems.lineResultsBoostLeft.className = "line-results-left";
+	elems.lineResultsBoostLeft.style.display = "flex";
+	elems.lineResultsBoostLeft.style.justifyContent = "center";
+	elems.lineResultsBoostLeft.style.alignItems = "center";
+	// elems.lineResultsBoostLeft.style.backgroundColor = "red";
+	elems.labelHalfBoost = document.createElement("span");
+	elems.labelHalfBoost.className = "number-label";
+	elems.labelHalfBoost.innerText = "42min";
+	
+	elems.lineResultsBoostRight = document.createElement("div");
+	elems.lineResultsBoostRight.className = "line-results-right";
+	elems.lineResultsBoostRight.style.display = "flex";
+	elems.lineResultsBoostRight.style.justifyContent = "center";
+	elems.lineResultsBoostRight.style.alignItems = "center";
+	elems.labelFullBoost = document.createElement("span");
+	elems.labelFullBoost.className = "number-label";
+	elems.labelFullBoost.innerText = "1h24";
+
+	elems.checkboxHalf = document.createElement("div");
+	elems.checkboxHalf.className = "checkbox-boost";
+	elems.checkboxHalfCenter = document.createElement("div");
+	elems.checkboxHalfCenter.className = "checkbox-boost-center";
+	elems.checkboxHalf.appendChild(elems.checkboxHalfCenter);
+	
+	elems.checkboxFull = document.createElement("div");
+	elems.checkboxFull.className = "checkbox-boost";
+	elems.checkboxFullCenter = document.createElement("div");
+	elems.checkboxFullCenter.className = "checkbox-boost-center";
+	elems.checkboxFull.appendChild(elems.checkboxFullCenter);
+
+	var checkboxHalfSelect = false; // change with data.student when finish
+	var checkboxFullSelect = false; // change with data.student when finish
+	
+	elems.checkboxHalf.addEventListener("click", function(e) {
+
+		if (checkboxHalfSelect)
+		{
+			checkboxHalfSelect = false;
+			elems.checkboxHalf.style.borderColor = "rgb(45, 49, 60)";
+			elems.checkboxHalfCenter.style.backgroundColor = "";
+		}
+		else
+		{
+			if (checkboxFullSelect)
+			{
+				checkboxFullSelect = false;
+				elems.checkboxFull.style.borderColor = "rgb(45, 49, 60)";
+				elems.checkboxFullCenter.style.backgroundColor = "";
+			}
+			checkboxHalfSelect = true;
+			elems.checkboxHalf.style.borderColor = "rgb(0, 186, 188)";
+			elems.checkboxHalfCenter.style.backgroundColor = "rgb(0, 186, 188)";
+		}
+	});
+
+	elems.checkboxFull.addEventListener("click", function(e) {
+
+		if (checkboxFullSelect)
+		{
+			checkboxFullSelect = false;
+			elems.checkboxFull.style.borderColor = "rgb(45, 49, 60)";
+			elems.checkboxFullCenter.style.backgroundColor = "";
+		}
+		else
+		{
+			if (checkboxHalfSelect)
+			{
+				checkboxHalfSelect = false;
+				elems.checkboxHalf.style.borderColor = "rgb(45, 49, 60)";
+				elems.checkboxHalfCenter.style.backgroundColor = "";
+			}
+			checkboxFullSelect = true;
+			elems.checkboxFull.style.borderColor = "rgb(0, 186, 188)";
+			elems.checkboxFullCenter.style.backgroundColor = "rgb(0, 186, 188)";
+		}
+	});
+
+	elems.lineResultsBoostLeft.appendChild(elems.labelHalfBoost);
+	elems.lineResultsBoostLeft.appendChild(elems.checkboxHalf);
+	elems.lineResultsBoostRight.appendChild(elems.labelFullBoost);
+	elems.lineResultsBoostRight.appendChild(elems.checkboxFull);
+
+	elems.lineResultsBoost.appendChild(elems.lineResultsBoostLeft);
+	elems.lineResultsBoost.appendChild(elems.lineResultsBoostRight);
+
+	elems.boostLockContainer.appendChild(elems.mainTitleBoost);
+	elems.boostLockContainer.appendChild(elems.lineResultsBoost);
+
+
 	elems.moreInfoContainer = document.createElement("div");
 	elems.moreInfoContainer.className = "more-info-container";
 	elems.moreInfoLogo = document.createElement("div");
@@ -324,6 +427,7 @@ popup.createElems = function(elems) {
 	elems.moreInfoContainer.appendChild(elems.moreInfoLogo);
 
 	elems.resultsContainer.appendChild(elems.resultsDiv);
+	elems.resultsContainer.appendChild(elems.boostLockContainer);
 
 	elems.resultsDiv.appendChild(elems.mainTitleDays);
 	elems.resultsDiv.appendChild(elems.lineResultsDays);
@@ -457,10 +561,21 @@ popup.setStyle = function(elems) {
 
 function isCheckboxUse() {
 
-	for (var i = 0; i < data.student.weeklyHabit.length; i++)
+	if (data.student.whichHabit === 1)
 	{
-		if (data.student.weeklyHabit[i])
-			return true;
+		for (var i = 0; i < data.student.weeklyHabit.length; i++)
+		{
+			if (data.student.weeklyHabit[i])
+				return true;
+		}
+	}
+	else if (data.student.whichHabit === 2)
+	{
+		for (var i = 0; i < data.student.monthlyHabit.length; i++)
+		{
+			if (data.student.monthlyHabit[i])
+				return true;
+		}
 	}
 	return false;
 }
@@ -468,8 +583,8 @@ function isCheckboxUse() {
 function getOpenDays(numberYear, numberMonth, numberDay) {
 
 	const numberDaysInMonth = new Date(numberYear, numberMonth + 1, 0).getDate();
-	const todayDate = new Date();
-	var actualDay = todayDate.getDay();
+	var actualDay = popup.date.getDay();
+
 	var openDays = 0;
 	var totalDays = 0;
 	var i = numberDay - 1;
@@ -479,23 +594,29 @@ function getOpenDays(numberYear, numberMonth, numberDay) {
 	while (++i <= numberDaysInMonth)
 	{
 		if (indexHabit === 7)
-		{
 			indexHabit = 0;
-		}
-		// console.log("check data for day: " + actualDay);
-		if (actualDay == 7)
+		if (actualDay === 7)
 			actualDay = 0;
 		if (actualDay >= 1 && actualDay <= 5)
 		{
-			if (data.student.weeklyHabit[indexHabit] || !useAll)
+			if (data.student.whichHabit === 1 && (data.student.weeklyHabit[indexHabit] || !useAll))
+			{
 				openDays++;
+			}
+			else if (data.student.whichHabit === 2 && (data.student.monthlyHabit[i - 1] || !useAll))
+			{
+				openDays++;
+			}
 		}
-		// console.log(i + " / " + numberDaysInMonth + "  -  habit: " + data.student.habit[indexHabit]);
-		if (data.student.weeklyHabit[indexHabit] || !useAll)
+		if (data.student.whichHabit === 1 && (data.student.weeklyHabit[indexHabit] || !useAll))
 		{
 			totalDays++;
 		}
-		
+		else if (data.student.whichHabit === 2 && (data.student.monthlyHabit[i - 1] || !useAll))
+		{
+			totalDays++;
+		}
+
 		indexHabit++;
 		actualDay++;
 	}
@@ -538,8 +659,6 @@ popup.setData = function(elems) {
 	}
 	if (needToUpdateData)
 		data.updateLocalStorage(data.student);
-
-
 
 	var numberDays = getOpenDays(popup.numberYear, popup.numberMonth, popup.numberDay);
 
