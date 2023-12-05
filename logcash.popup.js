@@ -735,9 +735,21 @@ popup.setData = function(elems) {
 	var integerSalary = parseInt(totalSalaryEarn);
 	var floatSalary = totalSalaryEarn - integerSalary;
 
-	// console.log("salary earn: " + totalSalaryEarn);
-	// console.log("integer earn: " + integerSalary);
-	// console.log("float earn: " + floatSalary.toFixed(2).split('.')[1]);
+	// console.log("require: " + popup.months[popup.months.indexArray].nbHourRem);
+	// console.log("remaining days: " + numberDays.total);
+
+	var newTimeRemaining = popup.months[popup.months.indexArray].nbHourRem + (popup.months[popup.months.indexArray].nbMinRem / 60);
+	var resultEachDay = newTimeRemaining / numberDays.total;
+
+	var resultInteger = parseInt(resultEachDay);
+	var resultFloat = (resultEachDay - resultInteger) * 60;
+
+	console.log("newTimeRemaining: " + newTimeRemaining);
+	console.log("resultEachDay: " + resultEachDay);
+	console.log("resultInteger: " + resultInteger);
+	console.log("resultFloat: " + resultFloat);
+
+	elems.resultEstimation1.innerText = resultInteger + "h" + parseInt(resultFloat);
 
 	elems.salaryInteger.innerText = integerSalary;
 	elems.salaryFloat.innerText = "." + floatSalary.toFixed(2).split('.')[1];
