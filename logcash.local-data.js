@@ -12,6 +12,8 @@ data.student = {
 	weeklyHabit: [false, false, false, false, false, false, false],
 	monthlyHabit: [],
 	whichHabit: 1,
+	addBoostHalf: false,
+	addBoostFull: false,
 };
 
 var localStorageSpace = function(){

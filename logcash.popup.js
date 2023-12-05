@@ -361,51 +361,64 @@ popup.createElems = function(elems) {
 	elems.checkboxFullCenter.className = "checkbox-boost-center";
 	elems.checkboxFull.appendChild(elems.checkboxFullCenter);
 
-	var checkboxHalfSelect = false; // change with data.student when finish
-	var checkboxFullSelect = false; // change with data.student when finish
+
+	/////////////// SET STYLE CHECKBOX BOOST WITH DATA.STUDENT
+	if (data.student.addBoostHalf)
+	{
+		elems.checkboxHalf.style.borderColor = "rgb(0, 186, 188)";
+		elems.checkboxHalfCenter.style.backgroundColor = "rgb(0, 186, 188)";
+	}
+	else if (data.student.addBoostFull)
+	{
+		elems.checkboxFull.style.borderColor = "rgb(0, 186, 188)";
+		elems.checkboxFullCenter.style.backgroundColor = "rgb(0, 186, 188)";
+	}
+	
 	
 	elems.checkboxHalf.addEventListener("click", function(e) {
 
-		if (checkboxHalfSelect)
+		if (data.student.addBoostHalf)
 		{
-			checkboxHalfSelect = false;
+			data.student.addBoostHalf = false;
 			elems.checkboxHalf.style.borderColor = "rgb(45, 49, 60)";
 			elems.checkboxHalfCenter.style.backgroundColor = "";
 		}
 		else
 		{
-			if (checkboxFullSelect)
+			if (data.student.addBoostFull)
 			{
-				checkboxFullSelect = false;
+				data.student.addBoostFull = false;
 				elems.checkboxFull.style.borderColor = "rgb(45, 49, 60)";
 				elems.checkboxFullCenter.style.backgroundColor = "";
 			}
-			checkboxHalfSelect = true;
+			data.student.addBoostHalf = true;
 			elems.checkboxHalf.style.borderColor = "rgb(0, 186, 188)";
 			elems.checkboxHalfCenter.style.backgroundColor = "rgb(0, 186, 188)";
 		}
+		data.updateLocalStorage(data.student);
 	});
 
 	elems.checkboxFull.addEventListener("click", function(e) {
 
-		if (checkboxFullSelect)
+		if (data.student.addBoostFull)
 		{
-			checkboxFullSelect = false;
+			data.student.addBoostFull = false;
 			elems.checkboxFull.style.borderColor = "rgb(45, 49, 60)";
 			elems.checkboxFullCenter.style.backgroundColor = "";
 		}
 		else
 		{
-			if (checkboxHalfSelect)
+			if (data.student.addBoostHalf)
 			{
-				checkboxHalfSelect = false;
+				data.student.addBoostHalf = false;
 				elems.checkboxHalf.style.borderColor = "rgb(45, 49, 60)";
 				elems.checkboxHalfCenter.style.backgroundColor = "";
 			}
-			checkboxFullSelect = true;
+			data.student.addBoostFull = true;
 			elems.checkboxFull.style.borderColor = "rgb(0, 186, 188)";
 			elems.checkboxFullCenter.style.backgroundColor = "rgb(0, 186, 188)";
 		}
+		data.updateLocalStorage(data.student);
 	});
 
 	elems.lineResultsBoostLeft.appendChild(elems.labelHalfBoost);
