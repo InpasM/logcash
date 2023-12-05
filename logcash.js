@@ -222,106 +222,11 @@ function getInfoMonth(elems, calendar) {
 
 	const nbMonth = getNbUniqueMonth(elems.textMonth);
 
-	// displayMessage("number month: " + nbMonth);
-
-	// tests on getting hour reading calendar elements
-	/*const calendarElem = calendar.childNodes;
-
-	const date = new Date();
-	var numberYear = date.getFullYear();
-	var numberMonth = date.getMonth() + 1;
-	var numberDay = date.getDate();
-
-	const objMonth = {
-		actualDate: 0,
-		array: [
-			{},
-			{},
-			{},
-			{}
-		],
-	};
-
-	objMonth.actualDate = numberYear + "-";
-	if (numberMonth < 10)
-		objMonth.actualDate += "0";
-	objMonth.actualDate += numberMonth + "-";
-	if (numberDay < 10)
-		objMonth.actualDate += "0";
-	objMonth.actualDate += numberDay;
-
-	let tmpFirst, tmpLast, newDateLast;
-	for (var i = 3; i >= 0; i--)
-	{
-		if (numberMonth == 1)
-		{
-			numberMonth = 12;
-			newDateLast = new Date(--numberYear, numberMonth, 0);
-		}
-		else
-			newDateLast = new Date(numberYear, numberMonth, 0);
-
-		tmpFirst = numberYear + "-";
-		if (numberMonth < 10)
-			tmpFirst += "0";
-		tmpFirst += numberMonth + "-01";
-		if (i === 3)
-			tmpLast = objMonth.actualDate;
-		else
-		{
-			tmpLast = newDateLast.getFullYear() + "-";
-			if (numberMonth < 10)
-				tmpLast += "0";
-			tmpLast += numberMonth + "-";
-			if (numberDay < 10)
-				tmpLast += "0";
-			tmpLast += newDateLast.getDate();
-		}
-		objMonth.array[i] = {firstDay: tmpFirst, lastDay: tmpLast};
-		--numberMonth;
-	}
-	console.log(objMonth.array);
-
-	let arrayMonthsG = [];
-	let tmpMonthG = [];
-	let indexMonth = 3;
-	let dateToFound;
-
-	for (var i = calendarElem.length - 1; i > 0; i--)
-	{
-		// console.log(calendarElem[i]);
-		if (indexMonth === -1)
-			break;
-		if (indexMonth === 0)
-			dateToFound = objMonth.array[indexMonth].firstDay;
-		else
-			dateToFound = objMonth.array[indexMonth - 1].lastDay;
-
-		let elemAttribute = calendarElem[i].getAttribute("data-iidate");
-		// let elemAttribute = calendarElem[i].getAttribute("data-original-title");
-
-		// console.log(elemAttribute + " === " + dateToFound);
-		if (elemAttribute === dateToFound)
-		{
-			if (indexMonth === 0)
-				tmpMonthG.push(calendarElem[i]);
-			arrayMonthsG.push(tmpMonthG);
-			tmpMonthG = [];
-			--indexMonth;
-		}
-		if (calendarElem[i].getAttribute("data-iidate"))
-			tmpMonthG.push(calendarElem[i]);
-	}
-	arrayMonthsG = arrayMonthsG.reverse();
-	console.log(arrayMonthsG);*/
-
-
 	function initArrayCalendar(calendarElem, arrayCalendar) {
 
 		let objMonth = {};
 		let arrayMonthsG = [];
 		let indexMonth = 0;
-
 		let tmpArray = [];
 
 		for (var i = calendarElem.length - 1; i >= 0; i--)
