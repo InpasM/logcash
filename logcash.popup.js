@@ -97,10 +97,6 @@ popup.createElems = function(elems) {
 
 	elems.weekContainer = document.createElement("div");
 	elems.weekContainer.className = "week-container";
-
-	elems.habitContainer.appendChild(elems.weeklySpan);
-	elems.habitContainer.appendChild(elems.weekContainer);
-
 	elems.weekContainer.appendChild(elems.lineHabit);
 
 	elems.checkboxes = [];
@@ -113,24 +109,16 @@ popup.createElems = function(elems) {
 		elems.checkboxes[i].innerText = arrayDaysLetter[i];
 	}
 	
-	// elems.monthlyHabit = document.createElement("div");
-	// elems.monthlyHabit.className = "monthly-habit";
-	
 	elems.monthContainer = document.createElement("div");
 	elems.monthContainer.className = "month-container";
-	// elems.monthContainer.style.display = "none";
 
+	elems.habitContainer.appendChild(elems.weeklySpan);
+	elems.habitContainer.appendChild(elems.weekContainer);
 	elems.habitContainer.appendChild(elems.monthContainer);
 
 	elems.monthLineHabit = [0, 0, 0, 0, 0, 0];
 	elems.checkboxesMonth = [];
 	var indexMonth = 0;
-
-	// const date = new Date();
-	// var numberDay = date.getDate();
-	// var numberDay = 25;
-
-	// console.log(numberDay);
 
 	for (var i = 0; i < popup.months[popup.months.indexArray].weeks.length; i++)
 	{
@@ -177,26 +165,40 @@ popup.createElems = function(elems) {
 		e.target.style.color = "";
 	});
 
-	var showWeekly = true;
-	elems.weeklySpan.addEventListener("click", function(e) {
+	selectHabitContainer();
 
-		console.log(data.student);
+	function selectHabitContainer() {
 
-		if (showWeekly)
-		{
-			elems.monthContainer.style.display = "flex";
-			elems.weekContainer.style.display = "none";
-			e.target.innerText = "Monthly Habit";
-			showWeekly = false;
-		}
-		else
+		if (data.student.whichHabit === 1)
 		{
 			elems.monthContainer.style.display = "none";
 			elems.weekContainer.style.display = "flex";
-			e.target.innerText = "Weekly Habit";
-			showWeekly = true;
+			elems.weeklySpan.innerText = "Weekly Habit";
 		}
-	});
+		else if (data.student.whichHabit === 2)
+		{
+			elems.monthContainer.style.display = "flex";
+			elems.weekContainer.style.display = "none";
+			elems.weeklySpan.innerText = "Monthly Habit";
+		}
+	}
+
+	function switchHabitContainer() {
+
+		if (data.student.whichHabit === 1)
+		{
+			data.student.whichHabit = 2;
+			selectHabitContainer();
+		}
+		else if (data.student.whichHabit === 2)
+		{
+			data.student.whichHabit = 1;
+			selectHabitContainer();
+		}
+		data.updateLocalStorage(data.student);
+	}
+
+	elems.weeklySpan.addEventListener("click", switchHabitContainer);
 
 	//////////////////////////////////////////////////////////////////////  MIDDLE RIGHT DIV
 	elems.popMiddleDivRight = document.createElement("div");

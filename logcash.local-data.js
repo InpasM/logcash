@@ -11,6 +11,7 @@ data.student = {
 	hoursDeducted: 0,
 	weeklyHabit: [false, false, false, false, false, false, false],
 	monthlyHabit: [],
+	whichHabit: 1,
 };
 
 var localStorageSpace = function(){

@@ -291,7 +291,7 @@ body
 .week-container, .month-container {
 	width: fit-content;
 	/* background-color: blue; */
-	display: flex;
+	display: none;
 	/* justify-content: center; */
 	flex-direction: column;
 	margin-top: 6px;
