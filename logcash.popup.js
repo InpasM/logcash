@@ -284,8 +284,35 @@ popup.createElems = function(elems) {
 	elems.salaryContainer.appendChild(elems.lineThisSelection);
 	elems.salaryContainer.appendChild(elems.salaryCircleContainer);
 	elems.popMiddleDivRight.appendChild(elems.salaryContainer);
+	
+	
+	///////////////////////////////////////////////////////////////////////// GRAPH SLIDE
+	elems.salaryGraphContainer = document.createElement("div");
+	elems.salaryGraphContainer.className = "salary-graph-container";
+	elems.salaryContainer.appendChild(elems.salaryGraphContainer);
 
-	////////////////////// TMP GRAPH SLIDE
+	elems.lineGraph = document.createElement("div");
+	elems.lineGraph.className = "line-graph";
+	elems.salaryGraphContainer.appendChild(elems.lineGraph);
+
+	if (data.student.salary)
+	{
+		const numberDayGraph = popup.months[popup.months.nbMonth - 1].arrayElems.length;
+		var newMonthHourDone = popup.months[popup.months.nbMonth - 1].nbHourDone + (popup.months[popup.months.nbMonth - 1].nbMinDone / 60);
+	
+		for (var i = 0; i < numberDayGraph; i++)
+		{
+			var newDayHourDone = popup.months[popup.months.nbMonth - 1].days[i].hourDone + (popup.months[popup.months.nbMonth - 1].days[i].minuteDone / 60);
+			var ratioDone = newMonthHourDone / newDayHourDone;
+			
+			console.log("ratioDone: " + ratioDone);
+			// console.log(popup.months[popup.months.nbMonth - 1].days[i]);
+			// console.log(newMonthHourDone + " / " + newDayHourDone);
+		}
+		console.log("numberDayGraph: " + numberDayGraph);
+
+	}
+
 	const slideContainer = document.querySelectorAll(".day-slide-container");
 
 	elems.tooltipSalary = document.createElement("div");
@@ -316,8 +343,6 @@ popup.createElems = function(elems) {
 			offsetTop = elemRect.top + 25 + elemRect.height;		// hover on top of element
 			offsetLeft = elemRect.left - 28 + (elemRect.width / 2);
 
-			// console.log("top: " + offsetTop + " + left: " + offsetLeft);
-
 			elems.tooltipSalary.style.opacity = "1";
 			elems.tooltipSalary.style.top = offsetTop + "px";
 			elems.tooltipSalary.style.left = offsetLeft + "px";
@@ -326,15 +351,11 @@ popup.createElems = function(elems) {
 		});
 
 		slideContainer[i].addEventListener("mouseout", function(e) {
-
-			// console.log(e.target.firstElementChild);
 			e.target.firstElementChild.style.backgroundColor = "rgba(0, 186, 188, 0.40)";
-
-			// elems.tooltipSalary.style.display = "none";
 			elems.tooltipSalary.style.opacity = "0";
 		});
 	}
-	// console.log(slideContainer);
+
 
 
 	//////////////////////////////////////////////////////////////////////  BOTTOM DIV
@@ -634,7 +655,7 @@ popup.createElems = function(elems) {
 
 	elems.popupRemaining.appendChild(elems.popMiddleDiv);
 	elems.popupRemaining.appendChild(elems.popBottomContainer);
-	// document.body.appendChild(elems.popupRemaining);
+	document.body.appendChild(elems.popupRemaining);
 }
 
 function disableTextSelection() {

@@ -335,7 +335,9 @@ function getInfoMonth(elems, calendar) {
 				timeDone: tmpTimeDone,
 				hourDone: parseInt(splitTimeDone[0]),
 				minuteDone: parseInt(splitTimeDone[1]),
+				// cashEarn: 0,
 			};
+			// console.log("test");
 
 			if (arrayCalendar[i].days[j].dayNumber === 0 && j !== 0)
 			{
