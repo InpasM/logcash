@@ -195,7 +195,7 @@ popup.createElems = function(elems) {
 			data.student.whichHabit = 1;
 			selectHabitContainer();
 		}
-		data.updateLocalStorage(data.student);
+		data.updateLocalStorage();
 		popup.setData(elems);
 	}
 
@@ -392,7 +392,7 @@ popup.createElems = function(elems) {
 			elems.checkboxHalf.style.borderColor = "rgb(0, 186, 188)";
 			elems.checkboxHalfCenter.style.backgroundColor = "rgb(0, 186, 188)";
 		}
-		data.updateLocalStorage(data.student);
+		data.updateLocalStorage();
 		popup.setData(elems);
 	});
 
@@ -416,7 +416,7 @@ popup.createElems = function(elems) {
 			elems.checkboxFull.style.borderColor = "rgb(0, 186, 188)";
 			elems.checkboxFullCenter.style.backgroundColor = "rgb(0, 186, 188)";
 		}
-		data.updateLocalStorage(data.student);
+		data.updateLocalStorage();
 		popup.setData(elems);
 	});
 
@@ -614,6 +614,18 @@ popup.setStyle = function(elems) {
 		e.target.style.backgroundColor = "";
 		e.target.style.color = "#9b9b9b";
 	});
+
+	elems.popupTopRightText.addEventListener("click", function(e) {
+
+		const tmpPseudo = document.querySelector(".login").innerText;
+		
+		if (tmpPseudo)
+		{
+			data.student.pseudo = tmpPseudo;
+			data.updateLocalStorage();
+			elems.popupTopRightText.innerText = data.student.pseudo;
+		}
+	});
 }
 
 function isCheckboxUse() {
@@ -720,7 +732,7 @@ popup.setData = function(elems) {
 		}
 	}
 	if (needToUpdateData)
-		data.updateLocalStorage(data.student);
+		data.updateLocalStorage();
 
 	var numberDays = getOpenDays(popup.numberYear, popup.numberMonth, popup.numberDay);
 
@@ -800,7 +812,7 @@ function clickWeeklyHabit(e) {
 		e.target.style.borderColor = "rgb(0, 186, 188)";
 	}
 	if (data.isHomePage === -1)
-		data.updateLocalStorage(data.student);
+		data.updateLocalStorage();
 	popup.setData(elems);
 }
 
@@ -820,7 +832,7 @@ function clickMonthlyHabit(e) {
 		e.target.style.borderColor = "rgb(0, 186, 188)";
 	}
 	if (data.isHomePage === -1)
-		data.updateLocalStorage(data.student);
+		data.updateLocalStorage();
 	popup.setData(elems);
 }
 
@@ -869,7 +881,7 @@ popup.initPopup = function(elems, months) {
 		{
 			data.student.salary = e.target.value;
 			if (data.isHomePage === -1)
-				data.updateLocalStorage(data.student);
+				data.updateLocalStorage();
 		}
 		popup.setData(elems);
 	});
@@ -882,7 +894,7 @@ popup.initPopup = function(elems, months) {
 		{
 			data.student.hoursDeducted = e.target.value;
 			if (data.isHomePage === -1)
-				data.updateLocalStorage(data.student);
+				data.updateLocalStorage();
 		}
 		var newRequire = months[months.indexArray].openDaysTotal * 7 - e.target.value;
 
