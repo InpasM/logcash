@@ -1,8 +1,10 @@
 
 window.data = window.data || {};
 
-data.updateLocalStorage = function(object) {
-	localStorage.setItem("student42", JSON.stringify(object));
+data.updateLocalStorage = function() {
+
+	if (data.isHomePage === -1)
+		localStorage.setItem("student42", JSON.stringify(data.student));
 }
 
 data.student = {
@@ -43,7 +45,7 @@ data.init = function() {
 			const login = document.querySelector(".login").innerText;
 
 			data.student.pseudo = login;
-			data.updateLocalStorage(data.student);
+			data.updateLocalStorage();
 
 			displayMessage("student not found in localstorage, check for login: " + login);
 			localStorageStud = localStorage.getItem("student42");
