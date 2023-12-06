@@ -10,6 +10,7 @@
 		<!-- <script src='main.js'></script> -->
 	</head>
 	<body>
+		<p class="dev-client-x">0</p>
 		<button class="dev-refresh-button">REFRESH: ON</button>
 
 		<div class="popup-remaining" style="opacity: 1; display: flex; position: absolute; border-radius: 4px; z-index: 1000; background-color: rgba(37, 41, 50, 0.8); border: 1px solid rgb(45, 49, 60); box-shadow: rgba(18, 20, 26, 0.227) 0px 10px 15px; top: 60px; left: 20px; backdrop-filter: blur(6px);">
@@ -91,11 +92,17 @@
 								</div>
 								<div class="day-graph">
 									<div class="day-slide-container">
-										<div class="day-slide" style="height: 30%; pointer-events: none;"></div>
+										<div class="day-slide" style="height: 100%; pointer-events: none;"></div>
 									</div>
 									<div class="day-base"></div>
 								</div>
 								<div class="day-graph">
+									<div class="day-slide-container">
+										<div class="day-slide" style="height: 30%;"></div>
+									</div>
+									<div class="day-base actual"></div>
+								</div>
+								<!-- <div class="day-graph">
 									<div class="day-slide-container">
 										<div class="day-slide" style="height: 100%; pointer-events: none;"></div>
 									</div>
@@ -112,7 +119,7 @@
 										<div class="day-slide" style="height: 60%; pointer-events: none;"></div>
 									</div>
 									<div class="day-base"></div>
-								</div>
+								</div> -->
 
 								
 								<!-- <div class="day-graph">

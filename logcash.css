@@ -536,6 +536,7 @@ body
 	/* height: 20px; */
 
 	width: 100%;
+	/* margin-top: 4px; 				ONLY if on top*/
 	display: flex;
 	justify-content: center;
 }
@@ -545,6 +546,7 @@ body
 	height: 50px;
 	/* width: 100%; */
 	/* background-color: orange; */
+	/* border-top: 1px solid rgb(51, 54, 65); */
 	flex: 1;
 	padding: 0 6px;
 	display: flex;
@@ -555,7 +557,9 @@ body
 	/* background-color: blue; */
 	/* width: 3px; */
 	/* width: 100%; */
+
 	flex: 1;
+	max-width: 16px;
 	height: 100%;
 	margin: 0 1px;		/* depending of month or week displayed */
 	display: flex;
@@ -565,19 +569,22 @@ body
 
 .day-slide-container {
 	/* background-color: red; */
-	background-color: blue;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
-	/* background-color: rgba(0, 186, 188, 0.40); */
 	height: 100%;
 	border-radius: 2px 2px 0 0;
+	/* border: 1px solid rgb(51, 54, 65); */
+	/* background-color: #313c48;
+	background-color: rgb(117, 117, 117); */
 }
 
 .day-slide {
 	background-color: rgba(0, 186, 188, 0.40);
-	/* height: 100%; */
+	/* border: 1px solid rgba(0, 186, 188, 0.60); */
+	border: 1px solid rgba(0, 186, 188, 0.30);
 	border-radius: 2px 2px 0 0;
+	pointer-events: none;
 	transition: ease 0.2s background-color;
 }
 
@@ -591,9 +598,10 @@ body
 	/* background-color: rgb(117, 117, 117); */
 	/* background-color: #313c48; */
 	background-color: rgb(120, 120, 120);
-	height: 4px;
+	border: 1px solid rgba(120, 120, 120, 0.30);
+	height: 3px;
 	margin-top: 2px;
-	/* border-radius: 4px; */
+	border-radius: 1px;
 }
 
 .actual {
@@ -605,34 +613,42 @@ body
 }
 
 .tooltip-salary {
-	position: absolute;
-	/* top: 270px;
+	/** DEV **/
+	/* top: 270px;		
 	left: 475px; */
-	background-color: red;
-	min-width: 100px;
-	/* height: 40px; */
+	
+	opacity: 0;
+	position: absolute;
+	background-color: rgba(46, 51, 61, 0.9);
+	width: 50px;
+	height: 23px;
+	padding: 3px;
+	border-radius: 4px;
+	border: 1px solid rgb(51, 54, 65);
+	box-shadow: 0px 10px 20px #12141a3a;
+	color: #f0f0f0;
 	z-index: 1000;
 	transition: ease 0.2s opacity;
 	display: flex;
 	flex-direction: column;
-	/* justify-content: space-between; */
 }
 
 .tooltip-top-text {
 	width: 100%;
 	/* height: 20px; */
 	/* background-color: orange; */
-	font-size: 10px;
+	font-size: 8px;
 	text-align: center;
 	padding: 0;
 	margin: 0;
+	color: rgb(155, 155, 155);
 }
 
 .tooltip-bottom-text {
 	width: 100%;
-	height: 20px;
+	/* height: 20px; */
 	/* background-color: green; */
-	font-size: 14px;
+	font-size: 12px;
 	text-align: center;
 	padding: 0;
 	margin: 0;
@@ -868,4 +884,12 @@ body
 	background: orange;
 	border-radius: 6px;
 	color: white;
+}
+
+.dev-client-x {
+	position: absolute;
+	color: white;
+	font-size: 1.5em;
+	left: 50%;
+	background-color: red;
 }

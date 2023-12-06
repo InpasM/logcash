@@ -735,3 +735,5 @@ function startLogcash() {
 setTimeout(function() {
 	startLogcash();
 }, 100);
+
+document.body.addEventListener

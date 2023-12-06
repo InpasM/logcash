@@ -312,20 +312,16 @@ popup.createElems = function(elems) {
 			var bodyRect = document.body.getBoundingClientRect();
 			elemRect = e.target.getBoundingClientRect();
 
-			console.log(e.clientX);
-			console.log(elemRect.width);
-			offsetTop = elemRect.top - bodyRect.top - 30;
-			offsetLeft = elemRect.left - bodyRect.left;
-			// offsetLeft = e.clientX - bodyRect.left - 40;
+			// offsetTop = elemRect.top - 21;		// hover on top of element
+			offsetTop = elemRect.top + 25 + elemRect.height;		// hover on top of element
+			offsetLeft = elemRect.left - 28 + (elemRect.width / 2);
 
-			console.log("top: " + offsetTop + " + left: " + offsetLeft);
+			// console.log("top: " + offsetTop + " + left: " + offsetLeft);
 
-			// elems.tooltipSalary.style.display = "flex";
 			elems.tooltipSalary.style.opacity = "1";
 			elems.tooltipSalary.style.top = offsetTop + "px";
 			elems.tooltipSalary.style.left = offsetLeft + "px";
 
-			// console.log(e.target.clientX);
 			e.target.firstElementChild.style.backgroundColor = "rgba(0, 186, 188, 0.80)";
 		});
 
@@ -638,7 +634,7 @@ popup.createElems = function(elems) {
 
 	elems.popupRemaining.appendChild(elems.popMiddleDiv);
 	elems.popupRemaining.appendChild(elems.popBottomContainer);
-	document.body.appendChild(elems.popupRemaining);
+	// document.body.appendChild(elems.popupRemaining);
 }
 
 function disableTextSelection() {
@@ -947,8 +943,11 @@ popup.initPopup = function(elems, months) {
 		mouseDown = true;
 		popupOffset = [elems.popupRemaining.offsetLeft - e.clientX, elems.popupRemaining.offsetTop - e.clientY];
 	})
+
+	const devTextClientX = document.querySelector(".dev-client-x");
 	document.body.addEventListener("mousemove", function(e) {
 
+		devTextClientX.innerText = e.clientX;
 		e.stopPropagation();
 		if (mouseDown) {
 			elems.popupRemaining.style.top = e.clientY + popupOffset[1] + "px";
