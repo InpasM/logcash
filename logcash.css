@@ -298,6 +298,23 @@ body
 	/* margin: 4px 0 8px 4px; */
 }
 
+.days-name-line {
+	display: flex;
+	margin-top: 2px;
+}
+
+.days-name-box {
+	color: rgb(198, 198, 198);
+	width: 24px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 8px;
+	font-weight: bold;
+	margin: 0 1px;
+}
+
 .line-habit {
 	/* background-color: pink; */
 	/* width: fit-content; */
@@ -707,23 +724,17 @@ body
 }
 
 .number-result {
-	/* font-size: 0.9em; */
-	/* background-color: #313c48; */
 	/* background-color: red; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	/* width: fit-content; */
 	min-width: 25px;
 	padding: 2px 0 0 0;
-	/* padding: 0; */
 	margin: 0;
 	font-size: 16px;
 	border-radius: 4px;
-	/* color: rgb(198, 198, 198); */
 	color: white;
-	/* border: 2px solid rgb(45, 49, 60); */
 }
 
 .checkbox-boost {

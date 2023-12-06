@@ -100,13 +100,14 @@ popup.createElems = function(elems) {
 	elems.weekContainer.appendChild(elems.lineHabit);
 
 	elems.checkboxes = [];
-	const arrayDaysLetter = ["S", "M", "T", "W", "T", "F", "S"];
+	// const arrayDaysLetter = ["S", "M", "T", "W", "T", "F", "S"];
+	const arrayDaysName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 	for (var i = 0; i < 7; i++)
 	{
 		elems.checkboxes[i] = document.createElement("div");
 		elems.checkboxes[i].className = "checkbox-habit";
 		elems.checkboxes[i].id = i;
-		elems.checkboxes[i].innerText = arrayDaysLetter[i];
+		elems.checkboxes[i].innerText = arrayDaysName[i];
 	}
 	
 	elems.monthContainer = document.createElement("div");
@@ -120,6 +121,20 @@ popup.createElems = function(elems) {
 	elems.checkboxesMonth = [];
 	var indexMonth = 0;
 
+	elems.monthDayBoxes = [];
+	elems.monthLineDayName = document.createElement("div");
+	elems.monthLineDayName.className = "days-name-line";
+	// const arrayDaysName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+	for (var i = 0; i < 7; i++)
+	{
+		elems.monthDayBoxes[i] = document.createElement("div");
+		elems.monthDayBoxes[i].className = "days-name-box";
+		elems.monthDayBoxes[i].id = i;
+		elems.monthDayBoxes[i].innerText = arrayDaysName[i];
+		elems.monthLineDayName.appendChild(elems.monthDayBoxes[i]);
+	}
+
+	elems.monthContainer.appendChild(elems.monthLineDayName);
 	for (var i = 0; i < popup.months[popup.months.indexArray].weeks.length; i++)
 	{
 		elems.monthLineHabit[i] = document.createElement("div");
@@ -297,7 +312,6 @@ popup.createElems = function(elems) {
 	elems.numberLabelOpen.innerText = "Open";
 	elems.numberResultOpen = document.createElement("p");
 	elems.numberResultOpen.className = "number-result";
-	elems.numberResultOpen.id = "result-open";
 	elems.numberResultOpen.innerText = "0";
 	elems.lineResultsDaysLeft.appendChild(elems.numberLabelOpen);
 	elems.lineResultsDaysLeft.appendChild(elems.numberResultOpen);
@@ -451,8 +465,8 @@ popup.createElems = function(elems) {
 	elems.labelLogtime1.innerText = "Each Day";
 	elems.resultLogtime1 = document.createElement("p");
 	elems.resultLogtime1.className = "number-result";
-	elems.resultLogtime1.id = "result-open";
 	elems.resultLogtime1.innerText = "0";
+	elems.resultLogtime1.style.minWidth = "60px";
 	elems.lineResultsLogtime1.appendChild(elems.labelLogtime1);
 	elems.lineResultsLogtime1.appendChild(elems.resultLogtime1);
 
@@ -464,8 +478,8 @@ popup.createElems = function(elems) {
 	elems.labelLogtime2.innerText = "Remaining today";
 	elems.resultLogtime2 = document.createElement("p");
 	elems.resultLogtime2.className = "number-result";
-	elems.resultLogtime2.id = "result-open";
 	elems.resultLogtime2.innerText = "0";
+	elems.resultLogtime2.style.minWidth = "60px";
 	elems.lineResultsLogtime2.appendChild(elems.labelLogtime2);
 	elems.lineResultsLogtime2.appendChild(elems.resultLogtime2);
 
@@ -770,14 +784,18 @@ popup.setData = function(elems) {
 		resultEachDay -= 1.4;
 
 	var resultInteger = parseInt(resultEachDay);
-	var resultFloat = (resultEachDay - resultInteger) * 60;
+	var resultFloat = parseInt((resultEachDay - resultInteger) * 60);
 
 	var resultRemaining = resultEachDay - newActualDone;
 
 	var doneInteger = parseInt(resultRemaining);
-	var doneFloat = (resultRemaining - doneInteger) * 60;
+	var doneFloat = parseInt((resultRemaining - doneInteger) * 60);
 
-	elems.resultLogtime1.innerText = resultInteger + "h" + parseInt(resultFloat);
+	var tmpText = resultInteger + "h";
+
+	if (resultFloat < 10)
+		tmpText += "0";
+	elems.resultLogtime1.innerText = tmpText + resultFloat;
 	if (resultRemaining < 0)
 	{
 		elems.resultLogtime2.innerText = "DONE";
@@ -785,7 +803,10 @@ popup.setData = function(elems) {
 	}
 	else
 	{
-		elems.resultLogtime2.innerText = doneInteger + "h" + parseInt(doneFloat);
+		tmpText = doneInteger + "h";
+		if (resultFloat < 10)
+			tmpText += "0";
+		elems.resultLogtime2.innerText = tmpText + doneFloat;
 		elems.resultLogtime2.style.color = "white";
 	}
 	elems.salaryInteger.innerText = integerSalary;
