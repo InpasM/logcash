@@ -285,6 +285,61 @@ popup.createElems = function(elems) {
 	elems.salaryContainer.appendChild(elems.salaryCircleContainer);
 	elems.popMiddleDivRight.appendChild(elems.salaryContainer);
 
+	////////////////////// TMP GRAPH SLIDE
+	const slideContainer = document.querySelectorAll(".day-slide-container");
+
+	elems.tooltipSalary = document.createElement("div");
+	elems.tooltipSalary.className = "tooltip-salary";
+	elems.tooltipTopText = document.createElement("p");
+	elems.tooltipTopText.className = "tooltip-top-text";
+	elems.tooltipBottomText = document.createElement("p");
+	elems.tooltipBottomText.className = "tooltip-bottom-text";
+
+	// TMP
+	elems.tooltipTopText.innerText = "05-12-2023";
+	elems.tooltipBottomText.innerText = "€23.74";
+
+	elems.tooltipSalary.appendChild(elems.tooltipTopText);
+	elems.tooltipSalary.appendChild(elems.tooltipBottomText);
+
+	document.body.appendChild(elems.tooltipSalary);
+	for (var i = 0; i < slideContainer.length; i++)
+	{
+		// console.log(slideContainer[i]);
+
+		slideContainer[i].addEventListener("mouseover", function(e) {
+
+			var bodyRect = document.body.getBoundingClientRect();
+			elemRect = e.target.getBoundingClientRect();
+
+			console.log(e.clientX);
+			console.log(elemRect.width);
+			offsetTop = elemRect.top - bodyRect.top - 30;
+			offsetLeft = elemRect.left - bodyRect.left;
+			// offsetLeft = e.clientX - bodyRect.left - 40;
+
+			console.log("top: " + offsetTop + " + left: " + offsetLeft);
+
+			// elems.tooltipSalary.style.display = "flex";
+			elems.tooltipSalary.style.opacity = "1";
+			elems.tooltipSalary.style.top = offsetTop + "px";
+			elems.tooltipSalary.style.left = offsetLeft + "px";
+
+			// console.log(e.target.clientX);
+			e.target.firstElementChild.style.backgroundColor = "rgba(0, 186, 188, 0.80)";
+		});
+
+		slideContainer[i].addEventListener("mouseout", function(e) {
+
+			// console.log(e.target.firstElementChild);
+			e.target.firstElementChild.style.backgroundColor = "rgba(0, 186, 188, 0.40)";
+
+			// elems.tooltipSalary.style.display = "none";
+			elems.tooltipSalary.style.opacity = "0";
+		});
+	}
+	// console.log(slideContainer);
+
 
 	//////////////////////////////////////////////////////////////////////  BOTTOM DIV
 	elems.popBottomContainer = document.createElement("div");
