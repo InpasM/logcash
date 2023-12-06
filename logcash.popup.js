@@ -295,25 +295,50 @@ popup.createElems = function(elems) {
 	elems.lineGraph.className = "line-graph";
 	elems.salaryGraphContainer.appendChild(elems.lineGraph);
 
-	if (data.student.salary)
+	elems.dayGraphs = [];
+	elems.daySlideContainers = [];
+	elems.daySlides = [];
+	elems.dayBases = [];
+
+	const numberDayGraph = popup.months[popup.months.nbMonth - 1].arrayElems.length;
+	var monthHourDone = popup.months[popup.months.nbMonth - 1].nbHourDone + (popup.months[popup.months.nbMonth - 1].nbMinDone / 60);
+	var monthHourRequired = popup.months[popup.months.nbMonth - 1].nbHourReq;
+
+	for (var i = 0; i < numberDayGraph; i++)
 	{
-		const numberDayGraph = popup.months[popup.months.nbMonth - 1].arrayElems.length;
-		var newMonthHourDone = popup.months[popup.months.nbMonth - 1].nbHourDone + (popup.months[popup.months.nbMonth - 1].nbMinDone / 60);
-	
-		for (var i = 0; i < numberDayGraph; i++)
+		var newDayHourDone = popup.months[popup.months.nbMonth - 1].days[i].hourDone + (popup.months[popup.months.nbMonth - 1].days[i].minuteDone / 60);
+		var ratioDone = 0;
+		var percentDay = 0;
+
+		elems.dayGraphs.push(document.createElement("div"));
+		elems.dayGraphs[i].className = "day-graph";
+		elems.daySlideContainers.push(document.createElement("div"));
+		elems.daySlideContainers[i].className = "day-slide-container";
+		elems.daySlides.push(document.createElement("div"));
+		elems.daySlides[i].className = "day-slide";
+		elems.dayBases.push(document.createElement("div"));
+		elems.dayBases[i].className = "day-base";
+
+		elems.daySlideContainers[i].appendChild(elems.daySlides[i]);
+
+		elems.dayGraphs[i].appendChild(elems.daySlideContainers[i]);
+		elems.dayGraphs[i].appendChild(elems.dayBases[i]);
+
+		elems.lineGraph.appendChild(elems.dayGraphs[i]);
+		
+		if (newDayHourDone > 0)
 		{
-			var newDayHourDone = popup.months[popup.months.nbMonth - 1].days[i].hourDone + (popup.months[popup.months.nbMonth - 1].days[i].minuteDone / 60);
-			var ratioDone = newMonthHourDone / newDayHourDone;
-			
-			console.log("ratioDone: " + ratioDone);
-			// console.log(popup.months[popup.months.nbMonth - 1].days[i]);
-			// console.log(newMonthHourDone + " / " + newDayHourDone);
+			ratioDone = newDayHourDone / monthHourRequired;
+			percentDay = newDayHourDone / monthHourDone;
 		}
-		console.log("numberDayGraph: " + numberDayGraph);
+		popup.months[popup.months.nbMonth - 1].days[i].ratioDone = ratioDone;
+		popup.months[popup.months.nbMonth - 1].days[i].percentDay = percentDay;
+		popup.months[popup.months.nbMonth - 1].days[i].cashEarn = ratioDone * data.student.salary;
 
+		elems.daySlides[i].style.height = percentDay * 100 + "%";
+
+		// console.log("day salary: " + popup.months[popup.months.nbMonth - 1].days[i].cashEarn.toFixed(2));
 	}
-
-	const slideContainer = document.querySelectorAll(".day-slide-container");
 
 	elems.tooltipSalary = document.createElement("div");
 	elems.tooltipSalary.className = "tooltip-salary";
@@ -322,25 +347,28 @@ popup.createElems = function(elems) {
 	elems.tooltipBottomText = document.createElement("p");
 	elems.tooltipBottomText.className = "tooltip-bottom-text";
 
-	// TMP
-	elems.tooltipTopText.innerText = "05-12-2023";
-	elems.tooltipBottomText.innerText = "€23.74";
-
 	elems.tooltipSalary.appendChild(elems.tooltipTopText);
 	elems.tooltipSalary.appendChild(elems.tooltipBottomText);
 
 	document.body.appendChild(elems.tooltipSalary);
-	for (var i = 0; i < slideContainer.length; i++)
+	for (var i = 0; i < elems.daySlideContainers.length; i++)
 	{
 		// console.log(slideContainer[i]);
+		// console.log(popup.months[popup.months.nbMonth - 1].days[i].dayDate);
 
-		slideContainer[i].addEventListener("mouseover", function(e) {
+		elems.daySlideContainers[i].setAttribute("date", popup.months[popup.months.nbMonth - 1].days[i].dayDate);
+		elems.daySlideContainers[i].setAttribute("salary", popup.months[popup.months.nbMonth - 1].days[i].cashEarn.toFixed(2));
+
+		elems.daySlideContainers[i].addEventListener("mouseover", function(e) {
 
 			var bodyRect = document.body.getBoundingClientRect();
 			elemRect = e.target.getBoundingClientRect();
 
+			elems.tooltipTopText.innerText = e.target.getAttribute("date");
+			elems.tooltipBottomText.innerText = e.target.getAttribute("salary") + "€";
+
 			// offsetTop = elemRect.top - 21;		// hover on top of element
-			offsetTop = elemRect.top + 25 + elemRect.height;		// hover on top of element
+			offsetTop = elemRect.top + 16 + elemRect.height;		// hover on top of element
 			offsetLeft = elemRect.left - 28 + (elemRect.width / 2);
 
 			elems.tooltipSalary.style.opacity = "1";
@@ -350,7 +378,7 @@ popup.createElems = function(elems) {
 			e.target.firstElementChild.style.backgroundColor = "rgba(0, 186, 188, 0.80)";
 		});
 
-		slideContainer[i].addEventListener("mouseout", function(e) {
+		elems.daySlideContainers[i].addEventListener("mouseout", function(e) {
 			e.target.firstElementChild.style.backgroundColor = "rgba(0, 186, 188, 0.40)";
 			elems.tooltipSalary.style.opacity = "0";
 		});
@@ -965,10 +993,10 @@ popup.initPopup = function(elems, months) {
 		popupOffset = [elems.popupRemaining.offsetLeft - e.clientX, elems.popupRemaining.offsetTop - e.clientY];
 	})
 
-	const devTextClientX = document.querySelector(".dev-client-x");
+	// const devTextClientX = document.querySelector(".dev-client-x");
 	document.body.addEventListener("mousemove", function(e) {
 
-		devTextClientX.innerText = e.clientX;
+		// devTextClientX.innerText = e.clientX;
 		e.stopPropagation();
 		if (mouseDown) {
 			elems.popupRemaining.style.top = e.clientY + popupOffset[1] + "px";

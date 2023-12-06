@@ -625,9 +625,9 @@ body
 	padding: 3px;
 	border-radius: 4px;
 	border: 1px solid rgb(51, 54, 65);
-	box-shadow: 0px 10px 20px #12141a3a;
+	box-shadow: 0px 2px 8px #12141a3a;
 	color: #f0f0f0;
-	z-index: 1000;
+	z-index: 100000;
 	transition: ease 0.2s opacity;
 	display: flex;
 	flex-direction: column;
