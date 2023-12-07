@@ -196,20 +196,33 @@ popup.createElems = function(elems) {
 		}
 	}
 
-	function switchHabitContainer() {
+	function switchHabitContainer(mode) {
 
-		if (data.student.whichHabit === 1)
+		// if (data.student.whichHabit === 1)
+		if (mode != data.student.whichHabit)
 		{
-			data.student.whichHabit = 2;
-			selectHabitContainer();
+			if (mode === 1)
+			{
+				elems.thisButtonWeek.style.backgroundColor = "white";
+				elems.thisButtonWeek.style.color = "#191919";
+				elems.thisButtonMonth.style.backgroundColor = "";
+				elems.thisButtonMonth.style.color = "rgb(155, 155, 155)";
+				data.student.whichHabit = 1;
+				selectHabitContainer();
+			}
+			// else if (data.student.whichHabit === 2)
+			else if (mode === 2)
+			{
+				elems.thisButtonMonth.style.backgroundColor = "white";
+				elems.thisButtonMonth.style.color = "#191919";
+				elems.thisButtonWeek.style.backgroundColor = "";
+				elems.thisButtonWeek.style.color = "rgb(155, 155, 155)";
+				data.student.whichHabit = 2;
+				selectHabitContainer();
+			}
+			data.updateLocalStorage();
+			popup.setData(elems);
 		}
-		else if (data.student.whichHabit === 2)
-		{
-			data.student.whichHabit = 1;
-			selectHabitContainer();
-		}
-		data.updateLocalStorage();
-		popup.setData(elems);
 	}
 
 	elems.weeklySpan.addEventListener("click", switchHabitContainer);
@@ -239,11 +252,12 @@ popup.createElems = function(elems) {
 
 	elems.thisButtonMonth.addEventListener("click", function(e) {
 		console.log("month");
-		switchHabitContainer();
+		switchHabitContainer(2);
 	});
 
 	elems.thisButtonWeek.addEventListener("click", function(e) {
 		console.log("week");
+		switchHabitContainer(1);
 	});
 
 	elems.lineThisSelection.appendChild(elems.thisButtonMonth);
