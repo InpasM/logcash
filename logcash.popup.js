@@ -303,6 +303,7 @@ popup.createElems = function(elems) {
 	const numberDayGraph = popup.months[popup.months.nbMonth - 1].arrayElems.length;
 	var monthHourDone = popup.months[popup.months.nbMonth - 1].nbHourDone + (popup.months[popup.months.nbMonth - 1].nbMinDone / 60);
 	var monthHourRequired = popup.months[popup.months.nbMonth - 1].nbHourReq;
+	var biggestPercent = 0
 
 	for (var i = 0; i < numberDayGraph; i++)
 	{
@@ -335,10 +336,21 @@ popup.createElems = function(elems) {
 		popup.months[popup.months.nbMonth - 1].days[i].percentDay = percentDay;
 		popup.months[popup.months.nbMonth - 1].days[i].cashEarn = ratioDone * data.student.salary;
 
-		elems.daySlides[i].style.height = percentDay * 100 + "%";
+		if (percentDay > biggestPercent)
+			biggestPercent = percentDay;
+		// elems.daySlides[i].style.height = percentDay * 100 + "%";
 
 		// console.log("day salary: " + popup.months[popup.months.nbMonth - 1].days[i].cashEarn.toFixed(2));
 	}
+
+	for (var i = 0; i < numberDayGraph; i++)
+	{
+		popup.months[popup.months.nbMonth - 1].days[i].percentAdjust = popup.months[popup.months.nbMonth - 1].days[i].percentDay / biggestPercent;
+		elems.daySlides[i].style.height = popup.months[popup.months.nbMonth - 1].days[i].percentAdjust * 100 + "%";
+
+		// console.log(i + " " + tmpNewPercent);
+	}
+	// console.log("biggestPercent: " + biggestPercent);
 
 	elems.tooltipSalary = document.createElement("div");
 	elems.tooltipSalary.className = "tooltip-salary";
@@ -374,19 +386,22 @@ popup.createElems = function(elems) {
 
 			// offsetTop = elemRect.top - 21;		// hover on top of element
 			offsetTop = elemRect.top + 16 + elemRect.height;		// hover on top of element
-			offsetLeft = elemRect.left - 28 + (elemRect.width / 2);
+			// offsetLeft = elemRect.left - 28 + (elemRect.width / 2);
+			offsetLeft = elemRect.left - elemRect.width;
 
-			newOffsetTop = tmpBase.top + tmpBase.height * 2;
+			newOffsetTop = tmpBase.top + tmpBase.height * 2 + window.scrollY;
+
+			// console.log();
 
 			// console.log(tmpBase.top + " vs " + offsetTop + " newOffset: " + newOffsetTop);
-			console.log(e.clientX);
+			console.log(window.scrollY);
 
 			elems.tooltipSalary.style.opacity = "1";
 			// elems.tooltipSalary.style.top = offsetTop + "px";
 			elems.tooltipSalary.style.top = newOffsetTop + "px";
-			// elems.tooltipSalary.style.left = offsetLeft + "px";
+			elems.tooltipSalary.style.left = offsetLeft + "px";
 			// elems.tooltipSalary.style.top = tmpBase.height + "px";
-			elems.tooltipSalary.style.left = e.clientX + "px";
+			// elems.tooltipSalary.style.left = e.clientX + "px";
 
 			e.target.firstElementChild.style.backgroundColor = "rgba(0, 186, 188, 0.80)";
 		});
