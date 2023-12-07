@@ -10,11 +10,9 @@ popup.createElems = function(elems) {
 	elems.popupTopDiv.className = "popup-top-div";
 	
 	elems.popupTopLeftText = document.createElement("p");
-	// elems.popupTopLeftText.className = "popup-top-left-text";
 	elems.popupTopLeftText.innerText = "Logcash";
 
 	elems.popupTopRightText = document.createElement("p");
-	// elems.popupTopRightText.className = "popup-top-right-text";
 
 	elems.popupRemaining.appendChild(elems.popupTopDiv);
 	elems.popupTopDiv.appendChild(elems.popupTopLeftText);
@@ -89,8 +87,8 @@ popup.createElems = function(elems) {
 	elems.habitContainer = document.createElement("div");
 	elems.habitContainer.className = "habit-container";
 	elems.weeklySpan = document.createElement("span");
-	elems.weeklySpan.innerText = "Weekly Habit";
-	elems.weeklySpan.style.marginLeft = "6px";
+	// elems.weeklySpan.innerText = "Weekly Attendance";
+	// elems.weeklySpan.style.marginLeft = "6px";
 
 	elems.lineHabit = document.createElement("div");
 	elems.lineHabit.className = "line-habit";
@@ -188,13 +186,13 @@ popup.createElems = function(elems) {
 		{
 			elems.monthContainer.style.display = "none";
 			elems.weekContainer.style.display = "flex";
-			elems.weeklySpan.innerText = "Weekly Habit";
+			elems.weeklySpan.innerText = "Weekly Attendance";
 		}
 		else if (data.student.whichHabit === 2)
 		{
 			elems.monthContainer.style.display = "flex";
 			elems.weekContainer.style.display = "none";
-			elems.weeklySpan.innerText = "Monthly Habit";
+			elems.weeklySpan.innerText = "Monthly Attendance";
 		}
 	}
 
@@ -238,6 +236,15 @@ popup.createElems = function(elems) {
 	elems.thisButtonWeek = document.createElement("div");
 	elems.thisButtonWeek.className = "this-button";
 	elems.thisButtonWeek.innerText = "Week";
+
+	elems.thisButtonMonth.addEventListener("click", function(e) {
+		console.log("month");
+		switchHabitContainer();
+	});
+
+	elems.thisButtonWeek.addEventListener("click", function(e) {
+		console.log("week");
+	});
 
 	elems.lineThisSelection.appendChild(elems.thisButtonMonth);
 	elems.lineThisSelection.appendChild(elems.thisButtonWeek);
@@ -307,10 +314,6 @@ popup.createElems = function(elems) {
 
 	for (var i = 0; i < numberDayGraph; i++)
 	{
-		var newDayHourDone = popup.months[popup.months.nbMonth - 1].days[i].hourDone + (popup.months[popup.months.nbMonth - 1].days[i].minuteDone / 60);
-		var ratioDone = 0;
-		var percentDay = 0;
-
 		elems.dayGraphs.push(document.createElement("div"));
 		elems.dayGraphs[i].className = "day-graph";
 		elems.daySlideContainers.push(document.createElement("div"));
@@ -326,21 +329,29 @@ popup.createElems = function(elems) {
 		elems.dayGraphs[i].appendChild(elems.dayBases[i]);
 
 		elems.lineGraph.appendChild(elems.dayGraphs[i]);
-		
+
+		var newDayHourDone = popup.months[popup.months.nbMonth - 1].days[i].hourDone + (popup.months[popup.months.nbMonth - 1].days[i].minuteDone / 60);
+		var ratioDone = 0;
+		var percentDay = 0;
+
 		if (newDayHourDone > 0)
 		{
-			ratioDone = newDayHourDone / monthHourRequired;
+			if (monthHourRequired === 0)
+				ratioDone = 0;
+			else
+				ratioDone = newDayHourDone / monthHourRequired;
 			percentDay = newDayHourDone / monthHourDone;
 		}
 		popup.months[popup.months.nbMonth - 1].days[i].ratioDone = ratioDone;
 		popup.months[popup.months.nbMonth - 1].days[i].percentDay = percentDay;
-		popup.months[popup.months.nbMonth - 1].days[i].cashEarn = ratioDone * data.student.salary;
+		console.log("multi " + ratioDone + " " + data.student.salary);
+		if (ratioDone === 0 || data.student.salary === 0)
+			popup.months[popup.months.nbMonth - 1].days[i].cashEarn = 0;
+		else
+			popup.months[popup.months.nbMonth - 1].days[i].cashEarn = ratioDone * data.student.salary;
 
 		if (percentDay > biggestPercent)
 			biggestPercent = percentDay;
-		// elems.daySlides[i].style.height = percentDay * 100 + "%";
-
-		// console.log("day salary: " + popup.months[popup.months.nbMonth - 1].days[i].cashEarn.toFixed(2));
 	}
 
 	for (var i = 0; i < numberDayGraph; i++)
@@ -370,7 +381,6 @@ popup.createElems = function(elems) {
 
 		elems.daySlideContainers[i].addEventListener("mouseover", function(e) {
 
-			var bodyRect = document.body.getBoundingClientRect();
 			elemRect = e.target.getBoundingClientRect();
 			var tmpBase = e.target.nextSibling.getBoundingClientRect();
 
@@ -921,11 +931,15 @@ popup.setData = function(elems) {
 	var doneInteger = parseInt(resultRemaining);
 	var doneFloat = parseInt((resultRemaining - doneInteger) * 60);
 
-	var tmpText = resultInteger + "h";
+	var tmpText = "";
+	if (resultInteger < 0 || resultFloat < 0)
+		tmpText = "0h00";
+	else if (resultFloat < 10)
+		tmpText = resultInteger + "h0" + resultFloat;
+	else
+		tmpText = resultInteger + "h" + resultFloat;
 
-	if (resultFloat < 10)
-		tmpText += "0";
-	elems.resultLogtime1.innerText = tmpText + resultFloat;
+	elems.resultLogtime1.innerText = tmpText;
 	if (resultRemaining < 0)
 	{
 		elems.resultLogtime2.innerText = "DONE";
@@ -1030,7 +1044,7 @@ popup.initPopup = function(elems, months) {
 
 	elems.inputSalary.addEventListener("blur", function(e) {
 
-		if (isNaN(e.target.value) || !e.target.value)
+		if (isNaN(e.target.value) || !e.target.value || e.target.value < 0)
 			e.target.value = 0;
 		else
 		{
@@ -1043,7 +1057,7 @@ popup.initPopup = function(elems, months) {
 
 	elems.inputDeducted.addEventListener("blur", function(e) {
 
-		if (isNaN(e.target.value)  || !e.target.value)
+		if (isNaN(e.target.value)  || !e.target.value || e.target.value < 0)
 			e.target.value = 0;
 		else
 		{
