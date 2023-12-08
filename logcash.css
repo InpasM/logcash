@@ -302,13 +302,12 @@ body
 	display: none;
 	/* justify-content: center; */
 	flex-direction: column;
-	margin-top: 6px;
-	/* margin: 4px 0 8px 4px; */
+	margin-top: 4px;
 }
 
 .days-name-line {
 	display: flex;
-	margin-top: 2px;
+	/* margin-top: 2px; */
 }
 
 .days-name-box {
@@ -330,7 +329,7 @@ body
 	width: 100%;
 	min-height: 20px;
 	display: flex;
-	margin-top: 2px;
+	/* margin-top: 2px; */
 	/* flex: 1; */
 	/* justify-content: space-around; */
 }
@@ -450,7 +449,8 @@ body
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
-	padding: 12px 0;
+	/* padding: 12px 0; */
+	padding: 12px;
 }
 
 .salary-circle {
@@ -750,7 +750,8 @@ body
 	display: none;
 	display: block;							/* TEMP */
 	border-right: 1px solid rgb(45, 49, 60);
-	padding: 8px 0;
+	/* padding: 8px 0; */
+	padding: 8px;
 	/* padding: 8px 8px 8px 8px; */
 }
 
