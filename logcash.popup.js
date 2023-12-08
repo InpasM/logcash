@@ -168,15 +168,15 @@ popup.createElems = function(elems) {
 		elems.monthContainer.appendChild(elems.monthLineHabit[i]);
 	}
 
-	elems.weeklySpan.addEventListener("mouseover", function(e) {
-		e.target.style.backgroundColor = "rgb(27, 30, 37)";
-		e.target.style.color = "rgb(226, 226, 226)";
-	});
+	// elems.weeklySpan.addEventListener("mouseover", function(e) {
+	// 	e.target.style.backgroundColor = "rgb(27, 30, 37)";
+	// 	e.target.style.color = "rgb(226, 226, 226)";
+	// });
 
-	elems.weeklySpan.addEventListener("mouseout", function(e) {
-		e.target.style.backgroundColor = "";
-		e.target.style.color = "";
-	});
+	// elems.weeklySpan.addEventListener("mouseout", function(e) {
+	// 	e.target.style.backgroundColor = "";
+	// 	e.target.style.color = "";
+	// });
 
 	selectHabitContainer();
 
@@ -203,20 +203,28 @@ popup.createElems = function(elems) {
 		{
 			if (mode === 1)
 			{
-				elems.thisButtonWeek.style.backgroundColor = "white";
-				elems.thisButtonWeek.style.color = "#191919";
-				elems.thisButtonMonth.style.backgroundColor = "";
-				elems.thisButtonMonth.style.color = "rgb(155, 155, 155)";
+				// elems.thisButtonWeek.style.backgroundColor = "white";
+				// elems.thisButtonWeek.style.color = "#191919";
+				// elems.thisButtonMonth.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+				// elems.thisButtonMonth.style.color = "rgb(155, 155, 155)";
+
+				elems.thisButtonWeek.className = "this-button selected";
+				elems.thisButtonMonth.className = "this-button";
+
 				data.student.whichHabit = 1;
 				selectHabitContainer();
 			}
 			// else if (data.student.whichHabit === 2)
 			else if (mode === 2)
 			{
-				elems.thisButtonMonth.style.backgroundColor = "white";
-				elems.thisButtonMonth.style.color = "#191919";
-				elems.thisButtonWeek.style.backgroundColor = "";
-				elems.thisButtonWeek.style.color = "rgb(155, 155, 155)";
+				// elems.thisButtonMonth.style.backgroundColor = "white";
+				// elems.thisButtonMonth.style.color = "#191919";
+				// elems.thisButtonWeek.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+				// elems.thisButtonWeek.style.color = "rgb(155, 155, 155)";
+
+				elems.thisButtonMonth.className = "this-button selected";
+				elems.thisButtonWeek.className = "this-button";
+
 				data.student.whichHabit = 2;
 				selectHabitContainer();
 			}
@@ -225,7 +233,7 @@ popup.createElems = function(elems) {
 		}
 	}
 
-	elems.weeklySpan.addEventListener("click", switchHabitContainer);
+	// elems.weeklySpan.addEventListener("click", switchHabitContainer);
 
 	//////////////////////////////////////////////////////////////////////  MIDDLE RIGHT DIV
 	elems.popMiddleDivRight = document.createElement("div");
@@ -243,20 +251,25 @@ popup.createElems = function(elems) {
 	elems.salaryCircleContainer.className = "salary-circle-container";
 
 	elems.thisButtonMonth = document.createElement("div");
-	elems.thisButtonMonth.className = "this-button selected";
+	elems.thisButtonMonth.className = "this-button";
 	elems.thisButtonMonth.innerText = "Month";
 	elems.thisButtonMonth.style.marginRight = "6px";
 	elems.thisButtonWeek = document.createElement("div");
 	elems.thisButtonWeek.className = "this-button";
 	elems.thisButtonWeek.innerText = "Week";
 
+	if (data.student.whichHabit === 1)
+		elems.thisButtonWeek.className += " selected";
+	else if (data.student.whichHabit === 2)
+		elems.thisButtonMonth.className += " selected";
+
 	elems.thisButtonMonth.addEventListener("click", function(e) {
-		console.log("month");
+		// console.log("month");
 		switchHabitContainer(2);
 	});
 
 	elems.thisButtonWeek.addEventListener("click", function(e) {
-		console.log("week");
+		// console.log("week");
 		switchHabitContainer(1);
 	});
 
@@ -310,6 +323,7 @@ popup.createElems = function(elems) {
 	///////////////////////////////////////////////////////////////////////// GRAPH SLIDE
 	elems.salaryGraphContainer = document.createElement("div");
 	elems.salaryGraphContainer.className = "salary-graph-container";
+
 	elems.salaryContainer.appendChild(elems.salaryGraphContainer);
 
 	elems.lineGraph = document.createElement("div");
@@ -358,7 +372,7 @@ popup.createElems = function(elems) {
 		}
 		popup.months[popup.months.nbMonth - 1].days[i].ratioDone = ratioDone;
 		popup.months[popup.months.nbMonth - 1].days[i].percentDay = percentDay;
-		console.log("multi " + ratioDone + " " + data.student.salary);
+		// console.log("multi " + ratioDone + " " + data.student.salary);
 		if (ratioDone === 0 || data.student.salary === 0)
 			popup.months[popup.months.nbMonth - 1].days[i].cashEarn = 0;
 		else
@@ -713,7 +727,6 @@ popup.createElems = function(elems) {
 	elems.inputContainerHours.appendChild(elems.inputDeducted);
 
 	elems.middleLine2.appendChild(elems.habitContainer);
-	// elems.middleLine2.appendChild(elems.monthlyHabit);
 
 	elems.popupRemaining.appendChild(elems.popMiddleDiv);
 	elems.popupRemaining.appendChild(elems.popBottomContainer);
