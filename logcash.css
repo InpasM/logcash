@@ -57,20 +57,13 @@ body
 
 .row-progress-bar 
 {
-	/* background: #2d313c; */
 	display: flex;
 	justify-content: space-evenly;
-	/* border: 2px solid #3a3f4c; */
 	border: 2px solid #2d313c;
-	/* box-shadow: 0 0px 10px #12141a75; */
-	/* height: 40px; */
-	/* border-radius: 5px; */
-	/* margin: 8px 0; */
 	position: relative;
 }
 
 .setting-div {
-	/* background-color: red; */
 	height: 100%;
 	right: 5px;
 	position: absolute;
@@ -93,15 +86,10 @@ body
 
 .side-progress
 {
-	/* background: #252932; */
-	/* background: #2d313c; */
-	/* min-width: 40px; */
-	/* width: 10%; */
 	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* cursor: pointer; */
 }
 
 .text-progress
