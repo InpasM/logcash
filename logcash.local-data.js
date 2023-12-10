@@ -16,6 +16,7 @@ data.student = {
 	whichHabit: 1,
 	addBoostHalf: false,
 	addBoostFull: false,
+	showMore: false,
 };
 
 var localStorageSpace = function(){

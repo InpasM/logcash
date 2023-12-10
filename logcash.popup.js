@@ -12,6 +12,10 @@ popup.createElems = function(elems) {
 	elems.popupTopLeftText = document.createElement("p");
 	elems.popupTopLeftText.innerText = "Logcash";
 
+	elems.popupTopLeftText.addEventListener("dblclick", function() {
+		console.log("double click");
+	});
+
 	elems.popupTopRightText = document.createElement("p");
 
 	elems.popupRemaining.appendChild(elems.popupTopDiv);
@@ -655,6 +659,37 @@ popup.createElems = function(elems) {
 	elems.popBottomDiv.appendChild(elems.moreInfoContainer);
 	elems.popBottomContainer.appendChild(elems.popBottomDiv);
 
+	if (data.student.showMore)
+	{
+		elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60)";
+		elems.moreInfoContainer.style.padding = "4px 0";
+	
+		elems.resultsDiv.style.height = "";
+		elems.resultsDiv.style.padding = "8px";
+		elems.resultsDiv.style.opacity = "1";
+		elems.boostLockContainer.style.height = "";
+		elems.boostLockContainer.style.padding = "8px";
+		elems.boostLockContainer.style.opacity = "1";
+		elems.estimationContainer.style.height = "";
+		elems.estimationContainer.style.padding = "8px";
+		elems.estimationContainer.style.opacity = "1";
+	}
+	else
+	{
+		elems.moreInfoContainer.style.backgroundColor = "";
+		elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
+
+		elems.resultsDiv.style.height = "0px";
+		elems.resultsDiv.style.padding = "0px 8px";
+		elems.resultsDiv.style.opacity = "0";
+		elems.boostLockContainer.style.height = "0px";
+		elems.boostLockContainer.style.padding = "0px 8px";
+		elems.boostLockContainer.style.opacity = "0";
+		elems.estimationContainer.style.height = "0px";
+		elems.estimationContainer.style.padding = "0px 8px";
+		elems.estimationContainer.style.opacity = "0";
+	}
+
 	function mouseoverPopBottom(e) {
 		elems.moreInfoLogo.style.height = "20px";
 		elems.moreInfoContainer.style.backgroundColor = "rgba(30, 35, 42, 0.8)";
@@ -668,27 +703,26 @@ popup.createElems = function(elems) {
 	elems.popBottomContainer.addEventListener("mouseover", mouseoverPopBottom);
 	elems.popBottomContainer.addEventListener("mouseout", mouseoutPopBottom);
 
-	var optionClicked = false;
+	// var optionClicked = false;
 
 	elems.moreInfoLogo.addEventListener("click", function(e) {
 
-		if (optionClicked)
+		if (data.student.showMore)
 		{
-			elems.moreInfoLogo.style.height = "0px";
 			elems.moreInfoContainer.style.backgroundColor = "";
 			elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
 
 			elems.resultsDiv.style.height = "0px";
-			elems.resultsDiv.style.padding = "0px";
+			elems.resultsDiv.style.padding = "0px 8px";
 			elems.resultsDiv.style.opacity = "0";
 			elems.boostLockContainer.style.height = "0px";
-			elems.boostLockContainer.style.padding = "0px";
+			elems.boostLockContainer.style.padding = "0px 8px";
 			elems.boostLockContainer.style.opacity = "0";
 			elems.estimationContainer.style.height = "0px";
-			elems.estimationContainer.style.padding = "0px";
+			elems.estimationContainer.style.padding = "0px 8px";
 			elems.estimationContainer.style.opacity = "0";
 
-			optionClicked = false;
+			data.student.showMore = false;
 		}
 		else
 		{
@@ -696,17 +730,18 @@ popup.createElems = function(elems) {
 			elems.moreInfoContainer.style.padding = "4px 0";
 
 			elems.resultsDiv.style.height = "";
-			elems.resultsDiv.style.padding = "8px 0";
+			elems.resultsDiv.style.padding = "8px";
 			elems.resultsDiv.style.opacity = "1";
 			elems.boostLockContainer.style.height = "";
-			elems.boostLockContainer.style.padding = "8px 0";
+			elems.boostLockContainer.style.padding = "8px";
 			elems.boostLockContainer.style.opacity = "1";
 			elems.estimationContainer.style.height = "";
-			elems.estimationContainer.style.padding = "8px 0";
+			elems.estimationContainer.style.padding = "8px";
 			elems.estimationContainer.style.opacity = "1";
 
-			optionClicked = true;
+			data.student.showMore = true;
 		}
+		data.updateLocalStorage();
 	});
 	
 
@@ -775,7 +810,7 @@ popup.setStyle = function(elems) {
 	elems.popupTopLeftText.style.margin = "3px";
 	elems.popupTopLeftText.style.padding = "0";
 	elems.popupTopLeftText.style.fontWeight = "bold";
-	elems.popupTopLeftText.style.pointerEvents = "none";
+	// elems.popupTopLeftText.style.pointerEvents = "none";
 	elems.popupTopLeftText.style.textShadow = "rgb(0, 0, 0) 0px 0px 3px";
 	
 	elems.popupTopRightText.style.fontSize = "14px";
