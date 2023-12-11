@@ -666,16 +666,29 @@ async function initLogcash()
 	{
 		displayMessage("Start setInterval each minutes");
 		setInterval(function() {
+
+			var tmpHourDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone;
+			var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + 1;
+			// var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + 10;
 	
-			var tmpHours = months[months.length - 1].nbHourDone;
-			var tmpMinutes = months[months.length - 1].nbMinDone + 1;
+			var tmpHourGlobal = months[months.length - 1].nbHourDone;
+			var tmpMinutesGlobal = months[months.length - 1].nbMinDone + 1;
+			// var tmpMinutesGlobal = months[months.length - 1].nbMinDone + 10;
 	
-			if (tmpMinutes >= 60) {
-				tmpMinutes = 0;
-				tmpHours += 1;
+			if (tmpMinutesDay >= 60) {
+				tmpMinutesDay = 0;
+				tmpHourDay += 1;
 			}
-			months[months.length - 1].nbHourDone = parseInt(tmpHours);
-			months[months.length - 1].nbMinDone = parseInt(tmpMinutes);
+			if (tmpMinutesGlobal >= 60) {
+				tmpMinutesGlobal = 0;
+				tmpHourGlobal += 1;
+			}
+
+			popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone = parseInt(tmpHourDay);
+			popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone = parseInt(tmpMinutesDay);
+			months[months.length - 1].nbHourDone = parseInt(tmpHourGlobal);
+			months[months.length - 1].nbMinDone = parseInt(tmpMinutesGlobal);
+
 			if (months.indexArray == months.length - 1)
 			{
 				calculProgress(months[months.indexArray]);
@@ -683,6 +696,7 @@ async function initLogcash()
 				popup.setData(elems);
 			}
 		}, 60000);
+		// }, 1000);
 	}
 }
 
@@ -703,7 +717,7 @@ function startLogcash() {
 		var refreshButton = document.querySelector(".dev-refresh");
 		var refreshButtonActivator = document.querySelector(".dev-refresh-button");
 		var refreshOn = true;
-		var cycleRefresh = setRefreshInterval();
+		// var cycleRefresh = setRefreshInterval();
 
 		refreshButtonActivator.addEventListener("click", function() {
 			if (refreshOn)

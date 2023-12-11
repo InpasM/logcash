@@ -975,6 +975,7 @@ popup.setData = function(elems) {
 	var newActualDone = actualHourDone + actualMinuteDone / 60;
 
 	var newTimeRemaining = popup.months[popup.months.indexArray].nbHourRem + (popup.months[popup.months.indexArray].nbMinRem / 60);
+	// console.log("newActualDone: " + newActualDone + " vs " + newTimeRemaining / numberDays.total);
 	if (data.student.monthlyHabit[popup.numberDay - 1])
 		newTimeRemaining += newActualDone;
 
