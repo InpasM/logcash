@@ -12,8 +12,46 @@ popup.createElems = function(elems) {
 	elems.popupTopLeftText = document.createElement("p");
 	elems.popupTopLeftText.innerText = "Logcash";
 
+	var clickerMode = false;
 	elems.popupTopLeftText.addEventListener("dblclick", function() {
 		console.log("double click");
+
+		data.student.showMore
+		if (!clickerMode)
+		{
+			elems.moreInfoContainer.style.backgroundColor = "";
+			elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
+	
+			elems.resultsDiv.style.height = "0px";
+			elems.resultsDiv.style.padding = "0px 8px";
+			elems.resultsDiv.style.opacity = "0";
+			elems.boostLockContainer.style.height = "0px";
+			elems.boostLockContainer.style.padding = "0px 8px";
+			elems.boostLockContainer.style.opacity = "0";
+			elems.estimationContainer.style.height = "0px";
+			elems.estimationContainer.style.padding = "0px 8px";
+			elems.estimationContainer.style.opacity = "0";
+
+			clickerMode = true;
+		}
+		else
+		{
+			elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60)";
+			elems.moreInfoContainer.style.padding = "4px 0";
+		
+			elems.resultsDiv.style.height = "";
+			elems.resultsDiv.style.padding = "8px";
+			elems.resultsDiv.style.opacity = "1";
+			elems.boostLockContainer.style.height = "";
+			elems.boostLockContainer.style.padding = "8px";
+			elems.boostLockContainer.style.opacity = "1";
+			elems.estimationContainer.style.height = "";
+			elems.estimationContainer.style.padding = "8px";
+			elems.estimationContainer.style.opacity = "1";
+
+			clickerMode = false;
+		}
+
 	});
 
 	elems.popupTopRightText = document.createElement("p");

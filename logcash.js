@@ -654,8 +654,6 @@ async function initLogcash()
 	window.months = months;
 	resizeProgress();
 
-	// console.log(months[months.indexArray]);
-
 	reGenerate(months[months.indexArray], elems);
 	window.addEventListener("resize", resizeProgress);
 	initButtons(elems);
