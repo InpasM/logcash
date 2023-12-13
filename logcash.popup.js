@@ -87,6 +87,8 @@ popup.createElems = function(elems) {
 			elems.middleLine1.style.display = "none";
 			elems.middleLine2.style.display = "none";
 
+			elems.salaryContainer.style.display = "none";
+
 			clickerMode = true;
 		}
 		else
@@ -106,6 +108,8 @@ popup.createElems = function(elems) {
 
 			elems.middleLine1.style.display = "flex";
 			elems.middleLine2.style.display = "flex";
+
+			elems.salaryContainer.style.display = "flex";
 
 			clickerMode = false;
 		}
