@@ -467,7 +467,7 @@ popup.createElems = function(elems) {
 	elems.tooltipSalary.appendChild(elems.tooltipBottomText);
 
 	elems.tooltipTopText.innerText = "2023-12-05";
-	elems.tooltipBottomText.innerText = "10€";
+	elems.tooltipBottomText.innerText = "0€";
 
 	document.body.appendChild(elems.tooltipSalary);
 
@@ -1043,8 +1043,11 @@ popup.setData = function(elems) {
 
 	var newTimeRemaining = popup.months[popup.months.indexArray].nbHourRem + (popup.months[popup.months.indexArray].nbMinRem / 60);
 	// console.log("newActualDone: " + newActualDone + " vs " + newTimeRemaining / numberDays.total);
-	if (data.student.monthlyHabit[popup.numberDay - 1])
+
+	if (data.student.monthlyHabit[popup.numberDay - 1] && !(newActualDone > newTimeRemaining / numberDays.total))
 		newTimeRemaining += newActualDone;
+	else
+		newTimeRemaining += newTimeRemaining / numberDays.total;
 
 	var resultEachDay = newTimeRemaining / numberDays.total;
 

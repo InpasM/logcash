@@ -648,12 +648,12 @@ async function initLogcash()
 		setInterval(function() {
 
 			var tmpHourDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone;
-			// var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + 1;
-			var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + 10;
+			var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + 1;
+			// var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + 10;
 	
 			var tmpHourGlobal = months[months.length - 1].nbHourDone;
-			// var tmpMinutesGlobal = months[months.length - 1].nbMinDone + 1;
-			var tmpMinutesGlobal = months[months.length - 1].nbMinDone + 10;
+			var tmpMinutesGlobal = months[months.length - 1].nbMinDone + 1;
+			// var tmpMinutesGlobal = months[months.length - 1].nbMinDone + 10;
 	
 			if (tmpMinutesDay >= 60) {
 				tmpMinutesDay = 0;
@@ -677,8 +677,8 @@ async function initLogcash()
 				popup.setAttributeDaySlide(elems);
 				popup.setData(elems);
 			}
-		// }, 60000);
-		}, 1000);
+		}, 60000);
+		// }, 1000);
 	}
 }
 
@@ -691,15 +691,13 @@ function startLogcash() {
 
 	data.init();
 	
-	// if (data.student)
-	// 	displayMessage(data.student.pseudo + " found in storage");
 	if (window.location.href.indexOf("logcash.html") !== -1)
 	{
 		devMode = true;
 		var refreshButton = document.querySelector(".dev-refresh");
 		var refreshButtonActivator = document.querySelector(".dev-refresh-button");
 		var refreshOn = true;
-		// var cycleRefresh = setRefreshInterval();
+		var cycleRefresh = setRefreshInterval();
 
 		refreshButtonActivator.addEventListener("click", function() {
 			if (refreshOn)
