@@ -201,6 +201,11 @@ body
 	display: flex;
 }
 
+.middle-line-1 {
+	/* background-color: red; */
+	justify-content: center;
+}
+
 .middle-line-2 {
 	/* background-color: orange; */
 	/* height: 100%; */

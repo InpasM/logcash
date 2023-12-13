@@ -5,6 +5,7 @@ popup.calculDays = function(elems) {
 
 	const numberDayGraph = popup.months[popup.months.nbMonth - 1].arrayElems.length;
 
+	var biggestPercent = 0
 	for (var i = 0; i < numberDayGraph; i++)
 	{
 		// console.log(popup.months[popup.months.nbMonth - 1].days[i].hourDone);
@@ -13,7 +14,6 @@ popup.calculDays = function(elems) {
 		var percentDay = 0;
 		var monthHourDone = popup.months[popup.months.nbMonth - 1].nbHourDone + (popup.months[popup.months.nbMonth - 1].nbMinDone / 60);
 		var monthHourRequired = popup.months[popup.months.nbMonth - 1].nbHourReq;
-		var biggestPercent = 0
 
 		if (newDayHourDone > 0)
 		{
@@ -84,6 +84,9 @@ popup.createElems = function(elems) {
 			elems.estimationContainer.style.padding = "0px 8px";
 			elems.estimationContainer.style.opacity = "0";
 
+			elems.middleLine1.style.display = "none";
+			elems.middleLine2.style.display = "none";
+
 			clickerMode = true;
 		}
 		else
@@ -100,6 +103,9 @@ popup.createElems = function(elems) {
 			elems.estimationContainer.style.height = "";
 			elems.estimationContainer.style.padding = "8px";
 			elems.estimationContainer.style.opacity = "1";
+
+			elems.middleLine1.style.display = "flex";
+			elems.middleLine2.style.display = "flex";
 
 			clickerMode = false;
 		}
