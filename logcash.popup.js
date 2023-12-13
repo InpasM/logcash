@@ -1,6 +1,58 @@
 
 window.popup = window.popup || {};
 
+popup.calculDays = function(elems) {
+
+	const numberDayGraph = popup.months[popup.months.nbMonth - 1].arrayElems.length;
+
+	for (var i = 0; i < numberDayGraph; i++)
+	{
+		// console.log(popup.months[popup.months.nbMonth - 1].days[i].hourDone);
+		var newDayHourDone = popup.months[popup.months.nbMonth - 1].days[i].hourDone + (popup.months[popup.months.nbMonth - 1].days[i].minuteDone / 60);
+		var ratioDone = 0;
+		var percentDay = 0;
+		var monthHourDone = popup.months[popup.months.nbMonth - 1].nbHourDone + (popup.months[popup.months.nbMonth - 1].nbMinDone / 60);
+		var monthHourRequired = popup.months[popup.months.nbMonth - 1].nbHourReq;
+		var biggestPercent = 0
+
+		if (newDayHourDone > 0)
+		{
+			if (monthHourRequired === 0)
+				ratioDone = 0;
+			else
+				ratioDone = newDayHourDone / monthHourRequired;
+			percentDay = newDayHourDone / monthHourDone;
+		}
+		popup.months[popup.months.nbMonth - 1].days[i].ratioDone = ratioDone;
+		popup.months[popup.months.nbMonth - 1].days[i].percentDay = percentDay;
+		// console.log("multi " + ratioDone + " " + data.student.salary);
+		if (ratioDone === 0 || data.student.salary === 0)
+			popup.months[popup.months.nbMonth - 1].days[i].cashEarn = 0;
+		else
+			popup.months[popup.months.nbMonth - 1].days[i].cashEarn = ratioDone * data.student.salary;
+
+		if (percentDay > biggestPercent)
+			biggestPercent = percentDay;
+	}
+
+	for (var i = 0; i < numberDayGraph; i++)
+	{
+		popup.months[popup.months.nbMonth - 1].days[i].percentAdjust = popup.months[popup.months.nbMonth - 1].days[i].percentDay / biggestPercent;
+		elems.daySlides[i].style.height = popup.months[popup.months.nbMonth - 1].days[i].percentAdjust * 100 + "%";
+	}
+}
+
+popup.setAttributeDaySlide = function(elems) {
+
+	for (var i = 0; i < elems.daySlideContainers.length; i++)
+	{
+		// console.log("setAttribute");
+		// console.log(elems.daySlideContainers[i]);
+		// elems.daySlideContainers[i].setAttribute("date", popup.months[popup.months.nbMonth - 1].days[i].dayDate);
+		elems.daySlideContainers[i].setAttribute("salary", popup.months[popup.months.nbMonth - 1].days[i].cashEarn.toFixed(2));
+	}
+}
+
 popup.createElems = function(elems) {
 
 	elems.popupRemaining = document.createElement("div");
@@ -399,36 +451,10 @@ popup.createElems = function(elems) {
 		elems.dayGraphs[i].appendChild(elems.dayBases[i]);
 
 		elems.lineGraph.appendChild(elems.dayGraphs[i]);
-
-		var newDayHourDone = popup.months[popup.months.nbMonth - 1].days[i].hourDone + (popup.months[popup.months.nbMonth - 1].days[i].minuteDone / 60);
-		var ratioDone = 0;
-		var percentDay = 0;
-
-		if (newDayHourDone > 0)
-		{
-			if (monthHourRequired === 0)
-				ratioDone = 0;
-			else
-				ratioDone = newDayHourDone / monthHourRequired;
-			percentDay = newDayHourDone / monthHourDone;
-		}
-		popup.months[popup.months.nbMonth - 1].days[i].ratioDone = ratioDone;
-		popup.months[popup.months.nbMonth - 1].days[i].percentDay = percentDay;
-		// console.log("multi " + ratioDone + " " + data.student.salary);
-		if (ratioDone === 0 || data.student.salary === 0)
-			popup.months[popup.months.nbMonth - 1].days[i].cashEarn = 0;
-		else
-			popup.months[popup.months.nbMonth - 1].days[i].cashEarn = ratioDone * data.student.salary;
-
-		if (percentDay > biggestPercent)
-			biggestPercent = percentDay;
 	}
 
-	for (var i = 0; i < numberDayGraph; i++)
-	{
-		popup.months[popup.months.nbMonth - 1].days[i].percentAdjust = popup.months[popup.months.nbMonth - 1].days[i].percentDay / biggestPercent;
-		elems.daySlides[i].style.height = popup.months[popup.months.nbMonth - 1].days[i].percentAdjust * 100 + "%";
-	}
+
+	popup.calculDays(elems);
 
 	elems.tooltipSalary = document.createElement("div");
 	elems.tooltipSalary.className = "tooltip-salary";
@@ -444,10 +470,13 @@ popup.createElems = function(elems) {
 	elems.tooltipBottomText.innerText = "10€";
 
 	document.body.appendChild(elems.tooltipSalary);
+
+	popup.setAttributeDaySlide(elems);
+
 	for (var i = 0; i < elems.daySlideContainers.length; i++)
 	{
-		elems.daySlideContainers[i].setAttribute("date", popup.months[popup.months.nbMonth - 1].days[i].dayDate);
-		elems.daySlideContainers[i].setAttribute("salary", popup.months[popup.months.nbMonth - 1].days[i].cashEarn.toFixed(2));
+		// elems.daySlideContainers[i].setAttribute("date", popup.months[popup.months.nbMonth - 1].days[i].dayDate);
+		// elems.daySlideContainers[i].setAttribute("salary", popup.months[popup.months.nbMonth - 1].days[i].cashEarn.toFixed(2));
 
 		elems.daySlideContainers[i].addEventListener("mouseover", function(e) {
 
@@ -1154,6 +1183,8 @@ popup.initPopup = function(elems, months) {
 				data.updateLocalStorage();
 		}
 		popup.setData(elems);
+		popup.calculDays(elems);
+		popup.setAttributeDaySlide(elems);
 	});
 
 	elems.inputDeducted.addEventListener("blur", function(e) {

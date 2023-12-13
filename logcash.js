@@ -666,12 +666,12 @@ async function initLogcash()
 		setInterval(function() {
 
 			var tmpHourDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone;
-			var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + 1;
-			// var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + 10;
+			// var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + 1;
+			var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + 10;
 	
 			var tmpHourGlobal = months[months.length - 1].nbHourDone;
-			var tmpMinutesGlobal = months[months.length - 1].nbMinDone + 1;
-			// var tmpMinutesGlobal = months[months.length - 1].nbMinDone + 10;
+			// var tmpMinutesGlobal = months[months.length - 1].nbMinDone + 1;
+			var tmpMinutesGlobal = months[months.length - 1].nbMinDone + 10;
 	
 			if (tmpMinutesDay >= 60) {
 				tmpMinutesDay = 0;
@@ -691,10 +691,12 @@ async function initLogcash()
 			{
 				calculProgress(months[months.indexArray]);
 				reGenerate(months[months.length - 1], elems);
+				popup.calculDays(elems);
+				popup.setAttributeDaySlide(elems);
 				popup.setData(elems);
 			}
-		}, 60000);
-		// }, 1000);
+		// }, 60000);
+		}, 1000);
 	}
 }
 
