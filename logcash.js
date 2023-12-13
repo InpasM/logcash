@@ -622,24 +622,6 @@ function getNumberOpenDays(numberYear, numberMonth, numberDay) {
 	return [openDaysRemaining, openDaysTotal];
 }
 
-// // test only
-// const listMonth = ["January", "Febrary", "March", "April", "Mai", "June", "July", "August", "September", "October", "November", "December"];
-// const listDayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-// const date = new Date();
-// var numberYear = date.getFullYear();
-// var numberMonth = date.getMonth();
-// var numberDay = date.getDate();
-
-// var i = -1;
-// while (++i < 12) {
-// 	const listMonth = ["January", "Febrary", "March", "April", "Mai", "June", "July", "August", "September", "October", "November", "December"];
-// 	var openDays = getNumberOpenDays(numberYear, i, numberDay);
-
-// 	displayMessage(listMonth[i] + ":  Open day since: " + openDays[0] + "   Open day total: " + openDays[1]);
-// }
-
-// getNumberHourDone();
-
 async function initLogcash()
 {
 	const elems = {};
