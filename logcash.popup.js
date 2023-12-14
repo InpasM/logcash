@@ -1053,30 +1053,26 @@ popup.setData = function(elems) {
 
 	var totalTimeRemaining = popup.months[popup.months.indexArray].nbHourRem + (popup.months[popup.months.indexArray].nbMinRem / 60);
 
-	// console.log("totalTimeRemaining before " + totalTimeRemaining);
-	// console.log("dayTimeDone " + dayTimeDone);
-	// console.log("resultEachDay before: " + totalTimeRemaining / numberDays.total);
-
-	if (data.student.monthlyHabit[popup.numberDay - 1])
+	console.log("totalTimeRemaining " + totalTimeRemaining);
+	var resultEachDay = 0;
+	if (totalTimeRemaining > 0)
 	{
-		// console.log("add time done today: " + dayTimeDone);
-		console.log(dayTimeDone + " vs " + totalTimeRemaining / numberDays.total);
-		totalTimeRemaining += dayTimeDone;
-
-		if ((dayTimeDone > totalTimeRemaining / numberDays.total))
-			console.log(dayTimeDone + " vs " + totalTimeRemaining / numberDays.total);
+		if (data.student.monthlyHabit[popup.numberDay - 1])
+		{
+			totalTimeRemaining += dayTimeDone;
+		}
+		else
+			console.log(totalTimeRemaining);
+	
+		resultEachDay = totalTimeRemaining / numberDays.total;
+	
+		if (dayTimeDone > resultEachDay)
+		{
+			var timeExtraToday = dayTimeDone - resultEachDay;
+			
+			resultEachDay -= timeExtraToday / (numberDays.total - 1);
+		}
 	}
-	// else
-	// {
-	// 	console.log("add time needed each day: " + totalTimeRemaining / numberDays.total);
-	// 	totalTimeRemaining += totalTimeRemaining / numberDays.total;
-	// }
-
-	console.log("totalTimeRemaining after " + totalTimeRemaining);
-
-	var resultEachDay = totalTimeRemaining / numberDays.total;
-
-	console.log("resultEachDay after: " + totalTimeRemaining / numberDays.total);
 
 	if (data.student.addBoostHalf)
 		resultEachDay -= 0.7;
@@ -1100,7 +1096,8 @@ popup.setData = function(elems) {
 		tmpText = resultInteger + "h" + resultFloat;
 
 	elems.resultLogtime1.innerText = tmpText;
-	if (resultRemaining < 0)
+	// console.log("resultRemaining: " + parseInt(resultRemaining * 60));
+	if (parseInt(resultRemaining * 60) <= 0)
 	{
 		elems.resultLogtime2.innerText = "DONE";
 		elems.resultLogtime2.style.color = "rgb(0, 186, 188)";

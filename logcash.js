@@ -366,6 +366,8 @@ function getInfoMonth(elems, calendar) {
 		else
 			arrayCalendar[i].nbHourReq -= data.student.hoursDeducted;
 
+		arrayCalendar[i].timeEachDay = 0;
+
 		// ///////////////////////////////////////////////////////// calcul all other value
 		// if (arrayCalendar[i].nbMinDone >= 60)
 		// {
