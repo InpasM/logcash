@@ -1049,17 +1049,34 @@ popup.setData = function(elems) {
 
 	var actualHourDone = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone;
 	var actualMinuteDone = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone;
-	var newActualDone = actualHourDone + actualMinuteDone / 60;
+	var dayTimeDone = actualHourDone + actualMinuteDone / 60;
 
-	var newTimeRemaining = popup.months[popup.months.indexArray].nbHourRem + (popup.months[popup.months.indexArray].nbMinRem / 60);
-	// console.log("newActualDone: " + newActualDone + " vs " + newTimeRemaining / numberDays.total);
+	var totalTimeRemaining = popup.months[popup.months.indexArray].nbHourRem + (popup.months[popup.months.indexArray].nbMinRem / 60);
 
-	if (data.student.monthlyHabit[popup.numberDay - 1] && !(newActualDone > newTimeRemaining / numberDays.total))
-		newTimeRemaining += newActualDone;
-	else
-		newTimeRemaining += newTimeRemaining / numberDays.total;
+	// console.log("totalTimeRemaining before " + totalTimeRemaining);
+	// console.log("dayTimeDone " + dayTimeDone);
+	// console.log("resultEachDay before: " + totalTimeRemaining / numberDays.total);
 
-	var resultEachDay = newTimeRemaining / numberDays.total;
+	if (data.student.monthlyHabit[popup.numberDay - 1])
+	{
+		// console.log("add time done today: " + dayTimeDone);
+		console.log(dayTimeDone + " vs " + totalTimeRemaining / numberDays.total);
+		totalTimeRemaining += dayTimeDone;
+
+		if ((dayTimeDone > totalTimeRemaining / numberDays.total))
+			console.log(dayTimeDone + " vs " + totalTimeRemaining / numberDays.total);
+	}
+	// else
+	// {
+	// 	console.log("add time needed each day: " + totalTimeRemaining / numberDays.total);
+	// 	totalTimeRemaining += totalTimeRemaining / numberDays.total;
+	// }
+
+	console.log("totalTimeRemaining after " + totalTimeRemaining);
+
+	var resultEachDay = totalTimeRemaining / numberDays.total;
+
+	console.log("resultEachDay after: " + totalTimeRemaining / numberDays.total);
 
 	if (data.student.addBoostHalf)
 		resultEachDay -= 0.7;
@@ -1069,7 +1086,7 @@ popup.setData = function(elems) {
 	var resultInteger = parseInt(resultEachDay);
 	var resultFloat = parseInt((resultEachDay - resultInteger) * 60);
 
-	var resultRemaining = resultEachDay - newActualDone;
+	var resultRemaining = resultEachDay - dayTimeDone;
 
 	var doneInteger = parseInt(resultRemaining);
 	var doneFloat = parseInt((resultRemaining - doneInteger) * 60);
