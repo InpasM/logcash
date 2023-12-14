@@ -368,39 +368,6 @@ function getInfoMonth(elems, calendar) {
 
 		arrayCalendar[i].timeEachDay = 0;
 
-		// ///////////////////////////////////////////////////////// calcul all other value
-		// if (arrayCalendar[i].nbMinDone >= 60)
-		// {
-		// 	var extraHour = parseInt(arrayCalendar[i].nbMinDone / 60);
-
-		// 	arrayCalendar[i].nbHourDone += extraHour;
-		// 	arrayCalendar[i].nbMinDone = arrayCalendar[i].nbMinDone - (extraHour * 60);
-		// 	// console.log("extraHour: " + parseInt(extraHour) + " remainingMinute: " + remainingMinute);
-		// }
-		// arrayCalendar[i].nbHourRem = arrayCalendar[i].nbHourReq - arrayCalendar[i].nbHourDone;
-		// arrayCalendar[i].nbMinRem = arrayCalendar[i].nbMinReq - arrayCalendar[i].nbMinDone;
-		
-		// if (arrayCalendar[i].nbMinRem < 0)
-		// {
-		// 	arrayCalendar[i].nbMinRem += 60;
-		// 	arrayCalendar[i].nbHourRem--;
-		// }
-		// else if (arrayCalendar[i].nbMinRem >= 60)
-		// {
-		// 	arrayCalendar[i].nbMinRem -= 60;
-		// 	arrayCalendar[i].nbHourRem++;
-		// }
-		// arrayCalendar[i].percent = (arrayCalendar[i].nbHourDone + (arrayCalendar[i].nbMinDone / 60)) / arrayCalendar[i].nbHourReq * 100;
-
-		// if (arrayCalendar[i].percent == 0)
-		// 	arrayCalendar[i].progressColor = "rgba(37, 41, 50, 0.8)";
-		// else
-		// 	arrayCalendar[i].progressColor = "rgba(0, 186, 188, " + (arrayCalendar[i].percent / 100) + ")";
-
-		// // console.log("nbHourRem: " + arrayCalendar[i].nbHourRem + " nbMinRem: " + arrayCalendar[i].nbMinRem  + " percent: " + arrayCalendar[i].percent);
-
-		// // console.log("monthName " + arrayCalendar[i].nameShort + " hourDone: " + 
-		// // arrayCalendar[i].nbHourDone + " minuteDone: " + arrayCalendar[i].nbMinDone);
 		calculProgress(arrayCalendar[i]);
 	}
 	return (arrayCalendar);

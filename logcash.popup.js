@@ -1053,25 +1053,18 @@ popup.setData = function(elems) {
 
 	var totalTimeRemaining = popup.months[popup.months.indexArray].nbHourRem + (popup.months[popup.months.indexArray].nbMinRem / 60);
 
-	console.log("totalTimeRemaining " + totalTimeRemaining);
+	// console.log("totalTimeRemaining " + totalTimeRemaining);
 	var resultEachDay = 0;
+	var timeExtraToday = 0;
 	if (totalTimeRemaining > 0)
 	{
 		if (data.student.monthlyHabit[popup.numberDay - 1])
 		{
 			totalTimeRemaining += dayTimeDone;
+			timeExtraToday = dayTimeDone - totalTimeRemaining / numberDays.total;
 		}
-		else
-			console.log(totalTimeRemaining);
-	
-		resultEachDay = totalTimeRemaining / numberDays.total;
-	
-		if (dayTimeDone > resultEachDay)
-		{
-			var timeExtraToday = dayTimeDone - resultEachDay;
-			
-			resultEachDay -= timeExtraToday / (numberDays.total - 1);
-		}
+		// console.log(timeExtraToday);
+		resultEachDay = totalTimeRemaining / numberDays.total - timeExtraToday;
 	}
 
 	if (data.student.addBoostHalf)
