@@ -868,7 +868,7 @@ popup.setStyle = function(elems) {
 	elems.popupRemaining.style.boxShadow = "0px 10px 15px #12141a3a";
 	elems.popupRemaining.style.backdropFilter = "blur(6px)";
 
-	elems.popupRemaining.style.top = "60px"; // remove dev only
+	elems.popupRemaining.style.top = "400px"; // remove dev only
 	elems.popupRemaining.style.right = "10px"; // remove dev only
 	
 	elems.popupTopDiv.style.cursor = "move";
@@ -1055,16 +1055,13 @@ popup.setData = function(elems) {
 
 	// console.log("totalTimeRemaining " + totalTimeRemaining);
 	var resultEachDay = 0;
-	var timeExtraToday = 0;
 	if (totalTimeRemaining > 0)
 	{
 		if (data.student.monthlyHabit[popup.numberDay - 1])
 		{
 			totalTimeRemaining += dayTimeDone;
-			timeExtraToday = dayTimeDone - totalTimeRemaining / numberDays.total;
 		}
-		// console.log(timeExtraToday);
-		resultEachDay = totalTimeRemaining / numberDays.total - timeExtraToday;
+		resultEachDay = totalTimeRemaining / numberDays.total;
 	}
 
 	if (data.student.addBoostHalf)
