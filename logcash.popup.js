@@ -515,6 +515,18 @@ popup.createElems = function(elems) {
 	}
 
 
+	//////////////////////////////////////////////////////////////////////  PROGRESS CONTAINER
+	elems.popProgressContainer = document.createElement("div");
+	elems.popProgressContainer.className = "pop-progress-container";
+
+	elems.popProgressTitle = document.createElement("span");
+	elems.popProgressTitle.className = "pop-progress-title";
+
+	elems.popProgressContainer.appendChild(elems.popProgressTitle);
+	elems.popProgressContainer.appendChild(elems.containerLogcash);
+
+	
+
 	//////////////////////////////////////////////////////////////////////  BOTTOM DIV
 	elems.popBottomContainer = document.createElement("div");
 	elems.popBottomContainer.className = "pop-bottom-container";
@@ -841,6 +853,9 @@ popup.createElems = function(elems) {
 	elems.middleLine2.appendChild(elems.habitContainer);
 
 	elems.popupRemaining.appendChild(elems.popMiddleDiv);
+	// elems.popupRemaining.appendChild(elems.containerLogcash.cloneNode(true));
+	// elems.popupRemaining.appendChild(elems.containerLogcash);
+	elems.popupRemaining.appendChild(elems.popProgressContainer);
 	elems.popupRemaining.appendChild(elems.popBottomContainer);
 	document.body.appendChild(elems.popupRemaining);
 }
@@ -868,8 +883,8 @@ popup.setStyle = function(elems) {
 	elems.popupRemaining.style.boxShadow = "0px 10px 15px #12141a3a";
 	elems.popupRemaining.style.backdropFilter = "blur(6px)";
 
-	elems.popupRemaining.style.top = "400px"; // remove dev only
-	elems.popupRemaining.style.right = "10px"; // remove dev only
+	elems.popupRemaining.style.top = "68px"; // remove dev only
+	elems.popupRemaining.style.right = "8px"; // remove dev only
 	
 	elems.popupTopDiv.style.cursor = "move";
 	elems.popupTopDiv.style.height = "fit-content";

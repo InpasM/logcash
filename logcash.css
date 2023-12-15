@@ -279,6 +279,13 @@ body
 	align-items: stretch; */
 }
 
+.title-container {
+	font-size: 12px;
+	color: rgb(155, 155, 155);
+	padding: 0;
+	margin: 0;
+}
+
 .habit-container span {
 	/* margin-left: 6px; */
 	/* background-color: white; */
@@ -655,6 +662,17 @@ body
 	text-align: center;
 	padding: 0;
 	margin: 0;
+}
+
+
+/***************************** PROGRESS *****************************/
+
+.pop-progress-container {
+	/* height: 20px; */
+	/* width: 100%; */
+	/* background-color: red; */
+	border-top: 1px solid rgb(45, 49, 60);
+	padding: 8px;
 }
 
 

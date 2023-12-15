@@ -86,7 +86,6 @@ function resizeProgress() {
 
 	elems.rowProgress.style.height = (ratio * 30) + "px";
 	elems.containerLogcash.style.display = "flex";
-	// elems.containerDivMonth.style.margin = "0 0 0 " + (ratio * 16) + "px";
 	var smallMargin = ratio * 6;
 
 	for (var i = 0; i < months.nbMonth; i++)
@@ -591,6 +590,29 @@ function getNumberOpenDays(numberYear, numberMonth, numberDay) {
 	return [openDaysRemaining, openDaysTotal];
 }
 
+function initStyleProgressBar() {
+
+	var textMonths = document.querySelectorAll(".text-month");
+	var divMonths = document.querySelectorAll(".div-month");
+
+	elems.rowProgress.style.height = "20px";
+	elems.containerLogcash.style.display = "flex";
+
+	for (var i = 0; i < months.nbMonth; i++)
+	{
+		textMonths[i].style.fontSize = "0.8em";
+		textMonths[i].style.padding = "0 10px";
+		textMonths[i].style.height = "20px";
+		textMonths[i].style.margin = "0 6px 0 0";
+
+		divMonths[i].setAttribute('id', i);
+		textMonths[i].setAttribute('id', i);
+	}
+	elems.sideProgress.style.fontSize = "0.8em";
+	elems.textRemaining.style.fontSize = "0.8em";
+	elems.sideProgress.style.margin = 0;
+}
+
 async function initLogcash()
 {
 	const elems = {};
@@ -599,14 +621,15 @@ async function initLogcash()
 	const months = getInfoMonth(elems, calendar);
 
 	init.generateContainerLogcash(elems, months, calendar);
-	calendar.parentElement.insertBefore(elems.containerLogcash, calendar.parentElement.firstChild);
+	// calendar.parentElement.insertBefore(elems.containerLogcash, calendar.parentElement.firstChild);
 
 	window.elems = elems;
 	window.months = months;
-	resizeProgress();
+	initStyleProgressBar();
+	// resizeProgress();
 
 	reGenerate(months[months.indexArray], elems);
-	window.addEventListener("resize", resizeProgress);
+	// window.addEventListener("resize", resizeProgress);
 	initButtons(elems);
 
 	const userPosteStatus = document.querySelector(".user-poste-status");
