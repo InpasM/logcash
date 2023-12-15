@@ -215,8 +215,8 @@ body
 
 .pop-input-container {
 	background-color: #373c48;
+	width: 100%;
 	max-height: fit-content;
-	max-width: 60px;
 	padding: 4px;
 	color: white;
 	border: 2px solid rgb(45, 49, 60);
@@ -226,6 +226,7 @@ body
 }
 
 .inputText, .inputText:focus {
+	max-width: 60px;
 	background-color: #373c48;
 	color: rgb(198, 198, 198);
 	outline: none;
