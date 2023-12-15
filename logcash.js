@@ -445,43 +445,27 @@ function clickRemaining(e) {
 }
 
 let timeOut;
-
 function clickSetting(e) {
-
-	// const settingButton = document.querySelector(".setting-button");
 
 	elems.settingButton.style.opacity = "0";
 	elems.settingButton.style.cursor = "default";
-	
 	clickRemaining(e);
 }
 
 function mouseoverProgress() {
+
 	clearTimeout(timeOut);
-	// elems.rowProgress.style.border = "2px solid #3a3f4c";
-	// elems.rowProgress.style.boxShadow = "0 0px 2px #12141a75";
-
-	// const elems.settingButton = document.querySelector(".setting-button");
-
 	elems.settingButton.style.opacity = "1";
 	elems.settingButton.style.cursor = "pointer";
 	elems.settingButton.addEventListener("click", clickSetting);
-
-	// elems.settingButton.style.top = "0";
 }
 
 function mouseoutProgress() {
-	// elems.rowProgress.style.border = "2px solid #2d313c";
-	// elems.rowProgress.style.boxShadow = "0 0px 10px #12141a75";
 
 	timeOut = setTimeout(function() {
-		// const elems.settingButton = document.querySelector(".setting-button");
-
 		elems.settingButton.removeEventListener("click", clickSetting);
 		elems.settingButton.style.opacity = "0";
 		elems.settingButton.style.cursor = "default";
-		// elems.settingButton.style.display = "none";
-		// elems.settingButton.style.top = "2px";
 	}, 800);
 }
 
@@ -490,14 +474,11 @@ function initButtons(elems)
 	elems.divMonths = document.querySelectorAll(".div-month");
 	elems.textMonths = document.querySelectorAll(".text-month");
 
-	if (data.student)
-	{
-		elems.rowProgress.addEventListener("mouseover", mouseoverProgress)
-		elems.rowProgress.addEventListener("mouseout", mouseoutProgress)
-		// elems.sideProgress.addEventListener("mouseover", mOverProgress);
-		// elems.sideProgress.addEventListener("mouseout", mOutProgress);
-		// elems.sideProgress.addEventListener("click", clickProgress);
-	}
+	// if (data.student)
+	// {
+	// 	elems.rowProgress.addEventListener("mouseover", mouseoverProgress)
+	// 	elems.rowProgress.addEventListener("mouseout", mouseoutProgress)
+	// }
 
 	// elems.sideRemaining.addEventListener("mouseover", function() {
 	// 	elems.sideRemaining.style.backgroundColor = "rgb(35, 39, 46)";
