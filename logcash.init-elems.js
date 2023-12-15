@@ -47,31 +47,21 @@ function initContainerLogcash(elems) {
 
 function initDivMonths(elems, months) {
 
-	var tmpMonth = [];
+	elems.divMonths = [];
+	elems.textMonths = [];
 
 	for (var i = 0; i < months.nbMonth; i++)
 	{
-		const	tmpText = document.createElement("p");
-		tmpText.className = "text-month";
-
-		tmpText.style.color = "#8e8e8f";
-		tmpText.style.cursor = "pointer";
-		tmpText.style.borderRadius = "4px";
-		tmpText.style.display = "flex";
-		tmpText.style.justifyContent = "center";
-		tmpText.style.alignItems = "center";
-		tmpText.style.border = "2px solid rgba(0,0,0,0)";
-
-		tmpText.innerHTML = months[i].nameShort;
-
-		tmpMonth = document.createElement("div");
-		tmpMonth.className = "div-month";
+		var tmpMonth = document.createElement("div");
+		tmpMonth.className = "this-button";
+		tmpMonth.innerText = months[i].nameShort;
 		if (i == months.indexArray)
-			tmpMonth.style.display = "flex"
-		else
-			tmpMonth.style.display = "none"
-
-		tmpMonth.appendChild(tmpText);
+		{
+			tmpMonth.style.display = "flex";
+			tmpMonth.style.color = "#191919";
+			tmpMonth.style.backgroundColor = "white";
+		}
+		elems.divMonths.push(tmpMonth);
 		elems.containerDivMonth.appendChild(tmpMonth)
 	}
 }

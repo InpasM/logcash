@@ -123,34 +123,35 @@ function waitForAll(selector) {
     });
 }
 
-function mOverMonth(e)
-{
-	devPos = document.querySelector(".dev-pos");
-	e.target.style.backgroundColor = months[parseInt(e.target.id)].progressColor;
-	e.target.style.color = "white";
-	e.target.style.border = "2px solid #2d313c";	
+function mOverMonth(e) {
+
+	if (e.target.id != months.indexArray)
+	{
+		e.target.style.backgroundColor = "rgba(48, 53, 65, 0.9)";
+		e.target.style.color = "rgba(236, 238, 244, 0.9)";
+	}
 }
 
-function mOutMonth(e)
-{
-	e.target.style.backgroundColor = "";
-	e.target.style.color = "#8e8e8f";
-	e.target.style.border = "2px solid rgba(0,0,0,0)";
+function mOutMonth(e) {
+	
+	if (e.target.id != months.indexArray)
+	{
+		e.target.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+		e.target.style.color = "rgb(155, 155, 155)";
+	}
 }
 
-function clickMonth(e)
-{
+function clickMonth(e) {
+
 	for (var i = 0; i < months.nbMonth; i++)
-		elems.divMonths[i].style.display = "flex";
-	elems.containerLogcash.addEventListener("mouseleave", function () {
-		for (var i = 0; i < months.nbMonth; i++)
-		{
-			// if (i != months.indexArray - 1)
-			if (i != months.indexArray)
-				elems.divMonths[i].style.display = "none";
-		}
-	});
+	{
+		elems.divMonths[i].style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+		elems.divMonths[i].style.color = "rgb(155, 155, 155)";
+	}
 	months.indexArray = parseInt(e.target.id);
+	elems.divMonths[months.indexArray].style.backgroundColor = "white";
+	elems.divMonths[months.indexArray].style.color = "#191919";
+
 	reGenerate(months[months.indexArray], elems);
 	popup.setData(elems);
 }
@@ -190,7 +191,6 @@ function isMonthInArray(array, node) {
 	for (var i = 0; i < array.length; i++)
 	{
 		if (array[i].innerHTML == node.innerHTML)
-			// return console.log(array[i].innerHTML + " vs " + node.innerHTML + " already in list"), true;
 			return true;
 	}
 	return false;
@@ -471,8 +471,8 @@ function mouseoutProgress() {
 
 function initButtons(elems)
 {
-	elems.divMonths = document.querySelectorAll(".div-month");
-	elems.textMonths = document.querySelectorAll(".text-month");
+	// elems.divMonths = document.querySelectorAll(".div-month");
+	// elems.textMonths = document.querySelectorAll(".text-month");
 
 	// if (data.student)
 	// {
@@ -491,9 +491,12 @@ function initButtons(elems)
 
 	for (var i = 0; i < months.nbMonth; i++)
 	{
-		elems.textMonths[i].addEventListener("mouseover", mOverMonth);
-		elems.textMonths[i].addEventListener("mouseout", mOutMonth);
-		elems.textMonths[i].addEventListener("click", clickMonth);
+		// elems.textMonths[i].addEventListener("mouseover", mOverMonth);
+		// elems.textMonths[i].addEventListener("mouseout", mOutMonth);
+		// elems.textMonths[i].addEventListener("click", clickMonth);
+		elems.divMonths[i].addEventListener("mouseover", mOverMonth);
+		elems.divMonths[i].addEventListener("mouseout", mOutMonth);
+		elems.divMonths[i].addEventListener("click", clickMonth);
 	}
 }
 
@@ -573,21 +576,18 @@ function getNumberOpenDays(numberYear, numberMonth, numberDay) {
 
 function initStyleProgressBar() {
 
-	var textMonths = document.querySelectorAll(".text-month");
-	var divMonths = document.querySelectorAll(".div-month");
-
 	elems.rowProgress.style.height = "20px";
 	elems.containerLogcash.style.display = "flex";
 
 	for (var i = 0; i < months.nbMonth; i++)
 	{
-		textMonths[i].style.fontSize = "0.8em";
-		textMonths[i].style.padding = "0 10px";
-		textMonths[i].style.height = "20px";
-		textMonths[i].style.margin = "0 6px 0 0";
+		// textMonths[i].style.fontSize = "0.8em";
+		// textMonths[i].style.padding = "0 10px";
+		// textMonths[i].style.height = "20px";
+		// textMonths[i].style.margin = "0 6px 0 0";
 
-		divMonths[i].setAttribute('id', i);
-		textMonths[i].setAttribute('id', i);
+		elems.divMonths[i].style.margin = "0 3px";
+		elems.divMonths[i].setAttribute('id', i);
 	}
 	elems.sideProgress.style.fontSize = "0.8em";
 	elems.textRemaining.style.fontSize = "0.8em";

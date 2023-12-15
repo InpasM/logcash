@@ -46,8 +46,15 @@ body
 
 .text-month
 {
-	color: #787d87;
-	padding: 3px 8px;
+	color: orange;
+	color: #8e8e8f;
+	cursor: pointer;
+	border-radius: 9px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2px solid rgba(0,0,0,0);
+	/* padding: 3px 8px; */
 }
 
 .text-cash
@@ -394,16 +401,15 @@ body
 
 .line-this-selection {
 	height: 18px;
-	/* background-color: orange; */
 	margin-top: 8px;
-	/* margin: 8px 8px 0 8px; */
 	display: flex;
 	justify-content: center;
 }
 
 .this-button {
-	/* background-color: white; */
 	background-color: rgba(37, 41, 50, 0.9);
+	/* background-color: rgba(48, 53, 65, 0.9); */
+	/* color: rgba(236, 238, 244, 0.9); */
 	font-size: 10px;
 	font-weight: bold;
 	display: flex;
@@ -412,15 +418,8 @@ body
 	padding: 0 6px;
 	border-radius: 9px;
 	color: rgb(155, 155, 155);
-	/* border: 1px solid rgb(78, 85, 101); */
-	/* border: 1px solid rgb(65, 70, 84); */
 	border: 1px solid rgb(51, 55, 67);
 	cursor: pointer;
-}
-
-.selected {
-	background-color: white;
-	color: #191919;
 }
 
 /************************* SALARY *************************/
@@ -882,6 +881,7 @@ body
 
 .div-month
 {
+	background-color: red;
 	justify-content: center;
 	align-items: center;
 }
