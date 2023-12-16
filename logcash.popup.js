@@ -65,10 +65,11 @@ popup.createElems = function(elems) {
 	elems.popupTopLeftText.innerText = "Logcash";
 
 	var clickerMode = false;
-	elems.popupTopLeftText.addEventListener("dblclick", function() {
-		console.log("double click");
+	// elems.popupTopLeftText.addEventListener("dblclick", function() {
+	elems.popupTopDiv.addEventListener("dblclick", function() {
+		// console.log("double click");
 
-		data.student.showMore
+		// data.student.showMore
 		if (!clickerMode)
 		{
 			elems.moreInfoContainer.style.backgroundColor = "";
@@ -84,10 +85,13 @@ popup.createElems = function(elems) {
 			elems.estimationContainer.style.padding = "0px 8px";
 			elems.estimationContainer.style.opacity = "0";
 
-			elems.middleLine1.style.display = "none";
-			elems.middleLine2.style.display = "none";
+			// elems.middleLine1.style.display = "none";
+			// elems.middleLine2.style.display = "none";
 
-			elems.salaryContainer.style.display = "none";
+			// elems.salaryContainer.style.display = "none";
+
+			elems.popMiddleDiv.style.display = "none";
+			elems.popProgressTitle.style.display = "none";
 
 			clickerMode = true;
 		}
@@ -106,10 +110,12 @@ popup.createElems = function(elems) {
 			elems.estimationContainer.style.padding = "8px";
 			elems.estimationContainer.style.opacity = "1";
 
-			elems.middleLine1.style.display = "flex";
-			elems.middleLine2.style.display = "flex";
+			// elems.middleLine1.style.display = "flex";
+			// elems.middleLine2.style.display = "flex";
+			// elems.salaryContainer.style.display = "flex";
 
-			elems.salaryContainer.style.display = "flex";
+			elems.popMiddleDiv.style.display = "flex";
+			elems.popProgressTitle.style.display = "flex";
 
 			clickerMode = false;
 		}
@@ -862,7 +868,7 @@ popup.setStyle = function(elems) {
 	elems.popupTopDiv.style.cursor = "move";
 	elems.popupTopDiv.style.height = "fit-content";
 	elems.popupTopDiv.style.borderRadius = "4px";
-	elems.popupTopDiv.style.borderBottom = "1px solid #2d313c";
+	// elems.popupTopDiv.style.borderBottom = "1px solid #2d313c";
 	elems.popupTopDiv.style.display = "flex";
 	elems.popupTopDiv.style.justifyContent = "space-between";
 	elems.popupTopDiv.style.alignItems = "center";
