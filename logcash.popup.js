@@ -1230,3 +1230,40 @@ popup.initPopup = function(elems, months) {
 	elems.inputSalary.addEventListener("click", function(e) { this.select(); });
 	elems.inputDeducted.addEventListener("click", function(e) { this.select(); });
 }
+
+const clickerButton = document.querySelector(".clicker-salary-circle-inside");
+const clickerInteger = document.querySelector(".clicker-salary-integer");
+const clickerFloat = document.querySelector(".clicker-salary-float");
+const clickerPerSecond = document.querySelector(".clicker-per-second-number");
+
+clickerInteger.innerText = 0;
+clickerFloat.innerText = "." + 0;
+clickerPerSecond.innerText = 0;
+
+var valueInteger = 0;
+var valueFloat = 0;
+var clickerEvent = 0;
+clickerButton.addEventListener("click", function(e) {
+
+	clickerButton.style.backgroundColor = "rgba(40, 45, 54, 0.9)";
+	clickerButton.style.boxShadow = "6px 6px 0 rgba(16, 16, 16, 0.5)";
+
+	if (clickerEvent)
+		clearTimeout(clickerEvent);
+	clickerEvent = setTimeout(function(e) {
+		clickerButton.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+		clickerButton.style.boxShadow = "10px 10px 0 rgba(16, 16, 16, 0.5)";
+	}, 100);
+
+	valueFloat += 1;
+	if (valueFloat === 10)
+	{
+		valueFloat = 0;
+		valueInteger += 1;
+	}
+
+	clickerInteger.innerText = valueInteger;
+	clickerFloat.innerText = "." + valueFloat;
+
+});
+// console.log(clickerButton);

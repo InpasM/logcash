@@ -62,7 +62,7 @@ function initDivMonths(elems, months) {
 			tmpMonth.style.backgroundColor = "white";
 		}
 		elems.divMonths.push(tmpMonth);
-		elems.containerDivMonth.appendChild(tmpMonth)
+		elems.containerDivMonth.appendChild(tmpMonth);
 	}
 }
 

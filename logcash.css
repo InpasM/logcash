@@ -913,6 +913,8 @@ body
 	width: 100%;
 	/* height: 50px; */
 	margin-bottom: 8px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid rgb(45, 49, 60);
 }
 
 .clicker-title-number-buy {
@@ -920,12 +922,13 @@ body
 	color: rgb(155, 155, 155);
 	display: flex;
 	justify-content: center;
-	margin-bottom: 4px;
+	/* margin-bottom: 4px; */
 }
 
 .clicker-number-buy-container {
 	/* background-color: orange; */
-	height: 20px;
+	/* height: 20px; */
+	margin-top: 8px;
 	display: flex;
 
 }
@@ -936,6 +939,7 @@ body
 	color: rgb(155, 155, 155);
 	flex: 1;
 	height: 24px;
+	min-width: 50px;
 	border-radius: 50px;
 	font-size: 10px;
 	/* font-weight: bold; */
@@ -1014,7 +1018,13 @@ body
 	align-items: center;
 	position: relative;
 	cursor: pointer;
+	transition: ease 0.2s background-color, ease 0.2s box-shadow;
 }
+
+/* .clicker-salary-circle-inside:hover {
+	background-color: rgba(40, 45, 54, 0.9);
+	box-shadow: 6px 6px 0 rgba(16, 16, 16, 0.5);
+} */
 
 .clicker-salary-info-container {
 	position: absolute;
