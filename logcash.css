@@ -298,10 +298,9 @@ body
 }
 
 .month-block {
-	background-color: pink;
+	/* background-color: pink; */
 	width: 100%;
 	display: none;
-	/* height: 100px; */
 }
 
 .days-name-line {
@@ -328,7 +327,7 @@ body
 	width: 100%;
 	min-height: 20px;
 	display: flex;
-	/* margin-top: 2px; */
+	margin-top: 2px;
 	/* flex: 1; */
 	/* justify-content: space-around; */
 }
