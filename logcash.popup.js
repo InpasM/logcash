@@ -168,32 +168,12 @@ popup.createElems = function(elems) {
 	elems.habitContainer = document.createElement("div");
 	elems.habitContainer.className = "habit-container";
 	elems.weeklySpan = document.createElement("span");
-	// elems.weeklySpan.innerText = "Weekly Attendance";
-	// elems.weeklySpan.style.marginLeft = "6px";
-
-	elems.lineHabit = document.createElement("div");
-	elems.lineHabit.className = "line-habit";
-
-	elems.weekContainer = document.createElement("div");
-	elems.weekContainer.className = "week-container";
-	elems.weekContainer.appendChild(elems.lineHabit);
-
-	elems.checkboxes = [];
-	// const arrayDaysLetter = ["S", "M", "T", "W", "T", "F", "S"];
-	const arrayDaysName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-	for (var i = 0; i < 7; i++)
-	{
-		elems.checkboxes[i] = document.createElement("div");
-		elems.checkboxes[i].className = "checkbox-habit";
-		elems.checkboxes[i].id = i;
-		elems.checkboxes[i].innerText = arrayDaysName[i];
-	}
+	elems.weeklySpan.innerText = "Monthly Attendance";
 	
 	elems.monthContainer = document.createElement("div");
 	elems.monthContainer.className = "month-container";
 
 	elems.habitContainer.appendChild(elems.weeklySpan);
-	elems.habitContainer.appendChild(elems.weekContainer);
 	elems.habitContainer.appendChild(elems.monthContainer);
 
 	elems.monthLineHabit = [0, 0, 0, 0, 0, 0];
@@ -203,7 +183,7 @@ popup.createElems = function(elems) {
 	elems.monthDayBoxes = [];
 	elems.monthLineDayName = document.createElement("div");
 	elems.monthLineDayName.className = "days-name-line";
-	// const arrayDaysName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+	const arrayDaysName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 	for (var i = 0; i < 7; i++)
 	{
 		elems.monthDayBoxes[i] = document.createElement("div");
@@ -229,7 +209,6 @@ popup.createElems = function(elems) {
 
 			if (indexMonth < popup.numberDay)
 			{
-				// console.log("passed " + indexMonth);
 				tmpDay.style.backgroundColor = "#202830";
 				tmpDay.style.color = "#64676a";
 				tmpDay.style.borderColor = "rgba(45, 49, 60, 0.5)";
@@ -249,72 +228,6 @@ popup.createElems = function(elems) {
 		elems.monthContainer.appendChild(elems.monthLineHabit[i]);
 	}
 
-	// elems.weeklySpan.addEventListener("mouseover", function(e) {
-	// 	e.target.style.backgroundColor = "rgb(27, 30, 37)";
-	// 	e.target.style.color = "rgb(226, 226, 226)";
-	// });
-
-	// elems.weeklySpan.addEventListener("mouseout", function(e) {
-	// 	e.target.style.backgroundColor = "";
-	// 	e.target.style.color = "";
-	// });
-
-	selectHabitContainer();
-
-	function selectHabitContainer() {
-
-		if (data.student.whichHabit === 1)
-		{
-			elems.monthContainer.style.display = "none";
-			elems.weekContainer.style.display = "flex";
-			elems.weeklySpan.innerText = "Weekly Attendance";
-		}
-		else if (data.student.whichHabit === 2)
-		{
-			elems.monthContainer.style.display = "flex";
-			elems.weekContainer.style.display = "none";
-			elems.weeklySpan.innerText = "Monthly Attendance";
-		}
-	}
-
-	function switchHabitContainer(mode) {
-
-		// if (data.student.whichHabit === 1)
-		if (mode != data.student.whichHabit)
-		{
-			if (mode === 1)
-			{
-				// elems.thisButtonWeek.style.backgroundColor = "white";
-				// elems.thisButtonWeek.style.color = "#191919";
-				// elems.thisButtonMonth.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
-				// elems.thisButtonMonth.style.color = "rgb(155, 155, 155)";
-
-				elems.thisButtonWeek.className = "this-button selected";
-				elems.thisButtonMonth.className = "this-button";
-
-				data.student.whichHabit = 1;
-				selectHabitContainer();
-			}
-			// else if (data.student.whichHabit === 2)
-			else if (mode === 2)
-			{
-				// elems.thisButtonMonth.style.backgroundColor = "white";
-				// elems.thisButtonMonth.style.color = "#191919";
-				// elems.thisButtonWeek.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
-				// elems.thisButtonWeek.style.color = "rgb(155, 155, 155)";
-
-				elems.thisButtonMonth.className = "this-button selected";
-				elems.thisButtonWeek.className = "this-button";
-
-				data.student.whichHabit = 2;
-				selectHabitContainer();
-			}
-			data.updateLocalStorage();
-			popup.setData(elems);
-		}
-	}
-
-	// elems.weeklySpan.addEventListener("click", switchHabitContainer);
 
 	//////////////////////////////////////////////////////////////////////  MIDDLE RIGHT DIV
 	elems.popMiddleDivRight = document.createElement("div");
@@ -813,8 +726,8 @@ popup.createElems = function(elems) {
 	});
 	
 
-	for (var i = 0; i < 7; i++)
-		elems.lineHabit.appendChild(elems.checkboxes[i]);
+	// for (var i = 0; i < 7; i++)
+	// 	elems.lineHabit.appendChild(elems.checkboxes[i]);
 
 	elems.popMiddleDiv.appendChild(elems.popMiddleDivLeft);
 	elems.popMiddleDiv.appendChild(elems.popMiddleDivRight);
@@ -993,11 +906,11 @@ popup.setData = function(elems) {
 		data.student.pseudo = tmpPseudo;
 	}
 	elems.popupTopRightText.innerText = data.student.pseudo;
-	for (var i = 0; i < elems.checkboxes.length; i++)
-	{
-		if (data.student.weeklyHabit[i])
-			elems.checkboxes[i].style.borderColor = "rgb(0, 186, 188)";
-	}
+	// for (var i = 0; i < elems.checkboxes.length; i++)
+	// {
+		// if (data.student.weeklyHabit[i])
+		// 	elems.checkboxes[i].style.borderColor = "rgb(0, 186, 188)";
+	// }
 
 	var needToUpdateData = false;
 	for (var i = 0; i < elems.checkboxesMonth.length; i++)
@@ -1173,7 +1086,6 @@ popup.initPopup = function(elems, months) {
 		mouseDown = false;
 	})
 
-	// put in setStyle
 	if (!data.student.salary)
 		elems.inputSalary.value = 0;
 	else
@@ -1219,10 +1131,10 @@ popup.initPopup = function(elems, months) {
 		popup.setData(elems);
 	});
 
-	for (var i = 0; i < elems.checkboxes.length; i++)
-	{
-		elems.checkboxes[i].addEventListener("click", clickWeeklyHabit);
-	}
+	// for (var i = 0; i < elems.checkboxes.length; i++)
+	// {
+	// 	elems.checkboxes[i].addEventListener("click", clickWeeklyHabit);
+	// }
 	for (var i = 0; i < elems.checkboxesMonth.length; i++)
 	{
 		elems.checkboxesMonth[i].addEventListener("click", clickMonthlyHabit);

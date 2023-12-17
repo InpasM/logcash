@@ -7,16 +7,24 @@ data.updateLocalStorage = function() {
 		localStorage.setItem("student42", JSON.stringify(data.student));
 }
 
+
 data.student = {
+	// DATA GLOBAL
 	pseudo: 0,
-	salary: 0,
-	hoursDeducted: 0,
-	weeklyHabit: [false, false, false, false, false, false, false],
-	monthlyHabit: [],
-	whichHabit: 1,
 	addBoostHalf: false,
 	addBoostFull: false,
 	showMore: false,
+
+	// ARRAY MONTH
+	months: [
+
+	],
+
+	salary: 0,
+	hoursDeducted: 0,
+	// weeklyHabit: [false, false, false, false, false, false, false],
+	monthlyHabit: [],
+	// whichHabit: 1,
 };
 
 var localStorageSpace = function(){
@@ -33,7 +41,7 @@ data.init = function() {
 
 	// console.log(localStorageSpace());
 	
-	// localStorage.removeItem("student42");
+	localStorage.removeItem("student42");
 	let localStorageStud = localStorage.getItem("student42");
 
 	data.isHomePage = window.location.href.indexOf("users");

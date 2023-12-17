@@ -292,9 +292,7 @@ body
 
 .week-container, .month-container {
 	width: fit-content;
-	/* background-color: blue; */
-	display: none;
-	/* justify-content: center; */
+	display: flex;
 	flex-direction: column;
 	margin-top: 4px;
 }
