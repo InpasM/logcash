@@ -285,6 +285,8 @@ function getInfoMonth(elems, calendar) {
 
 	initArrayCalendar(calendarElem, arrayCalendar);
 
+	console.log(arrayCalendar);
+
 	arrayCalendar.indexArray = arrayCalendar.length - 1;
 	arrayCalendar.nbMonth = arrayCalendar.length;
 	arrayCalendar = arrayCalendar.reverse();
@@ -599,18 +601,17 @@ async function initLogcash()
 	const elems = {};
 
 	calendar = await fetchCalendar(elems);
+
+	console.log(data.student.months);
 	const months = getInfoMonth(elems, calendar);
 
 	init.generateContainerLogcash(elems, months, calendar);
-	// calendar.parentElement.insertBefore(elems.containerLogcash, calendar.parentElement.firstChild);
 
 	window.elems = elems;
 	window.months = months;
 	initStyleProgressBar();
-	// resizeProgress();
 
 	reGenerate(months[months.indexArray], elems);
-	// window.addEventListener("resize", resizeProgress);
 	initButtons(elems);
 
 	const userPosteStatus = document.querySelector(".user-poste-status");
@@ -669,6 +670,7 @@ function startLogcash() {
 		devMode = true;
 		var refreshButton = document.querySelector(".dev-refresh");
 		var refreshButtonActivator = document.querySelector(".dev-refresh-button");
+		var refreshButtonRemove = document.querySelector(".dev-remove-localStorage");
 		var refreshOn = true;
 		var cycleRefresh = setRefreshInterval();
 
@@ -685,6 +687,10 @@ function startLogcash() {
 				cycleRefresh = setRefreshInterval();
 				refreshOn = true;
 			}
+		});
+
+		refreshButtonRemove.addEventListener("click", function() {
+			localStorage.removeItem("student42");
 		});
 
 		refreshButton.addEventListener("click", function() {

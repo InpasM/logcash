@@ -7,6 +7,16 @@ data.updateLocalStorage = function() {
 		localStorage.setItem("student42", JSON.stringify(data.student));
 }
 
+monthObj = {
+	yearIndex: 0,
+	nameShort: 0,
+	nameLong: 0,
+	salary: 0,
+	hoursDeducted: 0,
+	monthlyHabit: 0,
+	timeDone: 0,
+	// timeRequire: 0,
+};
 
 data.student = {
 	// DATA GLOBAL
@@ -14,11 +24,10 @@ data.student = {
 	addBoostHalf: false,
 	addBoostFull: false,
 	showMore: false,
+	indexLastMonth: 0,
 
-	// ARRAY MONTH
-	months: [
-
-	],
+	// ARRAY MONTH // up to 12 month save
+	months: [],
 
 	salary: 0,
 	hoursDeducted: 0,
@@ -39,7 +48,7 @@ data.init = function() {
 
 	// console.log(localStorageSpace());
 	
-	localStorage.removeItem("student42");
+	// localStorage.removeItem("student42");
 	let localStorageStud = localStorage.getItem("student42");
 
 	data.isHomePage = window.location.href.indexOf("users");
@@ -63,5 +72,12 @@ data.init = function() {
 	{
 		displayMessage("On other intra page");
 	}
-	console.log(data.student);
+	if (!data.student.months.length)
+	{
+		for (var i = 0; i < 12; i++)
+		{
+			data.student.months.push(monthObj);
+		}
+	}
+	// console.log(data.student.months);
 }

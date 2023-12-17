@@ -905,6 +905,18 @@ body
 	background-color: red;
 }
 
+.dev-remove-localStorage {
+	position: absolute;
+	width: 120px;
+	right: 150px;
+	top: 10px;
+	padding: 8px 0;
+	background: orange;
+	border-radius: 6px;
+	color: white;
+}
+
+
 /************************** CASH CLICKER ***************************/
 .clicker-div-number-buy {
 	/* background-color: red; */
