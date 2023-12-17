@@ -787,17 +787,17 @@ popup.setStyle = function(elems) {
 	elems.popupTopDiv.style.alignItems = "center";
 	elems.popupTopDiv.style.color = "#9b9b9b";
 	elems.popupTopDiv.style.whiteSpace = "nowrap";
-	elems.popupTopDiv.style.padding = "4px";
+	elems.popupTopDiv.style.padding = "2px 4px";
 
 	elems.popupTopLeftText.style.color = "#e2e2e2";
-	elems.popupTopLeftText.style.fontSize = "16px";
+	elems.popupTopLeftText.style.fontSize = "14px";
 	elems.popupTopLeftText.style.margin = "3px";
 	elems.popupTopLeftText.style.padding = "0";
 	elems.popupTopLeftText.style.fontWeight = "bold";
 	// elems.popupTopLeftText.style.pointerEvents = "none";
 	elems.popupTopLeftText.style.textShadow = "rgb(0, 0, 0) 0px 0px 3px";
 	
-	elems.popupTopRightText.style.fontSize = "14px";
+	elems.popupTopRightText.style.fontSize = "12px";
 	elems.popupTopRightText.style.margin = "0 2px 0 0";
 	elems.popupTopRightText.style.padding = "2px 4px";
 	elems.popupTopRightText.style.width = "fit-content";
@@ -830,21 +830,10 @@ popup.setStyle = function(elems) {
 
 function isCheckboxUse() {
 
-	if (data.student.whichHabit === 1)
+	for (var i = 0; i < data.student.monthlyHabit.length; i++)
 	{
-		for (var i = 0; i < data.student.weeklyHabit.length; i++)
-		{
-			if (data.student.weeklyHabit[i])
-				return true;
-		}
-	}
-	else if (data.student.whichHabit === 2)
-	{
-		for (var i = 0; i < data.student.monthlyHabit.length; i++)
-		{
-			if (data.student.monthlyHabit[i])
-				return true;
-		}
+		if (data.student.monthlyHabit[i])
+			return true;
 	}
 	return false;
 }
@@ -868,24 +857,11 @@ function getOpenDays(numberYear, numberMonth, numberDay) {
 			actualDay = 0;
 		if (actualDay >= 1 && actualDay <= 5)
 		{
-			if (data.student.whichHabit === 1 && (data.student.weeklyHabit[indexHabit] || !useAll))
-			{
+			if (data.student.monthlyHabit[i - 1] || !useAll)
 				openDays++;
-			}
-			else if (data.student.whichHabit === 2 && (data.student.monthlyHabit[i - 1] || !useAll))
-			{
-				openDays++;
-			}
 		}
-		if (data.student.whichHabit === 1 && (data.student.weeklyHabit[indexHabit] || !useAll))
-		{
+		if (data.student.monthlyHabit[i - 1] || !useAll)
 			totalDays++;
-		}
-		else if (data.student.whichHabit === 2 && (data.student.monthlyHabit[i - 1] || !useAll))
-		{
-			totalDays++;
-		}
-
 		indexHabit++;
 		actualDay++;
 	}
@@ -943,8 +919,6 @@ popup.setData = function(elems) {
 	{
 		var totalSalaryEarn = parseFloat(data.student.salary);
 		var percentSalary = 100.0;
-		// var integerSalary = parseInt(totalSalaryEarn);
-		// var floatSalary = totalSalaryEarn - integerSalary;
 	}
 	else
 	{
@@ -959,21 +933,23 @@ popup.setData = function(elems) {
 	var dayTimeDone = actualHourDone + actualMinuteDone / 60;
 
 	var totalTimeRemaining = popup.months[popup.months.indexArray].nbHourRem + (popup.months[popup.months.indexArray].nbMinRem / 60);
-
-	// console.log("totalTimeRemaining " + totalTimeRemaining);
 	var resultEachDay = 0;
+
 	if (totalTimeRemaining > 0)
 	{
 		if (data.student.monthlyHabit[popup.numberDay - 1])
 		{
 			totalTimeRemaining += dayTimeDone;
 		}
-		resultEachDay = totalTimeRemaining / numberDays.total;
+		if (totalTimeRemaining === 0 || numberDays.total === 0)
+			resultEachDay = 0;
+		else
+			resultEachDay = totalTimeRemaining / numberDays.total;
 	}
 
-	if (data.student.addBoostHalf)
+	if (data.student.addBoostHalf && resultEachDay != 0)
 		resultEachDay -= 0.7;
-	else if (data.student.addBoostFull)
+	else if (data.student.addBoostFull && resultEachDay != 0)
 		resultEachDay -= 1.4;
 
 	var resultInteger = parseInt(resultEachDay);
@@ -993,7 +969,6 @@ popup.setData = function(elems) {
 		tmpText = resultInteger + "h" + resultFloat;
 
 	elems.resultLogtime1.innerText = tmpText;
-	// console.log("resultRemaining: " + parseInt(resultRemaining * 60));
 	if (parseInt(resultRemaining * 60) <= 0)
 	{
 		elems.resultLogtime2.innerText = "DONE";
@@ -1014,33 +989,10 @@ popup.setData = function(elems) {
 	elems.salarySlide.style.height = percentSalary + "%";
 }
 
-function clickWeeklyHabit(e) {
-	
-	const index = parseInt(e.target.id);
-
-	// console.log(e.target.id);
-	if (data.student.weeklyHabit[index])
-	{
-		// console.log(e.target.id + ": false");
-		data.student.weeklyHabit[index] = false;
-		e.target.style.borderColor = "rgb(45, 49, 60)";
-	}
-	else
-	{
-		// console.log(e.target.id + ": true");
-		data.student.weeklyHabit[index] = true;
-		e.target.style.borderColor = "rgb(0, 186, 188)";
-	}
-	if (data.isHomePage === -1)
-		data.updateLocalStorage();
-	popup.setData(elems);
-}
-
 function clickMonthlyHabit(e) {
 	
 	const index = parseInt(e.target.id) - 1;
 
-	// console.log("click on day " + index);
 	if (data.student.monthlyHabit[index])
 	{
 		data.student.monthlyHabit[index] = false;

@@ -22,9 +22,7 @@ data.student = {
 
 	salary: 0,
 	hoursDeducted: 0,
-	// weeklyHabit: [false, false, false, false, false, false, false],
 	monthlyHabit: [],
-	// whichHabit: 1,
 };
 
 var localStorageSpace = function(){
@@ -56,7 +54,7 @@ data.init = function() {
 			data.student.pseudo = login;
 			data.updateLocalStorage();
 
-			displayMessage("student not found in localstorage, check for login: " + login);
+			displayMessage("Create new student42: " + login);
 			localStorageStud = localStorage.getItem("student42");
 		}
 		data.student = JSON.parse(localStorageStud);
@@ -65,4 +63,5 @@ data.init = function() {
 	{
 		displayMessage("On other intra page");
 	}
+	console.log(data.student);
 }
