@@ -1,5 +1,4 @@
 {
-
 	"manifest_version": 3,
 	"name": "Logcash",
 	"version": "1.0",
@@ -17,6 +16,15 @@
 		"css": ["logcash.css"],
 		"run_at": "document_end"
 	}
-	]
+	],
+
+	"browser_specific_settings": {
+		"gecko": {
+		  "id": "logcash@example.com"
+		},
+		"edge": {
+		  "browser_action_next_to_addressbar": true
+		}
+	}
 }
   
