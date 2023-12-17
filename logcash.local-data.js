@@ -24,7 +24,7 @@ data.student = {
 	addBoostHalf: false,
 	addBoostFull: false,
 	showMore: false,
-	indexLastMonth: 0,
+	indexLastMonth: -1,
 
 	// ARRAY MONTH // up to 12 month save
 	months: [],
@@ -74,7 +74,7 @@ data.init = function() {
 	}
 	if (!data.student.months.length)
 	{
-		for (var i = 0; i < 12; i++)
+		for (var i = 0; i < 4; i++)
 		{
 			data.student.months.push(monthObj);
 		}

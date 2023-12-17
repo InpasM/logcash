@@ -172,17 +172,14 @@ popup.createElems = function(elems) {
 	
 	elems.monthContainer = document.createElement("div");
 	elems.monthContainer.className = "month-container";
-
+	
 	elems.habitContainer.appendChild(elems.weeklySpan);
 	elems.habitContainer.appendChild(elems.monthContainer);
-
-	elems.monthLineHabit = [0, 0, 0, 0, 0, 0];
-	elems.checkboxesMonth = [];
-	var indexMonth = 0;
 
 	elems.monthDayBoxes = [];
 	elems.monthLineDayName = document.createElement("div");
 	elems.monthLineDayName.className = "days-name-line";
+
 	const arrayDaysName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 	for (var i = 0; i < 7; i++)
 	{
@@ -192,41 +189,84 @@ popup.createElems = function(elems) {
 		elems.monthDayBoxes[i].innerText = arrayDaysName[i];
 		elems.monthLineDayName.appendChild(elems.monthDayBoxes[i]);
 	}
-
 	elems.monthContainer.appendChild(elems.monthLineDayName);
-	for (var i = 0; i < popup.months[popup.months.indexArray].weeks.length; i++)
+
+
+
+	
+	// for loop
+	elems.monthArray = [];
+	elems.monthBlock = [];
+	for (var k = 0; k < popup.months.length; k++)
 	{
-		elems.monthLineHabit[i] = document.createElement("div");
-		elems.monthLineHabit[i].className = "line-habit";
-		if (i === 0)
-			elems.monthLineHabit[i].style.justifyContent = "flex-end";
-		for (var j = 0; j < popup.months[popup.months.indexArray].weeks[i].length; j++)
+		console.log("month: " + k + " vs index: " + popup.months.indexArray);
+		var monthLine = [0, 0, 0, 0, 0, 0];
+		var checkboxesMonth = [];
+		var indexMonth = 0;
+		// for (var i = 0; i < popup.months[popup.months.indexArray].weeks.length; i++)
+		for (var i = 0; i < popup.months[k].weeks.length; i++)
 		{
-			var tmpDay = document.createElement("div");
-			tmpDay.id = ++indexMonth;
-			tmpDay.innerText = indexMonth;
-			tmpDay.className = "checkbox-habit";
-
-			if (indexMonth < popup.numberDay)
+			
+			// tmpMonth = [];
+			// elems.monthLineHabit[i] = document.createElement("div");
+			// elems.monthLineHabit[i].className = "line-habit";
+			monthLine[i] = document.createElement("div");
+			monthLine[i].className = "line-habit";
+			if (i === 0)
+				// elems.monthLineHabit[i].style.justifyContent = "flex-end";
+				monthLine[i].style.justifyContent = "flex-end";
+			// for (var j = 0; j < popup.months[popup.months.indexArray].weeks[i].length; j++)
+			for (var j = 0; j < popup.months[k].weeks[i].length; j++)
 			{
-				tmpDay.style.backgroundColor = "#202830";
-				tmpDay.style.color = "#64676a";
-				tmpDay.style.borderColor = "rgba(45, 49, 60, 0.5)";
-				tmpDay.style.opacity = "0.5";
-				tmpDay.style.cursor = "default";
-				tmpDay.style.pointerEvents = "none";
+				console.log("day: " + j);
+				var tmpDay = document.createElement("div");
+	
+				tmpDay.id = ++indexMonth;
+				tmpDay.innerText = indexMonth;
+				tmpDay.className = "checkbox-habit";
+				if (indexMonth < popup.numberDay)
+				{
+					tmpDay.style.backgroundColor = "#202830";
+					tmpDay.style.color = "#64676a";
+					tmpDay.style.borderColor = "rgba(45, 49, 60, 0.5)";
+					tmpDay.style.opacity = "0.5";
+					tmpDay.style.cursor = "default";
+					tmpDay.style.pointerEvents = "none";
+				}
+				else if (indexMonth === popup.numberDay)
+				{
+					tmpDay.style.backgroundColor = "white";
+					tmpDay.style.color = "#191919";
+				}
+	
+				// elems.checkboxesMonth.push(tmpDay);
+				checkboxesMonth.push(tmpDay);
+				// tmpMonth.push(tmpDay);
+				// elems.monthLineHabit[i].appendChild(tmpDay);
+				monthLine[i].appendChild(tmpDay);
 			}
-			else if (indexMonth === popup.numberDay)
-			{
-				tmpDay.style.backgroundColor = "white";
-				tmpDay.style.color = "#191919";
-			}
-
-			elems.checkboxesMonth.push(tmpDay);
-			elems.monthLineHabit[i].appendChild(tmpDay);
+			// elems.monthContainer.appendChild(elems.monthLineHabit[i]);
+			// elems.monthBlock.push(monthLine);
 		}
-		elems.monthContainer.appendChild(elems.monthLineHabit[i]);
+		elems.monthArray.push(monthLine);
 	}
+
+	// elems.monthArray.push(tmpMonth);
+	
+	elems.monthBlock = [];
+	for (var i = 0; i < popup.months.length; i++)
+	{
+		tmpBlock = document.createElement("div");
+		tmpBlock.className = "month-block";
+
+		console.log(elems.monthArray[i]);
+		for (var j = 0; j < elems.monthArray[i].length; j++)
+			tmpBlock.appendChild(elems.monthArray[i][j]);
+
+		elems.monthBlock.push(tmpBlock)
+		elems.monthContainer.appendChild(elems.monthBlock[i]);
+	}
+	elems.monthBlock[popup.months.length - 1].style.display = "block";
 
 
 	//////////////////////////////////////////////////////////////////////  MIDDLE RIGHT DIV
@@ -888,25 +928,26 @@ popup.setData = function(elems) {
 		// 	elems.checkboxes[i].style.borderColor = "rgb(0, 186, 188)";
 	// }
 
+
 	var needToUpdateData = false;
-	for (var i = 0; i < elems.checkboxesMonth.length; i++)
-	{
-		if (!data.student.monthlyHabit[i])
-		{
-			data.student.monthlyHabit[i] = false;
-			needToUpdateData = true;
-		}
-		else
-		{
-			if (i + 1 < popup.numberDay)
-			{
-				data.student.monthlyHabit[i] = false;
-				needToUpdateData = true;
-			}
-			else
-				elems.checkboxesMonth[i].style.borderColor = "rgb(0, 186, 188)";
-		}
-	}
+	// for (var i = 0; i < elems.checkboxesMonth.length; i++)
+	// {
+	// 	if (!data.student.monthlyHabit[i])
+	// 	{
+	// 		data.student.monthlyHabit[i] = false;
+	// 		needToUpdateData = true;
+	// 	}
+	// 	else
+	// 	{
+	// 		if (i + 1 < popup.numberDay)
+	// 		{
+	// 			data.student.monthlyHabit[i] = false;
+	// 			needToUpdateData = true;
+	// 		}
+	// 		else
+	// 			elems.checkboxesMonth[i].style.borderColor = "rgb(0, 186, 188)";
+	// 	}
+	// }
 	if (needToUpdateData)
 		data.updateLocalStorage();
 
@@ -1012,6 +1053,10 @@ popup.initPopup = function(elems, months) {
 
 	popup.months = months;
 
+	console.log(data.student.months[months.length - 1]);
+
+	console.log(months.length);
+
 	var mouseDown = false,
 		popupOffset = [0, 0];
 
@@ -1024,10 +1069,7 @@ popup.initPopup = function(elems, months) {
 		popupOffset = [elems.popupRemaining.offsetLeft - e.clientX, elems.popupRemaining.offsetTop - e.clientY];
 	})
 
-	// const devTextClientX = document.querySelector(".dev-client-x");
 	document.body.addEventListener("mousemove", function(e) {
-
-		// devTextClientX.innerText = e.clientX;
 		e.stopPropagation();
 		if (mouseDown) {
 			elems.popupRemaining.style.top = e.clientY + popupOffset[1] + "px";
@@ -1038,14 +1080,20 @@ popup.initPopup = function(elems, months) {
 		mouseDown = false;
 	})
 
-	if (!data.student.salary)
-		elems.inputSalary.value = 0;
-	else
-		elems.inputSalary.value = data.student.salary;
-	if (!data.student.hoursDeducted)
-		elems.inputDeducted.value = 0;
-	else
-		elems.inputDeducted.value = data.student.hoursDeducted;
+	function setupInputValue(dataMonth, elems) {
+
+		if (!dataMonth.salary)
+			elems.inputSalary.value = 0;
+		else
+			elems.inputSalary.value = dataMonth.salary;
+		if (!dataMonth.hoursDeducted)
+			elems.inputDeducted.value = 0;
+		else
+			elems.inputDeducted.value = dataMonth.hoursDeducted;
+	}
+
+	setupInputValue(data.student.months[months.length - 1], elems);
+
 
 	elems.inputSalary.addEventListener("blur", function(e) {
 
@@ -1083,14 +1131,10 @@ popup.initPopup = function(elems, months) {
 		popup.setData(elems);
 	});
 
-	// for (var i = 0; i < elems.checkboxes.length; i++)
+	// for (var i = 0; i < elems.checkboxesMonth.length; i++)
 	// {
-	// 	elems.checkboxes[i].addEventListener("click", clickWeeklyHabit);
+	// 	elems.checkboxesMonth[i].addEventListener("click", clickMonthlyHabit);
 	// }
-	for (var i = 0; i < elems.checkboxesMonth.length; i++)
-	{
-		elems.checkboxesMonth[i].addEventListener("click", clickMonthlyHabit);
-	}
 	elems.inputSalary.addEventListener("click", function(e) { this.select(); });
 	elems.inputDeducted.addEventListener("click", function(e) { this.select(); });
 }

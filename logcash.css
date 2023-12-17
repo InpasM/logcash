@@ -297,6 +297,13 @@ body
 	margin-top: 4px;
 }
 
+.month-block {
+	background-color: pink;
+	width: 100%;
+	display: none;
+	/* height: 100px; */
+}
+
 .days-name-line {
 	display: flex;
 	/* margin-top: 2px; */
