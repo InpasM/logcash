@@ -142,11 +142,10 @@ function mOutMonth(e) {
 }
 
 function clickMonth(e) {
-	
+
 	var id = e.target.id;
 
-	console.log(data.student.months[id].salary);
-
+	// console.log(data.student.months[id].salary);
 	for (var i = 0; i < elems.monthBlock.length; i++)
 		elems.monthBlock[i].style.display = "none";
 	elems.monthBlock[id].style.display = "block";
