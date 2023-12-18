@@ -29,7 +29,7 @@ data.student = {
 	// ARRAY MONTH // up to 12 month save
 	months: [],
 
-	salary: 0,
+	// salary: 0,
 	hoursDeducted: 0,
 	monthlyHabit: [],
 };
@@ -72,6 +72,8 @@ data.init = function() {
 	{
 		displayMessage("On other intra page");
 	}
+	if (!data.student.months)
+		localStorage.removeItem("student42");
 	if (!data.student.months.length)
 	{
 		for (var i = 0; i < 4; i++)

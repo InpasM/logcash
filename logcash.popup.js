@@ -26,10 +26,14 @@ popup.calculDays = function(elems) {
 		popup.months[popup.months.nbMonth - 1].days[i].ratioDone = ratioDone;
 		popup.months[popup.months.nbMonth - 1].days[i].percentDay = percentDay;
 		// console.log("multi " + ratioDone + " " + data.student.salary);
-		if (ratioDone === 0 || data.student.salary === 0)
+
+		console.log(data.student.months[popup.months.nbMonth - 1].salary);
+		// if (ratioDone === 0 || data.student.salary === 0)
+		if (ratioDone === 0 || data.student.months[popup.months.nbMonth - 1].salary === 0)
 			popup.months[popup.months.nbMonth - 1].days[i].cashEarn = 0;
 		else
-			popup.months[popup.months.nbMonth - 1].days[i].cashEarn = ratioDone * data.student.salary;
+			// popup.months[popup.months.nbMonth - 1].days[i].cashEarn = ratioDone * data.student.salary;
+			popup.months[popup.months.nbMonth - 1].days[i].cashEarn = ratioDone * data.student.months[popup.months.nbMonth - 1].salary;
 
 		if (percentDay > biggestPercent)
 			biggestPercent = percentDay;
@@ -977,12 +981,12 @@ popup.setData = function(elems) {
 
 	if (popup.months[popup.months.indexArray].percent >= 100)
 	{
-		var totalSalaryEarn = parseFloat(data.student.salary);
+		var totalSalaryEarn = parseFloat(data.student.months[popup.months.indexArray].salary);
 		var percentSalary = 100.0;
 	}
 	else
 	{
-		var totalSalaryEarn = parseFloat(popup.months[popup.months.indexArray].percent / 100 * data.student.salary);
+		var totalSalaryEarn = parseFloat(popup.months[popup.months.indexArray].percent / 100 * data.student.months[popup.months.indexArray].salary);
 		var percentSalary = popup.months[popup.months.indexArray].percent;
 	}
 	var integerSalary = parseInt(totalSalaryEarn);
@@ -1072,9 +1076,8 @@ popup.initPopup = function(elems, months) {
 
 	popup.months = months;
 
-	console.log(data.student.months[months.length - 1]);
-
-	console.log(months.length);
+	// console.log(data.student.months[months.length - 1]);
+	// console.log(months.length);
 
 	var mouseDown = false,
 		popupOffset = [0, 0];
@@ -1120,7 +1123,7 @@ popup.initPopup = function(elems, months) {
 			e.target.value = 0;
 		else
 		{
-			data.student.salary = e.target.value;
+			data.student.months[popup.months.indexArray].salary = e.target.value;
 			if (data.isHomePage === -1)
 				data.updateLocalStorage();
 		}
@@ -1135,7 +1138,7 @@ popup.initPopup = function(elems, months) {
 			e.target.value = 0;
 		else
 		{
-			data.student.hoursDeducted = e.target.value;
+			data.student.months[popup.months.indexArray].hoursDeducted = e.target.value;
 			if (data.isHomePage === -1)
 				data.updateLocalStorage();
 		}

@@ -284,7 +284,7 @@ function getInfoMonth(elems, calendar) {
 
 	initArrayCalendar(calendarElem, arrayCalendar);
 
-	console.log(arrayCalendar);
+	// console.log(arrayCalendar);
 
 	arrayCalendar.indexArray = arrayCalendar.length - 1;
 	arrayCalendar.nbMonth = arrayCalendar.length;
@@ -591,7 +591,7 @@ async function initLogcash()
 
 	calendar = await fetchCalendar(elems);
 
-	console.log(data.student.months);
+	// console.log(data.student.months);
 	const months = getInfoMonth(elems, calendar);
 
 	init.generateContainerLogcash(elems, months, calendar);
