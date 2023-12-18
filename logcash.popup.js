@@ -912,34 +912,26 @@ popup.setData = function(elems) {
 	setupInputValue(data.student.months[popup.months.indexArray], elems);
 
 	var needToUpdateData = false;
-	// for (var i = 0; i < elems.checkboxesMonth.length; i++)
-	// console.log(elems.monthArray[popup.months.indexArray][0][0]);
-	// console.log("test");
-	// console.log(elems.monthArray[popup.months.indexArray]);
-	// for (var j = 0; j < elems.monthArray[popup.months.indexArray].length; j++)
-	// {
-		for (var i = 0; i < elems.monthArray[popup.months.indexArray].checkboxes.length; i++)
+
+	for (var i = 0; i < elems.monthArray[popup.months.indexArray].checkboxes.length; i++)
+	{
+		if (!data.student.monthlyHabit[i])
 		{
-			// console.log(elems.monthArray[popup.months.indexArray][j]);
-			// console.log("test");
-			if (!data.student.monthlyHabit[i])
+			data.student.monthlyHabit[i] = false;
+			needToUpdateData = true;
+		}
+		else
+		{
+			if (i + 1 < popup.numberDay)
 			{
 				data.student.monthlyHabit[i] = false;
 				needToUpdateData = true;
 			}
-			else
-			{
-				if (i + 1 < popup.numberDay)
-				{
-					data.student.monthlyHabit[i] = false;
-					needToUpdateData = true;
-				}
-				else
-					// elems.checkboxesMonth[i].style.borderColor = "rgb(0, 186, 188)";
-					elems.monthArray[popup.months.indexArray].checkboxes[i].style.borderColor = "rgb(0, 186, 188)";
-			}
+			else if (popup.months.indexArray === popup.months.length - 1)
+				elems.monthArray[popup.months.indexArray].checkboxes[i].style.borderColor = "rgb(0, 186, 188)";
 		}
-	// }
+	}
+
 	if (needToUpdateData)
 		data.updateLocalStorage();
 
