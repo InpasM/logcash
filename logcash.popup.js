@@ -15,6 +15,7 @@ popup.calculDays = function(elems) {
 		var monthHourDone = popup.months[popup.months.nbMonth - 1].nbHourDone + (popup.months[popup.months.nbMonth - 1].nbMinDone / 60);
 		var monthHourRequired = popup.months[popup.months.nbMonth - 1].nbHourReq;
 
+		// console.log(data.student.months[0].salary);
 		if (newDayHourDone > 0)
 		{
 			if (monthHourRequired === 0)
@@ -908,12 +909,7 @@ popup.setData = function(elems) {
 		data.student.pseudo = tmpPseudo;
 	}
 	elems.popupTopRightText.innerText = data.student.pseudo;
-	// for (var i = 0; i < elems.checkboxes.length; i++)
-	// {
-		// if (data.student.weeklyHabit[i])
-		// 	elems.checkboxes[i].style.borderColor = "rgb(0, 186, 188)";
-	// }
-
+	setupInputValue(data.student.months[popup.months.indexArray], elems);
 
 	var needToUpdateData = false;
 	// for (var i = 0; i < elems.checkboxesMonth.length; i++)
@@ -1045,6 +1041,18 @@ function clickMonthlyHabit(e) {
 	popup.setData(elems);
 }
 
+function setupInputValue(dataMonth, elems) {
+
+	if (!dataMonth.salary)
+		elems.inputSalary.value = 0;
+	else
+		elems.inputSalary.value = dataMonth.salary;
+	if (!dataMonth.hoursDeducted)
+		elems.inputDeducted.value = 0;
+	else
+		elems.inputDeducted.value = dataMonth.hoursDeducted;
+}
+
 popup.initPopup = function(elems, months) {
 
 	popup.months = months;
@@ -1075,17 +1083,6 @@ popup.initPopup = function(elems, months) {
 		mouseDown = false;
 	})
 
-	function setupInputValue(dataMonth, elems) {
-
-		if (!dataMonth.salary)
-			elems.inputSalary.value = 0;
-		else
-			elems.inputSalary.value = dataMonth.salary;
-		if (!dataMonth.hoursDeducted)
-			elems.inputDeducted.value = 0;
-		else
-			elems.inputDeducted.value = dataMonth.hoursDeducted;
-	}
 
 	setupInputValue(data.student.months[months.length - 1], elems);
 

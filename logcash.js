@@ -145,8 +145,10 @@ function clickMonth(e) {
 
 	// console.log(e.target.id);
 	var id = e.target.id;
-	console.log(window.months[id]);
-	console.log(window.elems.monthArray[id]);
+	// console.log(window.months[id]);
+	// console.log(window.elems.monthArray[id]);
+
+	console.log(data.student.months[id].salary);
 
 	for (var i = 0; i < elems.monthBlock.length; i++)
 		elems.monthBlock[i].style.display = "none";
@@ -388,6 +390,10 @@ function calculProgress(arrayCalendar) {
 		arrayCalendar.nbMinDone = arrayCalendar.nbMinDone - (extraHour * 60);
 		// console.log("extraHour: " + parseInt(extraHour) + " remainingMinute: " + remainingMinute);
 	}
+	console.log(data.student.months[0].salary);
+	console.log(data.student.months[0].hoursDeducted);
+	// console.log(data.student.months[months].hoursDeducted);
+	// arrayCalendar.nbHourRem = arrayCalendar.nbHourReq - arrayCalendar.nbHourDone - data.student.months[window.months].hoursDeducted;
 	arrayCalendar.nbHourRem = arrayCalendar.nbHourReq - arrayCalendar.nbHourDone;
 	arrayCalendar.nbMinRem = arrayCalendar.nbMinReq - arrayCalendar.nbMinDone;
 	
