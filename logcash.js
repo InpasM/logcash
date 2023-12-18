@@ -143,6 +143,15 @@ function mOutMonth(e) {
 
 function clickMonth(e) {
 
+	// console.log(e.target.id);
+	var id = e.target.id;
+	console.log(window.months[id]);
+	console.log(window.elems.monthArray[id]);
+
+	for (var i = 0; i < elems.monthBlock.length; i++)
+		elems.monthBlock[i].style.display = "none";
+	elems.monthBlock[id].style.display = "block";
+
 	for (var i = 0; i < months.nbMonth; i++)
 	{
 		elems.divMonths[i].style.backgroundColor = "rgba(37, 41, 50, 0.9)";
@@ -601,7 +610,7 @@ async function initLogcash()
 	initStyleProgressBar();
 
 	reGenerate(months[months.indexArray], elems);
-	// initButtons(elems);
+	initButtons(elems);
 
 	// const userPosteStatus = document.querySelector(".user-poste-status");
 
