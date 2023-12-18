@@ -142,11 +142,8 @@ function mOutMonth(e) {
 }
 
 function clickMonth(e) {
-
-	// console.log(e.target.id);
+	
 	var id = e.target.id;
-	// console.log(window.months[id]);
-	// console.log(window.elems.monthArray[id]);
 
 	console.log(data.student.months[id].salary);
 
@@ -367,14 +364,17 @@ function getInfoMonth(elems, calendar) {
 		}
 
 		// console.log("reduce number hour require depending of data");
-		if (data.student.hoursDeducted > arrayCalendar[i].nbHourReq)
+		// if (data.student.hoursDeducted > arrayCalendar[i].nbHourReq)
+		// console.log("month: " + i + " " + data.student.months[i].hoursDeducted);
+		if (data.student.months[i].hoursDeducted > arrayCalendar[i].nbHourReq)
 			arrayCalendar[i].nbHourReq = 0;
 		else
-			arrayCalendar[i].nbHourReq -= data.student.hoursDeducted;
+			// arrayCalendar[i].nbHourReq -= data.student.hoursDeducted;
+			arrayCalendar[i].nbHourReq -= data.student.months[i].hoursDeducted;
 
 		arrayCalendar[i].timeEachDay = 0;
 
-		calculProgress(arrayCalendar[i]);
+		calculProgress(arrayCalendar[i]);``
 	}
 	return (arrayCalendar);
 }
@@ -390,8 +390,8 @@ function calculProgress(arrayCalendar) {
 		arrayCalendar.nbMinDone = arrayCalendar.nbMinDone - (extraHour * 60);
 		// console.log("extraHour: " + parseInt(extraHour) + " remainingMinute: " + remainingMinute);
 	}
-	console.log(data.student.months[0].salary);
-	console.log(data.student.months[0].hoursDeducted);
+	// console.log(data.student.months[0].salary);
+	// console.log(data.student.months[0].hoursDeducted);
 	// console.log(data.student.months[months].hoursDeducted);
 	// arrayCalendar.nbHourRem = arrayCalendar.nbHourReq - arrayCalendar.nbHourDone - data.student.months[window.months].hoursDeducted;
 	arrayCalendar.nbHourRem = arrayCalendar.nbHourReq - arrayCalendar.nbHourDone;

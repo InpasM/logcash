@@ -28,7 +28,7 @@ popup.calculDays = function(elems) {
 		popup.months[popup.months.nbMonth - 1].days[i].percentDay = percentDay;
 		// console.log("multi " + ratioDone + " " + data.student.salary);
 
-		console.log(data.student.months[popup.months.nbMonth - 1].salary);
+		// console.log(data.student.months[popup.months.nbMonth - 1].salary);
 		// if (ratioDone === 0 || data.student.salary === 0)
 		if (ratioDone === 0 || data.student.months[popup.months.nbMonth - 1].salary === 0)
 			popup.months[popup.months.nbMonth - 1].days[i].cashEarn = 0;
