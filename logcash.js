@@ -1,8 +1,6 @@
 
 function reGenerate(month, elems) {
 
-	var textMonths = document.querySelectorAll(".text-month");
-
 	var tmpProgress;
 
 	if (month.percent >= 100)
@@ -145,11 +143,9 @@ function clickMonth(e) {
 
 	var id = e.target.id;
 
-	// console.log(data.student.months[id].salary);
 	for (var i = 0; i < elems.monthBlock.length; i++)
 		elems.monthBlock[i].style.display = "none";
 	elems.monthBlock[id].style.display = "block";
-	// elems.lineGraphs[popup.months.length - 1]
 	for (var i = 0; i < elems.lineGraphs.length; i++)
 		elems.lineGraphs[i].style.display = "none";
 	elems.lineGraphs[id].style.display = "flex";
@@ -294,8 +290,6 @@ function getInfoMonth(elems, calendar) {
 	var arrayCalendar = Array();
 
 	initArrayCalendar(calendarElem, arrayCalendar);
-
-	// console.log(arrayCalendar);
 
 	arrayCalendar.indexArray = arrayCalendar.length - 1;
 	arrayCalendar.nbMonth = arrayCalendar.length;
@@ -621,46 +615,46 @@ async function initLogcash()
 	reGenerate(months[months.indexArray], elems);
 	initButtons(elems);
 
-	// const userPosteStatus = document.querySelector(".user-poste-status");
+	const userPosteStatus = document.querySelector(".user-poste-status");
 
-	// if (userPosteStatus.innerText !== "Unavailable")
-	// {
-	// 	displayMessage("Start setInterval each minutes");
-	// 	setInterval(function() {
+	if (userPosteStatus.innerText !== "Unavailable")
+	{
+		displayMessage("Start setInterval each minutes");
+		setInterval(function() {
 
-	// 		var tmpHourDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone;
-	// 		var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + 1;
-	// 		// var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + 10;
+			var tmpHourDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone;
+			var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + 1;
+			// var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + 10;
 	
-	// 		var tmpHourGlobal = months[months.length - 1].nbHourDone;
-	// 		var tmpMinutesGlobal = months[months.length - 1].nbMinDone + 1;
-	// 		// var tmpMinutesGlobal = months[months.length - 1].nbMinDone + 10;
+			var tmpHourGlobal = months[months.length - 1].nbHourDone;
+			var tmpMinutesGlobal = months[months.length - 1].nbMinDone + 1;
+			// var tmpMinutesGlobal = months[months.length - 1].nbMinDone + 10;
 	
-	// 		if (tmpMinutesDay >= 60) {
-	// 			tmpMinutesDay = 0;
-	// 			tmpHourDay += 1;
-	// 		}
-	// 		if (tmpMinutesGlobal >= 60) {
-	// 			tmpMinutesGlobal = 0;
-	// 			tmpHourGlobal += 1;
-	// 		}
+			if (tmpMinutesDay >= 60) {
+				tmpMinutesDay = 0;
+				tmpHourDay += 1;
+			}
+			if (tmpMinutesGlobal >= 60) {
+				tmpMinutesGlobal = 0;
+				tmpHourGlobal += 1;
+			}
 
-	// 		popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone = parseInt(tmpHourDay);
-	// 		popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone = parseInt(tmpMinutesDay);
-	// 		months[months.length - 1].nbHourDone = parseInt(tmpHourGlobal);
-	// 		months[months.length - 1].nbMinDone = parseInt(tmpMinutesGlobal);
+			popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone = parseInt(tmpHourDay);
+			popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone = parseInt(tmpMinutesDay);
+			months[months.length - 1].nbHourDone = parseInt(tmpHourGlobal);
+			months[months.length - 1].nbMinDone = parseInt(tmpMinutesGlobal);
 
-	// 		if (months.indexArray == months.length - 1)
-	// 		{
-	// 			calculProgress(months[months.indexArray]);
-	// 			reGenerate(months[months.length - 1], elems);
-	// 			popup.calculDays(elems);
-	// 			popup.setAttributeDaySlide(elems);
-	// 			popup.setData(elems);
-	// 		}
-	// 	}, 60000);
-	// 	// }, 1000);
-	// }
+			if (months.indexArray == months.length - 1)
+			{
+				calculProgress(months[months.indexArray]);
+				reGenerate(months[months.length - 1], elems);
+				popup.calculDays(elems);
+				popup.setAttributeDaySlide(elems);
+				popup.setData(elems);
+			}
+		}, 60000);
+		// }, 1000);
+	}
 }
 
 function setRefreshInterval() {
