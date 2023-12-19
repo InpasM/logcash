@@ -1,6 +1,7 @@
 
 window.popup = window.popup || {};
 
+// add argument index month to calcul
 popup.calculDays = function(elems) {
 
 	const numberDayGraph = popup.months[popup.months.nbMonth - 1].arrayElems.length;
@@ -37,16 +38,20 @@ popup.calculDays = function(elems) {
 	for (var i = 0; i < numberDayGraph; i++)
 	{
 		popup.months[popup.months.nbMonth - 1].days[i].percentAdjust = popup.months[popup.months.nbMonth - 1].days[i].percentDay / biggestPercent;
-		elems.daySlides[i].style.height = popup.months[popup.months.nbMonth - 1].days[i].percentAdjust * 100 + "%";
+		console.log(elems.monthGraphs[popup.months.length - 1]);
+		// elems.daySlides[i].style.height = popup.months[popup.months.nbMonth - 1].days[i].percentAdjust * 100 + "%";
 	}
 }
 
-popup.setAttributeDaySlide = function(elems) {
+popup.setAttributeDaySlide = function(elems, indexMonth) {
 
-	for (var i = 0; i < elems.daySlideContainers.length; i++)
+	// for (var i = 0; i < elems.daySlideContainers.length; i++)
+	for (var i = 0; i < elems.monthGraphs[indexMonth].daySlideContainers.length; i++)
 	{
-		elems.daySlideContainers[i].setAttribute("date", popup.months[popup.months.nbMonth - 1].days[i].dayDate);
-		elems.daySlideContainers[i].setAttribute("salary", popup.months[popup.months.nbMonth - 1].days[i].cashEarn.toFixed(2));
+		// elems.daySlideContainers[i].setAttribute("date", popup.months[popup.months.nbMonth - 1].days[i].dayDate);
+		// elems.daySlideContainers[i].setAttribute("salary", popup.months[popup.months.nbMonth - 1].days[i].cashEarn.toFixed(2));
+		// elems.monthGraphs[indexMonth].daySlideContainers[i].setAttribute("date", popup.months[indexMonth].days[i].dayDate);
+		// elems.monthGraphs[indexMonth].daySlideContainers[i].setAttribute("salary", popup.months[indexMonth].days[i].cashEarn.toFixed(2));
 	}
 }
 
@@ -327,37 +332,43 @@ popup.createElems = function(elems) {
 
 	elems.lineGraph = document.createElement("div");
 	elems.lineGraph.className = "line-graph";
-	elems.salaryGraphContainer.appendChild(elems.lineGraph);
 
-	elems.dayGraphs = [];
-	elems.daySlideContainers = [];
-	elems.daySlides = [];
-	elems.dayBases = [];
-
-	const numberDayGraph = popup.months[popup.months.nbMonth - 1].arrayElems.length;
-	var monthHourDone = popup.months[popup.months.nbMonth - 1].nbHourDone + (popup.months[popup.months.nbMonth - 1].nbMinDone / 60);
-	var monthHourRequired = popup.months[popup.months.nbMonth - 1].nbHourReq;
-	var biggestPercent = 0
-
-	for (var i = 0; i < numberDayGraph; i++)
+	elems.monthGraphs = [];
+	for (var j = 0; j < popup.months.length; j++)
 	{
-		elems.dayGraphs.push(document.createElement("div"));
-		elems.dayGraphs[i].className = "day-graph";
-		elems.daySlideContainers.push(document.createElement("div"));
-		elems.daySlideContainers[i].className = "day-slide-container";
-		elems.daySlides.push(document.createElement("div"));
-		elems.daySlides[i].className = "day-slide";
-		elems.dayBases.push(document.createElement("div"));
-		elems.dayBases[i].className = "day-base";
-
-		elems.daySlideContainers[i].appendChild(elems.daySlides[i]);
-
-		elems.dayGraphs[i].appendChild(elems.daySlideContainers[i]);
-		elems.dayGraphs[i].appendChild(elems.dayBases[i]);
-
-		elems.lineGraph.appendChild(elems.dayGraphs[i]);
+		const numberDayGraph = popup.months[j].arrayElems.length;
+		var tmpDay = {
+			dayGraphs: [],
+			daySlideContainers: [],
+			daySlides: [],
+			dayBases: []
+		}
+		// elems.dayGraphs = [];
+		// elems.daySlideContainers = [];
+		// elems.daySlides = [];
+		// elems.dayBases = [];
+	
+		for (var i = 0; i < numberDayGraph; i++)
+		{
+			tmpDay.dayGraphs.push(document.createElement("div"));
+			tmpDay.dayGraphs[i].className = "day-graph";
+			tmpDay.daySlideContainers.push(document.createElement("div"));
+			tmpDay.daySlideContainers[i].className = "day-slide-container";
+			tmpDay.daySlides.push(document.createElement("div"));
+			tmpDay.daySlides[i].className = "day-slide";
+			tmpDay.dayBases.push(document.createElement("div"));
+			tmpDay.dayBases[i].className = "day-base";
+	
+			tmpDay.daySlideContainers[i].appendChild(tmpDay.daySlides[i]);
+	
+			tmpDay.dayGraphs[i].appendChild(tmpDay.daySlideContainers[i]);
+			tmpDay.dayGraphs[i].appendChild(tmpDay.dayBases[i]);
+	
+			// elems.lineGraph.appendChild(tmpDay.dayGraphs[i]);
+		}
+		elems.monthGraphs.push(tmpDay);
 	}
-
+	elems.salaryGraphContainer.appendChild(elems.lineGraph);
 
 	popup.calculDays(elems);
 
@@ -376,35 +387,36 @@ popup.createElems = function(elems) {
 
 	document.body.appendChild(elems.tooltipSalary);
 
-	popup.setAttributeDaySlide(elems);
+	for (var i = 0; i < popup.months.length; i++)
+		popup.setAttributeDaySlide(elems, i);
 
-	for (var i = 0; i < elems.daySlideContainers.length; i++)
-	{
-		elems.daySlideContainers[i].addEventListener("mouseover", function(e) {
+	// for (var i = 0; i < elems.monthGraphs[popup.months.length].daySlideContainers.length; i++)
+	// {
+		// elems.daySlideContainers[i].addEventListener("mouseover", function(e) {
 
-			elemRect = e.target.getBoundingClientRect();
-			var tmpBase = e.target.nextSibling.getBoundingClientRect();
+		// 	elemRect = e.target.getBoundingClientRect();
+		// 	var tmpBase = e.target.nextSibling.getBoundingClientRect();
 
-			elems.tooltipTopText.innerText = e.target.getAttribute("date");
-			elems.tooltipBottomText.innerText = e.target.getAttribute("salary") + "€";
+		// 	elems.tooltipTopText.innerText = e.target.getAttribute("date");
+		// 	elems.tooltipBottomText.innerText = e.target.getAttribute("salary") + "€";
 
-			offsetLeft = elemRect.left - elemRect.width;
+		// 	offsetLeft = elemRect.left - elemRect.width;
 
-			// newOffsetTop = elemRect.top - 21;	// hover on top of element
-			newOffsetTop = tmpBase.top + tmpBase.height * 2 + window.scrollY;	// hover at bottom of element
+		// 	// newOffsetTop = elemRect.top - 21;	// hover on top of element
+		// 	newOffsetTop = tmpBase.top + tmpBase.height * 2 + window.scrollY;	// hover at bottom of element
 
-			elems.tooltipSalary.style.opacity = "1";
-			elems.tooltipSalary.style.top = newOffsetTop + "px";
-			elems.tooltipSalary.style.left = offsetLeft + "px";
+		// 	elems.tooltipSalary.style.opacity = "1";
+		// 	elems.tooltipSalary.style.top = newOffsetTop + "px";
+		// 	elems.tooltipSalary.style.left = offsetLeft + "px";
 
-			e.target.firstElementChild.style.backgroundColor = "rgba(0, 186, 188, 0.80)";
-		});
+		// 	e.target.firstElementChild.style.backgroundColor = "rgba(0, 186, 188, 0.80)";
+		// });
 
-		elems.daySlideContainers[i].addEventListener("mouseout", function(e) {
-			e.target.firstElementChild.style.backgroundColor = "rgba(0, 186, 188, 0.40)";
-			elems.tooltipSalary.style.opacity = "0";
-		});
-	}
+		// elems.daySlideContainers[i].addEventListener("mouseout", function(e) {
+		// 	e.target.firstElementChild.style.backgroundColor = "rgba(0, 186, 188, 0.40)";
+		// 	elems.tooltipSalary.style.opacity = "0";
+		// });
+	// }
 
 
 	//////////////////////////////////////////////////////////////////////  PROGRESS CONTAINER
@@ -1068,7 +1080,7 @@ popup.initPopup = function(elems, months) {
 		}
 		popup.setData(elems);
 		popup.calculDays(elems);
-		popup.setAttributeDaySlide(elems);
+		popup.setAttributeDaySlide(elems, popup.months.indexArray);
 	});
 
 	elems.inputDeducted.addEventListener("blur", function(e) {
