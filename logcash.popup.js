@@ -38,7 +38,7 @@ popup.calculDays = function(elems) {
 	for (var i = 0; i < numberDayGraph; i++)
 	{
 		popup.months[popup.months.nbMonth - 1].days[i].percentAdjust = popup.months[popup.months.nbMonth - 1].days[i].percentDay / biggestPercent;
-		console.log(elems.monthGraphs[popup.months.length - 1]);
+		// console.log(elems.monthGraphs[popup.months.length - 1]);
 		// elems.daySlides[i].style.height = popup.months[popup.months.nbMonth - 1].days[i].percentAdjust * 100 + "%";
 	}
 }
@@ -330,10 +330,8 @@ popup.createElems = function(elems) {
 
 	elems.salaryContainer.appendChild(elems.salaryGraphContainer);
 
-	elems.lineGraph = document.createElement("div");
-	elems.lineGraph.className = "line-graph";
-
 	elems.monthGraphs = [];
+	elems.lineGraphs = [];
 	for (var j = 0; j < popup.months.length; j++)
 	{
 		const numberDayGraph = popup.months[j].arrayElems.length;
@@ -342,11 +340,9 @@ popup.createElems = function(elems) {
 			daySlideContainers: [],
 			daySlides: [],
 			dayBases: []
-		}
-		// elems.dayGraphs = [];
-		// elems.daySlideContainers = [];
-		// elems.daySlides = [];
-		// elems.dayBases = [];
+		};
+		elems.lineGraphs.push(document.createElement("div"));
+		elems.lineGraphs[j].className = "line-graph";
 	
 		for (var i = 0; i < numberDayGraph; i++)
 		{
@@ -363,12 +359,14 @@ popup.createElems = function(elems) {
 	
 			tmpDay.dayGraphs[i].appendChild(tmpDay.daySlideContainers[i]);
 			tmpDay.dayGraphs[i].appendChild(tmpDay.dayBases[i]);
-	
-			// elems.lineGraph.appendChild(tmpDay.dayGraphs[i]);
+
+			elems.lineGraphs[j].appendChild(tmpDay.dayGraphs[i]);
 		}
 		elems.monthGraphs.push(tmpDay);
+		elems.salaryGraphContainer.appendChild(elems.lineGraphs[j]);
 	}
-	elems.salaryGraphContainer.appendChild(elems.lineGraph);
+	
+	elems.lineGraphs[popup.months.length - 1].style.display = "flex";
 
 	popup.calculDays(elems);
 

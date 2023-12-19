@@ -149,6 +149,10 @@ function clickMonth(e) {
 	for (var i = 0; i < elems.monthBlock.length; i++)
 		elems.monthBlock[i].style.display = "none";
 	elems.monthBlock[id].style.display = "block";
+	// elems.lineGraphs[popup.months.length - 1]
+	for (var i = 0; i < elems.lineGraphs.length; i++)
+		elems.lineGraphs[i].style.display = "none";
+	elems.lineGraphs[id].style.display = "flex";
 
 	for (var i = 0; i < months.nbMonth; i++)
 	{
