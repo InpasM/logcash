@@ -2,18 +2,19 @@
 window.popup = window.popup || {};
 
 // add argument index month to calcul
-popup.calculDays = function(elems) {
+popup.calculDays = function(elems, index) {
 
-	const numberDayGraph = popup.months[popup.months.nbMonth - 1].arrayElems.length;
+	// const numberDayGraph = popup.months[popup.months.nbMonth - 1].arrayElems.length;
+	const numberDayGraph = popup.months[index].arrayElems.length;
 
 	var biggestPercent = 0
 	for (var i = 0; i < numberDayGraph; i++)
 	{
-		var newDayHourDone = popup.months[popup.months.nbMonth - 1].days[i].hourDone + (popup.months[popup.months.nbMonth - 1].days[i].minuteDone / 60);
+		var newDayHourDone = popup.months[index].days[i].hourDone + (popup.months[index].days[i].minuteDone / 60);
 		var ratioDone = 0;
 		var percentDay = 0;
-		var monthHourDone = popup.months[popup.months.nbMonth - 1].nbHourDone + (popup.months[popup.months.nbMonth - 1].nbMinDone / 60);
-		var monthHourRequired = popup.months[popup.months.nbMonth - 1].nbHourReq;
+		var monthHourDone = popup.months[index].nbHourDone + (popup.months[index].nbMinDone / 60);
+		var monthHourRequired = popup.months[index].nbHourReq;
 
 		if (newDayHourDone > 0)
 		{
@@ -23,13 +24,13 @@ popup.calculDays = function(elems) {
 				ratioDone = newDayHourDone / monthHourRequired;
 			percentDay = newDayHourDone / monthHourDone;
 		}
-		popup.months[popup.months.nbMonth - 1].days[i].ratioDone = ratioDone;
-		popup.months[popup.months.nbMonth - 1].days[i].percentDay = percentDay;
+		popup.months[index].days[i].ratioDone = ratioDone;
+		popup.months[index].days[i].percentDay = percentDay;
 
-		if (ratioDone === 0 || data.student.months[popup.months.nbMonth - 1].salary === 0)
-			popup.months[popup.months.nbMonth - 1].days[i].cashEarn = 0;
+		if (ratioDone === 0 || data.student.months[index].salary === 0)
+			popup.months[index].days[i].cashEarn = 0;
 		else
-			popup.months[popup.months.nbMonth - 1].days[i].cashEarn = ratioDone * data.student.months[popup.months.nbMonth - 1].salary;
+			popup.months[index].days[i].cashEarn = ratioDone * data.student.months[index].salary;
 
 		if (percentDay > biggestPercent)
 			biggestPercent = percentDay;
@@ -37,21 +38,17 @@ popup.calculDays = function(elems) {
 
 	for (var i = 0; i < numberDayGraph; i++)
 	{
-		popup.months[popup.months.nbMonth - 1].days[i].percentAdjust = popup.months[popup.months.nbMonth - 1].days[i].percentDay / biggestPercent;
-		// console.log(elems.monthGraphs[popup.months.length - 1]);
-		// elems.daySlides[i].style.height = popup.months[popup.months.nbMonth - 1].days[i].percentAdjust * 100 + "%";
+		popup.months[index].days[i].percentAdjust = popup.months[index].days[i].percentDay / biggestPercent;
+		elems.monthGraphs[index].daySlides[i].style.height = popup.months[index].days[i].percentAdjust * 100 + "%";
 	}
 }
 
 popup.setAttributeDaySlide = function(elems, indexMonth) {
 
-	// for (var i = 0; i < elems.daySlideContainers.length; i++)
 	for (var i = 0; i < elems.monthGraphs[indexMonth].daySlideContainers.length; i++)
 	{
-		// elems.daySlideContainers[i].setAttribute("date", popup.months[popup.months.nbMonth - 1].days[i].dayDate);
-		// elems.daySlideContainers[i].setAttribute("salary", popup.months[popup.months.nbMonth - 1].days[i].cashEarn.toFixed(2));
-		// elems.monthGraphs[indexMonth].daySlideContainers[i].setAttribute("date", popup.months[indexMonth].days[i].dayDate);
-		// elems.monthGraphs[indexMonth].daySlideContainers[i].setAttribute("salary", popup.months[indexMonth].days[i].cashEarn.toFixed(2));
+		elems.monthGraphs[indexMonth].daySlideContainers[i].setAttribute("date", popup.months[indexMonth].days[i].dayDate);
+		elems.monthGraphs[indexMonth].daySlideContainers[i].setAttribute("salary", popup.months[indexMonth].days[i].cashEarn.toFixed(2));
 	}
 }
 
@@ -368,7 +365,8 @@ popup.createElems = function(elems) {
 	
 	elems.lineGraphs[popup.months.length - 1].style.display = "flex";
 
-	popup.calculDays(elems);
+	for (var i = 0; i < popup.months.length; i++)
+		popup.calculDays(elems, i);
 
 	elems.tooltipSalary = document.createElement("div");
 	elems.tooltipSalary.className = "tooltip-salary";
@@ -388,33 +386,36 @@ popup.createElems = function(elems) {
 	for (var i = 0; i < popup.months.length; i++)
 		popup.setAttributeDaySlide(elems, i);
 
-	// for (var i = 0; i < elems.monthGraphs[popup.months.length].daySlideContainers.length; i++)
-	// {
-		// elems.daySlideContainers[i].addEventListener("mouseover", function(e) {
-
-		// 	elemRect = e.target.getBoundingClientRect();
-		// 	var tmpBase = e.target.nextSibling.getBoundingClientRect();
-
-		// 	elems.tooltipTopText.innerText = e.target.getAttribute("date");
-		// 	elems.tooltipBottomText.innerText = e.target.getAttribute("salary") + "€";
-
-		// 	offsetLeft = elemRect.left - elemRect.width;
-
-		// 	// newOffsetTop = elemRect.top - 21;	// hover on top of element
-		// 	newOffsetTop = tmpBase.top + tmpBase.height * 2 + window.scrollY;	// hover at bottom of element
-
-		// 	elems.tooltipSalary.style.opacity = "1";
-		// 	elems.tooltipSalary.style.top = newOffsetTop + "px";
-		// 	elems.tooltipSalary.style.left = offsetLeft + "px";
-
-		// 	e.target.firstElementChild.style.backgroundColor = "rgba(0, 186, 188, 0.80)";
-		// });
-
-		// elems.daySlideContainers[i].addEventListener("mouseout", function(e) {
-		// 	e.target.firstElementChild.style.backgroundColor = "rgba(0, 186, 188, 0.40)";
-		// 	elems.tooltipSalary.style.opacity = "0";
-		// });
-	// }
+	for (var j = 0; j < elems.monthGraphs.length; j++)
+	{
+		for (var i = 0; i < elems.monthGraphs[j].daySlideContainers.length; i++)
+		{
+			elems.monthGraphs[j].daySlideContainers[i].addEventListener("mouseover", function(e) {
+	
+				elemRect = e.target.getBoundingClientRect();
+				var tmpBase = e.target.nextSibling.getBoundingClientRect();
+	
+				elems.tooltipTopText.innerText = e.target.getAttribute("date");
+				elems.tooltipBottomText.innerText = e.target.getAttribute("salary") + "€";
+	
+				offsetLeft = elemRect.left - elemRect.width;
+	
+				// newOffsetTop = elemRect.top - 21;	// hover on top of element
+				newOffsetTop = tmpBase.top + tmpBase.height * 2 + window.scrollY;	// hover at bottom of element
+	
+				elems.tooltipSalary.style.opacity = "1";
+				elems.tooltipSalary.style.top = newOffsetTop + "px";
+				elems.tooltipSalary.style.left = offsetLeft + "px";
+	
+				e.target.firstElementChild.style.backgroundColor = "rgba(0, 186, 188, 0.80)";
+			});
+	
+			elems.monthGraphs[j].daySlideContainers[i].addEventListener("mouseout", function(e) {
+				e.target.firstElementChild.style.backgroundColor = "rgba(0, 186, 188, 0.40)";
+				elems.tooltipSalary.style.opacity = "0";
+			});
+		}
+	}
 
 
 	//////////////////////////////////////////////////////////////////////  PROGRESS CONTAINER
@@ -1077,7 +1078,7 @@ popup.initPopup = function(elems, months) {
 				data.updateLocalStorage();
 		}
 		popup.setData(elems);
-		popup.calculDays(elems);
+		popup.calculDays(elems, popup.months.indexArray);
 		popup.setAttributeDaySlide(elems, popup.months.indexArray);
 	});
 
