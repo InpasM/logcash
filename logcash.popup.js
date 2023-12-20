@@ -253,30 +253,6 @@ popup.createElems = function(elems) {
 	elems.salaryCircleContainer = document.createElement("div");
 	elems.salaryCircleContainer.className = "salary-circle-container";
 
-	// elems.thisButtonMonth = document.createElement("div");
-	// elems.thisButtonMonth.className = "this-button";
-	// elems.thisButtonMonth.innerText = "Month";
-	// elems.thisButtonMonth.style.marginRight = "6px";
-	// elems.thisButtonWeek = document.createElement("div");
-	// elems.thisButtonWeek.className = "this-button";
-	// elems.thisButtonWeek.innerText = "Week";
-
-	// if (data.student.whichHabit === 1)
-	// 	elems.thisButtonWeek.className += " selected";
-	// else if (data.student.whichHabit === 2)
-	// 	elems.thisButtonMonth.className += " selected";
-
-	// elems.thisButtonMonth.addEventListener("click", function(e) {
-	// 	switchHabitContainer(2);
-	// });
-
-	// elems.thisButtonWeek.addEventListener("click", function(e) {
-	// 	switchHabitContainer(1);
-	// });
-
-	// elems.lineThisSelection.appendChild(elems.thisButtonMonth);
-	// elems.lineThisSelection.appendChild(elems.thisButtonWeek);
-
 	elems.salaryCircle = document.createElement("div");
 	elems.salaryCircle.className = "salary-circle";
 	elems.salaryInfoContainer = document.createElement("div");
