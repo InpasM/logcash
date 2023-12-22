@@ -167,6 +167,50 @@ popup.createElems = function(elems) {
 	elems.monthLineDayName = document.createElement("div");
 	elems.monthLineDayName.className = "days-name-line";
 
+	function selectAllSameDay(e) {
+
+		if (popup.months.indexArray === popup.months.length - 1)
+		{
+			// console.log(popup.numberDay);
+			// console.log(e.target.id);
+			// console.log(elems.monthArray[popup.months.indexArray].checkboxes[0].getAttribute("indexday"));
+
+			var allTrue = true;
+			var allFalse = true;
+
+			for (var i = popup.numberDay - 1; i < elems.monthArray[popup.months.indexArray].checkboxes.length; i++)
+			{
+				if (elems.monthArray[popup.months.indexArray].checkboxes[i].getAttribute("indexday") === e.target.id)
+				{
+					if (data.student.monthlyHabit[i])
+					{
+						allFalse = false;
+					}
+					else
+					{
+						allTrue = false;
+					}
+					// console.log(popup.months[popup.months.indexArray].actualDay);
+					// console.log(elems.monthArray[popup.months.indexArray].checkboxes[i].id);
+					// console.log(data.student.monthlyHabit[i]);
+	
+				}
+			}
+			if (allTrue)
+			{
+				console.log("deselecting all days");
+			}
+			else if (allFalse)
+			{
+				console.log("selecting all days");
+			}
+			else
+			{
+				console.log("selecting false day");
+			}
+		}
+	}
+
 	const arrayDaysName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 	for (var i = 0; i < 7; i++)
 	{
@@ -174,6 +218,7 @@ popup.createElems = function(elems) {
 		elems.monthDayBoxes[i].className = "days-name-box";
 		elems.monthDayBoxes[i].id = i;
 		elems.monthDayBoxes[i].innerText = arrayDaysName[i];
+		elems.monthDayBoxes[i].addEventListener("click", selectAllSameDay);
 		elems.monthLineDayName.appendChild(elems.monthDayBoxes[i]);
 	}
 	elems.monthContainer.appendChild(elems.monthLineDayName);
@@ -200,6 +245,10 @@ popup.createElems = function(elems) {
 				var tmpDay = document.createElement("div");
 	
 				tmpDay.id = ++indexMonth;
+				tmpDay.setAttribute("indexday", popup.months[k].days[indexMonth - 1].dayNumber);
+
+				// console.log("month " + indexMonth);
+				// console.log(popup.months[k].days[indexMonth - 1].dayNumber);
 				tmpDay.innerText = indexMonth;
 				tmpDay.className = "checkbox-habit";
 				if (indexMonth < popup.numberDay || k != popup.months.length - 1)

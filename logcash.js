@@ -648,8 +648,8 @@ async function initLogcash()
 			{
 				calculProgress(months[months.indexArray]);
 				reGenerate(months[months.length - 1], elems);
-				popup.calculDays(elems);
-				popup.setAttributeDaySlide(elems);
+				popup.calculDays(elems, months.indexArray);
+				popup.setAttributeDaySlide(elems, months.indexArray);
 				popup.setData(elems);
 			}
 		}, 60000);
