@@ -10,6 +10,7 @@ function initContainerLogcash(elems) {
 	elems.containerLogcash.className = "container-logcash";
 	elems.containerLogcash.style.display = "flex";
 	elems.containerLogcash.style.alignItems = "center";
+	elems.containerLogcash.style.marginTop = "4px";
 
 	elems.containerDivMonth = document.createElement("div");
 	elems.containerDivMonth.style.display = "flex";

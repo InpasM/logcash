@@ -128,39 +128,77 @@ popup.createElems = function(elems) {
 
 	elems.inputContainerSalary = document.createElement("div");
 	elems.inputContainerSalary.className = "pop-input-container";
-	elems.inputContainerSalary.style.marginRight = "7px";			/// STYLE
+	elems.inputContainerSalary.style.marginRight = "8px";			/// STYLE
+	elems.inputContainerSalary.addEventListener("mouseenter", mouseoverInfoContainer);
+	elems.inputContainerSalary.addEventListener("mouseleave", mouseoutInfoContainer); 
+
+	// lineLabelSalary
+	// lineLabelHours
+	elems.lineLabelSalary = document.createElement("div");
+	elems.lineLabelSalary.className = "line-label";
+	
+	elems.labelSalary = document.createElement("p");
+	elems.labelSalary.className = "small-title-info";
+	elems.labelSalary.innerText = "Your salary";
+
+	elems.questionSalary = document.createElement("div");
+	elems.questionSalary.className = "question-logo";
+
+	elems.lineLabelSalary.appendChild(elems.labelSalary);
+	elems.lineLabelSalary.appendChild(elems.questionSalary);
 
 	elems.inputSalary = document.createElement("input");
-	elems.inputSalary.className = "inputText";
+	elems.inputSalary.className = "input-text";
 	elems.inputSalary.type = "text";
 	elems.inputSalary.setAttribute('required', '');
 
-	elems.labelSalary = document.createElement("span");
-	elems.labelSalary.className = "label-input";
-	elems.labelSalary.innerText = "Your salary";
-	
+
 	elems.inputContainerHours = document.createElement("div");
 	elems.inputContainerHours.className = "pop-input-container";
-	elems.inputContainerHours.style.backgroundColor = "#373c48";			/// STYLE
+	elems.inputContainerHours.addEventListener("mouseenter", mouseoverInfoContainer);
+	elems.inputContainerHours.addEventListener("mouseleave", mouseoutInfoContainer);
+
+	elems.lineLabelHours = document.createElement("div");
+	elems.lineLabelHours.className = "line-label";
+
+	elems.labelHours = document.createElement("p");
+	elems.labelHours.className = "small-title-info";
+	elems.labelHours.innerText = "Hours Deduc."; // before Hours Deducted
+
+	elems.questionHours = document.createElement("div");
+	elems.questionHours.className = "question-logo";
+
+	elems.lineLabelHours.appendChild(elems.labelHours);
+	elems.lineLabelHours.appendChild(elems.questionHours);
 
 	elems.inputDeducted = document.createElement("input");
-	elems.inputDeducted.className = "inputText";
+	elems.inputDeducted.className = "input-text";
 	elems.inputDeducted.type = "text";
 	elems.inputDeducted.setAttribute('required', '');
 
-	elems.labelHours = document.createElement("span");
-	elems.labelHours.className = "label-input";
-	elems.labelHours.innerText = "Hours Deducted";
 
 	elems.habitContainer = document.createElement("div");
 	elems.habitContainer.className = "habit-container";
-	elems.weeklySpan = document.createElement("span");
+	elems.habitContainer.addEventListener("mouseenter", mouseoverInfoContainer);
+	elems.habitContainer.addEventListener("mouseleave", mouseoutInfoContainer);
+
+	elems.lineLabelHabit = document.createElement("div");
+	elems.lineLabelHabit.className = "line-label";
+
+	elems.weeklySpan = document.createElement("p");
+	elems.weeklySpan.className = "main-title-info";
 	elems.weeklySpan.innerText = "Monthly Attendance";
+
+	elems.questionHabit = document.createElement("div");
+	elems.questionHabit.className = "question-logo";
 	
 	elems.monthContainer = document.createElement("div");
 	elems.monthContainer.className = "month-container";
 	
-	elems.habitContainer.appendChild(elems.weeklySpan);
+	elems.lineLabelHabit.appendChild(elems.weeklySpan);
+	elems.lineLabelHabit.appendChild(elems.questionHabit);
+
+	elems.habitContainer.appendChild(elems.lineLabelHabit);
 	elems.habitContainer.appendChild(elems.monthContainer);
 
 	elems.monthDayBoxes = [];
@@ -283,16 +321,42 @@ popup.createElems = function(elems) {
 	elems.monthBlock[popup.months.length - 1].style.display = "block";
 
 
+	function mouseoverInfoContainer(e) {
+
+		e.target.style.backgroundColor = "red";
+		console.log(e.target.firstElementChild );
+	}
+
+	function mouseoutInfoContainer(e) {
+
+		e.target.style.backgroundColor = "";
+	}
+
+
 	//////////////////////////////////////////////////////////////////////  MIDDLE RIGHT DIV
 	elems.popMiddleDivRight = document.createElement("div");
 	elems.popMiddleDivRight.className = "pop-middle-div-right";
 
 	elems.salaryContainer = document.createElement("div");
 	elems.salaryContainer.className = "salary-container";
+	elems.salaryContainer.addEventListener("mouseenter", mouseoverInfoContainer);
+	elems.salaryContainer.addEventListener("mouseleave", mouseoutInfoContainer);
 
 	elems.mainTitleInfo = document.createElement("p");
 	elems.mainTitleInfo.className = "main-title-info";
 	elems.mainTitleInfo.innerText = "Earned";
+
+
+	elems.lineLabelEarn = document.createElement("div");
+	elems.lineLabelEarn.className = "line-label";
+
+	elems.questionEarn = document.createElement("div");
+	elems.questionEarn.className = "question-logo";
+
+	elems.lineLabelEarn.appendChild(elems.mainTitleInfo);
+	elems.lineLabelEarn.appendChild(elems.questionEarn);
+
+
 	elems.lineThisSelection = document.createElement("div");
 	elems.lineThisSelection.className = "line-this-selection";
 	elems.salaryCircleContainer = document.createElement("div");
@@ -336,7 +400,7 @@ popup.createElems = function(elems) {
 
 	elems.salaryPercentLine.appendChild(elems.salaryPercent);
 
-	elems.salaryContainer.appendChild(elems.mainTitleInfo);
+	elems.salaryContainer.appendChild(elems.lineLabelEarn);
 	elems.salaryContainer.appendChild(elems.lineThisSelection);
 	elems.salaryContainer.appendChild(elems.salaryCircleContainer);
 	elems.popMiddleDivRight.appendChild(elems.salaryContainer);
@@ -443,8 +507,10 @@ popup.createElems = function(elems) {
 	elems.popProgressContainer = document.createElement("div");
 	elems.popProgressContainer.className = "pop-progress-container";
 
-	elems.popProgressTitle = document.createElement("span");
-	elems.popProgressTitle.className = "pop-title-container";
+	// elems.popProgressTitle = document.createElement("span");
+	// elems.popProgressTitle.className = "pop-title-container";
+	elems.popProgressTitle = document.createElement("p");
+	elems.popProgressTitle.className = "main-title-info";
 	elems.popProgressTitle.innerText = "Hours Done";
 
 	// elems.containerDivMonth.style.display = "none";
@@ -772,10 +838,12 @@ popup.createElems = function(elems) {
 	elems.middleLine1.appendChild(elems.inputContainerSalary);
 	elems.middleLine1.appendChild(elems.inputContainerHours);
 	
-	elems.inputContainerSalary.appendChild(elems.labelSalary);
+	// elems.inputContainerSalary.appendChild(elems.labelSalary);
+	elems.inputContainerSalary.appendChild(elems.lineLabelSalary);
 	elems.inputContainerSalary.appendChild(elems.inputSalary);
 	
-	elems.inputContainerHours.appendChild(elems.labelHours);
+	// elems.inputContainerHours.appendChild(elems.labelHours);
+	elems.inputContainerHours.appendChild(elems.lineLabelHours);
 	elems.inputContainerHours.appendChild(elems.inputDeducted);
 
 	elems.middleLine2.appendChild(elems.habitContainer);
