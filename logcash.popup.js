@@ -167,47 +167,43 @@ popup.createElems = function(elems) {
 	elems.monthLineDayName = document.createElement("div");
 	elems.monthLineDayName.className = "days-name-line";
 
+	function triggerSelect(id, conditionBool, newBool, borderColor) {
+
+		for (var i = popup.numberDay - 1; i < elems.monthArray[popup.months.indexArray].checkboxes.length; i++)
+		{
+			if (elems.monthArray[popup.months.indexArray].checkboxes[i].getAttribute("indexday") === id)
+			{
+				if (data.student.monthlyHabit[i] === conditionBool)
+				{
+					update = true;
+					data.student.monthlyHabit[i] = newBool;
+					elems.monthArray[popup.months.indexArray].checkboxes[i].style.borderColor = borderColor;
+				}
+			}
+		}
+		if (data.isHomePage === -1 && update)
+			data.updateLocalStorage();
+		popup.setData(elems);
+	}
+
 	function selectAllSameDay(e) {
 
 		if (popup.months.indexArray === popup.months.length - 1)
 		{
-			// console.log(popup.numberDay);
-			// console.log(e.target.id);
-			// console.log(elems.monthArray[popup.months.indexArray].checkboxes[0].getAttribute("indexday"));
-
-			var allTrue = true;
-			var allFalse = true;
+			var allTrue = true, update = false;
 
 			for (var i = popup.numberDay - 1; i < elems.monthArray[popup.months.indexArray].checkboxes.length; i++)
 			{
 				if (elems.monthArray[popup.months.indexArray].checkboxes[i].getAttribute("indexday") === e.target.id)
 				{
-					if (data.student.monthlyHabit[i])
-					{
-						allFalse = false;
-					}
-					else
-					{
+					if (!data.student.monthlyHabit[i])
 						allTrue = false;
-					}
-					// console.log(popup.months[popup.months.indexArray].actualDay);
-					// console.log(elems.monthArray[popup.months.indexArray].checkboxes[i].id);
-					// console.log(data.student.monthlyHabit[i]);
-	
 				}
 			}
 			if (allTrue)
-			{
-				console.log("deselecting all days");
-			}
-			else if (allFalse)
-			{
-				console.log("selecting all days");
-			}
+				triggerSelect(e.target.id, true, false, "rgb(45, 49, 60)");
 			else
-			{
-				console.log("selecting false day");
-			}
+				triggerSelect(e.target.id, false, true, "rgb(0, 186, 188)");
 		}
 	}
 
@@ -512,7 +508,7 @@ popup.createElems = function(elems) {
 
 	elems.mainTitleBoost = document.createElement("p");
 	elems.mainTitleBoost.className = "main-title-info";
-	elems.mainTitleBoost.innerText = "Add Boost Lock";
+	elems.mainTitleBoost.innerText = "Boost Lock";
 
 	elems.lineResultsBoost = document.createElement("div");
 	elems.lineResultsBoost.className = "line-results";
