@@ -141,7 +141,7 @@ function mOutMonth(e) {
 
 function clickMonth(e) {
 
-	var id = e.target.id;
+	var id = parseInt(e.target.id);
 
 	for (var i = 0; i < elems.monthBlock.length; i++)
 		elems.monthBlock[i].style.display = "none";
@@ -158,6 +158,26 @@ function clickMonth(e) {
 	months.indexArray = parseInt(e.target.id);
 	elems.divMonths[months.indexArray].style.backgroundColor = "white";
 	elems.divMonths[months.indexArray].style.color = "#191919";
+
+	function setDayNameEvent(value) {
+
+		for (var i = 0; i < elems.monthDayBoxes.length; i++)
+		{
+			elems.monthDayBoxes[i].style.pointerEvents = value;
+		}
+	}
+
+	// make event clickable for day name when on actual month
+	if (id === months.length - 1)
+	{
+		console.log("actual month");
+		setDayNameEvent("auto");
+	}
+	else
+	{
+		console.log("other month");
+		setDayNameEvent("none");
+	}
 
 	reGenerate(months[months.indexArray], elems);
 	popup.setData(elems);
@@ -477,31 +497,10 @@ function mouseoutProgress() {
 	}, 800);
 }
 
-function initButtons(elems)
-{
-	// elems.divMonths = document.querySelectorAll(".div-month");
-	// elems.textMonths = document.querySelectorAll(".text-month");
-
-	// if (data.student)
-	// {
-	// 	elems.rowProgress.addEventListener("mouseover", mouseoverProgress)
-	// 	elems.rowProgress.addEventListener("mouseout", mouseoutProgress)
-	// }
-
-	// elems.sideRemaining.addEventListener("mouseover", function() {
-	// 	elems.sideRemaining.style.backgroundColor = "rgb(35, 39, 46)";
-	// });
-	// elems.sideRemaining.addEventListener("mouseout", function() {
-	// 	elems.sideRemaining.style.backgroundColor = "";
-	// });
-	// elems.sideRemaining.addEventListener("click", clickRemaining);
-	// popup.initPopup(elems);
+function initButtons(elems) {
 
 	for (var i = 0; i < months.nbMonth; i++)
 	{
-		// elems.textMonths[i].addEventListener("mouseover", mOverMonth);
-		// elems.textMonths[i].addEventListener("mouseout", mOutMonth);
-		// elems.textMonths[i].addEventListener("click", clickMonth);
 		elems.divMonths[i].addEventListener("mouseover", mOverMonth);
 		elems.divMonths[i].addEventListener("mouseout", mOutMonth);
 		elems.divMonths[i].addEventListener("click", clickMonth);
