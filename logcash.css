@@ -721,11 +721,11 @@ body
 	background-color: rgb(210, 210, 210);
 	background-image: url("icons/question-1.svg");
 	aspect-ratio: 1/1;
-	margin-left: 4px;
+	margin-left: 6px;
 	height: 11px;
 	background-size: contain;
 	background-repeat: no-repeat;
-	/* opacity: 0; */
+	opacity: 0;
 	border-radius: 50%;
 	transition: 0.4s ease opacity;
 }

@@ -129,8 +129,8 @@ popup.createElems = function(elems) {
 	elems.inputContainerSalary = document.createElement("div");
 	elems.inputContainerSalary.className = "pop-input-container";
 	elems.inputContainerSalary.style.marginRight = "8px";			/// STYLE
-	elems.inputContainerSalary.addEventListener("mouseenter", mouseoverInfoContainer);
-	elems.inputContainerSalary.addEventListener("mouseleave", mouseoutInfoContainer); 
+	// elems.inputContainerSalary.addEventListener("mouseenter", mouseoverInfoContainer);
+	// elems.inputContainerSalary.addEventListener("mouseleave", mouseoutInfoContainer); 
 
 	// lineLabelSalary
 	// lineLabelHours
@@ -323,13 +323,15 @@ popup.createElems = function(elems) {
 
 	function mouseoverInfoContainer(e) {
 
-		e.target.style.backgroundColor = "red";
-		console.log(e.target.firstElementChild );
+		// e.target.style.backgroundColor = "red";
+		console.log(e.target.firstElementChild.lastElementChild);
+		e.target.firstElementChild.lastElementChild.style.opacity = "1";
 	}
 
 	function mouseoutInfoContainer(e) {
 
 		e.target.style.backgroundColor = "";
+		e.target.firstElementChild.lastElementChild.style.opacity = "0";
 	}
 
 
@@ -339,8 +341,8 @@ popup.createElems = function(elems) {
 
 	elems.salaryContainer = document.createElement("div");
 	elems.salaryContainer.className = "salary-container";
-	elems.salaryContainer.addEventListener("mouseenter", mouseoverInfoContainer);
-	elems.salaryContainer.addEventListener("mouseleave", mouseoutInfoContainer);
+	// elems.salaryContainer.addEventListener("mouseenter", mouseoverInfoContainer);
+	// elems.salaryContainer.addEventListener("mouseleave", mouseoutInfoContainer);
 
 	elems.mainTitleInfo = document.createElement("p");
 	elems.mainTitleInfo.className = "main-title-info";
