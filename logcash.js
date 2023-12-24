@@ -5,28 +5,18 @@ function reGenerate(month, elems) {
 
 	if (month.percent >= 100)
 	{
-		if (month.switchHourCash == 0)
-		{
-			if (month.nbMinDone < 10)
-				tmpProgress = month.nbHourDone + "h0" + month.nbMinDone + " / " + month.nbHourReq + "h00";
-			else
-				tmpProgress = month.nbHourDone + "h" + month.nbMinDone + " / " + month.nbHourReq + "h00";
-		}
-		else if (month.switchHourCash == 1)
-			tmpProgress = month.cashEarn.toFixed(2) + "€";
-			elems.textRemaining.style.display = "none";
+		if (month.nbMinDone < 10)
+			tmpProgress = month.nbHourDone + "h0" + month.nbMinDone + " / " + month.nbHourReq + "h00";
+		else
+			tmpProgress = month.nbHourDone + "h" + month.nbMinDone + " / " + month.nbHourReq + "h00";
 	}
 	else
 	{
-		if (month.switchHourCash == 0)
-		{
-			if (month.nbMinDone < 10)
-				tmpProgress = month.nbHourDone + "h0" + month.nbMinDone ;
-			else
-				tmpProgress = month.nbHourDone + "h" + month.nbMinDone ;
-		}
-		else if (month.switchHourCash == 1)
-			tmpProgress = month.cashEarn.toFixed(2) + "€";
+		if (month.nbMinDone < 10)
+			tmpProgress = month.nbHourDone + "h0" + month.nbMinDone ;
+		else
+			tmpProgress = month.nbHourDone + "h" + month.nbMinDone ;
+
 		if (month.nbMinRem < 10)
 			elems.textRemaining.innerText = month.nbHourRem + "h0" + month.nbMinRem;
 		else
@@ -36,8 +26,8 @@ function reGenerate(month, elems) {
 
 	elems.sideProgress.innerText = tmpProgress;
 
-	let textPercent = "  (" + Math.floor(month.percent) + "%)";
-	elems.sideProgress.innerText += textPercent;
+	// let textPercent = "  (" + Math.floor(month.percent) + "%)";
+	// elems.sideProgress.innerText += textPercent;
 
 	if (month.percent < 10)
 		elems.sideProgress.style.width = "50px";
