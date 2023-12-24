@@ -3,20 +3,12 @@ function reGenerate(month, elems) {
 
 	var tmpProgress;
 
-	if (month.percent >= 100)
-	{
-		if (month.nbMinDone < 10)
-			tmpProgress = month.nbHourDone + "h0" + month.nbMinDone + " / " + month.nbHourReq + "h00";
-		else
-			tmpProgress = month.nbHourDone + "h" + month.nbMinDone + " / " + month.nbHourReq + "h00";
-	}
+	if (month.nbMinDone < 10)
+		tmpProgress = month.nbHourDone + "h0" + month.nbMinDone + " / " + month.nbHourReq + "h";
 	else
+		tmpProgress = month.nbHourDone + "h" + month.nbMinDone + " / " + month.nbHourReq + "h";
+	if (month.percent < 100)
 	{
-		if (month.nbMinDone < 10)
-			tmpProgress = month.nbHourDone + "h0" + month.nbMinDone ;
-		else
-			tmpProgress = month.nbHourDone + "h" + month.nbMinDone ;
-
 		if (month.nbMinRem < 10)
 			elems.textRemaining.innerText = month.nbHourRem + "h0" + month.nbMinRem;
 		else
