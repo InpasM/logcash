@@ -59,68 +59,6 @@ function reGenerate(month, elems) {
 	}
 }
 
-function getRatio(windowWidth) {
-	
-	if (windowWidth <= 480)
-		return (windowWidth / 480);
-	else if (windowWidth <= 770)
-		return (windowWidth / 770);
-	else if (windowWidth <= 990)
-		return (windowWidth / 990);
-	else if (windowWidth <= 1600)
-		return (windowWidth / 1600);
-	else if (windowWidth <= 3000)
-		return (windowWidth / 3000);
-	else
-		return (1);
-}
-
-function resizeProgress() {
-
-	var windowWidth = window.innerWidth;
-	var textMonths = document.querySelectorAll(".text-month");
-	var divMonths = document.querySelectorAll(".div-month");
-	var ratio = getRatio(windowWidth);
-
-	elems.rowProgress.style.height = (ratio * 30) + "px";
-	elems.containerLogcash.style.display = "flex";
-	var smallMargin = ratio * 6;
-
-	for (var i = 0; i < months.nbMonth; i++)
-	{
-		textMonths[i].style.fontSize = "0.9em";
-		textMonths[i].style.padding = "0 10px";
-		textMonths[i].style.height = (ratio * 30) + "px";
-		textMonths[i].style.margin = "0 " + smallMargin + "px 0 0";
-
-		divMonths[i].setAttribute('id', i);
-		textMonths[i].setAttribute('id', i);
-	}
-	var bigText = ratio;
-
-	elems.sideProgress.style.fontSize = bigText + "em";
-	elems.textRemaining.style.fontSize = bigText + "em";
-	elems.sideProgress.style.margin = 0;
-}
-
-function waitForAll(selector) {
-    return new Promise(resolve => {
-        if (document.querySelectorAll(selector).length != 0) {
-            return resolve(document.querySelectorAll(selector));
-        }
-        const observer = new MutationObserver(mutations => {
-            if (document.querySelectorAll(selector).length != 0) {
-                resolve(document.querySelectorAll(selector));
-                observer.disconnect();
-            }
-        });
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
-    });
-}
-
 function mOverMonth(e) {
 
 	if (e.target.id != months.indexArray)
@@ -160,57 +98,18 @@ function clickMonth(e) {
 	elems.divMonths[months.indexArray].style.color = "#191919";
 
 	function setDayNameEvent(value) {
-
 		for (var i = 0; i < elems.monthDayBoxes.length; i++)
-		{
 			elems.monthDayBoxes[i].style.pointerEvents = value;
-		}
 	}
 
 	// make event clickable for day name when on actual month
 	if (id === months.length - 1)
-	{
-		console.log("actual month");
 		setDayNameEvent("auto");
-	}
 	else
-	{
-		console.log("other month");
 		setDayNameEvent("none");
-	}
 
 	reGenerate(months[months.indexArray], elems);
 	popup.setData(elems);
-}
-
-function mOverProgress(e)
-{
-	var tmpSplit = months[months.indexArray].progressColor.split(' ');
-	var newAlpha = tmpSplit[3].replace(')', '');
-
-	if ((parseInt(newAlpha) + 0.1) > 1)
-		var newColor = "rgb(0, 189, 190)";
-	else
-		var newColor = tmpSplit[0] + " " + tmpSplit[1] + tmpSplit[2] + " " + (parseFloat(newAlpha) + 0.1) + ")";
-	elems.sideProgress.style.backgroundColor = newColor;
-	elems.sideProgress.style.color = "white";
-
-	if (months[months.indexArray].percent >= 100)
-		displayMessage("Money full display option button");
-}
-
-function mOutProgress(e) {
-	elems.sideProgress.style.backgroundColor = months[months.indexArray].progressColor;
-	elems.sideProgress.style.color = "#f2f2f2";
-}
-
-function clickProgress(e) {
-
-	if (months[months.indexArray].switchHourCash == 0)
-		months[months.indexArray].switchHourCash = 1;
-	else if (months[months.indexArray].switchHourCash == 1)
-		months[months.indexArray].switchHourCash = 0;
-	reGenerate(months[months.indexArray], elems);
 }
 
 function isMonthInArray(array, node) {
@@ -362,36 +261,27 @@ function getInfoMonth(elems, calendar) {
 
 			if (arrayCalendar[i].days[j].dayNumber === 0 && j !== 0)
 			{
-				// console.log("start of new week: " + arrayCalendar[i].days[j].dayDate);
 				indexWeek++;
 			}
-			// console.log(arrayCalendar[i].days[j]);
 			arrayCalendar[i].weeks[indexWeek].push(arrayCalendar[i].days[j]);
 			arrayCalendar[i].nbHourDone += arrayCalendar[i].days[j].hourDone;
 			arrayCalendar[i].nbMinDone += arrayCalendar[i].days[j].minuteDone;
 
 			if (arrayCalendar[i].days[j].dayNumber >= 1 && arrayCalendar[i].days[j].dayNumber <= 5)
 			{
-				// console.log("start of new week: " + arrayCalendar[i].days[j].dayDate);
 				arrayCalendar[i].nbHourReq += 7;
 				arrayCalendar[i].openDaysTotal++;
 				if (!arrayCalendar[i].arrayElems[j])
 					arrayCalendar[i].openDaysRemaining++;
 			}
 		}
-
-		// console.log("reduce number hour require depending of data");
-		// if (data.student.hoursDeducted > arrayCalendar[i].nbHourReq)
-		// console.log("month: " + i + " " + data.student.months[i].hoursDeducted);
 		if (data.student.months[i].hoursDeducted > arrayCalendar[i].nbHourReq)
 			arrayCalendar[i].nbHourReq = 0;
 		else
-			// arrayCalendar[i].nbHourReq -= data.student.hoursDeducted;
 			arrayCalendar[i].nbHourReq -= data.student.months[i].hoursDeducted;
 
 		arrayCalendar[i].timeEachDay = 0;
-
-		calculProgress(arrayCalendar[i]);``
+		calculProgress(arrayCalendar[i]);
 	}
 	return (arrayCalendar);
 }
@@ -405,12 +295,7 @@ function calculProgress(arrayCalendar) {
 
 		arrayCalendar.nbHourDone += extraHour;
 		arrayCalendar.nbMinDone = arrayCalendar.nbMinDone - (extraHour * 60);
-		// console.log("extraHour: " + parseInt(extraHour) + " remainingMinute: " + remainingMinute);
 	}
-	// console.log(data.student.months[0].salary);
-	// console.log(data.student.months[0].hoursDeducted);
-	// console.log(data.student.months[months].hoursDeducted);
-	// arrayCalendar.nbHourRem = arrayCalendar.nbHourReq - arrayCalendar.nbHourDone - data.student.months[window.months].hoursDeducted;
 	arrayCalendar.nbHourRem = arrayCalendar.nbHourReq - arrayCalendar.nbHourDone;
 	arrayCalendar.nbMinRem = arrayCalendar.nbMinReq - arrayCalendar.nbMinDone;
 	
@@ -430,11 +315,6 @@ function calculProgress(arrayCalendar) {
 		arrayCalendar.progressColor = "rgba(37, 41, 50, 0.8)";
 	else
 		arrayCalendar.progressColor = "rgba(0, 186, 188, " + (arrayCalendar.percent / 100) + ")";
-
-	// console.log("nbHourRem: " + arrayCalendar.nbHourRem + " nbMinRem: " + arrayCalendar.nbMinRem  + " percent: " + arrayCalendar.percent);
-
-	// console.log("monthName " + arrayCalendar.nameShort + " hourDone: " + 
-	// arrayCalendar.nbHourDone + " minuteDone: " + arrayCalendar.nbMinDone);
 }
 
 var isPanelVisible = false;
@@ -602,7 +482,6 @@ async function initLogcash()
 
 	calendar = await fetchCalendar(elems);
 
-	// console.log(data.student.months);
 	const months = getInfoMonth(elems, calendar);
 
 	init.generateContainerLogcash(elems, months, calendar);
@@ -704,7 +583,6 @@ function startLogcash() {
 		setTimeout(function() {
 			initLogcash();
 		}, 1000);
-
 	}
 }
 setTimeout(function() {
