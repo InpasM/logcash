@@ -126,6 +126,39 @@ popup.createElems = function(elems) {
 	elems.middleLine2 = document.createElement("div");
 	elems.middleLine2.className = "middle-line-2";
 
+	elems.middleLine3 = document.createElement("div");
+	elems.middleLine3.className = "middle-line-3";
+	elems.titleBoost = document.createElement("p");
+	elems.titleBoost.className = "main-title-info";
+	elems.titleBoost.innerText = "Boost Lock";
+
+	
+	elems.blockBoost = document.createElement("div");
+	elems.blockBoost.className = "block-boost";
+	elems.blockBoostLeft = document.createElement("div");
+	elems.blockBoostLeft.className = "block-boost-left";
+	elems.blockBoostRight = document.createElement("div");
+	elems.blockBoostRight.className = "block-boost-right";
+
+	elems.titleBoostMin = document.createElement("p");
+	elems.titleBoostMin.className = "small-title-info";
+	elems.titleBoostMin.innerText = "Min";
+
+	elems.titleBoostMax = document.createElement("p");
+	elems.titleBoostMax.className = "small-title-info";
+	elems.titleBoostMax.innerText = "Max";
+
+	elems.blockBoostLeft.appendChild(elems.titleBoostMin);
+	elems.blockBoostRight.appendChild(elems.titleBoostMax);
+	
+
+	elems.blockBoost.appendChild(elems.blockBoostLeft);
+	elems.blockBoost.appendChild(elems.blockBoostRight);
+
+	elems.middleLine3.appendChild(elems.titleBoost);
+	elems.middleLine3.appendChild(elems.blockBoost);
+
+
 	elems.inputContainerSalary = document.createElement("div");
 	elems.inputContainerSalary.className = "pop-input-container";
 	elems.inputContainerSalary.style.marginRight = "8px";			/// STYLE
@@ -836,6 +869,7 @@ popup.createElems = function(elems) {
 	elems.popMiddleDiv.appendChild(elems.popMiddleDivLeft);
 	elems.popMiddleDiv.appendChild(elems.popMiddleDivRight);
 	elems.popMiddleDivLeft.appendChild(elems.middleLine1);
+	elems.popMiddleDivLeft.appendChild(elems.middleLine3);
 	elems.popMiddleDivLeft.appendChild(elems.middleLine2);
 	elems.middleLine1.appendChild(elems.inputContainerSalary);
 	elems.middleLine1.appendChild(elems.inputContainerHours);

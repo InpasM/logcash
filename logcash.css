@@ -214,6 +214,37 @@ body
 	justify-content: center;
 }
 
+
+.middle-line-3 {
+	/* background-color: red; */
+	/* height: 20px; */
+	width: 100%;
+	margin-top: 8px;
+}
+
+.block-boost {
+	/* background-color: orange; */
+	/* height: 10px; */
+	display: flex;
+	margin-top: 8px;
+}
+
+.block-boost-left, .block-boost-right {
+	height: 10px;
+	/* background-color: blue; */
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/* .block-boost-right {
+	height: 10px;
+	background-color: pink;
+	flex: 1;
+} */
+
+
 .pop-input-container {
 	background-color: #373c48;
 	width: 100%;
@@ -321,7 +352,7 @@ body
 }
 
 .checkbox-habit {
-	background-color: #313c48;
+	background-color: #373c48;
 	color: rgb(198, 198, 198);
 	width: 20px;
 	height: 20px;
@@ -806,7 +837,7 @@ body
 	height: 20px;
 	border-radius: 50%;
 	cursor: pointer;
-	background-color: #313c48;
+	background-color: #373c48;
 	display: flex;
 	align-items: center;
 	justify-content: center;
