@@ -15,6 +15,8 @@ function reGenerate(month, elems) {
 			elems.textRemaining.innerText = month.nbHourRem + "h" + month.nbMinRem;
 		elems.textRemaining.style.display = "";
 	}
+	else
+		elems.textRemaining.style.display = "none";
 
 	elems.sideProgress.innerText = tmpProgress;
 
