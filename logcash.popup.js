@@ -69,6 +69,10 @@ function clickBoostMin() {
 		data.student.addBoostHalf = true;
 		elems.buttonBoostMin.style.borderColor = "rgb(0, 186, 188)";
 	}
+	if (data.student.addBoostHalf || data.student.addBoostFull)
+		elems.extraLogtimeLeft.style.display = "flex";
+	else
+		elems.extraLogtimeLeft.style.display = "none";
 	data.updateLocalStorage();
 	popup.setData(elems);
 }
@@ -90,6 +94,10 @@ function clickBoostMax() {
 		data.student.addBoostFull = true;
 		elems.buttonBoostMax.style.borderColor = "rgb(0, 186, 188)";
 	}
+	if (data.student.addBoostHalf || data.student.addBoostFull)
+		elems.extraLogtimeLeft.style.display = "flex";
+	else
+		elems.extraLogtimeLeft.style.display = "none";
 	data.updateLocalStorage();
 	popup.setData(elems);
 }
@@ -437,10 +445,88 @@ popup.createElems = function(elems) {
 	elems.popMiddleDivRight = document.createElement("div");
 	elems.popMiddleDivRight.className = "pop-middle-div-right";
 
+
+	//////////////////////////////////////////////////////////////////////  LOGTIME CONTAINER
+	elems.logtimeContainer = document.createElement("div");
+	elems.logtimeContainer.className = "logtime-container";
+	elems.logtimeContainer.addEventListener("mouseenter", mouseoverInfoContainer);
+	elems.logtimeContainer.addEventListener("mouseleave", mouseoutInfoContainer);
+
+	elems.lineLogtime = document.createElement("div");
+	elems.lineLogtime.className = "line-label";
+
+	elems.titleLogtime = document.createElement("p");
+	elems.titleLogtime.className = "main-title-info";
+	elems.titleLogtime.innerText = "Logtime";
+	elems.questionLogtime = document.createElement("div");
+	elems.questionLogtime.className = "question-logo";
+	
+	elems.blockLogtime = document.createElement("div");
+	elems.blockLogtime.className = "block-logtime";
+
+	elems.blockLogtimeLeft = document.createElement("div");
+	elems.blockLogtimeLeft.className = "block-logtime-side";
+	elems.blockLogtimeLeft.style.borderRight = "1px solid rgb(45, 49, 60)";
+	elems.labelLogtimeLeft = document.createElement("p");
+	elems.labelLogtimeLeft.className = "small-title-info";
+	elems.labelLogtimeLeft.innerText = "Each Day";
+	elems.resultLogtimeLeft = document.createElement("p");
+	elems.resultLogtimeLeft.className = "number-result";
+	elems.resultLogtimeLeft.innerText = "0h00";
+
+	elems.extraLogtimeLeft = document.createElement("div");
+	elems.extraLogtimeLeft.className = "extra-logtime-left";
+	elems.extraLogtimeSideLeft = document.createElement("div");
+	elems.extraLogtimeSideLeft.className = "extra-logtime-side";
+	elems.extraLogtimeSideLeft.innerText = "Without\nBoost Lock";
+	elems.extraLogtimeSideLeft.style.textAlign = "right";
+	
+	elems.extraLogtimeSideRight = document.createElement("div");
+	elems.extraLogtimeSideRight.className = "extra-logtime-side";
+	elems.extraLogtimeSideRight.innerText = "0h00";
+	elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
+	elems.extraLogtimeSideRight.style.justifyContent = "flex-start";
+	elems.extraLogtimeSideRight.style.fontSize = "14px";
+
+	elems.extraLogtimeLeft.appendChild(elems.extraLogtimeSideLeft);
+	elems.extraLogtimeLeft.appendChild(elems.extraLogtimeSideRight);
+
+	elems.blockLogtimeLeft.appendChild(elems.labelLogtimeLeft);
+	elems.blockLogtimeLeft.appendChild(elems.resultLogtimeLeft);
+	elems.blockLogtimeLeft.appendChild(elems.extraLogtimeLeft);
+
+	if (data.student.addBoostHalf || data.student.addBoostFull)
+	{
+		elems.extraLogtimeLeft.style.display = "flex";
+	}
+	
+
+	elems.blockLogtimeRight = document.createElement("div");
+	elems.blockLogtimeRight.className = "block-logtime-side";
+	elems.labelLogtimeRight = document.createElement("p");
+	elems.labelLogtimeRight.className = "small-title-info";
+	elems.labelLogtimeRight.innerText = "Est. Lockout Time";
+
+	elems.estimationLogtime = document.createElement("div");
+	elems.estimationLogtime.className = "number-result";
+	elems.estimationLogtime.innerText = "0h00";
+
+	elems.blockLogtimeRight.appendChild(elems.labelLogtimeRight);
+	elems.blockLogtimeRight.appendChild(elems.estimationLogtime);
+
+	elems.lineLogtime.appendChild(elems.titleLogtime);
+	elems.lineLogtime.appendChild(elems.questionLogtime);
+
+	elems.blockLogtime.appendChild(elems.blockLogtimeLeft);
+	elems.blockLogtime.appendChild(elems.blockLogtimeRight);
+
+	elems.logtimeContainer.appendChild(elems.lineLogtime);
+	elems.logtimeContainer.appendChild(elems.blockLogtime);
+	
+
+	//////////////////////////////////////////////////////////////////////  SALARY CONTAINER
 	elems.salaryContainer = document.createElement("div");
 	elems.salaryContainer.className = "salary-container";
-	// elems.salaryContainer.addEventListener("mouseenter", mouseoverInfoContainer);
-	// elems.salaryContainer.addEventListener("mouseleave", mouseoutInfoContainer);
 
 	elems.mainTitleInfo = document.createElement("p");
 	elems.mainTitleInfo.className = "main-title-info";
@@ -503,6 +589,7 @@ popup.createElems = function(elems) {
 	elems.salaryContainer.appendChild(elems.lineLabelEarn);
 	elems.salaryContainer.appendChild(elems.lineThisSelection);
 	elems.salaryContainer.appendChild(elems.salaryCircleContainer);
+	elems.popMiddleDivRight.appendChild(elems.logtimeContainer);
 	elems.popMiddleDivRight.appendChild(elems.salaryContainer);
 	
 	
