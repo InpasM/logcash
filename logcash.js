@@ -460,6 +460,38 @@ function initStyleProgressBar() {
 	elems.sideProgress.style.margin = 0;
 }
 
+function updateTime(minuteToAdd) {
+
+	var tmpHourDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone;
+	var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + minuteToAdd;
+
+	var tmpHourGlobal = months[months.length - 1].nbHourDone;
+	var tmpMinutesGlobal = months[months.length - 1].nbMinDone + minuteToAdd;
+
+	if (tmpMinutesDay >= 60) {
+		tmpMinutesDay = 0;
+		tmpHourDay += 1;
+	}
+	if (tmpMinutesGlobal >= 60) {
+		tmpMinutesGlobal = 0;
+		tmpHourGlobal += 1;
+	}
+
+	popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone = parseInt(tmpHourDay);
+	popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone = parseInt(tmpMinutesDay);
+	months[months.length - 1].nbHourDone = parseInt(tmpHourGlobal);
+	months[months.length - 1].nbMinDone = parseInt(tmpMinutesGlobal);
+
+	if (months.indexArray == months.length - 1)
+	{
+		calculProgress(months[months.indexArray]);
+		reGenerate(months[months.length - 1], elems);
+		popup.calculDays(elems, months.indexArray);
+		popup.setAttributeDaySlide(elems, months.indexArray);
+		popup.setData(elems);
+	}
+}
+
 async function initLogcash()
 {
 	const elems = {};
@@ -486,40 +518,59 @@ async function initLogcash()
 	{
 		displayMessage("Start setInterval each minutes");
 		setInterval(function() {
+			updateTime(1);
 
-			var tmpHourDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone;
-			var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + 1;
-			// var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + 10;
+			// var tmpHourDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone;
+			// var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + 1;
+			// // var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + 10;
 	
-			var tmpHourGlobal = months[months.length - 1].nbHourDone;
-			var tmpMinutesGlobal = months[months.length - 1].nbMinDone + 1;
-			// var tmpMinutesGlobal = months[months.length - 1].nbMinDone + 10;
+			// var tmpHourGlobal = months[months.length - 1].nbHourDone;
+			// var tmpMinutesGlobal = months[months.length - 1].nbMinDone + 1;
+			// // var tmpMinutesGlobal = months[months.length - 1].nbMinDone + 10;
 	
-			if (tmpMinutesDay >= 60) {
-				tmpMinutesDay = 0;
-				tmpHourDay += 1;
-			}
-			if (tmpMinutesGlobal >= 60) {
-				tmpMinutesGlobal = 0;
-				tmpHourGlobal += 1;
-			}
+			// if (tmpMinutesDay >= 60) {
+			// 	tmpMinutesDay = 0;
+			// 	tmpHourDay += 1;
+			// }
+			// if (tmpMinutesGlobal >= 60) {
+			// 	tmpMinutesGlobal = 0;
+			// 	tmpHourGlobal += 1;
+			// }
 
-			popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone = parseInt(tmpHourDay);
-			popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone = parseInt(tmpMinutesDay);
-			months[months.length - 1].nbHourDone = parseInt(tmpHourGlobal);
-			months[months.length - 1].nbMinDone = parseInt(tmpMinutesGlobal);
+			// popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone = parseInt(tmpHourDay);
+			// popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone = parseInt(tmpMinutesDay);
+			// months[months.length - 1].nbHourDone = parseInt(tmpHourGlobal);
+			// months[months.length - 1].nbMinDone = parseInt(tmpMinutesGlobal);
 
-			if (months.indexArray == months.length - 1)
-			{
-				calculProgress(months[months.indexArray]);
-				reGenerate(months[months.length - 1], elems);
-				popup.calculDays(elems, months.indexArray);
-				popup.setAttributeDaySlide(elems, months.indexArray);
-				popup.setData(elems);
-			}
+			// if (months.indexArray == months.length - 1)
+			// {
+			// 	calculProgress(months[months.indexArray]);
+			// 	reGenerate(months[months.length - 1], elems);
+			// 	popup.calculDays(elems, months.indexArray);
+			// 	popup.setAttributeDaySlide(elems, months.indexArray);
+			// 	popup.setData(elems);
+			// }
 		}, 60000);
 		// }, 1000);
 	}
+
+	const buttonAddOneMinute = document.querySelector(".dev-add-1-min");
+	const buttonAddOneHour = document.querySelector(".dev-add-1-hour");
+	const buttonRemoveOneMinute = document.querySelector(".dev-remove-1-min");
+	const buttonRemoveOneHour = document.querySelector(".dev-remove-1-hour");
+
+	buttonAddOneMinute.addEventListener("click", function() {
+		updateTime(1);
+	});
+	buttonAddOneHour.addEventListener("click", function() {
+		updateTime(60);
+	});
+	buttonRemoveOneMinute.addEventListener("click", function() {
+		updateTime(-1);
+	});
+	buttonRemoveOneHour.addEventListener("click", function() {
+		updateTime(-60);
+	});
 }
 
 function setRefreshInterval() {

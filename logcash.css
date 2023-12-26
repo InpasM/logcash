@@ -1000,6 +1000,19 @@ body
 	color: white;
 }
 
+.dev-line-button-time {
+	position: absolute;
+	/* height: 20px; */
+	/* width: 100px; */
+	bottom: 10px;
+	display: flex;
+	background-color: red;
+}
+
+.dev-add-1-min , .dev-add-1-hour {
+
+}
+
 
 /************************** CASH CLICKER ***************************/
 .clicker-div-number-buy {
