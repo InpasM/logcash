@@ -52,6 +52,48 @@ popup.setAttributeDaySlide = function(elems, indexMonth) {
 	}
 }
 
+function clickBoostMin() {
+
+	if (data.student.addBoostHalf)
+	{
+		data.student.addBoostHalf = false;
+		elems.buttonBoostMin.style.borderColor = "rgb(45, 49, 60)";
+	}
+	else
+	{
+		if (data.student.addBoostFull)
+		{
+			data.student.addBoostFull = false;
+			elems.buttonBoostMax.style.borderColor = "rgb(45, 49, 60)";
+		}
+		data.student.addBoostHalf = true;
+		elems.buttonBoostMin.style.borderColor = "rgb(0, 186, 188)";
+	}
+	data.updateLocalStorage();
+	popup.setData(elems);
+}
+
+function clickBoostMax() {
+
+	if (data.student.addBoostFull)
+	{
+		data.student.addBoostFull = false;
+		elems.buttonBoostMax.style.borderColor = "rgb(45, 49, 60)";
+	}
+	else
+	{
+		if (data.student.addBoostHalf)
+		{
+			data.student.addBoostHalf = false;
+			elems.buttonBoostMin.style.borderColor = "rgb(45, 49, 60)";
+		}
+		data.student.addBoostFull = true;
+		elems.buttonBoostMax.style.borderColor = "rgb(0, 186, 188)";
+	}
+	data.updateLocalStorage();
+	popup.setData(elems);
+}
+
 popup.createElems = function(elems) {
 
 	elems.popupRemaining = document.createElement("div");
@@ -128,9 +170,19 @@ popup.createElems = function(elems) {
 
 	elems.middleLine3 = document.createElement("div");
 	elems.middleLine3.className = "middle-line-3";
+
+	
+	elems.lineLabelBoost = document.createElement("div");
+	elems.lineLabelBoost.className = "line-label";
+
 	elems.titleBoost = document.createElement("p");
 	elems.titleBoost.className = "main-title-info";
 	elems.titleBoost.innerText = "Boost Lock";
+	elems.questionHours = document.createElement("div");
+	elems.questionHours.className = "question-logo";
+
+	elems.lineLabelBoost.appendChild(elems.titleBoost);
+	elems.lineLabelBoost.appendChild(elems.questionHours);
 
 	
 	elems.blockBoost = document.createElement("div");
@@ -143,20 +195,34 @@ popup.createElems = function(elems) {
 	elems.titleBoostMin = document.createElement("p");
 	elems.titleBoostMin.className = "small-title-info";
 	elems.titleBoostMin.innerText = "Min";
-
+	elems.buttonBoostMin = document.createElement("div");
+	elems.buttonBoostMin.className = "button-boost";
+	elems.buttonBoostMin.innerText = "42min";
+	
 	elems.titleBoostMax = document.createElement("p");
 	elems.titleBoostMax.className = "small-title-info";
 	elems.titleBoostMax.innerText = "Max";
+	elems.buttonBoostMax = document.createElement("div");
+	elems.buttonBoostMax.className = "button-boost";
+	elems.buttonBoostMax.innerText = "1h24";
 
 	elems.blockBoostLeft.appendChild(elems.titleBoostMin);
-	elems.blockBoostRight.appendChild(elems.titleBoostMax);
+	elems.blockBoostLeft.appendChild(elems.buttonBoostMin);
 	
-
+	elems.blockBoostRight.appendChild(elems.titleBoostMax);
+	elems.blockBoostRight.appendChild(elems.buttonBoostMax);
+	
 	elems.blockBoost.appendChild(elems.blockBoostLeft);
 	elems.blockBoost.appendChild(elems.blockBoostRight);
 
-	elems.middleLine3.appendChild(elems.titleBoost);
+	elems.middleLine3.appendChild(elems.lineLabelBoost);
 	elems.middleLine3.appendChild(elems.blockBoost);
+
+	elems.middleLine3.addEventListener("mouseenter", mouseoverInfoContainer);
+	elems.middleLine3.addEventListener("mouseleave", mouseoutInfoContainer);
+
+	elems.buttonBoostMin.addEventListener("click", clickBoostMin);
+	elems.buttonBoostMax.addEventListener("click", clickBoostMax);
 
 
 	elems.inputContainerSalary = document.createElement("div");
@@ -165,8 +231,7 @@ popup.createElems = function(elems) {
 	// elems.inputContainerSalary.addEventListener("mouseenter", mouseoverInfoContainer);
 	// elems.inputContainerSalary.addEventListener("mouseleave", mouseoutInfoContainer); 
 
-	// lineLabelSalary
-	// lineLabelHours
+
 	elems.lineLabelSalary = document.createElement("div");
 	elems.lineLabelSalary.className = "line-label";
 	
@@ -357,7 +422,7 @@ popup.createElems = function(elems) {
 	function mouseoverInfoContainer(e) {
 
 		// e.target.style.backgroundColor = "red";
-		console.log(e.target.firstElementChild.lastElementChild);
+		// console.log(e.target.firstElementChild.lastElementChild);
 		e.target.firstElementChild.lastElementChild.style.opacity = "1";
 	}
 
@@ -647,13 +712,13 @@ popup.createElems = function(elems) {
 	/////////////// SET STYLE CHECKBOX BOOST WITH DATA.STUDENT
 	if (data.student.addBoostHalf)
 	{
-		elems.checkboxHalf.style.borderColor = "rgb(0, 186, 188)";
-		elems.checkboxHalfCenter.style.backgroundColor = "rgb(0, 186, 188)";
+		elems.buttonBoostMin.style.borderColor = "rgb(0, 186, 188)";
+		// elems.checkboxHalfCenter.style.backgroundColor = "rgb(0, 186, 188)";
 	}
 	else if (data.student.addBoostFull)
 	{
-		elems.checkboxFull.style.borderColor = "rgb(0, 186, 188)";
-		elems.checkboxFullCenter.style.backgroundColor = "rgb(0, 186, 188)";
+		elems.buttonBoostMax.style.borderColor = "rgb(0, 186, 188)";
+		// elems.checkboxFullCenter.style.backgroundColor = "rgb(0, 186, 188)";
 	}
 
 	elems.checkboxHalf.addEventListener("click", function(e) {
