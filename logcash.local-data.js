@@ -30,8 +30,14 @@ data.student = {
 	months: [],
 
 	// salary: 0,
-	hoursDeducted: 0,
-	monthlyHabit: [],
+	// hoursDeducted: 0,
+	// monthlyHabit: [],
+};
+
+data.session = {
+	logAtSchool: false,
+	numberDays: 0,
+	lockTime: 0,
 };
 
 var localStorageSpace = function(){

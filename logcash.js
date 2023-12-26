@@ -464,6 +464,11 @@ async function initLogcash()
 {
 	const elems = {};
 
+	const userPosteStatus = document.querySelector(".user-poste-status");
+
+	if (userPosteStatus.innerText !== "Unavailable")
+		data.session.logAtSchool = true;
+
 	calendar = await fetchCalendar(elems);
 
 	const months = getInfoMonth(elems, calendar);
@@ -477,9 +482,7 @@ async function initLogcash()
 	reGenerate(months[months.indexArray], elems);
 	initButtons(elems);
 
-	const userPosteStatus = document.querySelector(".user-poste-status");
-
-	if (userPosteStatus.innerText !== "Unavailable")
+	if (data.session.logAtSchool)
 	{
 		displayMessage("Start setInterval each minutes");
 		setInterval(function() {

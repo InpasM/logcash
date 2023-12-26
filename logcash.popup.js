@@ -469,10 +469,10 @@ popup.createElems = function(elems) {
 	elems.blockLogtimeLeft.style.borderRight = "1px solid rgb(45, 49, 60)";
 	elems.labelLogtimeLeft = document.createElement("p");
 	elems.labelLogtimeLeft.className = "small-title-info";
-	elems.labelLogtimeLeft.innerText = "Each Day";
+	// elems.labelLogtimeLeft.innerText = "Each Day";
 	elems.resultLogtimeLeft = document.createElement("p");
 	elems.resultLogtimeLeft.className = "number-result";
-	elems.resultLogtimeLeft.innerText = "0h00";
+	// elems.resultLogtimeLeft.innerText = "0h00";
 
 	elems.extraLogtimeLeft = document.createElement("div");
 	elems.extraLogtimeLeft.className = "extra-logtime-left";
@@ -495,21 +495,16 @@ popup.createElems = function(elems) {
 	elems.blockLogtimeLeft.appendChild(elems.resultLogtimeLeft);
 	elems.blockLogtimeLeft.appendChild(elems.extraLogtimeLeft);
 
-	if (data.student.addBoostHalf || data.student.addBoostFull)
-	{
-		elems.extraLogtimeLeft.style.display = "flex";
-	}
-	
 
 	elems.blockLogtimeRight = document.createElement("div");
 	elems.blockLogtimeRight.className = "block-logtime-side";
 	elems.labelLogtimeRight = document.createElement("p");
 	elems.labelLogtimeRight.className = "small-title-info";
-	elems.labelLogtimeRight.innerText = "Est. Lockout Time";
+	// elems.labelLogtimeRight.innerText = "Est. Lockout Time";
 
 	elems.estimationLogtime = document.createElement("div");
 	elems.estimationLogtime.className = "number-result";
-	elems.estimationLogtime.innerText = "0h00";
+	// elems.estimationLogtime.innerText = "0h00";
 
 	elems.blockLogtimeRight.appendChild(elems.labelLogtimeRight);
 	elems.blockLogtimeRight.appendChild(elems.estimationLogtime);
@@ -522,6 +517,26 @@ popup.createElems = function(elems) {
 
 	elems.logtimeContainer.appendChild(elems.lineLogtime);
 	elems.logtimeContainer.appendChild(elems.blockLogtime);
+
+	if (data.session.logAtSchool)
+	{
+		elems.labelLogtimeLeft.innerText = "Remaining Today";
+		elems.resultLogtimeLeft.innerText = "0h00";
+		if (data.student.addBoostHalf || data.student.addBoostFull)
+			elems.labelLogtimeRight.innerText = "Est. Lockout Time";
+		else
+			elems.labelLogtimeRight.innerText = "Est. Logout Time";
+	}
+	else
+	{
+		elems.labelLogtimeLeft.innerText = "Each Day";
+		elems.labelLogtimeRight.innerText = "Days Remaining";
+	}
+
+	if (data.student.addBoostHalf || data.student.addBoostFull)
+		elems.extraLogtimeLeft.style.display = "flex";
+	else
+		elems.extraLogtimeLeft.style.display = "none";
 	
 
 	//////////////////////////////////////////////////////////////////////  SALARY CONTAINER
@@ -1204,7 +1219,27 @@ popup.setData = function(elems) {
 	var numberDays = getOpenDays(popup.numberYear, popup.numberMonth, popup.numberDay);
 
 	elems.numberResultOpen.innerText = numberDays.open;
-	elems.numberResultTotal.innerText = numberDays.total;
+	// elems.numberResultTotal.innerText = numberDays.total;
+	data.session.numberDays = numberDays.total;
+
+	if (data.session.logAtSchool)
+	{
+		// elems.labelLogtimeLeft.innerText = "Remaining Today";
+		elems.resultLogtimeLeft.innerText = "0h00";
+		elems.estimationLogtime.innerText = "0h00";
+		// if (data.student.addBoostHalf || data.student.addBoostFull)
+		// 	elems.labelLogtimeRight.innerText = "Est. Lockout Time";
+		// else
+		// 	elems.labelLogtimeRight.innerText = "Est. Logout Time";
+	}
+	else
+	{
+		// elems.labelLogtimeLeft.innerText = "Each Day";
+		elems.resultLogtimeLeft.innerText = "0h00";
+		elems.estimationLogtime.innerText = data.session.numberDays;
+
+		// elems.labelLogtimeRight.innerText = "Days Remaining";
+	}
 
 	if (popup.months[popup.months.indexArray].percent >= 100)
 	{
@@ -1228,7 +1263,8 @@ popup.setData = function(elems) {
 
 	if (totalTimeRemaining > 0)
 	{
-		if (data.student.monthlyHabit[popup.numberDay - 1])
+		// if (data.student.monthlyHabit[popup.numberDay - 1])
+		if (data.session.logAtSchool)
 		{
 			totalTimeRemaining += dayTimeDone;
 		}
@@ -1278,6 +1314,10 @@ popup.setData = function(elems) {
 	elems.salaryFloat.innerText = "." + floatSalary.toFixed(2).split('.')[1];
 	elems.salaryPercent.innerText = percentSalary.toFixed(1) + '%';
 	elems.salarySlide.style.height = percentSalary + "%";
+
+
+	// DEFINE INFORMATION OF LOGTIME
+
 }
 
 function clickMonthlyHabit(e) {
@@ -1389,39 +1429,40 @@ popup.initPopup = function(elems, months) {
 	elems.inputDeducted.addEventListener("click", function(e) { this.select(); });
 }
 
-const clickerButton = document.querySelector(".clicker-salary-circle-inside");
-const clickerInteger = document.querySelector(".clicker-salary-integer");
-const clickerFloat = document.querySelector(".clicker-salary-float");
-const clickerPerSecond = document.querySelector(".clicker-per-second-number");
 
-clickerInteger.innerText = 0;
-clickerFloat.innerText = "." + 0;
-clickerPerSecond.innerText = 0;
+/*********************** CLICKER *************************/
+// const clickerButton = document.querySelector(".clicker-salary-circle-inside");
+// const clickerInteger = document.querySelector(".clicker-salary-integer");
+// const clickerFloat = document.querySelector(".clicker-salary-float");
+// const clickerPerSecond = document.querySelector(".clicker-per-second-number");
 
-var valueInteger = 0;
-var valueFloat = 0;
-var clickerEvent = 0;
-clickerButton.addEventListener("click", function(e) {
+// clickerInteger.innerText = 0;
+// clickerFloat.innerText = "." + 0;
+// clickerPerSecond.innerText = 0;
 
-	clickerButton.style.backgroundColor = "rgba(40, 45, 54, 0.9)";
-	clickerButton.style.boxShadow = "6px 6px 0 rgba(16, 16, 16, 0.5)";
+// var valueInteger = 0;
+// var valueFloat = 0;
+// var clickerEvent = 0;
+// clickerButton.addEventListener("click", function(e) {
 
-	if (clickerEvent)
-		clearTimeout(clickerEvent);
-	clickerEvent = setTimeout(function(e) {
-		clickerButton.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
-		clickerButton.style.boxShadow = "10px 10px 0 rgba(16, 16, 16, 0.5)";
-	}, 100);
+// 	clickerButton.style.backgroundColor = "rgba(40, 45, 54, 0.9)";
+// 	clickerButton.style.boxShadow = "6px 6px 0 rgba(16, 16, 16, 0.5)";
 
-	valueFloat += 1;
-	if (valueFloat === 10)
-	{
-		valueFloat = 0;
-		valueInteger += 1;
-	}
+// 	if (clickerEvent)
+// 		clearTimeout(clickerEvent);
+// 	clickerEvent = setTimeout(function(e) {
+// 		clickerButton.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+// 		clickerButton.style.boxShadow = "10px 10px 0 rgba(16, 16, 16, 0.5)";
+// 	}, 100);
 
-	clickerInteger.innerText = valueInteger;
-	clickerFloat.innerText = "." + valueFloat;
+// 	valueFloat += 1;
+// 	if (valueFloat === 10)
+// 	{
+// 		valueFloat = 0;
+// 		valueInteger += 1;
+// 	}
 
-});
-// console.log(clickerButton);
+// 	clickerInteger.innerText = valueInteger;
+// 	clickerFloat.innerText = "." + valueFloat;
+
+// });
