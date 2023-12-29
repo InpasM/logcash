@@ -313,11 +313,13 @@ popup.createElems = function(elems) {
 
 	function triggerSelect(id, conditionBool, newBool, borderColor) {
 
+		var update = false;
+
 		for (var i = popup.numberDay - 1; i < elems.monthArray[popup.months.indexArray].checkboxes.length; i++)
 		{
 			if (elems.monthArray[popup.months.indexArray].checkboxes[i].getAttribute("indexday") === id)
 			{
-				if (data.student.monthlyHabit[i] === conditionBool)
+				if (data.student.monthlyHabit[i] === conditionBool && (i + 1 !== popup.numberDay))
 				{
 					update = true;
 					data.student.monthlyHabit[i] = newBool;
@@ -336,7 +338,7 @@ popup.createElems = function(elems) {
 		{
 			var allTrue = true, update = false;
 
-			for (var i = popup.numberDay - 1; i < elems.monthArray[popup.months.indexArray].checkboxes.length; i++)
+			for (var i = popup.numberDay; i < elems.monthArray[popup.months.indexArray].checkboxes.length; i++)
 			{
 				if (elems.monthArray[popup.months.indexArray].checkboxes[i].getAttribute("indexday") === e.target.id)
 				{
@@ -404,6 +406,8 @@ popup.createElems = function(elems) {
 				{
 					tmpDay.style.backgroundColor = "white";
 					tmpDay.style.color = "#191919";
+					tmpDay.style.cursor = "default";
+					tmpDay.style.pointerEvents = "none";
 				}
 				tmpMonth.checkboxes.push(tmpDay);
 				tmpMonth.lines[i].appendChild(tmpDay);
@@ -1153,7 +1157,11 @@ function getOpenDays(numberYear, numberMonth, numberDay) {
 
 	var openDays = 0;
 	var totalDays = 0;
-	var i = numberDay - 1;
+
+	if (data.session.logAtSchool)
+		var i = numberDay - 1;
+	else
+		var i = numberDay;
 	var indexHabit = actualDay;
 	var useAll = isCheckboxUse();
 
@@ -1176,7 +1184,8 @@ function getOpenDays(numberYear, numberMonth, numberDay) {
 	return ({open: openDays, total: totalDays});
 }
 
-popup.date = new Date();
+// popup.date = new Date();
+popup.date = new Date("2023-12-24");
 popup.numberYear = popup.date.getFullYear();
 popup.numberMonth = popup.date.getMonth();
 popup.numberDay = popup.date.getDate();
@@ -1203,7 +1212,9 @@ popup.setData = function(elems) {
 		}
 		else
 		{
-			if (i + 1 < popup.numberDay)
+			// console.log(i+1);
+			// console.log(popup.numberDay);
+			if (i + 1 <= popup.numberDay)
 			{
 				data.student.monthlyHabit[i] = false;
 				needToUpdateData = true;
@@ -1219,8 +1230,8 @@ popup.setData = function(elems) {
 	var numberDays = getOpenDays(popup.numberYear, popup.numberMonth, popup.numberDay);
 
 	elems.numberResultOpen.innerText = numberDays.open;
-	// elems.numberResultTotal.innerText = numberDays.total;
 	data.session.numberDays = numberDays.total;
+	elems.numberResultTotal.innerText = numberDays.total;		// DEV ONLY
 
 	if (data.session.logAtSchool)
 	{
