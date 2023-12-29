@@ -468,13 +468,27 @@ function updateTime(minuteToAdd) {
 	var tmpHourGlobal = months[months.length - 1].nbHourDone;
 	var tmpMinutesGlobal = months[months.length - 1].nbMinDone + minuteToAdd;
 
-	if (tmpMinutesDay >= 60) {
-		tmpMinutesDay = 0;
-		tmpHourDay += 1;
+	if (minuteToAdd > 0)
+	{
+		if (tmpMinutesDay >= 60) {
+			tmpMinutesDay = 0;
+			tmpHourDay += 1;
+		}
+		if (tmpMinutesGlobal >= 60) {
+			tmpMinutesGlobal = 0;
+			tmpHourGlobal += 1;
+		}
 	}
-	if (tmpMinutesGlobal >= 60) {
-		tmpMinutesGlobal = 0;
-		tmpHourGlobal += 1;
+	else
+	{
+		if (tmpMinutesDay <= 0) {
+			tmpMinutesDay = 59;
+			tmpHourDay -= 1;
+		}
+		if (tmpMinutesGlobal <= 0) {
+			tmpMinutesGlobal = 59;
+			tmpHourGlobal -= 1;
+		}
 	}
 
 	popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone = parseInt(tmpHourDay);
