@@ -481,11 +481,11 @@ function updateTime(minuteToAdd) {
 	}
 	else
 	{
-		if (tmpMinutesDay <= 0) {
+		if (tmpMinutesDay < 0) {
 			tmpMinutesDay = 59;
 			tmpHourDay -= 1;
 		}
-		if (tmpMinutesGlobal <= 0) {
+		if (tmpMinutesGlobal < 0) {
 			tmpMinutesGlobal = 59;
 			tmpHourGlobal -= 1;
 		}
