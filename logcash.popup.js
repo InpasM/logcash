@@ -835,53 +835,53 @@ popup.createElems = function(elems) {
 		// elems.checkboxFullCenter.style.backgroundColor = "rgb(0, 186, 188)";
 	}
 
-	elems.checkboxHalf.addEventListener("click", function(e) {
+	// elems.checkboxHalf.addEventListener("click", function(e) {
 
-		if (data.student.addBoostHalf)
-		{
-			data.student.addBoostHalf = false;
-			elems.checkboxHalf.style.borderColor = "rgb(45, 49, 60)";
-			elems.checkboxHalfCenter.style.backgroundColor = "";
-		}
-		else
-		{
-			if (data.student.addBoostFull)
-			{
-				data.student.addBoostFull = false;
-				elems.checkboxFull.style.borderColor = "rgb(45, 49, 60)";
-				elems.checkboxFullCenter.style.backgroundColor = "";
-			}
-			data.student.addBoostHalf = true;
-			elems.checkboxHalf.style.borderColor = "rgb(0, 186, 188)";
-			elems.checkboxHalfCenter.style.backgroundColor = "rgb(0, 186, 188)";
-		}
-		data.updateLocalStorage();
-		popup.setData(elems);
-	});
+	// 	if (data.student.addBoostHalf)
+	// 	{
+	// 		data.student.addBoostHalf = false;
+	// 		elems.checkboxHalf.style.borderColor = "rgb(45, 49, 60)";
+	// 		elems.checkboxHalfCenter.style.backgroundColor = "";
+	// 	}
+	// 	else
+	// 	{
+	// 		if (data.student.addBoostFull)
+	// 		{
+	// 			data.student.addBoostFull = false;
+	// 			elems.checkboxFull.style.borderColor = "rgb(45, 49, 60)";
+	// 			elems.checkboxFullCenter.style.backgroundColor = "";
+	// 		}
+	// 		data.student.addBoostHalf = true;
+	// 		elems.checkboxHalf.style.borderColor = "rgb(0, 186, 188)";
+	// 		elems.checkboxHalfCenter.style.backgroundColor = "rgb(0, 186, 188)";
+	// 	}
+	// 	data.updateLocalStorage();
+	// 	popup.setData(elems);
+	// });
 
-	elems.checkboxFull.addEventListener("click", function(e) {
+	// elems.checkboxFull.addEventListener("click", function(e) {
 
-		if (data.student.addBoostFull)
-		{
-			data.student.addBoostFull = false;
-			elems.checkboxFull.style.borderColor = "rgb(45, 49, 60)";
-			elems.checkboxFullCenter.style.backgroundColor = "";
-		}
-		else
-		{
-			if (data.student.addBoostHalf)
-			{
-				data.student.addBoostHalf = false;
-				elems.checkboxHalf.style.borderColor = "rgb(45, 49, 60)";
-				elems.checkboxHalfCenter.style.backgroundColor = "";
-			}
-			data.student.addBoostFull = true;
-			elems.checkboxFull.style.borderColor = "rgb(0, 186, 188)";
-			elems.checkboxFullCenter.style.backgroundColor = "rgb(0, 186, 188)";
-		}
-		data.updateLocalStorage();
-		popup.setData(elems);
-	});
+	// 	if (data.student.addBoostFull)
+	// 	{
+	// 		data.student.addBoostFull = false;
+	// 		elems.checkboxFull.style.borderColor = "rgb(45, 49, 60)";
+	// 		elems.checkboxFullCenter.style.backgroundColor = "";
+	// 	}
+	// 	else
+	// 	{
+	// 		if (data.student.addBoostHalf)
+	// 		{
+	// 			data.student.addBoostHalf = false;
+	// 			elems.checkboxHalf.style.borderColor = "rgb(45, 49, 60)";
+	// 			elems.checkboxHalfCenter.style.backgroundColor = "";
+	// 		}
+	// 		data.student.addBoostFull = true;
+	// 		elems.checkboxFull.style.borderColor = "rgb(0, 186, 188)";
+	// 		elems.checkboxFullCenter.style.backgroundColor = "rgb(0, 186, 188)";
+	// 	}
+	// 	data.updateLocalStorage();
+	// 	popup.setData(elems);
+	// });
 
 	elems.lineResultsBoostLeft.appendChild(elems.labelHalfBoost);
 	elems.lineResultsBoostLeft.appendChild(elems.checkboxHalf);
@@ -1290,6 +1290,7 @@ popup.setData = function(elems) {
 			tmpEachDay = resultInteger + "h" + resultFloat;
 		return tmpEachDay;
 	}
+
 	function getRemainingToday(resultRemaining) {
 
 		var doneInteger = parseInt(resultRemaining);
@@ -1304,44 +1305,51 @@ popup.setData = function(elems) {
 
 	var resultRemaining = resultEachDay - dayTimeDone;
 
-	if (resultRemaining <= 0)
-	{
-		elems.resultLogtime2.innerText = "DONE";
-		elems.resultLogtime2.style.color = "rgb(0, 186, 188)";
-		elems.resultLogtimeLeft.innerText = "DONE";
-		elems.resultLogtimeLeft.style.color = "rgb(0, 186, 188)";
-
-		resultEachDay += resultRemaining / numberDays.total;
-	}
-	else
-	{
-		var remaining = getRemainingToday(resultRemaining);
-
-		elems.resultLogtime2.innerText = remaining;
-		elems.resultLogtime2.style.color = "white";
-		elems.resultLogtimeLeft.innerText = remaining;
-		elems.resultLogtimeLeft.style.color = "white";
-	}
-	elems.resultLogtime1.innerText = getEachDay(resultEachDay);
-
-	console.log("eachDay: " + resultEachDay + "  resultRemaining: " + resultRemaining);
-	console.log(resultEachDay + (resultRemaining / numberDays.total));
-
 	elems.salaryInteger.innerText = integerSalary;
 	elems.salaryFloat.innerText = "." + floatSalary.toFixed(2).split('.')[1];
 	elems.salaryPercent.innerText = percentSalary.toFixed(1) + '%';
 	elems.salarySlide.style.height = percentSalary + "%";
 
+	// elems.resultLogtime1.innerText = getEachDay(resultEachDay);	// DEV
+
 	if (data.session.logAtSchool)
 	{
-		// elems.resultLogtimeLeft.innerText = "0h00";
-		elems.estimationLogtime.innerText = "0h00";
+		if (resultRemaining <= 0)
+		{
+			elems.resultLogtimeLeft.innerText = "DONE";
+			elems.resultLogtimeLeft.style.color = "rgb(0, 186, 188)";
+			elems.resultLogtime2.innerText = "DONE";				// DEV
+			elems.resultLogtime2.style.color = "rgb(0, 186, 188)";	// DEV
+
+			resultEachDay += resultRemaining / (numberDays.total - 1) + (1 / 60);
+			elems.estimationLogtime.style.color = "rgb(0, 186, 188)";
+		}
+		else
+		{
+			var remaining = getRemainingToday(resultRemaining);
+
+			elems.resultLogtimeLeft.innerText = remaining;
+			elems.resultLogtimeLeft.style.color = "white";
+			elems.resultLogtime2.innerText = remaining;				// DEV
+			elems.resultLogtime2.style.color = "white";				// DEV
+		}
 	}
 	else
 	{
-		elems.resultLogtimeLeft.innerText = tmpEachDay;
+		if (totalTimeRemaining > 0)
+		{
+			resultEachDay += (1 / 60);
+			elems.resultLogtimeLeft.innerText = getEachDay(resultEachDay);
+			elems.resultLogtimeLeft.style.color = "white";
+		}
+		else
+		{
+			elems.resultLogtimeLeft.innerText = "DONE";
+			elems.resultLogtimeLeft.style.color = "rgb(0, 186, 188)";
+		}
 		elems.estimationLogtime.innerText = data.session.numberDays;
 	}
+	elems.resultLogtime1.innerText = getEachDay(resultEachDay);
 }
 
 function clickMonthlyHabit(e) {
