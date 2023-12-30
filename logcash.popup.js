@@ -58,7 +58,7 @@ function clickBoostMin() {
 	{
 		data.student.addBoostHalf = false;
 		elems.buttonBoostMin.style.borderColor = "rgb(45, 49, 60)";
-		elems.labelLogtimeRight.innerText = "Est. Logout Time";
+		elems.labelLogtimeEstimation.innerText = "Est. Logout Time";
 	}
 	else
 	{
@@ -66,10 +66,10 @@ function clickBoostMin() {
 		{
 			data.student.addBoostFull = false;
 			elems.buttonBoostMax.style.borderColor = "rgb(45, 49, 60)";
-			elems.labelLogtimeRight.innerText = "Est. Logout Time";
+			elems.labelLogtimeEstimation.innerText = "Est. Logout Time";
 		}
 		else
-			elems.labelLogtimeRight.innerText = "Est. Lockout Time";
+			elems.labelLogtimeEstimation.innerText = "Est. Lockout Time";
 		data.student.addBoostHalf = true;
 		elems.buttonBoostMin.style.borderColor = "rgb(0, 186, 188)";
 	}
@@ -87,7 +87,7 @@ function clickBoostMax() {
 	{
 		data.student.addBoostFull = false;
 		elems.buttonBoostMax.style.borderColor = "rgb(45, 49, 60)";
-		elems.labelLogtimeRight.innerText = "Est. Logout Time";
+		elems.labelLogtimeEstimation.innerText = "Est. Logout Time";
 	}
 	else
 	{
@@ -95,10 +95,10 @@ function clickBoostMax() {
 		{
 			data.student.addBoostHalf = false;
 			elems.buttonBoostMin.style.borderColor = "rgb(45, 49, 60)";
-			elems.labelLogtimeRight.innerText = "Est. Logout Time";
+			elems.labelLogtimeEstimation.innerText = "Est. Logout Time";
 		}
 		else
-			elems.labelLogtimeRight.innerText = "Est. Lockout Time";
+			elems.labelLogtimeEstimation.innerText = "Est. Lockout Time";
 		data.student.addBoostFull = true;
 		elems.buttonBoostMax.style.borderColor = "rgb(0, 186, 188)";
 	}
@@ -480,6 +480,22 @@ popup.createElems = function(elems) {
 	elems.blockLogtimeLeft.className = "block-logtime-side";
 	elems.blockLogtimeLeft.style.borderRight = "1px solid rgb(45, 49, 60)";
 
+	
+	elems.labelLogtimeEach = document.createElement("p");
+	elems.labelLogtimeEach.className = "small-title-info";
+	elems.labelLogtimeEach.innerText = "Each Day";
+	elems.resultLogtimeEach = document.createElement("p");
+	elems.resultLogtimeEach.className = "number-result";
+	elems.labelLogtimeEach.style.display = "none";
+	elems.resultLogtimeEach.style.display = "none";
+
+	elems.labelLogtimeRemaining = document.createElement("p");
+	elems.labelLogtimeRemaining.className = "small-title-info";
+	elems.resultLogtimeRemaining = document.createElement("p");
+	elems.resultLogtimeRemaining.className = "number-result";
+	elems.labelLogtimeRemaining.style.display = "none";
+	elems.resultLogtimeRemaining.style.display = "none";
+
 	if (data.session.logAtSchool)
 	{
 		elems.blockLogtimeLeft.style.cursor = "pointer";
@@ -488,21 +504,28 @@ popup.createElems = function(elems) {
 			if (data.session.logtimeMode === REMAINING)
 			{
 				data.session.logtimeMode = EACH;
-				// elems.labelLogtimeLeft.innerText = "Each Day";
+				elems.labelLogtimeRemaining.style.display = "none";
+				elems.resultLogtimeRemaining.style.display = "none";
+				elems.labelLogtimeEach.style.display = "flex";
+				elems.resultLogtimeEach.style.display = "flex";
 			}
 			else if (data.session.logtimeMode === EACH)
 			{
 				data.session.logtimeMode = REMAINING;
-				// elems.labelLogtimeLeft.innerText = "Remaining Today";
+				elems.labelLogtimeEach.style.display = "none";
+				elems.resultLogtimeEach.style.display = "none";
+				elems.labelLogtimeRemaining.style.display = "flex";
+				elems.resultLogtimeRemaining.style.display = "flex";
 			}
-			// popup.setData(elems);
 		});
+		elems.labelLogtimeRemaining.style.display = "flex";
+		elems.resultLogtimeRemaining.style.display = "flex";
 	}
-
-	elems.labelLogtimeLeft = document.createElement("p");
-	elems.labelLogtimeLeft.className = "small-title-info";
-	elems.resultLogtimeLeft = document.createElement("p");
-	elems.resultLogtimeLeft.className = "number-result";
+	else
+	{
+		elems.labelLogtimeEach.style.display = "flex";
+		elems.resultLogtimeEach.style.display = "flex";
+	}
 
 	elems.extraLogtimeLeft = document.createElement("div");
 	elems.extraLogtimeLeft.className = "extra-logtime-left";
@@ -521,23 +544,38 @@ popup.createElems = function(elems) {
 	elems.extraLogtimeLeft.appendChild(elems.extraLogtimeSideLeft);
 	elems.extraLogtimeLeft.appendChild(elems.extraLogtimeSideRight);
 
-	elems.blockLogtimeLeft.appendChild(elems.labelLogtimeLeft);
-	elems.blockLogtimeLeft.appendChild(elems.resultLogtimeLeft);
+	elems.blockLogtimeLeft.appendChild(elems.labelLogtimeEach);
+	elems.blockLogtimeLeft.appendChild(elems.resultLogtimeEach);
+	elems.blockLogtimeLeft.appendChild(elems.labelLogtimeRemaining);
+	elems.blockLogtimeLeft.appendChild(elems.resultLogtimeRemaining);
 	elems.blockLogtimeLeft.appendChild(elems.extraLogtimeLeft);
 
 
 	elems.blockLogtimeRight = document.createElement("div");
 	elems.blockLogtimeRight.className = "block-logtime-side";
-	elems.labelLogtimeRight = document.createElement("p");
-	elems.labelLogtimeRight.className = "small-title-info";
-	// elems.labelLogtimeRight.innerText = "Est. Lockout Time";
 
-	elems.estimationLogtime = document.createElement("div");
-	elems.estimationLogtime.className = "number-result";
-	// elems.estimationLogtime.innerText = "0h00";
+	elems.labelLogtimeEstimation = document.createElement("p");
+	elems.labelLogtimeEstimation.className = "small-title-info";
+	elems.resultLogtimeEstimation = document.createElement("div");
+	elems.resultLogtimeEstimation.className = "number-result";
+	elems.resultLogtimeEstimation.innerText = "0h00";
+	elems.labelLogtimeEstimation.style.display = "none";
+	elems.resultLogtimeEstimation.style.display = "none";
 
-	elems.blockLogtimeRight.appendChild(elems.labelLogtimeRight);
-	elems.blockLogtimeRight.appendChild(elems.estimationLogtime);
+	elems.labelLogtimeNumberDay = document.createElement("p");
+	elems.labelLogtimeNumberDay.className = "small-title-info";
+	elems.labelLogtimeNumberDay.innerText = "Days Remaining";
+	elems.resultLogtimeNumberDay = document.createElement("div");
+	elems.resultLogtimeNumberDay.className = "number-result";
+	elems.resultLogtimeNumberDay.innerText = "0";
+	elems.labelLogtimeNumberDay.style.display = "none";
+	elems.resultLogtimeNumberDay.style.display = "none";
+
+
+	elems.blockLogtimeRight.appendChild(elems.labelLogtimeEstimation);
+	elems.blockLogtimeRight.appendChild(elems.resultLogtimeEstimation);
+	elems.blockLogtimeRight.appendChild(elems.labelLogtimeNumberDay);
+	elems.blockLogtimeRight.appendChild(elems.resultLogtimeNumberDay);
 
 	elems.lineLogtime.appendChild(elems.titleLogtime);
 	elems.lineLogtime.appendChild(elems.questionLogtime);
@@ -550,19 +588,29 @@ popup.createElems = function(elems) {
 
 	if (data.session.logAtSchool)
 	{
+		elems.labelLogtimeEstimation.style.display = "flex";
+		elems.resultLogtimeEstimation.style.display = "flex";
+		elems.labelLogtimeNumberDay.style.display = "none";
+		elems.resultLogtimeNumberDay.style.display = "none";
+
 		data.session.logtimeMode = REMAINING;
-		elems.labelLogtimeLeft.innerText = "Remaining Today";
-		elems.resultLogtimeLeft.innerText = "0h00";
+		elems.labelLogtimeRemaining.innerText = "Remaining Today";
+		elems.resultLogtimeRemaining.innerText = "0h00";
 		if (data.student.addBoostHalf || data.student.addBoostFull)
-			elems.labelLogtimeRight.innerText = "Est. Lockout Time";
+			elems.labelLogtimeEstimation.innerText = "Est. Lockout Time";
 		else
-			elems.labelLogtimeRight.innerText = "Est. Logout Time";
+			elems.labelLogtimeEstimation.innerText = "Est. Logout Time";
 	}
 	else
 	{
+		elems.labelLogtimeEstimation.style.display = "none";
+		elems.resultLogtimeEstimation.style.display = "none";
+		elems.labelLogtimeNumberDay.style.display = "flex";
+		elems.resultLogtimeNumberDay.style.display = "flex";
+
 		data.session.logtimeMode = EACH;
-		elems.labelLogtimeLeft.innerText = "Each Day";
-		elems.labelLogtimeRight.innerText = "Days Remaining";
+
+		
 	}
 
 	if (data.student.addBoostHalf || data.student.addBoostFull)
@@ -1331,44 +1379,47 @@ popup.setData = function(elems) {
 	elems.salaryPercent.innerText = percentSalary.toFixed(1) + '%';
 	elems.salarySlide.style.height = percentSalary + "%";
 
-	if (data.session.logAtSchool)
-	{
+	// if (data.session.logAtSchool)
+	// {
 		if (data.session.remainingToday <= 0)
 		{
-			elems.resultLogtimeLeft.innerText = "DONE";
-			elems.resultLogtimeLeft.style.color = "rgb(0, 186, 188)";
+			elems.resultLogtimeRemaining.innerText = "DONE";
+			elems.resultLogtimeRemaining.style.color = "rgb(0, 186, 188)";
 			elems.resultLogtime2.innerText = "DONE";				// DEV
 			elems.resultLogtime2.style.color = "rgb(0, 186, 188)";	// DEV
-			elems.estimationLogtime.style.color = "rgb(0, 186, 188)";
+			elems.resultLogtimeEstimation.style.color = "rgb(0, 186, 188)";
 
-			resultEachDay += data.session.remainingToday / (numberDays.total - 1) + (1 / 60);
+			if (data.session.logAtSchool)
+				resultEachDay += data.session.remainingToday / (numberDays.total - 1) + (1 / 60);
 		}
 		else
 		{
 			var remaining = getRemainingToday(data.session.remainingToday);
 
-			elems.resultLogtimeLeft.innerText = remaining;
-			elems.resultLogtimeLeft.style.color = "white";
+			elems.resultLogtimeRemaining.innerText = remaining;
+			elems.resultLogtimeRemaining.style.color = "white";
 			elems.resultLogtime2.innerText = remaining;				// DEV
 			elems.resultLogtime2.style.color = "white";				// DEV
-			elems.estimationLogtime.style.color = "white";
+			elems.resultLogtimeEstimation.style.color = "white";
 		}
-	}
-	else
-	{
+	// }
+	// else
+	// {
 		if (totalTimeRemaining > 0)
 		{
-			resultEachDay += (1 / 60);
-			elems.resultLogtimeLeft.innerText = getEachDay(resultEachDay);
-			elems.resultLogtimeLeft.style.color = "white";
+			if (!data.session.logAtSchool)
+				resultEachDay += (1 / 60);
+			elems.resultLogtimeEach.innerText = getEachDay(resultEachDay);
+			elems.resultLogtimeEach.style.color = "white";
 		}
 		else
 		{
-			elems.resultLogtimeLeft.innerText = "DONE";
-			elems.resultLogtimeLeft.style.color = "rgb(0, 186, 188)";
+			elems.resultLogtimeEach.innerText = "DONE";
+			elems.resultLogtimeEach.style.color = "rgb(0, 186, 188)";
 		}
-		elems.estimationLogtime.innerText = data.session.numberDays;
-	}
+	// }
+	elems.resultLogtimeNumberDay.innerText = data.session.numberDays;
+	// elems.resultLogtime1.innerText = getEachDay(resultEachDay);
 	elems.resultLogtime1.innerText = getEachDay(resultEachDay);
 }
 
