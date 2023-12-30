@@ -528,14 +528,14 @@ async function initLogcash()
 	reGenerate(months[months.indexArray], elems);
 	initButtons(elems);
 
-	if (data.session.logAtSchool)
-	{
-		displayMessage("Start setInterval each minutes");
-		setInterval(function() {
-			updateTime(1);
-		}, 60000);
-		// }, 1000);
-	}
+	// if (data.session.logAtSchool)
+	// {
+	// 	displayMessage("Start setInterval each minutes");
+	// 	setInterval(function() {
+	// 		updateTime(1);
+	// 	}, 60000);
+	// 	// }, 1000);
+	// }
 
 	const buttonAddOneMinute = document.querySelector(".dev-add-1-min");
 	const buttonAddOneHour = document.querySelector(".dev-add-1-hour");

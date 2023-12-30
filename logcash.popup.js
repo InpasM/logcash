@@ -1346,6 +1346,10 @@ popup.setData = function(elems) {
 
 	function getEachDay(resultEachDay) {
 
+		var tmpEach = resultEachDay;
+
+		// var resultInteger = tmpEach.toFixed(0);
+		// var resultFloat = ((tmpEach - resultInteger) * 60).toFixed(0);
 		var resultInteger = parseInt(resultEachDay);
 		var resultFloat = parseInt((resultEachDay - resultInteger) * 60);
 		var tmpEachDay;
@@ -1361,8 +1365,16 @@ popup.setData = function(elems) {
 
 	function getRemainingToday(resultRemaining) {
 
-		var doneInteger = parseInt(resultRemaining);
-		var doneFloat = parseInt((resultRemaining - doneInteger) * 60);
+		// console.log(resultRemaining);
+		var tmpRemaining = resultRemaining;
+
+		// tmpRemaining.toFixed(5);
+
+		// console.log(tmpRemaining.toFixed(0));
+		var doneInteger = parseInt(tmpRemaining);
+		var doneFloat = parseInt((tmpRemaining - doneInteger) * 60);
+		// var doneInteger = tmpRemaining.toFixed(0);
+		// var doneFloat = ((tmpRemaining - doneInteger) * 60).toFixed(0);
 
 		var tmpRemainingToday = doneInteger + "h";
 		if (doneFloat < 10)
@@ -1371,7 +1383,6 @@ popup.setData = function(elems) {
 		return tmpRemainingToday;
 	}
 
-	// var resultRemaining = resultEachDay - dayTimeDone;
 	data.session.remainingToday = resultEachDay - dayTimeDone;
 
 	elems.salaryInteger.innerText = integerSalary;
@@ -1381,8 +1392,10 @@ popup.setData = function(elems) {
 
 	// if (data.session.logAtSchool)
 	// {
-		if (data.session.remainingToday <= 0)
+		if ((data.session.remainingToday).toFixed(5) <= 0)
+		// if ((data.session.remainingToday) <= 0)
 		{
+			// console.log("remainingToday", data.session.remainingToday);
 			elems.resultLogtimeRemaining.innerText = "DONE";
 			elems.resultLogtimeRemaining.style.color = "rgb(0, 186, 188)";
 			elems.resultLogtime2.innerText = "DONE";				// DEV
