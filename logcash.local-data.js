@@ -40,7 +40,7 @@ data.session = {
 	logAtSchool: false,
 	logtimeMode: 0,
 	remainingToday: 0,
-	EachDay: 0,
+	eachDay: 0,
 	numberDays: 0,
 	lockTime: 0,
 };

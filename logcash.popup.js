@@ -479,12 +479,30 @@ popup.createElems = function(elems) {
 	elems.blockLogtimeLeft = document.createElement("div");
 	elems.blockLogtimeLeft.className = "block-logtime-side";
 	elems.blockLogtimeLeft.style.borderRight = "1px solid rgb(45, 49, 60)";
+
+	if (data.session.logAtSchool)
+	{
+		elems.blockLogtimeLeft.style.cursor = "pointer";
+		elems.blockLogtimeLeft.addEventListener("click", function() {
+	
+			if (data.session.logtimeMode === REMAINING)
+			{
+				data.session.logtimeMode = EACH;
+				// elems.labelLogtimeLeft.innerText = "Each Day";
+			}
+			else if (data.session.logtimeMode === EACH)
+			{
+				data.session.logtimeMode = REMAINING;
+				// elems.labelLogtimeLeft.innerText = "Remaining Today";
+			}
+			// popup.setData(elems);
+		});
+	}
+
 	elems.labelLogtimeLeft = document.createElement("p");
 	elems.labelLogtimeLeft.className = "small-title-info";
-	// elems.labelLogtimeLeft.innerText = "Each Day";
 	elems.resultLogtimeLeft = document.createElement("p");
 	elems.resultLogtimeLeft.className = "number-result";
-	// elems.resultLogtimeLeft.innerText = "0h00";
 
 	elems.extraLogtimeLeft = document.createElement("div");
 	elems.extraLogtimeLeft.className = "extra-logtime-left";
@@ -532,6 +550,7 @@ popup.createElems = function(elems) {
 
 	if (data.session.logAtSchool)
 	{
+		data.session.logtimeMode = REMAINING;
 		elems.labelLogtimeLeft.innerText = "Remaining Today";
 		elems.resultLogtimeLeft.innerText = "0h00";
 		if (data.student.addBoostHalf || data.student.addBoostFull)
@@ -541,6 +560,7 @@ popup.createElems = function(elems) {
 	}
 	else
 	{
+		data.session.logtimeMode = EACH;
 		elems.labelLogtimeLeft.innerText = "Each Day";
 		elems.labelLogtimeRight.innerText = "Days Remaining";
 	}
@@ -1303,35 +1323,35 @@ popup.setData = function(elems) {
 		return tmpRemainingToday;
 	}
 
-	var resultRemaining = resultEachDay - dayTimeDone;
+	// var resultRemaining = resultEachDay - dayTimeDone;
+	data.session.remainingToday = resultEachDay - dayTimeDone;
 
 	elems.salaryInteger.innerText = integerSalary;
 	elems.salaryFloat.innerText = "." + floatSalary.toFixed(2).split('.')[1];
 	elems.salaryPercent.innerText = percentSalary.toFixed(1) + '%';
 	elems.salarySlide.style.height = percentSalary + "%";
 
-	// elems.resultLogtime1.innerText = getEachDay(resultEachDay);	// DEV
-
 	if (data.session.logAtSchool)
 	{
-		if (resultRemaining <= 0)
+		if (data.session.remainingToday <= 0)
 		{
 			elems.resultLogtimeLeft.innerText = "DONE";
 			elems.resultLogtimeLeft.style.color = "rgb(0, 186, 188)";
 			elems.resultLogtime2.innerText = "DONE";				// DEV
 			elems.resultLogtime2.style.color = "rgb(0, 186, 188)";	// DEV
-
-			resultEachDay += resultRemaining / (numberDays.total - 1) + (1 / 60);
 			elems.estimationLogtime.style.color = "rgb(0, 186, 188)";
+
+			resultEachDay += data.session.remainingToday / (numberDays.total - 1) + (1 / 60);
 		}
 		else
 		{
-			var remaining = getRemainingToday(resultRemaining);
+			var remaining = getRemainingToday(data.session.remainingToday);
 
 			elems.resultLogtimeLeft.innerText = remaining;
 			elems.resultLogtimeLeft.style.color = "white";
 			elems.resultLogtime2.innerText = remaining;				// DEV
 			elems.resultLogtime2.style.color = "white";				// DEV
+			elems.estimationLogtime.style.color = "white";
 		}
 	}
 	else
