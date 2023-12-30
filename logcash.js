@@ -533,37 +533,6 @@ async function initLogcash()
 		displayMessage("Start setInterval each minutes");
 		setInterval(function() {
 			updateTime(1);
-
-			// var tmpHourDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone;
-			// var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + 1;
-			// // var tmpMinutesDay = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone + 10;
-	
-			// var tmpHourGlobal = months[months.length - 1].nbHourDone;
-			// var tmpMinutesGlobal = months[months.length - 1].nbMinDone + 1;
-			// // var tmpMinutesGlobal = months[months.length - 1].nbMinDone + 10;
-	
-			// if (tmpMinutesDay >= 60) {
-			// 	tmpMinutesDay = 0;
-			// 	tmpHourDay += 1;
-			// }
-			// if (tmpMinutesGlobal >= 60) {
-			// 	tmpMinutesGlobal = 0;
-			// 	tmpHourGlobal += 1;
-			// }
-
-			// popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone = parseInt(tmpHourDay);
-			// popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone = parseInt(tmpMinutesDay);
-			// months[months.length - 1].nbHourDone = parseInt(tmpHourGlobal);
-			// months[months.length - 1].nbMinDone = parseInt(tmpMinutesGlobal);
-
-			// if (months.indexArray == months.length - 1)
-			// {
-			// 	calculProgress(months[months.indexArray]);
-			// 	reGenerate(months[months.length - 1], elems);
-			// 	popup.calculDays(elems, months.indexArray);
-			// 	popup.setAttributeDaySlide(elems, months.indexArray);
-			// 	popup.setData(elems);
-			// }
 		}, 60000);
 		// }, 1000);
 	}
