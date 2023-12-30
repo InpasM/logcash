@@ -498,26 +498,26 @@ popup.createElems = function(elems) {
 
 	if (data.session.logAtSchool)
 	{
-		elems.blockLogtimeLeft.style.cursor = "pointer";
-		elems.blockLogtimeLeft.addEventListener("click", function() {
+		// elems.blockLogtimeLeft.style.cursor = "pointer";
+		// elems.blockLogtimeLeft.addEventListener("click", function() {
 	
-			if (data.session.logtimeMode === REMAINING)
-			{
-				data.session.logtimeMode = EACH;
-				elems.labelLogtimeRemaining.style.display = "none";
-				elems.resultLogtimeRemaining.style.display = "none";
-				elems.labelLogtimeEach.style.display = "flex";
-				elems.resultLogtimeEach.style.display = "flex";
-			}
-			else if (data.session.logtimeMode === EACH)
-			{
-				data.session.logtimeMode = REMAINING;
-				elems.labelLogtimeEach.style.display = "none";
-				elems.resultLogtimeEach.style.display = "none";
-				elems.labelLogtimeRemaining.style.display = "flex";
-				elems.resultLogtimeRemaining.style.display = "flex";
-			}
-		});
+		// 	if (data.session.logtimeMode === REMAINING)
+		// 	{
+		// 		data.session.logtimeMode = EACH;
+		// 		elems.labelLogtimeRemaining.style.display = "none";
+		// 		elems.resultLogtimeRemaining.style.display = "none";
+		// 		elems.labelLogtimeEach.style.display = "flex";
+		// 		elems.resultLogtimeEach.style.display = "flex";
+		// 	}
+		// 	else if (data.session.logtimeMode === EACH)
+		// 	{
+		// 		data.session.logtimeMode = REMAINING;
+		// 		elems.labelLogtimeEach.style.display = "none";
+		// 		elems.resultLogtimeEach.style.display = "none";
+		// 		elems.labelLogtimeRemaining.style.display = "flex";
+		// 		elems.resultLogtimeRemaining.style.display = "flex";
+		// 	}
+		// });
 		elems.labelLogtimeRemaining.style.display = "flex";
 		elems.resultLogtimeRemaining.style.display = "flex";
 	}
@@ -1260,8 +1260,8 @@ function getOpenDays(numberYear, numberMonth, numberDay) {
 	return ({open: openDays, total: totalDays});
 }
 
-// popup.date = new Date();
-popup.date = new Date("2023-12-24");
+popup.date = new Date();
+// popup.date = new Date("2023-12-28");
 popup.numberYear = popup.date.getFullYear();
 popup.numberMonth = popup.date.getMonth();
 popup.numberDay = popup.date.getDate();
@@ -1346,14 +1346,10 @@ popup.setData = function(elems) {
 
 	function getEachDay(resultEachDay) {
 
-		var tmpEach = resultEachDay;
-
-		// var resultInteger = tmpEach.toFixed(0);
-		// var resultFloat = ((tmpEach - resultInteger) * 60).toFixed(0);
 		var resultInteger = parseInt(resultEachDay);
 		var resultFloat = parseInt((resultEachDay - resultInteger) * 60);
 		var tmpEachDay;
-	
+
 		if (resultInteger < 0 || resultFloat < 0)
 			tmpEachDay = "0h00";
 		else if (resultFloat < 10)
@@ -1365,16 +1361,8 @@ popup.setData = function(elems) {
 
 	function getRemainingToday(resultRemaining) {
 
-		// console.log(resultRemaining);
-		var tmpRemaining = resultRemaining;
-
-		// tmpRemaining.toFixed(5);
-
-		// console.log(tmpRemaining.toFixed(0));
-		var doneInteger = parseInt(tmpRemaining);
-		var doneFloat = parseInt((tmpRemaining - doneInteger) * 60);
-		// var doneInteger = tmpRemaining.toFixed(0);
-		// var doneFloat = ((tmpRemaining - doneInteger) * 60).toFixed(0);
+		var doneInteger = parseInt(resultRemaining);
+		var doneFloat = parseInt((resultRemaining - doneInteger) * 60);
 
 		var tmpRemainingToday = doneInteger + "h";
 		if (doneFloat < 10)
@@ -1390,47 +1378,40 @@ popup.setData = function(elems) {
 	elems.salaryPercent.innerText = percentSalary.toFixed(1) + '%';
 	elems.salarySlide.style.height = percentSalary + "%";
 
-	// if (data.session.logAtSchool)
-	// {
-		if ((data.session.remainingToday).toFixed(5) <= 0)
-		// if ((data.session.remainingToday) <= 0)
-		{
-			// console.log("remainingToday", data.session.remainingToday);
-			elems.resultLogtimeRemaining.innerText = "DONE";
-			elems.resultLogtimeRemaining.style.color = "rgb(0, 186, 188)";
-			elems.resultLogtime2.innerText = "DONE";				// DEV
-			elems.resultLogtime2.style.color = "rgb(0, 186, 188)";	// DEV
-			elems.resultLogtimeEstimation.style.color = "rgb(0, 186, 188)";
+	if ((data.session.remainingToday) <= 0)
+	{
+		elems.resultLogtimeRemaining.innerText = "DONE";
+		elems.resultLogtimeRemaining.style.color = "rgb(0, 186, 188)";
+		elems.resultLogtime2.innerText = "DONE";				// DEV
+		elems.resultLogtime2.style.color = "rgb(0, 186, 188)";	// DEV
+		elems.resultLogtimeEstimation.style.color = "rgb(0, 186, 188)";
 
-			if (data.session.logAtSchool)
-				resultEachDay += data.session.remainingToday / (numberDays.total - 1) + (1 / 60);
-		}
-		else
-		{
-			var remaining = getRemainingToday(data.session.remainingToday);
+		if (data.session.logAtSchool)
+			// resultEachDay += data.session.remainingToday / (numberDays.total - 1) + (1 / 60);
+			resultEachDay += data.session.remainingToday / (numberDays.total - 1);
+	}
+	else
+	{
+		var remaining = getRemainingToday(data.session.remainingToday + (1 / 60));
 
-			elems.resultLogtimeRemaining.innerText = remaining;
-			elems.resultLogtimeRemaining.style.color = "white";
-			elems.resultLogtime2.innerText = remaining;				// DEV
-			elems.resultLogtime2.style.color = "white";				// DEV
-			elems.resultLogtimeEstimation.style.color = "white";
-		}
-	// }
-	// else
-	// {
-		if (totalTimeRemaining > 0)
-		{
-			if (!data.session.logAtSchool)
-				resultEachDay += (1 / 60);
-			elems.resultLogtimeEach.innerText = getEachDay(resultEachDay);
-			elems.resultLogtimeEach.style.color = "white";
-		}
-		else
-		{
-			elems.resultLogtimeEach.innerText = "DONE";
-			elems.resultLogtimeEach.style.color = "rgb(0, 186, 188)";
-		}
-	// }
+		elems.resultLogtimeRemaining.innerText = remaining;
+		elems.resultLogtimeRemaining.style.color = "white";
+		elems.resultLogtime2.innerText = remaining;				// DEV
+		elems.resultLogtime2.style.color = "white";				// DEV
+		elems.resultLogtimeEstimation.style.color = "white";
+	}
+	if (totalTimeRemaining > 0)
+	{
+		// if (!data.session.logAtSchool)
+			resultEachDay += (1 / 60);
+		elems.resultLogtimeEach.innerText = getEachDay(resultEachDay);
+		elems.resultLogtimeEach.style.color = "white";
+	}
+	else
+	{
+		elems.resultLogtimeEach.innerText = "DONE";
+		elems.resultLogtimeEach.style.color = "rgb(0, 186, 188)";
+	}
 	elems.resultLogtimeNumberDay.innerText = data.session.numberDays;
 	// elems.resultLogtime1.innerText = getEachDay(resultEachDay);
 	elems.resultLogtime1.innerText = getEachDay(resultEachDay);
