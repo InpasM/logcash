@@ -58,6 +58,7 @@ function clickBoostMin() {
 	{
 		data.student.addBoostHalf = false;
 		elems.buttonBoostMin.style.borderColor = "rgb(45, 49, 60)";
+		elems.labelLogtimeRight.innerText = "Est. Logout Time";
 	}
 	else
 	{
@@ -65,7 +66,10 @@ function clickBoostMin() {
 		{
 			data.student.addBoostFull = false;
 			elems.buttonBoostMax.style.borderColor = "rgb(45, 49, 60)";
+			elems.labelLogtimeRight.innerText = "Est. Logout Time";
 		}
+		else
+			elems.labelLogtimeRight.innerText = "Est. Lockout Time";
 		data.student.addBoostHalf = true;
 		elems.buttonBoostMin.style.borderColor = "rgb(0, 186, 188)";
 	}
@@ -83,6 +87,7 @@ function clickBoostMax() {
 	{
 		data.student.addBoostFull = false;
 		elems.buttonBoostMax.style.borderColor = "rgb(45, 49, 60)";
+		elems.labelLogtimeRight.innerText = "Est. Logout Time";
 	}
 	else
 	{
@@ -90,7 +95,10 @@ function clickBoostMax() {
 		{
 			data.student.addBoostHalf = false;
 			elems.buttonBoostMin.style.borderColor = "rgb(45, 49, 60)";
+			elems.labelLogtimeRight.innerText = "Est. Logout Time";
 		}
+		else
+			elems.labelLogtimeRight.innerText = "Est. Lockout Time";
 		data.student.addBoostFull = true;
 		elems.buttonBoostMax.style.borderColor = "rgb(0, 186, 188)";
 	}
@@ -1212,8 +1220,6 @@ popup.setData = function(elems) {
 		}
 		else
 		{
-			// console.log(i+1);
-			// console.log(popup.numberDay);
 			if (i + 1 <= popup.numberDay)
 			{
 				data.student.monthlyHabit[i] = false;
@@ -1229,28 +1235,9 @@ popup.setData = function(elems) {
 
 	var numberDays = getOpenDays(popup.numberYear, popup.numberMonth, popup.numberDay);
 
-	elems.numberResultOpen.innerText = numberDays.open;
 	data.session.numberDays = numberDays.total;
+	elems.numberResultOpen.innerText = numberDays.open;
 	elems.numberResultTotal.innerText = numberDays.total;		// DEV ONLY
-
-	if (data.session.logAtSchool)
-	{
-		// elems.labelLogtimeLeft.innerText = "Remaining Today";
-		elems.resultLogtimeLeft.innerText = "0h00";
-		elems.estimationLogtime.innerText = "0h00";
-		// if (data.student.addBoostHalf || data.student.addBoostFull)
-		// 	elems.labelLogtimeRight.innerText = "Est. Lockout Time";
-		// else
-		// 	elems.labelLogtimeRight.innerText = "Est. Logout Time";
-	}
-	else
-	{
-		// elems.labelLogtimeLeft.innerText = "Each Day";
-		elems.resultLogtimeLeft.innerText = "0h00";
-		elems.estimationLogtime.innerText = data.session.numberDays;
-
-		// elems.labelLogtimeRight.innerText = "Days Remaining";
-	}
 
 	if (popup.months[popup.months.indexArray].percent >= 100)
 	{
@@ -1271,10 +1258,9 @@ popup.setData = function(elems) {
 
 	var totalTimeRemaining = popup.months[popup.months.indexArray].nbHourRem + (popup.months[popup.months.indexArray].nbMinRem / 60);
 	var resultEachDay = 0;
-
+	
 	if (totalTimeRemaining > 0)
 	{
-		// if (data.student.monthlyHabit[popup.numberDay - 1])
 		if (data.session.logAtSchool)
 		{
 			totalTimeRemaining += dayTimeDone;
@@ -1290,45 +1276,72 @@ popup.setData = function(elems) {
 	else if (data.student.addBoostFull && resultEachDay != 0)
 		resultEachDay -= 1.4;
 
-	var resultInteger = parseInt(resultEachDay);
-	var resultFloat = parseInt((resultEachDay - resultInteger) * 60);
+	function getEachDay(resultEachDay) {
+
+		var resultInteger = parseInt(resultEachDay);
+		var resultFloat = parseInt((resultEachDay - resultInteger) * 60);
+		var tmpEachDay;
+	
+		if (resultInteger < 0 || resultFloat < 0)
+			tmpEachDay = "0h00";
+		else if (resultFloat < 10)
+			tmpEachDay = resultInteger + "h0" + resultFloat;
+		else
+			tmpEachDay = resultInteger + "h" + resultFloat;
+		return tmpEachDay;
+	}
+	function getRemainingToday(resultRemaining) {
+
+		var doneInteger = parseInt(resultRemaining);
+		var doneFloat = parseInt((resultRemaining - doneInteger) * 60);
+
+		var tmpRemainingToday = doneInteger + "h";
+		if (doneFloat < 10)
+			tmpRemainingToday += "0";
+		tmpRemainingToday += doneFloat;
+		return tmpRemainingToday;
+	}
 
 	var resultRemaining = resultEachDay - dayTimeDone;
 
-	var doneInteger = parseInt(resultRemaining);
-	var doneFloat = parseInt((resultRemaining - doneInteger) * 60);
-
-	var tmpText = "";
-	if (resultInteger < 0 || resultFloat < 0)
-		tmpText = "0h00";
-	else if (resultFloat < 10)
-		tmpText = resultInteger + "h0" + resultFloat;
-	else
-		tmpText = resultInteger + "h" + resultFloat;
-
-	elems.resultLogtime1.innerText = tmpText;
-	if (parseInt(resultRemaining * 60) <= 0)
+	if (resultRemaining <= 0)
 	{
 		elems.resultLogtime2.innerText = "DONE";
 		elems.resultLogtime2.style.color = "rgb(0, 186, 188)";
+		elems.resultLogtimeLeft.innerText = "DONE";
+		elems.resultLogtimeLeft.style.color = "rgb(0, 186, 188)";
+
+		resultEachDay += resultRemaining / numberDays.total;
 	}
 	else
 	{
-		tmpText = doneInteger + "h";
+		var remaining = getRemainingToday(resultRemaining);
 
-		if (doneFloat < 10)
-			tmpText += "0";
-		elems.resultLogtime2.innerText = tmpText + doneFloat;
+		elems.resultLogtime2.innerText = remaining;
 		elems.resultLogtime2.style.color = "white";
+		elems.resultLogtimeLeft.innerText = remaining;
+		elems.resultLogtimeLeft.style.color = "white";
 	}
+	elems.resultLogtime1.innerText = getEachDay(resultEachDay);
+
+	console.log("eachDay: " + resultEachDay + "  resultRemaining: " + resultRemaining);
+	console.log(resultEachDay + (resultRemaining / numberDays.total));
+
 	elems.salaryInteger.innerText = integerSalary;
 	elems.salaryFloat.innerText = "." + floatSalary.toFixed(2).split('.')[1];
 	elems.salaryPercent.innerText = percentSalary.toFixed(1) + '%';
 	elems.salarySlide.style.height = percentSalary + "%";
 
-
-	// DEFINE INFORMATION OF LOGTIME
-
+	if (data.session.logAtSchool)
+	{
+		// elems.resultLogtimeLeft.innerText = "0h00";
+		elems.estimationLogtime.innerText = "0h00";
+	}
+	else
+	{
+		elems.resultLogtimeLeft.innerText = tmpEachDay;
+		elems.estimationLogtime.innerText = data.session.numberDays;
+	}
 }
 
 function clickMonthlyHabit(e) {

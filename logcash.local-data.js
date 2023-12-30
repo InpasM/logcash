@@ -34,8 +34,13 @@ data.student = {
 	// monthlyHabit: [],
 };
 
+var REMAINING = 1,
+	EACH = 2;
 data.session = {
 	logAtSchool: false,
+	logtimeMode: 0,
+	remainingToday: 0,
+	EachDay: 0,
 	numberDays: 0,
 	lockTime: 0,
 };
