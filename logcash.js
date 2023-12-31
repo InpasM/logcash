@@ -107,6 +107,9 @@ function isMonthInArray(array, node) {
 }
 
 function getNbUniqueMonth(nodesList) {
+
+	if (!nodesList)
+		return 0;
 	var tmpList = [];
 
 	for (var i = 0; i < nodesList.length; i++)
@@ -397,8 +400,8 @@ async function fetchCalendar(elems)
 
 	if (ltSvg) {
 		waitForLogTimesChartToLoad(ltSvg);
+		elems.textMonth = ltSvg.querySelectorAll("svg > text");
 	}
-	elems.textMonth = ltSvg.querySelectorAll("svg > text");
 	return ltSvg;
 }
 
@@ -517,43 +520,48 @@ async function initLogcash()
 
 	calendar = await fetchCalendar(elems);
 
-	const months = getInfoMonth(elems, calendar);
-
-	init.generateContainerLogcash(elems, months, calendar);
-
-	window.elems = elems;
-	window.months = months;
-	initStyleProgressBar();
-
-	reGenerate(months[months.indexArray], elems);
-	initButtons(elems);
-
-	// if (data.session.logAtSchool)
-	// {
-	// 	displayMessage("Start setInterval each minutes");
-	// 	setInterval(function() {
-	// 		updateTime(1);
-	// 	}, 60000);
-	// 	// }, 1000);
-	// }
-
-	const buttonAddOneMinute = document.querySelector(".dev-add-1-min");
-	const buttonAddOneHour = document.querySelector(".dev-add-1-hour");
-	const buttonRemoveOneMinute = document.querySelector(".dev-remove-1-min");
-	const buttonRemoveOneHour = document.querySelector(".dev-remove-1-hour");
-
-	buttonAddOneMinute.addEventListener("click", function() {
-		updateTime(1);
-	});
-	buttonAddOneHour.addEventListener("click", function() {
-		updateTime(60);
-	});
-	buttonRemoveOneMinute.addEventListener("click", function() {
-		updateTime(-1);
-	});
-	buttonRemoveOneHour.addEventListener("click", function() {
-		updateTime(-60);
-	});
+	if (calendar)
+	{
+		const months = getInfoMonth(elems, calendar);
+	
+		init.generateContainerLogcash(elems, months, calendar);
+	
+		window.elems = elems;
+		window.months = months;
+		initStyleProgressBar();
+	
+		reGenerate(months[months.indexArray], elems);
+		initButtons(elems);
+	
+		// if (data.session.logAtSchool)
+		// {
+		// 	displayMessage("Start setInterval each minutes");
+		// 	setInterval(function() {
+		// 		updateTime(1);
+		// 	}, 60000);
+		// 	// }, 1000);
+		// }
+	
+		const buttonAddOneMinute = document.querySelector(".dev-add-1-min");
+		const buttonAddOneHour = document.querySelector(".dev-add-1-hour");
+		const buttonRemoveOneMinute = document.querySelector(".dev-remove-1-min");
+		const buttonRemoveOneHour = document.querySelector(".dev-remove-1-hour");
+	
+		buttonAddOneMinute.addEventListener("click", function() {
+			updateTime(1);
+		});
+		buttonAddOneHour.addEventListener("click", function() {
+			updateTime(60);
+		});
+		buttonRemoveOneMinute.addEventListener("click", function() {
+			updateTime(-1);
+		});
+		buttonRemoveOneHour.addEventListener("click", function() {
+			updateTime(-60);
+		});
+	}
+	else
+		displayMessage("Cannot found logtime calendar");
 }
 
 function setRefreshInterval() {
