@@ -1283,7 +1283,7 @@ function getTimeFormat(timeNumber) {
 	var timeMinFloat = (timeMin - Math.trunc(timeMin));
 	var tmpTime;
 
-	console.log(timeNumber, timeHour, timeMin);
+	// console.log(timeNumber, timeHour, timeMin);
 
 	if (timeMinFloat > 0.5 || timeMinFloat.toFixed(1) === "0.5")
 		timeMin = Math.ceil(timeMin);
@@ -1405,21 +1405,14 @@ popup.setData = function(elems) {
 		}
 	}
 	data.session.remTodayLockOff = data.session.eachDayLockOff - dayTimeDone;
-	// if (data.session.remTodayLockOff < 0)
-		// data.session.remTodayLockOff = 0;
 	data.session.remTodayLockMin = data.session.eachDayLockMin - dayTimeDone;
-	// if (data.session.remTodayLockMin < 0)
-		// data.session.remTodayLockMin = 0;
 	data.session.remTodayLockMax = data.session.eachDayLockMax - dayTimeDone;
-	// if (data.session.remTodayLockMax < 0)
-		// data.session.remTodayLockMax = 0;
 
 	// console.log("dayTimeDone:", dayTimeDone, "totalTimeRem:", totalTimeRem);
 	// console.log("eachDay/ ", data.session.eachDayLockOff, data.session.eachDayLockMin, data.session.eachDayLockMax);
 	// console.log("remaining/ ", data.session.remTodayLockOff, data.session.remTodayLockMin, data.session.remTodayLockMax);
 	function setLogtimeValue(remToday, eachDay) {
 
-		// console.log("remToday:", remToday);
 		if ((remToday) <= 0)
 		{
 			elems.resultLogtimeRemaining.innerText = "DONE";
@@ -1430,12 +1423,7 @@ popup.setData = function(elems) {
 	
 			if (data.session.logAtSchool)
 			{
-				// console.log("add time to each day");
-				// eachDay += remToday / (numberDays.total - 1) + (1 / 60);
-				console.log("eachDay:", eachDay);
-				console.log("remToday:", remToday / (numberDays.total));
-				eachDay += remToday / (numberDays.total);
-
+				eachDay += remToday / (numberDays.total - 1);
 			}
 		}
 		else
@@ -1450,7 +1438,6 @@ popup.setData = function(elems) {
 		}
 		if (totalTimeRem > 0)
 		{
-			
 			elems.resultLogtimeEach.innerText = getTimeFormat(eachDay);
 			elems.resultLogtimeEach.style.color = "white";
 		}
@@ -1460,7 +1447,7 @@ popup.setData = function(elems) {
 			elems.resultLogtimeEach.style.color = "rgb(0, 186, 188)";
 		}
 
-		if (!data.session.remTodayLockOff)
+		if (data.session.remTodayLockOff <= 0)
 		{
 			elems.extraLogtimeSideRight.innerText = "DONE";
 			elems.extraLogtimeSideRight.style.color = "rgb(0 126 127)";
@@ -1471,8 +1458,7 @@ popup.setData = function(elems) {
 			elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
 		}
 		elems.resultLogtimeNumberDay.innerText = data.session.numberDays;
-		console.log("eachDay:", eachDay);
-		// elems.resultLogtime1.innerText = getTimeFormat(eachDay);
+		elems.resultLogtime1.innerText = getTimeFormat(eachDay);
 	}
 
 	if (data.student.addBoostHalf)
