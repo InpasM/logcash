@@ -499,26 +499,38 @@ popup.createElems = function(elems) {
 
 	if (data.session.logAtSchool)
 	{
-		// elems.blockLogtimeLeft.style.cursor = "pointer";
-		// elems.blockLogtimeLeft.addEventListener("click", function() {
+		elems.blockLogtimeLeft.style.cursor = "pointer";
+		elems.blockLogtimeLeft.addEventListener("click", function() {
 	
-		// 	if (data.session.logtimeMode === REMAINING)
-		// 	{
-		// 		data.session.logtimeMode = EACH;
-		// 		elems.labelLogtimeRemaining.style.display = "none";
-		// 		elems.resultLogtimeRemaining.style.display = "none";
-		// 		elems.labelLogtimeEach.style.display = "flex";
-		// 		elems.resultLogtimeEach.style.display = "flex";
-		// 	}
-		// 	else if (data.session.logtimeMode === EACH)
-		// 	{
-		// 		data.session.logtimeMode = REMAINING;
-		// 		elems.labelLogtimeEach.style.display = "none";
-		// 		elems.resultLogtimeEach.style.display = "none";
-		// 		elems.labelLogtimeRemaining.style.display = "flex";
-		// 		elems.resultLogtimeRemaining.style.display = "flex";
-		// 	}
-		// });
+			if (data.session.logtimeMode === REMAINING)
+			{
+				data.session.logtimeMode = EACH;
+				elems.labelLogtimeRemaining.style.display = "none";
+				elems.resultLogtimeRemaining.style.display = "none";
+				elems.labelLogtimeEach.style.display = "flex";
+				elems.resultLogtimeEach.style.display = "flex";
+
+				// elems.extraLogtimeLeft.style.display = "none";
+
+				// if (data.student.addBoostHalf)
+				// 	elems.extraLogtimeSideRight.innerText = data.session.eachDayLockMin;
+				// else if (data.student.addBoostHalf)
+				// 	elems.extraLogtimeSideRight.innerText = data.session.eachDayLockMax;
+			}
+			else if (data.session.logtimeMode === EACH)
+			{
+				data.session.logtimeMode = REMAINING;
+				elems.labelLogtimeEach.style.display = "none";
+				elems.resultLogtimeEach.style.display = "none";
+				elems.labelLogtimeRemaining.style.display = "flex";
+				elems.resultLogtimeRemaining.style.display = "flex";
+
+				// elems.extraLogtimeLeft.style.display = "flex";
+
+				// elems.extraLogtimeSideRight.innerText = data.session.eachDayLockMin;
+			}
+			popup.setData(elems);
+		});
 		elems.labelLogtimeRemaining.style.display = "flex";
 		elems.resultLogtimeRemaining.style.display = "flex";
 	}
@@ -539,10 +551,8 @@ popup.createElems = function(elems) {
 	elems.extraLogtimeSideRight = document.createElement("div");
 	elems.extraLogtimeSideRight.className = "extra-logtime-side";
 	elems.extraLogtimeSideRight.innerText = "0h00";
-	// elems.extraLogtimeSideRight.style.minWidth = "45px";
 	elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
 	elems.extraLogtimeSideRight.style.justifyContent = "flex-start";
-	// elems.extraLogtimeSideRight.style.justifyContent = "center";
 	elems.extraLogtimeSideRight.style.fontSize = "10px";
 	elems.extraLogtimeSideRight.style.margin = "auto";
 
@@ -1384,15 +1394,23 @@ popup.setData = function(elems) {
 	var minRem = popup.months[popup.months.indexArray].nbMinRem;
 	var totalTimeRem = hourRem + minRem * (1 / 60);
 
-	if (totalTimeRem > 0)
+	data.session.eachDayLockOff = 0;
+	data.session.eachDayLockMin = 0;
+	data.session.eachDayLockMax = 0;
+
+	var add = 0;
+	if (data.student.addBoostHalf)
+		add = 0.7;
+	else if (data.student.addBoostFull)
+		add = 1.4;
+	// if (totalTimeRem > 0)
+	if (totalTimeRem - (add * numberDays.total) > 0)
 	{
 		if (data.session.logAtSchool)
 		{
 			totalTimeRem += dayTimeDone;
 		}
-		data.session.eachDayLockOff = 0;
-		data.session.eachDayLockMin = 0;
-		data.session.eachDayLockMax = 0;
+
 		if (totalTimeRem > 0 && numberDays.total > 0)
 		{
 			data.session.eachDayLockOff = totalTimeRem / numberDays.total;
@@ -1408,12 +1426,14 @@ popup.setData = function(elems) {
 	data.session.remTodayLockMin = data.session.eachDayLockMin - dayTimeDone;
 	data.session.remTodayLockMax = data.session.eachDayLockMax - dayTimeDone;
 
+
 	// console.log("dayTimeDone:", dayTimeDone, "totalTimeRem:", totalTimeRem);
 	// console.log("eachDay/ ", data.session.eachDayLockOff, data.session.eachDayLockMin, data.session.eachDayLockMax);
 	// console.log("remaining/ ", data.session.remTodayLockOff, data.session.remTodayLockMin, data.session.remTodayLockMax);
 	function setLogtimeValue(remToday, eachDay) {
 
-		if ((remToday) <= 0)
+		// console.log(remToday.toFixed(2));
+		if (remToday.toFixed(2) <= 0)
 		{
 			elems.resultLogtimeRemaining.innerText = "DONE";
 			elems.resultLogtimeRemaining.style.color = "rgb(0, 186, 188)";
@@ -1436,7 +1456,9 @@ popup.setData = function(elems) {
 			elems.resultLogtime2.style.color = "white";				// DEV
 			elems.resultLogtimeEstimation.style.color = "white";
 		}
-		if (totalTimeRem > 0)
+		// if (totalTimeRem > 0)
+		// console.log("eachDay:", eachDay);
+		if (eachDay > 0)
 		{
 			elems.resultLogtimeEach.innerText = getTimeFormat(eachDay);
 			elems.resultLogtimeEach.style.color = "white";
@@ -1447,16 +1469,80 @@ popup.setData = function(elems) {
 			elems.resultLogtimeEach.style.color = "rgb(0, 186, 188)";
 		}
 
-		if (data.session.remTodayLockOff <= 0)
+		if (data.session.logtimeMode === REMAINING)
 		{
-			elems.extraLogtimeSideRight.innerText = "DONE";
-			elems.extraLogtimeSideRight.style.color = "rgb(0 126 127)";
+			console.log("REMAINING mode");
+			if (data.session.remTodayLockOff <= 0)
+			{
+				elems.extraLogtimeSideRight.innerText = "DONE";
+				elems.extraLogtimeSideRight.style.color = "rgb(0 126 127)";
+			}
+			else
+			{
+				elems.extraLogtimeSideRight.innerText = getTimeFormat(data.session.remTodayLockOff);
+				elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
+			}
 		}
-		else
+		else if (data.session.logtimeMode === EACH)
 		{
-			elems.extraLogtimeSideRight.innerText = getTimeFormat(data.session.remTodayLockOff);
-			elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
+			// console.log("EACH mode");
+
+			// if (data.student.addBoostHalf && data.session.logAtSchool)
+			// 	// var eachBoostValue = eachDay + 0.7;
+			// 	var eachBoostValue = eachDay + 1.05;
+			// else if (data.student.addBoostFull)
+			// {
+			// 	// var eachBoostValue = eachDay + 0.7;
+			// 	if (data.session.logAtSchool)
+			// 		var eachBoostValue = eachDay + 2.1;
+			// 	else
+			// 		var eachBoostValue = eachDay + 1.4;
+			// }
+			// else
+			// 	var eachBoostValue = eachDay;
+
+			// console.log("EACH mode", eachDay, "eachBoostValue:", eachBoostValue);
+
+			var add = 0;
+			
+			if (data.student.addBoostHalf)
+				add = 0.7;
+			else if (data.student.addBoostFull)
+			{
+				add = 1.4;
+
+			}
+			// console.log("totalTimeRem:", totalTimeRem - (add * numberDays.total));
+
+			if (data.session.logAtSchool)
+				var eachBoostValue = (hourRem + minRem * (1 / 60)) / (numberDays.total - 1);
+			else
+				var eachBoostValue = totalTimeRem / numberDays.total;
+
+			// console.log("eachBoostValue:", eachBoostValue);
+			if (eachBoostValue <= 0)
+			{
+				elems.extraLogtimeSideRight.innerText = "DONE";
+				elems.extraLogtimeSideRight.style.color = "rgb(0 126 127)";
+			}
+			else
+			{
+				// elems.extraLogtimeSideRight.innerText = getTimeFormat(eachDay + add);
+				elems.extraLogtimeSideRight.innerText = getTimeFormat(eachBoostValue);
+				elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
+			}
 		}
+
+		// if (data.session.remTodayLockOff <= 0)
+		// {
+		// 	elems.extraLogtimeSideRight.innerText = "DONE";
+		// 	elems.extraLogtimeSideRight.style.color = "rgb(0 126 127)";
+		// }
+		// else
+		// {
+		// 	elems.extraLogtimeSideRight.innerText = getTimeFormat(data.session.remTodayLockOff);
+		// 	elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
+		// }
 		elems.resultLogtimeNumberDay.innerText = data.session.numberDays;
 		elems.resultLogtime1.innerText = getTimeFormat(eachDay);
 	}
