@@ -474,23 +474,47 @@ function updateTime(minuteToAdd) {
 	if (minuteToAdd > 0)
 	{
 		if (tmpMinutesDay >= 60) {
-			tmpMinutesDay = 0;
+			tmpMinutesDay = tmpMinutesDay - 60;
 			tmpHourDay += 1;
 		}
 		if (tmpMinutesGlobal >= 60) {
-			tmpMinutesGlobal = 0;
+			tmpMinutesGlobal = tmpMinutesGlobal - 60;
 			tmpHourGlobal += 1;
 		}
 	}
 	else
 	{
-		if (tmpMinutesDay < 0) {
-			tmpMinutesDay = 59;
-			tmpHourDay -= 1;
+		if (tmpMinutesDay < 0)
+		{
+			var positiveMinute = tmpMinutesDay * -1;
+			var newMinute = 60 - positiveMinute;
+
+			if (tmpHourDay <= 0)
+			{
+				tmpHourDay = 0;
+				tmpMinutesDay = 0;
+			}
+			else
+			{
+				tmpHourDay -= 1;
+				tmpMinutesDay = newMinute;
+			}
 		}
-		if (tmpMinutesGlobal < 0) {
-			tmpMinutesGlobal = 59;
-			tmpHourGlobal -= 1;
+		if (tmpMinutesGlobal < 0)
+		{
+			var positiveMinute = tmpMinutesGlobal * -1;
+			var newMinute = 60 - positiveMinute;
+
+			if (tmpHourGlobal <= 0)
+			{
+				tmpHourGlobal = 0;
+				tmpMinutesGlobal = 0;
+			}
+			else
+			{
+				tmpHourGlobal -= 1;
+				tmpMinutesGlobal = newMinute;
+			}
 		}
 	}
 
