@@ -1239,20 +1239,21 @@ function getOpenDays(numberYear, numberMonth, numberDay) {
 	var useAll = isCheckboxUse();
 	var openDays = 0;
 	var totalDays = 0;
-
-	if (data.session.logAtSchool && useAll)
-	{
-		totalDays++; 
-		if (actualDay >= 1 && actualDay <= 5)
-			openDays++;
-	}
-
-	// if (data.session.logAtSchool)
-		// var i = numberDay - 1;
-		var i = numberDay - 1;
-	// else
-	// 	var i = numberDay;
 	var indexHabit = actualDay;
+
+	if (data.session.logAtSchool)
+	{
+		var i = numberDay - 1;
+
+		if (useAll)
+		{
+			totalDays++; 
+			if (actualDay >= 1 && actualDay <= 5)
+			openDays++;
+		}
+	}
+	else
+		var i = numberDay;
 
 	while (++i <= numberDaysInMonth)
 	{
@@ -1262,18 +1263,15 @@ function getOpenDays(numberYear, numberMonth, numberDay) {
 			actualDay = 0;
 		if (actualDay >= 1 && actualDay <= 5)
 		{
-			// if (data.student.monthlyHabit[i - 1] || !useAll || (i === numberDay - 1 && data.session.logAtSchool && useAll))
 			if (data.student.monthlyHabit[i - 1] || !useAll)
 				openDays++;
 		}
-		// if (data.student.monthlyHabit[i - 1] || !useAll || (i === numberDay - 1 && data.session.logAtSchool && useAll))
 		if (data.student.monthlyHabit[i - 1] || !useAll)
 			totalDays++;
 		indexHabit++;
 		actualDay++;
 	}
 	if (!useAll)
-		// console.log("send open days");
 		return ({open: openDays, total: openDays});
 	return ({open: openDays, total: totalDays});
 }
