@@ -1036,8 +1036,12 @@ popup.createElems = function(elems) {
 	elems.resultsDiv.appendChild(elems.mainTitleDays);
 	elems.resultsDiv.appendChild(elems.lineResultsDays);
 
-	elems.popBottomDiv.appendChild(elems.resultsContainer);
-	elems.popBottomDiv.appendChild(elems.moreInfoContainer);
+	data.session.devMode = false;
+	if (data.session.devMode)
+	{
+		elems.popBottomDiv.appendChild(elems.resultsContainer);
+		elems.popBottomDiv.appendChild(elems.moreInfoContainer);
+	}
 	elems.popBottomContainer.appendChild(elems.popBottomDiv);
 
 	if (data.student.showMore)
@@ -1504,7 +1508,7 @@ popup.setData = function(elems) {
 			// console.log("EACH mode", eachDay, "eachBoostValue:", eachBoostValue);
 
 			var add = 0;
-			
+
 			if (data.student.addBoostHalf)
 				add = 0.7;
 			else if (data.student.addBoostFull)

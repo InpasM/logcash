@@ -592,14 +592,14 @@ function setRefreshInterval() {
 	return setInterval(function() {location.reload();}, 5000);
 }
 
-let devMode;
+// let devMode;
 function startLogcash() {
 
 	data.init();
 	
 	if (window.location.href.indexOf("logcash.html") !== -1)
 	{
-		devMode = true;
+		data.session.devMode = true;
 		var refreshButton = document.querySelector(".dev-refresh");
 		var refreshButtonActivator = document.querySelector(".dev-refresh-button");
 		var refreshButtonRemove = document.querySelector(".dev-remove-localStorage");
@@ -632,7 +632,7 @@ function startLogcash() {
 	}
 	else
 	{
-		devMode = false;
+		// devMode = false;
 		setTimeout(function() {
 			initLogcash();
 		}, 1000);

@@ -37,6 +37,7 @@ data.student = {
 var REMAINING = 1,
 	EACH = 2;
 data.session = {
+	devMode: false,
 	logAtSchool: false,
 	logtimeMode: 0,
 	// remainingToday: 0,
