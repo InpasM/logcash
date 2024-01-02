@@ -1236,16 +1236,23 @@ function getOpenDays(numberYear, numberMonth, numberDay) {
 
 	const numberDaysInMonth = new Date(numberYear, numberMonth + 1, 0).getDate();
 	var actualDay = popup.date.getDay();
-
+	var useAll = isCheckboxUse();
 	var openDays = 0;
 	var totalDays = 0;
 
-	if (data.session.logAtSchool)
+	if (data.session.logAtSchool && useAll)
+	{
+		totalDays++; 
+		if (actualDay >= 1 && actualDay <= 5)
+			openDays++;
+	}
+
+	// if (data.session.logAtSchool)
+		// var i = numberDay - 1;
 		var i = numberDay - 1;
-	else
-		var i = numberDay;
+	// else
+	// 	var i = numberDay;
 	var indexHabit = actualDay;
-	var useAll = isCheckboxUse();
 
 	while (++i <= numberDaysInMonth)
 	{
@@ -1255,9 +1262,11 @@ function getOpenDays(numberYear, numberMonth, numberDay) {
 			actualDay = 0;
 		if (actualDay >= 1 && actualDay <= 5)
 		{
+			// if (data.student.monthlyHabit[i - 1] || !useAll || (i === numberDay - 1 && data.session.logAtSchool && useAll))
 			if (data.student.monthlyHabit[i - 1] || !useAll)
 				openDays++;
 		}
+		// if (data.student.monthlyHabit[i - 1] || !useAll || (i === numberDay - 1 && data.session.logAtSchool && useAll))
 		if (data.student.monthlyHabit[i - 1] || !useAll)
 			totalDays++;
 		indexHabit++;
@@ -1275,6 +1284,8 @@ function getTimeFormat(timeNumber) {
 	var timeMin = (timeNumber - timeHour) * 60;
 	var timeMinFloat = (timeMin - Math.trunc(timeMin));
 	var tmpTime;
+
+	console.log(timeNumber, timeHour, timeMin);
 
 	if (timeMinFloat > 0.5 || timeMinFloat.toFixed(1) === "0.5")
 		timeMin = Math.ceil(timeMin);
@@ -1396,20 +1407,21 @@ popup.setData = function(elems) {
 		}
 	}
 	data.session.remTodayLockOff = data.session.eachDayLockOff - dayTimeDone;
-	if (data.session.remTodayLockOff < 0)
-		data.session.remTodayLockOff = 0;
+	// if (data.session.remTodayLockOff < 0)
+		// data.session.remTodayLockOff = 0;
 	data.session.remTodayLockMin = data.session.eachDayLockMin - dayTimeDone;
-	if (data.session.remTodayLockMin < 0)
-		data.session.remTodayLockMin = 0;
+	// if (data.session.remTodayLockMin < 0)
+		// data.session.remTodayLockMin = 0;
 	data.session.remTodayLockMax = data.session.eachDayLockMax - dayTimeDone;
-	if (data.session.remTodayLockMax < 0)
-		data.session.remTodayLockMax = 0;
+	// if (data.session.remTodayLockMax < 0)
+		// data.session.remTodayLockMax = 0;
 
 	// console.log("dayTimeDone:", dayTimeDone, "totalTimeRem:", totalTimeRem);
 	// console.log("eachDay/ ", data.session.eachDayLockOff, data.session.eachDayLockMin, data.session.eachDayLockMax);
 	// console.log("remaining/ ", data.session.remTodayLockOff, data.session.remTodayLockMin, data.session.remTodayLockMax);
 	function setLogtimeValue(remToday, eachDay) {
 
+		// console.log("remToday:", remToday);
 		if ((remToday) <= 0)
 		{
 			elems.resultLogtimeRemaining.innerText = "DONE";
@@ -1422,9 +1434,10 @@ popup.setData = function(elems) {
 			{
 				// console.log("add time to each day");
 				// eachDay += remToday / (numberDays.total - 1) + (1 / 60);
-				eachDay += remToday / (numberDays.total - 1);
+				console.log("eachDay:", eachDay);
+				console.log("remToday:", remToday / (numberDays.total));
+				eachDay += remToday / (numberDays.total);
 
-				// console.log(remToday);
 			}
 		}
 		else
@@ -1439,6 +1452,7 @@ popup.setData = function(elems) {
 		}
 		if (totalTimeRem > 0)
 		{
+			
 			elems.resultLogtimeEach.innerText = getTimeFormat(eachDay);
 			elems.resultLogtimeEach.style.color = "white";
 		}
@@ -1459,7 +1473,8 @@ popup.setData = function(elems) {
 			elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
 		}
 		elems.resultLogtimeNumberDay.innerText = data.session.numberDays;
-		elems.resultLogtime1.innerText = getTimeFormat(eachDay);
+		console.log("eachDay:", eachDay);
+		// elems.resultLogtime1.innerText = getTimeFormat(eachDay);
 	}
 
 	if (data.student.addBoostHalf)
