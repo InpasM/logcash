@@ -1269,32 +1269,47 @@ function getOpenDays(numberYear, numberMonth, numberDay) {
 	return ({open: openDays, total: totalDays});
 }
 
+function getTimeFormat(timeNumber) {
+
+	var timeHour = Math.trunc(timeNumber);
+	var timeMin = (timeNumber - timeHour) * 60;
+	var timeMinFloat = (timeMin - Math.trunc(timeMin));
+	var tmpTime;
+
+	if (timeMinFloat > 0.5 || timeMinFloat.toFixed(1) === "0.5")
+		timeMin = Math.ceil(timeMin);
+	else
+		timeMin = Math.floor(timeMin);
+	if (timeMin === 60)
+	{
+		timeHour += 1;
+		timeMin = 0;
+	}
+	if (timeHour < 0 || timeMin < 0)
+		tmpTime = "0h00";
+	else if (timeMin < 10)
+		tmpTime = timeHour + "h0" + timeMin;
+	else
+		tmpTime = timeHour + "h" + timeMin;
+	return tmpTime;
+}
+
 function getEachDay(resultEachDay) {
 
-	// var resultInteger = parseInt(resultEachDay);
-	// var resultFloat = parseInt((resultEachDay - resultInteger) * 60);
-	// if (resultInteger < 0 || resultFloat < 0)
-	// 	tmpEachDay = "0h00";
-	// else if (resultFloat < 10)
-	// 	tmpEachDay = resultInteger + "h0" + resultFloat;
-	// else
-	// 	tmpEachDay = resultInteger + "h" + resultFloat;
-	
-	// console.log("parseInt:", resultEachDay, resultInteger, resultFloat);
-	
 	var eachDayHour = Math.trunc(resultEachDay);
 	var eachDayMin = (resultEachDay - eachDayHour) * 60;
 	var eachDayMinFloat = (eachDayMin - Math.trunc(eachDayMin));
 	var tmpEachDay;
 
-	// console.log("eachDayMinFloat:", eachDayMinFloat);
 	if (eachDayMinFloat > 0.5)
 		eachDayMin = Math.ceil(eachDayMin);
 	else
 		eachDayMin = Math.floor(eachDayMin);
-
-	// console.log("use MATH:", resultEachDay, eachDayHour, eachDayMin);
-	// console.log("");
+	if (eachDayMin === 60)
+	{
+		eachDayHour += 1;
+		eachDayMin = 0;
+	}
 	if (eachDayHour < 0 || eachDayMin < 0)
 		tmpEachDay = "0h00";
 	else if (eachDayMin < 10)
@@ -1473,7 +1488,8 @@ popup.setData = function(elems) {
 		else
 		{
 			// var remaining = getRemainingToday(remToday + (1 / 60));
-			var remaining = getRemainingToday(remToday);
+			// var remaining = getRemainingToday(remToday);
+			var remaining = getTimeFormat(remToday);
 	
 			elems.resultLogtimeRemaining.innerText = remaining;
 			elems.resultLogtimeRemaining.style.color = "white";
