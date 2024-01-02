@@ -449,7 +449,7 @@ body
 
 .block-logtime-side {
 	/* background-color: pink; */
-	width: 100%;
+	min-width: 74px;
 	/* min-height: 20px; */
 	display: flex;
 	flex-direction: column;
@@ -460,13 +460,14 @@ body
 	/* background-color: blue; */
 	width: 100%;
 	display: flex;
+	justify-content: center;
 	display: none;
 	color: rgb(90, 90, 90);
 }
 
 .extra-logtime-side {
 	/* background-color: purple; */
-	width: 100%;
+	/* width: 100%; */
 	font-size: 7px;
 	display: flex;
 	justify-content: flex-end;
