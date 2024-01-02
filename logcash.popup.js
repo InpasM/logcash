@@ -479,6 +479,7 @@ popup.createElems = function(elems) {
 	elems.blockLogtimeLeft = document.createElement("div");
 	elems.blockLogtimeLeft.className = "block-logtime-side";
 	elems.blockLogtimeLeft.style.borderRight = "1px solid rgb(45, 49, 60)";
+	elems.blockLogtimeLeft.style.paddingRight = "8px";
 
 	
 	elems.labelLogtimeEach = document.createElement("p");
@@ -533,13 +534,17 @@ popup.createElems = function(elems) {
 	elems.extraLogtimeSideLeft.className = "extra-logtime-side";
 	elems.extraLogtimeSideLeft.innerText = "Without\nBoost Lock";
 	elems.extraLogtimeSideLeft.style.textAlign = "right";
+	// elems.extraLogtimeSideLeft.style.flex = "1";
 	
 	elems.extraLogtimeSideRight = document.createElement("div");
 	elems.extraLogtimeSideRight.className = "extra-logtime-side";
 	elems.extraLogtimeSideRight.innerText = "0h00";
+	// elems.extraLogtimeSideRight.style.minWidth = "45px";
 	elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
 	elems.extraLogtimeSideRight.style.justifyContent = "flex-start";
-	elems.extraLogtimeSideRight.style.fontSize = "14px";
+	// elems.extraLogtimeSideRight.style.justifyContent = "center";
+	elems.extraLogtimeSideRight.style.fontSize = "10px";
+	elems.extraLogtimeSideRight.style.margin = "auto";
 
 	elems.extraLogtimeLeft.appendChild(elems.extraLogtimeSideLeft);
 	elems.extraLogtimeLeft.appendChild(elems.extraLogtimeSideRight);
@@ -553,6 +558,7 @@ popup.createElems = function(elems) {
 
 	elems.blockLogtimeRight = document.createElement("div");
 	elems.blockLogtimeRight.className = "block-logtime-side";
+	elems.blockLogtimeRight.style.paddingLeft = "8px";
 
 	elems.labelLogtimeEstimation = document.createElement("p");
 	elems.labelLogtimeEstimation.className = "small-title-info";
@@ -1305,7 +1311,7 @@ function getRemainingToday(resultRemaining) {
 	var remainingMinFloat = (remainingMin - Math.trunc(remainingMin));
 	var tmpRemaining;
 
-	if (remainingMinFloat > 0.5)
+	if (remainingMinFloat > 0.5 || remainingMinFloat.toFixed(1) === "0.5")
 		remainingMin = Math.ceil(remainingMin);
 	else
 		remainingMin = Math.floor(remainingMin);
@@ -1316,14 +1322,6 @@ function getRemainingToday(resultRemaining) {
 		tmpRemaining = remainingHour + "h0" + remainingMin;
 	else
 		tmpRemaining = remainingHour + "h" + remainingMin;
-
-	// var doneInteger = parseInt(resultRemaining);
-	// var doneFloat = parseInt((resultRemaining - doneInteger) * 60);
-
-	// var tmpRemainingToday = doneInteger + "h";
-	// if (doneFloat < 10)
-	// 	tmpRemainingToday += "0";
-	// tmpRemainingToday += doneFloat;
 	return tmpRemaining;
 }
 
@@ -1464,8 +1462,13 @@ popup.setData = function(elems) {
 			elems.resultLogtimeEstimation.style.color = "rgb(0, 186, 188)";
 	
 			if (data.session.logAtSchool)
+			{
+				// console.log("add time to each day");
 				// eachDay += remToday / (numberDays.total - 1) + (1 / 60);
 				eachDay += remToday / (numberDays.total - 1);
+
+				// console.log(remToday);
+			}
 		}
 		else
 		{
@@ -1478,27 +1481,32 @@ popup.setData = function(elems) {
 			elems.resultLogtime2.style.color = "white";				// DEV
 			elems.resultLogtimeEstimation.style.color = "white";
 		}
-		// if (totalTimeRem > 0)
-		// {
-		// 	// if (!data.session.logAtSchool)
-		// 		// eachDay += (1 / 60);
-		// 	elems.resultLogtimeEach.innerText = getEachDay(eachDay);
-		// 	elems.resultLogtimeEach.style.color = "white";
-		// }
-		// else
-		// {
-		// 	elems.resultLogtimeEach.innerText = "DONE";
-		// 	elems.resultLogtimeEach.style.color = "rgb(0, 186, 188)";
-		// }
+		if (totalTimeRem > 0)
+		{
+			// if (!data.session.logAtSchool)
+				// eachDay += (1 / 60);
+			elems.resultLogtimeEach.innerText = getEachDay(eachDay);
+			elems.resultLogtimeEach.style.color = "white";
+		}
+		else
+		{
+			elems.resultLogtimeEach.innerText = "DONE";
+			elems.resultLogtimeEach.style.color = "rgb(0, 186, 188)";
+		}
 
 		// console.log(data.session.remTodayLockOff);
 		if (!data.session.remTodayLockOff)
-			elems.extraLogtimeSideRight.innerText = "0h00";
+		{
+			elems.extraLogtimeSideRight.innerText = "DONE";
+			elems.extraLogtimeSideRight.style.color = "rgb(0 126 127)";
+		}
 		else
+		{
 			elems.extraLogtimeSideRight.innerText = getEachDay(data.session.remTodayLockOff);
-			// elems.extraLogtimeSideRight.innerText = getEachDay(data.session.remTodayLockOff + 1 / 60);
+			elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
+		}
 		elems.resultLogtimeNumberDay.innerText = data.session.numberDays;
-		// elems.resultLogtime1.innerText = getEachDay(eachDay);
+		elems.resultLogtime1.innerText = getEachDay(eachDay);
 	}
 
 	if (data.student.addBoostHalf)
