@@ -1294,52 +1294,6 @@ function getTimeFormat(timeNumber) {
 	return tmpTime;
 }
 
-// function getEachDay(resultEachDay) {
-
-// 	var eachDayHour = Math.trunc(resultEachDay);
-// 	var eachDayMin = (resultEachDay - eachDayHour) * 60;
-// 	var eachDayMinFloat = (eachDayMin - Math.trunc(eachDayMin));
-// 	var tmpEachDay;
-
-// 	if (eachDayMinFloat > 0.5)
-// 		eachDayMin = Math.ceil(eachDayMin);
-// 	else
-// 		eachDayMin = Math.floor(eachDayMin);
-// 	if (eachDayMin === 60)
-// 	{
-// 		eachDayHour += 1;
-// 		eachDayMin = 0;
-// 	}
-// 	if (eachDayHour < 0 || eachDayMin < 0)
-// 		tmpEachDay = "0h00";
-// 	else if (eachDayMin < 10)
-// 		tmpEachDay = eachDayHour + "h0" + eachDayMin;
-// 	else
-// 		tmpEachDay = eachDayHour + "h" + eachDayMin;
-// 	return tmpEachDay;
-// }
-
-// function getRemainingToday(resultRemaining) {
-
-// 	var remainingHour = Math.trunc(resultRemaining);
-// 	var remainingMin = (resultRemaining - remainingHour) * 60;
-// 	var remainingMinFloat = (remainingMin - Math.trunc(remainingMin));
-// 	var tmpRemaining;
-
-// 	if (remainingMinFloat > 0.5 || remainingMinFloat.toFixed(1) === "0.5")
-// 		remainingMin = Math.ceil(remainingMin);
-// 	else
-// 		remainingMin = Math.floor(remainingMin);
-
-// 	if (remainingHour < 0 || remainingMin < 0)
-// 		tmpRemaining = "0h00";
-// 	else if (remainingMin < 10)
-// 		tmpRemaining = remainingHour + "h0" + remainingMin;
-// 	else
-// 		tmpRemaining = remainingHour + "h" + remainingMin;
-// 	return tmpRemaining;
-// }
-
 function setSalaryValue(elems, integerSalary, floatSalary, percentSalary) {
 
 	elems.salaryInteger.innerText = integerSalary;
