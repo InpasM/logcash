@@ -1036,7 +1036,7 @@ popup.createElems = function(elems) {
 	elems.resultsDiv.appendChild(elems.mainTitleDays);
 	elems.resultsDiv.appendChild(elems.lineResultsDays);
 
-	data.session.devMode = false;
+	// data.session.devMode = false;
 	if (data.session.devMode)
 	{
 		elems.popBottomDiv.appendChild(elems.resultsContainer);
@@ -1475,7 +1475,7 @@ popup.setData = function(elems) {
 
 		if (data.session.logtimeMode === REMAINING)
 		{
-			console.log("REMAINING mode");
+			// console.log("REMAINING mode");
 			if (data.session.remTodayLockOff <= 0)
 			{
 				elems.extraLogtimeSideRight.innerText = "DONE";
