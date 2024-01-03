@@ -24,7 +24,7 @@ function reGenerate(month, elems) {
 	// elems.sideProgress.innerText += textPercent;
 
 	if (month.percent < 10)
-		elems.sideProgress.style.width = "50px";
+		elems.sideProgress.style.width = "90px";
 	else if (month.percent > 90 && month.percent < 100)
 		elems.sideProgress.style.width = "90%";
 	else
@@ -523,13 +523,14 @@ function updateTime(minuteToAdd) {
 	months[months.length - 1].nbHourDone = parseInt(tmpHourGlobal);
 	months[months.length - 1].nbMinDone = parseInt(tmpMinutesGlobal);
 
+	calculProgress(months[months.length - 1]);
+	popup.calculDays(elems, months.length - 1);
+	popup.setAttributeDaySlide(elems, months.length - 1);
+	popup.setData(elems);
+
 	if (months.indexArray == months.length - 1)
 	{
-		calculProgress(months[months.indexArray]);
 		reGenerate(months[months.length - 1], elems);
-		popup.calculDays(elems, months.indexArray);
-		popup.setAttributeDaySlide(elems, months.indexArray);
-		popup.setData(elems);
 	}
 }
 
