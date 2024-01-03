@@ -92,18 +92,21 @@ function setStyle(elems) {
 	elems.sideProgress.style.display = "flex";
 	elems.sideProgress.style.justifyContent = "center";
 	elems.sideProgress.style.alignItems = "center";
+	elems.sideProgress.style.textAlign = "center";
 	elems.sideProgress.style.minWidth = "90px";
 	elems.sideProgress.style.height = "100%";
 	elems.sideProgress.style.borderRadius = "3px";
+	elems.sideProgress.style.paddingTop = "2px";
 	
 	elems.sideRemaining.style.display = "flex";
 	elems.sideRemaining.style.justifyContent = "center";
 	elems.sideRemaining.style.alignItems = "center";
 	elems.sideRemaining.style.flex = "1";
-
+	
 	elems.textRemaining.style.margin = "0";
 	elems.textRemaining.style.color = "#8d8e8e";
 	elems.textRemaining.style.pointerEvents = "none";
+	elems.textRemaining.style.paddingTop = "4px";
 }
 
 init.generateContainerLogcash = function(elems, months, calendar) {
