@@ -1475,7 +1475,6 @@ popup.setData = function(elems) {
 
 		if (data.session.logtimeMode === REMAINING)
 		{
-			// console.log("REMAINING mode");
 			if (data.session.remTodayLockOff <= 0)
 			{
 				elems.extraLogtimeSideRight.innerText = "DONE";
@@ -1489,41 +1488,11 @@ popup.setData = function(elems) {
 		}
 		else if (data.session.logtimeMode === EACH)
 		{
-			// console.log("EACH mode");
-
-			// if (data.student.addBoostHalf && data.session.logAtSchool)
-			// 	// var eachBoostValue = eachDay + 0.7;
-			// 	var eachBoostValue = eachDay + 1.05;
-			// else if (data.student.addBoostFull)
-			// {
-			// 	// var eachBoostValue = eachDay + 0.7;
-			// 	if (data.session.logAtSchool)
-			// 		var eachBoostValue = eachDay + 2.1;
-			// 	else
-			// 		var eachBoostValue = eachDay + 1.4;
-			// }
-			// else
-			// 	var eachBoostValue = eachDay;
-
-			// console.log("EACH mode", eachDay, "eachBoostValue:", eachBoostValue);
-
-			var add = 0;
-
-			if (data.student.addBoostHalf)
-				add = 0.7;
-			else if (data.student.addBoostFull)
-			{
-				add = 1.4;
-
-			}
-			// console.log("totalTimeRem:", totalTimeRem - (add * numberDays.total));
-
 			if (data.session.logAtSchool)
 				var eachBoostValue = (hourRem + minRem * (1 / 60)) / (numberDays.total - 1);
 			else
 				var eachBoostValue = totalTimeRem / numberDays.total;
 
-			// console.log("eachBoostValue:", eachBoostValue);
 			if (eachBoostValue <= 0)
 			{
 				elems.extraLogtimeSideRight.innerText = "DONE";
@@ -1531,26 +1500,13 @@ popup.setData = function(elems) {
 			}
 			else
 			{
-				// elems.extraLogtimeSideRight.innerText = getTimeFormat(eachDay + add);
 				elems.extraLogtimeSideRight.innerText = getTimeFormat(eachBoostValue);
 				elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
 			}
 		}
-
-		// if (data.session.remTodayLockOff <= 0)
-		// {
-		// 	elems.extraLogtimeSideRight.innerText = "DONE";
-		// 	elems.extraLogtimeSideRight.style.color = "rgb(0 126 127)";
-		// }
-		// else
-		// {
-		// 	elems.extraLogtimeSideRight.innerText = getTimeFormat(data.session.remTodayLockOff);
-		// 	elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
-		// }
 		elems.resultLogtimeNumberDay.innerText = data.session.numberDays;
 		elems.resultLogtime1.innerText = getTimeFormat(eachDay);
 	}
-
 	if (data.student.addBoostHalf)
 		setLogtimeValue(data.session.remTodayLockMin, data.session.eachDayLockMin);
 	else if (data.student.addBoostFull)
