@@ -1483,6 +1483,7 @@ function setLogtimeValue(remToday, eachDay, elems) {
 
 	var hourRem = popup.months[popup.months.nbMonth - 1].nbHourRem;
 	var minRem = popup.months[popup.months.nbMonth - 1].nbMinRem;
+	var totalTimeRem = hourRem + minRem * (1 / 60);
 
 	if (remToday.toFixed(2) <= 0)
 	{
