@@ -1494,18 +1494,15 @@ function setLogtimeValue(remToday, eachDay, elems) {
 
 function getLogoutTime(timeEnd) {
 
-	if (timeEnd > 24)
+	if (timeEnd.toFixed(2) >= 24)
 		return "IMPOSSIBLE";
 	return getTimeFormat(timeEnd, ":");
 }
 
 function setLogtimeEstimation(elems) {
 		
-	actualTimeNumber = popup.date.getHours() + (popup.date.getMinutes() * (1 / 60));
-	if (data.session.remTodayLockOff <= 0)
-		var timeLockOff = "DONE";
-	else
-		var timeLockOff = getLogoutTime(actualTimeNumber + data.session.remTodayLockOff);
+	actualTimeNumber = popup.numberHour + (popup.numberMinutes * (1 / 60));
+	var timeLockOff = getLogoutTime(actualTimeNumber + data.session.remTodayLockOff);
 
 	if (data.student.addBoostHalf)
 	{
@@ -1598,25 +1595,20 @@ popup.setData = function(elems) {
 
 	setSalaryValue(elems, integerSalary, floatSalary, percentSalary);
 
-	// if (popup.months.indexArray === popup.months.nbMonth - 1)
-	// {
-		// console.log("actual month");
-		console.log(numberDays);
-		calculLogtimeValue(numberDays);
-	
-		// console.log("dayTimeDone:", dayTimeDone, "totalTimeRem:", totalTimeRem);
-		// console.log("eachDay/ ", data.session.eachDayLockOff, data.session.eachDayLockMin, data.session.eachDayLockMax);
-		// console.log("remaining/ ", data.session.remTodayLockOff, data.session.remTodayLockMin, data.session.remTodayLockMax);
-	
-		if (data.student.addBoostHalf)
-			setLogtimeValue(data.session.remTodayLockMin, data.session.eachDayLockMin, elems);
-		else if (data.student.addBoostFull)
-			setLogtimeValue(data.session.remTodayLockMax, data.session.eachDayLockMax, elems);
-		else
-			setLogtimeValue(data.session.remTodayLockOff, data.session.eachDayLockOff, elems);
-	
-		setLogtimeEstimation(elems);
-	// }
+	calculLogtimeValue(numberDays);
+
+	// console.log("dayTimeDone:", dayTimeDone, "totalTimeRem:", totalTimeRem);
+	// console.log("eachDay/ ", data.session.eachDayLockOff, data.session.eachDayLockMin, data.session.eachDayLockMax);
+	// console.log("remaining/ ", data.session.remTodayLockOff, data.session.remTodayLockMin, data.session.remTodayLockMax);
+
+	if (data.student.addBoostHalf)
+		setLogtimeValue(data.session.remTodayLockMin, data.session.eachDayLockMin, elems);
+	else if (data.student.addBoostFull)
+		setLogtimeValue(data.session.remTodayLockMax, data.session.eachDayLockMax, elems);
+	else
+		setLogtimeValue(data.session.remTodayLockOff, data.session.eachDayLockOff, elems);
+
+	setLogtimeEstimation(elems);
 }
 
 function clickMonthlyHabit(e) {
@@ -1660,6 +1652,9 @@ popup.initPopup = function(elems, months) {
 	popup.numberYear = popup.date.getFullYear();
 	popup.numberMonth = popup.date.getMonth();
 	popup.numberDay = popup.date.getDate();
+
+	popup.numberHour = popup.date.getHours();
+	popup.numberMinutes = popup.date.getMinutes();
 	// popup.numberDay = 5;
 
 	// console.log(data.student.months[months.length - 1]);
