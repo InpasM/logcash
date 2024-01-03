@@ -596,7 +596,7 @@ popup.createElems = function(elems) {
 
 	elems.labelLogtimeEstimation = document.createElement("p");
 	elems.labelLogtimeEstimation.className = "small-title-info";
-	elems.resultLogtimeEstimation = document.createElement("div");
+	elems.resultLogtimeEstimation = document.createElement("p");
 	elems.resultLogtimeEstimation.className = "number-result";
 	elems.resultLogtimeEstimation.innerText = "00:00";
 	elems.labelLogtimeEstimation.style.display = "none";
@@ -1419,6 +1419,9 @@ function calculLogtimeValue(numberDays) {
 
 function setLogtimeValue(remToday, eachDay, elems) {
 
+	var hourRem = popup.months[popup.months.nbMonth - 1].nbHourRem;
+	var minRem = popup.months[popup.months.nbMonth - 1].nbMinRem;
+
 	if (remToday.toFixed(2) <= 0)
 	{
 		elems.resultLogtimeRemaining.innerText = "DONE";
@@ -1461,11 +1464,13 @@ function setLogtimeValue(remToday, eachDay, elems) {
 		{
 			elems.extraLogtimeSideRight.innerText = "DONE";
 			elems.extraLogtimeSideRight.style.color = "rgb(0 126 127)";
+			elems.extraEstimation.style.color = "rgb(0 126 127)";
 		}
 		else
 		{
 			elems.extraLogtimeSideRight.innerText = getTimeFormat(data.session.remTodayLockOff, "h");
 			elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
+			elems.extraEstimation.style.color = "rgb(140, 140, 140)";
 		}
 	}
 	else if (data.session.logtimeMode === EACH)
@@ -1477,6 +1482,7 @@ function setLogtimeValue(remToday, eachDay, elems) {
 			// var eachBoostValue = totalTimeRem / numberDays.total;
 			var eachBoostValue = totalTimeRem / data.session.numberDays.total;
 
+		// console.log(hourRem, minRem, eachBoostValue, data.session.numberDays.total);
 		if (eachBoostValue <= 0)
 		{
 			elems.extraLogtimeSideRight.innerText = "DONE";
@@ -1488,7 +1494,7 @@ function setLogtimeValue(remToday, eachDay, elems) {
 			elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
 		}
 	}
-	elems.resultLogtimeNumberDay.innerText = data.session.numberDays;
+	elems.resultLogtimeNumberDay.innerText = data.session.numberDays.total;
 	elems.resultLogtime1.innerText = getTimeFormat(eachDay, "h");
 }
 
@@ -1506,23 +1512,23 @@ function setLogtimeEstimation(elems) {
 
 	if (data.student.addBoostHalf)
 	{
-		if (data.session.remTodayLockMin <= 0)
-			data.session.timeLock = "DONE";
-		else
+		// if (data.session.remTodayLockMin <= 0)
+		// 	data.session.timeLock = "DONE";
+		// else
 			data.session.timeLock = getLogoutTime(actualTimeNumber + data.session.remTodayLockMin);
 	}
 	else if (data.student.addBoostFull)
 	{
-		if (data.session.remTodayLockMax <= 0)
-			data.session.timeLock = "DONE";
-		else
+		// if (data.session.remTodayLockMax <= 0)
+		// 	data.session.timeLock = "DONE";
+		// else
 			data.session.timeLock = getLogoutTime(actualTimeNumber + data.session.remTodayLockMax);
 	}
 	else
 	{
-		if (data.session.remTodayLockOff <= 0)
-			data.session.timeLock = "DONE";
-		else
+		// if (data.session.remTodayLockOff <= 0)
+		// 	data.session.timeLock = "DONE";
+		// else
 			data.session.timeLock = timeLockOff;
 	}
 	
@@ -1576,7 +1582,7 @@ popup.setData = function(elems) {
 
 	var numberDays = getOpenDays(popup.numberYear, popup.numberMonth, popup.numberDay);
 
-	data.session.numberDays = numberDays.total;
+	data.session.numberDays = numberDays;
 	elems.numberResultOpen.innerText = numberDays.open;
 	elems.numberResultTotal.innerText = numberDays.total;		// DEV ONLY
 
@@ -1655,10 +1661,6 @@ popup.initPopup = function(elems, months) {
 
 	popup.numberHour = popup.date.getHours();
 	popup.numberMinutes = popup.date.getMinutes();
-	// popup.numberDay = 5;
-
-	// console.log(data.student.months[months.length - 1]);
-	// console.log(months.length);
 
 	var mouseDown = false,
 		popupOffset = [0, 0];
