@@ -44,10 +44,11 @@ data.session = {
 	remTodayLockOff: 0,
 	remTodayLockMin: 0,
 	remTodayLockMax: 0,
-	eachDay: 0,
+	// eachDay: 0,
 	eachDayLockOff: 0,
 	eachDayLockMin: 0,
 	eachDayLockMax: 0,
+	timeLock: 0,
 	numberDays: 0,
 	lockTime: 0,
 };
