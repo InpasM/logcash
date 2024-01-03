@@ -139,8 +139,11 @@ popup.createElems = function(elems) {
 
 		if (!clickerMode)
 		{
-			elems.moreInfoContainer.style.backgroundColor = "";
-			elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
+			if (data.session.devMode)
+			{
+				elems.moreInfoContainer.style.backgroundColor = "";
+				elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
+			}
 	
 			elems.resultsDiv.style.height = "0px";
 			elems.resultsDiv.style.padding = "0px 8px";
@@ -152,15 +155,21 @@ popup.createElems = function(elems) {
 			elems.estimationContainer.style.padding = "0px 8px";
 			elems.estimationContainer.style.opacity = "0";
 
-			elems.popMiddleDiv.style.display = "none";
-			elems.popProgressTitle.style.display = "none";
+			// elems.popMiddleDiv.style.display = "none";
+			// elems.popProgressTitle.style.display = "none";
+			elems.popMiddleDiv.style.opacity = "0";
+			elems.popProgressTitle.style.opacity = "0";
+			elems.popProgressTitle.style.height = "0";
 
 			clickerMode = true;
 		}
 		else
 		{
-			elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60)";
-			elems.moreInfoContainer.style.padding = "4px 0";
+			if (data.session.devMode)
+			{
+				elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60)";
+				elems.moreInfoContainer.style.padding = "4px 0";
+			}
 		
 			elems.resultsDiv.style.height = "";
 			elems.resultsDiv.style.padding = "8px";
@@ -172,8 +181,11 @@ popup.createElems = function(elems) {
 			elems.estimationContainer.style.padding = "8px";
 			elems.estimationContainer.style.opacity = "1";
 
-			elems.popMiddleDiv.style.display = "flex";
-			elems.popProgressTitle.style.display = "flex";
+			// elems.popMiddleDiv.style.display = "flex";
+			// elems.popProgressTitle.style.display = "flex";
+			elems.popMiddleDiv.style.opacity = "1";
+			elems.popProgressTitle.style.opacity = "1";
+			elems.popProgressTitle.style.height = "";
 
 			clickerMode = false;
 		}
@@ -1360,6 +1372,177 @@ function setSalaryValue(elems, integerSalary, floatSalary, percentSalary) {
 	elems.salarySlide.style.height = percentSalary + "%";
 }
 
+function calculLogtimeValue(numberDays) {
+
+	var actualHourDone = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone;
+	var actualMinuteDone = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone;
+	var dayTimeDone = actualHourDone + actualMinuteDone * (1 / 60);
+
+	// var hourRem = popup.months[popup.months.indexArray].nbHourRem;
+	// var minRem = popup.months[popup.months.indexArray].nbMinRem;
+	var hourRem = popup.months[popup.months.nbMonth - 1].nbHourRem;
+	var minRem = popup.months[popup.months.nbMonth - 1].nbMinRem;
+	var totalTimeRem = hourRem + minRem * (1 / 60);
+
+	data.session.eachDayLockOff = 0;
+	data.session.eachDayLockMin = 0;
+	data.session.eachDayLockMax = 0;
+
+	var add = 0;
+	if (data.student.addBoostHalf)
+		add = 0.7;
+	else if (data.student.addBoostFull)
+		add = 1.4;
+
+	if (totalTimeRem - (add * numberDays.total) > 0)
+	{
+		if (data.session.logAtSchool)
+		{
+			totalTimeRem += dayTimeDone;
+		}
+
+		if (totalTimeRem > 0 && numberDays.total > 0)
+		{
+			data.session.eachDayLockOff = totalTimeRem / numberDays.total;
+			data.session.eachDayLockMin = totalTimeRem / numberDays.total;
+			data.session.eachDayLockMax = totalTimeRem / numberDays.total;
+			if (data.session.eachDayLockMin > 0.7)
+				data.session.eachDayLockMin -= 0.7;
+			if (data.session.eachDayLockMax > 1.4)
+				data.session.eachDayLockMax -= 1.4;
+		}
+	}
+	data.session.remTodayLockOff = data.session.eachDayLockOff - dayTimeDone;
+	data.session.remTodayLockMin = data.session.eachDayLockMin - dayTimeDone;
+	data.session.remTodayLockMax = data.session.eachDayLockMax - dayTimeDone;
+}
+
+function setLogtimeValue(remToday, eachDay, elems) {
+
+	if (remToday.toFixed(2) <= 0)
+	{
+		elems.resultLogtimeRemaining.innerText = "DONE";
+		elems.resultLogtimeRemaining.style.color = "rgb(0, 186, 188)";
+		elems.resultLogtime2.innerText = "DONE";				// DEV
+		elems.resultLogtime2.style.color = "rgb(0, 186, 188)";	// DEV
+		elems.resultLogtimeEstimation.style.color = "rgb(0, 186, 188)";
+
+		if (data.session.logAtSchool)
+		{
+			// eachDay += remToday / (numberDays.total - 1);
+			eachDay += remToday / (data.session.numberDays.total - 1);
+		}
+	}
+	else
+	{
+		var remaining = getTimeFormat(remToday, "h");
+
+		elems.resultLogtimeRemaining.innerText = remaining;
+		elems.resultLogtimeRemaining.style.color = "white";
+		elems.resultLogtime2.innerText = remaining;				// DEV
+		elems.resultLogtime2.style.color = "white";				// DEV
+		elems.resultLogtimeEstimation.style.color = "white";
+	}
+
+	if (eachDay > 0)
+	{
+		elems.resultLogtimeEach.innerText = getTimeFormat(eachDay, "h");
+		elems.resultLogtimeEach.style.color = "white";
+	}
+	else
+	{
+		elems.resultLogtimeEach.innerText = "DONE";
+		elems.resultLogtimeEach.style.color = "rgb(0, 186, 188)";
+	}
+
+	if (data.session.logtimeMode === REMAINING)
+	{
+		if (data.session.remTodayLockOff <= 0)
+		{
+			elems.extraLogtimeSideRight.innerText = "DONE";
+			elems.extraLogtimeSideRight.style.color = "rgb(0 126 127)";
+		}
+		else
+		{
+			elems.extraLogtimeSideRight.innerText = getTimeFormat(data.session.remTodayLockOff, "h");
+			elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
+		}
+	}
+	else if (data.session.logtimeMode === EACH)
+	{
+		if (data.session.logAtSchool)
+			// var eachBoostValue = (hourRem + minRem * (1 / 60)) / (numberDays.total - 1);
+			var eachBoostValue = (hourRem + minRem * (1 / 60)) / (data.session.numberDays.total - 1);
+		else
+			// var eachBoostValue = totalTimeRem / numberDays.total;
+			var eachBoostValue = totalTimeRem / data.session.numberDays.total;
+
+		if (eachBoostValue <= 0)
+		{
+			elems.extraLogtimeSideRight.innerText = "DONE";
+			elems.extraLogtimeSideRight.style.color = "rgb(0 126 127)";
+		}
+		else
+		{
+			elems.extraLogtimeSideRight.innerText = getTimeFormat(eachBoostValue, "h");
+			elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
+		}
+	}
+	elems.resultLogtimeNumberDay.innerText = data.session.numberDays;
+	elems.resultLogtime1.innerText = getTimeFormat(eachDay, "h");
+}
+
+function getLogoutTime(timeEnd) {
+
+	if (timeEnd > 24)
+		return "IMPOSSIBLE";
+	return getTimeFormat(timeEnd, ":");
+}
+
+function setLogtimeEstimation(elems) {
+		
+	actualTimeNumber = popup.date.getHours() + (popup.date.getMinutes() * (1 / 60));
+	if (data.session.remTodayLockOff <= 0)
+		var timeLockOff = "DONE";
+	else
+		var timeLockOff = getLogoutTime(actualTimeNumber + data.session.remTodayLockOff);
+
+	if (data.student.addBoostHalf)
+	{
+		if (data.session.remTodayLockMin <= 0)
+			data.session.timeLock = "DONE";
+		else
+			data.session.timeLock = getLogoutTime(actualTimeNumber + data.session.remTodayLockMin);
+	}
+	else if (data.student.addBoostFull)
+	{
+		if (data.session.remTodayLockMax <= 0)
+			data.session.timeLock = "DONE";
+		else
+			data.session.timeLock = getLogoutTime(actualTimeNumber + data.session.remTodayLockMax);
+	}
+	else
+	{
+		if (data.session.remTodayLockOff <= 0)
+			data.session.timeLock = "DONE";
+		else
+			data.session.timeLock = timeLockOff;
+	}
+	
+	if (data.session.timeLock === "IMPOSSIBLE")
+		elems.resultLogtimeEstimation.style.fontSize = "12px";
+	else
+		elems.resultLogtimeEstimation.style.fontSize = "16px";
+
+	if (timeLockOff === "IMPOSSIBLE")
+		elems.extraEstimation.style.fontSize = "8px";
+	else
+		elems.extraEstimation.style.fontSize = "12px";
+
+	elems.resultLogtimeEstimation.innerText = data.session.timeLock;
+	elems.extraEstimation.innerText = timeLockOff;
+}
+
 popup.setData = function(elems) {
 
 	if (data.student.pseudo === 0)
@@ -1415,189 +1598,25 @@ popup.setData = function(elems) {
 
 	setSalaryValue(elems, integerSalary, floatSalary, percentSalary);
 
-	var actualHourDone = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].hourDone;
-	var actualMinuteDone = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone;
-	var dayTimeDone = actualHourDone + actualMinuteDone * (1 / 60);
-
-	var hourRem = popup.months[popup.months.indexArray].nbHourRem;
-	var minRem = popup.months[popup.months.indexArray].nbMinRem;
-	var totalTimeRem = hourRem + minRem * (1 / 60);
-
-	data.session.eachDayLockOff = 0;
-	data.session.eachDayLockMin = 0;
-	data.session.eachDayLockMax = 0;
-
-	var add = 0;
-	if (data.student.addBoostHalf)
-		add = 0.7;
-	else if (data.student.addBoostFull)
-		add = 1.4;
-	// if (totalTimeRem > 0)
-	if (totalTimeRem - (add * numberDays.total) > 0)
-	{
-		if (data.session.logAtSchool)
-		{
-			totalTimeRem += dayTimeDone;
-		}
-
-		if (totalTimeRem > 0 && numberDays.total > 0)
-		{
-			data.session.eachDayLockOff = totalTimeRem / numberDays.total;
-			data.session.eachDayLockMin = totalTimeRem / numberDays.total;
-			data.session.eachDayLockMax = totalTimeRem / numberDays.total;
-			if (data.session.eachDayLockMin > 0.7)
-				data.session.eachDayLockMin -= 0.7;
-			if (data.session.eachDayLockMax > 1.4)
-				data.session.eachDayLockMax -= 1.4;
-		}
-	}
-	data.session.remTodayLockOff = data.session.eachDayLockOff - dayTimeDone;
-	data.session.remTodayLockMin = data.session.eachDayLockMin - dayTimeDone;
-	data.session.remTodayLockMax = data.session.eachDayLockMax - dayTimeDone;
-
-
-	// console.log("dayTimeDone:", dayTimeDone, "totalTimeRem:", totalTimeRem);
-	// console.log("eachDay/ ", data.session.eachDayLockOff, data.session.eachDayLockMin, data.session.eachDayLockMax);
-	// console.log("remaining/ ", data.session.remTodayLockOff, data.session.remTodayLockMin, data.session.remTodayLockMax);
-	function setLogtimeValue(remToday, eachDay) {
-
-		// console.log(remToday.toFixed(2));
-		if (remToday.toFixed(2) <= 0)
-		{
-			elems.resultLogtimeRemaining.innerText = "DONE";
-			elems.resultLogtimeRemaining.style.color = "rgb(0, 186, 188)";
-			elems.resultLogtime2.innerText = "DONE";				// DEV
-			elems.resultLogtime2.style.color = "rgb(0, 186, 188)";	// DEV
-			elems.resultLogtimeEstimation.style.color = "rgb(0, 186, 188)";
+	// if (popup.months.indexArray === popup.months.nbMonth - 1)
+	// {
+		// console.log("actual month");
+		console.log(numberDays);
+		calculLogtimeValue(numberDays);
 	
-			if (data.session.logAtSchool)
-			{
-				eachDay += remToday / (numberDays.total - 1);
-			}
-		}
-		else
-		{
-			var remaining = getTimeFormat(remToday, "h");
+		// console.log("dayTimeDone:", dayTimeDone, "totalTimeRem:", totalTimeRem);
+		// console.log("eachDay/ ", data.session.eachDayLockOff, data.session.eachDayLockMin, data.session.eachDayLockMax);
+		// console.log("remaining/ ", data.session.remTodayLockOff, data.session.remTodayLockMin, data.session.remTodayLockMax);
 	
-			elems.resultLogtimeRemaining.innerText = remaining;
-			elems.resultLogtimeRemaining.style.color = "white";
-			elems.resultLogtime2.innerText = remaining;				// DEV
-			elems.resultLogtime2.style.color = "white";				// DEV
-			elems.resultLogtimeEstimation.style.color = "white";
-		}
-		// if (totalTimeRem > 0)
-		// console.log("eachDay:", eachDay);
-		if (eachDay > 0)
-		{
-			elems.resultLogtimeEach.innerText = getTimeFormat(eachDay, "h");
-			elems.resultLogtimeEach.style.color = "white";
-		}
+		if (data.student.addBoostHalf)
+			setLogtimeValue(data.session.remTodayLockMin, data.session.eachDayLockMin, elems);
+		else if (data.student.addBoostFull)
+			setLogtimeValue(data.session.remTodayLockMax, data.session.eachDayLockMax, elems);
 		else
-		{
-			elems.resultLogtimeEach.innerText = "DONE";
-			elems.resultLogtimeEach.style.color = "rgb(0, 186, 188)";
-		}
-
-		if (data.session.logtimeMode === REMAINING)
-		{
-			if (data.session.remTodayLockOff <= 0)
-			{
-				elems.extraLogtimeSideRight.innerText = "DONE";
-				elems.extraLogtimeSideRight.style.color = "rgb(0 126 127)";
-			}
-			else
-			{
-				elems.extraLogtimeSideRight.innerText = getTimeFormat(data.session.remTodayLockOff, "h");
-				elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
-			}
-		}
-		else if (data.session.logtimeMode === EACH)
-		{
-			if (data.session.logAtSchool)
-				var eachBoostValue = (hourRem + minRem * (1 / 60)) / (numberDays.total - 1);
-			else
-				var eachBoostValue = totalTimeRem / numberDays.total;
-
-			if (eachBoostValue <= 0)
-			{
-				elems.extraLogtimeSideRight.innerText = "DONE";
-				elems.extraLogtimeSideRight.style.color = "rgb(0 126 127)";
-			}
-			else
-			{
-				elems.extraLogtimeSideRight.innerText = getTimeFormat(eachBoostValue, "h");
-				elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
-			}
-		}
-		elems.resultLogtimeNumberDay.innerText = data.session.numberDays;
-		elems.resultLogtime1.innerText = getTimeFormat(eachDay, "h");
-	}
-	if (data.student.addBoostHalf)
-		setLogtimeValue(data.session.remTodayLockMin, data.session.eachDayLockMin);
-	else if (data.student.addBoostFull)
-		setLogtimeValue(data.session.remTodayLockMax, data.session.eachDayLockMax);
-	else
-		setLogtimeValue(data.session.remTodayLockOff, data.session.eachDayLockOff);
-
-	function getLogoutTime(timeEnd) {
-
-		// console.log(timeEnd);
-		if (timeEnd > 24)
-			return "IMPOSSIBLE";
-		return getTimeFormat(timeEnd, ":");
-	}
-
-	actualTimeNumber = popup.date.getHours() + (popup.date.getMinutes() * (1 / 60));
-
-	// console.log("remaining today:", data.session.remTodayLockOff, "actual time:", actualTimeNumber);
-
-	if (data.session.remTodayLockOff <= 0)
-		// data.session.timeLock = "DONE";
-		var timeLockOff = "DONE";
-	else
-		var timeLockOff = getLogoutTime(actualTimeNumber + data.session.remTodayLockOff);
-
-	if (data.student.addBoostHalf)
-	{
-		if (data.session.remTodayLockMin <= 0)
-			data.session.timeLock = "DONE";
-		else
-			data.session.timeLock = getLogoutTime(actualTimeNumber + data.session.remTodayLockMin);
-	}
-	else if (data.student.addBoostFull)
-	{
-		if (data.session.remTodayLockMax <= 0)
-			data.session.timeLock = "DONE";
-		else
-			data.session.timeLock = getLogoutTime(actualTimeNumber + data.session.remTodayLockMax);
-	}
-	else
-	{
-		if (data.session.remTodayLockOff <= 0)
-			data.session.timeLock = "DONE";
-		else
-			data.session.timeLock = timeLockOff;
-	}
-
-	// console.log(data.session.remTodayLockOff);
-	// if (data.session.remTodayLockOff <= 0)
-	// 	data.session.timeLock = "DONE";
-	// if (data.session.remTodayLockOff <= 0)
-	// 	data.session.timeLock = "DONE";
+			setLogtimeValue(data.session.remTodayLockOff, data.session.eachDayLockOff, elems);
 	
-	if (data.session.timeLock === "IMPOSSIBLE")
-		elems.resultLogtimeEstimation.style.fontSize = "12px";
-	else
-		elems.resultLogtimeEstimation.style.fontSize = "16px";
-
-	if (timeLockOff === "IMPOSSIBLE")
-		elems.extraEstimation.style.fontSize = "8px";
-	else
-		elems.extraEstimation.style.fontSize = "12px";
-
-
-	elems.resultLogtimeEstimation.innerText = data.session.timeLock;
-	elems.extraEstimation.innerText = timeLockOff;
+		setLogtimeEstimation(elems);
+	// }
 }
 
 function clickMonthlyHabit(e) {
