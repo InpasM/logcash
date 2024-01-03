@@ -133,7 +133,7 @@ function mouseOverQuestion(e) {
 	// elems.tooltipBottomText.innerText = e.target.getAttribute("salary") + "€";
 
 	offsetLeft = elemRect.left - elemRect.width;
-	offsetTop = elemRect.top + 25;
+	offsetTop = elemRect.top + 20;
 
 	// newOffsetTop = elemRect.top - 21;	// hover on top of element
 	// newOffsetTop = tmpBase.top + tmpBase.height * 2 + window.scrollY;	// hover at bottom of element
@@ -145,8 +145,14 @@ function mouseOverQuestion(e) {
 }
 
 function mouseOutQuestion(e) {
+
+	elemRect = e.target.getBoundingClientRect();
+
+	// add timeout to delay movement
 		
 	elems.tooltipQuestion.style.opacity = "0";
+	elems.tooltipQuestion.style.top = "-1000px";
+	elems.tooltipQuestion.style.left = "-1000px";
 }
 
 popup.createElems = function(elems) {
