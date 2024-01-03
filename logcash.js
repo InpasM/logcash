@@ -573,18 +573,42 @@ async function initLogcash()
 			const buttonAddOneHour = document.querySelector(".dev-add-1-hour");
 			const buttonRemoveOneMinute = document.querySelector(".dev-remove-1-min");
 			const buttonRemoveOneHour = document.querySelector(".dev-remove-1-hour");
+			const devClock = document.querySelector(".dev-clock");
+
+			devClock.innerText = popup.numberHour + ":" + popup.numberMinutes;
+			function updateMinutes(minuteToAdd) {
+
+				popup.numberMinutes += minuteToAdd;
+				if (popup.numberMinutes >= 60)
+				{
+					popup.numberMinutes -= 60;
+					popup.numberHour += 1;
+				}
+				else if (popup.numberMinutes < 0)
+				{
+					popup.numberMinutes += 60;
+					popup.numberHour -= 1;
+				}
+				// console.log("new hour:", popup.numberHour, "new minutes", popup.numberMinutes);
+			}
+
+			function addTime(number) {
+				updateMinutes(number);
+				updateTime(number);
+				devClock.innerText = popup.numberHour + ":" + popup.numberMinutes;
+			}
 		
 			buttonAddOneMinute.addEventListener("click", function() {
-				updateTime(1);
+				addTime(1);
 			});
 			buttonAddOneHour.addEventListener("click", function() {
-				updateTime(60);
+				addTime(60);
 			});
 			buttonRemoveOneMinute.addEventListener("click", function() {
-				updateTime(-1);
+				addTime(-1);
 			});
 			buttonRemoveOneHour.addEventListener("click", function() {
-				updateTime(-60);
+				addTime(-60);
 			});
 		}
 	}

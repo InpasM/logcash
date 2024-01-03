@@ -1031,11 +1031,19 @@ body
 	/* width: 100px; */
 	bottom: 10px;
 	display: flex;
-	background-color: red;
+	/* background-color: red; */
 }
 
 .dev-add-1-min , .dev-add-1-hour {
+	
+}
 
+.dev-clock {
+	background-color: rgb(253, 197, 91);
+	border-radius: 4px;
+	padding: 4px;
+	margin-left: 10px;
+	color: black;
 }
 
 
