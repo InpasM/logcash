@@ -122,6 +122,33 @@ function clickBoostMax() {
 	popup.setData(elems);
 }
 
+function mouseOverQuestion(e) {
+		
+	// console.log(e.target.id);
+
+	elemRect = e.target.getBoundingClientRect();
+	// var tmpBase = e.target.nextSibling.getBoundingClientRect();
+
+	// elems.tooltipTopText.innerText = e.target.getAttribute("date");
+	// elems.tooltipBottomText.innerText = e.target.getAttribute("salary") + "€";
+
+	offsetLeft = elemRect.left - elemRect.width;
+	offsetTop = elemRect.top + 25;
+
+	// newOffsetTop = elemRect.top - 21;	// hover on top of element
+	// newOffsetTop = tmpBase.top + tmpBase.height * 2 + window.scrollY;	// hover at bottom of element
+	newOffsetTop = 2 + window.scrollY;	// hover at bottom of element
+
+	elems.tooltipQuestion.style.opacity = "1";
+	elems.tooltipQuestion.style.top = offsetTop + "px";
+	elems.tooltipQuestion.style.left = offsetLeft + "px";
+}
+
+function mouseOutQuestion(e) {
+		
+	elems.tooltipQuestion.style.opacity = "0";
+}
+
 popup.createElems = function(elems) {
 
 	elems.popupRemaining = document.createElement("div");
@@ -218,11 +245,26 @@ popup.createElems = function(elems) {
 	elems.titleBoost = document.createElement("p");
 	elems.titleBoost.className = "main-title-info";
 	elems.titleBoost.innerText = "Boost Lock";
-	elems.questionHours = document.createElement("div");
-	elems.questionHours.className = "question-logo";
+	elems.questionBoost = document.createElement("div");
+	elems.questionBoost.className = "question-logo";
+	elems.questionBoost.id = "1";
+	elems.questionBoost.addEventListener("mouseover", mouseOverQuestion);
+	elems.questionBoost.addEventListener("mouseout", mouseOutQuestion);
 
 	elems.lineLabelBoost.appendChild(elems.titleBoost);
-	elems.lineLabelBoost.appendChild(elems.questionHours);
+	elems.lineLabelBoost.appendChild(elems.questionBoost);
+
+	elems.tooltipQuestion = document.createElement("div");
+	elems.tooltipQuestion.className = "tooltip-question";
+	elems.tooltipQuestionTopText = document.createElement("p");
+	elems.tooltipQuestionTopText.className = "tooltip-question-top-text";
+	elems.tooltipQuestionBottomText = document.createElement("p");
+	elems.tooltipQuestionBottomText.className = "tooltip-question-bottom-text";
+
+	elems.tooltipQuestion.appendChild(elems.tooltipQuestionTopText);
+	elems.tooltipQuestion.appendChild(elems.tooltipQuestionBottomText);
+
+	document.body.appendChild(elems.tooltipQuestion);
 
 	
 	elems.blockBoost = document.createElement("div");
@@ -281,6 +323,9 @@ popup.createElems = function(elems) {
 
 	elems.questionSalary = document.createElement("div");
 	elems.questionSalary.className = "question-logo";
+	elems.questionSalary.id = "1";
+	elems.questionSalary.addEventListener("mouseover", mouseOverQuestion);
+	elems.questionSalary.addEventListener("mouseout", mouseOutQuestion);
 
 	elems.lineLabelSalary.appendChild(elems.labelSalary);
 	elems.lineLabelSalary.appendChild(elems.questionSalary);
@@ -303,8 +348,13 @@ popup.createElems = function(elems) {
 	elems.labelHours.className = "small-title-info";
 	elems.labelHours.innerText = "Hours Deduc."; // before Hours Deducted
 
+
+
 	elems.questionHours = document.createElement("div");
 	elems.questionHours.className = "question-logo";
+	elems.questionHours.id = "0";
+	elems.questionHours.addEventListener("mouseover", mouseOverQuestion);
+	elems.questionHours.addEventListener("mouseout", mouseOutQuestion);
 
 	elems.lineLabelHours.appendChild(elems.labelHours);
 	elems.lineLabelHours.appendChild(elems.questionHours);
@@ -329,6 +379,9 @@ popup.createElems = function(elems) {
 
 	elems.questionHabit = document.createElement("div");
 	elems.questionHabit.className = "question-logo";
+	elems.questionHabit.id = "2";
+	elems.questionHabit.addEventListener("mouseover", mouseOverQuestion);
+	elems.questionHabit.addEventListener("mouseout", mouseOutQuestion);
 	
 	elems.monthContainer = document.createElement("div");
 	elems.monthContainer.className = "month-container";
@@ -496,6 +549,9 @@ popup.createElems = function(elems) {
 	elems.titleLogtime.innerText = "Logtime";
 	elems.questionLogtime = document.createElement("div");
 	elems.questionLogtime.className = "question-logo";
+	elems.questionLogtime.id = "3";
+	elems.questionLogtime.addEventListener("mouseover", mouseOverQuestion);
+	elems.questionLogtime.addEventListener("mouseout", mouseOutQuestion);
 	
 	elems.blockLogtime = document.createElement("div");
 	elems.blockLogtime.className = "block-logtime";
@@ -682,11 +738,11 @@ popup.createElems = function(elems) {
 	elems.lineLabelEarn = document.createElement("div");
 	elems.lineLabelEarn.className = "line-label";
 
-	elems.questionEarn = document.createElement("div");
-	elems.questionEarn.className = "question-logo";
+	// elems.questionEarn = document.createElement("div");
+	// elems.questionEarn.className = "question-logo";
 
 	elems.lineLabelEarn.appendChild(elems.mainTitleInfo);
-	elems.lineLabelEarn.appendChild(elems.questionEarn);
+	// elems.lineLabelEarn.appendChild(elems.questionEarn);
 
 
 	elems.lineThisSelection = document.createElement("div");
