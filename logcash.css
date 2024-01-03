@@ -472,6 +472,7 @@ body
 	font-size: 7px;
 	display: flex;
 	justify-content: flex-end;
+	align-items: center;
 	/* color: rgb(155, 155, 155); */
 	margin: 0;
 	padding: 0 2px;
@@ -479,6 +480,21 @@ body
 }
 
 .extra-title {
+}
+
+.extra-estimation {
+	/* background-color: red; */
+	height: 100%;
+	width: 100%;
+	display: flex;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	margin: 0px 0 0 0;
+	padding: 0;
+	font-size: 12px;
+	/* text-align: center; */
+	color: rgb(140, 140, 140);
 }
 
 
@@ -899,6 +915,7 @@ body
 	align-items: center;
 	text-align: center;
 	min-width: 25px;
+	min-height: 20px;
 	padding: 2px 0 0 0;
 	margin: 0;
 	font-size: 16px;

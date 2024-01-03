@@ -74,9 +74,15 @@ function clickBoostMin() {
 		elems.buttonBoostMin.style.borderColor = "rgb(0, 186, 188)";
 	}
 	if (data.student.addBoostHalf || data.student.addBoostFull)
+	{
 		elems.extraLogtimeLeft.style.display = "flex";
+		elems.extraEstimation.style.display = "flex";
+	}
 	else
+	{
 		elems.extraLogtimeLeft.style.display = "none";
+		elems.extraEstimation.style.display = "none";
+	}
 	data.updateLocalStorage();
 	popup.setData(elems);
 }
@@ -103,9 +109,15 @@ function clickBoostMax() {
 		elems.buttonBoostMax.style.borderColor = "rgb(0, 186, 188)";
 	}
 	if (data.student.addBoostHalf || data.student.addBoostFull)
+	{
 		elems.extraLogtimeLeft.style.display = "flex";
+		elems.extraEstimation.style.display = "flex";
+	}
 	else
+	{
 		elems.extraLogtimeLeft.style.display = "none";
+		elems.extraEstimation.style.display = "none";
+	}
 	data.updateLocalStorage();
 	popup.setData(elems);
 }
@@ -554,7 +566,7 @@ popup.createElems = function(elems) {
 	elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
 	elems.extraLogtimeSideRight.style.justifyContent = "flex-start";
 	elems.extraLogtimeSideRight.style.fontSize = "10px";
-	elems.extraLogtimeSideRight.style.margin = "auto";
+	// elems.extraLogtimeSideRight.style.margin = "auto";
 
 	elems.extraLogtimeLeft.appendChild(elems.extraLogtimeSideLeft);
 	elems.extraLogtimeLeft.appendChild(elems.extraLogtimeSideRight);
@@ -574,7 +586,7 @@ popup.createElems = function(elems) {
 	elems.labelLogtimeEstimation.className = "small-title-info";
 	elems.resultLogtimeEstimation = document.createElement("div");
 	elems.resultLogtimeEstimation.className = "number-result";
-	elems.resultLogtimeEstimation.innerText = "0h00";
+	elems.resultLogtimeEstimation.innerText = "00:00";
 	elems.labelLogtimeEstimation.style.display = "none";
 	elems.resultLogtimeEstimation.style.display = "none";
 
@@ -587,11 +599,16 @@ popup.createElems = function(elems) {
 	elems.labelLogtimeNumberDay.style.display = "none";
 	elems.resultLogtimeNumberDay.style.display = "none";
 
+	elems.extraEstimation = document.createElement("div");
+	elems.extraEstimation.className = "extra-estimation";
+	elems.extraEstimation.innerText = "00:00";
+
 
 	elems.blockLogtimeRight.appendChild(elems.labelLogtimeEstimation);
 	elems.blockLogtimeRight.appendChild(elems.resultLogtimeEstimation);
 	elems.blockLogtimeRight.appendChild(elems.labelLogtimeNumberDay);
 	elems.blockLogtimeRight.appendChild(elems.resultLogtimeNumberDay);
+	elems.blockLogtimeRight.appendChild(elems.extraEstimation);
 
 	elems.lineLogtime.appendChild(elems.titleLogtime);
 	elems.lineLogtime.appendChild(elems.questionLogtime);
@@ -630,9 +647,15 @@ popup.createElems = function(elems) {
 	}
 
 	if (data.student.addBoostHalf || data.student.addBoostFull)
+	{
 		elems.extraLogtimeLeft.style.display = "flex";
+		elems.extraEstimation.style.display = "flex";
+	}
 	else
+	{
 		elems.extraLogtimeLeft.style.display = "none";
+		elems.extraEstimation.style.display = "none";
+	}
 	
 
 	//////////////////////////////////////////////////////////////////////  SALARY CONTAINER
@@ -1295,7 +1318,7 @@ function getTimeFormat(timeNumber, separator) {
 	var timeHour = Math.trunc(timeNumber);
 	var timeMin = (timeNumber - timeHour) * 60;
 	var timeMinFloat = (timeMin - Math.trunc(timeMin));
-	var tmpTime;
+	var tmpTime = "";
 
 	// console.log(timeNumber, timeHour, timeMin);
 
@@ -1308,12 +1331,14 @@ function getTimeFormat(timeNumber, separator) {
 		timeHour += 1;
 		timeMin = 0;
 	}
+	if (separator === ":" && timeHour < 10)
+		tmpTime = "0";
 	if (timeHour < 0 || timeMin < 0)
-		tmpTime = "0" + separator + "00";
+		tmpTime += "0" + separator + "00";
 	else if (timeMin < 10)
-		tmpTime = timeHour + separator + "0" + timeMin;
+		tmpTime += timeHour + separator + "0" + timeMin;
 	else
-		tmpTime = timeHour + separator + timeMin;
+		tmpTime += timeHour + separator + timeMin;
 	return tmpTime;
 }
 
@@ -1516,35 +1541,63 @@ popup.setData = function(elems) {
 
 	function getLogoutTime(timeEnd) {
 
-		console.log(timeEnd);
+		// console.log(timeEnd);
 		if (timeEnd > 24)
 			return "IMPOSSIBLE";
 		return getTimeFormat(timeEnd, ":");
 	}
 
 	actualTimeNumber = popup.date.getHours() + (popup.date.getMinutes() * (1 / 60));
-	// console.log(popup.date.getHours(), popup.date.getMinutes(), actualTimeNumber);
-	
-	console.log("remaining today:", data.session.remTodayLockOff, "actual time:", actualTimeNumber);
 
-	if (data.session.remTodayLockOff > 0)
+	// console.log("remaining today:", data.session.remTodayLockOff, "actual time:", actualTimeNumber);
+
+	if (data.session.remTodayLockOff <= 0)
+		// data.session.timeLock = "DONE";
+		var timeLockOff = "DONE";
+	else
+		var timeLockOff = getLogoutTime(actualTimeNumber + data.session.remTodayLockOff);
+
+	if (data.student.addBoostHalf)
 	{
-		if (data.student.addBoostHalf)
-			data.session.timeLock = getLogoutTime(actualTimeNumber + data.session.remTodayLockMin);
-		else if (data.student.addBoostFull)
-			data.session.timeLock = getLogoutTime(actualTimeNumber + data.session.remTodayLockMax);
+		if (data.session.remTodayLockMin <= 0)
+			data.session.timeLock = "DONE";
 		else
-			data.session.timeLock = getLogoutTime(actualTimeNumber + data.session.remTodayLockOff);
-		// console.log("> 0");
+			data.session.timeLock = getLogoutTime(actualTimeNumber + data.session.remTodayLockMin);
+	}
+	else if (data.student.addBoostFull)
+	{
+		if (data.session.remTodayLockMax <= 0)
+			data.session.timeLock = "DONE";
+		else
+			data.session.timeLock = getLogoutTime(actualTimeNumber + data.session.remTodayLockMax);
 	}
 	else
-		data.session.timeLock = "DONE";
-	// {
-	// 	data.session.timeLock = getLogoutTime(actualTimeNumber + data.session.eachDayLockOff);
-	// 	// console.log("< 0");
-	// }
+	{
+		if (data.session.remTodayLockOff <= 0)
+			data.session.timeLock = "DONE";
+		else
+			data.session.timeLock = timeLockOff;
+	}
+
+	// console.log(data.session.remTodayLockOff);
+	// if (data.session.remTodayLockOff <= 0)
+	// 	data.session.timeLock = "DONE";
+	// if (data.session.remTodayLockOff <= 0)
+	// 	data.session.timeLock = "DONE";
 	
+	if (data.session.timeLock === "IMPOSSIBLE")
+		elems.resultLogtimeEstimation.style.fontSize = "12px";
+	else
+		elems.resultLogtimeEstimation.style.fontSize = "16px";
+
+	if (timeLockOff === "IMPOSSIBLE")
+		elems.extraEstimation.style.fontSize = "8px";
+	else
+		elems.extraEstimation.style.fontSize = "12px";
+
+
 	elems.resultLogtimeEstimation.innerText = data.session.timeLock;
+	elems.extraEstimation.innerText = timeLockOff;
 }
 
 function clickMonthlyHabit(e) {
@@ -1584,6 +1637,7 @@ popup.initPopup = function(elems, months) {
 
 	popup.date = new Date();
 	// popup.date = new Date("2023-12-28");
+	// popup.date = new Date("2024-01-03T00:10");
 	popup.numberYear = popup.date.getFullYear();
 	popup.numberMonth = popup.date.getMonth();
 	popup.numberDay = popup.date.getDate();
