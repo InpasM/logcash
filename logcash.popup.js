@@ -136,7 +136,8 @@ var questions = [
 		},
 		{	title: "Monthly Attendance",
 			text: "Select each day you plan to attend.\n\
-		Click on each day or use Names of day to select alls same days remaining in the month.\n\
+		Click on each day or use Names of day to select alls same days remaining in the month.\
+		If no day selected, the estimation will be based on remaining open days\n\
 		Double click on Monthly Attendance to reset the calendar.",
 			width: 150
 		},
@@ -416,6 +417,26 @@ popup.createElems = function(elems) {
 	elems.weeklySpan = document.createElement("p");
 	elems.weeklySpan.className = "main-title-info";
 	elems.weeklySpan.innerText = "Monthly Attendance";
+	elems.weeklySpan.style.cursor = "pointer";
+	elems.weeklySpan.addEventListener("dblclick", function() {
+
+		var update = false;
+
+		for (var i = popup.numberDay - 1; i < elems.monthArray[popup.months.length - 1].checkboxes.length; i++)
+		{
+			if (data.student.monthlyHabit[i] === true)
+			{
+				update = true;
+				data.student.monthlyHabit[i] = false;
+				elems.monthArray[popup.months.indexArray].checkboxes[i].style.borderColor = "rgb(45, 49, 60)";
+			}
+		}
+		if (data.isHomePage === -1 && update)
+		{
+			data.updateLocalStorage();
+			popup.setData(elems);
+		}
+	});
 
 	elems.questionHabit = document.createElement("div");
 	elems.questionHabit.className = "question-logo";
