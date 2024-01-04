@@ -160,8 +160,10 @@ function mouseOverQuestion(e) {
 
 	// console.log("circle question left:", elemRect.left, "width:", elemRect.width);
 	// console.log("tooltipRect left:", tooltipRect.left, "width:", tooltipRect.width);
+
+	// console.log(window.scrollY);
 	offsetLeft = elemRect.left - (tooltipRect.width / 2) + (elemRect.width / 2);
-	offsetTop = elemRect.top + 20;
+	offsetTop = elemRect.top + 20 + window.scrollY;
 
 	elems.tooltipQuestion.style.opacity = "1";
 	elems.tooltipQuestion.style.top = offsetTop + "px";
