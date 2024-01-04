@@ -3,7 +3,6 @@
 window.data = window.data || {};
 var REMAINING = 1,
 	EACH = 2;
-
 var ENGLISH = 0,
 	FRENCH = 1;
 
@@ -19,13 +18,11 @@ monthObj = {
 	nameLong: 0,
 	salary: 0,
 	hoursDeducted: 0,
-	monthlyHabit: 0,
 	timeDone: 0,
 };
 
 
 data.student = {
-	// DATA GLOBAL
 	pseudo: 0,
 	addBoostHalf: false,
 	addBoostFull: false,
@@ -35,7 +32,9 @@ data.student = {
 
 	// ARRAY MONTH // up to 12 month save
 	months: [],
+	monthlyHabit: [],
 };
+
 
 data.session = {
 	devMode: false,
@@ -62,9 +61,31 @@ var localStorageSpace = function(){
 	return allStrings ? 3 + ((allStrings.length*16)/(8*1024)) + ' KB' : 'Empty (0 KB)';
 };
 
-function isLocalStorageValid(studentParse) {
+function parseLocalStorage(itemStudent) {
+	
+	displayMessage("Parsing localStorage");
 
-	console.log(studentParse);
+	var student = JSON.parse(itemStudent);
+
+	if (!student.pseudo)
+	{
+		const login = document.querySelector(".login").innerText;
+
+		if (login)
+			student.pseudo = login;
+		else
+			student.pseudo = "No Name";
+	}
+	console.log(student.pseudo);
+	console.log(student.addBoostHalf);
+	console.log(student.addBoostFull);
+	console.log(student.showMore);
+	console.log(student.indexLastMonth);
+	console.log(student.language);
+	console.log(student.months);
+	console.log(student.monthlyHabit);
+
+	return student;
 }
 
 data.init = function() {
@@ -74,7 +95,6 @@ data.init = function() {
 	// localStorage.removeItem("student42");
 	let localStorageStud = localStorage.getItem("student42");
 
-	// console.log(localStorageStud);
 	data.isHomePage = window.location.href.indexOf("users");
 	if (data.isHomePage === -1)
 	{
@@ -90,14 +110,7 @@ data.init = function() {
 			displayMessage("Create new student42: " + login);
 			localStorageStud = localStorage.getItem("student42");
 		}
-		var studentParse = JSON.parse(localStorageStud);
-
-		if (isLocalStorageValid(studentParse))
-			data.student = studentParse;
-		else
-		{
-			
-		}
+		data.student = parseLocalStorage(localStorageStud);
 		// data.student = JSON.parse(localStorageStud);
 	}
 	else

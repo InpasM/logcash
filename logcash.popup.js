@@ -152,7 +152,7 @@ function mouseOverQuestion(e) {
 	elems.tooltipQuestion.style.top = offsetTop + "px";
 	elems.tooltipQuestion.style.left = offsetLeft + "px";
 
-	elems.tooltipQuestionTopText.innerText = "Question " + e.target.id; 
+	elems.tooltipQuestionTopText.innerText = "Question " + e.target.id;
 }
 
 function mouseOutQuestion(e) {
@@ -283,8 +283,8 @@ popup.createElems = function(elems) {
 	// elems.tooltipQuestionBottomText.innerText = "Add here all hours deducted\n from the total hour of the selected month. Days off, Public holiday, Medical exemption, School announcement ... etc";						//////////////// DEV
 	
 	// elems.tooltipQuestionBottomText.innerText = questions[data.student.language][0];						//////////////// DEV
-	console.log(data.student.language);
-	console.log(questions[0]);
+	// console.log(data.student.language);
+	// console.log(questions[0]);
 
 	elems.tooltipQuestion.appendChild(elems.tooltipQuestionTopText);
 	elems.tooltipQuestion.appendChild(elems.tooltipQuestionBottomText);
@@ -444,6 +444,7 @@ popup.createElems = function(elems) {
 
 	function selectAllSameDay(e) {
 
+		console.log(e.target);
 		if (popup.months.indexArray === popup.months.length - 1)
 		{
 			var allTrue = true, update = false;
