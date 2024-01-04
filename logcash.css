@@ -27,6 +27,47 @@ body
 	justify-content: space-between; */
 }
 
+/************************** MINI LOGTIME PANEL *****************************/
+.mini-logtime-panel {
+	/* background-color: red; */
+	background-color: rgba(32, 35, 44, 0.8);
+	border-radius: 4px;
+	margin-left: 4px;
+	display: flex;
+	display: none;
+}
+
+.mini-logtime-block {
+	/* background-color: orange; */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-right: 1px solid rgb(45, 49, 60);
+	padding: 0 6px;
+	/* flex: 1; */
+}
+
+.mini-logtime-title {
+	margin: 0;
+	padding: 0;
+	color: rgb(155, 155, 155);
+	font-size: 6px;
+	text-align: justify;
+	max-height: 8px;
+}
+
+.mini-logtime-value {
+	margin: 0;
+	padding: 0;
+	color: rgb(255, 255, 255);
+	font-size: 12px;
+	text-align: justify;
+	max-height: 10px;
+}
+
+
+
 .container-month 
 {
 	width: 100%;
@@ -859,7 +900,7 @@ body
 
 
 .tooltip-question {
-	/* opacity: 0; */
+	opacity: 0;
 	top: 10px;
 	left: 10px;
 

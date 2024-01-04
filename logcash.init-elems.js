@@ -9,7 +9,7 @@ function initContainerLogcash(elems) {
 	elems.containerLogcash = document.createElement("div");
 	elems.containerLogcash.className = "container-logcash";
 	elems.containerLogcash.style.display = "flex";
-	elems.containerLogcash.style.alignItems = "center";
+	// elems.containerLogcash.style.alignItems = "center";
 	elems.containerLogcash.style.marginTop = "4px";
 
 	elems.containerDivMonth = document.createElement("div");
@@ -21,6 +21,38 @@ function initContainerLogcash(elems) {
 
 	elems.sideProgress = document.createElement("div");
 	elems.sideProgress.className = "side-progress";
+
+
+	elems.miniLogtimePanel = document.createElement("div");
+	elems.miniLogtimePanel.className = "mini-logtime-panel";
+
+	elems.miniLogtimeBlockRemaining = document.createElement("div");
+	elems.miniLogtimeBlockRemaining.className = "mini-logtime-block";
+	elems.miniLogtimeTitleRemaining = document.createElement("p");
+	elems.miniLogtimeTitleRemaining.className = "mini-logtime-title";
+	elems.miniLogtimeTitleRemaining.innerText = "Rem. Today";
+	elems.miniLogtimeValueRemaining = document.createElement("p");
+	elems.miniLogtimeValueRemaining.className = "mini-logtime-value";
+	elems.miniLogtimeValueRemaining.innerText = "0h00";
+	
+	elems.miniLogtimeBlockLock = document.createElement("div");
+	elems.miniLogtimeBlockLock.className = "mini-logtime-block";
+	elems.miniLogtimeTitleLock = document.createElement("p");
+	elems.miniLogtimeTitleLock.className = "mini-logtime-title";
+	elems.miniLogtimeTitleLock.innerText = "Lock. Time";
+	elems.miniLogtimeValueLock = document.createElement("p");
+	elems.miniLogtimeValueLock.className = "mini-logtime-value";
+	elems.miniLogtimeValueLock.innerText = "00:00";
+
+	elems.miniLogtimeBlockRemaining.appendChild(elems.miniLogtimeTitleRemaining);
+	elems.miniLogtimeBlockRemaining.appendChild(elems.miniLogtimeValueRemaining);
+
+	elems.miniLogtimeBlockLock.appendChild(elems.miniLogtimeTitleLock);
+	elems.miniLogtimeBlockLock.appendChild(elems.miniLogtimeValueLock);
+
+	elems.miniLogtimePanel.appendChild(elems.miniLogtimeBlockRemaining);
+	elems.miniLogtimePanel.appendChild(elems.miniLogtimeBlockLock);
+
 
 	// elems.settingDiv = document.createElement("div");
 	// elems.settingDiv.className = "setting-div";
@@ -40,10 +72,13 @@ function initContainerLogcash(elems) {
 	elems.sideRemaining.appendChild(elems.textRemaining);
 	elems.rowProgress.appendChild(elems.sideProgress);
 	elems.rowProgress.appendChild(elems.sideRemaining);
+	// elems.rowProgress.appendChild(elems.miniLogtimePanel);
 	// elems.rowProgress.appendChild(elems.settingDiv);
-
+	
 	elems.containerLogcash.appendChild(elems.containerDivMonth);
 	elems.containerLogcash.appendChild(elems.rowProgress);
+	elems.containerLogcash.appendChild(elems.miniLogtimePanel);
+	// elems.containerLogcash.appendChild(elems.rowProgress);
 }
 
 function initDivMonths(elems, months) {
