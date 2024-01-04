@@ -184,6 +184,67 @@ function mouseOutQuestion(e) {
 	}, 300);
 }
 
+var clickerMode = false;
+function hideShowPopup() {
+
+	if (!clickerMode)
+	{
+		if (data.session.devMode)
+		{
+			elems.moreInfoContainer.style.backgroundColor = "";
+			elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
+		}
+
+		elems.resultsDiv.style.height = "0px";
+		elems.resultsDiv.style.padding = "0px 8px";
+		elems.resultsDiv.style.opacity = "0";
+		elems.boostLockContainer.style.height = "0px";
+		elems.boostLockContainer.style.padding = "0px 8px";
+		elems.boostLockContainer.style.opacity = "0";
+		elems.estimationContainer.style.height = "0px";
+		elems.estimationContainer.style.padding = "0px 8px";
+		elems.estimationContainer.style.opacity = "0";
+
+		// elems.popMiddleDiv.style.display = "none";
+		// elems.popProgressTitle.style.display = "none";
+		elems.popMiddleDiv.style.opacity = "0";
+		elems.popMiddleDiv.style.height = "0";
+		elems.popProgressTitle.style.opacity = "0";
+		elems.popProgressTitle.style.height = "0";
+		elems.containerLogcash.style.marginTop = "0";
+
+		clickerMode = true;
+	}
+	else
+	{
+		if (data.session.devMode)
+		{
+			elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60)";
+			elems.moreInfoContainer.style.padding = "4px 0";
+		}
+	
+		elems.resultsDiv.style.height = "";
+		elems.resultsDiv.style.padding = "8px";
+		elems.resultsDiv.style.opacity = "1";
+		elems.boostLockContainer.style.height = "";
+		elems.boostLockContainer.style.padding = "8px";
+		elems.boostLockContainer.style.opacity = "1";
+		elems.estimationContainer.style.height = "";
+		elems.estimationContainer.style.padding = "8px";
+		elems.estimationContainer.style.opacity = "1";
+
+		// elems.popMiddleDiv.style.display = "flex";
+		// elems.popProgressTitle.style.display = "flex";
+		elems.popMiddleDiv.style.opacity = "1";
+		elems.popMiddleDiv.style.height = "";
+		elems.popProgressTitle.style.opacity = "1";
+		elems.popProgressTitle.style.height = "";
+		elems.containerLogcash.style.marginTop = "4px";
+
+		clickerMode = false;
+	}
+}
+
 popup.createElems = function(elems) {
 
 	elems.popupRemaining = document.createElement("div");
@@ -195,63 +256,9 @@ popup.createElems = function(elems) {
 	elems.popupTopLeftText = document.createElement("p");
 	elems.popupTopLeftText.innerText = "Logcash";
 
-	var clickerMode = false;
-
-	elems.popupTopDiv.addEventListener("dblclick", function() {
-
-		if (!clickerMode)
-		{
-			if (data.session.devMode)
-			{
-				elems.moreInfoContainer.style.backgroundColor = "";
-				elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
-			}
 	
-			elems.resultsDiv.style.height = "0px";
-			elems.resultsDiv.style.padding = "0px 8px";
-			elems.resultsDiv.style.opacity = "0";
-			elems.boostLockContainer.style.height = "0px";
-			elems.boostLockContainer.style.padding = "0px 8px";
-			elems.boostLockContainer.style.opacity = "0";
-			elems.estimationContainer.style.height = "0px";
-			elems.estimationContainer.style.padding = "0px 8px";
-			elems.estimationContainer.style.opacity = "0";
 
-			// elems.popMiddleDiv.style.display = "none";
-			// elems.popProgressTitle.style.display = "none";
-			elems.popMiddleDiv.style.opacity = "0";
-			elems.popProgressTitle.style.opacity = "0";
-			elems.popProgressTitle.style.height = "0";
-
-			clickerMode = true;
-		}
-		else
-		{
-			if (data.session.devMode)
-			{
-				elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60)";
-				elems.moreInfoContainer.style.padding = "4px 0";
-			}
-		
-			elems.resultsDiv.style.height = "";
-			elems.resultsDiv.style.padding = "8px";
-			elems.resultsDiv.style.opacity = "1";
-			elems.boostLockContainer.style.height = "";
-			elems.boostLockContainer.style.padding = "8px";
-			elems.boostLockContainer.style.opacity = "1";
-			elems.estimationContainer.style.height = "";
-			elems.estimationContainer.style.padding = "8px";
-			elems.estimationContainer.style.opacity = "1";
-
-			// elems.popMiddleDiv.style.display = "flex";
-			// elems.popProgressTitle.style.display = "flex";
-			elems.popMiddleDiv.style.opacity = "1";
-			elems.popProgressTitle.style.opacity = "1";
-			elems.popProgressTitle.style.height = "";
-
-			clickerMode = false;
-		}
-	});
+	elems.popupTopDiv.addEventListener("dblclick", hideShowPopup);
 
 	elems.popupTopRightText = document.createElement("p");
 
@@ -301,6 +308,7 @@ popup.createElems = function(elems) {
 	{
 		// elems.tooltipQuestionTopText.innerText = questions[data.student.language][0].title;						//////////////// DEV
 		elems.tooltipQuestionBottomText.innerText = questions[data.student.language][2].text;						//////////////// DEV
+		elems.tooltipQuestion.style.opacity = "1";
 	}
 
 	// elems.tooltipQuestion.appendChild(elems.tooltipQuestionTopText);
@@ -738,7 +746,7 @@ popup.createElems = function(elems) {
 	elems.blockLogtimeRight.appendChild(elems.resultLogtimeEstimation);
 	elems.blockLogtimeRight.appendChild(elems.labelLogtimeNumberDay);
 	elems.blockLogtimeRight.appendChild(elems.resultLogtimeNumberDay);
-	elems.blockLogtimeRight.appendChild(elems.extraEstimation);
+	// elems.blockLogtimeRight.appendChild(elems.extraEstimation);
 
 	elems.lineLogtime.appendChild(elems.titleLogtime);
 	elems.lineLogtime.appendChild(elems.questionLogtime);
