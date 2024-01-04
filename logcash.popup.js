@@ -122,37 +122,49 @@ function clickBoostMax() {
 	popup.setData(elems);
 }
 
+var questions = [
+	[
+		[{ title: "Hours Deducted", text: "Add here all hours deducted from the total hour of the selected month. Days off, Public holiday, Medical exemption, School announcement ... etc" }],
+		[{ title: "Boost Lock", text: "Activate or not the extra time added to your Logtime when you leave the school with a lock session" }],
+		[{ title: "Monthly Attendance", text: "Select each day you plan to come at School.\n\
+		You can click on each day in the futur or use Names of day to select all same day remaining in the month.\n\
+		Double click on Monthly Attendance to reset the calendar." }],
+		[{ title: "Logtime", text: "If at School you will found the remaining time you have to do based on your selection of days.\n\
+		Else you will found an estimation for each remaining day of the actual month." }],
+	],
+	[]
+];
+
+var timeOutQuestion;
 function mouseOverQuestion(e) {
-		
-	// console.log(e.target.id);
+
+	clearTimeout(timeOutQuestion);
 
 	elemRect = e.target.getBoundingClientRect();
-	// var tmpBase = e.target.nextSibling.getBoundingClientRect();
+	tooltipRect = elems.tooltipQuestion.getBoundingClientRect();
 
-	// elems.tooltipTopText.innerText = e.target.getAttribute("date");
-	// elems.tooltipBottomText.innerText = e.target.getAttribute("salary") + "€";
-
-	offsetLeft = elemRect.left - elemRect.width;
+	console.log("circle question left:", elemRect.left, "width:", elemRect.width);
+	console.log("tooltipRect left:", tooltipRect.left, "width:", tooltipRect.width);
+	offsetLeft = elemRect.left - (tooltipRect.width / 2) + (elemRect.width / 2);
 	offsetTop = elemRect.top + 20;
-
-	// newOffsetTop = elemRect.top - 21;	// hover on top of element
-	// newOffsetTop = tmpBase.top + tmpBase.height * 2 + window.scrollY;	// hover at bottom of element
-	newOffsetTop = 2 + window.scrollY;	// hover at bottom of element
 
 	elems.tooltipQuestion.style.opacity = "1";
 	elems.tooltipQuestion.style.top = offsetTop + "px";
 	elems.tooltipQuestion.style.left = offsetLeft + "px";
+
+	elems.tooltipQuestionTopText.innerText = "Question " + e.target.id; 
 }
 
 function mouseOutQuestion(e) {
 
-	elemRect = e.target.getBoundingClientRect();
-
-	// add timeout to delay movement
-		
+	// elemRect = e.target.getBoundingClientRect();
+	
 	elems.tooltipQuestion.style.opacity = "0";
-	elems.tooltipQuestion.style.top = "-1000px";
-	elems.tooltipQuestion.style.left = "-1000px";
+	timeOutQuestion = setTimeout(function() {
+		
+		elems.tooltipQuestion.style.top = "-1000px";
+		elems.tooltipQuestion.style.left = "-1000px";
+	}, 300);
 }
 
 popup.createElems = function(elems) {
@@ -266,6 +278,13 @@ popup.createElems = function(elems) {
 	elems.tooltipQuestionTopText.className = "tooltip-question-top-text";
 	elems.tooltipQuestionBottomText = document.createElement("p");
 	elems.tooltipQuestionBottomText.className = "tooltip-question-bottom-text";
+
+	// elems.tooltipQuestionTopText.innerText = "Hours Deducted";						//////////////// DEV
+	// elems.tooltipQuestionBottomText.innerText = "Add here all hours deducted\n from the total hour of the selected month. Days off, Public holiday, Medical exemption, School announcement ... etc";						//////////////// DEV
+	
+	// elems.tooltipQuestionBottomText.innerText = questions[data.student.language][0];						//////////////// DEV
+	console.log(data.student.language);
+	console.log(questions[0]);
 
 	elems.tooltipQuestion.appendChild(elems.tooltipQuestionTopText);
 	elems.tooltipQuestion.appendChild(elems.tooltipQuestionBottomText);

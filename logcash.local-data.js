@@ -1,5 +1,11 @@
 
+///////////////////// GLOBAL VAR /////////////////////
 window.data = window.data || {};
+var REMAINING = 1,
+	EACH = 2;
+	
+var ENGLISH = 0,
+	FRENCH = 1;
 
 data.updateLocalStorage = function() {
 
@@ -15,8 +21,8 @@ monthObj = {
 	hoursDeducted: 0,
 	monthlyHabit: 0,
 	timeDone: 0,
-	// timeRequire: 0,
 };
+
 
 data.student = {
 	// DATA GLOBAL
@@ -25,26 +31,20 @@ data.student = {
 	addBoostFull: false,
 	showMore: false,
 	indexLastMonth: -1,
+	language: ENGLISH,
 
 	// ARRAY MONTH // up to 12 month save
 	months: [],
-
-	// salary: 0,
-	// hoursDeducted: 0,
-	// monthlyHabit: [],
 };
 
-var REMAINING = 1,
-	EACH = 2;
+
 data.session = {
 	devMode: false,
 	logAtSchool: false,
 	logtimeMode: 0,
-	// remainingToday: 0,
 	remTodayLockOff: 0,
 	remTodayLockMin: 0,
 	remTodayLockMax: 0,
-	// eachDay: 0,
 	eachDayLockOff: 0,
 	eachDayLockMin: 0,
 	eachDayLockMax: 0,
