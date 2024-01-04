@@ -33,7 +33,6 @@ data.student = {
 	monthlyHabit: [],
 };
 
-
 data.session = {
 	devMode: false,
 	logAtSchool: false,

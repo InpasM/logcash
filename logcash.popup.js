@@ -124,13 +124,27 @@ function clickBoostMax() {
 
 var questions = [
 	[
-		[{ title: "Hours Deducted", text: "Add here all hours deducted from the total hour of the selected month. Days off, Public holiday, Medical exemption, School announcement ... etc" }],
-		[{ title: "Boost Lock", text: "Activate or not the extra time added to your Logtime when you leave the school with a lock session" }],
-		[{ title: "Monthly Attendance", text: "Select each day you plan to come at School.\n\
-		You can click on each day in the futur or use Names of day to select all same day remaining in the month.\n\
-		Double click on Monthly Attendance to reset the calendar." }],
-		[{ title: "Logtime", text: "If at School you will found the remaining time you have to do based on your selection of days.\n\
-		Else you will found an estimation for each remaining day of the actual month." }],
+		{	title: "Hours Deducted",
+			text: "Add here all hours you want to deduct.\n\
+		Days off, Public holiday, Medical exemption, \
+		School announcement...",
+			width: 125
+		},
+		{	title: "Boost Lock",
+			text: "Add to estimation the extra time added to your Logtime when leaving with a lock session.",
+			width: 125
+		},
+		{	title: "Monthly Attendance",
+			text: "Select each day you plan to attend.\n\
+		Click on each day or use Names of day to select alls same days remaining in the month.\n\
+		Double click on Monthly Attendance to reset the calendar.",
+			width: 150
+		},
+		{	title: "Logtime",
+			text: "If at School you will see here the remaining time you have to do based on your selection of days.\n\
+		Else you will found an estimation for each remaining day of the actual month.",
+			width: 150
+		},
 	],
 	[]
 ];
@@ -143,8 +157,8 @@ function mouseOverQuestion(e) {
 	elemRect = e.target.getBoundingClientRect();
 	tooltipRect = elems.tooltipQuestion.getBoundingClientRect();
 
-	console.log("circle question left:", elemRect.left, "width:", elemRect.width);
-	console.log("tooltipRect left:", tooltipRect.left, "width:", tooltipRect.width);
+	// console.log("circle question left:", elemRect.left, "width:", elemRect.width);
+	// console.log("tooltipRect left:", tooltipRect.left, "width:", tooltipRect.width);
 	offsetLeft = elemRect.left - (tooltipRect.width / 2) + (elemRect.width / 2);
 	offsetTop = elemRect.top + 20;
 
@@ -152,7 +166,9 @@ function mouseOverQuestion(e) {
 	elems.tooltipQuestion.style.top = offsetTop + "px";
 	elems.tooltipQuestion.style.left = offsetLeft + "px";
 
-	elems.tooltipQuestionTopText.innerText = "Question " + e.target.id;
+	elems.tooltipQuestion.style.width = questions[data.student.language][e.target.id].width + "px";
+
+	elems.tooltipQuestionBottomText.innerText = questions[data.student.language][e.target.id].text;
 }
 
 function mouseOutQuestion(e) {
@@ -279,14 +295,14 @@ popup.createElems = function(elems) {
 	elems.tooltipQuestionBottomText = document.createElement("p");
 	elems.tooltipQuestionBottomText.className = "tooltip-question-bottom-text";
 
-	// elems.tooltipQuestionTopText.innerText = "Hours Deducted";						//////////////// DEV
-	// elems.tooltipQuestionBottomText.innerText = "Add here all hours deducted\n from the total hour of the selected month. Days off, Public holiday, Medical exemption, School announcement ... etc";						//////////////// DEV
-	
-	// elems.tooltipQuestionBottomText.innerText = questions[data.student.language][0];						//////////////// DEV
-	// console.log(data.student.language);
-	// console.log(questions[0]);
 
-	elems.tooltipQuestion.appendChild(elems.tooltipQuestionTopText);
+	if (data.session.devMode)
+	{
+		// elems.tooltipQuestionTopText.innerText = questions[data.student.language][0].title;						//////////////// DEV
+		elems.tooltipQuestionBottomText.innerText = questions[data.student.language][2].text;						//////////////// DEV
+	}
+
+	// elems.tooltipQuestion.appendChild(elems.tooltipQuestionTopText);
 	elems.tooltipQuestion.appendChild(elems.tooltipQuestionBottomText);
 
 	document.body.appendChild(elems.tooltipQuestion);
@@ -372,7 +388,6 @@ popup.createElems = function(elems) {
 	elems.labelHours = document.createElement("p");
 	elems.labelHours.className = "small-title-info";
 	elems.labelHours.innerText = "Hours Deduc."; // before Hours Deducted
-
 
 
 	elems.questionHours = document.createElement("div");

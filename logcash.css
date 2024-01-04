@@ -865,10 +865,10 @@ body
 
 	backdrop-filter: blur(6px);
 	position: absolute;
-	/* width: 100px; */
+	width: 150px;
 	/* height: 50px; */
 	background-color: rgba(46, 51, 61, 0.9);
-	padding: 4px;
+	padding: 8px;
 	border-radius: 4px;
 	border: 1px solid rgb(51, 54, 65);
 	box-shadow: 0px 2px 8px #12141a3a;
@@ -884,10 +884,12 @@ body
 	width: 100%;
 	font-size: 12px;
 	/* font-weight: bold; */
-	text-align: center;
-	padding: 0;
+	/* text-align: center; */
+	text-align: justify;
+	padding: 0 0 2px 0;
 	margin: 0;
-	margin: 2px 0 0 0;
+	margin: 2px 0 4px 0;
+	border-bottom: 1px solid rgb(103, 106, 114);
 	color: rgb(210, 210, 210);
 	color: rgb(170, 170, 170);
 }
@@ -896,9 +898,11 @@ body
 	/* background-color: green; */
 	width: 100%;
 	font-size: 10px;
-	text-align: center;
+	/* text-align: center; */
+	text-align: justify;
 	padding: 0;
 	margin: 0;
+	color: rgb(200, 199, 199);
 }
 
 
