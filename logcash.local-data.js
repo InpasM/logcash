@@ -3,7 +3,7 @@
 window.data = window.data || {};
 var REMAINING = 1,
 	EACH = 2;
-	
+
 var ENGLISH = 0,
 	FRENCH = 1;
 
@@ -37,7 +37,6 @@ data.student = {
 	months: [],
 };
 
-
 data.session = {
 	devMode: false,
 	logAtSchool: false,
@@ -63,6 +62,11 @@ var localStorageSpace = function(){
 	return allStrings ? 3 + ((allStrings.length*16)/(8*1024)) + ' KB' : 'Empty (0 KB)';
 };
 
+function isLocalStorageValid(studentParse) {
+
+	console.log(studentParse);
+}
+
 data.init = function() {
 
 	// console.log(localStorageSpace());
@@ -70,6 +74,7 @@ data.init = function() {
 	// localStorage.removeItem("student42");
 	let localStorageStud = localStorage.getItem("student42");
 
+	// console.log(localStorageStud);
 	data.isHomePage = window.location.href.indexOf("users");
 	if (data.isHomePage === -1)
 	{
@@ -85,7 +90,15 @@ data.init = function() {
 			displayMessage("Create new student42: " + login);
 			localStorageStud = localStorage.getItem("student42");
 		}
-		data.student = JSON.parse(localStorageStud);
+		var studentParse = JSON.parse(localStorageStud);
+
+		if (isLocalStorageValid(studentParse))
+			data.student = studentParse;
+		else
+		{
+			
+		}
+		// data.student = JSON.parse(localStorageStud);
 	}
 	else
 	{
