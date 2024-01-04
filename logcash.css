@@ -30,8 +30,7 @@ body
 /************************** MINI LOGTIME PANEL *****************************/
 .mini-logtime-panel {
 	/* background-color: red; */
-	background-color: rgba(32, 35, 44, 0.8);
-	border-radius: 4px;
+	/* background-color: rgba(32, 35, 44, 0.8); */
 	margin-left: 4px;
 	display: flex;
 	display: none;
@@ -39,11 +38,13 @@ body
 
 .mini-logtime-block {
 	/* background-color: orange; */
+	border-radius: 4px;
+	background-color: rgba(32, 35, 44, 0.8);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	border-right: 1px solid rgb(45, 49, 60);
+	/* border-right: 1px solid rgb(45, 49, 60); */
 	padding: 0 6px;
 	/* flex: 1; */
 }

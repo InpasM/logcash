@@ -28,6 +28,7 @@ function initContainerLogcash(elems) {
 
 	elems.miniLogtimeBlockRemaining = document.createElement("div");
 	elems.miniLogtimeBlockRemaining.className = "mini-logtime-block";
+	elems.miniLogtimeBlockRemaining.style.marginRight = "4px";
 	elems.miniLogtimeTitleRemaining = document.createElement("p");
 	elems.miniLogtimeTitleRemaining.className = "mini-logtime-title";
 	elems.miniLogtimeTitleRemaining.innerText = "Rem. Today";

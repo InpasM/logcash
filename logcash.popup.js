@@ -213,6 +213,8 @@ function hideShowPopup() {
 		elems.popProgressTitle.style.height = "0";
 		elems.containerLogcash.style.marginTop = "0";
 
+		elems.miniLogtimePanel.style.display = "flex";
+
 		clickerMode = true;
 	}
 	else
@@ -240,6 +242,8 @@ function hideShowPopup() {
 		elems.popProgressTitle.style.opacity = "1";
 		elems.popProgressTitle.style.height = "";
 		elems.containerLogcash.style.marginTop = "4px";
+
+		elems.miniLogtimePanel.style.display = "none";
 
 		clickerMode = false;
 	}
@@ -1553,9 +1557,13 @@ function setLogtimeValue(remToday, eachDay, elems) {
 	{
 		elems.resultLogtimeRemaining.innerText = "DONE";
 		elems.resultLogtimeRemaining.style.color = "rgb(0, 186, 188)";
+		elems.miniLogtimeValueRemaining.innerText = "DONE";
+		elems.miniLogtimeValueRemaining.style.color = "rgb(0, 186, 188)";
+
 		elems.resultLogtime2.innerText = "DONE";				// DEV
 		elems.resultLogtime2.style.color = "rgb(0, 186, 188)";	// DEV
 		elems.resultLogtimeEstimation.style.color = "rgb(0, 186, 188)";
+		elems.miniLogtimeValueLock.style.color = "rgb(0, 186, 188)";
 
 		if (data.session.logAtSchool)
 		{
@@ -1569,9 +1577,13 @@ function setLogtimeValue(remToday, eachDay, elems) {
 
 		elems.resultLogtimeRemaining.innerText = remaining;
 		elems.resultLogtimeRemaining.style.color = "white";
+		elems.miniLogtimeValueRemaining.innerText = remaining;
+		elems.miniLogtimeValueRemaining.style.color = "white";
+
 		elems.resultLogtime2.innerText = remaining;				// DEV
 		elems.resultLogtime2.style.color = "white";				// DEV
 		elems.resultLogtimeEstimation.style.color = "white";
+		elems.miniLogtimeValueLock.style.color = "white";
 	}
 
 	if (eachDay > 0)
@@ -1670,6 +1682,7 @@ function setLogtimeEstimation(elems) {
 		elems.extraEstimation.style.fontSize = "12px";
 
 	elems.resultLogtimeEstimation.innerText = data.session.timeLock;
+	elems.miniLogtimeValueLock.innerText = data.session.timeLock;
 	elems.extraEstimation.innerText = timeLockOff;
 }
 
