@@ -21,13 +21,11 @@ monthObj = {
 	timeDone: 0,
 };
 
-
 data.student = {
 	pseudo: 0,
 	addBoostHalf: false,
 	addBoostFull: false,
 	showMore: false,
-	indexLastMonth: -1,
 	language: ENGLISH,
 
 	// ARRAY MONTH // up to 12 month save
@@ -62,29 +60,30 @@ var localStorageSpace = function(){
 };
 
 function parseLocalStorage(itemStudent) {
-	
-	displayMessage("Parsing localStorage");
 
 	var student = JSON.parse(itemStudent);
 
 	if (!student.pseudo)
 	{
-		const login = document.querySelector(".login").innerText;
+		var login = document.querySelector(".login").innerText;
 
 		if (login)
 			student.pseudo = login;
 		else
 			student.pseudo = "No Name";
 	}
-	console.log(student.pseudo);
-	console.log(student.addBoostHalf);
-	console.log(student.addBoostFull);
-	console.log(student.showMore);
-	console.log(student.indexLastMonth);
-	console.log(student.language);
-	console.log(student.months);
-	console.log(student.monthlyHabit);
-
+	if (!student.addBoostHalf)
+		student.addBoostHalf = false;
+	if (!student.addBoostFull)
+		student.addBoostFull = false;
+	if (!student.showMore)
+		student.showMore = false;
+	if (!student.language)
+		student.language = ENGLISH;
+	if (!student.months)
+		student.months = [];
+	if (!student.monthlyHabit)
+		student.monthlyHabit = [];
 	return student;
 }
 
