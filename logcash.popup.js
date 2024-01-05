@@ -161,7 +161,6 @@ function mouseOverQuestion(e) {
 	// console.log("circle question left:", elemRect.left, "width:", elemRect.width);
 	// console.log("tooltipRect left:", tooltipRect.left, "width:", tooltipRect.width);
 
-	// console.log(window.scrollY);
 	offsetLeft = elemRect.left - (tooltipRect.width / 2) + (elemRect.width / 2);
 	offsetTop = elemRect.top + 20 + window.scrollY;
 
@@ -186,10 +185,10 @@ function mouseOutQuestion(e) {
 	}, 300);
 }
 
-var clickerMode = false;
+var popupVisible = false;
 function hideShowPopup() {
 
-	if (!clickerMode)
+	if (!popupVisible)
 	{
 		if (data.session.devMode)
 		{
@@ -217,7 +216,7 @@ function hideShowPopup() {
 
 		elems.miniLogtimePanel.style.display = "flex";
 
-		clickerMode = true;
+		popupVisible = true;
 	}
 	else
 	{
@@ -247,7 +246,7 @@ function hideShowPopup() {
 
 		elems.miniLogtimePanel.style.display = "none";
 
-		clickerMode = false;
+		popupVisible = false;
 	}
 }
 
@@ -258,19 +257,34 @@ popup.createElems = function(elems) {
 
 	elems.popupTopDiv = document.createElement("div");
 	elems.popupTopDiv.className = "popup-top-div";
+	elems.popupTopDiv.addEventListener("dblclick", hideShowPopup);
 	
 	elems.popupTopLeftText = document.createElement("p");
 	elems.popupTopLeftText.innerText = "Logcash";
 
-	
-
-	elems.popupTopDiv.addEventListener("dblclick", hideShowPopup);
-
 	elems.popupTopRightText = document.createElement("p");
 
-	elems.popupRemaining.appendChild(elems.popupTopDiv);
+	elems.topDivRight = document.createElement("div");
+	elems.topDivRight.className = "top-div-right";
+
+	elems.topDivMinimizeButton = document.createElement("div");
+	elems.topDivMinimizeButton.className = "top-div-minimize-button";
+	elems.topDivMinimizeButton.addEventListener("click", function(e) {
+
+		hideShowPopup();
+		if (popupVisible)
+			e.target.style.backgroundImage = "url(\"icons/arrow-down.svg\")";
+		else
+			e.target.style.backgroundImage = "url(\"icons/arrow-up.svg\")";
+	});
+
+	elems.topDivRight.appendChild(elems.topDivMinimizeButton);
+
+
 	elems.popupTopDiv.appendChild(elems.popupTopLeftText);
 	elems.popupTopDiv.appendChild(elems.popupTopRightText);
+	elems.popupTopDiv.appendChild(elems.topDivRight);
+	elems.popupRemaining.appendChild(elems.popupTopDiv);
 
 	// POPUP INFO
 	elems.popMiddleDiv = document.createElement("div");
@@ -377,14 +391,14 @@ popup.createElems = function(elems) {
 	elems.labelSalary.className = "small-title-info";
 	elems.labelSalary.innerText = "Your salary";
 
-	elems.questionSalary = document.createElement("div");
-	elems.questionSalary.className = "question-logo";
-	elems.questionSalary.id = "1";
-	elems.questionSalary.addEventListener("mouseover", mouseOverQuestion);
-	elems.questionSalary.addEventListener("mouseout", mouseOutQuestion);
+	// elems.questionSalary = document.createElement("div");
+	// elems.questionSalary.className = "question-logo";
+	// elems.questionSalary.id = "1";
+	// elems.questionSalary.addEventListener("mouseover", mouseOverQuestion);
+	// elems.questionSalary.addEventListener("mouseout", mouseOutQuestion);
 
 	elems.lineLabelSalary.appendChild(elems.labelSalary);
-	elems.lineLabelSalary.appendChild(elems.questionSalary);
+	// elems.lineLabelSalary.appendChild(elems.questionSalary);
 
 	elems.inputSalary = document.createElement("input");
 	elems.inputSalary.className = "input-text";
@@ -416,6 +430,7 @@ popup.createElems = function(elems) {
 
 	elems.inputDeducted = document.createElement("input");
 	elems.inputDeducted.className = "input-text";
+	elems.inputDeducted.style.maxWidth = "45px";
 	elems.inputDeducted.type = "text";
 	elems.inputDeducted.setAttribute('required', '');
 
@@ -1359,21 +1374,23 @@ popup.setStyle = function(elems) {
 	elems.popupTopDiv.style.display = "flex";
 	// elems.popupTopDiv.style.justifyContent = "space-between";
 	elems.popupTopDiv.style.justifyContent = "flex-start";
-	elems.popupTopDiv.style.alignItems = "center";
+	// elems.popupTopDiv.style.alignItems = "center";
 	elems.popupTopDiv.style.color = "#9b9b9b";
 	elems.popupTopDiv.style.whiteSpace = "nowrap";
-	elems.popupTopDiv.style.padding = "2px 4px";
+	// elems.popupTopDiv.style.padding = "2px 4px";
+	elems.popupTopDiv.style.padding = "2px 2px";
 
 	elems.popupTopLeftText.style.color = "#e2e2e2";
 	elems.popupTopLeftText.style.fontSize = "14px";
-	elems.popupTopLeftText.style.margin = "3px";
+	elems.popupTopLeftText.style.margin = "3px 3px 3px 5px";
 	elems.popupTopLeftText.style.padding = "0";
 	elems.popupTopLeftText.style.fontWeight = "bold";
 	// elems.popupTopLeftText.style.pointerEvents = "none";
 	elems.popupTopLeftText.style.textShadow = "rgb(0, 0, 0) 0px 0px 3px";
 	
+	elems.popupTopRightText.className = "popup-top-right-text";
 	elems.popupTopRightText.style.fontSize = "12px";
-	elems.popupTopRightText.style.margin = "0 2px";
+	elems.popupTopRightText.style.margin = "2px 2px";
 	elems.popupTopRightText.style.padding = "2px 4px";
 	elems.popupTopRightText.style.width = "fit-content";
 	elems.popupTopRightText.style.borderRadius = "2px";
@@ -1852,7 +1869,12 @@ popup.initPopup = function(elems, months) {
 			e.target.value = 0;
 		else
 		{
-			data.student.months[popup.months.indexArray].hoursDeducted = e.target.value;
+			// console.log(popup.months[months.length - 1].openDaysTotal * 7, parseInt(e.target.value));
+			var numberMonthHours = popup.months[months.length - 1].openDaysTotal * 7;
+			if (parseInt(e.target.value) > numberMonthHours)
+				data.student.months[popup.months.indexArray].hoursDeducted = numberMonthHours;
+			else
+				data.student.months[popup.months.indexArray].hoursDeducted = e.target.value;
 			if (data.isHomePage === -1)
 				data.updateLocalStorage();
 		}
