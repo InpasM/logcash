@@ -267,6 +267,37 @@ popup.createElems = function(elems) {
 	elems.topDivRight = document.createElement("div");
 	elems.topDivRight.className = "top-div-right";
 
+	elems.topDivSettingBlock = document.createElement("div");
+	elems.topDivSettingBlock.className = "top-div-setting-block";
+
+	elems.topDivSettingPanel = document.createElement("div");
+	elems.topDivSettingPanel.className = "top-div-setting-panel";
+	// elems.topDivSetting = document.createElement("div");
+	// elems.topDivSettingPanel.className = "top-div-setting-panel";
+
+	elems.topDivSettingButton = document.createElement("div");
+	elems.topDivSettingButton.className = "top-div-setting-button";
+	elems.topDivSettingButton.addEventListener("click", function() {
+
+		// elems.topDivSettingButton.style.display = "none";
+		elems.topDivSettingPanel.style.opacity = "1";
+		elems.topDivSettingPanel.style.display = "flex";
+
+		// elems.topDivSettingPanel.style.display = "flex";
+		// var eventSetting = elems.topDivSettingButton.addEventListener("mouseenter", function() {
+			
+		// });
+		
+		elems.topDivSettingPanel.addEventListener("mouseleave", function() {
+			
+			elems.topDivSettingPanel.style.opacity = "0";
+			elems.topDivSettingPanel.style.display = "none";
+		});
+		
+	});
+	elems.topDivSettingBlock.appendChild(elems.topDivSettingPanel);
+	elems.topDivSettingBlock.appendChild(elems.topDivSettingButton);
+
 	elems.topDivMinimizeButton = document.createElement("div");
 	elems.topDivMinimizeButton.className = "top-div-minimize-button";
 	elems.topDivMinimizeButton.addEventListener("click", function(e) {
@@ -278,6 +309,7 @@ popup.createElems = function(elems) {
 			e.target.style.backgroundImage = "url(\"icons/arrow-up.svg\")";
 	});
 
+	elems.topDivRight.appendChild(elems.topDivSettingBlock);
 	elems.topDivRight.appendChild(elems.topDivMinimizeButton);
 
 
@@ -1396,28 +1428,28 @@ popup.setStyle = function(elems) {
 	elems.popupTopRightText.style.borderRadius = "2px";
 	elems.popupTopRightText.style.textShadow = "rgb(0, 0, 0) 0px 0px 3px";
 
-	elems.popupTopRightText.addEventListener("mouseover", function(e) {
-		e.target.style.backgroundColor = "#1b1e25";
-		e.target.style.color = "#e2e2e2";
-		e.target.style.cursor = "pointer";
-	});
+	// elems.popupTopRightText.addEventListener("mouseover", function(e) {
+	// 	e.target.style.backgroundColor = "#1b1e25";
+	// 	e.target.style.color = "#e2e2e2";
+	// 	e.target.style.cursor = "pointer";
+	// });
 
-	elems.popupTopRightText.addEventListener("mouseout", function(e) {
-		e.target.style.backgroundColor = "";
-		e.target.style.color = "#9b9b9b";
-	});
+	// elems.popupTopRightText.addEventListener("mouseout", function(e) {
+	// 	e.target.style.backgroundColor = "";
+	// 	e.target.style.color = "#9b9b9b";
+	// });
 
-	elems.popupTopRightText.addEventListener("click", function(e) {
+	// elems.popupTopRightText.addEventListener("click", function(e) {
 
-		const tmpPseudo = document.querySelector(".login").innerText;
+	// 	const tmpPseudo = document.querySelector(".login").innerText;
 		
-		if (tmpPseudo)
-		{
-			data.student.pseudo = tmpPseudo;
-			data.updateLocalStorage();
-			elems.popupTopRightText.innerText = data.student.pseudo;
-		}
-	});
+	// 	if (tmpPseudo)
+	// 	{
+	// 		data.student.pseudo = tmpPseudo;
+	// 		data.updateLocalStorage();
+	// 		elems.popupTopRightText.innerText = data.student.pseudo;
+	// 	}
+	// });
 }
 
 function isCheckboxUse() {

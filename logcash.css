@@ -235,7 +235,7 @@ body
 
 .top-div-right {
 	/* background-color: red; */
-	width: 50px;
+	/* width: 50px; */
 	/* height: 50px; */
 	flex: 1;
 	display: flex;
@@ -258,11 +258,59 @@ body
 	/* margin: 4px; */
 }
 
+.top-div-setting-block {
+	/* background-color: rgba(32, 35, 44, 0.8);
+	background-color: pink; */
+	flex: 1;
+	width: fit-content;
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 4px;
+}
 
-.popup-top-right-text:hover {
+.top-div-setting-panel {
+	background-color: rgba(32, 35, 44, 0.8);
+	width: 120px;
+	height: 150px;
+	display: flex;
+	position: absolute;
+	border: 1px solid rgb(45, 49, 60);
+    box-shadow: rgba(18, 20, 26, 0.227) 0px 10px 15px;
+	top: 5px;
+	border-radius: 4px;
+	display: none;
+	opacity: 0;
+	/* transition: ease 0.4s opacity; */
+	transition: ease 0.2s all;
+	backdrop-filter: blur(6px);
+
+}
+
+.top-div-setting-button {
+	/* background-color: red; */
+	background-image: url("icons/three-dot-90.svg");
+	background-size: 80%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-position-x: center;
+	height: 100%;
+	aspect-ratio: 1/1;
+	border-radius: 50%;
+	cursor: pointer;
+	display: flex;
+}
+
+.top-div-setting-button:hover {
+	/* background-color: #1b1e25; */
+	background-color: rgba(32, 35, 44, 0.8);
+}
+
+
+
+/* .popup-top-right-text:hover {
 	background-color: #1b1e25;
 	color: #e2e2e2;
-}
+} */
 
 .pop-middle-div {
 	/* padding: 7px 7px 0 7px; */
