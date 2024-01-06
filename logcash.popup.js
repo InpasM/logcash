@@ -272,21 +272,72 @@ popup.createElems = function(elems) {
 
 	elems.topDivSettingPanel = document.createElement("div");
 	elems.topDivSettingPanel.className = "top-div-setting-panel";
-	// elems.topDivSetting = document.createElement("div");
-	// elems.topDivSettingPanel.className = "top-div-setting-panel";
+	elems.topDivSettingPanelTitle = document.createElement("div");
+	elems.topDivSettingPanelTitle.className = "setting-panel-main-title";
+	elems.topDivSettingPanelTitle.innerText = "Settings";
+	
+	elems.panelDarkLine = document.createElement("div");
+	elems.panelDarkLine.className = "panel-line";
+	elems.panelDarkTitle = document.createElement("div");
+	elems.panelDarkTitle.className = "setting-panel-title";
+	elems.panelDarkTitle.innerText = "Dark Mode";
+	elems.panelDarkButton = document.createElement("div");
+	elems.panelDarkButton.className = "checkbox-setting";
+	elems.panelDarkLine.appendChild(elems.panelDarkTitle);
+	elems.panelDarkLine.appendChild(elems.panelDarkButton);
+
+	elems.panelDeviseLine = document.createElement("div");
+	elems.panelDeviseLine.className = "panel-line";
+	elems.panelDeviseTitle = document.createElement("div");
+	elems.panelDeviseTitle.className = "setting-panel-title";
+	elems.panelDeviseTitle.innerText = "Devise";
+	elems.panelDeviseButton = document.createElement("div");
+	elems.panelDeviseButton.className = "checkbox-setting";
+	elems.panelDeviseLine.appendChild(elems.panelDeviseTitle);
+	elems.panelDeviseLine.appendChild(elems.panelDeviseButton);
+
+	elems.panelLanguageLine = document.createElement("div");
+	elems.panelLanguageLine.className = "panel-line";
+	elems.panelLanguageTitle = document.createElement("div");
+	elems.panelLanguageTitle.className = "setting-panel-title";
+	elems.panelLanguageTitle.innerText = "Language";
+	elems.panelLanguageButton = document.createElement("div");
+	elems.panelLanguageButton.className = "checkbox-setting";
+	elems.panelLanguageLine.appendChild(elems.panelLanguageTitle);
+	elems.panelLanguageLine.appendChild(elems.panelLanguageButton);
+
+
+	elems.panelSaveLine = document.createElement("div");
+	elems.panelSaveLine.className = "panel-save-line";
+	elems.panelSaveTitle = document.createElement("div");
+	elems.panelSaveTitle.className = "setting-panel-title";
+	elems.panelSaveTitle.innerText = "Save Recap";
+	elems.panelSaveButton = document.createElement("div");
+	elems.panelSaveButton.className = "panel-save-button";
+	elems.panelSaveLine.appendChild(elems.panelSaveTitle);
+	elems.panelSaveLine.appendChild(elems.panelSaveButton);
+
+	elems.panelResetLine = document.createElement("div");
+	elems.panelResetLine.className = "panel-reset-line";
+	elems.panelResetButton = document.createElement("div");
+	elems.panelResetButton.className = "panel-reset-button";
+	elems.panelResetButton.innerText = "RESET";
+	elems.panelResetLine.appendChild(elems.panelResetButton);
+
+	elems.topDivSettingPanel.appendChild(elems.topDivSettingPanelTitle);
+	elems.topDivSettingPanel.appendChild(elems.panelDarkLine);
+	elems.topDivSettingPanel.appendChild(elems.panelDeviseLine);
+	elems.topDivSettingPanel.appendChild(elems.panelLanguageLine);
+	elems.topDivSettingPanel.appendChild(elems.panelSaveLine);
+	elems.topDivSettingPanel.appendChild(elems.panelResetLine);
 
 	elems.topDivSettingButton = document.createElement("div");
 	elems.topDivSettingButton.className = "top-div-setting-button";
 	elems.topDivSettingButton.addEventListener("click", function() {
 
-		// elems.topDivSettingButton.style.display = "none";
+
 		elems.topDivSettingPanel.style.opacity = "1";
 		elems.topDivSettingPanel.style.display = "flex";
-
-		// elems.topDivSettingPanel.style.display = "flex";
-		// var eventSetting = elems.topDivSettingButton.addEventListener("mouseenter", function() {
-			
-		// });
 		
 		elems.topDivSettingPanel.addEventListener("mouseleave", function() {
 			
