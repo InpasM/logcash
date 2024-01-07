@@ -281,8 +281,8 @@ body
 	display: flex;
 	flex-direction: column;
 	padding: 8px;
-	display: none;
-	opacity: 0;
+	/* display: none;
+	opacity: 0; */
 	z-index: 1000;
 	transition: ease 0.2s all;
 	backdrop-filter: blur(6px);

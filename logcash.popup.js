@@ -147,7 +147,30 @@ var questions = [
 			width: 150
 		},
 	],
-	[]
+	[
+		{	title: "Hours Deducted",
+			text: "Add here all hours you want to deduct.\n\
+		Days off, Public holiday, Medical exemption, \
+		School announcement...",
+			width: 125
+		},
+		{	title: "Boost Lock",
+			text: "Add to estimation the extra time added to your Logtime when leaving with a lock session.",
+			width: 125
+		},
+		{	title: "Monthly Attendance",
+			text: "Select each day you plan to attend.\n\
+		Click on each day or use Names of day to select alls same days remaining in the month.\
+		If no day selected, the estimation will be based on remaining open days\n\
+		Double click on Monthly Attendance to reset the calendar.",
+			width: 150
+		},
+		{	title: "Logtime",
+			text: "If at School you will see here the remaining time you have to do based on your selection of days.\n\
+		Else you will found an estimation for each remaining day of the actual month.",
+			width: 150
+		},
+	]
 ];
 
 var timeOutQuestion;
@@ -250,6 +273,51 @@ function hideShowPopup() {
 	}
 }
 
+var arrayLanguages = [
+	{
+		boost: "Boost Lock",
+		labelSalary: "Your salary",
+		labelHours: "Hours Deducted",
+		monthlyAttendance: "Monthly Attendance",
+		labelLogtimeEach: "Each Day",
+		extraLogtimeSideLeft: "Without\nBoost Lock",
+		daysRemaining: "Days Remaining",
+		mainTitleInfo: "Earned",
+		popProgressTitle: "Hours Done",
+		mainTitleDays: "Days Remaining",
+	},
+	{
+		boost: "Boost Verrouillage",
+		labelSalary: "Votre salaire",
+		labelHours: "Heures Deduites",
+		monthlyAttendance: "Presence Mensuelle",
+		labelLogtimeEach: "Chaque Jour",
+		extraLogtimeSideLeft: "Sans Boost\nde Verrouillage",
+		daysRemaining: "Jour Restant",
+		mainTitleInfo: "Gagné",
+		popProgressTitle: "Heures Faites",
+	}
+];
+function initText(elems, text) {
+
+	elems.popupTopLeftText.innerText = "Logcash";
+
+	// elems.titleBoost.innerText = "Boost Lock";
+	elems.titleBoost.innerText = text.boost;
+
+	elems.labelSalary.innerText = text.labelSalary;
+	elems.labelHours.innerText = text.labelHours; // before Hours Deducted
+	elems.weeklySpan.innerText = text.monthlyAttendance;
+	elems.labelLogtimeEach.innerText = text.labelLogtimeEach;
+	elems.extraLogtimeSideLeft.innerText = text.extraLogtimeSideLeft;
+	elems.labelLogtimeNumberDay.innerText = text.daysRemaining;
+	elems.mainTitleInfo.innerText = text.mainTitleInfo;
+	elems.popProgressTitle.innerText = text.popProgressTitle;
+	elems.mainTitleDays.innerText = text.daysRemaining;
+	elems.mainTitleBoost.innerText = text.boost;
+}
+
+
 popup.createElems = function(elems) {
 
 	elems.popupRemaining = document.createElement("div");
@@ -260,7 +328,6 @@ popup.createElems = function(elems) {
 	elems.popupTopDiv.addEventListener("dblclick", hideShowPopup);
 	
 	elems.popupTopLeftText = document.createElement("p");
-	elems.popupTopLeftText.innerText = "Logcash";
 
 	elems.popupTopRightText = document.createElement("p");
 
@@ -324,11 +391,11 @@ popup.createElems = function(elems) {
 	elems.panelResetButton.innerText = "RESET";
 	elems.panelResetLine.appendChild(elems.panelResetButton);
 
-	elems.topDivSettingPanel.appendChild(elems.topDivSettingPanelTitle);
-	elems.topDivSettingPanel.appendChild(elems.panelDarkLine);
-	elems.topDivSettingPanel.appendChild(elems.panelDeviseLine);
+	// elems.topDivSettingPanel.appendChild(elems.topDivSettingPanelTitle);
+	// elems.topDivSettingPanel.appendChild(elems.panelDarkLine);
+	// elems.topDivSettingPanel.appendChild(elems.panelDeviseLine);
 	elems.topDivSettingPanel.appendChild(elems.panelLanguageLine);
-	elems.topDivSettingPanel.appendChild(elems.panelSaveLine);
+	// elems.topDivSettingPanel.appendChild(elems.panelSaveLine);
 	elems.topDivSettingPanel.appendChild(elems.panelResetLine);
 
 	elems.topDivSettingButton = document.createElement("div");
@@ -389,7 +456,7 @@ popup.createElems = function(elems) {
 
 	elems.titleBoost = document.createElement("p");
 	elems.titleBoost.className = "main-title-info";
-	elems.titleBoost.innerText = "Boost Lock";
+	// elems.titleBoost.innerText = "Boost Lock";
 	elems.questionBoost = document.createElement("div");
 	elems.questionBoost.className = "question-logo";
 	elems.questionBoost.id = "1";
@@ -472,7 +539,7 @@ popup.createElems = function(elems) {
 	
 	elems.labelSalary = document.createElement("p");
 	elems.labelSalary.className = "small-title-info";
-	elems.labelSalary.innerText = "Your salary";
+	// elems.labelSalary.innerText = "Your salary";
 
 	// elems.questionSalary = document.createElement("div");
 	// elems.questionSalary.className = "question-logo";
@@ -499,7 +566,7 @@ popup.createElems = function(elems) {
 
 	elems.labelHours = document.createElement("p");
 	elems.labelHours.className = "small-title-info";
-	elems.labelHours.innerText = "Hours Deduc."; // before Hours Deducted
+	// elems.labelHours.innerText = "Hours Deduc."; // before Hours Deducted
 
 
 	elems.questionHours = document.createElement("div");
@@ -528,7 +595,7 @@ popup.createElems = function(elems) {
 
 	elems.weeklySpan = document.createElement("p");
 	elems.weeklySpan.className = "main-title-info";
-	elems.weeklySpan.innerText = "Monthly Attendance";
+	// elems.weeklySpan.innerText = "Monthly Attendance";
 	elems.weeklySpan.style.cursor = "pointer";
 	elems.weeklySpan.addEventListener("dblclick", function() {
 
@@ -738,7 +805,7 @@ popup.createElems = function(elems) {
 	
 	elems.labelLogtimeEach = document.createElement("p");
 	elems.labelLogtimeEach.className = "small-title-info";
-	elems.labelLogtimeEach.innerText = "Each Day";
+	// elems.labelLogtimeEach.innerText = "Each Day";
 	elems.resultLogtimeEach = document.createElement("p");
 	elems.resultLogtimeEach.className = "number-result";
 	elems.labelLogtimeEach.style.display = "none";
@@ -798,7 +865,7 @@ popup.createElems = function(elems) {
 	elems.extraLogtimeLeft.className = "extra-logtime-left";
 	elems.extraLogtimeSideLeft = document.createElement("div");
 	elems.extraLogtimeSideLeft.className = "extra-logtime-side";
-	elems.extraLogtimeSideLeft.innerText = "Without\nBoost Lock";
+	// elems.extraLogtimeSideLeft.innerText = "Without\nBoost Lock";
 	elems.extraLogtimeSideLeft.style.textAlign = "right";
 	// elems.extraLogtimeSideLeft.style.flex = "1";
 	
@@ -834,7 +901,7 @@ popup.createElems = function(elems) {
 
 	elems.labelLogtimeNumberDay = document.createElement("p");
 	elems.labelLogtimeNumberDay.className = "small-title-info";
-	elems.labelLogtimeNumberDay.innerText = "Days Remaining";
+	// elems.labelLogtimeNumberDay.innerText = "Days Remaining";
 	elems.resultLogtimeNumberDay = document.createElement("div");
 	elems.resultLogtimeNumberDay.className = "number-result";
 	elems.resultLogtimeNumberDay.innerText = "0";
@@ -906,7 +973,7 @@ popup.createElems = function(elems) {
 
 	elems.mainTitleInfo = document.createElement("p");
 	elems.mainTitleInfo.className = "main-title-info";
-	elems.mainTitleInfo.innerText = "Earned";
+	// elems.mainTitleInfo.innerText = "Earned";
 
 
 	elems.lineLabelEarn = document.createElement("div");
@@ -1074,7 +1141,7 @@ popup.createElems = function(elems) {
 	// elems.popProgressTitle.className = "pop-title-container";
 	elems.popProgressTitle = document.createElement("p");
 	elems.popProgressTitle.className = "main-title-info";
-	elems.popProgressTitle.innerText = "Hours Done";
+	// elems.popProgressTitle.innerText = "Hours Done";
 
 	// elems.containerDivMonth.style.display = "none";
 
@@ -1099,7 +1166,7 @@ popup.createElems = function(elems) {
 
 	elems.mainTitleDays = document.createElement("p");
 	elems.mainTitleDays.className = "main-title-info";
-	elems.mainTitleDays.innerText = "Days Remaining";
+	// elems.mainTitleDays.innerText = "Days Remaining";
 	elems.lineResultsDays = document.createElement("div");
 	elems.lineResultsDays.className = "line-results";
 
@@ -1137,7 +1204,7 @@ popup.createElems = function(elems) {
 
 	elems.mainTitleBoost = document.createElement("p");
 	elems.mainTitleBoost.className = "main-title-info";
-	elems.mainTitleBoost.innerText = "Boost Lock";
+	// elems.mainTitleBoost.innerText = "Boost Lock";
 
 	elems.lineResultsBoost = document.createElement("div");
 	elems.lineResultsBoost.className = "line-results";
@@ -1422,6 +1489,9 @@ popup.createElems = function(elems) {
 	elems.popupRemaining.appendChild(elems.popProgressContainer);
 	elems.popupRemaining.appendChild(elems.popBottomContainer);
 	document.body.appendChild(elems.popupRemaining);
+
+	data.student.language = FRENCH;
+	initText(elems, arrayLanguages[data.student.language]);
 }
 
 function disableTextSelection() {
