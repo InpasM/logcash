@@ -58,7 +58,10 @@ function clickBoostMin() {
 	{
 		data.student.addBoostHalf = false;
 		elems.buttonBoostMin.style.borderColor = "rgb(45, 49, 60)";
-		elems.labelLogtimeEstimation.innerText = "Est. Logout Time";
+		// if (data.student.language === ENGLISH)
+			// elems.labelLogtimeEstimation.innerText = "Est. Logout Timee";
+			elems.labelLogtimeEstimation.innerText = arrayLanguages[data.student.language].labelEstimationLog;
+		// else
 	}
 	else
 	{
@@ -66,10 +69,10 @@ function clickBoostMin() {
 		{
 			data.student.addBoostFull = false;
 			elems.buttonBoostMax.style.borderColor = "rgb(45, 49, 60)";
-			elems.labelLogtimeEstimation.innerText = "Est. Logout Time";
+			elems.labelLogtimeEstimation.innerText = arrayLanguages[data.student.language].labelEstimationLock;
 		}
 		else
-			elems.labelLogtimeEstimation.innerText = "Est. Lockout Time";
+			elems.labelLogtimeEstimation.innerText = arrayLanguages[data.student.language].labelEstimationLock;
 		data.student.addBoostHalf = true;
 		elems.buttonBoostMin.style.borderColor = "rgb(0, 186, 188)";
 	}
@@ -93,7 +96,7 @@ function clickBoostMax() {
 	{
 		data.student.addBoostFull = false;
 		elems.buttonBoostMax.style.borderColor = "rgb(45, 49, 60)";
-		elems.labelLogtimeEstimation.innerText = "Est. Logout Time";
+		elems.labelLogtimeEstimation.innerText = arrayLanguages[data.student.language].labelEstimationLog;
 	}
 	else
 	{
@@ -101,10 +104,10 @@ function clickBoostMax() {
 		{
 			data.student.addBoostHalf = false;
 			elems.buttonBoostMin.style.borderColor = "rgb(45, 49, 60)";
-			elems.labelLogtimeEstimation.innerText = "Est. Logout Time";
+			elems.labelLogtimeEstimation.innerText = arrayLanguages[data.student.language].labelEstimationLock;
 		}
 		else
-			elems.labelLogtimeEstimation.innerText = "Est. Lockout Time";
+			elems.labelLogtimeEstimation.innerText = arrayLanguages[data.student.language].labelEstimationLock;
 		data.student.addBoostFull = true;
 		elems.buttonBoostMax.style.borderColor = "rgb(0, 186, 188)";
 	}
@@ -282,31 +285,47 @@ var arrayLanguages = [
 		labelLogtimeEach: "Each Day",
 		extraLogtimeSideLeft: "Without\nBoost Lock",
 		daysRemaining: "Days Remaining",
-		mainTitleInfo: "Earned",
+		mainTitleInfo: "Cash Earned",
 		popProgressTitle: "Hours Done",
-		mainTitleDays: "Days Remaining",
+		arrayDaysName: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+		arrayMonth: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+		labelLogtimeRemaining: "Remaining Today",
+		labelEstimationLock: "Lockout Time",
+		labelEstimationLog: "Logout Time",
+		darkMode: "Dark Mode",
+		devise: "Devise",
+		language: "Language",
+		save: "Save Month",
 	},
 	{
 		boost: "Boost Verrouillage",
 		labelSalary: "Votre salaire",
 		labelHours: "Heures Deduites",
 		monthlyAttendance: "Presence Mensuelle",
-		labelLogtimeEach: "Chaque Jour",
-		extraLogtimeSideLeft: "Sans Boost\nde Verrouillage",
+		labelLogtimeEach: "Part Jour",
+		extraLogtimeSideLeft: "Sans Boost\nVerrouillage",
 		daysRemaining: "Jour Restant",
-		mainTitleInfo: "Gagné",
+		mainTitleInfo: "Salaire Perçu",
 		popProgressTitle: "Heures Faites",
+		arrayDaysName: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+		arrayMonth: ["Jan", "Fev", "Mar", "Avr", "Mai", "Jui", "Juil", "Aou", "Sep", "Oct", "Nov", "Dec"],
+		labelLogtimeRemaining: "Restant Aujourd'hui",
+		labelEstimationLock: "Heure Verrouillage",
+		labelEstimationLog: "Heure Déconnexion",
+		darkMode: "Mode Sombre",
+		devise: "Devise",
+		language: "Langue",
+		save: "Sauvegarde Mois",
 	}
 ];
+
 function initText(elems, text) {
 
 	elems.popupTopLeftText.innerText = "Logcash";
 
-	// elems.titleBoost.innerText = "Boost Lock";
 	elems.titleBoost.innerText = text.boost;
-
 	elems.labelSalary.innerText = text.labelSalary;
-	elems.labelHours.innerText = text.labelHours; // before Hours Deducted
+	elems.labelHours.innerText = text.labelHours;
 	elems.weeklySpan.innerText = text.monthlyAttendance;
 	elems.labelLogtimeEach.innerText = text.labelLogtimeEach;
 	elems.extraLogtimeSideLeft.innerText = text.extraLogtimeSideLeft;
@@ -315,6 +334,38 @@ function initText(elems, text) {
 	elems.popProgressTitle.innerText = text.popProgressTitle;
 	elems.mainTitleDays.innerText = text.daysRemaining;
 	elems.mainTitleBoost.innerText = text.boost;
+
+	for (var i = 0; i < 7; i++)
+	{
+		elems.monthDayBoxes[i].innerText = text.arrayDaysName[i];
+	}
+
+	if (data.session.logAtSchool)
+	{
+		elems.labelLogtimeRemaining.innerText = text.labelLogtimeRemaining;
+		if (data.student.addBoostHalf || data.student.addBoostFull)
+			elems.labelLogtimeEstimation.innerText = text.labelEstimationLock;
+		else
+			elems.labelLogtimeEstimation.innerText = text.labelEstimationLog;
+	}
+
+	const arrayMonth = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+	for (var i = 0; i < elems.divMonths.length; i++)
+	{
+		for (var j = 0; j < arrayMonth.length; j++)
+		{
+			if (elems.divMonths[i].innerText === arrayMonth[j])
+			{
+				// console.log(elems.divMonths[i].innerText, "found index", j);
+				elems.divMonths[i].innerText = text.arrayMonth[j];
+			}
+
+		}
+	}
+	elems.panelDarkTitle.innerText = text.darkMode;
+	elems.panelDeviseTitle.innerText = text.devise;
+	elems.panelLanguageTitle.innerText = text.language;
+	elems.panelSaveTitle.innerText = text.save;
 }
 
 
@@ -347,7 +398,7 @@ popup.createElems = function(elems) {
 	elems.panelDarkLine.className = "panel-line";
 	elems.panelDarkTitle = document.createElement("div");
 	elems.panelDarkTitle.className = "setting-panel-title";
-	elems.panelDarkTitle.innerText = "Dark Mode";
+	// elems.panelDarkTitle.innerText = "Dark Mode";
 	elems.panelDarkButton = document.createElement("div");
 	elems.panelDarkButton.className = "checkbox-setting";
 	elems.panelDarkLine.appendChild(elems.panelDarkTitle);
@@ -357,7 +408,7 @@ popup.createElems = function(elems) {
 	elems.panelDeviseLine.className = "panel-line";
 	elems.panelDeviseTitle = document.createElement("div");
 	elems.panelDeviseTitle.className = "setting-panel-title";
-	elems.panelDeviseTitle.innerText = "Devise";
+	// elems.panelDeviseTitle.innerText = "Devise";
 	elems.panelDeviseButton = document.createElement("div");
 	elems.panelDeviseButton.className = "checkbox-setting";
 	elems.panelDeviseLine.appendChild(elems.panelDeviseTitle);
@@ -367,18 +418,70 @@ popup.createElems = function(elems) {
 	elems.panelLanguageLine.className = "panel-line";
 	elems.panelLanguageTitle = document.createElement("div");
 	elems.panelLanguageTitle.className = "setting-panel-title";
-	elems.panelLanguageTitle.innerText = "Language";
-	elems.panelLanguageButton = document.createElement("div");
-	elems.panelLanguageButton.className = "checkbox-setting";
+	// elems.panelLanguageTitle.innerText = "Language";
+
+	elems.panelLanguageRight = document.createElement("div");
+	elems.panelLanguageRight.className = "setting-block-button";
+	elems.panelLanguageButtonEnglish = document.createElement("div");
+	elems.panelLanguageButtonEnglish.className = "setting-button-option";
+	elems.panelLanguageButtonEnglish.innerText = "ENG";
+	elems.panelLanguageButtonEnglish.id = "0";
+	elems.panelLanguageButtonFrench = document.createElement("div");
+	elems.panelLanguageButtonFrench.className = "setting-button-option";
+	elems.panelLanguageButtonFrench.innerText = "FR";
+	elems.panelLanguageButtonFrench.id = "1";
+
+	function changeLanguage(e) {
+
+		var tmpId = parseInt(e.target.id)
+
+		if (tmpId != data.student.language)
+		{
+			elems.panelLanguageButtonEnglish.style.color = "rgb(155, 155, 155)";
+			elems.panelLanguageButtonEnglish.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+			elems.panelLanguageButtonFrench.style.color = "rgb(155, 155, 155)";
+			elems.panelLanguageButtonFrench.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+
+			e.target.style.color = "#191919";
+			e.target.style.backgroundColor = "white";
+			data.student.language = tmpId;
+			if (data.isHomePage === -1)
+			{
+				data.updateLocalStorage();
+				initText(elems, arrayLanguages[data.student.language]);
+			}
+		}
+	}
+
+	elems.panelLanguageButtonEnglish.addEventListener("click", changeLanguage);
+	elems.panelLanguageButtonFrench.addEventListener("click", changeLanguage);
+
+	if (data.student.language === ENGLISH)
+	{
+		// elems.panelLanguageButtonEnglish.style.display = "flex";
+		elems.panelLanguageButtonEnglish.style.color = "#191919";
+		elems.panelLanguageButtonEnglish.style.backgroundColor = "white";
+	}
+	else
+	{
+		// elems.panelLanguageButtonFrench.style.display = "flex";
+		elems.panelLanguageButtonFrench.style.color = "#191919";
+		elems.panelLanguageButtonFrench.style.backgroundColor = "white";
+	}
+	elems.panelLanguageRight.appendChild(elems.panelLanguageButtonEnglish);
+	elems.panelLanguageRight.appendChild(elems.panelLanguageButtonFrench);
+
 	elems.panelLanguageLine.appendChild(elems.panelLanguageTitle);
-	elems.panelLanguageLine.appendChild(elems.panelLanguageButton);
+	elems.panelLanguageLine.appendChild(elems.panelLanguageRight);
+	// elems.panelLanguageLine.appendChild(elems.panelLanguageButtonEnglish);
+	// elems.panelLanguageLine.appendChild(elems.panelLanguageButtonFrench);
 
 
 	elems.panelSaveLine = document.createElement("div");
 	elems.panelSaveLine.className = "panel-save-line";
 	elems.panelSaveTitle = document.createElement("div");
 	elems.panelSaveTitle.className = "setting-panel-title";
-	elems.panelSaveTitle.innerText = "Save Recap";
+	// elems.panelSaveTitle.innerText = "Save Recap";
 	elems.panelSaveButton = document.createElement("div");
 	elems.panelSaveButton.className = "panel-save-button";
 	elems.panelSaveLine.appendChild(elems.panelSaveTitle);
@@ -389,6 +492,45 @@ popup.createElems = function(elems) {
 	elems.panelResetButton = document.createElement("div");
 	elems.panelResetButton.className = "panel-reset-button";
 	elems.panelResetButton.innerText = "RESET";
+	elems.panelResetButton.addEventListener("click", function() {
+
+		elems.resetTooltipPanel.style.display = "flex";
+		setTimeout(function() {
+			elems.resetTooltipPanel.style.opacity = "1";
+		}, 10);
+	});
+
+	elems.resetTooltipPanel = document.createElement("div");
+	elems.resetTooltipPanel.className = "reset-tooltip";
+
+	function closeResetPanel() {
+		
+		elems.resetTooltipPanel.style.opacity = "0";
+		setTimeout(function() {
+			elems.resetTooltipPanel.style.display = "none";
+		}, 400);
+	}
+	elems.resetTooltipPanel.addEventListener("click", closeResetPanel);
+	elems.resetTooltipPanel.addEventListener("mouseleave", closeResetPanel);
+
+	elems.resetTooltipBlockConfirm = document.createElement("div");
+	elems.resetTooltipBlockConfirm.className = "reset-tooltip-block";
+	elems.resetTooltipBlockConfirmTitle = document.createElement("div");
+	elems.resetTooltipBlockConfirmTitle.className = "setting-panel-main-title";
+	elems.resetTooltipBlockConfirmTitle.innerText = "Reset Logcash ?";
+	elems.resetConfirmButton = document.createElement("div");
+	elems.resetConfirmButton.className = "panel-reset-button";
+	elems.resetConfirmButton.innerText = "YES";
+	elems.resetConfirmButton.style.marginTop = "4px";
+	elems.resetConfirmButton.addEventListener("click", function() {
+		console.log("reset all");
+	});
+
+	elems.resetTooltipBlockConfirm.appendChild(elems.resetTooltipBlockConfirmTitle);
+	elems.resetTooltipBlockConfirm.appendChild(elems.resetConfirmButton);
+	elems.resetTooltipPanel.appendChild(elems.resetTooltipBlockConfirm);
+	elems.popupRemaining.appendChild(elems.resetTooltipPanel);
+
 	elems.panelResetLine.appendChild(elems.panelResetButton);
 
 	// elems.topDivSettingPanel.appendChild(elems.topDivSettingPanelTitle);
@@ -401,7 +543,6 @@ popup.createElems = function(elems) {
 	elems.topDivSettingButton = document.createElement("div");
 	elems.topDivSettingButton.className = "top-div-setting-button";
 	elems.topDivSettingButton.addEventListener("click", function() {
-
 
 		elems.topDivSettingPanel.style.opacity = "1";
 		elems.topDivSettingPanel.style.display = "flex";
@@ -439,6 +580,7 @@ popup.createElems = function(elems) {
 	// POPUP INFO
 	elems.popMiddleDiv = document.createElement("div");
 	elems.popMiddleDiv.className = "pop-middle-div";
+
 	
 	elems.popMiddleDivLeft = document.createElement("div");
 	elems.popMiddleDivLeft.className = "pop-middle-div-left";
@@ -679,13 +821,13 @@ popup.createElems = function(elems) {
 		}
 	}
 
-	const arrayDaysName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+	// const arrayDaysName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 	for (var i = 0; i < 7; i++)
 	{
 		elems.monthDayBoxes[i] = document.createElement("div");
 		elems.monthDayBoxes[i].className = "days-name-box";
 		elems.monthDayBoxes[i].id = i;
-		elems.monthDayBoxes[i].innerText = arrayDaysName[i];
+		// elems.monthDayBoxes[i].innerText = arrayDaysName[i];
 		elems.monthDayBoxes[i].addEventListener("click", selectAllSameDay);
 		elems.monthLineDayName.appendChild(elems.monthDayBoxes[i]);
 	}
@@ -936,12 +1078,12 @@ popup.createElems = function(elems) {
 		elems.resultLogtimeNumberDay.style.display = "none";
 
 		data.session.logtimeMode = REMAINING;
-		elems.labelLogtimeRemaining.innerText = "Remaining Today";
+		// elems.labelLogtimeRemaining.innerText = "Remaining Today";
 		elems.resultLogtimeRemaining.innerText = "0h00";
-		if (data.student.addBoostHalf || data.student.addBoostFull)
-			elems.labelLogtimeEstimation.innerText = "Est. Lockout Time";
-		else
-			elems.labelLogtimeEstimation.innerText = "Est. Logout Time";
+		// if (data.student.addBoostHalf || data.student.addBoostFull)
+		// 	elems.labelLogtimeEstimation.innerText = "Est. Lockout Time";
+		// else
+		// 	elems.labelLogtimeEstimation.innerText = "Est. Logout Time";
 	}
 	else
 	{
@@ -950,9 +1092,7 @@ popup.createElems = function(elems) {
 		elems.labelLogtimeNumberDay.style.display = "flex";
 		elems.resultLogtimeNumberDay.style.display = "flex";
 
-		data.session.logtimeMode = EACH;
-
-		
+		data.session.logtimeMode = EACH;	
 	}
 
 	if (data.student.addBoostHalf || data.student.addBoostFull)
@@ -999,7 +1139,7 @@ popup.createElems = function(elems) {
 	elems.salaryAmountLine.className = "salary-amount-line";
 	elems.salaryEuroSign = document.createElement("p");
 	elems.salaryEuroSign.className = "salary-euro-sign";
-	elems.salaryEuroSign.innerText = "€";
+	elems.salaryEuroSign.innerText = "€";								// DEVISE
 	elems.salaryInteger = document.createElement("p");
 	elems.salaryInteger.className = "salary-integer";
 	elems.salaryInteger.innerText = "0";
@@ -1227,17 +1367,17 @@ popup.createElems = function(elems) {
 	elems.labelFullBoost.className = "number-label";
 	elems.labelFullBoost.innerText = "1h24";
 
-	elems.checkboxHalf = document.createElement("div");
-	elems.checkboxHalf.className = "checkbox-boost";
-	elems.checkboxHalfCenter = document.createElement("div");
-	elems.checkboxHalfCenter.className = "checkbox-boost-center";
-	elems.checkboxHalf.appendChild(elems.checkboxHalfCenter);
+	// elems.checkboxHalf = document.createElement("div");
+	// elems.checkboxHalf.className = "checkbox-boost";
+	// elems.checkboxHalfCenter = document.createElement("div");
+	// elems.checkboxHalfCenter.className = "checkbox-boost-center";
+	// elems.checkboxHalf.appendChild(elems.checkboxHalfCenter);
 	
-	elems.checkboxFull = document.createElement("div");
-	elems.checkboxFull.className = "checkbox-boost";
-	elems.checkboxFullCenter = document.createElement("div");
-	elems.checkboxFullCenter.className = "checkbox-boost-center";
-	elems.checkboxFull.appendChild(elems.checkboxFullCenter);
+	// elems.checkboxFull = document.createElement("div");
+	// elems.checkboxFull.className = "checkbox-boost";
+	// elems.checkboxFullCenter = document.createElement("div");
+	// elems.checkboxFullCenter.className = "checkbox-boost-center";
+	// elems.checkboxFull.appendChild(elems.checkboxFullCenter);
 
 	/////////////// SET STYLE CHECKBOX BOOST WITH DATA.STUDENT
 	if (data.student.addBoostHalf)
@@ -1299,16 +1439,16 @@ popup.createElems = function(elems) {
 	// 	popup.setData(elems);
 	// });
 
-	elems.lineResultsBoostLeft.appendChild(elems.labelHalfBoost);
-	elems.lineResultsBoostLeft.appendChild(elems.checkboxHalf);
-	elems.lineResultsBoostRight.appendChild(elems.labelFullBoost);
-	elems.lineResultsBoostRight.appendChild(elems.checkboxFull);
+	// elems.lineResultsBoostLeft.appendChild(elems.labelHalfBoost);
+	// elems.lineResultsBoostLeft.appendChild(elems.checkboxHalf);
+	// elems.lineResultsBoostRight.appendChild(elems.labelFullBoost);
+	// elems.lineResultsBoostRight.appendChild(elems.checkboxFull);
 
-	elems.lineResultsBoost.appendChild(elems.lineResultsBoostLeft);
-	elems.lineResultsBoost.appendChild(elems.lineResultsBoostRight);
+	// elems.lineResultsBoost.appendChild(elems.lineResultsBoostLeft);
+	// elems.lineResultsBoost.appendChild(elems.lineResultsBoostRight);
 
 	elems.boostLockContainer.appendChild(elems.mainTitleBoost);
-	elems.boostLockContainer.appendChild(elems.lineResultsBoost);
+	// elems.boostLockContainer.appendChild(elems.lineResultsBoost);
 
 
 	///////////////////////////////////////////////////////// CONTAINER ESTIMATION
@@ -1362,7 +1502,7 @@ popup.createElems = function(elems) {
 	elems.moreInfoContainer.appendChild(elems.moreInfoLogo);
 
 	elems.resultsContainer.appendChild(elems.resultsDiv);
-	elems.resultsContainer.appendChild(elems.boostLockContainer);
+	// elems.resultsContainer.appendChild(elems.boostLockContainer);
 	elems.resultsContainer.appendChild(elems.estimationContainer);
 
 	elems.resultsDiv.appendChild(elems.mainTitleDays);
@@ -1490,7 +1630,7 @@ popup.createElems = function(elems) {
 	elems.popupRemaining.appendChild(elems.popBottomContainer);
 	document.body.appendChild(elems.popupRemaining);
 
-	data.student.language = FRENCH;
+	// data.student.language = FRENCH;
 	initText(elems, arrayLanguages[data.student.language]);
 }
 

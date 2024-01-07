@@ -270,7 +270,7 @@ body
 
 .top-div-setting-panel {
 	background-color: rgba(32, 35, 44, 0.8);
-	width: 112px;
+	width: 120px;
 	/* height: 150px; */
 	display: flex;
 	position: absolute;
@@ -281,8 +281,8 @@ body
 	display: flex;
 	flex-direction: column;
 	padding: 8px;
-	/* display: none;
-	opacity: 0; */
+	display: none;
+	opacity: 0;
 	z-index: 1000;
 	transition: ease 0.2s all;
 	backdrop-filter: blur(6px);
@@ -320,7 +320,7 @@ body
 	margin: 3px 0;
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	/* align-items: center; */
 }
 
 .panel-save-line {
@@ -339,6 +339,32 @@ body
 	width: 18px;
 	cursor: pointer;
 	/* margin-top: 4px; */
+}
+
+.setting-block-button {
+	/* background-color: red; */
+	width: 100%;
+	/* height: 20px; */
+	flex: 1;
+	margin-left: 8px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.setting-button-option {
+	width: 18px;
+	background-color: rgba(37, 41, 50, 0.9);
+	font-size: 9px;
+	/* font-weight: bold; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 4px 6px;
+	margin-left: 4px;
+	border-radius: 13px;
+	color: rgb(155, 155, 155);
+	border: 1px solid rgb(51, 55, 67);
+	cursor: pointer;
 }
 
 .checkbox-setting {
@@ -369,7 +395,7 @@ body
 }
 
 .panel-reset-button {
-	
+	color: rgb(198, 198, 198);
 	height: 22px;
 	border-radius: 14px;
 	width: 54px;
@@ -390,6 +416,49 @@ body
 	color: rgb(235, 25, 25);
 	/* background-color: rgb(48, 53, 65); */
 }
+
+.reset-tooltip {
+	opacity: 1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 1;
+    display: flex;
+	z-index: 10000;
+    background-color: rgba(37, 41, 50, 0.8);
+    backdrop-filter: blur(6px);
+	transition: ease 0.4s all;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	display: none;
+	opacity: 0;
+}
+
+.reset-tooltip-block {
+	background-color: rgba(32, 35, 44, 0.8);
+	/* width: 120px; */
+	display: flex;
+	/* position: absolute; */
+	border: 1px solid rgb(45, 49, 60);
+    box-shadow: rgba(18, 20, 26, 0.227) 0px 10px 15px;
+	/* top: 5px; */
+	border-radius: 4px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 8px;
+	/* display: none;
+	opacity: 0; */
+	z-index: 1000;
+	transition: ease 0.2s all;
+	/* backdrop-filter: blur(6px); */
+	/* cursor: default; */
+}
+
+
 
 .top-div-setting-button {
 	/* background-color: red; */
