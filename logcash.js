@@ -20,9 +20,6 @@ function reGenerate(month, elems) {
 
 	elems.sideProgress.innerText = tmpProgress;
 
-	// let textPercent = "  (" + Math.floor(month.percent) + "%)";
-	// elems.sideProgress.innerText += textPercent;
-
 	if (month.percent < 10)
 		elems.sideProgress.style.width = "90px";
 	else if (month.percent > 90 && month.percent < 100)

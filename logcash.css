@@ -388,8 +388,6 @@ body
 
 
 .pop-middle-div {
-	/* border-top: 1px solid rgb(45, 49, 60); */
-	/* height: 100%; */
 	opacity: 1;
 	transform: translateY(0);
 	display: flex;
