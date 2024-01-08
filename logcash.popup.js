@@ -131,50 +131,48 @@ function clickBoostMax() {
 
 var questions = [
 	[
-		{	title: "Hours Deducted",
+		{	
 			text: "Add here all hours you want to deduct.\n\
-		Days off, Public holiday, Medical exemption, \
-		School announcement...",
+			Days off, Public holiday, Medical exemption, \
+			School announcement...",
 			width: 125
 		},
-		{	title: "Boost Lock",
-			text: "Add to estimation the extra time added to your Logtime when leaving with a lock session.",
+		{	
+			text: "Add to estimation the extra time added to your Logtime when leaving with a lock session at the end of day.",
 			width: 125
 		},
-		{	title: "Monthly Attendance",
+		{	
 			text: "Select each day you plan to attend.\n\
-		Click on each day or use Names of day to select alls same days remaining in the month.\
-		If no day selected, the estimation will be based on remaining open days\n\
-		Double click on Monthly Attendance to reset the calendar.",
-			width: 150
+			Click on day's name to select alls same days remaining in the month.\n\
+			If none selected, the estimation will be based on remaining open days\n\
+			Double click on \"Monthly Attendance\" to reset the calendar.",
+			width: 170
 		},
-		{	title: "Logtime",
-			text: "If at School you will see here the remaining time you have to do based on your selection of days.\n\
-		Else you will found an estimation for each remaining day of the actual month.",
+		{	
+			text: "Log at School you will see the estimated time remaining you have to do today to reach your monthly goal.",
 			width: 150
 		},
 	],
 	[
-		{	title: "Hours Deducted",
-			text: "Add here all hours you want to deduct.\n\
-		Days off, Public holiday, Medical exemption, \
-		School announcement...",
+		{	
+			text: "Ajouter ici toutes les heures à deduire du mois.\n\
+			Congés, jours fériés, dispense médical, \
+			Annonce de l'école...",
 			width: 125
 		},
-		{	title: "Boost Lock",
-			text: "Add to estimation the extra time added to your Logtime when leaving with a lock session.",
+		{	
+			text: "Ajouter à l'estimation le temps de connexion ajouté à votre Logtime en laissant sa session verrouillée en fin de journée.",
 			width: 125
 		},
-		{	title: "Monthly Attendance",
-			text: "Select each day you plan to attend.\n\
-		Click on each day or use Names of day to select alls same days remaining in the month.\
-		If no day selected, the estimation will be based on remaining open days\n\
-		Double click on Monthly Attendance to reset the calendar.",
-			width: 150
+		{	
+			text: "Selectionner chaque jour auquel vous prevoyez d'assister.\n\
+			Cliquer sur les noms de jour pour selectionner toute la colonne restante.\
+			Si aucun jour n'est selectionné, l'estimation sera basé sur le nombre de jour ouvré restant.\
+			Double clique sur \"Presence Mensuelle\" pour reset le calendrier.",
+			width: 170
 		},
-		{	title: "Logtime",
-			text: "If at School you will see here the remaining time you have to do based on your selection of days.\n\
-		Else you will found an estimation for each remaining day of the actual month.",
+		{	
+			text: "Connecté à l'école, vous verrez le temps estimé restant à faire cette journée pour atteindre votre objectif mensuel.",
 			width: 150
 		},
 	]
@@ -627,8 +625,8 @@ popup.createElems = function(elems) {
 		elems.tooltipQuestionBottomText.innerText = questions[data.student.language][2].text;						//////////////// DEV
 		elems.tooltipQuestion.style.opacity = "1";
 	}
+	// elems.tooltipQuestionBottomText.innerText = questions[data.student.language][2].text;						//////////////// DEV
 
-	// elems.tooltipQuestion.appendChild(elems.tooltipQuestionTopText);
 	elems.tooltipQuestion.appendChild(elems.tooltipQuestionBottomText);
 
 	document.body.appendChild(elems.tooltipQuestion);
