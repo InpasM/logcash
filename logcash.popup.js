@@ -1550,10 +1550,8 @@ function disableTextSelection() {
 
 popup.setStyle = function(elems) {
 
-	elems.popupRemaining.style.opacity = "1"; // dev
+	elems.popupRemaining.style.opacity = "1";
 	elems.popupRemaining.style.display = "flex";
-	// elems.popupRemaining.style.opacity = "0"; // normal
-	// elems.popupRemaining.style.display = "none";
 	elems.popupRemaining.style.position = "absolute";
 	elems.popupRemaining.style.borderRadius = "4px";
 	elems.popupRemaining.style.zIndex = "1000";
@@ -1562,20 +1560,16 @@ popup.setStyle = function(elems) {
 	elems.popupRemaining.style.boxShadow = "0px 10px 15px #12141a3a";
 	elems.popupRemaining.style.backdropFilter = "blur(6px)";
 
-	elems.popupRemaining.style.top = "68px"; // remove dev only
-	elems.popupRemaining.style.right = "8px"; // remove dev only
+	elems.popupRemaining.style.top = "68px";
+	elems.popupRemaining.style.right = "8px";
 	
 	elems.popupTopDiv.style.cursor = "move";
 	elems.popupTopDiv.style.height = "fit-content";
 	elems.popupTopDiv.style.borderRadius = "4px";
-	// elems.popupTopDiv.style.borderBottom = "1px solid #2d313c";
 	elems.popupTopDiv.style.display = "flex";
-	// elems.popupTopDiv.style.justifyContent = "space-between";
 	elems.popupTopDiv.style.justifyContent = "flex-start";
-	// elems.popupTopDiv.style.alignItems = "center";
 	elems.popupTopDiv.style.color = "#9b9b9b";
 	elems.popupTopDiv.style.whiteSpace = "nowrap";
-	// elems.popupTopDiv.style.padding = "2px 4px";
 	elems.popupTopDiv.style.padding = "2px 2px";
 
 	elems.popupTopLeftText.style.color = "#e2e2e2";
@@ -1583,7 +1577,6 @@ popup.setStyle = function(elems) {
 	elems.popupTopLeftText.style.margin = "3px 3px 3px 5px";
 	elems.popupTopLeftText.style.padding = "0";
 	elems.popupTopLeftText.style.fontWeight = "bold";
-	// elems.popupTopLeftText.style.pointerEvents = "none";
 	elems.popupTopLeftText.style.textShadow = "rgb(0, 0, 0) 0px 0px 3px";
 	
 	elems.popupTopRightText.className = "popup-top-right-text";
@@ -1593,29 +1586,6 @@ popup.setStyle = function(elems) {
 	elems.popupTopRightText.style.width = "fit-content";
 	elems.popupTopRightText.style.borderRadius = "2px";
 	elems.popupTopRightText.style.textShadow = "rgb(0, 0, 0) 0px 0px 3px";
-
-	// elems.popupTopRightText.addEventListener("mouseover", function(e) {
-	// 	e.target.style.backgroundColor = "#1b1e25";
-	// 	e.target.style.color = "#e2e2e2";
-	// 	e.target.style.cursor = "pointer";
-	// });
-
-	// elems.popupTopRightText.addEventListener("mouseout", function(e) {
-	// 	e.target.style.backgroundColor = "";
-	// 	e.target.style.color = "#9b9b9b";
-	// });
-
-	// elems.popupTopRightText.addEventListener("click", function(e) {
-
-	// 	const tmpPseudo = document.querySelector(".login").innerText;
-		
-	// 	if (tmpPseudo)
-	// 	{
-	// 		data.student.pseudo = tmpPseudo;
-	// 		data.updateLocalStorage();
-	// 		elems.popupTopRightText.innerText = data.student.pseudo;
-	// 	}
-	// });
 }
 
 function isCheckboxUse() {
