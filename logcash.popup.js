@@ -533,8 +533,8 @@ popup.createElems = function(elems) {
 	elems.resetConfirmButton.style.marginRight = "8px";
 	elems.resetConfirmButton.addEventListener("click", function() {
 
-		if (data.isHomePage === -1)
-		{
+		// if (data.isHomePage === -1)
+		// {
 			const login = document.querySelector(".login").innerText;
 	
 			data.student.pseudo = login;
@@ -570,7 +570,7 @@ popup.createElems = function(elems) {
 			// console.log(data.student.monthlyHabit.length);
 			data.updateLocalStorage();
 			popup.setData(elems);
-		}
+		// }
 	});
 	elems.resetCancelButton = document.createElement("div");
 	elems.resetCancelButton.className = "panel-cancel-button";

@@ -10,6 +10,12 @@ data.updateLocalStorage = function() {
 
 	if (data.isHomePage === -1)
 		localStorage.setItem("student42", JSON.stringify(data.student));
+	else
+	{
+		// console.log("guest mode");
+		// console.log(data.student);
+		localStorage.setItem("guest42", JSON.stringify(data.student));
+	}
 }
 
 monthObj = {
@@ -92,6 +98,7 @@ data.init = function() {
 	
 	// localStorage.removeItem("student42");
 	let localStorageStud = localStorage.getItem("student42");
+	let localStorageGuest = localStorage.getItem("guest42");
 
 	data.isHomePage = window.location.href.indexOf("users");
 	if (data.isHomePage === -1)
@@ -109,11 +116,36 @@ data.init = function() {
 			localStorageStud = localStorage.getItem("student42");
 		}
 		data.student = parseLocalStorage(localStorageStud);
-		// data.student = JSON.parse(localStorageStud);
 	}
 	else
 	{
 		displayMessage("On other intra page");
+		const login = document.querySelector(".login").innerText;
+
+		if (!localStorageGuest)
+		{
+			data.student.pseudo = login;
+			data.updateLocalStorage();
+
+			displayMessage("Create new guest: " + login);
+			localStorageGuest = localStorage.getItem("guest42");
+			data.student = parseLocalStorage(localStorageGuest);
+		}
+		else
+		{
+			var tmpGuest = JSON.parse(localStorageGuest);
+
+			if (tmpGuest.pseudo === login)
+			{
+				data.student = parseLocalStorage(localStorageGuest);
+			}
+			else
+			{
+				data.student.pseudo = login;
+				data.updateLocalStorage();
+			}
+			// console.log("check", tmpGuest.pseudo, "actual pseudo", login);
+		}
 	}
 	if (!data.student.months)
 		localStorage.removeItem("student42");
