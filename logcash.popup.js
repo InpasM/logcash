@@ -78,12 +78,14 @@ function clickBoostMin() {
 	}
 	if (data.student.addBoostHalf || data.student.addBoostFull)
 	{
-		elems.extraLogtimeLeft.style.display = "flex";
+		// elems.extraLogtimeLeft.style.display = "flex";
+		elems.extraLogtimeLeft.style.opacity = "1";
 		elems.extraEstimation.style.display = "flex";
 	}
 	else
 	{
-		elems.extraLogtimeLeft.style.display = "none";
+		// elems.extraLogtimeLeft.style.display = "none";
+		elems.extraLogtimeLeft.style.opacity = "0";
 		elems.extraEstimation.style.display = "none";
 	}
 	data.updateLocalStorage();
@@ -113,12 +115,14 @@ function clickBoostMax() {
 	}
 	if (data.student.addBoostHalf || data.student.addBoostFull)
 	{
-		elems.extraLogtimeLeft.style.display = "flex";
+		// elems.extraLogtimeLeft.style.display = "flex";
+		elems.extraLogtimeLeft.style.opacity = "1";
 		elems.extraEstimation.style.display = "flex";
 	}
 	else
 	{
-		elems.extraLogtimeLeft.style.display = "none";
+		// elems.extraLogtimeLeft.style.display = "none";
+		elems.extraLogtimeLeft.style.opacity = "0";
 		elems.extraEstimation.style.display = "none";
 	}
 	data.updateLocalStorage();
@@ -522,6 +526,7 @@ popup.createElems = function(elems) {
 	elems.resetConfirmButton.className = "panel-reset-button";
 	elems.resetConfirmButton.innerText = "YES";
 	elems.resetConfirmButton.style.marginTop = "4px";
+	// elems.resetConfirmButton.style.margin = "4px";
 	elems.resetConfirmButton.addEventListener("click", function() {
 		console.log("reset all");
 	});
@@ -1097,12 +1102,14 @@ popup.createElems = function(elems) {
 
 	if (data.student.addBoostHalf || data.student.addBoostFull)
 	{
-		elems.extraLogtimeLeft.style.display = "flex";
+		// elems.extraLogtimeLeft.style.display = "flex";
+		elems.extraLogtimeLeft.style.opacity = "1";
 		elems.extraEstimation.style.display = "flex";
 	}
 	else
 	{
-		elems.extraLogtimeLeft.style.display = "none";
+		// elems.extraLogtimeLeft.style.display = "none";
+		elems.extraLogtimeLeft.style.opacity = "0";
 		elems.extraEstimation.style.display = "none";
 	}
 	
