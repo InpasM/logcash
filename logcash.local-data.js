@@ -12,8 +12,6 @@ data.updateLocalStorage = function() {
 		localStorage.setItem("student42", JSON.stringify(data.student));
 	else
 	{
-		// console.log("guest mode");
-		// console.log(data.student);
 		localStorage.setItem("guest42", JSON.stringify(data.student));
 	}
 }
@@ -34,7 +32,6 @@ data.student = {
 	showMore: false,
 	language: ENGLISH,
 
-	// ARRAY MONTH // up to 12 month save
 	months: [],
 	monthlyHabit: [],
 };
@@ -94,9 +91,6 @@ function parseLocalStorage(itemStudent) {
 
 data.init = function() {
 
-	// console.log(localStorageSpace());
-	
-	// localStorage.removeItem("student42");
 	let localStorageStud = localStorage.getItem("student42");
 	let localStorageGuest = localStorage.getItem("guest42");
 
@@ -144,7 +138,6 @@ data.init = function() {
 				data.student.pseudo = login;
 				data.updateLocalStorage();
 			}
-			// console.log("check", tmpGuest.pseudo, "actual pseudo", login);
 		}
 	}
 	if (!data.student.months)
@@ -156,5 +149,4 @@ data.init = function() {
 			data.student.months.push(monthObj);
 		}
 	}
-	// console.log(data.student.months);
 }
