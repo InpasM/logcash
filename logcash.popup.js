@@ -1922,10 +1922,6 @@ popup.setData = function(elems) {
 
 	calculLogtimeValue(numberDays);
 
-	// console.log("dayTimeDone:", dayTimeDone, "totalTimeRem:", totalTimeRem);
-	// console.log("eachDay/ ", data.session.eachDayLockOff, data.session.eachDayLockMin, data.session.eachDayLockMax);
-	// console.log("remaining/ ", data.session.remTodayLockOff, data.session.remTodayLockMin, data.session.remTodayLockMax);
-
 	if (data.student.addBoostHalf)
 		setLogtimeValue(data.session.remTodayLockMin, data.session.eachDayLockMin, elems);
 	else if (data.student.addBoostFull)
@@ -2029,7 +2025,6 @@ popup.initPopup = function(elems, months) {
 			e.target.value = 0;
 		else
 		{
-			// console.log(popup.months[months.length - 1].openDaysTotal * 7, parseInt(e.target.value));
 			var numberMonthHours = popup.months[months.length - 1].openDaysTotal * 7;
 			if (parseInt(e.target.value) > numberMonthHours)
 				data.student.months[popup.months.indexArray].hoursDeducted = numberMonthHours;
