@@ -531,47 +531,43 @@ popup.createElems = function(elems) {
 	elems.resetConfirmButton.innerText = "YES";
 	elems.resetConfirmButton.style.marginTop = "4px";
 	elems.resetConfirmButton.style.marginRight = "8px";
-	elems.resetConfirmButton.addEventListener("click", function() {
 
-		// if (data.isHomePage === -1)
-		// {
-			const login = document.querySelector(".login").innerText;
-	
-			data.student.pseudo = login;
-			data.student.addBoostHalf = false;
-			data.student.addBoostFull = false;
-			elems.buttonBoostMin.style.borderColor = "rgb(45, 49, 60)";
-			elems.buttonBoostMax.style.borderColor = "rgb(45, 49, 60)";
+	function resetAllDatas() {
 
-			data.student.language = ENGLISH;
-			initText(elems, arrayLanguages[data.student.language]);
-			elems.panelLanguageButtonEnglish.style.color = "#191919";
-			elems.panelLanguageButtonEnglish.style.backgroundColor = "white";
-			elems.panelLanguageButtonFrench.style.color = "rgb(155, 155, 155)";
-			elems.panelLanguageButtonFrench.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+		const login = document.querySelector(".login").innerText;
 
-			// console.log(data.student.months);
+		data.student.pseudo = login;
+		data.student.addBoostHalf = false;
+		data.student.addBoostFull = false;
+		elems.buttonBoostMin.style.borderColor = "rgb(45, 49, 60)";
+		elems.buttonBoostMax.style.borderColor = "rgb(45, 49, 60)";
 
-			for (var i = 0; i < data.student.months.length; i++)
-			{
-				data.student.months[i].hoursDeducted = 0;
-				data.student.months[i].salary = 0;
-			}
+		data.student.language = ENGLISH;
+		initText(elems, arrayLanguages[data.student.language]);
+		elems.panelLanguageButtonEnglish.style.color = "#191919";
+		elems.panelLanguageButtonEnglish.style.backgroundColor = "white";
+		elems.panelLanguageButtonFrench.style.color = "rgb(155, 155, 155)";
+		elems.panelLanguageButtonFrench.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
 
-			for (var i = 0; i < data.student.monthlyHabit.length; i++)
-			{
-				data.student.monthlyHabit[i] = false;
-			}
-			// console.log(popup.numberDay);
-			for (var i = popup.numberDay; i < elems.monthArray[elems.monthArray.length - 1].checkboxes.length; i++)
-			{
-				elems.monthArray[elems.monthArray.length - 1].checkboxes[i].style.borderColor = "rgb(45, 49, 60)";
-			}
-			// console.log(data.student.monthlyHabit.length);
-			data.updateLocalStorage();
-			popup.setData(elems);
-		// }
-	});
+		for (var i = 0; i < data.student.months.length; i++)
+		{
+			data.student.months[i].hoursDeducted = 0;
+			data.student.months[i].salary = 0;
+		}
+
+		for (var i = 0; i < data.student.monthlyHabit.length; i++)
+		{
+			data.student.monthlyHabit[i] = false;
+		}
+		for (var i = popup.numberDay; i < elems.monthArray[elems.monthArray.length - 1].checkboxes.length; i++)
+		{
+			elems.monthArray[elems.monthArray.length - 1].checkboxes[i].style.borderColor = "rgb(45, 49, 60)";
+		}
+		data.updateLocalStorage();
+		popup.setData(elems);
+	}
+
+	elems.resetConfirmButton.addEventListener("click", resetAllDatas);
 	elems.resetCancelButton = document.createElement("div");
 	elems.resetCancelButton.className = "panel-cancel-button";
 	elems.resetCancelButton.innerText = "NO";
