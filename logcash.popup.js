@@ -1419,13 +1419,12 @@ popup.createElems = function(elems) {
 	elems.moreInfoContainer.appendChild(elems.moreInfoLogo);
 
 	elems.resultsContainer.appendChild(elems.resultsDiv);
-	// elems.resultsContainer.appendChild(elems.boostLockContainer);
+
 	elems.resultsContainer.appendChild(elems.estimationContainer);
 
 	elems.resultsDiv.appendChild(elems.mainTitleDays);
 	elems.resultsDiv.appendChild(elems.lineResultsDays);
 
-	// data.session.devMode = false;
 	if (data.session.devMode)
 	{
 		elems.popBottomDiv.appendChild(elems.resultsContainer);
@@ -1477,8 +1476,6 @@ popup.createElems = function(elems) {
 	elems.popBottomContainer.addEventListener("mouseover", mouseoverPopBottom);
 	elems.popBottomContainer.addEventListener("mouseout", mouseoutPopBottom);
 
-	// var optionClicked = false;
-
 	elems.moreInfoLogo.addEventListener("click", function(e) {
 
 		if (data.student.showMore)
@@ -1518,10 +1515,6 @@ popup.createElems = function(elems) {
 		data.updateLocalStorage();
 	});
 	
-
-	// for (var i = 0; i < 7; i++)
-	// 	elems.lineHabit.appendChild(elems.checkboxes[i]);
-
 	elems.popMiddleDiv.appendChild(elems.popMiddleDivLeft);
 	elems.popMiddleDiv.appendChild(elems.popMiddleDivRight);
 	elems.popMiddleDivLeft.appendChild(elems.middleLine1);
@@ -1530,24 +1523,19 @@ popup.createElems = function(elems) {
 	elems.middleLine1.appendChild(elems.inputContainerSalary);
 	elems.middleLine1.appendChild(elems.inputContainerHours);
 	
-	// elems.inputContainerSalary.appendChild(elems.labelSalary);
 	elems.inputContainerSalary.appendChild(elems.lineLabelSalary);
 	elems.inputContainerSalary.appendChild(elems.inputSalary);
 	
-	// elems.inputContainerHours.appendChild(elems.labelHours);
 	elems.inputContainerHours.appendChild(elems.lineLabelHours);
 	elems.inputContainerHours.appendChild(elems.inputDeducted);
 
 	elems.middleLine2.appendChild(elems.habitContainer);
 
 	elems.popupRemaining.appendChild(elems.popMiddleDiv);
-	// elems.popupRemaining.appendChild(elems.containerLogcash.cloneNode(true));
-	// elems.popupRemaining.appendChild(elems.containerLogcash);
 	elems.popupRemaining.appendChild(elems.popProgressContainer);
 	elems.popupRemaining.appendChild(elems.popBottomContainer);
 	document.body.appendChild(elems.popupRemaining);
 
-	// data.student.language = FRENCH;
 	initText(elems, arrayLanguages[data.student.language]);
 }
 
