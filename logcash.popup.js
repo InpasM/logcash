@@ -1649,8 +1649,6 @@ function getTimeFormat(timeNumber, separator) {
 	var timeMinFloat = (timeMin - Math.trunc(timeMin));
 	var tmpTime = "";
 
-	// console.log(timeNumber, timeHour, timeMin);
-
 	if (timeMinFloat > 0.5 || timeMinFloat.toFixed(1) === "0.5")
 		timeMin = Math.ceil(timeMin);
 	else
@@ -1695,8 +1693,6 @@ function calculLogtimeValue(numberDays) {
 	var actualMinuteDone = popup.months[popup.months.nbMonth - 1].days[popup.numberDay - 1].minuteDone;
 	var dayTimeDone = actualHourDone + actualMinuteDone * (1 / 60);
 
-	// var hourRem = popup.months[popup.months.indexArray].nbHourRem;
-	// var minRem = popup.months[popup.months.indexArray].nbMinRem;
 	var hourRem = popup.months[popup.months.nbMonth - 1].nbHourRem;
 	var minRem = popup.months[popup.months.nbMonth - 1].nbMinRem;
 	var totalTimeRem = hourRem + minRem * (1 / 60);
@@ -1754,7 +1750,6 @@ function setLogtimeValue(remToday, eachDay, elems) {
 
 		if (data.session.logAtSchool)
 		{
-			// eachDay += remToday / (numberDays.total - 1);
 			eachDay += remToday / (data.session.numberDays.total - 1);
 		}
 	}
@@ -1802,13 +1797,10 @@ function setLogtimeValue(remToday, eachDay, elems) {
 	else if (data.session.logtimeMode === EACH)
 	{
 		if (data.session.logAtSchool)
-			// var eachBoostValue = (hourRem + minRem * (1 / 60)) / (numberDays.total - 1);
 			var eachBoostValue = (hourRem + minRem * (1 / 60)) / (data.session.numberDays.total - 1);
 		else
-			// var eachBoostValue = totalTimeRem / numberDays.total;
 			var eachBoostValue = totalTimeRem / data.session.numberDays.total;
 
-		// console.log(hourRem, minRem, eachBoostValue, data.session.numberDays.total);
 		if (eachBoostValue <= 0)
 		{
 			elems.extraLogtimeSideRight.innerText = "DONE";
