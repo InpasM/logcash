@@ -23,8 +23,9 @@ body
 	/* background-color: red; */
 	/* height: 100%; */
 	/* z-index: 1; */
-	/* display: flex;
-	justify-content: space-between; */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 /************************** MINI LOGTIME PANEL *****************************/
@@ -53,18 +54,18 @@ body
 	margin: 0;
 	padding: 0;
 	color: rgb(155, 155, 155);
-	font-size: 6px;
+	font-size: 8px;
 	text-align: justify;
-	max-height: 8px;
+	/* max-height: 8px; */
 }
 
 .mini-logtime-value {
 	margin: 0;
 	padding: 0;
 	color: rgb(255, 255, 255);
-	font-size: 12px;
+	font-size: 10px;
 	text-align: justify;
-	max-height: 10px;
+	/* max-height: 10px; */
 }
 
 
