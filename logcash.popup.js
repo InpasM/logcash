@@ -1366,66 +1366,7 @@ popup.createElems = function(elems) {
 	{
 		elems.buttonBoostMax.style.borderColor = "rgb(0, 186, 188)";
 	}
-
-	// elems.checkboxHalf.addEventListener("click", function(e) {
-
-	// 	if (data.student.addBoostHalf)
-	// 	{
-	// 		data.student.addBoostHalf = false;
-	// 		elems.checkboxHalf.style.borderColor = "rgb(45, 49, 60)";
-	// 		elems.checkboxHalfCenter.style.backgroundColor = "";
-	// 	}
-	// 	else
-	// 	{
-	// 		if (data.student.addBoostFull)
-	// 		{
-	// 			data.student.addBoostFull = false;
-	// 			elems.checkboxFull.style.borderColor = "rgb(45, 49, 60)";
-	// 			elems.checkboxFullCenter.style.backgroundColor = "";
-	// 		}
-	// 		data.student.addBoostHalf = true;
-	// 		elems.checkboxHalf.style.borderColor = "rgb(0, 186, 188)";
-	// 		elems.checkboxHalfCenter.style.backgroundColor = "rgb(0, 186, 188)";
-	// 	}
-	// 	data.updateLocalStorage();
-	// 	popup.setData(elems);
-	// });
-
-	// elems.checkboxFull.addEventListener("click", function(e) {
-
-	// 	if (data.student.addBoostFull)
-	// 	{
-	// 		data.student.addBoostFull = false;
-	// 		elems.checkboxFull.style.borderColor = "rgb(45, 49, 60)";
-	// 		elems.checkboxFullCenter.style.backgroundColor = "";
-	// 	}
-	// 	else
-	// 	{
-	// 		if (data.student.addBoostHalf)
-	// 		{
-	// 			data.student.addBoostHalf = false;
-	// 			elems.checkboxHalf.style.borderColor = "rgb(45, 49, 60)";
-	// 			elems.checkboxHalfCenter.style.backgroundColor = "";
-	// 		}
-	// 		data.student.addBoostFull = true;
-	// 		elems.checkboxFull.style.borderColor = "rgb(0, 186, 188)";
-	// 		elems.checkboxFullCenter.style.backgroundColor = "rgb(0, 186, 188)";
-	// 	}
-	// 	data.updateLocalStorage();
-	// 	popup.setData(elems);
-	// });
-
-	// elems.lineResultsBoostLeft.appendChild(elems.labelHalfBoost);
-	// elems.lineResultsBoostLeft.appendChild(elems.checkboxHalf);
-	// elems.lineResultsBoostRight.appendChild(elems.labelFullBoost);
-	// elems.lineResultsBoostRight.appendChild(elems.checkboxFull);
-
-	// elems.lineResultsBoost.appendChild(elems.lineResultsBoostLeft);
-	// elems.lineResultsBoost.appendChild(elems.lineResultsBoostRight);
-
 	elems.boostLockContainer.appendChild(elems.mainTitleBoost);
-	// elems.boostLockContainer.appendChild(elems.lineResultsBoost);
-
 
 	///////////////////////////////////////////////////////// CONTAINER ESTIMATION
 	elems.estimationContainer = document.createElement("div");
