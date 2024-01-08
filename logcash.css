@@ -20,9 +20,6 @@ body
 
 .container-logcash 
 {
-	/* background-color: red; */
-	/* height: 100%; */
-	/* z-index: 1; */
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -30,24 +27,19 @@ body
 
 /************************** MINI LOGTIME PANEL *****************************/
 .mini-logtime-panel {
-	/* background-color: red; */
-	/* background-color: rgba(32, 35, 44, 0.8); */
 	margin-left: 4px;
 	display: flex;
 	display: none;
 }
 
 .mini-logtime-block {
-	/* background-color: orange; */
 	border-radius: 4px;
 	background-color: rgba(32, 35, 44, 0.8);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	/* border-right: 1px solid rgb(45, 49, 60); */
 	padding: 0 6px;
-	/* flex: 1; */
 }
 
 .mini-logtime-title {
@@ -56,7 +48,6 @@ body
 	color: rgb(155, 155, 155);
 	font-size: 8px;
 	text-align: justify;
-	/* max-height: 8px; */
 }
 
 .mini-logtime-value {
@@ -65,9 +56,7 @@ body
 	color: rgb(255, 255, 255);
 	font-size: 10px;
 	text-align: justify;
-	/* max-height: 10px; */
 }
-
 
 
 .container-month 
@@ -97,7 +86,6 @@ body
 	justify-content: center;
 	align-items: center;
 	border: 2px solid rgba(0,0,0,0);
-	/* padding: 3px 8px; */
 }
 
 .text-cash
@@ -142,17 +130,7 @@ body
 	align-items: center;
 	text-align: center;
 	font-size: 0.8em;
-	/* transition: 0.5s ease all; */
 }
-
-
-.text-progress
-{
-	/* padding: 5px 0 0 0; */
-	/* margin: 0;
-	color: #a8aeb9; */
-}
-
 
 .side-remaining
 {
@@ -162,83 +140,21 @@ body
 	flex: 1;
 }
 
-.text-remaining
-{
-	/* background: #234a92; */
-	/* padding: 5px 0 0 0;
-	margin: 0;
-	color: #595d62;
-	cursor: pointer; */
-}
 
 /*------------------------------------------------------------------------------*/
 .popup-remaining
 {
-	/* border: 1px solid #2d313c;
-	top: 80px;
-	right: 20px;*/
 	width: fit-content;
-	/* display: flex;
-	position: absolute;
-	z-index: 1;
-	box-shadow: 0px 10px 20px #12141a3a; */
-	/* background-color: #f4f4f4; */
-	/* background-color: #191919d2; */
-	/* background-color: red; */
 	flex-direction: column;
 
 }
 
-.popup-top-div {
-	/* background-color: orange; */
-	/* height: 30px; */
-	/* height: fit-content; */
-	/* width: 100%; */
-	/* border-radius: 4px;
-	border-bottom: 1px solid #2d313c; */
-	/* display: flex; */
-	/* flex-direction: column;
-	justify-content: flex-start; */
-	/* white-space: nowrap; */
-	/* color: #9b9b9b;
-	padding: 6px 30px 6px 6px; */
-	/* padding: 4px 30px 4px 4px; */
-}
-
-.popup-top-left-text {
-	/* color: #c5c5c6;
-	font-size: 0.85em;
-	font-weight: bold;
-	margin: 10px 20px; */
-	/* margin: 10px 10; */
-	/* padding: 0 4px; */
-	/* text-shadow: rgb(0, 0, 0) 0px 0px 3px; */
-	/* padding: 1px 3px 2px 3px; */
-	/* margin: 3px 0 0 3px;
-	padding: 0; */
-}
-
 .popup-top-right-text {
-	/* background-color: red; */
 	display: flex;
 	align-items: center;
-	/* height: 80%; */
-	/* color: #c5c5c6;
-	font-size: 0.85em;
-	font-weight: bold;
-	margin: 10px 20px; */
-	/* margin: 10px 10; */
-	/* margin: 2px 0 0 0;
-	padding: 2px 3px;
-	width: fit-content;
-	border-radius: 2px; */
-	/* text-shadow: rgb(0, 0, 0) 0px 0px 3px; */
 }
 
 .top-div-right {
-	/* background-color: red; */
-	/* width: 50px; */
-	/* height: 50px; */
 	flex: 1;
 	display: flex;
 	justify-content: flex-end;
@@ -272,8 +188,6 @@ body
 }
 
 .top-div-setting-block {
-	/* background-color: rgba(32, 35, 44, 0.8);
-	background-color: pink; */
 	flex: 1;
 	width: fit-content;
 	display: flex;
@@ -284,7 +198,6 @@ body
 .top-div-setting-panel {
 	background-color: rgba(32, 35, 44, 0.8);
 	width: 130px;
-	/* height: 150px; */
 	display: flex;
 	position: absolute;
 	border: 1px solid rgb(45, 49, 60);
@@ -304,7 +217,6 @@ body
 }
 
 .setting-panel-main-title {
-	/* background-color: red; */
 	height: fit-content;
 	width: 100%;
 	font-size: 12px;
@@ -316,29 +228,20 @@ body
 
 .setting-panel-title {
 	height: fit-content;
-	/* width: 100%; */
 	font-size: 10px;
 	color: rgb(181, 181, 181);
 	margin: 4px 0;
 	padding: 0;
-	/* margin: 0 0 3px 0;
-	padding: 0 0 6px 0; */
-	/* border-bottom: 1px solid rgb(45, 49, 60); */
 }
 
 .panel-line {
-	/* background-color: red; */
-	/* height: 20px; */
 	width: 100%;
 	margin: 3px 0;
 	display: flex;
 	justify-content: space-between;
-	/* align-items: center; */
 }
 
 .panel-save-line {
-	/* background-color: blue; */
-	/* height: 20px; */
 	width: 100%;
 	margin: 3px 0;
 	display: flex;
@@ -351,13 +254,10 @@ body
 	height: 18px;
 	width: 18px;
 	cursor: pointer;
-	/* margin-top: 4px; */
 }
 
 .setting-block-button {
-	/* background-color: red; */
 	width: 100%;
-	/* height: 20px; */
 	flex: 1;
 	margin-left: 8px;
 	display: flex;
@@ -365,10 +265,8 @@ body
 }
 
 .setting-button-option {
-	/* width: 18px; */
 	background-color: rgba(37, 41, 50, 0.9);
 	font-size: 9px;
-	/* font-weight: bold; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -397,10 +295,7 @@ body
 }
 
 .panel-reset-line {
-	/* background-color: orange; */
-	/* height: 20px; */
 	width: 100%;
-	/* margin: 3px 0 3px 0; */
 	padding: 8px 0 0 0;
 	border-top: 1px solid rgb(45, 49, 60);
 	display: flex;
@@ -454,12 +349,9 @@ body
 
 .reset-tooltip-block {
 	background-color: rgba(32, 35, 44, 0.8);
-	/* width: 120px; */
 	display: flex;
-	/* position: absolute; */
 	border: 1px solid rgb(45, 49, 60);
     box-shadow: rgba(18, 20, 26, 0.227) 0px 10px 15px;
-	/* top: 5px; */
 	border-radius: 4px;
 	display: flex;
 	flex-direction: column;
@@ -469,21 +361,15 @@ body
 	opacity: 0; */
 	z-index: 1000;
 	transition: ease 0.2s all;
-	/* backdrop-filter: blur(6px); */
-	/* cursor: default; */
 }
 
 .reset-confirm-button-line {
-	/* background-color: red; */
 	width: 100%;
-	/* height: 20px; */
 	display: flex;
 }
 
 
-
 .top-div-setting-button {
-	/* background-color: red; */
 	background-image: url("icons/three-dot-90.svg");
 	background-size: 80%;
 	background-repeat: no-repeat;
@@ -497,31 +383,20 @@ body
 }
 
 .top-div-setting-button:hover {
-	/* background-color: #1b1e25; */
 	background-color: rgba(32, 35, 44, 0.8);
 }
 
 
-
-/* .popup-top-right-text:hover {
-	background-color: #1b1e25;
-	color: #e2e2e2;
-} */
-
 .pop-middle-div {
-	/* padding: 7px 7px 0 7px; */
 	border-top: 1px solid rgb(45, 49, 60);
 	display: flex;
 }
 
 .pop-middle-div-left {
-	/* background-color: orange; */
-	/* padding-right: 7px; */
 	padding: 8px;
 	border-right: 1px solid rgb(45, 49, 60);
 	display: flex;
 	flex-direction: column;
-	/* min-width: 200px; */
 }
 
 .middle-line-1, .middle-line-2 {
@@ -533,23 +408,18 @@ body
 	justify-content: center;
 }
 
-
 .middle-line-3 {
-	/* background-color: red; */
-	/* height: 20px; */
 	width: 100%;
 	margin-top: 8px;
 }
 
 .block-boost {
-	/* background-color: orange; */
 	display: flex;
 	justify-content: flex-start;
 	margin-top: 8px;
 }
 
 .block-boost-left, .block-boost-right {
-	/* background-color: blue; */
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -567,7 +437,6 @@ body
 }
 
 .button-boost {
-	/* background-color: red; */
 	width: 40px;
 	height: 22px;
 	margin-top: 3px;
@@ -578,7 +447,6 @@ body
 	align-items: center;
 	justify-content: center;
 	font-size: 11px;
-	/* color: rgb(0, 213, 216); */
 	color: rgb(198, 198, 198);
 	border: 2px solid rgb(0, 186, 188);
 	border: 2px solid rgb(45, 49, 60);
@@ -587,7 +455,6 @@ body
 	justify-content: center;
 	align-items: center;
 }
-
 
 .pop-input-container {
 	background-color: #373c48;
@@ -624,30 +491,19 @@ body
 }
 
 .middle-line-2 {
-	/* background-color: red; */
 	margin: 7px 0 0 0;
 	border-top: 1px solid rgb(45, 49, 60);
 	display: flex;
 	flex-direction: column;
-	/* align-items: center; */
 }
 
 /*******************************  BLOC WEEK/MONTH  ********************************/
 .habit-container {
-	/* background-color: blue; */
 	width: fit-content;
 	margin-top: 8px;
-	/* font-size: 12px;
-	color: rgb(155, 155, 155); */
 }
 
-/* .monthly-habit {
-	width: fit-content;
-	padding: 5px 0 8px 0;
-}  */
-
 .habit-container span {
-	/* background-color: white; */
 	font-size: 12px;
 	color: rgb(155, 155, 155);
 	padding: 0 4px;
@@ -662,7 +518,6 @@ body
 }
 
 .month-block {
-	/* background-color: pink; */
 	width: 100%;
 	display: none;
 }
@@ -672,7 +527,6 @@ body
 }
 
 .days-name-box {
-	/* background-color: red; */
 	color: rgb(198, 198, 198);
 	width: 20px;
 	height: 20px;
@@ -688,7 +542,6 @@ body
 }
 
 .line-habit {
-	/* background-color: pink; */
 	width: 100%;
 	min-height: 24px;
 	display: flex;
@@ -711,29 +564,16 @@ body
 	border: 2px solid rgb(45, 49, 60);
 }
 
-.day-passed-habit {
-	/* background-color: #313c48; */
-	/* background-color: "red"; */
-}
-
-.actual-day-habit {
-	/* background-color: "blue"; */
-}
-
-
 .pop-middle-div-right {
-	/* background-color: grey; */
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: stretch;
 	padding: 8px;
 	flex: 1;
-	/* min-width: 170px; */
 }
 
 .div-info {
-	/* background-color: red; */
 	margin: 2px 2px 2px 0;
 	display: flex;
 	justify-content: space-between;
@@ -763,51 +603,38 @@ body
 }
 
 .block-logtime {
-	/* background-color: orange; */
 	flex: 1;
 	display: flex;
 	margin: 8px 0 0 0;
 }
 
 .block-logtime-side {
-	/* background-color: pink; */
 	min-width: 74px;
-	/* min-height: 20px; */
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
 .extra-logtime-left {
-	/* background-color: blue; */
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	/* display: none; */
 	opacity: 0;
 	color: rgb(90, 90, 90);
 }
 
 .extra-logtime-side {
-	/* background-color: purple; */
-	/* width: 100%; */
 	font-size: 7px;
 	line-height: 8px;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	/* color: rgb(155, 155, 155); */
 	margin: 0;
 	padding: 0 2px;
 	white-space: nowrap;
 }
 
-.extra-title {
-}
-
 .extra-estimation {
-	/* background-color: red; */
-	/* height: 100%; */
 	width: 100%;
 	display: flex;
 	display: none;
@@ -816,14 +643,12 @@ body
 	margin: 0;
 	padding: 0;
 	font-size: 12px;
-	/* text-align: center; */
 	color: rgb(140, 140, 140);
 }
 
 
 /**************************************** SALARY ****************************************/
 .salary-container {
-	/* background-color: blue; */
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -881,13 +706,8 @@ body
 }
 
 .salary-info-container {
-	/* background-color: pink; */
 	position: absolute;
-	/* top: 30%; */
 	bottom: 30%;
-	/* left: 50%; */
-	/* background-color: rgb(182, 214, 182); */
-	/* opacity: 0; */
 }
 
 .salary-amount-line {
@@ -919,13 +739,11 @@ body
 	margin: 3px 0 0 1px;
 	padding: 0;
 	font-size: 12px;
-	/* color: rgb(233, 233, 233); */
 	color: rgb(211, 211, 211);
 	text-shadow: rgb(0, 0, 0) 0px 0px 3px;
 }
 
 .salary-percent-line {
-	/* background-color: green; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -935,7 +753,6 @@ body
 	margin: 0;
 	padding: 0;
 	font-size: 10px;
-	/* color: rgb(169, 169, 169); */
 	color: rgb(176, 176, 176);
 	text-shadow: rgb(0, 0, 0) 0px 0px 1px;
 }
@@ -951,27 +768,21 @@ body
 	transition: ease 0.5s all;
 }
 
-/***************************** GRAPH *****************************/
 
+/***************************** GRAPH *****************************/
 .salary-graph-container {
-	/* background-color: red; */
 	height: 100%;
 	min-height: 40px;
-	/* max-height: 50px; */
 	flex: 2;
 	display: flex;
 	justify-content: center;
-	/* align-items: flex-end; */
 }
 
 .graph-empty-line {
-	/* background-color: orange; */
 	height: 100%;
 }
 
 .line-graph {
-	/* background-color: pink; */
-	/* height: 100%; */
 	max-height: 40px;
 	flex: 1;
 	display: none;
@@ -979,7 +790,6 @@ body
 }
 
 .day-graph {
-	/* background-color: blue; */
 	flex: 2;
 	max-width: 16px;
 	height: 100%;
@@ -990,7 +800,6 @@ body
 }
 
 .day-slide-container {
-	/* background-color: red; */
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
@@ -1004,12 +813,6 @@ body
 	border-radius: 2px 2px 0 0;
 	pointer-events: none;
 	transition: ease 0.2s background-color;
-}
-
-.day-slide-container:hover {
-	/* background-color: rgba(0, 186, 188, 0.60); */
-	/* height: 100%;
-	border-radius: 2px 2px 0 0; */
 }
 
 .day-base {
@@ -1044,7 +847,6 @@ body
 }
 
 .tooltip-top-text {
-	/* background-color: orange; */
 	width: 100%;
 	font-size: 8px;
 	text-align: center;
@@ -1054,7 +856,6 @@ body
 }
 
 .tooltip-bottom-text {
-	/* background-color: green; */
 	width: 100%;
 	font-size: 12px;
 	text-align: center;
@@ -1064,11 +865,7 @@ body
 
 
 /***************************** PROGRESS *****************************/
-
 .pop-progress-container {
-	/* height: 20px; */
-	/* width: 100%; */
-	/* background-color: red; */
 	border-top: 1px solid rgb(45, 49, 60);
 	padding: 8px;
 	display: flex;
@@ -1077,10 +874,8 @@ body
 }
 
 .pop-title-container {
-	/* background-color: orange; */
 	font-size: 12px;
 	color: rgb(155, 155, 155);
-	/* padding: 0 0 0 8px; */
 	padding: 0 4px;
 	margin: 0;
 	margin-bottom: 8px;
@@ -1088,44 +883,22 @@ body
 
 
 /***************************** BOTTOM *****************************/
-
 .pop-bottom-container {
-	/* background-color: pink; */
-	
 	overflow: hidden;
 	position: relative;
 	width: 100%;
-	/* display: flex;
-	align-items: center;
-	justify-content: center; */
 }
 
 .pop-bottom-div {
-	/* background-color: green; */
-	/* background-color: rgba(30, 35, 42, 0.8); */
 	border-top: 1px solid rgb(45, 49, 60);
-	/* margin: 8px 0; */
-
-	/* padding-top: 8px; */
-	/*padding: 0 8px; */
-	/* transition: ease 2s box-shadow; */
 	transition: ease 0.5s background-color, ease 0.5s box-shadow;
-	/* box-shadow: -8px 0 8px rgba(30, 35, 42, 0.7), 8px 0 8px rgba(30, 35, 42, 0.8), 0px 8px 8px rgba(30, 35, 42, 0.8); */
-
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 }
 
-/* .pop-bottom-container:hover { */
-.pop-bottom-div:hover {
-	/* background-color: red; */
-	/* box-shadow: -4px 0 4px rgba(30, 35, 42, 0.7), 4px 0 4px rgba(30, 35, 42, 0.8); */
-}
-
 .more-info-container {
-	/* background-color: green; */
 	display: flex;
 	justify-content: center;
 	padding: 4px 0;
@@ -1135,7 +908,6 @@ body
 }
 
 .more-info-logo {
-	/* background-color: red; */
 	background-image: url("icons/more-1.svg");
 	aspect-ratio: 1/1;
 	background-size: contain;
@@ -1162,7 +934,6 @@ body
 }
 
 .line-label {
-	/* background-color: red; */
 	display: flex;
 	justify-content: space-between;
 	justify-content: flex-start;
@@ -1187,11 +958,9 @@ body
 	opacity: 0;
 	top: 10px;
 	left: 10px;
-
 	backdrop-filter: blur(6px);
 	position: absolute;
 	width: 150px;
-	/* height: 50px; */
 	background-color: rgba(46, 51, 61, 0.9);
 	padding: 8px;
 	border-radius: 4px;
@@ -1205,11 +974,8 @@ body
 }
 
 .tooltip-question-top-text {
-	/* background-color: orange; */
 	width: 100%;
 	font-size: 12px;
-	/* font-weight: bold; */
-	/* text-align: center; */
 	text-align: justify;
 	padding: 0 0 2px 0;
 	margin: 0;
@@ -1220,10 +986,8 @@ body
 }
 
 .tooltip-question-bottom-text {
-	/* background-color: green; */
 	width: 100%;
 	font-size: 10px;
-	/* text-align: center; */
 	text-align: justify;
 	padding: 0;
 	margin: 0;
@@ -1248,7 +1012,6 @@ body
 }
 
 .line-results {
-	/* background-color: rgb(60, 60, 184); */
 	width: 100%;
 	height: fit-content;
 	display: flex;
@@ -1257,7 +1020,6 @@ body
 }
 
 .line-results-left {
-	/* background-color: green; */
 	flex: 1;
 	display: flex;
 	flex-direction: column;
@@ -1266,7 +1028,6 @@ body
 }
 
 .line-results-right {
-	/* background-color: blue; */
 	flex: 1;
 	display: flex;
 	flex-direction: column;
@@ -1274,7 +1035,6 @@ body
 }
 
 .number-label {
-	/* background-color: orange; */
 	pointer-events: none;
 	color: rgb(122, 122, 122);
 	font-size: 10px;
@@ -1289,7 +1049,6 @@ body
 }
 
 .number-result {
-	/* background-color: red; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -1304,7 +1063,6 @@ body
 }
 
 .checkbox-boost {
-	/* background-color: red; */
 	width: 20px;
 	height: 20px;
 	border-radius: 50%;
@@ -1314,11 +1072,9 @@ body
 	align-items: center;
 	justify-content: center;
 	border: 2px solid rgb(45, 49, 60);
-	/* border: 2px solid rgb(0, 186, 188); */
 }
 
 .checkbox-boost-center {
-	/* background-color: rgb(0, 186, 188); */
 	width: 12px;
 	height: 12px;
 	border-radius: 50%;
@@ -1326,9 +1082,6 @@ body
 }
 
 .line-estimation-block {
-	/* height: 10px; */
-	/* width: 100%; */
-	/* background-color: blue; */
 	padding: 0 8px;
 	flex: 1;
 	display: flex;
@@ -1336,9 +1089,8 @@ body
 	border-right: 1px solid rgb(45, 49, 60);
 }
 
+
 /*------------------------------------------------------------------------------*/
-
-
 .text-bottom
 {
 	padding: 0;
@@ -1402,15 +1154,8 @@ body
 
 .dev-line-button-time {
 	position: absolute;
-	/* height: 20px; */
-	/* width: 100px; */
 	bottom: 10px;
 	display: flex;
-	/* background-color: red; */
-}
-
-.dev-add-1-min , .dev-add-1-hour {
-	
 }
 
 .dev-clock {
@@ -1424,9 +1169,7 @@ body
 
 /************************** CASH CLICKER ***************************/
 .clicker-div-number-buy {
-	/* background-color: red; */
 	width: 100%;
-	/* height: 50px; */
 	margin-bottom: 8px;
 	padding-bottom: 8px;
 	border-bottom: 1px solid rgb(45, 49, 60);
@@ -1437,19 +1180,14 @@ body
 	color: rgb(155, 155, 155);
 	display: flex;
 	justify-content: center;
-	/* margin-bottom: 4px; */
 }
 
 .clicker-number-buy-container {
-	/* background-color: orange; */
-	/* height: 20px; */
 	margin-top: 8px;
 	display: flex;
-
 }
 
 .clicker-number-buy-button {
-	/* background-color: pink; */
 	background-color: rgba(37, 41, 50, 0.9);
 	color: rgb(155, 155, 155);
 	flex: 1;
@@ -1457,7 +1195,6 @@ body
 	min-width: 50px;
 	border-radius: 50px;
 	font-size: 10px;
-	/* font-weight: bold; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -1471,7 +1208,6 @@ body
 }
 
 .buy-number {
-	/* background-color: red; */
 	margin-left: 2px;
 	color: rgb(219, 219, 219);
 	font-size: 14px;
@@ -1483,9 +1219,6 @@ body
 }
 
 .clicker-container-cash-click {
-	/* background-color: red; */
-	/* height: 50px; */
-	/* background-color: rgb(107, 107, 107); */
 	width: 100%;
 	border-radius: 9px;
 }
@@ -1518,8 +1251,6 @@ body
 
 .clicker-salary-circle-inside {
 	background-color: rgba(37, 41, 50, 0.9);
-	/* background-color: green; */
-	/* box-shadow: 0px 0px 30px rgba(16, 16, 16, 0.2); */
 	box-shadow: 10px 10px 0 rgba(16, 16, 16, 0.5);
 	aspect-ratio: 1;
 	min-width: 84px;
@@ -1535,11 +1266,6 @@ body
 	cursor: pointer;
 	transition: ease 0.2s background-color, ease 0.2s box-shadow;
 }
-
-/* .clicker-salary-circle-inside:hover {
-	background-color: rgba(40, 45, 54, 0.9);
-	box-shadow: 6px 6px 0 rgba(16, 16, 16, 0.5);
-} */
 
 .clicker-salary-info-container {
 	position: absolute;
@@ -1595,11 +1321,9 @@ body
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	/* background-color: red; */
 }
 
 .clicker-per-second-number {
-
 	font-size: 12px;
 	color: rgb(205, 205, 205);
 }
