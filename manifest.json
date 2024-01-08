@@ -9,13 +9,19 @@
 	  "48": "icons/logcash-48.png"
 	},
 
+	"web_accessible_resources": [{
+		"resources": ["icons/arrow-down.svg"],
+		"matches": ["<all_urls>"],
+		"use_dynamic_url": true
+	}],
+ 
 	"content_scripts": [
-	{
-		"matches": ["*://*.profile.intra.42.fr/*"],
-		"js": ["logcash.local-data.js", "logcash.popup.js", "logcash.init-elems.js", "logcash.js"],
-		"css": ["logcash.css"],
-		"run_at": "document_end"
-	}
+		{
+			"matches": ["*://*.profile.intra.42.fr/*"],
+			"js": ["logcash.local-data.js", "logcash.popup.js", "logcash.init-elems.js", "logcash.js"],
+			"css": ["logcash.css"],
+			"run_at": "document_end"
+		}
 	],
 
 	"browser_specific_settings": {

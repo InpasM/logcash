@@ -141,7 +141,8 @@ body
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	transition: 0.5s ease all;
+	font-size: 0.8em;
+	/* transition: 0.5s ease all; */
 }
 
 
@@ -245,7 +246,6 @@ body
 }
 
 .top-div-minimize-button {
-	/* background-color: orange; */
 	background-image: url("icons/arrow-up.svg");
 	background-size: 60%;
 	background-repeat: no-repeat;
@@ -255,8 +255,20 @@ body
 	aspect-ratio: 1/1;
 	border-radius: 50%;
 	cursor: pointer;
-	/* padding: 2px; */
-	/* margin: 4px; */
+	display: none;
+}
+
+.top-div-maximize-button {
+	background-image: url("icons/arrow-down.svg");
+	background-size: 60%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-position-x: center;
+	height: 100%;
+	aspect-ratio: 1/1;
+	border-radius: 50%;
+	cursor: pointer;
+	display: none;
 }
 
 .top-div-setting-block {

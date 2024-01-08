@@ -242,6 +242,9 @@ function hideShowPopup() {
 		elems.popProgressTitle.style.height = "0";
 		elems.containerLogcash.style.marginTop = "0";
 
+		elems.topDivMinimizeButton.style.display = "none";
+		elems.topDivMaximizeButton.style.display = "flex";
+
 		elems.miniLogtimePanel.style.display = "flex";
 
 		popupVisible = true;
@@ -273,6 +276,9 @@ function hideShowPopup() {
 		elems.containerLogcash.style.marginTop = "4px";
 
 		elems.miniLogtimePanel.style.display = "none";
+
+		elems.topDivMinimizeButton.style.display = "flex";
+		elems.topDivMaximizeButton.style.display = "none";
 
 		popupVisible = false;
 	}
@@ -370,7 +376,7 @@ function initText(elems, text) {
 	elems.panelSaveTitle.innerText = text.save;
 }
 
-
+const browser = window.browser || window.chrome;
 popup.createElems = function(elems) {
 
 	elems.popupRemaining = document.createElement("div");
@@ -544,7 +550,7 @@ popup.createElems = function(elems) {
 			elems.panelLanguageButtonFrench.style.color = "rgb(155, 155, 155)";
 			elems.panelLanguageButtonFrench.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
 
-			console.log(data.student.months);
+			// console.log(data.student.months);
 
 			for (var i = 0; i < data.student.months.length; i++)
 			{
@@ -613,17 +619,34 @@ popup.createElems = function(elems) {
 
 	elems.topDivMinimizeButton = document.createElement("div");
 	elems.topDivMinimizeButton.className = "top-div-minimize-button";
-	elems.topDivMinimizeButton.addEventListener("click", function(e) {
+	elems.topDivMinimizeButton.style.display = "flex";
+	elems.topDivMaximizeButton = document.createElement("div");
+	elems.topDivMaximizeButton.className = "top-div-maximize-button";
+
+	function updateMinimizeButton() {
 
 		hideShowPopup();
+
 		if (popupVisible)
-			e.target.style.backgroundImage = "url(\"icons/arrow-down.svg\")";
+		{
+			elems.topDivMinimizeButton.style.display = "none";
+			elems.topDivMaximizeButton.style.display = "flex";
+			// e.target.style.backgroundImage = "url(\"icons/arrow-down.svg\")";
+		}
 		else
-			e.target.style.backgroundImage = "url(\"icons/arrow-up.svg\")";
-	});
+		{
+			elems.topDivMinimizeButton.style.display = "flex";
+			elems.topDivMaximizeButton.style.display = "none";
+			// e.target.style.backgroundImage = "url(\"icons/arrow-up.svg\")";
+		}
+	}
+
+	elems.topDivMinimizeButton.addEventListener("click", updateMinimizeButton);
+	elems.topDivMaximizeButton.addEventListener("click", updateMinimizeButton);
 
 	elems.topDivRight.appendChild(elems.topDivSettingBlock);
 	elems.topDivRight.appendChild(elems.topDivMinimizeButton);
+	elems.topDivRight.appendChild(elems.topDivMaximizeButton);
 
 
 	elems.popupTopDiv.appendChild(elems.popupTopLeftText);
