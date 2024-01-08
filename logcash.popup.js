@@ -524,13 +524,28 @@ popup.createElems = function(elems) {
 	elems.resetConfirmButton.className = "panel-reset-button";
 	elems.resetConfirmButton.innerText = "YES";
 	elems.resetConfirmButton.style.marginTop = "4px";
-	// elems.resetConfirmButton.style.margin = "4px";
+	elems.resetConfirmButton.style.marginRight = "8px";
 	elems.resetConfirmButton.addEventListener("click", function() {
 		console.log("reset all");
 	});
+	elems.resetCancelButton = document.createElement("div");
+	elems.resetCancelButton.className = "panel-reset-button";
+	elems.resetCancelButton.innerText = "NO";
+	elems.resetCancelButton.style.marginTop = "4px";
+	elems.resetCancelButton.addEventListener("click", function() {
+		console.log("reset all");
+	});
+
+	elems.resetConfirmButtonLine = document.createElement("div");
+	elems.resetConfirmButtonLine.className = "reset-confirm-button-line";
+	elems.resetConfirmButtonLine.appendChild(elems.resetConfirmButton);
+	elems.resetConfirmButtonLine.appendChild(elems.resetCancelButton);
 
 	elems.resetTooltipBlockConfirm.appendChild(elems.resetTooltipBlockConfirmTitle);
-	elems.resetTooltipBlockConfirm.appendChild(elems.resetConfirmButton);
+	// elems.resetTooltipBlockConfirm.appendChild(elems.resetConfirmButton);
+	// elems.resetTooltipBlockConfirm.appendChild(elems.resetCancelButton);
+	elems.resetTooltipBlockConfirm.appendChild(elems.resetConfirmButtonLine);
+
 	elems.resetTooltipPanel.appendChild(elems.resetTooltipBlockConfirm);
 	elems.popupRemaining.appendChild(elems.resetTooltipPanel);
 

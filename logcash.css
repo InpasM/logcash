@@ -399,7 +399,7 @@ body
 	color: rgb(198, 198, 198);
 	height: 22px;
 	border-radius: 14px;
-	width: 54px;
+	width: 40px;
 	/* color: rgb(200, 24, 24); */
 	/* color: rgb(235, 25, 25); */
 	border: 2px solid rgb(45, 49, 60);
@@ -434,8 +434,8 @@ body
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	display: none;
-	opacity: 0;
+	/* display: none;
+	opacity: 0; */
 }
 
 .reset-tooltip-block {
@@ -457,6 +457,13 @@ body
 	transition: ease 0.2s all;
 	/* backdrop-filter: blur(6px); */
 	/* cursor: default; */
+}
+
+.reset-confirm-button-line {
+	background-color: red;
+	width: 100%;
+	/* height: 20px; */
+	display: flex;
 }
 
 
