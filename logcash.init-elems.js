@@ -9,7 +9,6 @@ function initContainerLogcash(elems) {
 	elems.containerLogcash = document.createElement("div");
 	elems.containerLogcash.className = "container-logcash";
 	elems.containerLogcash.style.display = "flex";
-	// elems.containerLogcash.style.alignItems = "center";
 	elems.containerLogcash.style.marginTop = "4px";
 
 	elems.containerDivMonth = document.createElement("div");
@@ -21,7 +20,6 @@ function initContainerLogcash(elems) {
 
 	elems.sideProgress = document.createElement("div");
 	elems.sideProgress.className = "side-progress";
-
 
 	elems.miniLogtimePanel = document.createElement("div");
 	elems.miniLogtimePanel.className = "mini-logtime-panel";
@@ -54,32 +52,17 @@ function initContainerLogcash(elems) {
 	elems.miniLogtimePanel.appendChild(elems.miniLogtimeBlockRemaining);
 	elems.miniLogtimePanel.appendChild(elems.miniLogtimeBlockLock);
 
-
-	// elems.settingDiv = document.createElement("div");
-	// elems.settingDiv.className = "setting-div";
-
-	// elems.settingButton = document.createElement("div");
-	// elems.settingButton.className = "setting-button";
-
-	// elems.settingDiv.appendChild(elems.settingButton);
-
-	// initPopup(elems);
-
 	elems.sideRemaining = document.createElement("div");
 	elems.sideRemaining.className = "side-remaining";
 	elems.textRemaining = document.createElement("p");
 	elems.textRemaining.className = "text-remaining";
-	// elems.sideRemaining.appendChild(elems.popupRemaining);
 	elems.sideRemaining.appendChild(elems.textRemaining);
 	elems.rowProgress.appendChild(elems.sideProgress);
 	elems.rowProgress.appendChild(elems.sideRemaining);
-	// elems.rowProgress.appendChild(elems.miniLogtimePanel);
-	// elems.rowProgress.appendChild(elems.settingDiv);
 	
 	elems.containerLogcash.appendChild(elems.containerDivMonth);
 	elems.containerLogcash.appendChild(elems.rowProgress);
 	elems.containerLogcash.appendChild(elems.miniLogtimePanel);
-	// elems.containerLogcash.appendChild(elems.rowProgress);
 }
 
 function initDivMonths(elems, months) {
