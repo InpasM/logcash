@@ -526,15 +526,51 @@ popup.createElems = function(elems) {
 	elems.resetConfirmButton.style.marginTop = "4px";
 	elems.resetConfirmButton.style.marginRight = "8px";
 	elems.resetConfirmButton.addEventListener("click", function() {
-		console.log("reset all");
+
+		if (data.isHomePage === -1)
+		{
+			const login = document.querySelector(".login").innerText;
+	
+			data.student.pseudo = login;
+			data.student.addBoostHalf = false;
+			data.student.addBoostFull = false;
+			elems.buttonBoostMin.style.borderColor = "rgb(45, 49, 60)";
+			elems.buttonBoostMax.style.borderColor = "rgb(45, 49, 60)";
+
+			data.student.language = ENGLISH;
+			initText(elems, arrayLanguages[data.student.language]);
+			elems.panelLanguageButtonEnglish.style.color = "#191919";
+			elems.panelLanguageButtonEnglish.style.backgroundColor = "white";
+			elems.panelLanguageButtonFrench.style.color = "rgb(155, 155, 155)";
+			elems.panelLanguageButtonFrench.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+
+			console.log(data.student.months);
+
+			for (var i = 0; i < data.student.months.length; i++)
+			{
+				data.student.months[i].hoursDeducted = 0;
+				data.student.months[i].salary = 0;
+			}
+
+			for (var i = 0; i < data.student.monthlyHabit.length; i++)
+			{
+				data.student.monthlyHabit[i] = false;
+			}
+			// console.log(popup.numberDay);
+			for (var i = popup.numberDay; i < elems.monthArray[elems.monthArray.length - 1].checkboxes.length; i++)
+			{
+				elems.monthArray[elems.monthArray.length - 1].checkboxes[i].style.borderColor = "rgb(45, 49, 60)";
+			}
+			// console.log(data.student.monthlyHabit.length);
+			data.updateLocalStorage();
+			popup.setData(elems);
+		}
 	});
 	elems.resetCancelButton = document.createElement("div");
-	elems.resetCancelButton.className = "panel-reset-button";
+	elems.resetCancelButton.className = "panel-cancel-button";
 	elems.resetCancelButton.innerText = "NO";
 	elems.resetCancelButton.style.marginTop = "4px";
-	elems.resetCancelButton.addEventListener("click", function() {
-		console.log("reset all");
-	});
+	elems.resetCancelButton.addEventListener("click", closeResetPanel);
 
 	elems.resetConfirmButtonLine = document.createElement("div");
 	elems.resetConfirmButtonLine.className = "reset-confirm-button-line";
@@ -1199,7 +1235,10 @@ popup.createElems = function(elems) {
 	///////////////////////////////////////////////////////////////////////// GRAPH SLIDE
 	elems.salaryGraphContainer = document.createElement("div");
 	elems.salaryGraphContainer.className = "salary-graph-container";
+	elems.graphEmptyLine = document.createElement("div");
+	elems.graphEmptyLine.className = "graph-empty-line";
 
+	elems.salaryContainer.appendChild(elems.graphEmptyLine);
 	elems.salaryContainer.appendChild(elems.salaryGraphContainer);
 
 	elems.monthGraphs = [];

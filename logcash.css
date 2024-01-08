@@ -395,27 +395,29 @@ body
 	justify-content: center;
 }
 
-.panel-reset-button {
-	color: rgb(198, 198, 198);
+.panel-reset-button, .panel-cancel-button {
 	height: 22px;
-	border-radius: 14px;
-	width: 40px;
-	/* color: rgb(200, 24, 24); */
-	/* color: rgb(235, 25, 25); */
+	border-radius: 16px;
 	border: 2px solid rgb(45, 49, 60);
+	color: rgb(198, 198, 198);
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	text-align: center;
+	padding: 0 10px;
 	font-size: 10px;
 	font-weight: bold;
 	cursor: pointer;
 }
 
 .panel-reset-button:hover {
-	/* color: rgb(200, 24, 24); */
 	border: 2px solid rgb(186, 25, 25);
 	color: rgb(235, 25, 25);
-	/* background-color: rgb(48, 53, 65); */
+}
+
+.panel-cancel-button:hover {
+	border: 2px solid rgb(73, 79, 96);
+	color: rgb(232, 232, 232);
 }
 
 .reset-tooltip {
@@ -434,8 +436,8 @@ body
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* display: none;
-	opacity: 0; */
+	display: none;
+	opacity: 0;
 }
 
 .reset-tooltip-block {
@@ -460,7 +462,7 @@ body
 }
 
 .reset-confirm-button-line {
-	background-color: red;
+	/* background-color: red; */
 	width: 100%;
 	/* height: 20px; */
 	display: flex;
@@ -676,7 +678,7 @@ body
 .line-habit {
 	/* background-color: pink; */
 	width: 100%;
-	min-height: 20px;
+	min-height: 24px;
 	display: flex;
 	margin-top: 2px;
 }
@@ -841,7 +843,7 @@ body
 }
 
 .salary-circle-container {
-	flex: 2;
+	flex: 1;
 	aspect-ratio: 1;
 	display: flex;
 	justify-content: center;
@@ -942,16 +944,23 @@ body
 .salary-graph-container {
 	/* background-color: red; */
 	height: 100%;
-	/* min-height: 30px; */
-	max-height: 50px;
-	flex: 1;
+	min-height: 40px;
+	/* max-height: 50px; */
+	flex: 2;
 	display: flex;
 	justify-content: center;
+	/* align-items: flex-end; */
+}
+
+.graph-empty-line {
+	/* background-color: orange; */
+	height: 100%;
 }
 
 .line-graph {
 	/* background-color: pink; */
-	height: 100%;
+	/* height: 100%; */
+	max-height: 40px;
 	flex: 1;
 	display: none;
 	justify-content: center;
@@ -959,7 +968,7 @@ body
 
 .day-graph {
 	/* background-color: blue; */
-	flex: 1;
+	flex: 2;
 	max-width: 16px;
 	height: 100%;
 	margin: 0 1px;		/* depending of month or week displayed */
