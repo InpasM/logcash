@@ -234,8 +234,6 @@ function hideShowPopup() {
 		elems.estimationContainer.style.padding = "0px 8px";
 		elems.estimationContainer.style.opacity = "0";
 
-		// elems.popMiddleDiv.style.display = "none";
-		// elems.popProgressTitle.style.display = "none";
 		elems.popMiddleDiv.style.opacity = "0";
 		elems.popMiddleDiv.style.height = "0";
 		elems.popProgressTitle.style.opacity = "0";
@@ -267,8 +265,6 @@ function hideShowPopup() {
 		elems.estimationContainer.style.padding = "8px";
 		elems.estimationContainer.style.opacity = "1";
 
-		// elems.popMiddleDiv.style.display = "flex";
-		// elems.popProgressTitle.style.display = "flex";
 		elems.popMiddleDiv.style.opacity = "1";
 		elems.popMiddleDiv.style.height = "";
 		elems.popProgressTitle.style.opacity = "1";
@@ -363,11 +359,7 @@ function initText(elems, text) {
 		for (var j = 0; j < arrayMonth.length; j++)
 		{
 			if (elems.divMonths[i].innerText === arrayMonth[j])
-			{
-				// console.log(elems.divMonths[i].innerText, "found index", j);
 				elems.divMonths[i].innerText = text.arrayMonth[j];
-			}
-
 		}
 	}
 	elems.panelDarkTitle.innerText = text.darkMode;
@@ -466,13 +458,11 @@ popup.createElems = function(elems) {
 
 	if (data.student.language === ENGLISH)
 	{
-		// elems.panelLanguageButtonEnglish.style.display = "flex";
 		elems.panelLanguageButtonEnglish.style.color = "#191919";
 		elems.panelLanguageButtonEnglish.style.backgroundColor = "white";
 	}
 	else
 	{
-		// elems.panelLanguageButtonFrench.style.display = "flex";
 		elems.panelLanguageButtonFrench.style.color = "#191919";
 		elems.panelLanguageButtonFrench.style.backgroundColor = "white";
 	}
@@ -481,15 +471,12 @@ popup.createElems = function(elems) {
 
 	elems.panelLanguageLine.appendChild(elems.panelLanguageTitle);
 	elems.panelLanguageLine.appendChild(elems.panelLanguageRight);
-	// elems.panelLanguageLine.appendChild(elems.panelLanguageButtonEnglish);
-	// elems.panelLanguageLine.appendChild(elems.panelLanguageButtonFrench);
-
 
 	elems.panelSaveLine = document.createElement("div");
 	elems.panelSaveLine.className = "panel-save-line";
 	elems.panelSaveTitle = document.createElement("div");
 	elems.panelSaveTitle.className = "setting-panel-title";
-	// elems.panelSaveTitle.innerText = "Save Recap";
+
 	elems.panelSaveButton = document.createElement("div");
 	elems.panelSaveButton.className = "panel-save-button";
 	elems.panelSaveLine.appendChild(elems.panelSaveTitle);
@@ -580,8 +567,6 @@ popup.createElems = function(elems) {
 	elems.resetConfirmButtonLine.appendChild(elems.resetCancelButton);
 
 	elems.resetTooltipBlockConfirm.appendChild(elems.resetTooltipBlockConfirmTitle);
-	// elems.resetTooltipBlockConfirm.appendChild(elems.resetConfirmButton);
-	// elems.resetTooltipBlockConfirm.appendChild(elems.resetCancelButton);
 	elems.resetTooltipBlockConfirm.appendChild(elems.resetConfirmButtonLine);
 
 	elems.resetTooltipPanel.appendChild(elems.resetTooltipBlockConfirm);
@@ -627,13 +612,11 @@ popup.createElems = function(elems) {
 		{
 			elems.topDivMinimizeButton.style.display = "none";
 			elems.topDivMaximizeButton.style.display = "flex";
-			// e.target.style.backgroundImage = "url(\"icons/arrow-down.svg\")";
 		}
 		else
 		{
 			elems.topDivMinimizeButton.style.display = "flex";
 			elems.topDivMaximizeButton.style.display = "none";
-			// e.target.style.backgroundImage = "url(\"icons/arrow-up.svg\")";
 		}
 	}
 
@@ -665,13 +648,11 @@ popup.createElems = function(elems) {
 	elems.middleLine3 = document.createElement("div");
 	elems.middleLine3.className = "middle-line-3";
 
-	
 	elems.lineLabelBoost = document.createElement("div");
 	elems.lineLabelBoost.className = "line-label";
 
 	elems.titleBoost = document.createElement("p");
 	elems.titleBoost.className = "main-title-info";
-	// elems.titleBoost.innerText = "Boost Lock";
 	elems.questionBoost = document.createElement("div");
 	elems.questionBoost.className = "question-logo";
 	elems.questionBoost.id = "1";
@@ -688,20 +669,14 @@ popup.createElems = function(elems) {
 	elems.tooltipQuestionBottomText = document.createElement("p");
 	elems.tooltipQuestionBottomText.className = "tooltip-question-bottom-text";
 
-
 	if (data.session.devMode)
 	{
-		// elems.tooltipQuestionTopText.innerText = questions[data.student.language][0].title;						//////////////// DEV
 		elems.tooltipQuestionBottomText.innerText = questions[data.student.language][2].text;						//////////////// DEV
 		elems.tooltipQuestion.style.opacity = "1";
 	}
-	// elems.tooltipQuestionBottomText.innerText = questions[data.student.language][2].text;						//////////////// DEV
-
 	elems.tooltipQuestion.appendChild(elems.tooltipQuestionBottomText);
-
 	document.body.appendChild(elems.tooltipQuestion);
 
-	
 	elems.blockBoost = document.createElement("div");
 	elems.blockBoost.className = "block-boost";
 	elems.blockBoostLeft = document.createElement("div");
@@ -744,26 +719,15 @@ popup.createElems = function(elems) {
 
 	elems.inputContainerSalary = document.createElement("div");
 	elems.inputContainerSalary.className = "pop-input-container";
-	elems.inputContainerSalary.style.marginRight = "8px";			/// STYLE
-	// elems.inputContainerSalary.addEventListener("mouseenter", mouseoverInfoContainer);
-	// elems.inputContainerSalary.addEventListener("mouseleave", mouseoutInfoContainer); 
-
+	elems.inputContainerSalary.style.marginRight = "8px";
 
 	elems.lineLabelSalary = document.createElement("div");
 	elems.lineLabelSalary.className = "line-label";
 	
 	elems.labelSalary = document.createElement("p");
 	elems.labelSalary.className = "small-title-info";
-	// elems.labelSalary.innerText = "Your salary";
-
-	// elems.questionSalary = document.createElement("div");
-	// elems.questionSalary.className = "question-logo";
-	// elems.questionSalary.id = "1";
-	// elems.questionSalary.addEventListener("mouseover", mouseOverQuestion);
-	// elems.questionSalary.addEventListener("mouseout", mouseOutQuestion);
 
 	elems.lineLabelSalary.appendChild(elems.labelSalary);
-	// elems.lineLabelSalary.appendChild(elems.questionSalary);
 
 	elems.inputSalary = document.createElement("input");
 	elems.inputSalary.className = "input-text";
@@ -781,8 +745,6 @@ popup.createElems = function(elems) {
 
 	elems.labelHours = document.createElement("p");
 	elems.labelHours.className = "small-title-info";
-	// elems.labelHours.innerText = "Hours Deduc."; // before Hours Deducted
-
 
 	elems.questionHours = document.createElement("div");
 	elems.questionHours.className = "question-logo";
@@ -810,7 +772,6 @@ popup.createElems = function(elems) {
 
 	elems.weeklySpan = document.createElement("p");
 	elems.weeklySpan.className = "main-title-info";
-	// elems.weeklySpan.innerText = "Monthly Attendance";
 	elems.weeklySpan.style.cursor = "pointer";
 	elems.weeklySpan.addEventListener("dblclick", function() {
 
@@ -874,7 +835,6 @@ popup.createElems = function(elems) {
 
 	function selectAllSameDay(e) {
 
-		// console.log(e.target);
 		if (popup.months.indexArray === popup.months.length - 1)
 		{
 			var allTrue = true, update = false;
@@ -894,13 +854,11 @@ popup.createElems = function(elems) {
 		}
 	}
 
-	// const arrayDaysName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 	for (var i = 0; i < 7; i++)
 	{
 		elems.monthDayBoxes[i] = document.createElement("div");
 		elems.monthDayBoxes[i].className = "days-name-box";
 		elems.monthDayBoxes[i].id = i;
-		// elems.monthDayBoxes[i].innerText = arrayDaysName[i];
 		elems.monthDayBoxes[i].addEventListener("click", selectAllSameDay);
 		elems.monthLineDayName.appendChild(elems.monthDayBoxes[i]);
 	}
@@ -916,7 +874,6 @@ popup.createElems = function(elems) {
 		};
 
 		var indexMonth = 0;
-		// for (var i = 0; i < popup.months[popup.months.indexArray].weeks.length; i++)
 		for (var i = 0; i < popup.months[k].weeks.length; i++)
 		{
 			tmpMonth.lines[i] = document.createElement("div");
@@ -930,8 +887,6 @@ popup.createElems = function(elems) {
 				tmpDay.id = ++indexMonth;
 				tmpDay.setAttribute("indexday", popup.months[k].days[indexMonth - 1].dayNumber);
 
-				// console.log("month " + indexMonth);
-				// console.log(popup.months[k].days[indexMonth - 1].dayNumber);
 				tmpDay.innerText = indexMonth;
 				tmpDay.className = "checkbox-habit";
 				if (indexMonth < popup.numberDay || k != popup.months.length - 1)
@@ -973,9 +928,6 @@ popup.createElems = function(elems) {
 
 
 	function mouseoverInfoContainer(e) {
-
-		// e.target.style.backgroundColor = "red";
-		// console.log(e.target.firstElementChild.lastElementChild);
 		e.target.firstElementChild.lastElementChild.style.opacity = "1";
 	}
 
@@ -1020,7 +972,6 @@ popup.createElems = function(elems) {
 	
 	elems.labelLogtimeEach = document.createElement("p");
 	elems.labelLogtimeEach.className = "small-title-info";
-	// elems.labelLogtimeEach.innerText = "Each Day";
 	elems.resultLogtimeEach = document.createElement("p");
 	elems.resultLogtimeEach.className = "number-result";
 	elems.labelLogtimeEach.style.display = "none";
@@ -1045,13 +996,6 @@ popup.createElems = function(elems) {
 				elems.resultLogtimeRemaining.style.display = "none";
 				elems.labelLogtimeEach.style.display = "flex";
 				elems.resultLogtimeEach.style.display = "flex";
-
-				// elems.extraLogtimeLeft.style.display = "none";
-
-				// if (data.student.addBoostHalf)
-				// 	elems.extraLogtimeSideRight.innerText = data.session.eachDayLockMin;
-				// else if (data.student.addBoostHalf)
-				// 	elems.extraLogtimeSideRight.innerText = data.session.eachDayLockMax;
 			}
 			else if (data.session.logtimeMode === EACH)
 			{
@@ -1060,10 +1004,6 @@ popup.createElems = function(elems) {
 				elems.resultLogtimeEach.style.display = "none";
 				elems.labelLogtimeRemaining.style.display = "flex";
 				elems.resultLogtimeRemaining.style.display = "flex";
-
-				// elems.extraLogtimeLeft.style.display = "flex";
-
-				// elems.extraLogtimeSideRight.innerText = data.session.eachDayLockMin;
 			}
 			popup.setData(elems);
 		});
@@ -1080,9 +1020,7 @@ popup.createElems = function(elems) {
 	elems.extraLogtimeLeft.className = "extra-logtime-left";
 	elems.extraLogtimeSideLeft = document.createElement("div");
 	elems.extraLogtimeSideLeft.className = "extra-logtime-side";
-	// elems.extraLogtimeSideLeft.innerText = "Without\nBoost Lock";
 	elems.extraLogtimeSideLeft.style.textAlign = "right";
-	// elems.extraLogtimeSideLeft.style.flex = "1";
 	
 	elems.extraLogtimeSideRight = document.createElement("div");
 	elems.extraLogtimeSideRight.className = "extra-logtime-side";
@@ -1090,7 +1028,6 @@ popup.createElems = function(elems) {
 	elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
 	elems.extraLogtimeSideRight.style.justifyContent = "flex-start";
 	elems.extraLogtimeSideRight.style.fontSize = "10px";
-	// elems.extraLogtimeSideRight.style.margin = "auto";
 
 	elems.extraLogtimeLeft.appendChild(elems.extraLogtimeSideLeft);
 	elems.extraLogtimeLeft.appendChild(elems.extraLogtimeSideRight);
@@ -1116,7 +1053,6 @@ popup.createElems = function(elems) {
 
 	elems.labelLogtimeNumberDay = document.createElement("p");
 	elems.labelLogtimeNumberDay.className = "small-title-info";
-	// elems.labelLogtimeNumberDay.innerText = "Days Remaining";
 	elems.resultLogtimeNumberDay = document.createElement("div");
 	elems.resultLogtimeNumberDay.className = "number-result";
 	elems.resultLogtimeNumberDay.innerText = "0";
@@ -1132,7 +1068,6 @@ popup.createElems = function(elems) {
 	elems.blockLogtimeRight.appendChild(elems.resultLogtimeEstimation);
 	elems.blockLogtimeRight.appendChild(elems.labelLogtimeNumberDay);
 	elems.blockLogtimeRight.appendChild(elems.resultLogtimeNumberDay);
-	// elems.blockLogtimeRight.appendChild(elems.extraEstimation);
 
 	elems.lineLogtime.appendChild(elems.titleLogtime);
 	elems.lineLogtime.appendChild(elems.questionLogtime);
@@ -1151,12 +1086,7 @@ popup.createElems = function(elems) {
 		elems.resultLogtimeNumberDay.style.display = "none";
 
 		data.session.logtimeMode = REMAINING;
-		// elems.labelLogtimeRemaining.innerText = "Remaining Today";
 		elems.resultLogtimeRemaining.innerText = "0h00";
-		// if (data.student.addBoostHalf || data.student.addBoostFull)
-		// 	elems.labelLogtimeEstimation.innerText = "Est. Lockout Time";
-		// else
-		// 	elems.labelLogtimeEstimation.innerText = "Est. Logout Time";
 	}
 	else
 	{
@@ -1170,13 +1100,11 @@ popup.createElems = function(elems) {
 
 	if (data.student.addBoostHalf || data.student.addBoostFull)
 	{
-		// elems.extraLogtimeLeft.style.display = "flex";
 		elems.extraLogtimeLeft.style.opacity = "1";
 		elems.extraEstimation.style.display = "flex";
 	}
 	else
 	{
-		// elems.extraLogtimeLeft.style.display = "none";
 		elems.extraLogtimeLeft.style.opacity = "0";
 		elems.extraEstimation.style.display = "none";
 	}
@@ -1188,18 +1116,11 @@ popup.createElems = function(elems) {
 
 	elems.mainTitleInfo = document.createElement("p");
 	elems.mainTitleInfo.className = "main-title-info";
-	// elems.mainTitleInfo.innerText = "Earned";
-
 
 	elems.lineLabelEarn = document.createElement("div");
 	elems.lineLabelEarn.className = "line-label";
 
-	// elems.questionEarn = document.createElement("div");
-	// elems.questionEarn.className = "question-logo";
-
 	elems.lineLabelEarn.appendChild(elems.mainTitleInfo);
-	// elems.lineLabelEarn.appendChild(elems.questionEarn);
-
 
 	elems.lineThisSelection = document.createElement("div");
 	elems.lineThisSelection.className = "line-this-selection";
@@ -1355,18 +1276,12 @@ popup.createElems = function(elems) {
 	elems.popProgressContainer = document.createElement("div");
 	elems.popProgressContainer.className = "pop-progress-container";
 
-	// elems.popProgressTitle = document.createElement("span");
-	// elems.popProgressTitle.className = "pop-title-container";
 	elems.popProgressTitle = document.createElement("p");
 	elems.popProgressTitle.className = "main-title-info";
-	// elems.popProgressTitle.innerText = "Hours Done";
-
-	// elems.containerDivMonth.style.display = "none";
 
 	elems.popProgressContainer.appendChild(elems.popProgressTitle);
 	elems.popProgressContainer.appendChild(elems.containerLogcash);
 	elems.lineThisSelection.appendChild(elems.containerDivMonth);
-
 	
 
 	//////////////////////////////////////////////////////////////////////  BOTTOM DIV
@@ -1384,7 +1299,6 @@ popup.createElems = function(elems) {
 
 	elems.mainTitleDays = document.createElement("p");
 	elems.mainTitleDays.className = "main-title-info";
-	// elems.mainTitleDays.innerText = "Days Remaining";
 	elems.lineResultsDays = document.createElement("div");
 	elems.lineResultsDays.className = "line-results";
 
@@ -1404,7 +1318,6 @@ popup.createElems = function(elems) {
 	elems.numberLabelTotal = document.createElement("span");
 	elems.numberLabelTotal.className = "number-label";
 	elems.numberLabelTotal.innerText = "Total";
-	// elems.numberLabelTotal.style.marginLeft = "4px";
 	elems.numberResultTotal = document.createElement("p");
 	elems.numberResultTotal.className = "number-result";
 	elems.numberResultTotal.id = "result-Total";
@@ -1422,7 +1335,6 @@ popup.createElems = function(elems) {
 
 	elems.mainTitleBoost = document.createElement("p");
 	elems.mainTitleBoost.className = "main-title-info";
-	// elems.mainTitleBoost.innerText = "Boost Lock";
 
 	elems.lineResultsBoost = document.createElement("div");
 	elems.lineResultsBoost.className = "line-results";
@@ -1445,28 +1357,14 @@ popup.createElems = function(elems) {
 	elems.labelFullBoost.className = "number-label";
 	elems.labelFullBoost.innerText = "1h24";
 
-	// elems.checkboxHalf = document.createElement("div");
-	// elems.checkboxHalf.className = "checkbox-boost";
-	// elems.checkboxHalfCenter = document.createElement("div");
-	// elems.checkboxHalfCenter.className = "checkbox-boost-center";
-	// elems.checkboxHalf.appendChild(elems.checkboxHalfCenter);
-	
-	// elems.checkboxFull = document.createElement("div");
-	// elems.checkboxFull.className = "checkbox-boost";
-	// elems.checkboxFullCenter = document.createElement("div");
-	// elems.checkboxFullCenter.className = "checkbox-boost-center";
-	// elems.checkboxFull.appendChild(elems.checkboxFullCenter);
-
 	/////////////// SET STYLE CHECKBOX BOOST WITH DATA.STUDENT
 	if (data.student.addBoostHalf)
 	{
 		elems.buttonBoostMin.style.borderColor = "rgb(0, 186, 188)";
-		// elems.checkboxHalfCenter.style.backgroundColor = "rgb(0, 186, 188)";
 	}
 	else if (data.student.addBoostFull)
 	{
 		elems.buttonBoostMax.style.borderColor = "rgb(0, 186, 188)";
-		// elems.checkboxFullCenter.style.backgroundColor = "rgb(0, 186, 188)";
 	}
 
 	// elems.checkboxHalf.addEventListener("click", function(e) {
