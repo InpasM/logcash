@@ -878,7 +878,7 @@ popup.createElems = function(elems) {
 
 	function selectAllSameDay(e) {
 
-		console.log(e.target);
+		// console.log(e.target);
 		if (popup.months.indexArray === popup.months.length - 1)
 		{
 			var allTrue = true, update = false;
