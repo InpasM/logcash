@@ -234,8 +234,17 @@ function hideShowPopup() {
 		elems.estimationContainer.style.padding = "0px 8px";
 		elems.estimationContainer.style.opacity = "0";
 
-		elems.popMiddleDiv.style.opacity = "0";
-		elems.popMiddleDiv.style.height = "0";
+		elems.popMiddleDivLeft.style.opacity = "0";
+		elems.popMiddleDivLeft.style.height = "0";
+		elems.popMiddleDivLeft.style.padding = "0 8px";
+		elems.popMiddleDivRight.style.opacity = "0";
+		elems.popMiddleDivRight.style.height = "0";
+		elems.popMiddleDivRight.style.padding = "0 8px";
+
+		elems.popupTopDiv.style.borderBottom = "1px solid rgba(45, 49, 60, 0)";
+
+		elems.popMiddleDiv.style.transform = "translateY(-5px)";
+
 		elems.popProgressTitle.style.opacity = "0";
 		elems.popProgressTitle.style.height = "0";
 		elems.containerLogcash.style.marginTop = "0";
@@ -265,8 +274,17 @@ function hideShowPopup() {
 		elems.estimationContainer.style.padding = "8px";
 		elems.estimationContainer.style.opacity = "1";
 
-		elems.popMiddleDiv.style.opacity = "1";
-		elems.popMiddleDiv.style.height = "";
+		elems.popMiddleDivLeft.style.opacity = "1";
+		elems.popMiddleDivLeft.style.height = "";
+		elems.popMiddleDivLeft.style.padding = "8px";
+		elems.popMiddleDivRight.style.opacity = "1";
+		elems.popMiddleDivRight.style.height = "";
+		elems.popMiddleDivRight.style.padding = "8px";
+
+		elems.popupTopDiv.style.borderBottom = "1px solid rgb(45, 49, 60)";
+
+		elems.popMiddleDiv.style.transform = "translateY(0)";
+
 		elems.popProgressTitle.style.opacity = "1";
 		elems.popProgressTitle.style.height = "";
 		elems.containerLogcash.style.marginTop = "4px";
@@ -1425,11 +1443,11 @@ popup.createElems = function(elems) {
 	elems.resultsDiv.appendChild(elems.mainTitleDays);
 	elems.resultsDiv.appendChild(elems.lineResultsDays);
 
-	if (data.session.devMode)
-	{
-		elems.popBottomDiv.appendChild(elems.resultsContainer);
-		elems.popBottomDiv.appendChild(elems.moreInfoContainer);
-	}
+	// if (data.session.devMode)
+	// {
+	// 	elems.popBottomDiv.appendChild(elems.resultsContainer);
+	// 	elems.popBottomDiv.appendChild(elems.moreInfoContainer);
+	// }
 	elems.popBottomContainer.appendChild(elems.popBottomDiv);
 
 	if (data.student.showMore)
@@ -1571,6 +1589,7 @@ popup.setStyle = function(elems) {
 	elems.popupTopDiv.style.color = "#9b9b9b";
 	elems.popupTopDiv.style.whiteSpace = "nowrap";
 	elems.popupTopDiv.style.padding = "2px 2px";
+	elems.popupTopDiv.style.borderBottom = "1px solid rgb(45, 49, 60)";
 
 	elems.popupTopLeftText.style.color = "#e2e2e2";
 	elems.popupTopLeftText.style.fontSize = "14px";

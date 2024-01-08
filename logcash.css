@@ -388,8 +388,13 @@ body
 
 
 .pop-middle-div {
-	border-top: 1px solid rgb(45, 49, 60);
+	/* border-top: 1px solid rgb(45, 49, 60); */
+	/* height: 100%; */
+	opacity: 1;
+	transform: translateY(0);
 	display: flex;
+	transition: ease 0.4s all;
+	overflow: hidden;
 }
 
 .pop-middle-div-left {
@@ -397,6 +402,7 @@ body
 	border-right: 1px solid rgb(45, 49, 60);
 	display: flex;
 	flex-direction: column;
+	transition: ease 0.4s all;
 }
 
 .middle-line-1, .middle-line-2 {
@@ -571,6 +577,7 @@ body
 	align-items: stretch;
 	padding: 8px;
 	flex: 1;
+	transition: ease 0.4s all;
 }
 
 .div-info {
