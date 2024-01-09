@@ -161,12 +161,12 @@ var questions = [
 			width: 125
 		},
 		{	
-			text: "Ajouter à l'estimation le temps de connexion ajouté à votre Logtime en laissant sa session verrouillée en fin de journée.",
+			text: "Ajouter à l'estimation le temps de Logtime qui s'écoule en laissant sa session verrouillée en fin de journée.",
 			width: 125
 		},
 		{	
-			text: "Selectionner chaque jour auquel vous prevoyez d'assister.\n\
-			Cliquer sur les noms de jour pour selectionner toute la colonne restante.\
+			text: "Selectionner chaque journée auquelle vous prevoyez d'assister.\n\
+			Cliquer sur les noms de jour pour selectionner toute une colonne.\
 			Si aucun jour n'est selectionné, l'estimation sera basé sur le nombre de jour ouvré restant.\
 			Double clique sur \"Presence Mensuelle\" pour reset le calendrier.",
 			width: 170
@@ -186,9 +186,6 @@ function mouseOverQuestion(e) {
 	elemRect = e.target.getBoundingClientRect();
 	tooltipRect = elems.tooltipQuestion.getBoundingClientRect();
 
-	// console.log("circle question left:", elemRect.left, "width:", elemRect.width);
-	// console.log("tooltipRect left:", tooltipRect.left, "width:", tooltipRect.width);
-
 	offsetLeft = elemRect.left - (tooltipRect.width / 2) + (elemRect.width / 2);
 	offsetTop = elemRect.top + 20 + window.scrollY;
 
@@ -203,8 +200,6 @@ function mouseOverQuestion(e) {
 
 function mouseOutQuestion(e) {
 
-	// elemRect = e.target.getBoundingClientRect();
-	
 	elems.tooltipQuestion.style.opacity = "0";
 	timeOutQuestion = setTimeout(function() {
 		
@@ -324,7 +319,7 @@ var arrayLanguages = [
 		labelSalary: "Votre salaire",
 		labelHours: "Heures Deduites",
 		monthlyAttendance: "Presence Mensuelle",
-		labelLogtimeEach: "Part Jour",
+		labelLogtimeEach: "Par Jour",
 		extraLogtimeSideLeft: "Sans Boost\nVerrouillage",
 		daysRemaining: "Jour Restant",
 		mainTitleInfo: "Salaire Perçu",
