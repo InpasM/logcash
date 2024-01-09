@@ -144,7 +144,7 @@ var questions = [
 		{	
 			text: "Select each day you plan to attend.\n\
 			Click on day's name to select alls same days remaining in the month.\n\
-			If none selected, the estimation will be based on remaining open days\n\
+			If none selected, the estimation will be based on remaining open days.\n\
 			Double click on \"Monthly Attendance\" to reset the calendar.",
 			width: 170
 		},
@@ -982,18 +982,25 @@ popup.createElems = function(elems) {
 	elems.blockLogtimeLeft.style.borderRight = "1px solid rgb(45, 49, 60)";
 	elems.blockLogtimeLeft.style.paddingRight = "8px";
 
+
+	// elems.blockLogtimeLeft.style.backgroundColor = "red";
+	elems.blockLogtimeTooltip = document.createElement("div");
+	elems.blockLogtimeTooltip.className = "block-logtime-tooltip";
+	elems.blockLogtimeTooltipText = document.createElement("div");
+	elems.blockLogtimeTooltipText.className = "block-logtime-tooltip-text";
+	elems.blockLogtimeTooltipText.innerText = "/ 0h00";
+	elems.blockLogtimeTooltip.appendChild(elems.blockLogtimeTooltipText);
+	elems.blockLogtimeLeft.appendChild(elems.blockLogtimeTooltip);
+
 	
 	elems.labelLogtimeEach = document.createElement("p");
 	elems.labelLogtimeEach.className = "small-title-info";
 	elems.resultLogtimeEach = document.createElement("p");
-	elems.resultLogtimeEach.className = "number-result";
+	elems.resultLogtimeEach.className = "number-result-smaller";
 	elems.labelLogtimeEach.style.display = "none";
 	elems.resultLogtimeEach.style.display = "none";
 
-	elems.blockLogtimeLeft.addEventListener("mouseover", function(e) {
-		console.log("test");
-	});
-
+	
 	elems.labelLogtimeRemaining = document.createElement("p");
 	elems.labelLogtimeRemaining.className = "small-title-info";
 	elems.resultLogtimeRemaining = document.createElement("p");
@@ -1001,29 +1008,58 @@ popup.createElems = function(elems) {
 	elems.labelLogtimeRemaining.style.display = "none";
 	elems.resultLogtimeRemaining.style.display = "none";
 
+
+	elems.blockLogtimeLine = document.createElement("div");
+	elems.blockLogtimeLine.className = "block-logtime-line";
+	elems.blockLogtimeLine.appendChild(elems.resultLogtimeRemaining);
+	// elems.blockLogtimeLine.appendChild(elems.resultLogtimeEach);
+
+
+	// elems.resultLogtimeRemaining.addEventListener("mouseover", function(e) {
+	// 	// console.log("test");
+
+	// 	const elemBox = e.target.getBoundingClientRect();
+	// 	const blockBox = elems.popupRemaining.getBoundingClientRect();
+
+	// 	var newTop = elemBox.top - blockBox.top - elemBox.height - 5;
+	// 	var newLeft = elemBox.left - blockBox.left + elemBox.width + 5;
+
+	// 	// console.log(newTop, newLeft);
+
+	// 	elems.blockLogtimeTooltip.style.top = newTop + "px";
+	// 	elems.blockLogtimeTooltip.style.left = newLeft + "px";
+	// 	elems.blockLogtimeTooltip.style.opacity = "1";
+	// });
+
+	// elems.resultLogtimeRemaining.addEventListener("mouseout", function(e) {
+
+	// 	elems.blockLogtimeTooltip.style.opacity = "0";
+	// });
+
 	if (data.session.logAtSchool)
 	{
-		elems.blockLogtimeLeft.style.cursor = "pointer";
-		elems.blockLogtimeLeft.addEventListener("click", function() {
+		// elems.blockLogtimeLeft.style.cursor = "pointer";
+		// elems.blockLogtimeLeft.addEventListener("click", function() {
 	
-			if (data.session.logtimeMode === REMAINING)
-			{
-				data.session.logtimeMode = EACH;
-				// elems.labelLogtimeRemaining.style.display = "none";
-				// elems.resultLogtimeRemaining.style.display = "none";
-				// elems.labelLogtimeEach.style.display = "flex";
-				// elems.resultLogtimeEach.style.display = "flex";
-			}
-			else if (data.session.logtimeMode === EACH)
-			{
-				data.session.logtimeMode = REMAINING;
-				// elems.labelLogtimeEach.style.display = "none";
-				// elems.resultLogtimeEach.style.display = "none";
-				// elems.labelLogtimeRemaining.style.display = "flex";
-				// elems.resultLogtimeRemaining.style.display = "flex";
-			}
-			popup.setData(elems);
-		});
+		// 	if (data.session.logtimeMode === REMAINING)
+		// 	{
+		// 		data.session.logtimeMode = EACH;
+		// 		// elems.labelLogtimeRemaining.style.display = "none";
+		// 		// elems.resultLogtimeRemaining.style.display = "none";
+		// 		// elems.labelLogtimeEach.style.display = "flex";
+		// 		// elems.resultLogtimeEach.style.display = "flex";
+		// 	}
+		// 	else if (data.session.logtimeMode === EACH)
+		// 	{
+		// 		data.session.logtimeMode = REMAINING;
+		// 		// elems.labelLogtimeEach.style.display = "none";
+		// 		// elems.resultLogtimeEach.style.display = "none";
+		// 		// elems.labelLogtimeRemaining.style.display = "flex";
+		// 		// elems.resultLogtimeRemaining.style.display = "flex";
+		// 	}
+		// 	popup.setData(elems);
+		// });
+		elems.blockLogtimeLine.appendChild(elems.resultLogtimeEach);
 		elems.labelLogtimeRemaining.style.display = "flex";
 		elems.resultLogtimeRemaining.style.display = "flex";
 	}
@@ -1033,6 +1069,12 @@ popup.createElems = function(elems) {
 		elems.resultLogtimeEach.style.display = "flex";
 	}
 
+	// elems.labelLogtimeRemaining.style.display = "flex";
+	elems.resultLogtimeRemaining.style.display = "flex";
+	// elems.labelLogtimeEach.style.display = "flex";
+	elems.resultLogtimeEach.style.display = "flex";
+
+	
 	elems.extraLogtimeLeft = document.createElement("div");
 	elems.extraLogtimeLeft.className = "extra-logtime-left";
 	elems.extraLogtimeSideLeft = document.createElement("div");
@@ -1049,10 +1091,13 @@ popup.createElems = function(elems) {
 	elems.extraLogtimeLeft.appendChild(elems.extraLogtimeSideLeft);
 	elems.extraLogtimeLeft.appendChild(elems.extraLogtimeSideRight);
 
-	// elems.blockLogtimeLeft.appendChild(elems.labelLogtimeEach);
-	// elems.blockLogtimeLeft.appendChild(elems.resultLogtimeEach);
 	elems.blockLogtimeLeft.appendChild(elems.labelLogtimeRemaining);
-	elems.blockLogtimeLeft.appendChild(elems.resultLogtimeRemaining);
+	elems.blockLogtimeLeft.appendChild(elems.labelLogtimeEach);
+	
+	elems.blockLogtimeLeft.appendChild(elems.blockLogtimeLine);
+	// elems.blockLogtimeLeft.appendChild(elems.resultLogtimeEach);
+	// elems.blockLogtimeLeft.appendChild(elems.resultLogtimeRemaining);
+
 	elems.blockLogtimeLeft.appendChild(elems.extraLogtimeLeft);
 
 
@@ -1788,13 +1833,18 @@ function setLogtimeValue(remToday, eachDay, elems) {
 
 	if (eachDay > 0)
 	{
-		elems.resultLogtimeEach.innerText = getTimeFormat(eachDay, "h");
-		elems.resultLogtimeEach.style.color = "white";
+		elems.resultLogtimeEach.innerText = "/ " + getTimeFormat(eachDay, "h");
+		// elems.resultLogtimeEach.style.color = "white";
+		elems.resultLogtimeEach.style.color = "rgb(180, 180, 180)";
+		elems.blockLogtimeTooltipText.innerText = "/ " + getTimeFormat(eachDay, "h");
+		elems.blockLogtimeTooltipText.style.color = "white";
 	}
 	else
 	{
-		elems.resultLogtimeEach.innerText = "DONE";
+		elems.resultLogtimeEach.innerText = "/ DONE";
 		elems.resultLogtimeEach.style.color = "rgb(0, 186, 188)";
+		elems.blockLogtimeTooltipText.innerText = "DONE";
+		elems.blockLogtimeTooltipText.style.color = "rgb(0, 186, 188)";
 	}
 
 	if (data.session.logtimeMode === REMAINING)
