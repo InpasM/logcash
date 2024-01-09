@@ -555,14 +555,14 @@ async function initLogcash()
 		reGenerate(months[months.indexArray], elems);
 		initButtons(elems);
 	
-		// if (data.session.logAtSchool)
-		// {
+		if (data.session.logAtSchool)
+		{
 			displayMessage("Start setInterval each minutes");
 			setInterval(function() {
 				updateTime(1);
 			}, 60000);
 			// }, 1000);
-		// }
+		}
 	
 		if (data.session.devMode)
 		{
