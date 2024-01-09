@@ -6,7 +6,7 @@
 	"description": "Calcul and let you know how much hour you will need to do to get paid fully.",
 
 	"icons": {
-	  "48": "icons/logcash-48.png"
+	  "128": "icons/logcash-128.png"
 	},
 
 	"web_accessible_resources": [{
