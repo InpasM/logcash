@@ -166,8 +166,8 @@ var questions = [
 		},
 		{	
 			text: "Selectionner chaque journée auquelle vous prevoyez d'assister.\n\
-			Cliquer sur les noms de jour pour selectionner toute une colonne.\
-			Si aucun jour n'est selectionné, l'estimation sera basé sur le nombre de jour ouvré restant.\
+			Cliquer sur les noms de jour pour selectionner toute une colonne.\n\
+			Si aucun jour n'est selectionné, l'estimation sera basé sur le nombre de jour ouvré restant.\n\
 			Double clique sur \"Presence Mensuelle\" pour reset le calendrier.",
 			width: 170
 		},
