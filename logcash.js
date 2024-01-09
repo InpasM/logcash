@@ -531,6 +531,21 @@ function updateTime(minuteToAdd) {
 	}
 }
 
+function updateMinutes(minuteToAdd) {
+
+	popup.numberMinutes += minuteToAdd;
+	if (popup.numberMinutes >= 60)
+	{
+		popup.numberMinutes -= 60;
+		popup.numberHour += 1;
+	}
+	else if (popup.numberMinutes < 0)
+	{
+		popup.numberMinutes += 60;
+		popup.numberHour -= 1;
+	}
+}
+
 async function initLogcash()
 {
 	const elems = {};
@@ -554,11 +569,11 @@ async function initLogcash()
 	
 		reGenerate(months[months.indexArray], elems);
 		initButtons(elems);
-	
 		if (data.session.logAtSchool)
 		{
 			displayMessage("Start setInterval each minutes");
 			setInterval(function() {
+				updateMinutes(1);
 				updateTime(1);
 			}, 60000);
 			// }, 1000);
@@ -573,21 +588,6 @@ async function initLogcash()
 			const devClock = document.querySelector(".dev-clock");
 
 			devClock.innerText = popup.numberHour + ":" + popup.numberMinutes;
-			function updateMinutes(minuteToAdd) {
-
-				popup.numberMinutes += minuteToAdd;
-				if (popup.numberMinutes >= 60)
-				{
-					popup.numberMinutes -= 60;
-					popup.numberHour += 1;
-				}
-				else if (popup.numberMinutes < 0)
-				{
-					popup.numberMinutes += 60;
-					popup.numberHour -= 1;
-				}
-				// console.log("new hour:", popup.numberHour, "new minutes", popup.numberMinutes);
-			}
 
 			function addTime(number) {
 				updateMinutes(number);
@@ -617,7 +617,6 @@ function setRefreshInterval() {
 	return setInterval(function() {location.reload();}, 5000);
 }
 
-// let devMode;
 function startLogcash() {
 
 	data.init();

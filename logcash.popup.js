@@ -1996,6 +1996,8 @@ popup.initPopup = function(elems, months) {
 	popup.numberHour = popup.date.getHours();
 	popup.numberMinutes = popup.date.getMinutes();
 
+	// console.log(popup.numberHour);
+
 	var mouseDown = false,
 		popupOffset = [0, 0];
 
