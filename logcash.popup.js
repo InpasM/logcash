@@ -990,6 +990,10 @@ popup.createElems = function(elems) {
 	elems.labelLogtimeEach.style.display = "none";
 	elems.resultLogtimeEach.style.display = "none";
 
+	elems.blockLogtimeLeft.addEventListener("mouseover", function(e) {
+		console.log("test");
+	});
+
 	elems.labelLogtimeRemaining = document.createElement("p");
 	elems.labelLogtimeRemaining.className = "small-title-info";
 	elems.resultLogtimeRemaining = document.createElement("p");
@@ -1005,18 +1009,18 @@ popup.createElems = function(elems) {
 			if (data.session.logtimeMode === REMAINING)
 			{
 				data.session.logtimeMode = EACH;
-				elems.labelLogtimeRemaining.style.display = "none";
-				elems.resultLogtimeRemaining.style.display = "none";
-				elems.labelLogtimeEach.style.display = "flex";
-				elems.resultLogtimeEach.style.display = "flex";
+				// elems.labelLogtimeRemaining.style.display = "none";
+				// elems.resultLogtimeRemaining.style.display = "none";
+				// elems.labelLogtimeEach.style.display = "flex";
+				// elems.resultLogtimeEach.style.display = "flex";
 			}
 			else if (data.session.logtimeMode === EACH)
 			{
 				data.session.logtimeMode = REMAINING;
-				elems.labelLogtimeEach.style.display = "none";
-				elems.resultLogtimeEach.style.display = "none";
-				elems.labelLogtimeRemaining.style.display = "flex";
-				elems.resultLogtimeRemaining.style.display = "flex";
+				// elems.labelLogtimeEach.style.display = "none";
+				// elems.resultLogtimeEach.style.display = "none";
+				// elems.labelLogtimeRemaining.style.display = "flex";
+				// elems.resultLogtimeRemaining.style.display = "flex";
 			}
 			popup.setData(elems);
 		});
@@ -1045,8 +1049,8 @@ popup.createElems = function(elems) {
 	elems.extraLogtimeLeft.appendChild(elems.extraLogtimeSideLeft);
 	elems.extraLogtimeLeft.appendChild(elems.extraLogtimeSideRight);
 
-	elems.blockLogtimeLeft.appendChild(elems.labelLogtimeEach);
-	elems.blockLogtimeLeft.appendChild(elems.resultLogtimeEach);
+	// elems.blockLogtimeLeft.appendChild(elems.labelLogtimeEach);
+	// elems.blockLogtimeLeft.appendChild(elems.resultLogtimeEach);
 	elems.blockLogtimeLeft.appendChild(elems.labelLogtimeRemaining);
 	elems.blockLogtimeLeft.appendChild(elems.resultLogtimeRemaining);
 	elems.blockLogtimeLeft.appendChild(elems.extraLogtimeLeft);
