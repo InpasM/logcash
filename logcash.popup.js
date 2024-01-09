@@ -1059,7 +1059,6 @@ popup.createElems = function(elems) {
 		// 	}
 		// 	popup.setData(elems);
 		// });
-		elems.blockLogtimeLine.appendChild(elems.resultLogtimeEach);
 		elems.labelLogtimeRemaining.style.display = "flex";
 		elems.resultLogtimeRemaining.style.display = "flex";
 	}
@@ -1068,6 +1067,7 @@ popup.createElems = function(elems) {
 		elems.labelLogtimeEach.style.display = "flex";
 		elems.resultLogtimeEach.style.display = "flex";
 	}
+	elems.blockLogtimeLine.appendChild(elems.resultLogtimeEach);
 
 	// elems.labelLogtimeRemaining.style.display = "flex";
 	elems.resultLogtimeRemaining.style.display = "flex";
