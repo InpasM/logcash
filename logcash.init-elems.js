@@ -88,20 +88,6 @@ function initDivMonths(elems, months) {
 
 function setStyle(elems) {
 
-	var bgColor = "#1e212a";
-	let border, color;
-
-	if (bgColor == "#1e212a" || "rgb(30, 33, 42)")
-	{
-		border = "2px solid #2d313c";
-		color = "#f2f2f2";
-	}
-	else
-	{
-		border = "2px solid #e5e5e5";
-		color = "#2c2c34";
-	}
-
 	elems.rowProgress.style.display = "flex";
 	elems.rowProgress.style.flex = "1";
 	elems.rowProgress.style.justifyContent = "space-between";
@@ -115,7 +101,6 @@ function setStyle(elems) {
 	elems.sideProgress.style.minWidth = "90px";
 	elems.sideProgress.style.height = "100%";
 	elems.sideProgress.style.borderRadius = "3px";
-	elems.sideProgress.style.paddingTop = "2px";
 	
 	elems.sideRemaining.style.display = "flex";
 	elems.sideRemaining.style.justifyContent = "center";
@@ -125,7 +110,6 @@ function setStyle(elems) {
 	elems.textRemaining.style.margin = "0";
 	elems.textRemaining.style.color = "#8d8e8e";
 	elems.textRemaining.style.pointerEvents = "none";
-	elems.textRemaining.style.paddingTop = "4px";
 }
 
 init.generateContainerLogcash = function(elems, months, calendar) {
