@@ -313,6 +313,7 @@ var arrayLanguages = [
 		devise: "Devise",
 		language: "Language",
 		save: "Save Month",
+		size: "Size Font",
 	},
 	{
 		boost: "Boost Verrouillage",
@@ -333,6 +334,7 @@ var arrayLanguages = [
 		devise: "Devise",
 		language: "Langue",
 		save: "Sauvegarde Mois",
+		size: "Taille Police",
 	}
 ];
 
@@ -383,6 +385,11 @@ function initText(elems, text) {
 	elems.panelDeviseTitle.innerText = text.devise;
 	elems.panelLanguageTitle.innerText = text.language;
 	elems.panelSaveTitle.innerText = text.save;
+	elems.panelSizeFontTitle.innerText = text.size;
+}
+
+function setFontSize(ratio) {
+
 }
 
 const browser = window.browser || window.chrome;
@@ -498,6 +505,32 @@ popup.createElems = function(elems) {
 	elems.panelSaveButton.className = "panel-save-button";
 	elems.panelSaveLine.appendChild(elems.panelSaveTitle);
 	elems.panelSaveLine.appendChild(elems.panelSaveButton);
+	
+
+	elems.panelSizeFontLine = document.createElement("div");
+	elems.panelSizeFontLine.className = "panel-size-font-line";
+	elems.panelSizeFontTitle = document.createElement("div");
+	elems.panelSizeFontTitle.className = "setting-panel-title";
+	elems.panelSizeFontBlock = document.createElement("div");
+	elems.panelSizeFontBlock.className = "panel-size-font-block";
+
+	elems.panelSizeFontValue = document.createElement("div");
+	elems.panelSizeFontValue.className = "panel-size-font-value";
+	elems.panelSizeFontValue.innerText = "1.0";
+	elems.panelSizeFontMin = document.createElement("div");
+	elems.panelSizeFontMin.className = "panel-size-font-button";
+	elems.panelSizeFontMin.innerText = "-";
+	elems.panelSizeFontMax = document.createElement("div");
+	elems.panelSizeFontMax.className = "panel-size-font-button";
+	elems.panelSizeFontMax.innerText = "+";
+
+	elems.panelSizeFontBlock.appendChild(elems.panelSizeFontValue);
+	elems.panelSizeFontBlock.appendChild(elems.panelSizeFontMin);
+	elems.panelSizeFontBlock.appendChild(elems.panelSizeFontMax);
+
+	elems.panelSizeFontLine.appendChild(elems.panelSizeFontTitle);
+	elems.panelSizeFontLine.appendChild(elems.panelSizeFontBlock);
+
 
 	elems.panelResetLine = document.createElement("div");
 	elems.panelResetLine.className = "panel-reset-line";
@@ -596,6 +629,7 @@ popup.createElems = function(elems) {
 	// elems.topDivSettingPanel.appendChild(elems.panelDeviseLine);
 	elems.topDivSettingPanel.appendChild(elems.panelLanguageLine);
 	// elems.topDivSettingPanel.appendChild(elems.panelSaveLine);
+	elems.topDivSettingPanel.appendChild(elems.panelSizeFontLine);
 	elems.topDivSettingPanel.appendChild(elems.panelResetLine);
 
 	elems.topDivSettingButton = document.createElement("div");
