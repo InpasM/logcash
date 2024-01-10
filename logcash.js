@@ -447,7 +447,7 @@ function getNumberOpenDays(numberYear, numberMonth, numberDay) {
 
 function initStyleProgressBar() {
 
-	elems.rowProgress.style.height = "20px";
+	// elems.rowProgress.style.height = "20px";
 	elems.containerLogcash.style.display = "flex";
 
 	for (var i = 0; i < months.nbMonth; i++)

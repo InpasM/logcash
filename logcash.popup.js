@@ -395,6 +395,7 @@ function setFontSize(elems, ratio) {
 	elems.miniLogtimeValueRemaining.style.fontSize = 10 * ratio + "px";
 	elems.miniLogtimeValueLock.style.fontSize = 10 * ratio + "px";
 
+	elems.rowProgress.style.height = 20 * ratio + "px";
 	elems.sideProgress.style.fontSize = 14 * ratio + "px";
 	elems.textRemaining.style.fontSize = 12 * ratio + "px";
 	
@@ -420,7 +421,11 @@ function setFontSize(elems, ratio) {
 	elems.resetCancelButton.style.fontSize = 10 * ratio + "px";
 
 	elems.buttonBoostMin.style.fontSize = 11 * ratio + "px";
+	elems.buttonBoostMin.style.width = 40 * ratio + "px";
+	elems.buttonBoostMin.style.height = 22 * ratio + "px";
 	elems.buttonBoostMax.style.fontSize = 11 * ratio + "px";
+	elems.buttonBoostMax.style.width = 40 * ratio + "px";
+	elems.buttonBoostMax.style.height = 22 * ratio + "px";
 
 	elems.inputSalary.style.fontSize = 16 * ratio + "px";
 	elems.inputSalary.style.maxWidth = 45 * ratio + "px";
@@ -449,7 +454,19 @@ function setFontSize(elems, ratio) {
 	elems.extraLogtimeSideRight.style.fontSize = 10 * ratio + "px";
 	elems.extraLogtimeSideRight.style.lineHeight = 8 * ratio + "px";
 
-	// elems.extraEstimation.style.lineHeight = 12 * ratio + "px";
+	for (var i = 0; i < elems.divMonths.length; i++)
+	{
+		elems.divMonths[i].style.fontSize = 10 * ratio + "px";
+	}
+
+	elems.titleBoost.style.lineHeight = 12 * ratio + "px";
+	elems.weeklySpan.style.lineHeight = 12 * ratio + "px";
+	elems.titleLogtime.style.lineHeight = 12 * ratio + "px";
+	elems.mainTitleInfo.style.lineHeight = 12 * ratio + "px";
+	elems.popProgressTitle.style.lineHeight = 12 * ratio + "px";
+	elems.mainTitleDays.style.lineHeight = 12 * ratio + "px";
+	elems.mainTitleBoost.style.lineHeight = 12 * ratio + "px";
+	elems.mainTitleLogtime.style.lineHeight = 12 * ratio + "px";
 }
 
 const browser = window.browser || window.chrome;
