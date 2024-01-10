@@ -46,20 +46,21 @@ body
 	margin: 0;
 	padding: 0;
 	color: rgb(155, 155, 155);
-	font-size: 8px;
+	/* font-size: 8px; */
 	text-align: justify;
 }
 
 .mini-logtime-value {
+
 	margin: 0;
 	padding: 0;
 	color: rgb(255, 255, 255);
-	font-size: 10px;
+	/* font-size: 10px; */
 	text-align: justify;
 }
 
 
-.container-month 
+/* .container-month 
 {
 	width: 100%;
 }
@@ -74,9 +75,9 @@ body
 .row-top p
 {
 	font-size: 0.9em;
-}
+} */
 
-.text-month
+/* .text-month
 {
 	color: orange;
 	color: #8e8e8f;
@@ -86,12 +87,12 @@ body
 	justify-content: center;
 	align-items: center;
 	border: 2px solid rgba(0,0,0,0);
-}
+} */
 
-.text-cash
+/* .text-cash
 {
 	color: #b1b1b3;
-}
+} */
 
 .row-progress-bar 
 {
@@ -129,7 +130,9 @@ body
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	font-size: 0.8em;
+	/* font-size: 0.8em;
+	font-size: 50px; */
+	/* background-color: red; */
 }
 
 .side-remaining
@@ -197,7 +200,7 @@ body
 
 .top-div-setting-panel {
 	background-color: rgba(32, 35, 44, 0.8);
-	width: 150px;
+	/* width: 150px; */
 	display: flex;
 	position: absolute;
 	border: 1px solid rgb(45, 49, 60);
@@ -207,8 +210,8 @@ body
 	display: flex;
 	flex-direction: column;
 	padding: 8px;
-	/* display: none;
-	opacity: 0; */
+	display: none;
+	opacity: 0;
 	z-index: 1000;
 	transition: ease 0.2s all;
 	backdrop-filter: blur(6px);
@@ -219,7 +222,7 @@ body
 .setting-panel-main-title {
 	height: fit-content;
 	width: 100%;
-	font-size: 12px;
+	/* font-size: 12px; */
 	color: rgb(155, 155, 155);
 	margin: 0 0 3px 0;
 	padding: 0 0 6px 0;
@@ -228,7 +231,7 @@ body
 
 .setting-panel-title {
 	height: fit-content;
-	font-size: 10px;
+	/* font-size: 10px; */
 	color: rgb(181, 181, 181);
 	margin: 4px 0;
 	padding: 0;
@@ -266,7 +269,7 @@ body
 
 .setting-button-option {
 	background-color: rgba(37, 41, 50, 0.9);
-	font-size: 9px;
+	/* font-size: 9px; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -277,7 +280,7 @@ body
 	border: 1px solid rgb(51, 55, 67);
 	cursor: pointer;
 }
-
+/* 
 .checkbox-setting {
 	background-color: #373c48;
 	color: rgb(198, 198, 198);
@@ -292,7 +295,7 @@ body
 	font-weight: bold;
 	margin: 0 1px;
 	border: 2px solid rgb(45, 49, 60);
-}
+} */
 
 .panel-size-font-line {
 	/* background-color: red; */
@@ -322,7 +325,7 @@ body
 	color: white;
 	padding: 3px 0 0 0;
 	margin: 0 4px 0 4px;
-	font-size: 14px;
+	/* font-size: 14px; */
 	line-height: 14px;
 }
 
@@ -330,6 +333,7 @@ body
 	cursor: pointer;
 	background-color: #2d313c;
 	border: 1px solid rgb(37, 41, 50);
+	/* font-size: 12px; */
 	/* padding: 2px; */
 	margin: 0 2px;
 	height: 15px;
@@ -361,9 +365,10 @@ body
 	align-items: center;
 	text-align: center;
 	padding: 0 10px;
-	font-size: 10px;
+	/* font-size: 10px; */
 	font-weight: bold;
 	cursor: pointer;
+	/* background-color: red; */
 }
 
 .panel-reset-button:hover {
@@ -406,8 +411,6 @@ body
 	flex-direction: column;
 	align-items: center;
 	padding: 8px;
-	/* display: none;
-	opacity: 0; */
 	z-index: 1000;
 	transition: ease 0.2s all;
 }
@@ -415,6 +418,7 @@ body
 .reset-confirm-button-line {
 	width: 100%;
 	display: flex;
+	justify-content: center;
 }
 
 
@@ -499,7 +503,7 @@ body
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 11px;
+	/* font-size: 11px; */
 	color: rgb(198, 198, 198);
 	border: 2px solid rgb(0, 186, 188);
 	border: 2px solid rgb(45, 49, 60);
@@ -527,21 +531,22 @@ body
 	color: rgb(198, 198, 198);
 	outline: none;
 	border: none;
-	font-size: 16px;
+	/* font-size: 16px; */
 }
 
 .pop-input:focus-within {
 	border: 2px solid rgb(78, 85, 101);
 }
 
-.label-input {
+/* .label-input {
+	background-color: red;
 	pointer-events: none;
 	color: rgb(122, 122, 122);
 	font-size: 8px;
 	padding: 0;
 	margin: 0;
 	white-space: nowrap;
-}
+} */
 
 .middle-line-2 {
 	margin: 7px 0 0 0;
@@ -555,13 +560,14 @@ body
 	width: fit-content;
 	margin-top: 8px;
 }
-
+/* 
 .habit-container span {
+	background-color: red;
 	font-size: 12px;
 	color: rgb(155, 155, 155);
 	padding: 0 4px;
 	transition: ease 0.5s all;
-}
+} */
 
 .week-container, .month-container {
 	width: fit-content;
@@ -581,13 +587,13 @@ body
 
 .days-name-box {
 	color: rgb(198, 198, 198);
-	width: 20px;
-	height: 20px;
+	/* width: 20px;
+	height: 20px; */
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 8px;
+	/* font-size: 8px; */
 	font-weight: bold;
 	margin: 0 1px;
 	border: 2px solid rgba(255, 0, 0, 0);
@@ -604,17 +610,18 @@ body
 .checkbox-habit {
 	background-color: #373c48;
 	color: rgb(198, 198, 198);
-	width: 20px;
-	height: 20px;
+	/* width: 20px;
+	height: 20px; */
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
-	font-size: 8px;
+	/* font-size: 8px; */
 	font-weight: bold;
 	margin: 0 1px;
 	border: 2px solid rgb(45, 49, 60);
+	/* background-color: red; */
 }
 
 .pop-middle-div-right {
@@ -626,26 +633,27 @@ body
 	flex: 1;
 	transition: ease 0.4s all;
 }
-
+/* 
 .div-info {
 	margin: 2px 2px 2px 0;
 	display: flex;
 	justify-content: space-between;
-}
-
+} */
+/* 
 .title-info {
+	background-color: red;
 	color: rgb(155, 155, 155);
 	margin: 0;
 	padding: 0;
 	font-size: 0.6em;
-}
+} */
 
-.p-open-day-result {
+/* .p-open-day-result {
 	color: aliceblue;
 	margin: 0;
 	padding: 0;
 	font-size: 0.7em;
-}
+} */
 
 
 /**************************************** LOGTIME ****************************************/
@@ -698,16 +706,16 @@ body
 	display: flex;
 	flex-direction: column;
 }
-
+/* 
 .block-logtime-tooltip-text {
-	/* background-color: red; */
+	background-color: red;
 	font-size: 12px;
 	color: rgb(192, 192, 192);
 	padding: 0;
 	margin: 0;
 	line-height: 12px;
 	text-align: center;
-}
+} */
 
 .extra-logtime-left {
 	width: 100%;
@@ -718,8 +726,9 @@ body
 }
 
 .extra-logtime-side {
-	font-size: 7px;
-	line-height: 8px;
+	/* background-color: red; */
+	/* font-size: 7px;
+	line-height: 8px; */
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
@@ -727,8 +736,9 @@ body
 	padding: 0 2px;
 	white-space: nowrap;
 }
-
+/* 
 .extra-estimation {
+	background-color: red;
 	width: 100%;
 	display: flex;
 	display: none;
@@ -736,9 +746,9 @@ body
 	align-items: center;
 	margin: 0;
 	padding: 0;
-	font-size: 12px;
+	/* font-size: 12px; */
 	color: rgb(140, 140, 140);
-}
+} */
 
 
 /**************************************** SALARY ****************************************/

@@ -80,13 +80,13 @@ function clickBoostMin() {
 	{
 		// elems.extraLogtimeLeft.style.display = "flex";
 		elems.extraLogtimeLeft.style.opacity = "1";
-		elems.extraEstimation.style.display = "flex";
+		// elems.extraEstimation.style.display = "flex";
 	}
 	else
 	{
 		// elems.extraLogtimeLeft.style.display = "none";
 		elems.extraLogtimeLeft.style.opacity = "0";
-		elems.extraEstimation.style.display = "none";
+		// elems.extraEstimation.style.display = "none";
 	}
 	data.updateLocalStorage();
 	popup.setData(elems);
@@ -117,13 +117,13 @@ function clickBoostMax() {
 	{
 		// elems.extraLogtimeLeft.style.display = "flex";
 		elems.extraLogtimeLeft.style.opacity = "1";
-		elems.extraEstimation.style.display = "flex";
+		// elems.extraEstimation.style.display = "flex";
 	}
 	else
 	{
 		// elems.extraLogtimeLeft.style.display = "none";
 		elems.extraLogtimeLeft.style.opacity = "0";
-		elems.extraEstimation.style.display = "none";
+		// elems.extraEstimation.style.display = "none";
 	}
 	data.updateLocalStorage();
 	popup.setData(elems);
@@ -381,15 +381,75 @@ function initText(elems, text) {
 				elems.divMonths[i].innerText = text.arrayMonth[j];
 		}
 	}
-	elems.panelDarkTitle.innerText = text.darkMode;
-	elems.panelDeviseTitle.innerText = text.devise;
+	// elems.panelDarkTitle.innerText = text.darkMode;
+	// elems.panelDeviseTitle.innerText = text.devise;
 	elems.panelLanguageTitle.innerText = text.language;
-	elems.panelSaveTitle.innerText = text.save;
+	// elems.panelSaveTitle.innerText = text.save;
 	elems.panelSizeFontTitle.innerText = text.size;
 }
 
-function setFontSize(ratio) {
+function setFontSize(elems, ratio) {
 
+	elems.miniLogtimeTitleRemaining.style.fontSize = 8 * ratio + "px";
+	elems.miniLogtimeTitleLock.style.fontSize = 8 * ratio + "px";
+	elems.miniLogtimeValueRemaining.style.fontSize = 10 * ratio + "px";
+	elems.miniLogtimeValueLock.style.fontSize = 10 * ratio + "px";
+
+	elems.sideProgress.style.fontSize = 14 * ratio + "px";
+	elems.textRemaining.style.fontSize = 12 * ratio + "px";
+	
+	elems.topDivSettingPanel.style.fontSize = 160 * ratio + "px";
+
+	elems.panelLanguageTitle.style.fontSize = 10 * ratio + "px";
+	elems.panelSizeFontTitle.style.fontSize = 10 * ratio + "px";
+	
+	elems.panelLanguageButtonEnglish.style.fontSize = 9 * ratio + "px";
+	elems.panelLanguageButtonFrench.style.fontSize = 9 * ratio + "px";
+
+	elems.panelSizeFontValue.style.fontSize = 12 * ratio + "px";
+	elems.panelSizeFontMin.style.fontSize = 14 * ratio + "px";
+	elems.panelSizeFontMin.style.height = 15 * ratio + "px";
+	elems.panelSizeFontMin.style.width = 15 * ratio + "px";
+	elems.panelSizeFontMax.style.fontSize = 14 * ratio + "px";
+	elems.panelSizeFontMax.style.height = 15 * ratio + "px";
+	elems.panelSizeFontMax.style.width = 15 * ratio + "px";
+
+	elems.resetTooltipBlockConfirmTitle.style.fontSize = 12 * ratio + "px";
+	elems.panelResetButton.style.fontSize = 10 * ratio + "px";
+	elems.resetConfirmButton.style.fontSize = 10 * ratio + "px";
+	elems.resetCancelButton.style.fontSize = 10 * ratio + "px";
+
+	elems.buttonBoostMin.style.fontSize = 11 * ratio + "px";
+	elems.buttonBoostMax.style.fontSize = 11 * ratio + "px";
+
+	elems.inputSalary.style.fontSize = 16 * ratio + "px";
+	elems.inputSalary.style.maxWidth = 45 * ratio + "px";
+	elems.inputDeducted.style.fontSize = 16 * ratio + "px";
+	elems.inputDeducted.style.maxWidth = 45 * ratio + "px";
+
+	for (var i = 0; i < 7; i++)
+	{
+		elems.monthDayBoxes[i].style.fontSize = 8 * ratio + "px";
+		elems.monthDayBoxes[i].style.width = 20 * ratio + "px";
+		elems.monthDayBoxes[i].style.height = 20 * ratio + "px";
+	}
+
+	for (var i = 0; i < elems.monthArray.length; i++)
+	{
+		for (var j = 0; j < elems.monthArray[i].checkboxes.length; j++)
+		{
+			elems.monthArray[i].checkboxes[j].style.fontSize = 8 * ratio + "px";
+			elems.monthArray[i].checkboxes[j].style.width = 20 * ratio + "px";
+			elems.monthArray[i].checkboxes[j].style.height = 20 * ratio + "px";
+		}
+	}
+
+	elems.extraLogtimeSideLeft.style.fontSize = 7 * ratio + "px";
+	elems.extraLogtimeSideLeft.style.lineHeight = 8 * ratio + "px";
+	elems.extraLogtimeSideRight.style.fontSize = 10 * ratio + "px";
+	elems.extraLogtimeSideRight.style.lineHeight = 8 * ratio + "px";
+
+	// elems.extraEstimation.style.lineHeight = 12 * ratio + "px";
 }
 
 const browser = window.browser || window.chrome;
@@ -414,29 +474,29 @@ popup.createElems = function(elems) {
 
 	elems.topDivSettingPanel = document.createElement("div");
 	elems.topDivSettingPanel.className = "top-div-setting-panel";
-	elems.topDivSettingPanelTitle = document.createElement("div");
-	elems.topDivSettingPanelTitle.className = "setting-panel-main-title";
-	elems.topDivSettingPanelTitle.innerText = "Settings";
+	// elems.topDivSettingPanelTitle = document.createElement("div");
+	// elems.topDivSettingPanelTitle.className = "setting-panel-main-title";
+	// elems.topDivSettingPanelTitle.innerText = "Settings";
 	
-	elems.panelDarkLine = document.createElement("div");
-	elems.panelDarkLine.className = "panel-line";
-	elems.panelDarkTitle = document.createElement("div");
-	elems.panelDarkTitle.className = "setting-panel-title";
-	// elems.panelDarkTitle.innerText = "Dark Mode";
-	elems.panelDarkButton = document.createElement("div");
-	elems.panelDarkButton.className = "checkbox-setting";
-	elems.panelDarkLine.appendChild(elems.panelDarkTitle);
-	elems.panelDarkLine.appendChild(elems.panelDarkButton);
+	// elems.panelDarkLine = document.createElement("div");
+	// elems.panelDarkLine.className = "panel-line";
+	// elems.panelDarkTitle = document.createElement("div");
+	// elems.panelDarkTitle.className = "setting-panel-title";
+	// // elems.panelDarkTitle.innerText = "Dark Mode";
+	// elems.panelDarkButton = document.createElement("div");
+	// elems.panelDarkButton.className = "checkbox-setting";
+	// elems.panelDarkLine.appendChild(elems.panelDarkTitle);
+	// elems.panelDarkLine.appendChild(elems.panelDarkButton);
 
-	elems.panelDeviseLine = document.createElement("div");
-	elems.panelDeviseLine.className = "panel-line";
-	elems.panelDeviseTitle = document.createElement("div");
-	elems.panelDeviseTitle.className = "setting-panel-title";
-	// elems.panelDeviseTitle.innerText = "Devise";
-	elems.panelDeviseButton = document.createElement("div");
-	elems.panelDeviseButton.className = "checkbox-setting";
-	elems.panelDeviseLine.appendChild(elems.panelDeviseTitle);
-	elems.panelDeviseLine.appendChild(elems.panelDeviseButton);
+	// elems.panelDeviseLine = document.createElement("div");
+	// elems.panelDeviseLine.className = "panel-line";
+	// elems.panelDeviseTitle = document.createElement("div");
+	// elems.panelDeviseTitle.className = "setting-panel-title";
+	// // elems.panelDeviseTitle.innerText = "Devise";
+	// elems.panelDeviseButton = document.createElement("div");
+	// elems.panelDeviseButton.className = "checkbox-setting";
+	// elems.panelDeviseLine.appendChild(elems.panelDeviseTitle);
+	// elems.panelDeviseLine.appendChild(elems.panelDeviseButton);
 
 	elems.panelLanguageLine = document.createElement("div");
 	elems.panelLanguageLine.className = "panel-line";
@@ -496,15 +556,15 @@ popup.createElems = function(elems) {
 	elems.panelLanguageLine.appendChild(elems.panelLanguageTitle);
 	elems.panelLanguageLine.appendChild(elems.panelLanguageRight);
 
-	elems.panelSaveLine = document.createElement("div");
-	elems.panelSaveLine.className = "panel-save-line";
-	elems.panelSaveTitle = document.createElement("div");
-	elems.panelSaveTitle.className = "setting-panel-title";
+	// elems.panelSaveLine = document.createElement("div");
+	// elems.panelSaveLine.className = "panel-save-line";
+	// elems.panelSaveTitle = document.createElement("div");
+	// elems.panelSaveTitle.className = "setting-panel-title";
 
-	elems.panelSaveButton = document.createElement("div");
-	elems.panelSaveButton.className = "panel-save-button";
-	elems.panelSaveLine.appendChild(elems.panelSaveTitle);
-	elems.panelSaveLine.appendChild(elems.panelSaveButton);
+	// elems.panelSaveButton = document.createElement("div");
+	// elems.panelSaveButton.className = "panel-save-button";
+	// elems.panelSaveLine.appendChild(elems.panelSaveTitle);
+	// elems.panelSaveLine.appendChild(elems.panelSaveButton);
 	
 
 	elems.panelSizeFontLine = document.createElement("div");
@@ -1134,7 +1194,7 @@ popup.createElems = function(elems) {
 	elems.extraLogtimeSideRight.innerText = "0h00";
 	elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
 	elems.extraLogtimeSideRight.style.justifyContent = "flex-start";
-	elems.extraLogtimeSideRight.style.fontSize = "10px";
+	// elems.extraLogtimeSideRight.style.fontSize = "10px";
 
 	elems.extraLogtimeLeft.appendChild(elems.extraLogtimeSideLeft);
 	elems.extraLogtimeLeft.appendChild(elems.extraLogtimeSideRight);
@@ -1169,9 +1229,9 @@ popup.createElems = function(elems) {
 	elems.labelLogtimeNumberDay.style.display = "none";
 	elems.resultLogtimeNumberDay.style.display = "none";
 
-	elems.extraEstimation = document.createElement("div");
-	elems.extraEstimation.className = "extra-estimation";
-	elems.extraEstimation.innerText = "00:00";
+	// elems.extraEstimation = document.createElement("div");
+	// elems.extraEstimation.className = "extra-estimation";
+	// elems.extraEstimation.innerText = "00:00";
 
 
 	elems.blockLogtimeRight.appendChild(elems.labelLogtimeEstimation);
@@ -1211,12 +1271,12 @@ popup.createElems = function(elems) {
 	if (data.student.addBoostHalf || data.student.addBoostFull)
 	{
 		elems.extraLogtimeLeft.style.opacity = "1";
-		elems.extraEstimation.style.display = "flex";
+		// elems.extraEstimation.style.display = "flex";
 	}
 	else
 	{
 		elems.extraLogtimeLeft.style.opacity = "0";
-		elems.extraEstimation.style.display = "none";
+		// elems.extraEstimation.style.display = "none";
 	}
 	
 
@@ -1535,11 +1595,11 @@ popup.createElems = function(elems) {
 	elems.resultsDiv.appendChild(elems.mainTitleDays);
 	elems.resultsDiv.appendChild(elems.lineResultsDays);
 
-	// if (data.session.devMode)
-	// {
-	// 	elems.popBottomDiv.appendChild(elems.resultsContainer);
-	// 	elems.popBottomDiv.appendChild(elems.moreInfoContainer);
-	// }
+	if (data.session.devMode)
+	{
+		elems.popBottomDiv.appendChild(elems.resultsContainer);
+		elems.popBottomDiv.appendChild(elems.moreInfoContainer);
+	}
 	elems.popBottomContainer.appendChild(elems.popBottomDiv);
 
 	if (data.student.showMore)
@@ -1647,6 +1707,7 @@ popup.createElems = function(elems) {
 	document.body.appendChild(elems.popupRemaining);
 
 	initText(elems, arrayLanguages[data.student.language]);
+	setFontSize(elems, 1.5);
 }
 
 function disableTextSelection() {
@@ -1908,13 +1969,13 @@ function setLogtimeValue(remToday, eachDay, elems) {
 		{
 			elems.extraLogtimeSideRight.innerText = "DONE";
 			elems.extraLogtimeSideRight.style.color = "rgb(0 126 127)";
-			elems.extraEstimation.style.color = "rgb(0 126 127)";
+			// elems.extraEstimation.style.color = "rgb(0 126 127)";
 		}
 		else
 		{
 			elems.extraLogtimeSideRight.innerText = getTimeFormat(data.session.remTodayLockOff, "h");
 			elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
-			elems.extraEstimation.style.color = "rgb(140, 140, 140)";
+			// elems.extraEstimation.style.color = "rgb(140, 140, 140)";
 		}
 	}
 	else if (data.session.logtimeMode === EACH)
@@ -1978,14 +2039,14 @@ function setLogtimeEstimation(elems) {
 	else
 		elems.resultLogtimeEstimation.style.fontSize = "16px";
 
-	if (timeLockOff === "IMPOSSIBLE")
-		elems.extraEstimation.style.fontSize = "8px";
-	else
-		elems.extraEstimation.style.fontSize = "12px";
+	// if (timeLockOff === "IMPOSSIBLE")
+	// 	elems.extraEstimation.style.fontSize = "8px";
+	// else
+	// 	elems.extraEstimation.style.fontSize = "12px";
 
 	elems.resultLogtimeEstimation.innerText = data.session.timeLock;
 	elems.miniLogtimeValueLock.innerText = data.session.timeLock;
-	elems.extraEstimation.innerText = timeLockOff;
+	// elems.extraEstimation.innerText = timeLockOff;
 }
 
 popup.setData = function(elems) {

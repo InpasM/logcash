@@ -455,8 +455,6 @@ function initStyleProgressBar() {
 		elems.divMonths[i].style.margin = "0 3px";
 		elems.divMonths[i].setAttribute('id', i);
 	}
-	elems.sideProgress.style.fontSize = "0.8em";
-	elems.textRemaining.style.fontSize = "0.8em";
 	elems.sideProgress.style.margin = 0;
 }
 
