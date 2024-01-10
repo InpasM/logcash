@@ -344,7 +344,7 @@ function initText(elems, text) {
 	elems.labelSalary.innerText = text.labelSalary;
 	elems.labelHours.innerText = text.labelHours;
 	elems.weeklySpan.innerText = text.monthlyAttendance;
-	elems.labelLogtimeEach.innerText = text.labelLogtimeEach;
+	// elems.labelLogtimeEach.innerText = text.labelLogtimeEach;
 	elems.extraLogtimeSideLeft.innerText = text.extraLogtimeSideLeft;
 	elems.labelLogtimeNumberDay.innerText = text.daysRemaining;
 	elems.mainTitleInfo.innerText = text.mainTitleInfo;
@@ -364,6 +364,10 @@ function initText(elems, text) {
 			elems.labelLogtimeEstimation.innerText = text.labelEstimationLock;
 		else
 			elems.labelLogtimeEstimation.innerText = text.labelEstimationLog;
+	}
+	else
+	{
+		elems.labelLogtimeRemaining.innerText = text.labelLogtimeEach;
 	}
 
 	const arrayMonth = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -984,35 +988,38 @@ popup.createElems = function(elems) {
 
 
 	// elems.blockLogtimeLeft.style.backgroundColor = "red";
-	elems.blockLogtimeTooltip = document.createElement("div");
-	elems.blockLogtimeTooltip.className = "block-logtime-tooltip";
-	elems.blockLogtimeTooltipText = document.createElement("div");
-	elems.blockLogtimeTooltipText.className = "block-logtime-tooltip-text";
-	elems.blockLogtimeTooltipText.innerText = "/ 0h00";
-	elems.blockLogtimeTooltip.appendChild(elems.blockLogtimeTooltipText);
-	elems.blockLogtimeLeft.appendChild(elems.blockLogtimeTooltip);
+	// elems.blockLogtimeTooltip = document.createElement("div");
+	// elems.blockLogtimeTooltip.className = "block-logtime-tooltip";
+	// elems.blockLogtimeTooltipText = document.createElement("div");
+	// elems.blockLogtimeTooltipText.className = "block-logtime-tooltip-text";
+	// elems.blockLogtimeTooltipText.innerText = "/ 0h00";
+	// elems.blockLogtimeTooltip.appendChild(elems.blockLogtimeTooltipText);
+	// elems.blockLogtimeLeft.appendChild(elems.blockLogtimeTooltip);
 
 	
-	elems.labelLogtimeEach = document.createElement("p");
-	elems.labelLogtimeEach.className = "small-title-info";
-	elems.resultLogtimeEach = document.createElement("p");
-	elems.resultLogtimeEach.className = "number-result-smaller";
-	elems.labelLogtimeEach.style.display = "none";
-	elems.resultLogtimeEach.style.display = "none";
-
+	
 	
 	elems.labelLogtimeRemaining = document.createElement("p");
 	elems.labelLogtimeRemaining.className = "small-title-info";
-	elems.resultLogtimeRemaining = document.createElement("p");
-	elems.resultLogtimeRemaining.className = "number-result";
 	elems.labelLogtimeRemaining.style.display = "none";
+	
+	
+	// elems.labelLogtimeEach = document.createElement("p");
+	// elems.labelLogtimeEach.className = "small-title-info";
+	elems.resultLogtimeEach = document.createElement("p");
+	// elems.resultLogtimeEach.className = "number-result-smaller";
+	// elems.labelLogtimeEach.style.display = "none";
+	elems.resultLogtimeEach.style.display = "none";
+	
+	elems.resultLogtimeRemaining = document.createElement("p");
+	// elems.resultLogtimeRemaining.className = "number-result";
 	elems.resultLogtimeRemaining.style.display = "none";
 
 
 	elems.blockLogtimeLine = document.createElement("div");
 	elems.blockLogtimeLine.className = "block-logtime-line";
 	elems.blockLogtimeLine.appendChild(elems.resultLogtimeRemaining);
-	// elems.blockLogtimeLine.appendChild(elems.resultLogtimeEach);
+	elems.blockLogtimeLine.appendChild(elems.resultLogtimeEach);
 
 
 	// elems.resultLogtimeRemaining.addEventListener("mouseover", function(e) {
@@ -1061,18 +1068,25 @@ popup.createElems = function(elems) {
 		// });
 		elems.labelLogtimeRemaining.style.display = "flex";
 		elems.resultLogtimeRemaining.style.display = "flex";
+		elems.resultLogtimeEach.style.display = "flex";
+
+		elems.resultLogtimeEach.className = "number-result-smaller";
+		elems.resultLogtimeRemaining.className = "number-result";
 	}
 	else
 	{
-		elems.labelLogtimeEach.style.display = "flex";
+		// elems.labelLogtimeEach.style.display = "flex";
 		elems.resultLogtimeEach.style.display = "flex";
-	}
-	elems.blockLogtimeLine.appendChild(elems.resultLogtimeEach);
 
-	// elems.labelLogtimeRemaining.style.display = "flex";
-	elems.resultLogtimeRemaining.style.display = "flex";
+		elems.resultLogtimeEach.className = "number-result";
+		// elems.resultLogtimeRemaining.className = "number-result";
+	}
+	// elems.blockLogtimeLine.appendChild(elems.resultLogtimeEach);
+
+	elems.labelLogtimeRemaining.style.display = "flex";
+	// elems.resultLogtimeRemaining.style.display = "flex";
 	// elems.labelLogtimeEach.style.display = "flex";
-	elems.resultLogtimeEach.style.display = "flex";
+	// elems.resultLogtimeEach.style.display = "flex";
 
 	
 	elems.extraLogtimeLeft = document.createElement("div");
@@ -1092,7 +1106,7 @@ popup.createElems = function(elems) {
 	elems.extraLogtimeLeft.appendChild(elems.extraLogtimeSideRight);
 
 	elems.blockLogtimeLeft.appendChild(elems.labelLogtimeRemaining);
-	elems.blockLogtimeLeft.appendChild(elems.labelLogtimeEach);
+	// elems.blockLogtimeLeft.appendChild(elems.labelLogtimeEach);
 	
 	elems.blockLogtimeLeft.appendChild(elems.blockLogtimeLine);
 	// elems.blockLogtimeLeft.appendChild(elems.resultLogtimeEach);
@@ -1833,18 +1847,25 @@ function setLogtimeValue(remToday, eachDay, elems) {
 
 	if (eachDay > 0)
 	{
-		elems.resultLogtimeEach.innerText = "/ " + getTimeFormat(eachDay, "h");
+		if (data.session.logAtSchool)
+			elems.resultLogtimeEach.innerText = "/ " + getTimeFormat(eachDay, "h");
+		else
+			elems.resultLogtimeEach.innerText = getTimeFormat(eachDay, "h");
+
 		// elems.resultLogtimeEach.style.color = "white";
 		elems.resultLogtimeEach.style.color = "rgb(180, 180, 180)";
-		elems.blockLogtimeTooltipText.innerText = "/ " + getTimeFormat(eachDay, "h");
-		elems.blockLogtimeTooltipText.style.color = "white";
+		// elems.blockLogtimeTooltipText.innerText = "/ " + getTimeFormat(eachDay, "h");
+		// elems.blockLogtimeTooltipText.style.color = "white";
 	}
 	else
 	{
-		elems.resultLogtimeEach.innerText = "/ DONE";
+		if (data.session.logAtSchool)
+			elems.resultLogtimeEach.innerText = "/ DONE";
+		else
+			elems.resultLogtimeEach.innerText = "DONE";
 		elems.resultLogtimeEach.style.color = "rgb(0, 186, 188)";
-		elems.blockLogtimeTooltipText.innerText = "DONE";
-		elems.blockLogtimeTooltipText.style.color = "rgb(0, 186, 188)";
+		// elems.blockLogtimeTooltipText.innerText = "DONE";
+		// elems.blockLogtimeTooltipText.style.color = "rgb(0, 186, 188)";
 	}
 
 	if (data.session.logtimeMode === REMAINING)
