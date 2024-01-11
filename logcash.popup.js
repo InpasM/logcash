@@ -277,12 +277,19 @@ function hidePopup(elems) {
 	elems.estimationContainer.style.padding = "8px";
 	elems.estimationContainer.style.opacity = "1";
 
+	elems.resultsDiv.style.transition = "ease 0.5s height, ease 0.5s padding, ease 0.5s opacity";
+	elems.boostLockContainer.style.transition = "ease 0.5s height, ease 0.5s padding, ease 0.5s opacity";
+	elems.estimationContainer.style.transition = "ease 0.5s height, ease 0.5s padding, ease 0.5s opacity";
+
 	elems.popMiddleDivLeft.style.opacity = "1";
 	elems.popMiddleDivLeft.style.height = "";
 	elems.popMiddleDivLeft.style.padding = "8px";
+	elems.popMiddleDivLeft.style.transition = "ease 0.4s all";
+	
 	elems.popMiddleDivRight.style.opacity = "1";
 	elems.popMiddleDivRight.style.height = "";
 	elems.popMiddleDivRight.style.padding = "8px";
+	elems.popMiddleDivRight.style.transition = "ease 0.4s all";
 
 	elems.popupTopDiv.style.borderBottom = "1px solid rgb(45, 49, 60)";
 

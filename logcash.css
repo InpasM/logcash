@@ -460,7 +460,7 @@ body
 	border-right: 1px solid rgb(45, 49, 60);
 	display: flex;
 	flex-direction: column;
-	transition: ease 0.4s all;
+	/* transition: ease 0.4s all; */
 }
 
 .middle-line-1, .middle-line-2 {
@@ -638,7 +638,7 @@ body
 	align-items: stretch;
 	padding: 8px;
 	flex: 1;
-	transition: ease 0.4s all;
+	/* transition: ease 0.4s all; */
 }
 /* 
 .div-info {
@@ -1044,7 +1044,7 @@ body
 	display: block;							/* TEMP */
 	border-right: 1px solid rgb(45, 49, 60);
 	padding: 8px;
-	transition: ease 0.5s height, ease 0.5s padding, ease 0.5s opacity;
+	/* transition: ease 0.5s height, ease 0.5s padding, ease 0.5s opacity; */
 }
 
 .line-label {
