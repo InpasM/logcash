@@ -208,91 +208,184 @@ function mouseOutQuestion(e) {
 	}, 300);
 }
 
-var popupVisible = false;
-function hideShowPopup(e) {
+function doHideShow(e) {
 
-	if (e.target.className === "top-div-setting-block")
+	var arrayElems = ["popup-top-left-text", "popup-top-right-text", "top-div-setting-block", "top-div-maximize-button", "top-div-minimize-button"];
+
+	for (var i = 0; i < arrayElems.length; i++)
 	{
-		if (!popupVisible)
+		if (e.target.className === arrayElems[i])
+			return true;
+	}
+	return false;
+}
+
+function showPopup(elems) {
+
+	// if (data.session.devMode)
+	// {
+	// 	elems.moreInfoContainer.style.backgroundColor = "";
+	// 	elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
+	// }
+
+	elems.resultsDiv.style.height = "0px";
+	elems.resultsDiv.style.padding = "0px 8px";
+	elems.resultsDiv.style.opacity = "0";
+	elems.boostLockContainer.style.height = "0px";
+	elems.boostLockContainer.style.padding = "0px 8px";
+	elems.boostLockContainer.style.opacity = "0";
+	elems.estimationContainer.style.height = "0px";
+	elems.estimationContainer.style.padding = "0px 8px";
+	elems.estimationContainer.style.opacity = "0";
+
+	elems.popMiddleDivLeft.style.opacity = "0";
+	elems.popMiddleDivLeft.style.height = "0";
+	elems.popMiddleDivLeft.style.padding = "0 8px";
+	elems.popMiddleDivRight.style.opacity = "0";
+	elems.popMiddleDivRight.style.height = "0";
+	elems.popMiddleDivRight.style.padding = "0 8px";
+
+	elems.popupTopDiv.style.borderBottom = "1px solid rgba(45, 49, 60, 0)";
+
+	elems.popMiddleDiv.style.transform = "translateY(-5px)";
+
+	elems.popProgressTitle.style.opacity = "0";
+	elems.popProgressTitle.style.height = "0";
+	elems.containerLogcash.style.marginTop = "0";
+
+	elems.topDivMinimizeButton.style.display = "none";
+	elems.topDivMaximizeButton.style.display = "flex";
+
+	elems.miniLogtimePanel.style.display = "flex";
+}
+
+function hidePopup(elems) {
+
+	// if (data.session.devMode)
+	// {
+	// 	elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60)";
+	// 	elems.moreInfoContainer.style.padding = "4px 0";
+	// }
+
+	elems.resultsDiv.style.height = "";
+	elems.resultsDiv.style.padding = "8px";
+	elems.resultsDiv.style.opacity = "1";
+	elems.boostLockContainer.style.height = "";
+	elems.boostLockContainer.style.padding = "8px";
+	elems.boostLockContainer.style.opacity = "1";
+	elems.estimationContainer.style.height = "";
+	elems.estimationContainer.style.padding = "8px";
+	elems.estimationContainer.style.opacity = "1";
+
+	elems.popMiddleDivLeft.style.opacity = "1";
+	elems.popMiddleDivLeft.style.height = "";
+	elems.popMiddleDivLeft.style.padding = "8px";
+	elems.popMiddleDivRight.style.opacity = "1";
+	elems.popMiddleDivRight.style.height = "";
+	elems.popMiddleDivRight.style.padding = "8px";
+
+	elems.popupTopDiv.style.borderBottom = "1px solid rgb(45, 49, 60)";
+
+	elems.popMiddleDiv.style.transform = "translateY(0)";
+
+	elems.popProgressTitle.style.opacity = "1";
+	elems.popProgressTitle.style.height = "";
+	elems.containerLogcash.style.marginTop = "4px";
+
+	elems.miniLogtimePanel.style.display = "none";
+
+	elems.topDivMinimizeButton.style.display = "flex";
+	elems.topDivMaximizeButton.style.display = "none";
+}
+
+// var popupVisible = false;
+function hideShowPopup(elems, e) {
+
+	// console.log(e.target.className);
+	if (doHideShow(e))
+	{
+		if (!data.student.popupVisible)
 		{
-			if (data.session.devMode)
-			{
-				elems.moreInfoContainer.style.backgroundColor = "";
-				elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
-			}
+			// if (data.session.devMode)
+			// {
+			// 	elems.moreInfoContainer.style.backgroundColor = "";
+			// 	elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
+			// }
 	
-			elems.resultsDiv.style.height = "0px";
-			elems.resultsDiv.style.padding = "0px 8px";
-			elems.resultsDiv.style.opacity = "0";
-			elems.boostLockContainer.style.height = "0px";
-			elems.boostLockContainer.style.padding = "0px 8px";
-			elems.boostLockContainer.style.opacity = "0";
-			elems.estimationContainer.style.height = "0px";
-			elems.estimationContainer.style.padding = "0px 8px";
-			elems.estimationContainer.style.opacity = "0";
+			// elems.resultsDiv.style.height = "0px";
+			// elems.resultsDiv.style.padding = "0px 8px";
+			// elems.resultsDiv.style.opacity = "0";
+			// elems.boostLockContainer.style.height = "0px";
+			// elems.boostLockContainer.style.padding = "0px 8px";
+			// elems.boostLockContainer.style.opacity = "0";
+			// elems.estimationContainer.style.height = "0px";
+			// elems.estimationContainer.style.padding = "0px 8px";
+			// elems.estimationContainer.style.opacity = "0";
 	
-			elems.popMiddleDivLeft.style.opacity = "0";
-			elems.popMiddleDivLeft.style.height = "0";
-			elems.popMiddleDivLeft.style.padding = "0 8px";
-			elems.popMiddleDivRight.style.opacity = "0";
-			elems.popMiddleDivRight.style.height = "0";
-			elems.popMiddleDivRight.style.padding = "0 8px";
+			// elems.popMiddleDivLeft.style.opacity = "0";
+			// elems.popMiddleDivLeft.style.height = "0";
+			// elems.popMiddleDivLeft.style.padding = "0 8px";
+			// elems.popMiddleDivRight.style.opacity = "0";
+			// elems.popMiddleDivRight.style.height = "0";
+			// elems.popMiddleDivRight.style.padding = "0 8px";
 	
-			elems.popupTopDiv.style.borderBottom = "1px solid rgba(45, 49, 60, 0)";
+			// elems.popupTopDiv.style.borderBottom = "1px solid rgba(45, 49, 60, 0)";
 	
-			elems.popMiddleDiv.style.transform = "translateY(-5px)";
+			// elems.popMiddleDiv.style.transform = "translateY(-5px)";
 	
-			elems.popProgressTitle.style.opacity = "0";
-			elems.popProgressTitle.style.height = "0";
-			elems.containerLogcash.style.marginTop = "0";
+			// elems.popProgressTitle.style.opacity = "0";
+			// elems.popProgressTitle.style.height = "0";
+			// elems.containerLogcash.style.marginTop = "0";
 	
-			elems.topDivMinimizeButton.style.display = "none";
-			elems.topDivMaximizeButton.style.display = "flex";
+			// elems.topDivMinimizeButton.style.display = "none";
+			// elems.topDivMaximizeButton.style.display = "flex";
 	
-			elems.miniLogtimePanel.style.display = "flex";
-	
-			popupVisible = true;
+			// elems.miniLogtimePanel.style.display = "flex";
+			showPopup(elems);
+			data.student.popupVisible = true;
 		}
 		else
 		{
-			if (data.session.devMode)
-			{
-				elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60)";
-				elems.moreInfoContainer.style.padding = "4px 0";
-			}
+			// if (data.session.devMode)
+			// {
+			// 	elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60)";
+			// 	elems.moreInfoContainer.style.padding = "4px 0";
+			// }
 		
-			elems.resultsDiv.style.height = "";
-			elems.resultsDiv.style.padding = "8px";
-			elems.resultsDiv.style.opacity = "1";
-			elems.boostLockContainer.style.height = "";
-			elems.boostLockContainer.style.padding = "8px";
-			elems.boostLockContainer.style.opacity = "1";
-			elems.estimationContainer.style.height = "";
-			elems.estimationContainer.style.padding = "8px";
-			elems.estimationContainer.style.opacity = "1";
+			// elems.resultsDiv.style.height = "";
+			// elems.resultsDiv.style.padding = "8px";
+			// elems.resultsDiv.style.opacity = "1";
+			// elems.boostLockContainer.style.height = "";
+			// elems.boostLockContainer.style.padding = "8px";
+			// elems.boostLockContainer.style.opacity = "1";
+			// elems.estimationContainer.style.height = "";
+			// elems.estimationContainer.style.padding = "8px";
+			// elems.estimationContainer.style.opacity = "1";
 	
-			elems.popMiddleDivLeft.style.opacity = "1";
-			elems.popMiddleDivLeft.style.height = "";
-			elems.popMiddleDivLeft.style.padding = "8px";
-			elems.popMiddleDivRight.style.opacity = "1";
-			elems.popMiddleDivRight.style.height = "";
-			elems.popMiddleDivRight.style.padding = "8px";
+			// elems.popMiddleDivLeft.style.opacity = "1";
+			// elems.popMiddleDivLeft.style.height = "";
+			// elems.popMiddleDivLeft.style.padding = "8px";
+			// elems.popMiddleDivRight.style.opacity = "1";
+			// elems.popMiddleDivRight.style.height = "";
+			// elems.popMiddleDivRight.style.padding = "8px";
 	
-			elems.popupTopDiv.style.borderBottom = "1px solid rgb(45, 49, 60)";
+			// elems.popupTopDiv.style.borderBottom = "1px solid rgb(45, 49, 60)";
 	
-			elems.popMiddleDiv.style.transform = "translateY(0)";
+			// elems.popMiddleDiv.style.transform = "translateY(0)";
 	
-			elems.popProgressTitle.style.opacity = "1";
-			elems.popProgressTitle.style.height = "";
-			elems.containerLogcash.style.marginTop = "4px";
+			// elems.popProgressTitle.style.opacity = "1";
+			// elems.popProgressTitle.style.height = "";
+			// elems.containerLogcash.style.marginTop = "4px";
 	
-			elems.miniLogtimePanel.style.display = "none";
+			// elems.miniLogtimePanel.style.display = "none";
 	
-			elems.topDivMinimizeButton.style.display = "flex";
-			elems.topDivMaximizeButton.style.display = "none";
+			// elems.topDivMinimizeButton.style.display = "flex";
+			// elems.topDivMaximizeButton.style.display = "none";
 	
-			popupVisible = false;
+			hidePopup(elems);
+			data.student.popupVisible = false;
 		}
+		data.updateLocalStorage();
 	}
 }
 
@@ -530,9 +623,12 @@ popup.createElems = function(elems) {
 
 	elems.popupTopDiv = document.createElement("div");
 	elems.popupTopDiv.className = "popup-top-div";
-	elems.popupTopDiv.addEventListener("dblclick", hideShowPopup);
+	elems.popupTopDiv.addEventListener("dblclick", function(e) {
+		hideShowPopup(elems, e);	
+	});
 	
 	elems.popupTopLeftText = document.createElement("p");
+	elems.popupTopLeftText.className = "popup-top-left-text";
 
 	elems.popupTopRightText = document.createElement("p");
 
@@ -869,9 +965,9 @@ popup.createElems = function(elems) {
 	elems.topDivMaximizeButton = document.createElement("div");
 	elems.topDivMaximizeButton.className = "top-div-maximize-button";
 
-	function updateMinimizeButton() {
+	function updateMinimizeButton(e) {
 
-		hideShowPopup();
+		hideShowPopup(elems, e);
 
 		if (popupVisible)
 		{
@@ -934,11 +1030,11 @@ popup.createElems = function(elems) {
 	elems.tooltipQuestionBottomText = document.createElement("p");
 	elems.tooltipQuestionBottomText.className = "tooltip-question-bottom-text";
 
-	if (data.session.devMode)
-	{
-		elems.tooltipQuestionBottomText.innerText = questions[data.student.language][2].text;						//////////////// DEV
-		elems.tooltipQuestion.style.opacity = "1";
-	}
+	// if (data.session.devMode)
+	// {
+	// 	elems.tooltipQuestionBottomText.innerText = questions[data.student.language][2].text;						//////////////// DEV
+	// 	elems.tooltipQuestion.style.opacity = "1";
+	// }
 	elems.tooltipQuestion.appendChild(elems.tooltipQuestionBottomText);
 	document.body.appendChild(elems.tooltipQuestion);
 
@@ -1756,36 +1852,36 @@ popup.createElems = function(elems) {
 	}
 	// elems.popBottomContainer.appendChild(elems.popBottomDiv);
 
-	if (data.student.showMore)
-	{
-		elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60)";
-		elems.moreInfoContainer.style.padding = "4px 0";
+	// if (data.student.showMore)
+	// {
+	// 	elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60)";
+	// 	elems.moreInfoContainer.style.padding = "4px 0";
 	
-		elems.resultsDiv.style.height = "";
-		elems.resultsDiv.style.padding = "8px";
-		elems.resultsDiv.style.opacity = "1";
-		elems.boostLockContainer.style.height = "";
-		elems.boostLockContainer.style.padding = "8px";
-		elems.boostLockContainer.style.opacity = "1";
-		elems.estimationContainer.style.height = "";
-		elems.estimationContainer.style.padding = "8px";
-		elems.estimationContainer.style.opacity = "1";
-	}
-	else
-	{
-		elems.moreInfoContainer.style.backgroundColor = "";
-		elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
+	// 	elems.resultsDiv.style.height = "";
+	// 	elems.resultsDiv.style.padding = "8px";
+	// 	elems.resultsDiv.style.opacity = "1";
+	// 	elems.boostLockContainer.style.height = "";
+	// 	elems.boostLockContainer.style.padding = "8px";
+	// 	elems.boostLockContainer.style.opacity = "1";
+	// 	elems.estimationContainer.style.height = "";
+	// 	elems.estimationContainer.style.padding = "8px";
+	// 	elems.estimationContainer.style.opacity = "1";
+	// }
+	// else
+	// {
+	// 	elems.moreInfoContainer.style.backgroundColor = "";
+	// 	elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
 
-		elems.resultsDiv.style.height = "0px";
-		elems.resultsDiv.style.padding = "0px 8px";
-		elems.resultsDiv.style.opacity = "0";
-		elems.boostLockContainer.style.height = "0px";
-		elems.boostLockContainer.style.padding = "0px 8px";
-		elems.boostLockContainer.style.opacity = "0";
-		elems.estimationContainer.style.height = "0px";
-		elems.estimationContainer.style.padding = "0px 8px";
-		elems.estimationContainer.style.opacity = "0";
-	}
+	// 	elems.resultsDiv.style.height = "0px";
+	// 	elems.resultsDiv.style.padding = "0px 8px";
+	// 	elems.resultsDiv.style.opacity = "0";
+	// 	elems.boostLockContainer.style.height = "0px";
+	// 	elems.boostLockContainer.style.padding = "0px 8px";
+	// 	elems.boostLockContainer.style.opacity = "0";
+	// 	elems.estimationContainer.style.height = "0px";
+	// 	elems.estimationContainer.style.padding = "0px 8px";
+	// 	elems.estimationContainer.style.opacity = "0";
+	// }
 
 	// function mouseoverPopBottom(e) {
 	// 	elems.moreInfoLogo.style.height = "20px";
@@ -1800,44 +1896,44 @@ popup.createElems = function(elems) {
 	// elems.popBottomContainer.addEventListener("mouseover", mouseoverPopBottom);
 	// elems.popBottomContainer.addEventListener("mouseout", mouseoutPopBottom);
 
-	elems.moreInfoLogo.addEventListener("click", function(e) {
+	// elems.moreInfoLogo.addEventListener("click", function(e) {
 
-		if (data.student.showMore)
-		{
-			elems.moreInfoContainer.style.backgroundColor = "";
-			elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
+	// 	if (data.student.showMore)
+	// 	{
+	// 		elems.moreInfoContainer.style.backgroundColor = "";
+	// 		elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
 
-			elems.resultsDiv.style.height = "0px";
-			elems.resultsDiv.style.padding = "0px 8px";
-			elems.resultsDiv.style.opacity = "0";
-			elems.boostLockContainer.style.height = "0px";
-			elems.boostLockContainer.style.padding = "0px 8px";
-			elems.boostLockContainer.style.opacity = "0";
-			elems.estimationContainer.style.height = "0px";
-			elems.estimationContainer.style.padding = "0px 8px";
-			elems.estimationContainer.style.opacity = "0";
+	// 		elems.resultsDiv.style.height = "0px";
+	// 		elems.resultsDiv.style.padding = "0px 8px";
+	// 		elems.resultsDiv.style.opacity = "0";
+	// 		elems.boostLockContainer.style.height = "0px";
+	// 		elems.boostLockContainer.style.padding = "0px 8px";
+	// 		elems.boostLockContainer.style.opacity = "0";
+	// 		elems.estimationContainer.style.height = "0px";
+	// 		elems.estimationContainer.style.padding = "0px 8px";
+	// 		elems.estimationContainer.style.opacity = "0";
 
-			data.student.showMore = false;
-		}
-		else
-		{
-			elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60)";
-			elems.moreInfoContainer.style.padding = "4px 0";
+	// 		data.student.showMore = false;
+	// 	}
+	// 	else
+	// 	{
+	// 		elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60)";
+	// 		elems.moreInfoContainer.style.padding = "4px 0";
 
-			elems.resultsDiv.style.height = "";
-			elems.resultsDiv.style.padding = "8px";
-			elems.resultsDiv.style.opacity = "1";
-			elems.boostLockContainer.style.height = "";
-			elems.boostLockContainer.style.padding = "8px";
-			elems.boostLockContainer.style.opacity = "1";
-			elems.estimationContainer.style.height = "";
-			elems.estimationContainer.style.padding = "8px";
-			elems.estimationContainer.style.opacity = "1";
+	// 		elems.resultsDiv.style.height = "";
+	// 		elems.resultsDiv.style.padding = "8px";
+	// 		elems.resultsDiv.style.opacity = "1";
+	// 		elems.boostLockContainer.style.height = "";
+	// 		elems.boostLockContainer.style.padding = "8px";
+	// 		elems.boostLockContainer.style.opacity = "1";
+	// 		elems.estimationContainer.style.height = "";
+	// 		elems.estimationContainer.style.padding = "8px";
+	// 		elems.estimationContainer.style.opacity = "1";
 
-			data.student.showMore = true;
-		}
-		data.updateLocalStorage();
-	});
+	// 		data.student.showMore = true;
+	// 	}
+	// 	data.updateLocalStorage();
+	// });
 	
 	elems.popMiddleDiv.appendChild(elems.popMiddleDivLeft);
 	elems.popMiddleDiv.appendChild(elems.popMiddleDivRight);
@@ -1862,6 +1958,11 @@ popup.createElems = function(elems) {
 
 	initText(elems, arrayLanguages[data.student.language]);
 	updateFontSize(elems);
+
+	if (!data.student.popupVisible)
+		hidePopup(elems);
+	else
+		showPopup(elems);
 	elems.panelSizeFontValue.innerText = data.student.sizeFont.toFixed(1);
 }
 
@@ -1899,12 +2000,12 @@ popup.setStyle = function(elems) {
 	elems.popupTopDiv.style.padding = "2px 2px";
 	elems.popupTopDiv.style.borderBottom = "1px solid rgb(45, 49, 60)";
 
-	elems.popupTopLeftText.style.color = "#e2e2e2";
-	// elems.popupTopLeftText.style.fontSize = "14px";
-	elems.popupTopLeftText.style.margin = "3px 3px 3px 5px";
-	elems.popupTopLeftText.style.padding = "0";
-	elems.popupTopLeftText.style.fontWeight = "bold";
-	elems.popupTopLeftText.style.textShadow = "rgb(0, 0, 0) 0px 0px 3px";
+	// elems.popupTopLeftText.style.color = "#e2e2e2";
+	// // elems.popupTopLeftText.style.fontSize = "14px";
+	// elems.popupTopLeftText.style.margin = "3px 3px 3px 5px";
+	// elems.popupTopLeftText.style.padding = "0";
+	// elems.popupTopLeftText.style.fontWeight = "bold";
+	// elems.popupTopLeftText.style.textShadow = "rgb(0, 0, 0) 0px 0px 3px";
 	
 	elems.popupTopRightText.className = "popup-top-right-text";
 	// elems.popupTopRightText.style.fontSize = "12px";

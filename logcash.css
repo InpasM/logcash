@@ -149,7 +149,14 @@ body
 {
 	width: fit-content;
 	flex-direction: column;
+}
 
+.popup-top-left-text {
+	color: #e2e2e2;
+	margin: 3px 3px 3px 5px;
+	padding: 0;
+	font-weight: bold;
+	text-shadow: rgb(0, 0, 0) 0 0 3px;
 }
 
 .popup-top-right-text {
