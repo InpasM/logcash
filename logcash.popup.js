@@ -396,8 +396,8 @@ function setFontSize(elems, ratio) {
 	elems.miniLogtimeValueLock.style.fontSize = 10 * ratio + "px";
 
 	elems.rowProgress.style.height = 20 * ratio + "px";
-	elems.sideProgress.style.fontSize = 14 * ratio + "px";
-	elems.textRemaining.style.fontSize = 12 * ratio + "px";
+	elems.sideProgress.style.fontSize = 12 * ratio + "px";
+	elems.textRemaining.style.fontSize = 11 * ratio + "px";
 	
 	elems.topDivSettingPanel.style.fontSize = 160 * ratio + "px";
 
@@ -457,16 +457,55 @@ function setFontSize(elems, ratio) {
 	for (var i = 0; i < elems.divMonths.length; i++)
 	{
 		elems.divMonths[i].style.fontSize = 10 * ratio + "px";
+
+		// padding: 2px 6px;
+		var paddingY = 2 * ratio + "px ";
+		var paddingX = 6 * ratio + "px";
+		elems.divMonths[i].style.fontSize = 10 * ratio + "px";
+		elems.divMonths[i].style.padding = paddingY + paddingX;
 	}
 
-	elems.titleBoost.style.lineHeight = 12 * ratio + "px";
-	elems.weeklySpan.style.lineHeight = 12 * ratio + "px";
-	elems.titleLogtime.style.lineHeight = 12 * ratio + "px";
-	elems.mainTitleInfo.style.lineHeight = 12 * ratio + "px";
-	elems.popProgressTitle.style.lineHeight = 12 * ratio + "px";
-	elems.mainTitleDays.style.lineHeight = 12 * ratio + "px";
-	elems.mainTitleBoost.style.lineHeight = 12 * ratio + "px";
-	elems.mainTitleLogtime.style.lineHeight = 12 * ratio + "px";
+	elems.titleBoost.style.fontSize = 12 * ratio + "px";
+	elems.weeklySpan.style.fontSize = 12 * ratio + "px";
+	elems.titleLogtime.style.fontSize = 12 * ratio + "px";
+	elems.mainTitleInfo.style.fontSize = 12 * ratio + "px";
+	elems.popProgressTitle.style.fontSize = 12 * ratio + "px";
+	elems.mainTitleDays.style.fontSize = 12 * ratio + "px";
+	elems.mainTitleBoost.style.fontSize = 12 * ratio + "px";
+	elems.mainTitleLogtime.style.fontSize = 12 * ratio + "px";
+	// elems.titleBoost.style.lineHeight = 12 * ratio + "px";
+	// elems.weeklySpan.style.lineHeight = 12 * ratio + "px";
+	// elems.titleLogtime.style.lineHeight = 12 * ratio + "px";
+	// elems.mainTitleInfo.style.lineHeight = 12 * ratio + "px";
+	// elems.popProgressTitle.style.lineHeight = 12 * ratio + "px";
+	// elems.mainTitleDays.style.lineHeight = 12 * ratio + "px";
+	// elems.mainTitleBoost.style.lineHeight = 12 * ratio + "px";
+	// elems.mainTitleLogtime.style.lineHeight = 12 * ratio + "px";
+
+	elems.salaryEuroSign.style.fontSize = 10 * ratio + "px";
+	elems.salaryInteger.style.fontSize = 22 * ratio + "px";
+	elems.salaryFloat.style.fontSize = 12 * ratio + "px";
+	elems.salaryPercent.style.fontSize = 10 * ratio + "px";
+
+	elems.tooltipTopText.style.fontSize = 8 * ratio + "px";
+	elems.tooltipBottomText.style.fontSize = 12 * ratio + "px";
+
+	elems.tooltipQuestionBottomText.style.fontSize = 10 * ratio + "px";
+
+	elems.titleBoostMin.style.fontSize = 8 * ratio + "px";
+	elems.titleBoostMax.style.fontSize = 8 * ratio + "px";
+	elems.labelSalary.style.fontSize = 8 * ratio + "px";
+	elems.labelHours.style.fontSize = 8 * ratio + "px";
+	elems.labelLogtimeRemaining.style.fontSize = 8 * ratio + "px";
+	elems.labelLogtimeEstimation.style.fontSize = 8 * ratio + "px";
+	elems.labelLogtimeNumberDay.style.fontSize = 8 * ratio + "px";
+
+	elems.resultLogtimeRemaining.style.fontSize = 14 * ratio + "px";
+	elems.resultLogtimeEach.style.fontSize = 14 * ratio + "px";
+	elems.resultLogtimeEstimation.style.fontSize = 14 * ratio + "px";
+	elems.resultLogtimeNumberDay.style.fontSize = 14 * ratio + "px";
+
+	elems.resultLogtimeEach.style.fontSize = 8 * ratio + "px";
 }
 
 const browser = window.browser || window.chrome;
@@ -1472,8 +1511,8 @@ popup.createElems = function(elems) {
 	
 
 	//////////////////////////////////////////////////////////////////////  BOTTOM DIV
-	elems.popBottomContainer = document.createElement("div");
-	elems.popBottomContainer.className = "pop-bottom-container";
+	// elems.popBottomContainer = document.createElement("div");
+	// elems.popBottomContainer.className = "pop-bottom-container";
 	
 	elems.popBottomDiv = document.createElement("div");
 	elems.popBottomDiv.className = "pop-bottom-div";
@@ -1617,7 +1656,7 @@ popup.createElems = function(elems) {
 		elems.popBottomDiv.appendChild(elems.resultsContainer);
 		elems.popBottomDiv.appendChild(elems.moreInfoContainer);
 	}
-	elems.popBottomContainer.appendChild(elems.popBottomDiv);
+	// elems.popBottomContainer.appendChild(elems.popBottomDiv);
 
 	if (data.student.showMore)
 	{
@@ -1650,18 +1689,18 @@ popup.createElems = function(elems) {
 		elems.estimationContainer.style.opacity = "0";
 	}
 
-	function mouseoverPopBottom(e) {
-		elems.moreInfoLogo.style.height = "20px";
-		elems.moreInfoContainer.style.backgroundColor = "rgba(30, 35, 42, 0.8)";
-	}
+	// function mouseoverPopBottom(e) {
+	// 	elems.moreInfoLogo.style.height = "20px";
+	// 	elems.moreInfoContainer.style.backgroundColor = "rgba(30, 35, 42, 0.8)";
+	// }
 
-	function mouseoutPopBottom(e) {
-		elems.moreInfoLogo.style.height = "0px";
-		elems.moreInfoContainer.style.backgroundColor = "";
-	}
+	// function mouseoutPopBottom(e) {
+	// 	elems.moreInfoLogo.style.height = "0px";
+	// 	elems.moreInfoContainer.style.backgroundColor = "";
+	// }
 	
-	elems.popBottomContainer.addEventListener("mouseover", mouseoverPopBottom);
-	elems.popBottomContainer.addEventListener("mouseout", mouseoutPopBottom);
+	// elems.popBottomContainer.addEventListener("mouseover", mouseoverPopBottom);
+	// elems.popBottomContainer.addEventListener("mouseout", mouseoutPopBottom);
 
 	elems.moreInfoLogo.addEventListener("click", function(e) {
 
@@ -1720,7 +1759,7 @@ popup.createElems = function(elems) {
 
 	elems.popupRemaining.appendChild(elems.popMiddleDiv);
 	elems.popupRemaining.appendChild(elems.popProgressContainer);
-	elems.popupRemaining.appendChild(elems.popBottomContainer);
+	// elems.popupRemaining.appendChild(elems.popBottomContainer);
 	document.body.appendChild(elems.popupRemaining);
 
 	initText(elems, arrayLanguages[data.student.language]);
