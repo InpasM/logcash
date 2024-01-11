@@ -797,8 +797,8 @@ body
 	background-color: rgba(37, 41, 50, 0.5);
 	box-shadow: inset 0px 0px 10px rgba(16, 16, 16, 0.5);
 	aspect-ratio: 1;
-	max-width: 100px;
-	min-width: 84px;
+	/* max-width: 100px;
+	min-width: 84px; */
 	width: 100%;
 	border-radius: 50%;
 	overflow: hidden;

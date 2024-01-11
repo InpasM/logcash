@@ -31,6 +31,7 @@ data.student = {
 	addBoostFull: false,
 	showMore: false,
 	language: ENGLISH,
+	sizeFont: 1.0,
 
 	months: [],
 	monthlyHabit: [],
@@ -82,6 +83,8 @@ function parseLocalStorage(itemStudent) {
 		student.showMore = false;
 	if (!student.language)
 		student.language = ENGLISH;
+	if (!student.sizeFont)
+		student.sizeFont = 1.0;
 	if (!student.months)
 		student.months = [];
 	if (!student.monthlyHabit)

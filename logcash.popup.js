@@ -388,124 +388,135 @@ function initText(elems, text) {
 	elems.panelSizeFontTitle.innerText = text.size;
 }
 
-function setFontSize(elems, ratio) {
+function updateFontSize(elems) {
 
-	elems.miniLogtimeTitleRemaining.style.fontSize = 8 * ratio + "px";
-	elems.miniLogtimeTitleLock.style.fontSize = 8 * ratio + "px";
-	elems.miniLogtimeValueRemaining.style.fontSize = 10 * ratio + "px";
-	elems.miniLogtimeValueLock.style.fontSize = 10 * ratio + "px";
+	// data.student.sizeFont = 1;
 
-	elems.rowProgress.style.height = 20 * ratio + "px";
-	elems.sideProgress.style.fontSize = 12 * ratio + "px";
-	elems.textRemaining.style.fontSize = 11 * ratio + "px";
+	const	ratio_8 = 8 * data.student.sizeFont + "px",
+			ratio_9 = 9 * data.student.sizeFont + "px",
+			ratio_10 = 10 * data.student.sizeFont + "px",
+			ratio_11 = 11 * data.student.sizeFont + "px",
+			ratio_12 = 12 * data.student.sizeFont + "px",
+			ratio_14 = 14 * data.student.sizeFont + "px",
+			ratio_15 = 15 * data.student.sizeFont + "px",
+			ratio_16 = 16 * data.student.sizeFont + "px",
+			ratio_20 = 20 * data.student.sizeFont + "px",
+			ratio_22 = 22 * data.student.sizeFont + "px",
+			ratio_40 = 40 * data.student.sizeFont + "px",
+			ratio_45 = 45 * data.student.sizeFont + "px";
+
+	elems.popupTopLeftText.style.fontSize = ratio_14;
+	elems.popupTopRightText.style.fontSize = ratio_12;
+
+	elems.miniLogtimeTitleRemaining.style.fontSize = ratio_8;
+	elems.miniLogtimeTitleLock.style.fontSize = ratio_8;
+	elems.miniLogtimeValueRemaining.style.fontSize = ratio_10;
+	elems.miniLogtimeValueLock.style.fontSize = ratio_10;
+
+	elems.rowProgress.style.height = ratio_20;
+	elems.sideProgress.style.fontSize = ratio_12;
+	elems.textRemaining.style.fontSize = ratio_11;
 	
-	elems.topDivSettingPanel.style.fontSize = 160 * ratio + "px";
+	elems.topDivSettingPanel.style.fontSize = 160 * data.student.sizeFont + "px";
 
-	elems.panelLanguageTitle.style.fontSize = 10 * ratio + "px";
-	elems.panelSizeFontTitle.style.fontSize = 10 * ratio + "px";
+	elems.panelLanguageTitle.style.fontSize = ratio_10;
+	elems.panelSizeFontTitle.style.fontSize = ratio_10;
 	
-	elems.panelLanguageButtonEnglish.style.fontSize = 9 * ratio + "px";
-	elems.panelLanguageButtonFrench.style.fontSize = 9 * ratio + "px";
+	elems.panelLanguageButtonEnglish.style.fontSize = ratio_9;
+	elems.panelLanguageButtonFrench.style.fontSize = ratio_9;
 
-	elems.panelSizeFontValue.style.fontSize = 12 * ratio + "px";
-	elems.panelSizeFontMin.style.fontSize = 14 * ratio + "px";
-	elems.panelSizeFontMin.style.height = 15 * ratio + "px";
-	elems.panelSizeFontMin.style.width = 15 * ratio + "px";
-	elems.panelSizeFontMax.style.fontSize = 14 * ratio + "px";
-	elems.panelSizeFontMax.style.height = 15 * ratio + "px";
-	elems.panelSizeFontMax.style.width = 15 * ratio + "px";
+	elems.panelSizeFontValue.style.fontSize = ratio_12;
+	elems.panelSizeFontMin.style.fontSize = ratio_14;
+	elems.panelSizeFontMin.style.height = ratio_15;
+	elems.panelSizeFontMin.style.width = ratio_15;
+	elems.panelSizeFontMax.style.fontSize = ratio_14;
+	elems.panelSizeFontMax.style.height = ratio_15;
+	elems.panelSizeFontMax.style.width = ratio_15;
 
-	elems.resetTooltipBlockConfirmTitle.style.fontSize = 12 * ratio + "px";
-	elems.panelResetButton.style.fontSize = 10 * ratio + "px";
-	elems.resetConfirmButton.style.fontSize = 10 * ratio + "px";
-	elems.resetCancelButton.style.fontSize = 10 * ratio + "px";
+	elems.resetTooltipBlockConfirmTitle.style.fontSize = ratio_12;
+	elems.panelResetButton.style.fontSize = ratio_10;
+	elems.resetConfirmButton.style.fontSize = ratio_10;
+	elems.resetCancelButton.style.fontSize = ratio_10;
 
-	elems.buttonBoostMin.style.fontSize = 11 * ratio + "px";
-	elems.buttonBoostMin.style.width = 40 * ratio + "px";
-	elems.buttonBoostMin.style.height = 22 * ratio + "px";
-	elems.buttonBoostMax.style.fontSize = 11 * ratio + "px";
-	elems.buttonBoostMax.style.width = 40 * ratio + "px";
-	elems.buttonBoostMax.style.height = 22 * ratio + "px";
+	elems.buttonBoostMin.style.fontSize = ratio_11;
+	elems.buttonBoostMin.style.width = ratio_40;
+	elems.buttonBoostMin.style.height = ratio_22;
+	elems.buttonBoostMax.style.fontSize = ratio_11;
+	elems.buttonBoostMax.style.width = ratio_40;
+	elems.buttonBoostMax.style.height = ratio_22;
 
-	elems.inputSalary.style.fontSize = 16 * ratio + "px";
-	elems.inputSalary.style.maxWidth = 45 * ratio + "px";
-	elems.inputDeducted.style.fontSize = 16 * ratio + "px";
-	elems.inputDeducted.style.maxWidth = 45 * ratio + "px";
+	elems.inputSalary.style.fontSize = ratio_16;
+	elems.inputSalary.style.maxWidth = ratio_45;
+	elems.inputDeducted.style.fontSize = ratio_16;
+	elems.inputDeducted.style.maxWidth = ratio_45;
 
 	for (var i = 0; i < 7; i++)
 	{
-		elems.monthDayBoxes[i].style.fontSize = 8 * ratio + "px";
-		elems.monthDayBoxes[i].style.width = 20 * ratio + "px";
-		elems.monthDayBoxes[i].style.height = 20 * ratio + "px";
+		elems.monthDayBoxes[i].style.fontSize = ratio_8;
+		elems.monthDayBoxes[i].style.width = ratio_20;
+		elems.monthDayBoxes[i].style.height = ratio_20;
 	}
 
 	for (var i = 0; i < elems.monthArray.length; i++)
 	{
 		for (var j = 0; j < elems.monthArray[i].checkboxes.length; j++)
 		{
-			elems.monthArray[i].checkboxes[j].style.fontSize = 8 * ratio + "px";
-			elems.monthArray[i].checkboxes[j].style.width = 20 * ratio + "px";
-			elems.monthArray[i].checkboxes[j].style.height = 20 * ratio + "px";
+			elems.monthArray[i].checkboxes[j].style.fontSize = ratio_8;
+			elems.monthArray[i].checkboxes[j].style.width = ratio_20;
+			elems.monthArray[i].checkboxes[j].style.height = ratio_20;
 		}
 	}
 
-	elems.extraLogtimeSideLeft.style.fontSize = 7 * ratio + "px";
-	elems.extraLogtimeSideLeft.style.lineHeight = 8 * ratio + "px";
-	elems.extraLogtimeSideRight.style.fontSize = 10 * ratio + "px";
-	elems.extraLogtimeSideRight.style.lineHeight = 8 * ratio + "px";
+	elems.extraLogtimeSideLeft.style.fontSize = 7 * data.student.sizeFont + "px";
+	elems.extraLogtimeSideLeft.style.lineHeight = ratio_8;
+	elems.extraLogtimeSideRight.style.fontSize = ratio_10;
+	elems.extraLogtimeSideRight.style.lineHeight = ratio_8;
 
+	var paddingY = 2 * data.student.sizeFont + "px ";
+	var paddingX = 6 * data.student.sizeFont + "px";
 	for (var i = 0; i < elems.divMonths.length; i++)
 	{
-		elems.divMonths[i].style.fontSize = 10 * ratio + "px";
-
-		// padding: 2px 6px;
-		var paddingY = 2 * ratio + "px ";
-		var paddingX = 6 * ratio + "px";
-		elems.divMonths[i].style.fontSize = 10 * ratio + "px";
+		elems.divMonths[i].style.fontSize = ratio_10;
+		elems.divMonths[i].style.fontSize = ratio_10;
 		elems.divMonths[i].style.padding = paddingY + paddingX;
 	}
 
-	elems.titleBoost.style.fontSize = 12 * ratio + "px";
-	elems.weeklySpan.style.fontSize = 12 * ratio + "px";
-	elems.titleLogtime.style.fontSize = 12 * ratio + "px";
-	elems.mainTitleInfo.style.fontSize = 12 * ratio + "px";
-	elems.popProgressTitle.style.fontSize = 12 * ratio + "px";
-	elems.mainTitleDays.style.fontSize = 12 * ratio + "px";
-	elems.mainTitleBoost.style.fontSize = 12 * ratio + "px";
-	elems.mainTitleLogtime.style.fontSize = 12 * ratio + "px";
-	// elems.titleBoost.style.lineHeight = 12 * ratio + "px";
-	// elems.weeklySpan.style.lineHeight = 12 * ratio + "px";
-	// elems.titleLogtime.style.lineHeight = 12 * ratio + "px";
-	// elems.mainTitleInfo.style.lineHeight = 12 * ratio + "px";
-	// elems.popProgressTitle.style.lineHeight = 12 * ratio + "px";
-	// elems.mainTitleDays.style.lineHeight = 12 * ratio + "px";
-	// elems.mainTitleBoost.style.lineHeight = 12 * ratio + "px";
-	// elems.mainTitleLogtime.style.lineHeight = 12 * ratio + "px";
+	elems.titleBoost.style.fontSize = ratio_12;
+	elems.weeklySpan.style.fontSize = ratio_12;
+	elems.titleLogtime.style.fontSize = ratio_12;
+	elems.mainTitleInfo.style.fontSize = ratio_12;
+	elems.popProgressTitle.style.fontSize = ratio_12;
+	elems.mainTitleDays.style.fontSize = ratio_12;
+	elems.mainTitleBoost.style.fontSize = ratio_12;
+	elems.mainTitleLogtime.style.fontSize = ratio_12;
 
-	elems.salaryEuroSign.style.fontSize = 10 * ratio + "px";
-	elems.salaryInteger.style.fontSize = 22 * ratio + "px";
-	elems.salaryFloat.style.fontSize = 12 * ratio + "px";
-	elems.salaryPercent.style.fontSize = 10 * ratio + "px";
+	elems.salaryEuroSign.style.fontSize = ratio_10;
+	elems.salaryInteger.style.fontSize = ratio_22;
+	elems.salaryFloat.style.fontSize = ratio_12;
+	elems.salaryPercent.style.fontSize = ratio_10;
 
-	elems.tooltipTopText.style.fontSize = 8 * ratio + "px";
-	elems.tooltipBottomText.style.fontSize = 12 * ratio + "px";
+	elems.salaryCircle.style.maxWidth = 100 * data.student.sizeFont + "px";
+	elems.salaryCircle.style.minWidth = 84 * data.student.sizeFont + "px";
 
-	elems.tooltipQuestionBottomText.style.fontSize = 10 * ratio + "px";
+	elems.tooltipTopText.style.fontSize = ratio_8;
+	elems.tooltipBottomText.style.fontSize = ratio_12;
 
-	elems.titleBoostMin.style.fontSize = 8 * ratio + "px";
-	elems.titleBoostMax.style.fontSize = 8 * ratio + "px";
-	elems.labelSalary.style.fontSize = 8 * ratio + "px";
-	elems.labelHours.style.fontSize = 8 * ratio + "px";
-	elems.labelLogtimeRemaining.style.fontSize = 8 * ratio + "px";
-	elems.labelLogtimeEstimation.style.fontSize = 8 * ratio + "px";
-	elems.labelLogtimeNumberDay.style.fontSize = 8 * ratio + "px";
+	elems.tooltipQuestionBottomText.style.fontSize = ratio_10;
 
-	elems.resultLogtimeRemaining.style.fontSize = 14 * ratio + "px";
-	elems.resultLogtimeEach.style.fontSize = 14 * ratio + "px";
-	elems.resultLogtimeEstimation.style.fontSize = 14 * ratio + "px";
-	elems.resultLogtimeNumberDay.style.fontSize = 14 * ratio + "px";
+	elems.titleBoostMin.style.fontSize = ratio_8;
+	elems.titleBoostMax.style.fontSize = ratio_8;
+	elems.labelSalary.style.fontSize = ratio_8;
+	elems.labelHours.style.fontSize = ratio_8;
+	elems.labelLogtimeRemaining.style.fontSize = ratio_8;
+	elems.labelLogtimeEstimation.style.fontSize = ratio_8;
+	elems.labelLogtimeNumberDay.style.fontSize = ratio_8;
 
-	elems.resultLogtimeEach.style.fontSize = 8 * ratio + "px";
+	elems.resultLogtimeRemaining.style.fontSize = ratio_14;
+	elems.resultLogtimeEach.style.fontSize = ratio_14;
+	elems.resultLogtimeEstimation.style.fontSize = ratio_14;
+	elems.resultLogtimeNumberDay.style.fontSize = ratio_14;
+
+	elems.resultLogtimeEach.style.fontSize = ratio_8;
 }
 
 const browser = window.browser || window.chrome;
@@ -639,6 +650,7 @@ popup.createElems = function(elems) {
 	elems.panelSizeFontMax = document.createElement("div");
 	elems.panelSizeFontMax.className = "panel-size-font-button";
 	elems.panelSizeFontMax.innerText = "+";
+
 
 	elems.panelSizeFontBlock.appendChild(elems.panelSizeFontValue);
 	elems.panelSizeFontBlock.appendChild(elems.panelSizeFontMin);
@@ -1763,7 +1775,7 @@ popup.createElems = function(elems) {
 	document.body.appendChild(elems.popupRemaining);
 
 	initText(elems, arrayLanguages[data.student.language]);
-	setFontSize(elems, 1.5);
+	updateFontSize(elems);
 }
 
 function disableTextSelection() {
@@ -1801,14 +1813,14 @@ popup.setStyle = function(elems) {
 	elems.popupTopDiv.style.borderBottom = "1px solid rgb(45, 49, 60)";
 
 	elems.popupTopLeftText.style.color = "#e2e2e2";
-	elems.popupTopLeftText.style.fontSize = "14px";
+	// elems.popupTopLeftText.style.fontSize = "14px";
 	elems.popupTopLeftText.style.margin = "3px 3px 3px 5px";
 	elems.popupTopLeftText.style.padding = "0";
 	elems.popupTopLeftText.style.fontWeight = "bold";
 	elems.popupTopLeftText.style.textShadow = "rgb(0, 0, 0) 0px 0px 3px";
 	
 	elems.popupTopRightText.className = "popup-top-right-text";
-	elems.popupTopRightText.style.fontSize = "12px";
+	// elems.popupTopRightText.style.fontSize = "12px";
 	elems.popupTopRightText.style.margin = "2px 2px";
 	elems.popupTopRightText.style.padding = "2px 4px";
 	elems.popupTopRightText.style.width = "fit-content";
