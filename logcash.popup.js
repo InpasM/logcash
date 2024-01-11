@@ -209,87 +209,90 @@ function mouseOutQuestion(e) {
 }
 
 var popupVisible = false;
-function hideShowPopup() {
+function hideShowPopup(e) {
 
-	if (!popupVisible)
+	if (e.target.className === "top-div-setting-block")
 	{
-		if (data.session.devMode)
+		if (!popupVisible)
 		{
-			elems.moreInfoContainer.style.backgroundColor = "";
-			elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
-		}
-
-		elems.resultsDiv.style.height = "0px";
-		elems.resultsDiv.style.padding = "0px 8px";
-		elems.resultsDiv.style.opacity = "0";
-		elems.boostLockContainer.style.height = "0px";
-		elems.boostLockContainer.style.padding = "0px 8px";
-		elems.boostLockContainer.style.opacity = "0";
-		elems.estimationContainer.style.height = "0px";
-		elems.estimationContainer.style.padding = "0px 8px";
-		elems.estimationContainer.style.opacity = "0";
-
-		elems.popMiddleDivLeft.style.opacity = "0";
-		elems.popMiddleDivLeft.style.height = "0";
-		elems.popMiddleDivLeft.style.padding = "0 8px";
-		elems.popMiddleDivRight.style.opacity = "0";
-		elems.popMiddleDivRight.style.height = "0";
-		elems.popMiddleDivRight.style.padding = "0 8px";
-
-		elems.popupTopDiv.style.borderBottom = "1px solid rgba(45, 49, 60, 0)";
-
-		elems.popMiddleDiv.style.transform = "translateY(-5px)";
-
-		elems.popProgressTitle.style.opacity = "0";
-		elems.popProgressTitle.style.height = "0";
-		elems.containerLogcash.style.marginTop = "0";
-
-		elems.topDivMinimizeButton.style.display = "none";
-		elems.topDivMaximizeButton.style.display = "flex";
-
-		elems.miniLogtimePanel.style.display = "flex";
-
-		popupVisible = true;
-	}
-	else
-	{
-		if (data.session.devMode)
-		{
-			elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60)";
-			elems.moreInfoContainer.style.padding = "4px 0";
-		}
+			if (data.session.devMode)
+			{
+				elems.moreInfoContainer.style.backgroundColor = "";
+				elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
+			}
 	
-		elems.resultsDiv.style.height = "";
-		elems.resultsDiv.style.padding = "8px";
-		elems.resultsDiv.style.opacity = "1";
-		elems.boostLockContainer.style.height = "";
-		elems.boostLockContainer.style.padding = "8px";
-		elems.boostLockContainer.style.opacity = "1";
-		elems.estimationContainer.style.height = "";
-		elems.estimationContainer.style.padding = "8px";
-		elems.estimationContainer.style.opacity = "1";
-
-		elems.popMiddleDivLeft.style.opacity = "1";
-		elems.popMiddleDivLeft.style.height = "";
-		elems.popMiddleDivLeft.style.padding = "8px";
-		elems.popMiddleDivRight.style.opacity = "1";
-		elems.popMiddleDivRight.style.height = "";
-		elems.popMiddleDivRight.style.padding = "8px";
-
-		elems.popupTopDiv.style.borderBottom = "1px solid rgb(45, 49, 60)";
-
-		elems.popMiddleDiv.style.transform = "translateY(0)";
-
-		elems.popProgressTitle.style.opacity = "1";
-		elems.popProgressTitle.style.height = "";
-		elems.containerLogcash.style.marginTop = "4px";
-
-		elems.miniLogtimePanel.style.display = "none";
-
-		elems.topDivMinimizeButton.style.display = "flex";
-		elems.topDivMaximizeButton.style.display = "none";
-
-		popupVisible = false;
+			elems.resultsDiv.style.height = "0px";
+			elems.resultsDiv.style.padding = "0px 8px";
+			elems.resultsDiv.style.opacity = "0";
+			elems.boostLockContainer.style.height = "0px";
+			elems.boostLockContainer.style.padding = "0px 8px";
+			elems.boostLockContainer.style.opacity = "0";
+			elems.estimationContainer.style.height = "0px";
+			elems.estimationContainer.style.padding = "0px 8px";
+			elems.estimationContainer.style.opacity = "0";
+	
+			elems.popMiddleDivLeft.style.opacity = "0";
+			elems.popMiddleDivLeft.style.height = "0";
+			elems.popMiddleDivLeft.style.padding = "0 8px";
+			elems.popMiddleDivRight.style.opacity = "0";
+			elems.popMiddleDivRight.style.height = "0";
+			elems.popMiddleDivRight.style.padding = "0 8px";
+	
+			elems.popupTopDiv.style.borderBottom = "1px solid rgba(45, 49, 60, 0)";
+	
+			elems.popMiddleDiv.style.transform = "translateY(-5px)";
+	
+			elems.popProgressTitle.style.opacity = "0";
+			elems.popProgressTitle.style.height = "0";
+			elems.containerLogcash.style.marginTop = "0";
+	
+			elems.topDivMinimizeButton.style.display = "none";
+			elems.topDivMaximizeButton.style.display = "flex";
+	
+			elems.miniLogtimePanel.style.display = "flex";
+	
+			popupVisible = true;
+		}
+		else
+		{
+			if (data.session.devMode)
+			{
+				elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60)";
+				elems.moreInfoContainer.style.padding = "4px 0";
+			}
+		
+			elems.resultsDiv.style.height = "";
+			elems.resultsDiv.style.padding = "8px";
+			elems.resultsDiv.style.opacity = "1";
+			elems.boostLockContainer.style.height = "";
+			elems.boostLockContainer.style.padding = "8px";
+			elems.boostLockContainer.style.opacity = "1";
+			elems.estimationContainer.style.height = "";
+			elems.estimationContainer.style.padding = "8px";
+			elems.estimationContainer.style.opacity = "1";
+	
+			elems.popMiddleDivLeft.style.opacity = "1";
+			elems.popMiddleDivLeft.style.height = "";
+			elems.popMiddleDivLeft.style.padding = "8px";
+			elems.popMiddleDivRight.style.opacity = "1";
+			elems.popMiddleDivRight.style.height = "";
+			elems.popMiddleDivRight.style.padding = "8px";
+	
+			elems.popupTopDiv.style.borderBottom = "1px solid rgb(45, 49, 60)";
+	
+			elems.popMiddleDiv.style.transform = "translateY(0)";
+	
+			elems.popProgressTitle.style.opacity = "1";
+			elems.popProgressTitle.style.height = "";
+			elems.containerLogcash.style.marginTop = "4px";
+	
+			elems.miniLogtimePanel.style.display = "none";
+	
+			elems.topDivMinimizeButton.style.display = "flex";
+			elems.topDivMaximizeButton.style.display = "none";
+	
+			popupVisible = false;
+		}
 	}
 }
 
@@ -643,7 +646,7 @@ popup.createElems = function(elems) {
 
 	elems.panelSizeFontValue = document.createElement("div");
 	elems.panelSizeFontValue.className = "panel-size-font-value";
-	elems.panelSizeFontValue.innerText = "1.0";
+	// elems.panelSizeFontValue.innerText = "1.0";
 	elems.panelSizeFontMin = document.createElement("div");
 	elems.panelSizeFontMin.className = "panel-size-font-button";
 	elems.panelSizeFontMin.innerText = "-";
@@ -651,6 +654,39 @@ popup.createElems = function(elems) {
 	elems.panelSizeFontMax.className = "panel-size-font-button";
 	elems.panelSizeFontMax.innerText = "+";
 
+
+	function setFontSize(toAdd) {
+
+		if (toAdd > 0 && (data.student.sizeFont + toAdd).toFixed(1) <= 1.4)
+		{
+			data.student.sizeFont += 0.1;
+		}
+		else if (toAdd < 0 && (data.student.sizeFont + toAdd).toFixed(1) >= 0.8)
+		{
+			data.student.sizeFont -= 0.1;
+		}
+	}
+
+	elems.panelSizeFontMin.addEventListener("click", function(e) {
+
+		setFontSize(-0.1);
+		data.updateLocalStorage();
+		if (data.student.sizeFont === 1)
+			elems.panelSizeFontValue.innerText = "1.0";
+		else
+			elems.panelSizeFontValue.innerText = data.student.sizeFont.toFixed(1);
+		updateFontSize(elems);
+	});
+	elems.panelSizeFontMax.addEventListener("click", function(e) {
+
+		setFontSize(0.1);
+		data.updateLocalStorage();
+		if (data.student.sizeFont === 1)
+			elems.panelSizeFontValue.innerText = "1.0";
+		else
+			elems.panelSizeFontValue.innerText = data.student.sizeFont.toFixed(1);
+		updateFontSize(elems)
+	});
 
 	elems.panelSizeFontBlock.appendChild(elems.panelSizeFontValue);
 	elems.panelSizeFontBlock.appendChild(elems.panelSizeFontMin);
@@ -708,6 +744,8 @@ popup.createElems = function(elems) {
 		elems.buttonBoostMax.style.borderColor = "rgb(45, 49, 60)";
 
 		data.student.language = ENGLISH;
+		data.student.sizeFont = 1.0;
+		elems.panelSizeFontValue.innerText = "1.0";
 		initText(elems, arrayLanguages[data.student.language]);
 		elems.panelLanguageButtonEnglish.style.color = "#191919";
 		elems.panelLanguageButtonEnglish.style.backgroundColor = "white";
@@ -729,6 +767,7 @@ popup.createElems = function(elems) {
 			elems.monthArray[elems.monthArray.length - 1].checkboxes[i].style.borderColor = "rgb(45, 49, 60)";
 		}
 		data.updateLocalStorage();
+		updateFontSize(elems);
 		popup.setData(elems);
 	}
 
@@ -1776,6 +1815,7 @@ popup.createElems = function(elems) {
 
 	initText(elems, arrayLanguages[data.student.language]);
 	updateFontSize(elems);
+	elems.panelSizeFontValue.innerText = data.student.sizeFont.toFixed(1);
 }
 
 function disableTextSelection() {
