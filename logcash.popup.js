@@ -655,37 +655,84 @@ popup.createElems = function(elems) {
 	elems.panelSizeFontMax.innerText = "+";
 
 
-	function setFontSize(toAdd) {
+	function setFontSize(toAdd, e) {
 
-		if (toAdd > 0 && (data.student.sizeFont + toAdd).toFixed(1) <= 1.4)
+		var update = false;
+		const oldTargetBox = e.target.getBoundingClientRect();
+		
+		var oldLeft = oldTargetBox.left;
+		var oldTop = oldTargetBox.top;
+		var oldHeight = oldTargetBox.height;
+		var oldWidth = oldTargetBox.width;
+
+		var posLeft = oldWidth / 2 - (e.clientX - oldLeft);
+		var posTop = oldHeight / 2 - (e.clientY - oldTop);
+
+		// console.log("oldHeight:", oldHeight, "oldWidth:", oldWidth);
+		// console.log("posLeft:", posLeft, "posTop:", posTop);
+		// console.log("oldLeft:", oldLeft, "oldTop:", oldTop);
+		// console.log("clientX:", e.clientX, "clientY:", e.clientY);
+
+		if (toAdd > 0 && (data.student.sizeFont + toAdd).toFixed(1) <= 1.5)
 		{
 			data.student.sizeFont += 0.1;
+			update = true;
 		}
-		else if (toAdd < 0 && (data.student.sizeFont + toAdd).toFixed(1) >= 0.8)
+		else if (toAdd < 0 && (data.student.sizeFont + toAdd).toFixed(1) >= 0.7)
 		{
 			data.student.sizeFont -= 0.1;
+			update = true;
+		}
+		if (update)
+		{
+			data.updateLocalStorage();
+			if (data.student.sizeFont === 1)
+				elems.panelSizeFontValue.innerText = "1.0";
+			else
+				elems.panelSizeFontValue.innerText = data.student.sizeFont.toFixed(1);
+			updateFontSize(elems);
+
+			const popupBox = elems.popupRemaining.getBoundingClientRect();
+			const newTargetBox = e.target.getBoundingClientRect();
+			var newLeft = newTargetBox.left;
+			var newTop = newTargetBox.top;
+			var offsetTargetLeft = oldLeft - newLeft;
+			var offsetTargetTop = oldTop - newTop;
+			
+			elems.popupRemaining.style.top = (popupBox.top + offsetTargetTop) + "px";
+			elems.popupRemaining.style.left = (popupBox.left + offsetTargetLeft) + "px";
 		}
 	}
 
+
 	elems.panelSizeFontMin.addEventListener("click", function(e) {
-
-		setFontSize(-0.1);
-		data.updateLocalStorage();
-		if (data.student.sizeFont === 1)
-			elems.panelSizeFontValue.innerText = "1.0";
-		else
-			elems.panelSizeFontValue.innerText = data.student.sizeFont.toFixed(1);
-		updateFontSize(elems);
+		
+		// const oldTargetBox = e.target.getBoundingClientRect();
+		
+		// var oldLeft = oldTargetBox.left;
+		// var oldTop = oldTargetBox.top;
+		
+		setFontSize(-0.1, e);
+		
+		// const popupBox = elems.popupRemaining.getBoundingClientRect();
+		// const newTargetBox = e.target.getBoundingClientRect();
+		// var newLeft = newTargetBox.left;
+		// var newTop = newTargetBox.top;
+		// var offsetTargetLeft = oldLeft - newLeft;
+		// var offsetTargetTop = oldTop - newTop;
+		
+		// elems.popupRemaining.style.top = (popupBox.top + offsetTargetTop) + "px";
+		// elems.popupRemaining.style.left = (popupBox.left + offsetTargetLeft) + "px";
 	});
-	elems.panelSizeFontMax.addEventListener("click", function(e) {
 
-		setFontSize(0.1);
-		data.updateLocalStorage();
-		if (data.student.sizeFont === 1)
-			elems.panelSizeFontValue.innerText = "1.0";
-		else
-			elems.panelSizeFontValue.innerText = data.student.sizeFont.toFixed(1);
-		updateFontSize(elems)
+	elems.panelSizeFontMax.addEventListener("click", function(e) {
+		setFontSize(0.1, e);
+		// data.updateLocalStorage();
+		// if (data.student.sizeFont === 1)
+		// 	elems.panelSizeFontValue.innerText = "1.0";
+		// else
+		// 	elems.panelSizeFontValue.innerText = data.student.sizeFont.toFixed(1);
+		// updateFontSize(elems)
 	});
 
 	elems.panelSizeFontBlock.appendChild(elems.panelSizeFontValue);
