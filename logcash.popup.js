@@ -392,9 +392,13 @@ function initText(elems, text) {
 
 function updateFontSize(elems) {
 
-	console.log(elems.monthArray[0].lines[0]);
+	// console.log(elems.monthArray[0].lines[0]);
 
-	const	ratio_8 = 8 * data.student.sizeFont + "px",
+	const	ratio_2 = 2 * data.student.sizeFont + "px",
+			ratio_3 = 3 * data.student.sizeFont + "px",
+			ratio_4 = 4 * data.student.sizeFont + "px",
+			ratio_6 = 6 * data.student.sizeFont + "px",
+			ratio_8 = 8 * data.student.sizeFont + "px",
 			ratio_9 = 9 * data.student.sizeFont + "px",
 			ratio_10 = 10 * data.student.sizeFont + "px",
 			ratio_11 = 11 * data.student.sizeFont + "px",
@@ -406,24 +410,35 @@ function updateFontSize(elems) {
 			ratio_22 = 22 * data.student.sizeFont + "px",
 			ratio_24 = 24 * data.student.sizeFont + "px",
 			ratio_40 = 40 * data.student.sizeFont + "px",
-			ratio_45 = 45 * data.student.sizeFont + "px";
+			ratio_45 = 45 * data.student.sizeFont + "px",
+			ratio_54 = 54 * data.student.sizeFont + "px";
 
+	///////////////////////////////////////////////// TOP LINE POPUP
 	elems.popupTopLeftText.style.fontSize = ratio_14;
 	elems.popupTopRightText.style.fontSize = ratio_12;
-
+	
+	//////////////////////////////////////////////////////// PROGRESS BAR
 	elems.miniLogtimeTitleRemaining.style.fontSize = ratio_8;
 	elems.miniLogtimeTitleLock.style.fontSize = ratio_8;
 	elems.miniLogtimeValueRemaining.style.fontSize = ratio_10;
 	elems.miniLogtimeValueLock.style.fontSize = ratio_10;
-
+	
 	elems.rowProgress.style.height = ratio_20;
 	elems.sideProgress.style.fontSize = ratio_12;
 	elems.textRemaining.style.fontSize = ratio_11;
 	
-	elems.topDivSettingPanel.style.fontSize = 160 * data.student.sizeFont + "px";
+	//////////////////////////////////////////////// SETTING PANEL
+	elems.topDivSettingPanel.style.padding = ratio_8;
+	elems.topDivSettingPanel.style.borderRadius = ratio_4;
 
 	elems.panelLanguageTitle.style.fontSize = ratio_10;
+	// elems.panelLanguageTitle.style.margin = ratio_3 + " 0";		// panel line
+	elems.panelLanguageLine.style.margin = ratio_3 + " 0";		// panel line
+	elems.panelSizeFontLine.style.margin = ratio_6 + " 0";
+	elems.panelSizeFontBlock.style.padding = ratio_4 + " " + ratio_4;
+	elems.panelSizeFontBlock.style.marginLeft = ratio_6;
 	elems.panelSizeFontTitle.style.fontSize = ratio_10;
+	elems.panelSizeFontTitle.style.minWidth = ratio_54;
 	
 	elems.panelLanguageButtonEnglish.style.fontSize = ratio_9;
 	elems.panelLanguageButtonFrench.style.fontSize = ratio_9;
@@ -432,11 +447,14 @@ function updateFontSize(elems) {
 	elems.panelSizeFontMin.style.fontSize = ratio_14;
 	elems.panelSizeFontMin.style.height = ratio_15;
 	elems.panelSizeFontMin.style.width = ratio_15;
+	elems.panelSizeFontMin.style.margin = "0 " + ratio_2;
 	elems.panelSizeFontMax.style.fontSize = ratio_14;
 	elems.panelSizeFontMax.style.height = ratio_15;
 	elems.panelSizeFontMax.style.width = ratio_15;
+	elems.panelSizeFontMax.style.margin = "0 " + ratio_2;
 
 	elems.resetTooltipBlockConfirmTitle.style.fontSize = ratio_12;
+	elems.panelResetLine.style.padding = ratio_8 + " 0 0 0";
 	elems.panelResetButton.style.fontSize = ratio_10;
 	elems.resetConfirmButton.style.fontSize = ratio_10;
 	elems.resetCancelButton.style.fontSize = ratio_10;
@@ -479,14 +497,18 @@ function updateFontSize(elems) {
 	elems.extraLogtimeSideRight.style.fontSize = ratio_10;
 	elems.extraLogtimeSideRight.style.lineHeight = ratio_8;
 
-	var paddingY = 2 * data.student.sizeFont + "px ";
+	var paddingY = 5 * data.student.sizeFont + "px ";
 	var paddingX = 6 * data.student.sizeFont + "px";
 	for (var i = 0; i < elems.divMonths.length; i++)
 	{
 		elems.divMonths[i].style.fontSize = ratio_10;
-		elems.divMonths[i].style.fontSize = ratio_10;
 		elems.divMonths[i].style.padding = paddingY + paddingX;
 	}
+	elems.panelLanguageButtonEnglish.style.padding = paddingY + paddingX;
+	elems.panelLanguageButtonFrench.style.padding = paddingY + paddingX;
+
+	elems.blockLogtimeLeft.style.minWidth = 74 * data.student.sizeFont + "px";
+	elems.blockLogtimeRight.style.minWidth = 74 * data.student.sizeFont + "px";
 
 	elems.titleBoost.style.fontSize = ratio_12;
 	elems.weeklySpan.style.fontSize = ratio_12;
@@ -504,6 +526,11 @@ function updateFontSize(elems) {
 
 	elems.salaryCircle.style.maxWidth = 100 * data.student.sizeFont + "px";
 	elems.salaryCircle.style.minWidth = 84 * data.student.sizeFont + "px";
+
+	elems.questionBoost.style.height = ratio_11;
+	elems.questionHours.style.height = ratio_11;
+	elems.questionHabit.style.height = ratio_11;
+	elems.questionLogtime.style.height = ratio_11;
 
 	elems.tooltipTopText.style.fontSize = ratio_8;
 	elems.tooltipBottomText.style.fontSize = ratio_12;
