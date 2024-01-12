@@ -305,90 +305,17 @@ function hidePopup(elems) {
 	elems.topDivMaximizeButton.style.display = "none";
 }
 
-// var popupVisible = false;
 function hideShowPopup(elems, e) {
 
-	// console.log(e.target.className);
 	if (doHideShow(e))
 	{
 		if (!data.student.popupVisible)
 		{
-			// if (data.session.devMode)
-			// {
-			// 	elems.moreInfoContainer.style.backgroundColor = "";
-			// 	elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
-			// }
-	
-			// elems.resultsDiv.style.height = "0px";
-			// elems.resultsDiv.style.padding = "0px 8px";
-			// elems.resultsDiv.style.opacity = "0";
-			// elems.boostLockContainer.style.height = "0px";
-			// elems.boostLockContainer.style.padding = "0px 8px";
-			// elems.boostLockContainer.style.opacity = "0";
-			// elems.estimationContainer.style.height = "0px";
-			// elems.estimationContainer.style.padding = "0px 8px";
-			// elems.estimationContainer.style.opacity = "0";
-	
-			// elems.popMiddleDivLeft.style.opacity = "0";
-			// elems.popMiddleDivLeft.style.height = "0";
-			// elems.popMiddleDivLeft.style.padding = "0 8px";
-			// elems.popMiddleDivRight.style.opacity = "0";
-			// elems.popMiddleDivRight.style.height = "0";
-			// elems.popMiddleDivRight.style.padding = "0 8px";
-	
-			// elems.popupTopDiv.style.borderBottom = "1px solid rgba(45, 49, 60, 0)";
-	
-			// elems.popMiddleDiv.style.transform = "translateY(-5px)";
-	
-			// elems.popProgressTitle.style.opacity = "0";
-			// elems.popProgressTitle.style.height = "0";
-			// elems.containerLogcash.style.marginTop = "0";
-	
-			// elems.topDivMinimizeButton.style.display = "none";
-			// elems.topDivMaximizeButton.style.display = "flex";
-	
-			// elems.miniLogtimePanel.style.display = "flex";
 			showPopup(elems);
 			data.student.popupVisible = true;
 		}
 		else
 		{
-			// if (data.session.devMode)
-			// {
-			// 	elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60)";
-			// 	elems.moreInfoContainer.style.padding = "4px 0";
-			// }
-		
-			// elems.resultsDiv.style.height = "";
-			// elems.resultsDiv.style.padding = "8px";
-			// elems.resultsDiv.style.opacity = "1";
-			// elems.boostLockContainer.style.height = "";
-			// elems.boostLockContainer.style.padding = "8px";
-			// elems.boostLockContainer.style.opacity = "1";
-			// elems.estimationContainer.style.height = "";
-			// elems.estimationContainer.style.padding = "8px";
-			// elems.estimationContainer.style.opacity = "1";
-	
-			// elems.popMiddleDivLeft.style.opacity = "1";
-			// elems.popMiddleDivLeft.style.height = "";
-			// elems.popMiddleDivLeft.style.padding = "8px";
-			// elems.popMiddleDivRight.style.opacity = "1";
-			// elems.popMiddleDivRight.style.height = "";
-			// elems.popMiddleDivRight.style.padding = "8px";
-	
-			// elems.popupTopDiv.style.borderBottom = "1px solid rgb(45, 49, 60)";
-	
-			// elems.popMiddleDiv.style.transform = "translateY(0)";
-	
-			// elems.popProgressTitle.style.opacity = "1";
-			// elems.popProgressTitle.style.height = "";
-			// elems.containerLogcash.style.marginTop = "4px";
-	
-			// elems.miniLogtimePanel.style.display = "none";
-	
-			// elems.topDivMinimizeButton.style.display = "flex";
-			// elems.topDivMaximizeButton.style.display = "none";
-	
 			hidePopup(elems);
 			data.student.popupVisible = false;
 		}
@@ -495,6 +422,8 @@ function updateFontSize(elems) {
 
 	// data.student.sizeFont = 1;
 
+	console.log(elems.monthArray[0].lines[0]);
+
 	const	ratio_8 = 8 * data.student.sizeFont + "px",
 			ratio_9 = 9 * data.student.sizeFont + "px",
 			ratio_10 = 10 * data.student.sizeFont + "px",
@@ -505,6 +434,7 @@ function updateFontSize(elems) {
 			ratio_16 = 16 * data.student.sizeFont + "px",
 			ratio_20 = 20 * data.student.sizeFont + "px",
 			ratio_22 = 22 * data.student.sizeFont + "px",
+			ratio_24 = 24 * data.student.sizeFont + "px",
 			ratio_40 = 40 * data.student.sizeFont + "px",
 			ratio_45 = 45 * data.student.sizeFont + "px";
 
@@ -568,6 +498,10 @@ function updateFontSize(elems) {
 			elems.monthArray[i].checkboxes[j].style.width = ratio_20;
 			elems.monthArray[i].checkboxes[j].style.height = ratio_20;
 		}
+		// for (var j = 0; j < elems.monthArray[i].lines.length; j++)
+		// {
+		// 	elems.monthArray[i].lines[j].style.min-
+		// }
 	}
 
 	elems.extraLogtimeSideLeft.style.fontSize = 7 * data.student.sizeFont + "px";
