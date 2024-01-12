@@ -112,8 +112,8 @@ var questions = [
 	[
 		{	
 			text: "Add here all hours you want to deduct.\n\
-			Days off, Public holiday, Medical exemption, \
-			School announcement...",
+			Days off, public holiday, medical exemption, \
+			school announcement...",
 			width: 125
 		},
 		{	
@@ -136,7 +136,7 @@ var questions = [
 		{	
 			text: "Ajouter ici toutes les heures à deduire du mois.\n\
 			Congés, jours fériés, dispense médical, \
-			Annonce de l'école...",
+			annonce de l'école...",
 			width: 125
 		},
 		{	
@@ -1220,6 +1220,8 @@ popup.createElems = function(elems) {
 
 	elems.monthArray = [];
 	elems.monthBlock = [];
+
+	// console.log(popup.months[0].weeks);
 	for (var k = 0; k < popup.months.length; k++)
 	{
 		var tmpMonth = {
@@ -1265,6 +1267,36 @@ popup.createElems = function(elems) {
 		}
 		elems.monthArray.push(tmpMonth);
 	}
+
+	// check if one month as six line of day circle, if so add an extra circle in every 
+	// month calendar so the height is the same for each one
+	var addCircle = false;
+	for (var i = 0; i < elems.monthArray.length; i++)
+	{
+		if (elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes.length)
+		{
+			addCircle = true;
+			break ;
+		}
+	}
+	for (var i = 0; i < elems.monthArray.length; i++)
+	{
+		if (!elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes.length)
+		{
+			var tmpDay = document.createElement("div");
+	
+			tmpDay.innerText = "0";
+			tmpDay.className = "checkbox-habit";
+			tmpDay.style.fontSize = 8 * data.student.sizeFont + "px";
+			tmpDay.style.width = 20 * data.student.sizeFont + "px";
+			tmpDay.style.height = 20 * data.student.sizeFont + "px";
+			tmpDay.style.opacity = "0";
+			tmpDay.style.cursor = "default";
+
+			elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].appendChild(tmpDay);
+		}
+	}
+
 	
 	elems.monthBlock = [];
 	for (var i = 0; i < popup.months.length; i++)
