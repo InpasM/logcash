@@ -57,6 +57,7 @@ function clickBoostMin() {
 		data.student.addBoostHalf = false;
 		elems.buttonBoostMin.style.borderColor = "rgb(45, 49, 60)";
 		elems.labelLogtimeEstimation.innerText = arrayLanguages[data.student.language].labelEstimationLog;
+		elems.miniLogtimeTitleLock.innerText = arrayLanguages[data.student.language].labelEstimationLogMini;
 	}
 	else
 	{
@@ -65,9 +66,13 @@ function clickBoostMin() {
 			data.student.addBoostFull = false;
 			elems.buttonBoostMax.style.borderColor = "rgb(45, 49, 60)";
 			elems.labelLogtimeEstimation.innerText = arrayLanguages[data.student.language].labelEstimationLock;
+			elems.miniLogtimeTitleLock.innerText = arrayLanguages[data.student.language].labelEstimationLockMini;
 		}
 		else
+		{
 			elems.labelLogtimeEstimation.innerText = arrayLanguages[data.student.language].labelEstimationLock;
+			elems.miniLogtimeTitleLock.innerText = arrayLanguages[data.student.language].labelEstimationLockMini;
+		}
 		data.student.addBoostHalf = true;
 		elems.buttonBoostMin.style.borderColor = "rgb(0, 186, 188)";
 	}
@@ -86,6 +91,7 @@ function clickBoostMax() {
 		data.student.addBoostFull = false;
 		elems.buttonBoostMax.style.borderColor = "rgb(45, 49, 60)";
 		elems.labelLogtimeEstimation.innerText = arrayLanguages[data.student.language].labelEstimationLog;
+		elems.miniLogtimeTitleLock.innerText = arrayLanguages[data.student.language].labelEstimationLogMini;
 	}
 	else
 	{
@@ -94,9 +100,13 @@ function clickBoostMax() {
 			data.student.addBoostHalf = false;
 			elems.buttonBoostMin.style.borderColor = "rgb(45, 49, 60)";
 			elems.labelLogtimeEstimation.innerText = arrayLanguages[data.student.language].labelEstimationLock;
+			elems.miniLogtimeTitleLock.innerText = arrayLanguages[data.student.language].labelEstimationLockMini;
 		}
 		else
+		{
 			elems.labelLogtimeEstimation.innerText = arrayLanguages[data.student.language].labelEstimationLock;
+			elems.miniLogtimeTitleLock.innerText = arrayLanguages[data.student.language].labelEstimationLockMini;
+		}
 		data.student.addBoostFull = true;
 		elems.buttonBoostMax.style.borderColor = "rgb(0, 186, 188)";
 	}
@@ -306,14 +316,18 @@ var arrayLanguages = [
 		monthlyAttendance: "Monthly Attendance",
 		labelLogtimeEach: "Each Day",
 		extraLogtimeSideLeft: "Without\nBoost Lock",
-		daysRemaining: "Days Remaining",
+		daysRemaining: "Remaining Days",
+		daysRemainingMini: "Rem. Days",
 		mainTitleInfo: "Cash Earned",
 		popProgressTitle: "Hours Done",
 		arrayDaysName: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
 		arrayMonth: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 		labelLogtimeRemaining: "Remaining Today",
+		labelLogtimeRemainingMini: "Rem. Today",
 		labelEstimationLock: "Lockout Time",
+		labelEstimationLockMini: "Lock Time",
 		labelEstimationLog: "Logout Time",
+		labelEstimationLogMini: "Log. Time",
 		darkMode: "Dark Mode",
 		devise: "Devise",
 		language: "Language",
@@ -329,13 +343,17 @@ var arrayLanguages = [
 		labelLogtimeEach: "Par Jour",
 		extraLogtimeSideLeft: "Sans Boost\nVerrouillage",
 		daysRemaining: "Jour Restant",
+		daysRemainingMini: "Jour Rest.",
 		mainTitleInfo: "Salaire Perçu",
 		popProgressTitle: "Heures Faites",
 		arrayDaysName: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
 		arrayMonth: ["Jan", "Fev", "Mar", "Avr", "Mai", "Jui", "Juil", "Aou", "Sep", "Oct", "Nov", "Dec"],
 		labelLogtimeRemaining: "Restant Aujourd'hui",
+		labelLogtimeRemainingMini: "Restant Auj.",
 		labelEstimationLock: "Heure Verrouillage",
+		labelEstimationLockMini: "Heure Verr.",
 		labelEstimationLog: "Heure Déconnexion",
+		labelEstimationLogMini: "Heure Déco.",
 		darkMode: "Mode Sombre",
 		devise: "Devise",
 		language: "Langue",
@@ -368,14 +386,23 @@ function initText(elems, text) {
 	if (data.session.logAtSchool)
 	{
 		elems.labelLogtimeRemaining.innerText = text.labelLogtimeRemaining;
+		elems.miniLogtimeTitleRemaining.innerText = arrayLanguages[data.student.language].labelLogtimeRemainingMini;
 		if (data.student.addBoostHalf || data.student.addBoostFull)
+		{
 			elems.labelLogtimeEstimation.innerText = text.labelEstimationLock;
+			elems.miniLogtimeTitleLock.innerText = arrayLanguages[data.student.language].labelEstimationLockMini;
+		}
 		else
+		{
 			elems.labelLogtimeEstimation.innerText = text.labelEstimationLog;
+			elems.miniLogtimeTitleLock.innerText = arrayLanguages[data.student.language].labelEstimationLogMini;
+		}
 	}
 	else
 	{
 		elems.labelLogtimeRemaining.innerText = text.labelLogtimeEach;
+		elems.miniLogtimeTitleRemaining.innerText = arrayLanguages[data.student.language].labelLogtimeEach;
+		elems.miniLogtimeTitleLock.innerText = arrayLanguages[data.student.language].daysRemainingMini;
 	}
 
 	if (elems.resultLogtimeRemaining.innerText === "DONE" || elems.resultLogtimeRemaining.innerText === "FAIT")
@@ -402,6 +429,10 @@ function initText(elems, text) {
 	elems.panelLanguageTitle.innerText = text.language;
 	// elems.panelSaveTitle.innerText = text.save;
 	elems.panelSizeFontTitle.innerText = text.size;
+
+	///////////////////////////////////////////// PROGRESS BAR
+	// elems.miniLogtimeTitleRemaining.innerText = arrayLanguages[data.student.language].labelLogtimeRemainingMini;
+	// elems.miniLogtimeTitleLock.innerText = arrayLanguages[data.student.language].labelLogtimeRemainingMini;
 }
 
 function updateFontSize(elems) {
@@ -600,11 +631,13 @@ function updateFontSize(elems) {
 	elems.labelLogtimeNumberDay.style.fontSize = ratio_8;
 
 	elems.resultLogtimeRemaining.style.fontSize = ratio_14;
-	elems.resultLogtimeEach.style.fontSize = ratio_14;
 	elems.resultLogtimeEstimation.style.fontSize = ratio_14;
 	elems.resultLogtimeNumberDay.style.fontSize = ratio_14;
-
-	elems.resultLogtimeEach.style.fontSize = ratio_8;
+	
+	if (data.session.logAtSchool)
+		elems.resultLogtimeEach.style.fontSize = ratio_8;
+	else
+		elems.resultLogtimeEach.style.fontSize = ratio_14;
 
 	//////////////////////////////////////////////// BOOST CONTAINER
 	elems.middleLine3.style.marginTop = ratio_8;
@@ -2196,18 +2229,18 @@ function setLogtimeValue(remToday, eachDay, elems) {
 		// elems.resultLogtimeRemaining.innerText = "DONE";
 		elems.resultLogtimeRemaining.innerText = arrayLanguages[data.student.language].done;
 		// elems.miniLogtimeValueRemaining.innerText = "DONE";
-		elems.miniLogtimeValueRemaining.innerText = arrayLanguages[data.student.language].done;
+		// elems.miniLogtimeValueRemaining.innerText = arrayLanguages[data.student.language].done;
 
 		elems.resultLogtimeRemaining.style.color = "rgb(0, 186, 188)";
-		elems.miniLogtimeValueRemaining.style.color = "rgb(0, 186, 188)";
+		// elems.miniLogtimeValueRemaining.style.color = "rgb(0, 186, 188)";
 
 		// elems.resultLogtime2.innerText = "DONE";				// DEV
 		// elems.resultLogtime2.style.color = "rgb(0, 186, 188)";	// DEV
 		elems.resultLogtimeEstimation.style.color = "rgb(0, 186, 188)";
-		elems.miniLogtimeValueLock.style.color = "rgb(0, 186, 188)";
 
 		if (data.session.logAtSchool)
 		{
+			elems.miniLogtimeValueLock.style.color = "rgb(0, 186, 188)";
 			eachDay += remToday / (data.session.numberDays.total - 1);
 		}
 	}
@@ -2217,8 +2250,8 @@ function setLogtimeValue(remToday, eachDay, elems) {
 
 		elems.resultLogtimeRemaining.innerText = remaining;
 		elems.resultLogtimeRemaining.style.color = "white";
-		elems.miniLogtimeValueRemaining.innerText = remaining;
-		elems.miniLogtimeValueRemaining.style.color = "white";
+		// elems.miniLogtimeValueRemaining.innerText = remaining;
+		// elems.miniLogtimeValueRemaining.style.color = "white";
 
 		// elems.resultLogtime2.innerText = remaining;				// DEV
 		// elems.resultLogtime2.style.color = "white";				// DEV
@@ -2229,12 +2262,19 @@ function setLogtimeValue(remToday, eachDay, elems) {
 	if (eachDay > 0)
 	{
 		if (data.session.logAtSchool)
+		{
 			elems.resultLogtimeEach.innerText = "/ " + getTimeFormat(eachDay, "h");
+			elems.resultLogtimeEach.style.color = "rgb(180, 180, 180)";
+		}
 		else
+		{
 			elems.resultLogtimeEach.innerText = getTimeFormat(eachDay, "h");
+			elems.resultLogtimeEach.style.color = "white";
+			elems.miniLogtimeValueRemaining.innerText = getTimeFormat(eachDay, "h");
+			elems.miniLogtimeValueRemaining.style.color = "white";
+		}
 
 		// elems.resultLogtimeEach.style.color = "white";
-		elems.resultLogtimeEach.style.color = "rgb(180, 180, 180)";
 		// elems.blockLogtimeTooltipText.innerText = "/ " + getTimeFormat(eachDay, "h");
 		// elems.blockLogtimeTooltipText.style.color = "white";
 	}
@@ -2244,6 +2284,8 @@ function setLogtimeValue(remToday, eachDay, elems) {
 			elems.resultLogtimeEach.innerText = "/ " + arrayLanguages[data.student.language].done;
 		else
 			elems.resultLogtimeEach.innerText = arrayLanguages[data.student.language].done;
+		elems.miniLogtimeValueRemaining.innerText = arrayLanguages[data.student.language].done;
+		elems.miniLogtimeValueRemaining.style.color = "rgb(0, 135, 136)";
 		// elems.resultLogtimeEach.style.color = "rgb(0, 186, 188)";
 		elems.resultLogtimeEach.style.color = "rgb(0, 135, 136)";
 		// elems.blockLogtimeTooltipText.innerText = "DONE";
@@ -2332,7 +2374,11 @@ function setLogtimeEstimation(elems) {
 	// 	elems.extraEstimation.style.fontSize = "12px";
 
 	elems.resultLogtimeEstimation.innerText = data.session.timeLock;
-	elems.miniLogtimeValueLock.innerText = data.session.timeLock;
+
+	if (data.session.logAtSchool)
+		elems.miniLogtimeValueLock.innerText = data.session.timeLock;
+	else
+		elems.miniLogtimeValueLock.innerText = data.session.numberDays.total;
 	// elems.extraEstimation.innerText = timeLockOff;
 }
 
