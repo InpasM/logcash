@@ -1,10 +1,8 @@
 
 window.popup = window.popup || {};
 
-// add argument index month to calcul
 popup.calculDays = function(elems, index) {
 
-	// const numberDayGraph = popup.months[popup.months.nbMonth - 1].arrayElems.length;
 	const numberDayGraph = popup.months[index].arrayElems.length;
 
 	var biggestPercent = 0
@@ -58,10 +56,7 @@ function clickBoostMin() {
 	{
 		data.student.addBoostHalf = false;
 		elems.buttonBoostMin.style.borderColor = "rgb(45, 49, 60)";
-		// if (data.student.language === ENGLISH)
-			// elems.labelLogtimeEstimation.innerText = "Est. Logout Timee";
-			elems.labelLogtimeEstimation.innerText = arrayLanguages[data.student.language].labelEstimationLog;
-		// else
+		elems.labelLogtimeEstimation.innerText = arrayLanguages[data.student.language].labelEstimationLog;
 	}
 	else
 	{
@@ -77,17 +72,9 @@ function clickBoostMin() {
 		elems.buttonBoostMin.style.borderColor = "rgb(0, 186, 188)";
 	}
 	if (data.student.addBoostHalf || data.student.addBoostFull)
-	{
-		// elems.extraLogtimeLeft.style.display = "flex";
 		elems.extraLogtimeLeft.style.opacity = "1";
-		// elems.extraEstimation.style.display = "flex";
-	}
 	else
-	{
-		// elems.extraLogtimeLeft.style.display = "none";
 		elems.extraLogtimeLeft.style.opacity = "0";
-		// elems.extraEstimation.style.display = "none";
-	}
 	data.updateLocalStorage();
 	popup.setData(elems);
 }
@@ -114,17 +101,9 @@ function clickBoostMax() {
 		elems.buttonBoostMax.style.borderColor = "rgb(0, 186, 188)";
 	}
 	if (data.student.addBoostHalf || data.student.addBoostFull)
-	{
-		// elems.extraLogtimeLeft.style.display = "flex";
 		elems.extraLogtimeLeft.style.opacity = "1";
-		// elems.extraEstimation.style.display = "flex";
-	}
 	else
-	{
-		// elems.extraLogtimeLeft.style.display = "none";
 		elems.extraLogtimeLeft.style.opacity = "0";
-		// elems.extraEstimation.style.display = "none";
-	}
 	data.updateLocalStorage();
 	popup.setData(elems);
 }
