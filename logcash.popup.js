@@ -319,6 +319,7 @@ var arrayLanguages = [
 		language: "Language",
 		save: "Save Month",
 		size: "Size Font",
+		done: "DONE",
 	},
 	{
 		boost: "Boost Verrouillage",
@@ -340,6 +341,7 @@ var arrayLanguages = [
 		language: "Langue",
 		save: "Sauvegarde Mois",
 		size: "Taille Police",
+		done: "FAIT",
 	}
 ];
 
@@ -375,6 +377,16 @@ function initText(elems, text) {
 	{
 		elems.labelLogtimeRemaining.innerText = text.labelLogtimeEach;
 	}
+
+	if (elems.resultLogtimeRemaining.innerText === "DONE" || elems.resultLogtimeRemaining.innerText === "FAIT")
+		elems.resultLogtimeRemaining.innerText = arrayLanguages[data.student.language].done;
+	if (elems.miniLogtimeValueRemaining.innerText === "DONE" || elems.miniLogtimeValueRemaining.innerText === "FAIT")
+		elems.miniLogtimeValueRemaining.innerText = arrayLanguages[data.student.language].done;
+	if (elems.resultLogtimeEach.innerText === "/ DONE" || elems.resultLogtimeEach.innerText === "/ FAIT")
+		elems.resultLogtimeEach.innerText = "/ " + arrayLanguages[data.student.language].done;
+	if (elems.extraLogtimeSideRight.innerText === "DONE" || elems.extraLogtimeSideRight.innerText === "FAIT")
+		elems.extraLogtimeSideRight.innerText = arrayLanguages[data.student.language].done;
+
 
 	const arrayMonth = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 	for (var i = 0; i < elems.divMonths.length; i++)
@@ -2181,13 +2193,16 @@ function setLogtimeValue(remToday, eachDay, elems) {
 
 	if (remToday.toFixed(2) <= 0)
 	{
-		elems.resultLogtimeRemaining.innerText = "DONE";
+		// elems.resultLogtimeRemaining.innerText = "DONE";
+		elems.resultLogtimeRemaining.innerText = arrayLanguages[data.student.language].done;
+		// elems.miniLogtimeValueRemaining.innerText = "DONE";
+		elems.miniLogtimeValueRemaining.innerText = arrayLanguages[data.student.language].done;
+
 		elems.resultLogtimeRemaining.style.color = "rgb(0, 186, 188)";
-		elems.miniLogtimeValueRemaining.innerText = "DONE";
 		elems.miniLogtimeValueRemaining.style.color = "rgb(0, 186, 188)";
 
-		elems.resultLogtime2.innerText = "DONE";				// DEV
-		elems.resultLogtime2.style.color = "rgb(0, 186, 188)";	// DEV
+		// elems.resultLogtime2.innerText = "DONE";				// DEV
+		// elems.resultLogtime2.style.color = "rgb(0, 186, 188)";	// DEV
 		elems.resultLogtimeEstimation.style.color = "rgb(0, 186, 188)";
 		elems.miniLogtimeValueLock.style.color = "rgb(0, 186, 188)";
 
@@ -2205,8 +2220,8 @@ function setLogtimeValue(remToday, eachDay, elems) {
 		elems.miniLogtimeValueRemaining.innerText = remaining;
 		elems.miniLogtimeValueRemaining.style.color = "white";
 
-		elems.resultLogtime2.innerText = remaining;				// DEV
-		elems.resultLogtime2.style.color = "white";				// DEV
+		// elems.resultLogtime2.innerText = remaining;				// DEV
+		// elems.resultLogtime2.style.color = "white";				// DEV
 		elems.resultLogtimeEstimation.style.color = "white";
 		elems.miniLogtimeValueLock.style.color = "white";
 	}
@@ -2226,10 +2241,11 @@ function setLogtimeValue(remToday, eachDay, elems) {
 	else
 	{
 		if (data.session.logAtSchool)
-			elems.resultLogtimeEach.innerText = "/ DONE";
+			elems.resultLogtimeEach.innerText = "/ " + arrayLanguages[data.student.language].done;
 		else
-			elems.resultLogtimeEach.innerText = "DONE";
-		elems.resultLogtimeEach.style.color = "rgb(0, 186, 188)";
+			elems.resultLogtimeEach.innerText = arrayLanguages[data.student.language].done;
+		// elems.resultLogtimeEach.style.color = "rgb(0, 186, 188)";
+		elems.resultLogtimeEach.style.color = "rgb(0, 135, 136)";
 		// elems.blockLogtimeTooltipText.innerText = "DONE";
 		// elems.blockLogtimeTooltipText.style.color = "rgb(0, 186, 188)";
 	}
@@ -2238,7 +2254,7 @@ function setLogtimeValue(remToday, eachDay, elems) {
 	{
 		if (data.session.remTodayLockOff <= 0)
 		{
-			elems.extraLogtimeSideRight.innerText = "DONE";
+			elems.extraLogtimeSideRight.innerText = arrayLanguages[data.student.language].done;
 			elems.extraLogtimeSideRight.style.color = "rgb(0 126 127)";
 			// elems.extraEstimation.style.color = "rgb(0 126 127)";
 		}
@@ -2258,8 +2274,8 @@ function setLogtimeValue(remToday, eachDay, elems) {
 
 		if (eachBoostValue <= 0)
 		{
-			elems.extraLogtimeSideRight.innerText = "DONE";
-			elems.extraLogtimeSideRight.style.color = "rgb(0 126 127)";
+			elems.extraLogtimeSideRight.innerText = arrayLanguages[data.student.language].done;
+			elems.extraLogtimeSideRight.style.color = "rgb(0, 126, 127)";
 		}
 		else
 		{
