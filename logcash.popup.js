@@ -400,6 +400,7 @@ function updateFontSize(elems) {
 			ratio_3 = 3 * data.student.sizeFont + "px",
 			ratio_4 = 4 * data.student.sizeFont + "px",
 			ratio_6 = 6 * data.student.sizeFont + "px",
+			ratio_7 = 7 * data.student.sizeFont + "px",
 			ratio_8 = 8 * data.student.sizeFont + "px",
 			ratio_9 = 9 * data.student.sizeFont + "px",
 			ratio_10 = 10 * data.student.sizeFont + "px",
@@ -473,10 +474,12 @@ function updateFontSize(elems) {
 	elems.buttonBoostMax.style.height = ratio_22;
 
 	/////////////////////////////////////////// INPUT
+	elems.labelHours
 	elems.inputSalary.style.fontSize = ratio_16;
 	elems.inputSalary.style.maxWidth = ratio_45;
 	elems.inputDeducted.style.fontSize = ratio_16;
 	elems.inputDeducted.style.maxWidth = ratio_45;
+	elems.inputContainerSalary.style.marginRight = ratio_8;
 
 	/////////////////////////////////////////////////// CALENDAR
 	for (var i = 0; i < 7; i++)
@@ -547,10 +550,13 @@ function updateFontSize(elems) {
 	elems.salaryCircle.style.minWidth = 84 * data.student.sizeFont + "px";
 
 	/////////////////////////////////////////// TOOLTIP QUESTION
-	elems.questionBoost.style.height = ratio_11;
 	elems.questionHours.style.height = ratio_11;
+	elems.questionBoost.style.height = ratio_11;
+	elems.questionBoost.style.marginLeft = ratio_6;
 	elems.questionHabit.style.height = ratio_11;
+	elems.questionHabit.style.marginLeft = ratio_6;
 	elems.questionLogtime.style.height = ratio_11;
+	elems.questionLogtime.style.marginLeft = ratio_6;
 
 	elems.tooltipTopText.style.fontSize = ratio_8;
 	elems.tooltipBottomText.style.fontSize = ratio_12;
@@ -572,6 +578,32 @@ function updateFontSize(elems) {
 	elems.resultLogtimeNumberDay.style.fontSize = ratio_14;
 
 	elems.resultLogtimeEach.style.fontSize = ratio_8;
+
+	//////////////////////////////////////////////// BOOST CONTAINER
+	elems.middleLine3.style.marginTop = ratio_8;
+	elems.blockBoost.style.marginTop = ratio_8;
+	elems.blockBoostLeft.style.margingLeft = ratio_4;
+	elems.blockBoostLeft.style.paddingRight = ratio_8;
+	elems.blockBoostRight.style.margingRight = ratio_4;
+	elems.blockBoostRight.style.paddingLeft = ratio_8;
+	
+	//////////////////////////////////////////////// SALARY CONTAINER
+	elems.salaryGraphContainer.style.minHeight = ratio_40;
+	elems.salaryContainer.style.paddingTop = ratio_8;
+	elems.lineThisSelection.style.marginTop = ratio_8;
+	elems.salaryCircleContainer.style.padding = ratio_12;
+
+	for (var i = 0; i < elems.monthGraphs.length; i++)
+	{
+		for (var j = 0; j < elems.monthGraphs[i].dayGraphs.length; j++)
+		{
+			elems.monthGraphs[i].dayGraphs[j].style.maxWidth = ratio_16;
+		}
+	}
+	
+	//////////////////////////////////////////////// MONTHLY CONTAINER
+	elems.habitContainer.style.marginTop = ratio_8;
+	elems.middleLine2.style.margin = ratio_7 + " 0 0 0";
 }
 
 const browser = window.browser || window.chrome;
@@ -1016,7 +1048,7 @@ popup.createElems = function(elems) {
 
 	elems.inputContainerSalary = document.createElement("div");
 	elems.inputContainerSalary.className = "pop-input-container";
-	elems.inputContainerSalary.style.marginRight = "8px";
+	// elems.inputContainerSalary.style.marginRight = "8px";
 
 	elems.lineLabelSalary = document.createElement("div");
 	elems.lineLabelSalary.className = "line-label";
@@ -1042,6 +1074,7 @@ popup.createElems = function(elems) {
 
 	elems.labelHours = document.createElement("p");
 	elems.labelHours.className = "small-title-info";
+	elems.labelHours.style.flex = "1";
 
 	elems.questionHours = document.createElement("div");
 	elems.questionHours.className = "question-logo";

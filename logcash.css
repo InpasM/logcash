@@ -172,7 +172,7 @@ body
 	border: 1px solid rgb(45, 49, 60);
     box-shadow: rgba(18, 20, 26, 0.227) 0px 10px 15px;
 	top: 5px;
-	top: 130px;
+	/* top: 130px; */
 	display: flex;
 	flex-direction: column;
 	/* padding: 8px; */
@@ -367,7 +367,6 @@ body
 	justify-content: center;
 }
 
-
 .top-div-setting-button {
 	background-image: url("icons/three-dot-90.svg");
 	background-size: 80%;
@@ -384,7 +383,6 @@ body
 .top-div-setting-button:hover {
 	background-color: rgba(32, 35, 44, 0.8);
 }
-
 
 .pop-middle-div {
 	opacity: 1;
@@ -412,13 +410,13 @@ body
 
 .middle-line-3 {
 	width: 100%;
-	margin-top: 8px;
+	/* margin-top: 8px; */
 }
 
 .block-boost {
 	display: flex;
 	justify-content: flex-start;
-	margin-top: 8px;
+	/* margin-top: 8px; */
 }
 
 .block-boost-left, .block-boost-right {
@@ -429,13 +427,13 @@ body
 
 .block-boost-left {
 	border-right: 1px solid rgb(45, 49, 60);
-	margin-left: 4px;
-	padding-right: 8px;
+	/* margin-left: 4px;
+	padding-right: 8px; */
 }
 
 .block-boost-right {
-	margin-right: 4px;
-	padding-left: 8px;
+	/* margin-right: 4px;
+	padding-left: 8px; */
 }
 
 .button-boost {
@@ -479,7 +477,7 @@ body
 }
 
 .middle-line-2 {
-	margin: 7px 0 0 0;
+	/* margin: 7px 0 0 0; */
 	border-top: 1px solid rgb(45, 49, 60);
 	display: flex;
 	flex-direction: column;
@@ -488,7 +486,7 @@ body
 /*******************************  BLOC WEEK/MONTH  ********************************/
 .habit-container {
 	width: fit-content;
-	margin-top: 8px;
+	/* margin-top: 8px; */
 }
 
 .week-container, .month-container {
@@ -618,12 +616,12 @@ body
 	flex-direction: column;
 	align-items: stretch;
 	border-top: 1px solid rgb(45, 49, 60);
-	padding-top: 8px;
+	/* padding-top: 8px; */
 }
 
 .line-this-selection {
 	/* height: 18px; */
-	margin-top: 8px;
+	/* margin-top: 8px; */
 	display: flex;
 	justify-content: center;
 }
@@ -645,11 +643,11 @@ body
 
 .salary-circle-container {
 	flex: 1;
-	aspect-ratio: 1;
+	/* aspect-ratio: 1; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 12px;
+	/* padding: 12px; */
 }
 
 .salary-circle {
@@ -736,7 +734,7 @@ body
 /***************************** GRAPH *****************************/
 .salary-graph-container {
 	height: 100%;
-	min-height: 40px;
+	/* min-height: 40px; */
 	flex: 2;
 	display: flex;
 	justify-content: center;
@@ -755,7 +753,7 @@ body
 
 .day-graph {
 	flex: 2;
-	max-width: 16px;
+	/* max-width: 16px; */
 	height: 100%;
 	margin: 0 1px;		/* depending of month or week displayed */
 	display: flex;
@@ -910,7 +908,7 @@ body
 	background-color: rgb(210, 210, 210);
 	background-image: url("icons/question-1.svg");
 	aspect-ratio: 1/1;
-	margin-left: 6px;
+	/* margin-left: 6px; */
 	/* height: 11px; */
 	background-size: contain;
 	background-repeat: no-repeat;
