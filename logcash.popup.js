@@ -240,12 +240,6 @@ function showPopup(elems) {
 
 function hidePopup(elems) {
 
-	// if (data.session.devMode)
-	// {
-	// 	elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60)";
-	// 	elems.moreInfoContainer.style.padding = "4px 0";
-	// }
-
 	elems.resultsDiv.style.height = "";
 	elems.resultsDiv.style.padding = "8px";
 	elems.resultsDiv.style.opacity = "1";
@@ -355,7 +349,6 @@ function initText(elems, text) {
 	elems.labelSalary.innerText = text.labelSalary;
 	elems.labelHours.innerText = text.labelHours;
 	elems.weeklySpan.innerText = text.monthlyAttendance;
-	// elems.labelLogtimeEach.innerText = text.labelLogtimeEach;
 	elems.extraLogtimeSideLeft.innerText = text.extraLogtimeSideLeft;
 	elems.labelLogtimeNumberDay.innerText = text.daysRemaining;
 	elems.mainTitleInfo.innerText = text.mainTitleInfo;
@@ -398,8 +391,6 @@ function initText(elems, text) {
 }
 
 function updateFontSize(elems) {
-
-	// data.student.sizeFont = 1;
 
 	console.log(elems.monthArray[0].lines[0]);
 
@@ -662,7 +653,6 @@ popup.createElems = function(elems) {
 
 	elems.panelSizeFontValue = document.createElement("div");
 	elems.panelSizeFontValue.className = "panel-size-font-value";
-	// elems.panelSizeFontValue.innerText = "1.0";
 	elems.panelSizeFontMin = document.createElement("div");
 	elems.panelSizeFontMin.className = "panel-size-font-button";
 	elems.panelSizeFontMin.innerText = "-";
@@ -722,33 +712,11 @@ popup.createElems = function(elems) {
 
 
 	elems.panelSizeFontMin.addEventListener("click", function(e) {
-		
-		// const oldTargetBox = e.target.getBoundingClientRect();
-		
-		// var oldLeft = oldTargetBox.left;
-		// var oldTop = oldTargetBox.top;
-		
 		setFontSize(-0.1, e);
-		
-		// const popupBox = elems.popupRemaining.getBoundingClientRect();
-		// const newTargetBox = e.target.getBoundingClientRect();
-		// var newLeft = newTargetBox.left;
-		// var newTop = newTargetBox.top;
-		// var offsetTargetLeft = oldLeft - newLeft;
-		// var offsetTargetTop = oldTop - newTop;
-		
-		// elems.popupRemaining.style.top = (popupBox.top + offsetTargetTop) + "px";
-		// elems.popupRemaining.style.left = (popupBox.left + offsetTargetLeft) + "px";
 	});
 
 	elems.panelSizeFontMax.addEventListener("click", function(e) {
 		setFontSize(0.1, e);
-		// data.updateLocalStorage();
-		// if (data.student.sizeFont === 1)
-		// 	elems.panelSizeFontValue.innerText = "1.0";
-		// else
-		// 	elems.panelSizeFontValue.innerText = data.student.sizeFont.toFixed(1);
-		// updateFontSize(elems)
 	});
 
 	elems.panelSizeFontBlock.appendChild(elems.panelSizeFontValue);
