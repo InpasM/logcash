@@ -1020,8 +1020,8 @@ body
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	min-width: 25px;
-	min-height: 20px;
+	/* min-width: 25px;
+	min-height: 20px; */
 	padding: 2px 0 0 0;
 	margin: 0;
 	/* font-size: 14px; */

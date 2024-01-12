@@ -2364,13 +2364,31 @@ popup.initPopup = function(elems, months) {
 	popup.setStyle(elems);
 	popup.setData(elems);
 	disableTextSelection();
+
+	function doMouseDown(e) {
+
+		var arrayElems = ["popup-top-left-text", "popup-top-right-text", "top-div-setting-block", "popup-top-div", "top-div-right"];
+	
+		for (var i = 0; i < arrayElems.length; i++)
+		{
+			if (e.target.className === arrayElems[i])
+				return true;
+		}
+		return false;
+	}
+
 	elems.popupTopDiv.addEventListener("mousedown", function(e) {
-		mouseDown = true;
-		popupOffset = [elems.popupRemaining.offsetLeft - e.clientX, elems.popupRemaining.offsetTop - e.clientY];
+
+		if (doMouseDown(e))
+		{
+			mouseDown = true;
+			popupOffset = [elems.popupRemaining.offsetLeft - e.clientX, elems.popupRemaining.offsetTop - e.clientY];
+		}
 	})
 
 	document.body.addEventListener("mousemove", function(e) {
 		e.stopPropagation();
+
 		if (mouseDown) {
 			elems.popupRemaining.style.top = e.clientY + popupOffset[1] + "px";
 			elems.popupRemaining.style.left = e.clientX + popupOffset[0] + "px";
