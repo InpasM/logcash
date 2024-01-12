@@ -199,13 +199,7 @@ function doHideShow(e) {
 	return false;
 }
 
-function showPopup(elems) {
-
-	// if (data.session.devMode)
-	// {
-	// 	elems.moreInfoContainer.style.backgroundColor = "";
-	// 	elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
-	// }
+function hidePopup(elems) {
 
 	elems.resultsDiv.style.height = "0px";
 	elems.resultsDiv.style.padding = "0px 8px";
@@ -217,12 +211,16 @@ function showPopup(elems) {
 	elems.estimationContainer.style.padding = "0px 8px";
 	elems.estimationContainer.style.opacity = "0";
 
+	// elems.resultsDiv.style.transition = "ease 0.5s height, ease 0.5s padding, ease 0.5s opacity";
+	// elems.boostLockContainer.style.transition = "ease 0.5s height, ease 0.5s padding, ease 0.5s opacity";
+	// elems.estimationContainer.style.transition = "ease 0.5s height, ease 0.5s padding, ease 0.5s opacity";
+
 	elems.popMiddleDivLeft.style.opacity = "0";
 	elems.popMiddleDivLeft.style.height = "0";
-	elems.popMiddleDivLeft.style.padding = "0 8px";
+	elems.popMiddleDivLeft.style.padding = "0 " + 8 * data.student.sizeFont + "px";
 	elems.popMiddleDivRight.style.opacity = "0";
 	elems.popMiddleDivRight.style.height = "0";
-	elems.popMiddleDivRight.style.padding = "0 8px";
+	elems.popMiddleDivRight.style.padding = "0 " + 8 * data.student.sizeFont + "px";
 
 	elems.popupTopDiv.style.borderBottom = "1px solid rgba(45, 49, 60, 0)";
 
@@ -238,7 +236,7 @@ function showPopup(elems) {
 	elems.miniLogtimePanel.style.display = "flex";
 }
 
-function hidePopup(elems) {
+function showPopup(elems) {
 
 	elems.resultsDiv.style.height = "";
 	elems.resultsDiv.style.padding = "8px";
@@ -250,20 +248,17 @@ function hidePopup(elems) {
 	elems.estimationContainer.style.padding = "8px";
 	elems.estimationContainer.style.opacity = "1";
 
-	elems.resultsDiv.style.transition = "ease 0.5s height, ease 0.5s padding, ease 0.5s opacity";
-	elems.boostLockContainer.style.transition = "ease 0.5s height, ease 0.5s padding, ease 0.5s opacity";
-	elems.estimationContainer.style.transition = "ease 0.5s height, ease 0.5s padding, ease 0.5s opacity";
-
+	
 	elems.popMiddleDivLeft.style.opacity = "1";
 	elems.popMiddleDivLeft.style.height = "";
-	elems.popMiddleDivLeft.style.padding = "8px";
-	elems.popMiddleDivLeft.style.transition = "ease 0.4s all";
+	elems.popMiddleDivLeft.style.padding = 8 * data.student.sizeFont + "px";
+	elems.popMiddleDivLeft.style.transition = "ease 0.4s opacity, ease 0.4s height";
 	
 	elems.popMiddleDivRight.style.opacity = "1";
 	elems.popMiddleDivRight.style.height = "";
-	elems.popMiddleDivRight.style.padding = "8px";
-	elems.popMiddleDivRight.style.transition = "ease 0.4s all";
-
+	elems.popMiddleDivRight.style.padding = 8 * data.student.sizeFont + "px";
+	elems.popMiddleDivRight.style.transition = "ease 0.4s opacity, ease 0.4s height";
+	
 	elems.popupTopDiv.style.borderBottom = "1px solid rgb(45, 49, 60)";
 
 	elems.popMiddleDiv.style.transform = "translateY(0)";
@@ -271,11 +266,18 @@ function hidePopup(elems) {
 	elems.popProgressTitle.style.opacity = "1";
 	elems.popProgressTitle.style.height = "";
 	elems.containerLogcash.style.marginTop = "4px";
-
+	
 	elems.miniLogtimePanel.style.display = "none";
-
+	
 	elems.topDivMinimizeButton.style.display = "flex";
 	elems.topDivMaximizeButton.style.display = "none";
+	
+	elems.resultsDiv.style.transition = "ease 0.5s height, ease 0.5s opacity";
+	elems.boostLockContainer.style.transition = "ease 0.5s height, ease 0.5s opacity";
+	elems.estimationContainer.style.transition = "ease 0.5s height, ease 0.5s opacity";
+	// elems.resultsDiv.style.transition = "ease 0.5s height, ease 0.5s padding, ease 0.5s opacity";
+	// elems.boostLockContainer.style.transition = "ease 0.5s height, ease 0.5s padding, ease 0.5s opacity";
+	// elems.estimationContainer.style.transition = "ease 0.5s height, ease 0.5s padding, ease 0.5s opacity";
 }
 
 function hideShowPopup(elems, e) {
@@ -416,6 +418,10 @@ function updateFontSize(elems) {
 	///////////////////////////////////////////////// TOP LINE POPUP
 	elems.popupTopLeftText.style.fontSize = ratio_14;
 	elems.popupTopRightText.style.fontSize = ratio_12;
+
+	////////////////////////////////////////////////// MIDDLE DIV
+	elems.popMiddleDivLeft.style.padding = 8 * data.student.sizeFont + "px";
+	elems.popMiddleDivRight.style.padding = 8 * data.student.sizeFont + "px";
 	
 	//////////////////////////////////////////////////////// PROGRESS BAR
 	elems.miniLogtimeTitleRemaining.style.fontSize = ratio_8;
@@ -432,7 +438,6 @@ function updateFontSize(elems) {
 	elems.topDivSettingPanel.style.borderRadius = ratio_4;
 
 	elems.panelLanguageTitle.style.fontSize = ratio_10;
-	// elems.panelLanguageTitle.style.margin = ratio_3 + " 0";		// panel line
 	elems.panelLanguageLine.style.margin = ratio_3 + " 0";		// panel line
 	elems.panelSizeFontLine.style.margin = ratio_6 + " 0";
 	elems.panelSizeFontBlock.style.padding = ratio_4 + " " + ratio_4;
@@ -459,6 +464,7 @@ function updateFontSize(elems) {
 	elems.resetConfirmButton.style.fontSize = ratio_10;
 	elems.resetCancelButton.style.fontSize = ratio_10;
 
+	////////////////////////////////////////////// BUTTONS
 	elems.buttonBoostMin.style.fontSize = ratio_11;
 	elems.buttonBoostMin.style.width = ratio_40;
 	elems.buttonBoostMin.style.height = ratio_22;
@@ -466,11 +472,13 @@ function updateFontSize(elems) {
 	elems.buttonBoostMax.style.width = ratio_40;
 	elems.buttonBoostMax.style.height = ratio_22;
 
+	/////////////////////////////////////////// INPUT
 	elems.inputSalary.style.fontSize = ratio_16;
 	elems.inputSalary.style.maxWidth = ratio_45;
 	elems.inputDeducted.style.fontSize = ratio_16;
 	elems.inputDeducted.style.maxWidth = ratio_45;
 
+	/////////////////////////////////////////////////// CALENDAR
 	for (var i = 0; i < 7; i++)
 	{
 		elems.monthDayBoxes[i].style.fontSize = ratio_8;
@@ -486,6 +494,7 @@ function updateFontSize(elems) {
 			elems.monthArray[i].checkboxes[j].style.width = ratio_20;
 			elems.monthArray[i].checkboxes[j].style.height = ratio_20;
 		}
+		elems.lineGraphs[i].style.maxHeight = ratio_40;
 		// for (var j = 0; j < elems.monthArray[i].lines.length; j++)
 		// {
 		// 	elems.monthArray[i].lines[j].style.min-
@@ -510,6 +519,7 @@ function updateFontSize(elems) {
 	elems.blockLogtimeLeft.style.minWidth = 74 * data.student.sizeFont + "px";
 	elems.blockLogtimeRight.style.minWidth = 74 * data.student.sizeFont + "px";
 
+	////////////////////////////////////////// TITLE SECTION
 	elems.titleBoost.style.fontSize = ratio_12;
 	elems.weeklySpan.style.fontSize = ratio_12;
 	elems.titleLogtime.style.fontSize = ratio_12;
@@ -518,7 +528,16 @@ function updateFontSize(elems) {
 	elems.mainTitleDays.style.fontSize = ratio_12;
 	elems.mainTitleBoost.style.fontSize = ratio_12;
 	elems.mainTitleLogtime.style.fontSize = ratio_12;
+	elems.titleBoost.style.margin = "0 0 0 " + ratio_2;
+	elems.weeklySpan.style.margin = "0 0 0 " + ratio_2;
+	elems.titleLogtime.style.margin = "0 0 0 " + ratio_2;
+	elems.mainTitleInfo.style.margin = "0 0 0 " + ratio_2;
+	elems.popProgressTitle.style.margin = "0 0 0 " + ratio_2;
+	elems.mainTitleDays.style.margin = "0 0 0 " + ratio_2;
+	elems.mainTitleBoost.style.margin = "0 0 0 " + ratio_2;
+	elems.mainTitleLogtime.style.margin = "0 0 0 " + ratio_2;
 
+	////////////////////////////////////////////// SALARY
 	elems.salaryEuroSign.style.fontSize = ratio_10;
 	elems.salaryInteger.style.fontSize = ratio_22;
 	elems.salaryFloat.style.fontSize = ratio_12;
@@ -527,6 +546,7 @@ function updateFontSize(elems) {
 	elems.salaryCircle.style.maxWidth = 100 * data.student.sizeFont + "px";
 	elems.salaryCircle.style.minWidth = 84 * data.student.sizeFont + "px";
 
+	/////////////////////////////////////////// TOOLTIP QUESTION
 	elems.questionBoost.style.height = ratio_11;
 	elems.questionHours.style.height = ratio_11;
 	elems.questionHabit.style.height = ratio_11;
@@ -537,6 +557,7 @@ function updateFontSize(elems) {
 
 	elems.tooltipQuestionBottomText.style.fontSize = ratio_10;
 
+	//////////////////////////////////////////// LABEL
 	elems.titleBoostMin.style.fontSize = ratio_8;
 	elems.titleBoostMax.style.fontSize = ratio_8;
 	elems.labelSalary.style.fontSize = ratio_8;
@@ -884,7 +905,7 @@ popup.createElems = function(elems) {
 
 		hideShowPopup(elems, e);
 
-		if (popupVisible)
+		if (!data.student.popupVisible)
 		{
 			elems.topDivMinimizeButton.style.display = "none";
 			elems.topDivMaximizeButton.style.display = "flex";
@@ -1892,7 +1913,8 @@ function disableTextSelection() {
 
 popup.setStyle = function(elems) {
 
-	elems.popupRemaining.style.opacity = "1";
+	// elems.popupRemaining.style.opacity = "1";
+	elems.popupRemaining.style.opacity = "0";
 	elems.popupRemaining.style.display = "flex";
 	elems.popupRemaining.style.position = "absolute";
 	elems.popupRemaining.style.borderRadius = "4px";
@@ -1901,6 +1923,7 @@ popup.setStyle = function(elems) {
 	elems.popupRemaining.style.border = "1px solid #2d313c";
 	elems.popupRemaining.style.boxShadow = "0px 10px 15px #12141a3a";
 	elems.popupRemaining.style.backdropFilter = "blur(6px)";
+	elems.popupRemaining.style.transition = "ease 0.2s opacity";
 
 	elems.popupRemaining.style.top = "68px";
 	elems.popupRemaining.style.right = "8px";
@@ -2357,9 +2380,7 @@ popup.initPopup = function(elems, months) {
 		mouseDown = false;
 	})
 
-
 	setupInputValue(data.student.months[months.length - 1], elems);
-
 
 	elems.inputSalary.addEventListener("blur", function(e) {
 
@@ -2407,6 +2428,10 @@ popup.initPopup = function(elems, months) {
 	}
 	elems.inputSalary.addEventListener("click", function(e) { this.select(); });
 	elems.inputDeducted.addEventListener("click", function(e) { this.select(); });
+
+	setTimeout(function() {
+		elems.popupRemaining.style.opacity = "1";
+	}, 200);
 }
 
 
