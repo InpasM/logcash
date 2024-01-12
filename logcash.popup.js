@@ -172,7 +172,7 @@ function mouseOverQuestion(e) {
 	elems.tooltipQuestion.style.top = offsetTop + "px";
 	elems.tooltipQuestion.style.left = offsetLeft + "px";
 
-	elems.tooltipQuestion.style.width = questions[data.student.language][e.target.id].width + "px";
+	elems.tooltipQuestion.style.width = questions[data.student.language][e.target.id].width * data.student.sizeFont + "px";
 
 	elems.tooltipQuestionBottomText.innerText = questions[data.student.language][e.target.id].text;
 }
@@ -450,6 +450,8 @@ function updateFontSize(elems) {
 	elems.panelLanguageButtonFrench.style.fontSize = ratio_9;
 
 	elems.panelSizeFontValue.style.fontSize = ratio_12;
+	elems.panelSizeFontValue.style.margin = "0 " + ratio_4 + " 0 0";
+
 	elems.panelSizeFontMin.style.fontSize = ratio_14;
 	elems.panelSizeFontMin.style.height = ratio_15;
 	elems.panelSizeFontMin.style.width = ratio_15;
@@ -457,13 +459,19 @@ function updateFontSize(elems) {
 	elems.panelSizeFontMax.style.fontSize = ratio_14;
 	elems.panelSizeFontMax.style.height = ratio_15;
 	elems.panelSizeFontMax.style.width = ratio_15;
-	elems.panelSizeFontMax.style.margin = "0 " + ratio_2;
+	elems.panelSizeFontMax.style.margin = "0 0 0 " + ratio_2;
 
 	elems.resetTooltipBlockConfirmTitle.style.fontSize = ratio_12;
 	elems.panelResetLine.style.padding = ratio_8 + " 0 0 0";
 	elems.panelResetButton.style.fontSize = ratio_10;
+	elems.panelResetButton.style.padding = ratio_6 + " " + ratio_10;
+	elems.panelResetButton.style.borderRadius = ratio_16;
 	elems.resetConfirmButton.style.fontSize = ratio_10;
+	elems.resetConfirmButton.style.padding = ratio_6 + " " + ratio_10;
+	elems.resetConfirmButton.style.borderRadius = ratio_16;
 	elems.resetCancelButton.style.fontSize = ratio_10;
+	elems.resetCancelButton.style.padding = ratio_6 + " " + ratio_10;
+	elems.resetCancelButton.style.borderRadius = ratio_16;
 
 	////////////////////////////////////////////// BUTTONS
 	elems.buttonBoostMin.style.fontSize = ratio_11;
@@ -516,8 +524,12 @@ function updateFontSize(elems) {
 		elems.divMonths[i].style.fontSize = ratio_10;
 		elems.divMonths[i].style.padding = paddingY + paddingX;
 	}
+
+	//////////////////////////////////////////////////////////////////// LANGUAGE BUTTON
 	elems.panelLanguageButtonEnglish.style.padding = paddingY + paddingX;
+	elems.panelLanguageButtonEnglish.style.marginLeft = ratio_4;
 	elems.panelLanguageButtonFrench.style.padding = paddingY + paddingX;
+	elems.panelLanguageButtonFrench.style.marginLeft = ratio_4;
 
 	elems.blockLogtimeLeft.style.minWidth = 74 * data.student.sizeFont + "px";
 	elems.blockLogtimeRight.style.minWidth = 74 * data.student.sizeFont + "px";
@@ -558,10 +570,13 @@ function updateFontSize(elems) {
 	elems.questionLogtime.style.height = ratio_11;
 	elems.questionLogtime.style.marginLeft = ratio_6;
 
+	elems.tooltipQuestion.style.padding = ratio_8;
+
 	elems.tooltipTopText.style.fontSize = ratio_8;
 	elems.tooltipBottomText.style.fontSize = ratio_12;
 
 	elems.tooltipQuestionBottomText.style.fontSize = ratio_10;
+	elems.tooltipQuestionBottomText.style.lineHeight = ratio_12;
 
 	//////////////////////////////////////////// LABEL
 	elems.titleBoostMin.style.fontSize = ratio_8;
@@ -586,6 +601,10 @@ function updateFontSize(elems) {
 	elems.blockBoostLeft.style.paddingRight = ratio_8;
 	elems.blockBoostRight.style.margingRight = ratio_4;
 	elems.blockBoostRight.style.paddingLeft = ratio_8;
+	elems.buttonBoostMin.style.marginTop = ratio_3;
+	elems.buttonBoostMin.style.borderRadius = ratio_22;
+	elems.buttonBoostMax.style.marginTop = ratio_3;
+	elems.buttonBoostMax.style.borderRadius = ratio_22;
 	
 	//////////////////////////////////////////////// SALARY CONTAINER
 	elems.salaryGraphContainer.style.minHeight = ratio_40;
@@ -604,6 +623,11 @@ function updateFontSize(elems) {
 	//////////////////////////////////////////////// MONTHLY CONTAINER
 	elems.habitContainer.style.marginTop = ratio_8;
 	elems.middleLine2.style.margin = ratio_7 + " 0 0 0";
+
+	//////////////////////////////////////////////// LOGTIME CONTAINER
+	elems.logtimeContainer.style.marginBottom = ratio_8;
+	elems.logtimeContainer.style.padding = ratio_6;
+	elems.logtimeContainer.style.borderRadius = ratio_4;
 }
 
 const browser = window.browser || window.chrome;
@@ -1299,18 +1323,6 @@ popup.createElems = function(elems) {
 	elems.blockLogtimeLeft.style.borderRight = "1px solid rgb(45, 49, 60)";
 	elems.blockLogtimeLeft.style.paddingRight = "8px";
 
-
-	// elems.blockLogtimeLeft.style.backgroundColor = "red";
-	// elems.blockLogtimeTooltip = document.createElement("div");
-	// elems.blockLogtimeTooltip.className = "block-logtime-tooltip";
-	// elems.blockLogtimeTooltipText = document.createElement("div");
-	// elems.blockLogtimeTooltipText.className = "block-logtime-tooltip-text";
-	// elems.blockLogtimeTooltipText.innerText = "/ 0h00";
-	// elems.blockLogtimeTooltip.appendChild(elems.blockLogtimeTooltipText);
-	// elems.blockLogtimeLeft.appendChild(elems.blockLogtimeTooltip);
-
-	
-	
 	
 	elems.labelLogtimeRemaining = document.createElement("p");
 	elems.labelLogtimeRemaining.className = "small-title-info";
@@ -1801,24 +1813,24 @@ popup.createElems = function(elems) {
 	elems.estimationContainer.appendChild(elems.lineResultsLogtime);
 
 
-	elems.moreInfoContainer = document.createElement("div");
-	elems.moreInfoContainer.className = "more-info-container";
-	elems.moreInfoLogo = document.createElement("div");
-	elems.moreInfoLogo.className = "more-info-logo";
-	elems.moreInfoContainer.appendChild(elems.moreInfoLogo);
+	// elems.moreInfoContainer = document.createElement("div");
+	// elems.moreInfoContainer.className = "more-info-container";
+	// elems.moreInfoLogo = document.createElement("div");
+	// elems.moreInfoLogo.className = "more-info-logo";
+	// elems.moreInfoContainer.appendChild(elems.moreInfoLogo);
 
-	elems.resultsContainer.appendChild(elems.resultsDiv);
+	// elems.resultsContainer.appendChild(elems.resultsDiv);
 
-	elems.resultsContainer.appendChild(elems.estimationContainer);
+	// elems.resultsContainer.appendChild(elems.estimationContainer);
 
-	elems.resultsDiv.appendChild(elems.mainTitleDays);
-	elems.resultsDiv.appendChild(elems.lineResultsDays);
+	// elems.resultsDiv.appendChild(elems.mainTitleDays);
+	// elems.resultsDiv.appendChild(elems.lineResultsDays);
 
-	if (data.session.devMode)
-	{
-		elems.popBottomDiv.appendChild(elems.resultsContainer);
-		elems.popBottomDiv.appendChild(elems.moreInfoContainer);
-	}
+	// if (data.session.devMode)
+	// {
+	// 	elems.popBottomDiv.appendChild(elems.resultsContainer);
+	// 	elems.popBottomDiv.appendChild(elems.moreInfoContainer);
+	// }
 	// elems.popBottomContainer.appendChild(elems.popBottomDiv);
 
 	// if (data.student.showMore)
