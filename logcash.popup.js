@@ -182,7 +182,7 @@ function mouseOverQuestion(e) {
 	elems.tooltipQuestion.style.top = offsetTop + "px";
 	elems.tooltipQuestion.style.left = offsetLeft + "px";
 
-	elems.tooltipQuestion.style.width = questions[data.student.language][e.target.id].width * data.student.sizeFont + "px";
+	elems.tooltipQuestion.style.width = questions[data.student.language][e.target.id].width * data.student.sizePanel + "px";
 
 	elems.tooltipQuestionBottomText.innerText = questions[data.student.language][e.target.id].text;
 }
@@ -227,10 +227,10 @@ function hidePopup(elems) {
 
 	elems.popMiddleDivLeft.style.opacity = "0";
 	elems.popMiddleDivLeft.style.height = "0";
-	elems.popMiddleDivLeft.style.padding = "0 " + 8 * data.student.sizeFont + "px";
+	elems.popMiddleDivLeft.style.padding = "0 " + 8 * data.student.sizePanel + "px";
 	elems.popMiddleDivRight.style.opacity = "0";
 	elems.popMiddleDivRight.style.height = "0";
-	elems.popMiddleDivRight.style.padding = "0 " + 8 * data.student.sizeFont + "px";
+	elems.popMiddleDivRight.style.padding = "0 " + 8 * data.student.sizePanel + "px";
 
 	elems.popupTopDiv.style.borderBottom = "1px solid rgba(45, 49, 60, 0)";
 
@@ -261,12 +261,12 @@ function showPopup(elems) {
 	
 	elems.popMiddleDivLeft.style.opacity = "1";
 	elems.popMiddleDivLeft.style.height = "";
-	elems.popMiddleDivLeft.style.padding = 8 * data.student.sizeFont + "px";
+	elems.popMiddleDivLeft.style.padding = 8 * data.student.sizePanel + "px";
 	elems.popMiddleDivLeft.style.transition = "ease 0.4s opacity, ease 0.4s height";
 	
 	elems.popMiddleDivRight.style.opacity = "1";
 	elems.popMiddleDivRight.style.height = "";
-	elems.popMiddleDivRight.style.padding = 8 * data.student.sizeFont + "px";
+	elems.popMiddleDivRight.style.padding = 8 * data.student.sizePanel + "px";
 	elems.popMiddleDivRight.style.transition = "ease 0.4s opacity, ease 0.4s height";
 	
 	elems.popupTopDiv.style.borderBottom = "1px solid rgb(45, 49, 60)";
@@ -435,37 +435,43 @@ function initText(elems, text) {
 	// elems.miniLogtimeTitleLock.innerText = arrayLanguages[data.student.language].labelLogtimeRemainingMini;
 }
 
-function updateFontSize(elems) {
+function updatePanelSize(elems) {
 
-	// console.log(elems.monthArray[0].lines[0]);
-
-	const	ratio_2 = 2 * data.student.sizeFont + "px",
-			ratio_3 = 3 * data.student.sizeFont + "px",
-			ratio_4 = 4 * data.student.sizeFont + "px",
-			ratio_6 = 6 * data.student.sizeFont + "px",
-			ratio_7 = 7 * data.student.sizeFont + "px",
-			ratio_8 = 8 * data.student.sizeFont + "px",
-			ratio_9 = 9 * data.student.sizeFont + "px",
-			ratio_10 = 10 * data.student.sizeFont + "px",
-			ratio_11 = 11 * data.student.sizeFont + "px",
-			ratio_12 = 12 * data.student.sizeFont + "px",
-			ratio_14 = 14 * data.student.sizeFont + "px",
-			ratio_15 = 15 * data.student.sizeFont + "px",
-			ratio_16 = 16 * data.student.sizeFont + "px",
-			ratio_20 = 20 * data.student.sizeFont + "px",
-			ratio_22 = 22 * data.student.sizeFont + "px",
-			ratio_24 = 24 * data.student.sizeFont + "px",
-			ratio_40 = 40 * data.student.sizeFont + "px",
-			ratio_45 = 45 * data.student.sizeFont + "px",
-			ratio_54 = 54 * data.student.sizeFont + "px";
+	const	ratio_2 = 2 * data.student.sizePanel + "px",
+			ratio_3 = 3 * data.student.sizePanel + "px",
+			ratio_4 = 4 * data.student.sizePanel + "px",
+			ratio_6 = 6 * data.student.sizePanel + "px",
+			ratio_7 = 7 * data.student.sizePanel + "px",
+			ratio_8 = 8 * data.student.sizePanel + "px",
+			ratio_9 = 9 * data.student.sizePanel + "px",
+			ratio_10 = 10 * data.student.sizePanel + "px",
+			ratio_11 = 11 * data.student.sizePanel + "px",
+			ratio_12 = 12 * data.student.sizePanel + "px",
+			ratio_14 = 14 * data.student.sizePanel + "px",
+			ratio_15 = 15 * data.student.sizePanel + "px",
+			ratio_16 = 16 * data.student.sizePanel + "px",
+			ratio_20 = 20 * data.student.sizePanel + "px",
+			ratio_22 = 22 * data.student.sizePanel + "px",
+			ratio_24 = 24 * data.student.sizePanel + "px",
+			ratio_40 = 40 * data.student.sizePanel + "px",
+			ratio_45 = 45 * data.student.sizePanel + "px",
+			ratio_54 = 54 * data.student.sizePanel + "px";
 
 	///////////////////////////////////////////////// TOP LINE POPUP
 	elems.popupTopLeftText.style.fontSize = ratio_14;
 	elems.popupTopRightText.style.fontSize = ratio_12;
 
 	////////////////////////////////////////////////// MIDDLE DIV
-	elems.popMiddleDivLeft.style.padding = 8 * data.student.sizeFont + "px";
-	elems.popMiddleDivRight.style.padding = 8 * data.student.sizeFont + "px";
+	if (!data.student.popupVisible)
+	{
+		elems.popMiddleDivLeft.style.padding = "0 " + 8 * data.student.sizePanel + "px";
+		elems.popMiddleDivRight.style.padding = "0 " + 8 * data.student.sizePanel + "px";
+	}
+	else
+	{
+		elems.popMiddleDivLeft.style.padding = 8 * data.student.sizePanel + "px";
+		elems.popMiddleDivRight.style.padding = 8 * data.student.sizePanel + "px";
+	}
 	
 	//////////////////////////////////////////////////////// PROGRESS BAR
 	elems.miniLogtimeTitleRemaining.style.fontSize = ratio_8;
@@ -549,19 +555,15 @@ function updateFontSize(elems) {
 			elems.monthArray[i].checkboxes[j].style.height = ratio_20;
 		}
 		elems.lineGraphs[i].style.maxHeight = ratio_40;
-		// for (var j = 0; j < elems.monthArray[i].lines.length; j++)
-		// {
-		// 	elems.monthArray[i].lines[j].style.min-
-		// }
 	}
 
-	elems.extraLogtimeSideLeft.style.fontSize = 7 * data.student.sizeFont + "px";
+	elems.extraLogtimeSideLeft.style.fontSize = 7 * data.student.sizePanel + "px";
 	elems.extraLogtimeSideLeft.style.lineHeight = ratio_8;
 	elems.extraLogtimeSideRight.style.fontSize = ratio_10;
 	elems.extraLogtimeSideRight.style.lineHeight = ratio_8;
 
-	var paddingY = 5 * data.student.sizeFont + "px ";
-	var paddingX = 6 * data.student.sizeFont + "px";
+	var paddingY = 5 * data.student.sizePanel + "px ";
+	var paddingX = 6 * data.student.sizePanel + "px";
 	for (var i = 0; i < elems.divMonths.length; i++)
 	{
 		elems.divMonths[i].style.fontSize = ratio_10;
@@ -574,8 +576,8 @@ function updateFontSize(elems) {
 	elems.panelLanguageButtonFrench.style.padding = paddingY + paddingX;
 	elems.panelLanguageButtonFrench.style.marginLeft = ratio_4;
 
-	elems.blockLogtimeLeft.style.minWidth = 74 * data.student.sizeFont + "px";
-	elems.blockLogtimeRight.style.minWidth = 74 * data.student.sizeFont + "px";
+	elems.blockLogtimeLeft.style.minWidth = 74 * data.student.sizePanel + "px";
+	elems.blockLogtimeRight.style.minWidth = 74 * data.student.sizePanel + "px";
 
 	////////////////////////////////////////// TITLE SECTION
 	elems.titleBoost.style.fontSize = ratio_12;
@@ -601,8 +603,8 @@ function updateFontSize(elems) {
 	elems.salaryFloat.style.fontSize = ratio_12;
 	elems.salaryPercent.style.fontSize = ratio_10;
 
-	elems.salaryCircle.style.maxWidth = 100 * data.student.sizeFont + "px";
-	elems.salaryCircle.style.minWidth = 84 * data.student.sizeFont + "px";
+	elems.salaryCircle.style.maxWidth = 100 * data.student.sizePanel + "px";
+	elems.salaryCircle.style.minWidth = 84 * data.student.sizePanel + "px";
 
 	/////////////////////////////////////////// TOOLTIP QUESTION
 	elems.questionHours.style.height = ratio_11;
@@ -828,24 +830,24 @@ popup.createElems = function(elems) {
 		// console.log("oldLeft:", oldLeft, "oldTop:", oldTop);
 		// console.log("clientX:", e.clientX, "clientY:", e.clientY);
 
-		if (toAdd > 0 && (data.student.sizeFont + toAdd).toFixed(1) <= 1.5)
+		if (toAdd > 0 && (data.student.sizePanel + toAdd).toFixed(1) <= 1.5)
 		{
-			data.student.sizeFont += 0.1;
+			data.student.sizePanel += 0.1;
 			update = true;
 		}
-		else if (toAdd < 0 && (data.student.sizeFont + toAdd).toFixed(1) >= 0.7)
+		else if (toAdd < 0 && (data.student.sizePanel + toAdd).toFixed(1) >= 0.7)
 		{
-			data.student.sizeFont -= 0.1;
+			data.student.sizePanel -= 0.1;
 			update = true;
 		}
 		if (update)
 		{
 			data.updateLocalStorage();
-			if (data.student.sizeFont === 1)
+			if (data.student.sizePanel === 1)
 				elems.panelSizeFontValue.innerText = "1.0";
 			else
-				elems.panelSizeFontValue.innerText = data.student.sizeFont.toFixed(1);
-			updateFontSize(elems);
+				elems.panelSizeFontValue.innerText = data.student.sizePanel.toFixed(1);
+			updatePanelSize(elems);
 
 			const popupBox = elems.popupRemaining.getBoundingClientRect();
 			const newTargetBox = e.target.getBoundingClientRect();
@@ -924,7 +926,7 @@ popup.createElems = function(elems) {
 		elems.buttonBoostMax.style.borderColor = "rgb(45, 49, 60)";
 
 		data.student.language = ENGLISH;
-		data.student.sizeFont = 1.0;
+		data.student.sizePanel = 1.0;
 		elems.panelSizeFontValue.innerText = "1.0";
 		initText(elems, arrayLanguages[data.student.language]);
 		elems.panelLanguageButtonEnglish.style.color = "#191919";
@@ -947,7 +949,7 @@ popup.createElems = function(elems) {
 			elems.monthArray[elems.monthArray.length - 1].checkboxes[i].style.borderColor = "rgb(45, 49, 60)";
 		}
 		data.updateLocalStorage();
-		updateFontSize(elems);
+		updatePanelSize(elems);
 		popup.setData(elems);
 	}
 
@@ -1332,9 +1334,9 @@ popup.createElems = function(elems) {
 	
 			tmpDay.innerText = "0";
 			tmpDay.className = "checkbox-habit";
-			tmpDay.style.fontSize = 8 * data.student.sizeFont + "px";
-			tmpDay.style.width = 20 * data.student.sizeFont + "px";
-			tmpDay.style.height = 20 * data.student.sizeFont + "px";
+			tmpDay.style.fontSize = 8 * data.student.sizePanel + "px";
+			tmpDay.style.width = 20 * data.student.sizePanel + "px";
+			tmpDay.style.height = 20 * data.student.sizePanel + "px";
 			tmpDay.style.opacity = "0";
 			tmpDay.style.cursor = "default";
 
@@ -2015,13 +2017,13 @@ popup.createElems = function(elems) {
 	document.body.appendChild(elems.popupRemaining);
 
 	initText(elems, arrayLanguages[data.student.language]);
-	updateFontSize(elems);
+	updatePanelSize(elems);
 
 	if (!data.student.popupVisible)
 		hidePopup(elems);
 	else
 		showPopup(elems);
-	elems.panelSizeFontValue.innerText = data.student.sizeFont.toFixed(1);
+	elems.panelSizeFontValue.innerText = data.student.sizePanel.toFixed(1);
 }
 
 function disableTextSelection() {
