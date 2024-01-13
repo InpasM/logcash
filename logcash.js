@@ -81,6 +81,7 @@ function clickMonth(e) {
 	function setDayNameEvent(value) {
 		for (var i = 0; i < elems.monthDayBoxes.length; i++)
 			elems.monthDayBoxes[i].style.pointerEvents = value;
+		elems.weeklySpan.style.pointerEvents = value;
 	}
 
 	// make event clickable for day name when on actual month
