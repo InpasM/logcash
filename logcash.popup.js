@@ -47,6 +47,9 @@ popup.setAttributeDaySlide = function(elems, indexMonth) {
 	{
 		elems.monthGraphs[indexMonth].daySlideContainers[i].setAttribute("date", popup.months[indexMonth].days[i].dayDate);
 		elems.monthGraphs[indexMonth].daySlideContainers[i].setAttribute("salary", popup.months[indexMonth].days[i].cashEarn.toFixed(2));
+		elems.monthGraphs[indexMonth].daySlideContainers[i].setAttribute("timeDone", popup.months[indexMonth].days[i].timeDone);
+		// elems.monthGraphs[indexMonth].daySlideContainers[i].setAttribute("salary", popup.months[indexMonth].days[i].cashEarn.toFixed(2));
+		// console.log(popup.months[indexMonth].days[i].timeDone);
 	}
 }
 
@@ -1767,7 +1770,11 @@ popup.createElems = function(elems) {
 				var tmpBase = e.target.nextSibling.getBoundingClientRect();
 	
 				elems.tooltipTopText.innerText = e.target.getAttribute("date");
-				elems.tooltipBottomText.innerText = e.target.getAttribute("salary") + "€";
+
+				if (data.student.months[popup.months.indexArray].salary !== "0" && data.student.months[popup.months.indexArray].salary !== 0)
+					elems.tooltipBottomText.innerText = e.target.getAttribute("salary") + "€";
+				else
+					elems.tooltipBottomText.innerText = e.target.getAttribute("timeDOne");
 	
 				offsetLeft = elemRect.left - elemRect.width;
 	
