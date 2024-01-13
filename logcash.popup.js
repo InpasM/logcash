@@ -304,8 +304,8 @@ function showPopup(elems) {
 	elems.topDivMinimizeButton.style.display = "flex";
 	elems.topDivMaximizeButton.style.display = "none";
 	
-	elems.popMiddleDivLeft.style.transition = "ease 0.4s all";
-	elems.popMiddleDivRight.style.transition = "ease 0.4s all";
+	elems.popMiddleDivLeft.style.transition = "ease 0.4s opacity, ease 0.4s height, ease 0.4s padding-top, ease 0.4s padding-bottom";
+	elems.popMiddleDivRight.style.transition = "ease 0.4s opacity, ease 0.4s height, ease 0.4s padding-top, ease 0.4s padding-bottom";
 	// elems.resultsDiv.style.transition = "ease 0.5s height, ease 0.5s opacity";
 	// elems.boostLockContainer.style.transition = "ease 0.5s height, ease 0.5s opacity";
 	// elems.estimationContainer.style.transition = "ease 0.5s height, ease 0.5s opacity";
