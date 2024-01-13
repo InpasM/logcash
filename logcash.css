@@ -46,7 +46,8 @@ body
 	margin: 0;
 	padding: 0;
 	color: rgb(155, 155, 155);
-	text-align: justify;
+	/* text-align: justify; */
+	text-align: center;
 }
 
 .mini-logtime-value {
@@ -172,6 +173,7 @@ body
 	border: 1px solid rgb(45, 49, 60);
     box-shadow: rgba(18, 20, 26, 0.227) 0px 10px 15px;
 	top: 5px;
+	/* top: 150px; */
 	display: flex;
 	flex-direction: column;
 	display: none;

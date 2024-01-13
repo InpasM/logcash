@@ -323,7 +323,8 @@ var arrayLanguages = [
 		arrayDaysName: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
 		arrayMonth: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 		labelLogtimeRemaining: "Remaining Today",
-		labelLogtimeRemainingMini: "Rem. Today",
+		// labelLogtimeRemainingMini: "Rem. Today",
+		labelLogtimeRemainingMini: "Today",
 		labelEstimationLock: "Lockout Time",
 		labelEstimationLockMini: "Lock Time",
 		labelEstimationLog: "Logout Time",
@@ -349,7 +350,8 @@ var arrayLanguages = [
 		arrayDaysName: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
 		arrayMonth: ["Jan", "Fev", "Mar", "Avr", "Mai", "Jui", "Juil", "Aou", "Sep", "Oct", "Nov", "Dec"],
 		labelLogtimeRemaining: "Restant Aujourd'hui",
-		labelLogtimeRemainingMini: "Restant Auj.",
+		// labelLogtimeRemainingMini: "Restant Auj.",
+		labelLogtimeRemainingMini: "Aujourd'hui",
 		labelEstimationLock: "Heure Verrouillage",
 		labelEstimationLockMini: "Heure Verr.",
 		labelEstimationLog: "Heure Déconnexion",
@@ -454,8 +456,10 @@ function updatePanelSize(elems) {
 			ratio_22 = 22 * data.student.sizePanel + "px",
 			ratio_24 = 24 * data.student.sizePanel + "px",
 			ratio_40 = 40 * data.student.sizePanel + "px",
+			ratio_43 = 43 * data.student.sizePanel + "px",
 			ratio_45 = 45 * data.student.sizePanel + "px",
-			ratio_54 = 54 * data.student.sizePanel + "px";
+			ratio_54 = 54 * data.student.sizePanel + "px",
+			ratio_90 = 90 * data.student.sizePanel + "px";
 
 	///////////////////////////////////////////////// TOP LINE POPUP
 	elems.popupTopLeftText.style.fontSize = ratio_14;
@@ -474,14 +478,21 @@ function updatePanelSize(elems) {
 	}
 	
 	//////////////////////////////////////////////////////// PROGRESS BAR
+	elems.rowProgress.style.height = ratio_20;
+	elems.sideProgress.style.fontSize = ratio_12;
+	elems.sideProgress.style.minWidth = ratio_90;
+	elems.textRemaining.style.fontSize = ratio_11;
+
+	//////////////////////////////////////////////////////// MINI PROGRESS BAR
 	elems.miniLogtimeTitleRemaining.style.fontSize = ratio_8;
+	elems.miniLogtimeTitleRemaining.style.width = ratio_43;
+	
 	elems.miniLogtimeTitleLock.style.fontSize = ratio_8;
+	elems.miniLogtimeTitleLock.style.width = ratio_43;
+
 	elems.miniLogtimeValueRemaining.style.fontSize = ratio_10;
 	elems.miniLogtimeValueLock.style.fontSize = ratio_10;
 	
-	elems.rowProgress.style.height = ratio_20;
-	elems.sideProgress.style.fontSize = ratio_12;
-	elems.textRemaining.style.fontSize = ratio_11;
 	
 	//////////////////////////////////////////////// SETTING PANEL
 	elems.topDivSettingPanel.style.padding = ratio_8;
@@ -531,7 +542,6 @@ function updatePanelSize(elems) {
 	elems.buttonBoostMax.style.height = ratio_22;
 
 	/////////////////////////////////////////// INPUT
-	elems.labelHours
 	elems.inputSalary.style.fontSize = ratio_16;
 	elems.inputSalary.style.maxWidth = ratio_45;
 	elems.inputDeducted.style.fontSize = ratio_16;
@@ -555,6 +565,23 @@ function updatePanelSize(elems) {
 			elems.monthArray[i].checkboxes[j].style.height = ratio_20;
 		}
 		elems.lineGraphs[i].style.maxHeight = ratio_40;
+
+		for (var j = 0; j < elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes.length; j++)
+		{
+			elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.width = ratio_20;
+			elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.height = ratio_20;
+		}
+
+		for (var j = 0; j < elems.lineGraphs[i].childNodes.length; j++)
+		{
+			for (var k = 0; k < elems.lineGraphs[i].childNodes[j].childNodes.length; k++)
+			{
+				if (elems.lineGraphs[i].childNodes[j].childNodes[k].className === "day-base")
+				{
+					elems.lineGraphs[i].childNodes[j].childNodes[k].style.height = ratio_2;
+				}
+			}
+		}
 	}
 
 	elems.extraLogtimeSideLeft.style.fontSize = 7 * data.student.sizePanel + "px";
@@ -659,6 +686,10 @@ function updatePanelSize(elems) {
 	elems.lineThisSelection.style.marginTop = ratio_8;
 	elems.salaryCircleContainer.style.padding = ratio_12;
 
+	// elems.salaryCircleContainer.style.padding = ratio_12;
+	elems.blockLogtimeLeft.style.paddingRight = ratio_8;
+	elems.blockLogtimeRight.style.paddingLeft = ratio_8;
+
 	for (var i = 0; i < elems.monthGraphs.length; i++)
 	{
 		for (var j = 0; j < elems.monthGraphs[i].dayGraphs.length; j++)
@@ -675,6 +706,12 @@ function updatePanelSize(elems) {
 	elems.logtimeContainer.style.marginBottom = ratio_8;
 	elems.logtimeContainer.style.padding = ratio_6;
 	elems.logtimeContainer.style.borderRadius = ratio_4;
+
+	// extraLogtimeSideLeft
+	// extraLogtimeSideRight
+	elems.labelLogtimeRemaining.style.borderRadius = ratio_4;
+	elems.extraLogtimeSideLeft.style.padding = "0 " + ratio_2;
+	elems.extraLogtimeSideRight.style.padding = "0 " + ratio_2;
 }
 
 const browser = window.browser || window.chrome;
@@ -1400,7 +1437,7 @@ popup.createElems = function(elems) {
 	elems.blockLogtimeLeft = document.createElement("div");
 	elems.blockLogtimeLeft.className = "block-logtime-side";
 	elems.blockLogtimeLeft.style.borderRight = "1px solid rgb(45, 49, 60)";
-	elems.blockLogtimeLeft.style.paddingRight = "8px";
+	// elems.blockLogtimeLeft.style.paddingRight = "8px";
 
 	
 	elems.labelLogtimeRemaining = document.createElement("p");
@@ -1521,7 +1558,7 @@ popup.createElems = function(elems) {
 
 	elems.blockLogtimeRight = document.createElement("div");
 	elems.blockLogtimeRight.className = "block-logtime-side";
-	elems.blockLogtimeRight.style.paddingLeft = "8px";
+	// elems.blockLogtimeRight.style.paddingLeft = "8px";
 
 	elems.labelLogtimeEstimation = document.createElement("p");
 	elems.labelLogtimeEstimation.className = "small-title-info";
@@ -2366,9 +2403,9 @@ function setLogtimeEstimation(elems) {
 	}
 	
 	if (data.session.timeLock === "IMPOSSIBLE")
-		elems.resultLogtimeEstimation.style.fontSize = "12px";
+		elems.resultLogtimeEstimation.style.fontSize = 12 * data.student.sizePanel + "px";
 	else
-		elems.resultLogtimeEstimation.style.fontSize = "16px";
+		elems.resultLogtimeEstimation.style.fontSize = 16 * data.student.sizePanel + "px";
 
 	// if (timeLockOff === "IMPOSSIBLE")
 	// 	elems.extraEstimation.style.fontSize = "8px";

@@ -29,7 +29,6 @@ function initContainerLogcash(elems) {
 	elems.miniLogtimeBlockRemaining.style.marginRight = "4px";
 	elems.miniLogtimeTitleRemaining = document.createElement("p");
 	elems.miniLogtimeTitleRemaining.className = "mini-logtime-title";
-	// elems.miniLogtimeTitleRemaining.innerText = "Rem. Today";
 	elems.miniLogtimeValueRemaining = document.createElement("p");
 	elems.miniLogtimeValueRemaining.className = "mini-logtime-value";
 	elems.miniLogtimeValueRemaining.innerText = "0h00";
@@ -38,7 +37,6 @@ function initContainerLogcash(elems) {
 	elems.miniLogtimeBlockLock.className = "mini-logtime-block";
 	elems.miniLogtimeTitleLock = document.createElement("p");
 	elems.miniLogtimeTitleLock.className = "mini-logtime-title";
-	// elems.miniLogtimeTitleLock.innerText = "Lock. Time";
 	elems.miniLogtimeValueLock = document.createElement("p");
 	elems.miniLogtimeValueLock.className = "mini-logtime-value";
 	elems.miniLogtimeValueLock.innerText = "00:00";
@@ -98,7 +96,6 @@ function setStyle(elems) {
 	elems.sideProgress.style.justifyContent = "center";
 	elems.sideProgress.style.alignItems = "center";
 	elems.sideProgress.style.textAlign = "center";
-	elems.sideProgress.style.minWidth = "90px";
 	elems.sideProgress.style.height = "100%";
 	elems.sideProgress.style.borderRadius = "3px";
 	
