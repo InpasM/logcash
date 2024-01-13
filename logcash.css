@@ -267,6 +267,11 @@ body
 	border-radius: 3px;
 }
 
+.panel-size-font-button:hover {
+	background-color: rgb(30, 33, 43);
+	color: rgba(236, 238, 244, 0.9);
+}
+
 .panel-reset-line {
 	width: 100%;
 	border-top: 1px solid rgb(45, 49, 60);
@@ -349,7 +354,7 @@ body
 }
 
 .top-div-setting-button:hover {
-	background-color: rgba(32, 35, 44, 0.8);
+	background-color: rgb(30, 33, 43);
 }
 
 .pop-middle-div {
@@ -412,6 +417,7 @@ body
 	text-align: center;
 	justify-content: center;
 	align-items: center;
+	/* background-color: rgb(30, 33, 43); */
 }
 
 .pop-input-container {
@@ -476,6 +482,10 @@ body
 	cursor: pointer;
 }
 
+.days-name-box:hover {
+	color: rgb(230, 230, 230);
+}
+
 .line-habit {
 	width: 100%;
 	display: flex;
@@ -484,6 +494,7 @@ body
 
 .checkbox-habit {
 	background-color: #373c48;
+	/* background-color: #282b34; */
 	color: rgb(198, 198, 198);
 	border-radius: 50%;
 	display: flex;

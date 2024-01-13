@@ -44,7 +44,7 @@ function mOverMonth(e) {
 
 	if (e.target.id != months.indexArray)
 	{
-		e.target.style.backgroundColor = "rgb(27 31 41)";
+		e.target.style.backgroundColor = "rgb(30, 33, 43)";
 		e.target.style.color = "rgba(236, 238, 244, 0.9)";
 	}
 }

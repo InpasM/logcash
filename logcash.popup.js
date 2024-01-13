@@ -787,16 +787,39 @@ popup.createElems = function(elems) {
 	elems.panelLanguageTitle.className = "setting-panel-title";
 	// elems.panelLanguageTitle.innerText = "Language";
 
+	function mouseoverLanguage(e) {
+		
+		if ((data.student.language === 1 && e.target.id === "0") || (data.student.language === 0 && e.target.id === "1"))
+		{
+			e.target.style.backgroundColor = "rgb(30, 33, 43)";
+			e.target.style.color = "rgba(236, 238, 244, 0.9)";
+		}
+	}
+
+	function mouseoutLanguage(e) {
+		
+		if ((data.student.language === 1 && e.target.id === "0") || (data.student.language === 0 && e.target.id === "1"))
+		{
+			e.target.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+			e.target.style.color = "rgb(155, 155, 155)";
+		}
+	}
+
 	elems.panelLanguageRight = document.createElement("div");
 	elems.panelLanguageRight.className = "setting-block-button";
 	elems.panelLanguageButtonEnglish = document.createElement("div");
 	elems.panelLanguageButtonEnglish.className = "setting-button-option";
 	elems.panelLanguageButtonEnglish.innerText = "ENG";
 	elems.panelLanguageButtonEnglish.id = "0";
+	elems.panelLanguageButtonEnglish.addEventListener("mouseover", mouseoverLanguage);
+	elems.panelLanguageButtonEnglish.addEventListener("mouseout", mouseoutLanguage);
+	
 	elems.panelLanguageButtonFrench = document.createElement("div");
 	elems.panelLanguageButtonFrench.className = "setting-button-option";
 	elems.panelLanguageButtonFrench.innerText = "FR";
 	elems.panelLanguageButtonFrench.id = "1";
+	elems.panelLanguageButtonFrench.addEventListener("mouseover", mouseoverLanguage);
+	elems.panelLanguageButtonFrench.addEventListener("mouseout", mouseoutLanguage);
 
 	function changeLanguage(e) {
 
@@ -859,6 +882,8 @@ popup.createElems = function(elems) {
 
 	elems.panelSizeFontValue = document.createElement("div");
 	elems.panelSizeFontValue.className = "panel-size-font-value";
+
+	////////////////////////////////////////////////////// SIZE BUTTONS
 	elems.panelSizeFontMin = document.createElement("div");
 	elems.panelSizeFontMin.className = "panel-size-font-button";
 	elems.panelSizeFontMin.innerText = "-";
@@ -978,7 +1003,11 @@ popup.createElems = function(elems) {
 		data.student.addBoostHalf = false;
 		data.student.addBoostFull = false;
 		elems.buttonBoostMin.style.borderColor = "rgb(45, 49, 60)";
+		elems.buttonBoostMin.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+		elems.buttonBoostMin.style.color = "rgb(155, 155, 155)";
 		elems.buttonBoostMax.style.borderColor = "rgb(45, 49, 60)";
+		elems.buttonBoostMax.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+		elems.buttonBoostMax.style.color = "rgb(155, 155, 155)";
 
 		data.student.language = ENGLISH;
 		data.student.sizePanel = 1.0;
@@ -1141,18 +1170,30 @@ popup.createElems = function(elems) {
 
 	function mouseoverBoost(e) {
 
-		if (!data.student.addBoostHalf && e.target.id === "boost-min")
-			e.target.style.backgroundColor = "rgb(27 31 41)";
-		else if (!data.student.addBoostFull && e.target.id === "boost-max")
-			e.target.style.backgroundColor = "rgb(27 31 41)";
+		if ((!data.student.addBoostHalf && e.target.id === "boost-min") || (!data.student.addBoostFull && e.target.id === "boost-max"))
+		{
+			e.target.style.backgroundColor = "rgb(30, 33, 43)";
+			e.target.style.color = "rgba(236, 238, 244, 0.9)";
+		}
+		else
+		{
+			e.target.style.backgroundColor = "#282b34";
+			e.target.style.color = "rgba(236, 238, 244, 0.9)";
+		}
 	}
 
 	function mouseoutBoost(e) {
 
-		if (!data.student.addBoostHalf && e.target.id === "boost-min")
+		if ((!data.student.addBoostHalf && e.target.id === "boost-min") || (!data.student.addBoostFull && e.target.id === "boost-max"))
+		{
 			e.target.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
-		else if (!data.student.addBoostFull && e.target.id === "boost-max")
-			e.target.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+			e.target.style.color = "rgb(155, 155, 155)";
+		}
+		else
+		{
+			e.target.style.backgroundColor = "#373c48";
+			e.target.style.color = "white";
+		}
 	}
 
 	elems.titleBoostMin = document.createElement("p");
@@ -1342,6 +1383,16 @@ popup.createElems = function(elems) {
 	}
 	elems.monthContainer.appendChild(elems.monthLineDayName);
 
+	function mouseoverDayCircle(e) {
+		e.target.style.backgroundColor = "#282b34";
+		e.target.style.color = "rgba(236, 238, 244, 0.9)";
+	}
+
+	function mouseoutDayCircle(e) {
+		e.target.style.backgroundColor = "#373c48";
+		e.target.style.color = "rgb(198, 198, 198)";
+	}
+
 	elems.monthArray = [];
 	elems.monthBlock = [];
 
@@ -1369,6 +1420,8 @@ popup.createElems = function(elems) {
 
 				tmpDay.innerText = indexMonth;
 				tmpDay.className = "checkbox-habit";
+				tmpDay.addEventListener("mouseover", mouseoverDayCircle);
+				tmpDay.addEventListener("mouseout", mouseoutDayCircle);
 				if (indexMonth < popup.numberDay || k != popup.months.length - 1)
 				{
 					tmpDay.style.backgroundColor = "#202830";
@@ -2544,11 +2597,13 @@ function clickMonthlyHabit(e) {
 	{
 		data.student.monthlyHabit[index] = false;
 		e.target.style.borderColor = "rgb(45, 49, 60)";
+		e.target.style.backgroundColor = "#373c48";
 	}
 	else
 	{
 		data.student.monthlyHabit[index] = true;
 		e.target.style.borderColor = "rgb(0, 186, 188)";
+		e.target.style.backgroundColor = "#373c48";
 	}
 	if (data.isHomePage === -1)
 		data.updateLocalStorage();
