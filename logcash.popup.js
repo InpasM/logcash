@@ -458,6 +458,7 @@ function updatePanelSize(elems) {
 			ratio_20 = 20 * data.student.sizePanel + "px",
 			ratio_22 = 22 * data.student.sizePanel + "px",
 			ratio_24 = 24 * data.student.sizePanel + "px",
+			ratio_35 = 35 * data.student.sizePanel + "px",
 			ratio_40 = 40 * data.student.sizePanel + "px",
 			ratio_43 = 43 * data.student.sizePanel + "px",
 			ratio_45 = 45 * data.student.sizePanel + "px",
@@ -589,8 +590,10 @@ function updatePanelSize(elems) {
 
 	elems.extraLogtimeSideLeft.style.fontSize = 7 * data.student.sizePanel + "px";
 	elems.extraLogtimeSideLeft.style.lineHeight = ratio_8;
+	elems.extraLogtimeSideLeft.style.width = ratio_40;
 	elems.extraLogtimeSideRight.style.fontSize = ratio_10;
 	elems.extraLogtimeSideRight.style.lineHeight = ratio_8;
+	elems.extraLogtimeSideRight.style.width = ratio_35;
 
 	var paddingY = 5 * data.student.sizePanel + "px ";
 	var paddingX = 6 * data.student.sizePanel + "px";
@@ -1543,7 +1546,7 @@ popup.createElems = function(elems) {
 	elems.extraLogtimeSideRight.className = "extra-logtime-side";
 	elems.extraLogtimeSideRight.innerText = "0h00";
 	elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
-	elems.extraLogtimeSideRight.style.justifyContent = "flex-start";
+	// elems.extraLogtimeSideRight.style.justifyContent = "flex-start";
 	// elems.extraLogtimeSideRight.style.fontSize = "10px";
 
 	elems.extraLogtimeLeft.appendChild(elems.extraLogtimeSideLeft);
