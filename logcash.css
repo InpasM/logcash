@@ -400,7 +400,8 @@ body
 
 .button-boost {
 	cursor: pointer;
-	background-color: #373c48;
+	/* background-color: #373c48; */
+	background-color: rgba(37, 41, 50, 0.9);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -541,7 +542,6 @@ body
 	justify-content: center;
 	align-items: center;
 	margin: 0;
-	/* padding: 0 2px; */
 	white-space: nowrap;
 	text-align: center;
 }

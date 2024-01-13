@@ -59,6 +59,8 @@ function clickBoostMin() {
 	{
 		data.student.addBoostHalf = false;
 		elems.buttonBoostMin.style.borderColor = "rgb(45, 49, 60)";
+		elems.buttonBoostMin.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+		elems.buttonBoostMin.style.color = "rgb(155, 155, 155)";
 		elems.labelLogtimeEstimation.innerText = arrayLanguages[data.student.language].labelEstimationLog;
 		elems.miniLogtimeTitleLock.innerText = arrayLanguages[data.student.language].labelEstimationLogMini;
 	}
@@ -68,6 +70,8 @@ function clickBoostMin() {
 		{
 			data.student.addBoostFull = false;
 			elems.buttonBoostMax.style.borderColor = "rgb(45, 49, 60)";
+			elems.buttonBoostMax.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+			elems.buttonBoostMax.style.color = "rgb(155, 155, 155)";
 			elems.labelLogtimeEstimation.innerText = arrayLanguages[data.student.language].labelEstimationLock;
 			elems.miniLogtimeTitleLock.innerText = arrayLanguages[data.student.language].labelEstimationLockMini;
 		}
@@ -78,6 +82,8 @@ function clickBoostMin() {
 		}
 		data.student.addBoostHalf = true;
 		elems.buttonBoostMin.style.borderColor = "rgb(0, 186, 188)";
+		elems.buttonBoostMin.style.backgroundColor = "#373c48";
+		elems.buttonBoostMin.style.color = "white";
 	}
 	if (data.student.addBoostHalf || data.student.addBoostFull)
 		elems.extraLogtimeLeft.style.opacity = "1";
@@ -93,6 +99,8 @@ function clickBoostMax() {
 	{
 		data.student.addBoostFull = false;
 		elems.buttonBoostMax.style.borderColor = "rgb(45, 49, 60)";
+		elems.buttonBoostMax.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+		elems.buttonBoostMax.style.color = "rgb(155, 155, 155)";
 		elems.labelLogtimeEstimation.innerText = arrayLanguages[data.student.language].labelEstimationLog;
 		elems.miniLogtimeTitleLock.innerText = arrayLanguages[data.student.language].labelEstimationLogMini;
 	}
@@ -102,6 +110,8 @@ function clickBoostMax() {
 		{
 			data.student.addBoostHalf = false;
 			elems.buttonBoostMin.style.borderColor = "rgb(45, 49, 60)";
+			elems.buttonBoostMin.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+			elems.buttonBoostMin.style.color = "rgb(155, 155, 155)";
 			elems.labelLogtimeEstimation.innerText = arrayLanguages[data.student.language].labelEstimationLock;
 			elems.miniLogtimeTitleLock.innerText = arrayLanguages[data.student.language].labelEstimationLockMini;
 		}
@@ -112,6 +122,8 @@ function clickBoostMax() {
 		}
 		data.student.addBoostFull = true;
 		elems.buttonBoostMax.style.borderColor = "rgb(0, 186, 188)";
+		elems.buttonBoostMax.style.backgroundColor = "#373c48";
+		elems.buttonBoostMax.style.color = "white";
 	}
 	if (data.student.addBoostHalf || data.student.addBoostFull)
 		elems.extraLogtimeLeft.style.opacity = "1";
@@ -1127,19 +1139,41 @@ popup.createElems = function(elems) {
 	elems.blockBoostRight = document.createElement("div");
 	elems.blockBoostRight.className = "block-boost-right";
 
+	function mouseoverBoost(e) {
+
+		if (!data.student.addBoostHalf && e.target.id === "boost-min")
+			e.target.style.backgroundColor = "rgb(27 31 41)";
+		else if (!data.student.addBoostFull && e.target.id === "boost-max")
+			e.target.style.backgroundColor = "rgb(27 31 41)";
+	}
+
+	function mouseoutBoost(e) {
+
+		if (!data.student.addBoostHalf && e.target.id === "boost-min")
+			e.target.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+		else if (!data.student.addBoostFull && e.target.id === "boost-max")
+			e.target.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+	}
+
 	elems.titleBoostMin = document.createElement("p");
 	elems.titleBoostMin.className = "small-title-info";
 	elems.titleBoostMin.innerText = "Min";
 	elems.buttonBoostMin = document.createElement("div");
 	elems.buttonBoostMin.className = "button-boost";
+	elems.buttonBoostMin.id = "boost-min";
 	elems.buttonBoostMin.innerText = "42min";
+	elems.buttonBoostMin.addEventListener("mouseover", mouseoverBoost);
+	elems.buttonBoostMin.addEventListener("mouseout", mouseoutBoost);
 	
 	elems.titleBoostMax = document.createElement("p");
 	elems.titleBoostMax.className = "small-title-info";
 	elems.titleBoostMax.innerText = "Max";
 	elems.buttonBoostMax = document.createElement("div");
 	elems.buttonBoostMax.className = "button-boost";
+	elems.buttonBoostMax.id = "boost-max";
 	elems.buttonBoostMax.innerText = "1h24";
+	elems.buttonBoostMax.addEventListener("mouseover", mouseoverBoost);
+	elems.buttonBoostMax.addEventListener("mouseout", mouseoutBoost);
 
 	elems.blockBoostLeft.appendChild(elems.titleBoostMin);
 	elems.blockBoostLeft.appendChild(elems.buttonBoostMin);
@@ -1888,10 +1922,14 @@ popup.createElems = function(elems) {
 	if (data.student.addBoostHalf)
 	{
 		elems.buttonBoostMin.style.borderColor = "rgb(0, 186, 188)";
+		elems.buttonBoostMin.style.backgroundColor = "#373c48";
+		elems.buttonBoostMin.style.color = "white";
 	}
 	else if (data.student.addBoostFull)
 	{
 		elems.buttonBoostMax.style.borderColor = "rgb(0, 186, 188)";
+		elems.buttonBoostMax.style.backgroundColor = "#373c48";
+		elems.buttonBoostMax.style.color = "white";
 	}
 	elems.boostLockContainer.appendChild(elems.mainTitleBoost);
 
