@@ -240,6 +240,9 @@ function hidePopup(elems) {
 	// elems.boostLockContainer.style.transition = "ease 0.5s height, ease 0.5s padding, ease 0.5s opacity";
 	// elems.estimationContainer.style.transition = "ease 0.5s height, ease 0.5s padding, ease 0.5s opacity";
 
+	// elems.popMiddleDivLeft.style.transition = "ease 0.4s opacity, ease 0.4s height";
+	// elems.popMiddleDivRight.style.transition = "ease 0.4s opacity, ease 0.4s height";
+
 	elems.popMiddleDivLeft.style.opacity = "0";
 	elems.popMiddleDivLeft.style.height = "0";
 	elems.popMiddleDivLeft.style.padding = "0 " + 8 * data.student.sizePanel + "px";
@@ -259,6 +262,10 @@ function hidePopup(elems) {
 	elems.topDivMaximizeButton.style.display = "flex";
 
 	elems.miniLogtimePanel.style.display = "flex";
+
+	// elems.resultsDiv.style.transition = "ease 0.5s height, ease 0.5s opacity";
+	// elems.boostLockContainer.style.transition = "ease 0.5s height, ease 0.5s opacity";
+	// elems.estimationContainer.style.transition = "ease 0.5s height, ease 0.5s opacity";
 }
 
 function showPopup(elems) {
@@ -277,12 +284,12 @@ function showPopup(elems) {
 	elems.popMiddleDivLeft.style.opacity = "1";
 	elems.popMiddleDivLeft.style.height = "";
 	elems.popMiddleDivLeft.style.padding = 8 * data.student.sizePanel + "px";
-	elems.popMiddleDivLeft.style.transition = "ease 0.4s opacity, ease 0.4s height";
+	// elems.popMiddleDivLeft.style.transition = "ease 0.4s opacity, ease 0.4s height";
 	
 	elems.popMiddleDivRight.style.opacity = "1";
 	elems.popMiddleDivRight.style.height = "";
 	elems.popMiddleDivRight.style.padding = 8 * data.student.sizePanel + "px";
-	elems.popMiddleDivRight.style.transition = "ease 0.4s opacity, ease 0.4s height";
+	// elems.popMiddleDivRight.style.transition = "ease 0.4s opacity, ease 0.4s height";
 	
 	elems.popupTopDiv.style.borderBottom = "1px solid rgb(45, 49, 60)";
 
@@ -297,9 +304,12 @@ function showPopup(elems) {
 	elems.topDivMinimizeButton.style.display = "flex";
 	elems.topDivMaximizeButton.style.display = "none";
 	
-	elems.resultsDiv.style.transition = "ease 0.5s height, ease 0.5s opacity";
-	elems.boostLockContainer.style.transition = "ease 0.5s height, ease 0.5s opacity";
-	elems.estimationContainer.style.transition = "ease 0.5s height, ease 0.5s opacity";
+	elems.popMiddleDivLeft.style.transition = "ease 0.4s all";
+	elems.popMiddleDivRight.style.transition = "ease 0.4s all";
+	// elems.resultsDiv.style.transition = "ease 0.5s height, ease 0.5s opacity";
+	// elems.boostLockContainer.style.transition = "ease 0.5s height, ease 0.5s opacity";
+	// elems.estimationContainer.style.transition = "ease 0.5s height, ease 0.5s opacity";
+
 	// elems.resultsDiv.style.transition = "ease 0.5s height, ease 0.5s padding, ease 0.5s opacity";
 	// elems.boostLockContainer.style.transition = "ease 0.5s height, ease 0.5s padding, ease 0.5s opacity";
 	// elems.estimationContainer.style.transition = "ease 0.5s height, ease 0.5s padding, ease 0.5s opacity";

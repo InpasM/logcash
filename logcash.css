@@ -93,6 +93,7 @@ body
 	justify-content: center;
 	align-items: center;
 	text-align: center;
+	transition: ease 0.4s width;
 }
 
 .side-remaining
@@ -361,7 +362,7 @@ body
 	opacity: 1;
 	transform: translateY(0);
 	display: flex;
-	transition: ease 0.4s all;
+	/* transition: ease 0.4s all; */
 	overflow: hidden;
 }
 

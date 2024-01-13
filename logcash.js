@@ -61,10 +61,11 @@ function mOutMonth(e) {
 function clickMonth(e) {
 
 	var id = parseInt(e.target.id);
+	var oldMonth = months.indexArray;
 	var disappear;
 	var appear;
 
-	if (months.indexArray > id)
+	if (oldMonth > id)
 	{
 		disappear = "disappearRight";
 		appear = "appearRight";
@@ -75,36 +76,37 @@ function clickMonth(e) {
 		appear = "appearLeft";
 	}
 
-	elems.monthBlock[months.indexArray].style.animation = "0.2s " + disappear;
-	elems.monthBlock[months.indexArray].style.animationFillMode = "forwards";
+	elems.monthBlock[oldMonth].style.animation = "0.2s " + disappear;
+	elems.monthBlock[oldMonth].style.animationFillMode = "forwards";
 
-	elems.divMonths[months.indexArray].style.backgroundColor = "rgba(37, 41, 50, 0.9)";
-	elems.divMonths[months.indexArray].style.color = "rgb(155, 155, 155)";
+	elems.divMonths[oldMonth].style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+	elems.divMonths[oldMonth].style.color = "rgb(155, 155, 155)";
 	
 	elems.divMonths[parseInt(e.target.id)].style.backgroundColor = "white";
 	elems.divMonths[parseInt(e.target.id)].style.color = "#191919";
+
+	months.indexArray = parseInt(e.target.id);
+	function setDayNameEvent(value) {
+		for (var i = 0; i < elems.monthDayBoxes.length; i++)
+			elems.monthDayBoxes[i].style.pointerEvents = value;
+		elems.weeklySpan.style.pointerEvents = value;
+	}
+
+	// make event clickable for day name when on actual month
+	if (id === months.length - 1)
+		setDayNameEvent("auto");
+	else
+		setDayNameEvent("none");
+
+	reGenerate(months[months.indexArray], elems);
+	popup.setData(elems);
+
 	setTimeout(function() {
-		elems.monthBlock[months.indexArray].style.display = "none";
+		elems.monthBlock[oldMonth].style.display = "none";
 
 		elems.monthBlock[id].style.display = "block";
 		elems.monthBlock[id].style.animation = "0.2s " + appear;
 		elems.monthBlock[id].style.animationFillMode = "forwards";
-
-		months.indexArray = parseInt(e.target.id);
-		function setDayNameEvent(value) {
-			for (var i = 0; i < elems.monthDayBoxes.length; i++)
-				elems.monthDayBoxes[i].style.pointerEvents = value;
-			elems.weeklySpan.style.pointerEvents = value;
-		}
-	
-		// make event clickable for day name when on actual month
-		if (id === months.length - 1)
-			setDayNameEvent("auto");
-		else
-			setDayNameEvent("none");
-	
-		reGenerate(months[months.indexArray], elems);
-		popup.setData(elems);
 	}, 200);
 }
 
