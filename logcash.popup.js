@@ -946,7 +946,7 @@ popup.createElems = function(elems) {
 			var offsetTargetLeft = oldLeft - newLeft;
 			var offsetTargetTop = oldTop - newTop;
 			
-			elems.popupRemaining.style.top = (popupBox.top + offsetTargetTop) + "px";
+			elems.popupRemaining.style.top = (popupBox.top + offsetTargetTop + e.scrollY) + "px";
 			elems.popupRemaining.style.left = (popupBox.left + offsetTargetLeft) + "px";
 		}
 	}
