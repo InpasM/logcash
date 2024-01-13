@@ -61,37 +61,51 @@ function mOutMonth(e) {
 function clickMonth(e) {
 
 	var id = parseInt(e.target.id);
+	var disappear;
+	var appear;
 
-	for (var i = 0; i < elems.monthBlock.length; i++)
-		elems.monthBlock[i].style.display = "none";
-	elems.monthBlock[id].style.display = "block";
-	for (var i = 0; i < elems.lineGraphs.length; i++)
-		elems.lineGraphs[i].style.display = "none";
-	elems.lineGraphs[id].style.display = "flex";
-
-	for (var i = 0; i < months.nbMonth; i++)
+	if (months.indexArray > id)
 	{
-		elems.divMonths[i].style.backgroundColor = "rgba(37, 41, 50, 0.9)";
-		elems.divMonths[i].style.color = "rgb(155, 155, 155)";
+		disappear = "disappearRight";
+		appear = "appearRight";
 	}
-	months.indexArray = parseInt(e.target.id);
-	elems.divMonths[months.indexArray].style.backgroundColor = "white";
-	elems.divMonths[months.indexArray].style.color = "#191919";
-
-	function setDayNameEvent(value) {
-		for (var i = 0; i < elems.monthDayBoxes.length; i++)
-			elems.monthDayBoxes[i].style.pointerEvents = value;
-		elems.weeklySpan.style.pointerEvents = value;
-	}
-
-	// make event clickable for day name when on actual month
-	if (id === months.length - 1)
-		setDayNameEvent("auto");
 	else
-		setDayNameEvent("none");
+	{
+		disappear = "disappearLeft";
+		appear = "appearLeft";
+	}
 
-	reGenerate(months[months.indexArray], elems);
-	popup.setData(elems);
+	elems.monthBlock[months.indexArray].style.animation = "0.2s " + disappear;
+	elems.monthBlock[months.indexArray].style.animationFillMode = "forwards";
+
+	elems.divMonths[months.indexArray].style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+	elems.divMonths[months.indexArray].style.color = "rgb(155, 155, 155)";
+	
+	elems.divMonths[parseInt(e.target.id)].style.backgroundColor = "white";
+	elems.divMonths[parseInt(e.target.id)].style.color = "#191919";
+	setTimeout(function() {
+		elems.monthBlock[months.indexArray].style.display = "none";
+
+		elems.monthBlock[id].style.display = "block";
+		elems.monthBlock[id].style.animation = "0.2s " + appear;
+		elems.monthBlock[id].style.animationFillMode = "forwards";
+
+		months.indexArray = parseInt(e.target.id);
+		function setDayNameEvent(value) {
+			for (var i = 0; i < elems.monthDayBoxes.length; i++)
+				elems.monthDayBoxes[i].style.pointerEvents = value;
+			elems.weeklySpan.style.pointerEvents = value;
+		}
+	
+		// make event clickable for day name when on actual month
+		if (id === months.length - 1)
+			setDayNameEvent("auto");
+		else
+			setDayNameEvent("none");
+	
+		reGenerate(months[months.indexArray], elems);
+		popup.setData(elems);
+	}, 200);
 }
 
 function isMonthInArray(array, node) {

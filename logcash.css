@@ -989,6 +989,49 @@ body
 }
 
 
+/************************** ANIMATIONS ***************************/
+@keyframes disappearRight {
+	0% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	100% {
+		opacity: 0;
+		transform: translateX(6px);
+	}
+}
+@keyframes appearRight {
+	0% {
+		opacity: 0;
+		transform: translateX(-6px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes disappearLeft {
+	0% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	100% {
+		opacity: 0;
+		transform: translateX(-6px);
+	}
+}
+@keyframes appearLeft {
+	0% {
+		opacity: 0;
+		transform: translateX(6px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
 /************************** CASH CLICKER ***************************/
 .clicker-div-number-buy {
 	width: 100%;
