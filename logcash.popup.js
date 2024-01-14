@@ -765,13 +765,13 @@ function setPopupPosition(elems) {
 
 	var navbar = document.querySelector(".main-navbar");
 	var navbarBox = navbar.getBoundingClientRect();
+	var popupBox = elems.popupRemaining.getBoundingClientRect();
 	var windowHeight = window.innerHeight;
 	var windowWidth = window.innerWidth;
 
 	var newTop = data.student.positionTop;
 	var newLeft = data.student.percentPositionLeft * windowWidth;
 
-	console.log(data.student.percentPositionLeft, windowWidth);
 	if (newTop < navbarBox.height + 5)
 	{
 		newTop = navbarBox.height + 5;
@@ -781,10 +781,8 @@ function setPopupPosition(elems) {
 	{
 		if (newLeft < 85)
 			newLeft = 85;
-		else if (newLeft > windowWidth - 50)
-		{
-			var popupBox = elems.popupRemaining.getBoundingClientRect();
-	
+		else if (newLeft > windowWidth - 50 || newLeft + popupBox.width > windowWidth - 5)
+		{	
 			if (popupBox.width < windowWidth - 85)
 			{
 				newLeft = windowWidth - popupBox.width - 20;
@@ -795,10 +793,8 @@ function setPopupPosition(elems) {
 	}
 	else
 	{
-		if (newLeft > windowWidth - 50)
+		if (newLeft > windowWidth - 50 || newLeft + popupBox.width > windowWidth - 5)
 		{
-			var popupBox = elems.popupRemaining.getBoundingClientRect();
-	
 			if (popupBox.width < windowWidth - 85)
 			{
 				newLeft = windowWidth - popupBox.width - 20;
