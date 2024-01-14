@@ -325,7 +325,6 @@ var arrayLanguages = [
 		arrayDaysName: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
 		arrayMonth: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 		labelLogtimeRemaining: "Remaining Today",
-		// labelLogtimeRemainingMini: "Rem. Today",
 		labelLogtimeRemainingMini: "Today",
 		labelEstimationLock: "Lockout Time",
 		labelEstimationLockMini: "Lock Time",
@@ -352,7 +351,6 @@ var arrayLanguages = [
 		arrayDaysName: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
 		arrayMonth: ["Jan", "Fev", "Mar", "Avr", "Mai", "Jui", "Juil", "Aou", "Sep", "Oct", "Nov", "Dec"],
 		labelLogtimeRemaining: "Restant Aujourd'hui",
-		// labelLogtimeRemainingMini: "Restant Auj.",
 		labelLogtimeRemainingMini: "Aujourd'hui",
 		labelEstimationLock: "Heure Verrouillage",
 		labelEstimationLockMini: "Heure Verr.",
@@ -712,8 +710,6 @@ function updatePanelSize(elems) {
 	elems.logtimeContainer.style.padding = ratio_6;
 	elems.logtimeContainer.style.borderRadius = ratio_4;
 
-	// extraLogtimeSideLeft
-	// extraLogtimeSideRight
 	elems.labelLogtimeRemaining.style.borderRadius = ratio_4;
 	elems.extraLogtimeSideLeft.style.padding = "0 " + ratio_2;
 	elems.extraLogtimeSideRight.style.padding = "0 " + ratio_2;
@@ -1042,7 +1038,7 @@ popup.createElems = function(elems) {
 		}, 400);
 	}
 	elems.resetTooltipPanel.addEventListener("click", closeResetPanel);
-	// elems.resetTooltipPanel.addEventListener("mouseleave", closeResetPanel);
+	elems.resetTooltipPanel.addEventListener("mouseleave", closeResetPanel);
 
 	elems.resetTooltipBlockConfirm = document.createElement("div");
 	elems.resetTooltipBlockConfirm.className = "reset-tooltip-block";
@@ -1213,11 +1209,6 @@ popup.createElems = function(elems) {
 	elems.tooltipQuestionBottomText = document.createElement("p");
 	elems.tooltipQuestionBottomText.className = "tooltip-question-bottom-text";
 
-	// if (data.session.devMode)
-	// {
-	// 	elems.tooltipQuestionBottomText.innerText = questions[data.student.language][2].text;						//////////////// DEV
-	// 	elems.tooltipQuestion.style.opacity = "1";
-	// }
 	elems.tooltipQuestion.appendChild(elems.tooltipQuestionBottomText);
 	document.body.appendChild(elems.tooltipQuestion);
 
@@ -1297,7 +1288,6 @@ popup.createElems = function(elems) {
 
 	elems.inputContainerSalary = document.createElement("div");
 	elems.inputContainerSalary.className = "pop-input-container";
-	// elems.inputContainerSalary.style.marginRight = "8px";
 
 	elems.lineLabelSalary = document.createElement("div");
 	elems.lineLabelSalary.className = "line-label";
@@ -1456,7 +1446,6 @@ popup.createElems = function(elems) {
 	elems.monthArray = [];
 	elems.monthBlock = [];
 
-	// console.log(popup.months[0].weeks);
 	for (var k = 0; k < popup.months.length; k++)
 	{
 		var tmpMonth = {
@@ -1533,7 +1522,6 @@ popup.createElems = function(elems) {
 			elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].appendChild(tmpDay);
 		}
 	}
-
 	
 	elems.monthBlock = [];
 	for (var i = 0; i < popup.months.length; i++)
@@ -1560,11 +1548,9 @@ popup.createElems = function(elems) {
 		e.target.firstElementChild.lastElementChild.style.opacity = "0";
 	}
 
-
 	//////////////////////////////////////////////////////////////////////  MIDDLE RIGHT DIV
 	elems.popMiddleDivRight = document.createElement("div");
 	elems.popMiddleDivRight.className = "pop-middle-div-right";
-
 
 	//////////////////////////////////////////////////////////////////////  LOGTIME CONTAINER
 	elems.logtimeContainer = document.createElement("div");
@@ -1590,25 +1576,18 @@ popup.createElems = function(elems) {
 	elems.blockLogtimeLeft = document.createElement("div");
 	elems.blockLogtimeLeft.className = "block-logtime-side";
 	elems.blockLogtimeLeft.style.borderRight = "1px solid rgb(45, 49, 60)";
-	// elems.blockLogtimeLeft.style.paddingRight = "8px";
 
 	
 	elems.labelLogtimeRemaining = document.createElement("p");
 	elems.labelLogtimeRemaining.className = "small-title-info";
 	elems.labelLogtimeRemaining.style.display = "none";
 	
-	
-	// elems.labelLogtimeEach = document.createElement("p");
-	// elems.labelLogtimeEach.className = "small-title-info";
+
 	elems.resultLogtimeEach = document.createElement("p");
-	// elems.resultLogtimeEach.className = "number-result-smaller";
-	// elems.labelLogtimeEach.style.display = "none";
 	elems.resultLogtimeEach.style.display = "none";
 	
 	elems.resultLogtimeRemaining = document.createElement("p");
-	// elems.resultLogtimeRemaining.className = "number-result";
 	elems.resultLogtimeRemaining.style.display = "none";
-
 
 	elems.blockLogtimeLine = document.createElement("div");
 	elems.blockLogtimeLine.className = "block-logtime-line";
@@ -1616,50 +1595,8 @@ popup.createElems = function(elems) {
 	elems.blockLogtimeLine.appendChild(elems.resultLogtimeEach);
 
 
-	// elems.resultLogtimeRemaining.addEventListener("mouseover", function(e) {
-	// 	// console.log("test");
-
-	// 	const elemBox = e.target.getBoundingClientRect();
-	// 	const blockBox = elems.popupRemaining.getBoundingClientRect();
-
-	// 	var newTop = elemBox.top - blockBox.top - elemBox.height - 5;
-	// 	var newLeft = elemBox.left - blockBox.left + elemBox.width + 5;
-
-	// 	// console.log(newTop, newLeft);
-
-	// 	elems.blockLogtimeTooltip.style.top = newTop + "px";
-	// 	elems.blockLogtimeTooltip.style.left = newLeft + "px";
-	// 	elems.blockLogtimeTooltip.style.opacity = "1";
-	// });
-
-	// elems.resultLogtimeRemaining.addEventListener("mouseout", function(e) {
-
-	// 	elems.blockLogtimeTooltip.style.opacity = "0";
-	// });
-
 	if (data.session.logAtSchool)
 	{
-		// elems.blockLogtimeLeft.style.cursor = "pointer";
-		// elems.blockLogtimeLeft.addEventListener("click", function() {
-	
-		// 	if (data.session.logtimeMode === REMAINING)
-		// 	{
-		// 		data.session.logtimeMode = EACH;
-		// 		// elems.labelLogtimeRemaining.style.display = "none";
-		// 		// elems.resultLogtimeRemaining.style.display = "none";
-		// 		// elems.labelLogtimeEach.style.display = "flex";
-		// 		// elems.resultLogtimeEach.style.display = "flex";
-		// 	}
-		// 	else if (data.session.logtimeMode === EACH)
-		// 	{
-		// 		data.session.logtimeMode = REMAINING;
-		// 		// elems.labelLogtimeEach.style.display = "none";
-		// 		// elems.resultLogtimeEach.style.display = "none";
-		// 		// elems.labelLogtimeRemaining.style.display = "flex";
-		// 		// elems.resultLogtimeRemaining.style.display = "flex";
-		// 	}
-		// 	popup.setData(elems);
-		// });
 		elems.labelLogtimeRemaining.style.display = "flex";
 		elems.resultLogtimeRemaining.style.display = "flex";
 		elems.resultLogtimeEach.style.display = "flex";
@@ -1669,18 +1606,10 @@ popup.createElems = function(elems) {
 	}
 	else
 	{
-		// elems.labelLogtimeEach.style.display = "flex";
 		elems.resultLogtimeEach.style.display = "flex";
-
 		elems.resultLogtimeEach.className = "number-result";
-		// elems.resultLogtimeRemaining.className = "number-result";
 	}
-	// elems.blockLogtimeLine.appendChild(elems.resultLogtimeEach);
-
 	elems.labelLogtimeRemaining.style.display = "flex";
-	// elems.resultLogtimeRemaining.style.display = "flex";
-	// elems.labelLogtimeEach.style.display = "flex";
-	// elems.resultLogtimeEach.style.display = "flex";
 
 	
 	elems.extraLogtimeLeft = document.createElement("div");
@@ -1693,25 +1622,17 @@ popup.createElems = function(elems) {
 	elems.extraLogtimeSideRight.className = "extra-logtime-side";
 	elems.extraLogtimeSideRight.innerText = "0h00";
 	elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
-	// elems.extraLogtimeSideRight.style.justifyContent = "flex-start";
-	// elems.extraLogtimeSideRight.style.fontSize = "10px";
 
 	elems.extraLogtimeLeft.appendChild(elems.extraLogtimeSideLeft);
 	elems.extraLogtimeLeft.appendChild(elems.extraLogtimeSideRight);
 
 	elems.blockLogtimeLeft.appendChild(elems.labelLogtimeRemaining);
-	// elems.blockLogtimeLeft.appendChild(elems.labelLogtimeEach);
-	
 	elems.blockLogtimeLeft.appendChild(elems.blockLogtimeLine);
-	// elems.blockLogtimeLeft.appendChild(elems.resultLogtimeEach);
-	// elems.blockLogtimeLeft.appendChild(elems.resultLogtimeRemaining);
-
 	elems.blockLogtimeLeft.appendChild(elems.extraLogtimeLeft);
 
 
 	elems.blockLogtimeRight = document.createElement("div");
 	elems.blockLogtimeRight.className = "block-logtime-side";
-	// elems.blockLogtimeRight.style.paddingLeft = "8px";
 
 	elems.labelLogtimeEstimation = document.createElement("p");
 	elems.labelLogtimeEstimation.className = "small-title-info";
@@ -1728,10 +1649,6 @@ popup.createElems = function(elems) {
 	elems.resultLogtimeNumberDay.innerText = "0";
 	elems.labelLogtimeNumberDay.style.display = "none";
 	elems.resultLogtimeNumberDay.style.display = "none";
-
-	// elems.extraEstimation = document.createElement("div");
-	// elems.extraEstimation.className = "extra-estimation";
-	// elems.extraEstimation.innerText = "00:00";
 
 
 	elems.blockLogtimeRight.appendChild(elems.labelLogtimeEstimation);
@@ -1771,12 +1688,10 @@ popup.createElems = function(elems) {
 	if (data.student.addBoostHalf || data.student.addBoostFull)
 	{
 		elems.extraLogtimeLeft.style.opacity = "1";
-		// elems.extraEstimation.style.display = "flex";
 	}
 	else
 	{
 		elems.extraLogtimeLeft.style.opacity = "0";
-		// elems.extraEstimation.style.display = "none";
 	}
 	
 
