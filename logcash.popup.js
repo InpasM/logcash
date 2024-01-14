@@ -2047,7 +2047,6 @@ function disableTextSelection() {
 
 popup.setStyle = function(elems) {
 
-	// elems.popupRemaining.style.opacity = "1";
 	elems.popupRemaining.style.opacity = "0";
 	elems.popupRemaining.style.display = "flex";
 	elems.popupRemaining.style.position = "absolute";
@@ -2059,9 +2058,6 @@ popup.setStyle = function(elems) {
 	elems.popupRemaining.style.backdropFilter = "blur(6px)";
 	elems.popupRemaining.style.transition = "ease 0.2s opacity";
 
-	// elems.popupRemaining.style.top = "68px";
-	// elems.popupRemaining.style.right = "8px";
-	
 	elems.popupTopDiv.style.cursor = "move";
 	elems.popupTopDiv.style.height = "fit-content";
 	elems.popupTopDiv.style.borderRadius = "4px";
@@ -2072,15 +2068,7 @@ popup.setStyle = function(elems) {
 	elems.popupTopDiv.style.padding = "2px 2px";
 	elems.popupTopDiv.style.borderBottom = "1px solid rgb(45, 49, 60)";
 
-	// elems.popupTopLeftText.style.color = "#e2e2e2";
-	// // elems.popupTopLeftText.style.fontSize = "14px";
-	// elems.popupTopLeftText.style.margin = "3px 3px 3px 5px";
-	// elems.popupTopLeftText.style.padding = "0";
-	// elems.popupTopLeftText.style.fontWeight = "bold";
-	// elems.popupTopLeftText.style.textShadow = "rgb(0, 0, 0) 0px 0px 3px";
-	
 	elems.popupTopRightText.className = "popup-top-right-text";
-	// elems.popupTopRightText.style.fontSize = "12px";
 	elems.popupTopRightText.style.margin = "2px 2px";
 	elems.popupTopRightText.style.padding = "2px 4px";
 	elems.popupTopRightText.style.width = "fit-content";
