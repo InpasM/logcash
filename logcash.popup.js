@@ -2004,109 +2004,6 @@ popup.createElems = function(elems) {
 	elems.estimationContainer.appendChild(elems.mainTitleLogtime);
 	elems.estimationContainer.appendChild(elems.lineResultsLogtime);
 
-
-	// elems.moreInfoContainer = document.createElement("div");
-	// elems.moreInfoContainer.className = "more-info-container";
-	// elems.moreInfoLogo = document.createElement("div");
-	// elems.moreInfoLogo.className = "more-info-logo";
-	// elems.moreInfoContainer.appendChild(elems.moreInfoLogo);
-
-	// elems.resultsContainer.appendChild(elems.resultsDiv);
-
-	// elems.resultsContainer.appendChild(elems.estimationContainer);
-
-	// elems.resultsDiv.appendChild(elems.mainTitleDays);
-	// elems.resultsDiv.appendChild(elems.lineResultsDays);
-
-	// if (data.session.devMode)
-	// {
-	// 	elems.popBottomDiv.appendChild(elems.resultsContainer);
-	// 	elems.popBottomDiv.appendChild(elems.moreInfoContainer);
-	// }
-	// elems.popBottomContainer.appendChild(elems.popBottomDiv);
-
-	// if (data.student.showMore)
-	// {
-	// 	elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60)";
-	// 	elems.moreInfoContainer.style.padding = "4px 0";
-	
-	// 	elems.resultsDiv.style.height = "";
-	// 	elems.resultsDiv.style.padding = "8px";
-	// 	elems.resultsDiv.style.opacity = "1";
-	// 	elems.boostLockContainer.style.height = "";
-	// 	elems.boostLockContainer.style.padding = "8px";
-	// 	elems.boostLockContainer.style.opacity = "1";
-	// 	elems.estimationContainer.style.height = "";
-	// 	elems.estimationContainer.style.padding = "8px";
-	// 	elems.estimationContainer.style.opacity = "1";
-	// }
-	// else
-	// {
-	// 	elems.moreInfoContainer.style.backgroundColor = "";
-	// 	elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
-
-	// 	elems.resultsDiv.style.height = "0px";
-	// 	elems.resultsDiv.style.padding = "0px 8px";
-	// 	elems.resultsDiv.style.opacity = "0";
-	// 	elems.boostLockContainer.style.height = "0px";
-	// 	elems.boostLockContainer.style.padding = "0px 8px";
-	// 	elems.boostLockContainer.style.opacity = "0";
-	// 	elems.estimationContainer.style.height = "0px";
-	// 	elems.estimationContainer.style.padding = "0px 8px";
-	// 	elems.estimationContainer.style.opacity = "0";
-	// }
-
-	// function mouseoverPopBottom(e) {
-	// 	elems.moreInfoLogo.style.height = "20px";
-	// 	elems.moreInfoContainer.style.backgroundColor = "rgba(30, 35, 42, 0.8)";
-	// }
-
-	// function mouseoutPopBottom(e) {
-	// 	elems.moreInfoLogo.style.height = "0px";
-	// 	elems.moreInfoContainer.style.backgroundColor = "";
-	// }
-	
-	// elems.popBottomContainer.addEventListener("mouseover", mouseoverPopBottom);
-	// elems.popBottomContainer.addEventListener("mouseout", mouseoutPopBottom);
-
-	// elems.moreInfoLogo.addEventListener("click", function(e) {
-
-	// 	if (data.student.showMore)
-	// 	{
-	// 		elems.moreInfoContainer.style.backgroundColor = "";
-	// 		elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60, 0)";
-
-	// 		elems.resultsDiv.style.height = "0px";
-	// 		elems.resultsDiv.style.padding = "0px 8px";
-	// 		elems.resultsDiv.style.opacity = "0";
-	// 		elems.boostLockContainer.style.height = "0px";
-	// 		elems.boostLockContainer.style.padding = "0px 8px";
-	// 		elems.boostLockContainer.style.opacity = "0";
-	// 		elems.estimationContainer.style.height = "0px";
-	// 		elems.estimationContainer.style.padding = "0px 8px";
-	// 		elems.estimationContainer.style.opacity = "0";
-
-	// 		data.student.showMore = false;
-	// 	}
-	// 	else
-	// 	{
-	// 		elems.moreInfoContainer.style.borderTop = "1px solid rgb(45, 49, 60)";
-	// 		elems.moreInfoContainer.style.padding = "4px 0";
-
-	// 		elems.resultsDiv.style.height = "";
-	// 		elems.resultsDiv.style.padding = "8px";
-	// 		elems.resultsDiv.style.opacity = "1";
-	// 		elems.boostLockContainer.style.height = "";
-	// 		elems.boostLockContainer.style.padding = "8px";
-	// 		elems.boostLockContainer.style.opacity = "1";
-	// 		elems.estimationContainer.style.height = "";
-	// 		elems.estimationContainer.style.padding = "8px";
-	// 		elems.estimationContainer.style.opacity = "1";
-
-	// 		data.student.showMore = true;
-	// 	}
-	// 	data.updateLocalStorage();
-	// });
 	
 	elems.popMiddleDiv.appendChild(elems.popMiddleDivLeft);
 	elems.popMiddleDiv.appendChild(elems.popMiddleDivRight);
@@ -2126,7 +2023,6 @@ popup.createElems = function(elems) {
 
 	elems.popupRemaining.appendChild(elems.popMiddleDiv);
 	elems.popupRemaining.appendChild(elems.popProgressContainer);
-	// elems.popupRemaining.appendChild(elems.popBottomContainer);
 	document.body.appendChild(elems.popupRemaining);
 
 	initText(elems, arrayLanguages[data.student.language]);
