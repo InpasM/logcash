@@ -53,7 +53,6 @@ body
 	margin: 0;
 	padding: 0;
 	color: rgb(155, 155, 155);
-	/* text-align: justify; */
 	text-align: center;
 }
 
@@ -181,7 +180,6 @@ body
 	border: 1px solid rgb(45, 49, 60);
     box-shadow: rgba(18, 20, 26, 0.227) 0px 10px 15px;
 	top: 5px;
-	/* top: 150px; */
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -370,7 +368,6 @@ body
 	opacity: 1;
 	transform: translateY(0);
 	display: flex;
-	/* transition: ease 0.4s all; */
 	overflow: hidden;
 }
 
@@ -414,7 +411,6 @@ body
 
 .button-boost {
 	cursor: pointer;
-	/* background-color: #373c48; */
 	background-color: rgba(37, 41, 50, 0.9);
 	display: flex;
 	align-items: center;
@@ -426,7 +422,6 @@ body
 	text-align: center;
 	justify-content: center;
 	align-items: center;
-	/* background-color: rgb(30, 33, 43); */
 }
 
 .pop-input-container {
@@ -503,7 +498,6 @@ body
 
 .checkbox-habit {
 	background-color: #373c48;
-	/* background-color: #282b34; */
 	color: rgb(198, 198, 198);
 	border-radius: 50%;
 	display: flex;
