@@ -6,6 +6,8 @@
 body
 {
 	background: #12141a;
+	margin: 0;
+	padding: 0;
 }
 
 .main-div 
@@ -16,6 +18,11 @@ body
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+}
+
+.main-navbar {
+	background-color: grey;
+	height: 60px;
 }
 
 .container-logcash 
@@ -168,7 +175,7 @@ body
 }
 
 .top-div-setting-panel {
-	background-color: rgba(32, 35, 44, 0.8);
+	background-color: rgba(32, 35, 44, 0.95);
 	display: flex;
 	position: absolute;
 	border: 1px solid rgb(45, 49, 60);

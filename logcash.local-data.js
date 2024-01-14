@@ -33,6 +33,8 @@ data.student = {
 	language: ENGLISH,
 	sizePanel: 1.0,
 	popupVisible: false,
+	positionTop: 0,
+	percentPositionLeft: 0,
 
 	months: [],
 	monthlyHabit: [],
@@ -88,6 +90,10 @@ function parseLocalStorage(itemStudent) {
 		student.sizePanel = 1.0;
 	if (!student.popupVisible)
 		student.popupVisible = false;
+	if (!student.positionTop)
+		student.positionTop = 0;
+	if (!student.percentPositionLeft)
+		student.percentPositionLeft = 0;
 	if (!student.months)
 		student.months = [];
 	if (!student.monthlyHabit)

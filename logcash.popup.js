@@ -742,11 +742,80 @@ function updatePanelSize(elems) {
 	elems.extraLogtimeSideRight.style.padding = "0 " + ratio_2;
 }
 
+function savePosition() {
+
+	var popupBox = elems.popupRemaining.getBoundingClientRect();
+	var popupLeft = popupBox.left;
+	var popupTop = popupBox.top;
+	
+	data.student.positionTop = popupTop + window.scrollY;
+	data.student.percentPositionLeft = popupLeft / window.innerWidth;
+
+	data.updateLocalStorage();
+}
+
+var resizeTimeout;
+window.onresize = function() {
+
+	clearTimeout(resizeTimeout);
+	resizeTimeout = setTimeout(savePosition, 400);
+}
+
+function setPopupPosition(elems) {
+
+	var navbar = document.querySelector(".main-navbar");
+	var navbarBox = navbar.getBoundingClientRect();
+	var windowHeight = window.innerHeight;
+	var windowWidth = window.innerWidth;
+
+	var newTop = data.student.positionTop;
+	var newLeft = data.student.percentPositionLeft * windowWidth;
+
+	if (newTop < navbarBox.height)
+	{
+		newTop = navbarBox.height + 5;
+	}
+
+	if (windowWidth >= 770)
+	{
+		if (newLeft < 80)
+			newLeft = 85;
+		else if (newLeft > windowWidth - 50)
+		{
+			var popupBox = elems.popupRemaining.getBoundingClientRect();
+	
+			if (popupBox.width < windowWidth - 85)
+			{
+				newLeft = windowWidth - popupBox.width - 20;
+			}
+			else
+				newLeft = 85;
+		}
+	}
+	else
+	{
+		if (newLeft > windowWidth - 50)
+		{
+			var popupBox = elems.popupRemaining.getBoundingClientRect();
+	
+			if (popupBox.width < windowWidth - 85)
+			{
+				newLeft = windowWidth - popupBox.width - 20;
+			}
+			else
+				newLeft = 85;
+		}
+	}
+	elems.popupRemaining.style.top = newTop + "px";
+	elems.popupRemaining.style.left = newLeft + "px";
+}
+
 const browser = window.browser || window.chrome;
 popup.createElems = function(elems) {
 
 	elems.popupRemaining = document.createElement("div");
 	elems.popupRemaining.className = "popup-remaining";
+	
 
 	elems.popupTopDiv = document.createElement("div");
 	elems.popupTopDiv.className = "popup-top-div";
@@ -906,19 +975,8 @@ popup.createElems = function(elems) {
 
 		var update = false;
 		const oldTargetBox = e.target.getBoundingClientRect();
-		
 		var oldLeft = oldTargetBox.left;
 		var oldTop = oldTargetBox.top;
-		var oldHeight = oldTargetBox.height;
-		var oldWidth = oldTargetBox.width;
-
-		var posLeft = oldWidth / 2 - (e.clientX - oldLeft);
-		var posTop = oldHeight / 2 - (e.clientY - oldTop);
-
-		// console.log("oldHeight:", oldHeight, "oldWidth:", oldWidth);
-		// console.log("posLeft:", posLeft, "posTop:", posTop);
-		// console.log("oldLeft:", oldLeft, "oldTop:", oldTop);
-		// console.log("clientX:", e.clientX, "clientY:", e.clientY);
 
 		if (toAdd > 0 && (data.student.sizePanel + toAdd).toFixed(1) <= 1.5)
 		{
@@ -937,16 +995,18 @@ popup.createElems = function(elems) {
 				elems.panelSizeFontValue.innerText = "1.0";
 			else
 				elems.panelSizeFontValue.innerText = data.student.sizePanel.toFixed(1);
+			
+			var popupBox = elems.popupRemaining.getBoundingClientRect();
+
 			updatePanelSize(elems);
 
-			const popupBox = elems.popupRemaining.getBoundingClientRect();
 			const newTargetBox = e.target.getBoundingClientRect();
 			var newLeft = newTargetBox.left;
 			var newTop = newTargetBox.top;
 			var offsetTargetLeft = oldLeft - newLeft;
 			var offsetTargetTop = oldTop - newTop;
-			
-			elems.popupRemaining.style.top = (popupBox.top + offsetTargetTop + e.scrollY) + "px";
+
+			elems.popupRemaining.style.top = (popupBox.top + offsetTargetTop + window.scrollY) + "px";
 			elems.popupRemaining.style.left = (popupBox.left + offsetTargetLeft) + "px";
 		}
 	}
@@ -2172,6 +2232,7 @@ popup.createElems = function(elems) {
 	else
 		showPopup(elems);
 	elems.panelSizeFontValue.innerText = data.student.sizePanel.toFixed(1);
+	setPopupPosition(elems);
 }
 
 function disableTextSelection() {
@@ -2197,8 +2258,8 @@ popup.setStyle = function(elems) {
 	elems.popupRemaining.style.backdropFilter = "blur(6px)";
 	elems.popupRemaining.style.transition = "ease 0.2s opacity";
 
-	elems.popupRemaining.style.top = "68px";
-	elems.popupRemaining.style.right = "8px";
+	// elems.popupRemaining.style.top = "68px";
+	// elems.popupRemaining.style.right = "8px";
 	
 	elems.popupTopDiv.style.cursor = "move";
 	elems.popupTopDiv.style.height = "fit-content";
@@ -2687,6 +2748,8 @@ popup.initPopup = function(elems, months) {
 	})
 	document.body.addEventListener("mouseup", function() {
 		mouseDown = false;
+		clearTimeout(resizeTimeout);
+		resizeTimeout = setTimeout(savePosition, 400);
 	})
 
 	setupInputValue(data.student.months[months.length - 1], elems);
