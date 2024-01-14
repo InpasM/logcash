@@ -2320,24 +2320,15 @@ function setLogtimeEstimation(elems) {
 
 	if (data.student.addBoostHalf)
 	{
-		// if (data.session.remTodayLockMin <= 0)
-		// 	data.session.timeLock = "DONE";
-		// else
-			data.session.timeLock = getLogoutTime(actualTimeNumber + data.session.remTodayLockMin);
+		data.session.timeLock = getLogoutTime(actualTimeNumber + data.session.remTodayLockMin);
 	}
 	else if (data.student.addBoostFull)
 	{
-		// if (data.session.remTodayLockMax <= 0)
-		// 	data.session.timeLock = "DONE";
-		// else
-			data.session.timeLock = getLogoutTime(actualTimeNumber + data.session.remTodayLockMax);
+		data.session.timeLock = getLogoutTime(actualTimeNumber + data.session.remTodayLockMax);
 	}
 	else
 	{
-		// if (data.session.remTodayLockOff <= 0)
-		// 	data.session.timeLock = "DONE";
-		// else
-			data.session.timeLock = timeLockOff;
+		data.session.timeLock = timeLockOff;
 	}
 	
 	if (data.session.timeLock === "IMPOSSIBLE")
@@ -2345,18 +2336,12 @@ function setLogtimeEstimation(elems) {
 	else
 		elems.resultLogtimeEstimation.style.fontSize = 16 * data.student.sizePanel + "px";
 
-	// if (timeLockOff === "IMPOSSIBLE")
-	// 	elems.extraEstimation.style.fontSize = "8px";
-	// else
-	// 	elems.extraEstimation.style.fontSize = "12px";
-
 	elems.resultLogtimeEstimation.innerText = data.session.timeLock;
 
 	if (data.session.logAtSchool)
 		elems.miniLogtimeValueLock.innerText = data.session.timeLock;
 	else
 		elems.miniLogtimeValueLock.innerText = data.session.numberDays.total;
-	// elems.extraEstimation.innerText = timeLockOff;
 }
 
 popup.setData = function(elems) {
