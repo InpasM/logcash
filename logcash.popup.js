@@ -771,14 +771,15 @@ function setPopupPosition(elems) {
 	var newTop = data.student.positionTop;
 	var newLeft = data.student.percentPositionLeft * windowWidth;
 
-	if (newTop < navbarBox.height)
+	console.log(data.student.percentPositionLeft, windowWidth);
+	if (newTop < navbarBox.height + 5)
 	{
 		newTop = navbarBox.height + 5;
 	}
 
 	if (windowWidth >= 770)
 	{
-		if (newLeft < 80)
+		if (newLeft < 85)
 			newLeft = 85;
 		else if (newLeft > windowWidth - 50)
 		{
@@ -1036,8 +1037,24 @@ popup.createElems = function(elems) {
 	elems.panelResetButton.addEventListener("click", function() {
 
 		elems.resetTooltipPanel.style.display = "flex";
+		if (!data.student.popupVisible)
+		{
+			elems.resetTooltipBlockConfirm.style.flexDirection = "row";
+			elems.resetTooltipBlockConfirmTitle.style.borderBottom = "1px solid rgb(45, 49, 60, 0)";
+			elems.resetTooltipBlockConfirmTitle.style.margin = "0 8px 0 0";
+			elems.resetTooltipBlockConfirmTitle.style.padding = "0";
+		}
+		else
+		{
+			elems.resetTooltipBlockConfirm.style.flexDirection = "column";
+			elems.resetTooltipBlockConfirmTitle.style.borderBottom = "1px solid rgb(45, 49, 60)";
+			elems.resetTooltipBlockConfirmTitle.style.margin = "0 0 3px 0";
+			elems.resetTooltipBlockConfirmTitle.style.padding = "0 0 6px 0";
+		}
 		setTimeout(function() {
 			elems.resetTooltipPanel.style.opacity = "1";
+			elems.topDivSettingPanel.style.opacity = "0";
+			elems.topDivSettingPanel.style.display = "none";
 		}, 10);
 	});
 
@@ -1052,7 +1069,7 @@ popup.createElems = function(elems) {
 		}, 400);
 	}
 	elems.resetTooltipPanel.addEventListener("click", closeResetPanel);
-	elems.resetTooltipPanel.addEventListener("mouseleave", closeResetPanel);
+	// elems.resetTooltipPanel.addEventListener("mouseleave", closeResetPanel);
 
 	elems.resetTooltipBlockConfirm = document.createElement("div");
 	elems.resetTooltipBlockConfirm.className = "reset-tooltip-block";
