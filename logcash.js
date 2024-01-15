@@ -146,8 +146,6 @@ function isMonthAlreadyAdd(array, monthName) {
 
 function getInfoMonth(elems, calendar) {
 
-	const nbMonth = getNbUniqueMonth(elems.textMonth);
-
 	function initArrayCalendar(calendarElem, arrayCalendar) {
 
 		let objMonth = {};
@@ -408,24 +406,12 @@ function waitForLogTimesChartToLoad(ltSvg) {
 	}
 }
 
-// function fetchCalendar(elems)
-// {
-// 	const ltSvg = document.getElementById("user-locations");
-
-// 	if (ltSvg) {
-// 		waitForLogTimesChartToLoad(ltSvg);
-// 		// elems.textMonth = ltSvg.querySelectorAll("svg > text");
-// 	}
-// 	return ltSvg;
-// }
-
 async function fetchCalendar(elems)
 {
 	const ltSvg = document.getElementById("user-locations");
 
 	if (ltSvg) {
 		waitForLogTimesChartToLoad(ltSvg);
-		// elems.textMonth = ltSvg.querySelectorAll("svg > text");
 	}
 	return ltSvg;
 }
