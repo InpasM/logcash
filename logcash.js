@@ -408,13 +408,24 @@ function waitForLogTimesChartToLoad(ltSvg) {
 	}
 }
 
+// function fetchCalendar(elems)
+// {
+// 	const ltSvg = document.getElementById("user-locations");
+
+// 	if (ltSvg) {
+// 		waitForLogTimesChartToLoad(ltSvg);
+// 		// elems.textMonth = ltSvg.querySelectorAll("svg > text");
+// 	}
+// 	return ltSvg;
+// }
+
 async function fetchCalendar(elems)
 {
 	const ltSvg = document.getElementById("user-locations");
 
 	if (ltSvg) {
 		waitForLogTimesChartToLoad(ltSvg);
-		elems.textMonth = ltSvg.querySelectorAll("svg > text");
+		// elems.textMonth = ltSvg.querySelectorAll("svg > text");
 	}
 	return ltSvg;
 }
@@ -560,7 +571,8 @@ function updateMinutes(minuteToAdd) {
 	}
 }
 
-async function initLogcash()
+// async function initLogcash()
+function initLogcash()
 {
 	const elems = {};
 
@@ -569,62 +581,69 @@ async function initLogcash()
 	if (userPosteStatus.innerText !== "Unavailable")
 		data.session.logAtSchool = true;
 
-	calendar = await fetchCalendar(elems);
+	// calendar = await fetchCalendar(elems);
+	// calendar = fetchCalendar(elems);
 
-	if (calendar)
-	{
-		const months = getInfoMonth(elems, calendar);
-	
-		init.generateContainerLogcash(elems, months, calendar);
-	
-		window.elems = elems;
-		window.months = months;
-		initStyleProgressBar();
-	
-		reGenerate(months[months.indexArray], elems);
-		initButtons(elems);
-		if (data.session.logAtSchool)
-		{
-			displayMessage("Start setInterval each minutes");
-			setInterval(function() {
-				updateMinutes(1);
-				updateTime(1);
-			}, 60000);
-			// }, 1000);
-		}
-	
-		if (data.session.devMode)
-		{
-			const buttonAddOneMinute = document.querySelector(".dev-add-1-min");
-			const buttonAddOneHour = document.querySelector(".dev-add-1-hour");
-			const buttonRemoveOneMinute = document.querySelector(".dev-remove-1-min");
-			const buttonRemoveOneHour = document.querySelector(".dev-remove-1-hour");
-			const devClock = document.querySelector(".dev-clock");
+	fetchCalendar(elems).then(function(calendar) {
 
-			devClock.innerText = popup.numberHour + ":" + popup.numberMinutes;
+		console.log(calendar);
+	});
 
-			function addTime(number) {
-				updateMinutes(number);
-				updateTime(number);
-				devClock.innerText = popup.numberHour + ":" + popup.numberMinutes;
-			}
+
+	// if (calendar)
+	// {
+	// 	const months = getInfoMonth(elems, calendar);
+	
+	// 	init.generateContainerLogcash(elems, months, calendar);
+	
+	// 	window.elems = elems;
+	// 	window.months = months;
+	// 	initStyleProgressBar();
+	
+	// 	reGenerate(months[months.indexArray], elems);
+	// 	initButtons(elems);
+	// 	if (data.session.logAtSchool)
+	// 	{
+	// 		displayMessage("Start setInterval each minutes");
+	// 		setInterval(function() {
+	// 			updateMinutes(1);
+	// 			updateTime(1);
+	// 		}, 60000);
+	// 		// }, 1000);
+	// 	}
+	
+	// 	if (data.session.devMode)
+	// 	{
+	// 		const buttonAddOneMinute = document.querySelector(".dev-add-1-min");
+	// 		const buttonAddOneHour = document.querySelector(".dev-add-1-hour");
+	// 		const buttonRemoveOneMinute = document.querySelector(".dev-remove-1-min");
+	// 		const buttonRemoveOneHour = document.querySelector(".dev-remove-1-hour");
+	// 		const devClock = document.querySelector(".dev-clock");
+
+	// 		devClock.innerText = popup.numberHour + ":" + popup.numberMinutes;
+
+	// 		function addTime(number) {
+	// 			updateMinutes(number);
+	// 			updateTime(number);
+	// 			devClock.innerText = popup.numberHour + ":" + popup.numberMinutes;
+	// 		}
 		
-			buttonAddOneMinute.addEventListener("click", function() {
-				addTime(1);
-			});
-			buttonAddOneHour.addEventListener("click", function() {
-				addTime(60);
-			});
-			buttonRemoveOneMinute.addEventListener("click", function() {
-				addTime(-1);
-			});
-			buttonRemoveOneHour.addEventListener("click", function() {
-				addTime(-60);
-			});
-		}
-	}
-	else
-		displayMessage("Cannot found logtime calendar");
+	// 		buttonAddOneMinute.addEventListener("click", function() {
+	// 			addTime(1);
+	// 		});
+	// 		buttonAddOneHour.addEventListener("click", function() {
+	// 			addTime(60);
+	// 		});
+	// 		buttonRemoveOneMinute.addEventListener("click", function() {
+	// 			addTime(-1);
+	// 		});
+	// 		buttonRemoveOneHour.addEventListener("click", function() {
+	// 			addTime(-60);
+	// 		});
+	// 	}
+	// }
+	// else
+	// 	displayMessage("Cannot found logtime calendar");
 }
 
 function setRefreshInterval() {
@@ -670,11 +689,15 @@ function startLogcash() {
 	}
 	else
 	{
-		setTimeout(function() {
-			initLogcash();
-		}, 1000);
+		initLogcash();
+		// setTimeout(function() {
+		// 	initLogcash();
+		// }, 1000);
 	}
 }
-setTimeout(function() {
-	startLogcash();
-}, 100);
+// setTimeout(function() {
+// 	startLogcash();
+// }, 100);
+// startLogcash();
+
+// initLogcash();
