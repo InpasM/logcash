@@ -9,7 +9,7 @@ Logcash is a browser extension which can help you plan and adjust your daily log
 
 <h2 style="outline: none; border: none; padding: 0; margin: 30px 0 6px 0">Download</h2>
 
-[<img src="https://www.mozilla.org/media/img/structured-data/logo-firefox-browser.fbc7ffbb50fd.png" width="64" alt="Mozilla Firefox" title="Download for Mozilla Firefox">](https://github.com/InpasM/logcash/releases/download/v1.1.1/logcash-firefox-1.1.1.xpi)
+[<img src="https://www.mozilla.org/media/img/structured-data/logo-firefox-browser.fbc7ffbb50fd.png" width="64" alt="Mozilla Firefox" title="Download for Mozilla Firefox">](https://github.com/InpasM/logcash/releases/download/v1.1.2/logcash-firefox-1.1.2.xpi)
 
 <h2 style="outline: none; border: none; padding: 0; margin: 30px 0 6px 0">Features</h2>
 
