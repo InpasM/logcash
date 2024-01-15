@@ -646,45 +646,66 @@ function setRefreshInterval() {
 	return setInterval(function() {location.reload();}, 5000);
 }
 
+function startDevMode() {
+
+	data.session.devMode = true;
+	var refreshButton = document.querySelector(".dev-refresh");
+	var refreshButtonActivator = document.querySelector(".dev-refresh-button");
+	var refreshButtonRemove = document.querySelector(".dev-remove-localStorage");
+	var refreshOn = true;
+	var cycleRefresh = setRefreshInterval();
+
+	// STYLE
+	var mainNavbar = document.querySelector(".main-navbar");
+	var mainDiv = document.querySelector(".main-div");
+
+	document.body.style.backgroundColor = "#12141a";
+	document.body.style.margin = "0";
+	document.body.style.padding = "0";
+
+	mainNavbar.style.backgroundColor = "grey";
+	mainNavbar.style.height = "60px";
+
+	mainDiv.style.backgroundColor = "#1d2028";
+	mainDiv.style.boxSizing = "border-box";
+	mainDiv.style.padding = "25px";
+	mainDiv.style.display = "flex";
+	mainDiv.style.flexDirection = "column";
+	mainDiv.style.justifyContent = "center";
+
+	refreshButtonActivator.addEventListener("click", function() {
+		if (refreshOn)
+		{
+			refreshButtonActivator.innerText = "REFRESH: OFF";
+			clearInterval(cycleRefresh);
+			refreshOn = false;
+		}
+		else
+		{
+			refreshButtonActivator.innerText = "REFRESH: ON";
+			cycleRefresh = setRefreshInterval();
+			refreshOn = true;
+		}
+	});
+
+	refreshButtonRemove.addEventListener("click", function() {
+		localStorage.removeItem("student42");
+	});
+
+	refreshButton.addEventListener("click", function() {
+		location.reload();
+	});
+	setTimeout(function() {
+		initLogcash();
+	}, 300);
+}
+
 function startLogcash() {
 
 	data.init();
 	
 	if (window.location.href.indexOf("logcash.html") !== -1)
-	{
-		data.session.devMode = true;
-		var refreshButton = document.querySelector(".dev-refresh");
-		var refreshButtonActivator = document.querySelector(".dev-refresh-button");
-		var refreshButtonRemove = document.querySelector(".dev-remove-localStorage");
-		var refreshOn = true;
-		var cycleRefresh = setRefreshInterval();
-
-		refreshButtonActivator.addEventListener("click", function() {
-			if (refreshOn)
-			{
-				refreshButtonActivator.innerText = "REFRESH: OFF";
-				clearInterval(cycleRefresh);
-				refreshOn = false;
-			}
-			else
-			{
-				refreshButtonActivator.innerText = "REFRESH: ON";
-				cycleRefresh = setRefreshInterval();
-				refreshOn = true;
-			}
-		});
-
-		refreshButtonRemove.addEventListener("click", function() {
-			localStorage.removeItem("student42");
-		});
-
-		refreshButton.addEventListener("click", function() {
-			location.reload();
-		});
-		setTimeout(function() {
-			initLogcash();
-		}, 100);
-	}
+		startDevMode();
 	else
 	{
 		setTimeout(function() {
@@ -693,4 +714,6 @@ function startLogcash() {
 	}
 }
 
-startLogcash();
+setTimeout(function() {
+	startLogcash();
+}, 100);
