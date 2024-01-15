@@ -592,7 +592,7 @@ function updatePanelSize(elems) {
 	elems.extraLogtimeSideRight.style.lineHeight = ratio_8;
 	elems.extraLogtimeSideRight.style.width = ratio_35;
 
-	var paddingY = 5 * data.student.sizePanel + "px ";
+	var paddingY = 2 * data.student.sizePanel + "px ";
 	var paddingX = 6 * data.student.sizePanel + "px";
 	for (var i = 0; i < elems.divMonths.length; i++)
 	{
@@ -2237,6 +2237,8 @@ function setLogtimeValue(remToday, eachDay, elems) {
 		if (data.session.logAtSchool)
 		{
 			elems.miniLogtimeValueLock.style.color = "rgb(0, 186, 188)";
+			elems.miniLogtimeValueRemaining.style.color = "rgb(0, 186, 188)";
+			elems.miniLogtimeValueRemaining.innerText = arrayLanguages[data.student.language].done;
 			eachDay += remToday / (data.session.numberDays.total - 1);
 		}
 	}
@@ -2247,6 +2249,8 @@ function setLogtimeValue(remToday, eachDay, elems) {
 		elems.resultLogtimeRemaining.innerText = remaining;
 		elems.resultLogtimeRemaining.style.color = "white";
 		elems.resultLogtimeEstimation.style.color = "white";
+		elems.miniLogtimeValueRemaining.style.color = "white";
+		elems.miniLogtimeValueRemaining.innerText = remaining;
 		elems.miniLogtimeValueLock.style.color = "white";
 	}
 

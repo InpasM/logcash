@@ -681,7 +681,9 @@ function startLogcash() {
 		refreshButton.addEventListener("click", function() {
 			location.reload();
 		});
-		initLogcash();
+		setTimeout(function() {
+			initLogcash();
+		}, 100);
 	}
 	else
 	{
