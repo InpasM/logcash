@@ -78,14 +78,16 @@ function clickMonth(e) {
 
 	elems.monthBlock[oldMonth].style.animation = "0.2s " + disappear;
 	elems.monthBlock[oldMonth].style.animationFillMode = "forwards";
+	elems.lineGraphs[oldMonth].style.animation = "0.2s " + disappear;
+	elems.lineGraphs[oldMonth].style.animationFillMode = "forwards";
 
 	elems.divMonths[oldMonth].style.backgroundColor = "rgba(37, 41, 50, 0.9)";
 	elems.divMonths[oldMonth].style.color = "rgb(155, 155, 155)";
 	
-	elems.divMonths[parseInt(e.target.id)].style.backgroundColor = "white";
-	elems.divMonths[parseInt(e.target.id)].style.color = "#191919";
+	elems.divMonths[id].style.backgroundColor = "white";
+	elems.divMonths[id].style.color = "#191919";
 
-	months.indexArray = parseInt(e.target.id);
+	months.indexArray = id;
 	function setDayNameEvent(value) {
 		for (var i = 0; i < elems.monthDayBoxes.length; i++)
 			elems.monthDayBoxes[i].style.pointerEvents = value;
@@ -103,10 +105,15 @@ function clickMonth(e) {
 
 	setTimeout(function() {
 		elems.monthBlock[oldMonth].style.display = "none";
+		elems.lineGraphs[oldMonth].style.display = "none";
 
 		elems.monthBlock[id].style.display = "block";
 		elems.monthBlock[id].style.animation = "0.2s " + appear;
 		elems.monthBlock[id].style.animationFillMode = "forwards";
+
+		elems.lineGraphs[id].style.display = "flex";
+		elems.lineGraphs[id].style.animation = "0.2s " + appear;
+		elems.lineGraphs[id].style.animationFillMode = "forwards";
 	}, 200);
 }
 
