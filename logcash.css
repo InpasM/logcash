@@ -3,28 +3,6 @@
 	font-family: "Futura PT", "Futura", "Helvetica", "Sans serif";
 }
 
-body
-{
-	background: #12141a;
-	margin: 0;
-	padding: 0;
-}
-
-.main-div 
-{
-	background: #1d2028;
-	box-sizing: border-box;
-	padding: 25px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-}
-
-.main-navbar {
-	background-color: grey;
-	height: 60px;
-}
-
 .container-logcash 
 {
 	display: flex;
