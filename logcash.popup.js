@@ -334,7 +334,7 @@ var arrayLanguages = [
 		devise: "Devise",
 		language: "Language",
 		save: "Save Month",
-		size: "Size Font",
+		size: "Panel Size",
 		done: "DONE",
 	},
 	{
@@ -360,7 +360,7 @@ var arrayLanguages = [
 		devise: "Devise",
 		language: "Langue",
 		save: "Sauvegarde Mois",
-		size: "Taille Police",
+		size: "Taille Cadre",
 		done: "FAIT",
 	}
 ];
