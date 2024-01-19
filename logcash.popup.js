@@ -2535,7 +2535,8 @@ popup.initPopup = function(elems, months) {
 			e.target.value = 0;
 		else
 		{
-			var numberMonthHours = popup.months[months.length - 1].openDaysTotal * 7;
+			var numberMonthHours = popup.months[popup.months.indexArray].openDaysTotal * 7;
+
 			if (parseInt(e.target.value) > numberMonthHours)
 				data.student.months[popup.months.indexArray].hoursDeducted = numberMonthHours;
 			else
