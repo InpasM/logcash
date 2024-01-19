@@ -45,6 +45,7 @@ data.session = {
 	numberDays: 0,
 	lockTime: 0,
 	onCurrentMonth: true,
+	date: new Date(),
 };
 
 var localStorageSpace = function(){

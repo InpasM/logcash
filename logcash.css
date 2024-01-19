@@ -366,6 +366,9 @@
 
 .middle-line-3 {
 	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .block-boost {
@@ -380,7 +383,7 @@
 }
 
 .block-boost-left {
-	border-right: 1px solid rgb(45, 49, 60);
+	/* border-right: 1px solid rgb(45, 49, 60); */
 }
 
 .block-boost-right {
@@ -434,13 +437,14 @@
 /*******************************  BLOC WEEK/MONTH  ********************************/
 .habit-container {
 	width: fit-content;
+	height: 100%;
 }
 
 .week-container, .month-container {
 	width: fit-content;
 	display: flex;
 	flex-direction: column;
-	margin-top: 4px;
+	/* margin-top: 4px; */
 }
 
 .month-block {
@@ -552,7 +556,9 @@
 .line-this-selection {
 	/* background-color: red; */
 	display: flex;
-	justify-content: center;
+	/* justify-content: center; */
+	justify-content: space-between;
+	align-items: center;
 }
 
 .this-button {
@@ -567,10 +573,7 @@
 }
 
 .selection-arrow-right, .selection-arrow-left {
-	position: relative;
-	right: 0;
 	height: 100%;
-	/* width: 10px; */
 	aspect-ratio: 1;
 	/* background-color: pink; */
 	background-image: url("icons/arrow-up.svg");
@@ -580,24 +583,15 @@
 	background-position-x: center;
 	border-radius: 50%;
 	opacity: 0;
-	/* cursor: default; */
-	/* cursor: pointer; */
-	/* pointer-events: ; */
 	transition: ease 0.4s opacity, ease 0.4s background;
 }
 
-/* .selection-arrow-right:hover, .selection-arrow-left:hover {
-	background-color: rgb(30, 33, 43);
-} */
-
 .selection-arrow-right {
 	transform: rotate(90deg);
-	margin-left: 8px;
 }
 
 .selection-arrow-left {
 	transform: rotate(-90deg);
-	margin-right: 8px;
 }
 
 .salary-circle-container {
