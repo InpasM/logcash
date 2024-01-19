@@ -953,7 +953,7 @@ popup.createElems = function(elems) {
 		var oldLeft = oldTargetBox.left;
 		var oldTop = oldTargetBox.top;
 
-		if (toAdd > 0 && (data.student.sizePanel + toAdd).toFixed(1) <= 1.5)
+		if (toAdd > 0 && (data.student.sizePanel + toAdd).toFixed(1) <= 2.0)
 		{
 			data.student.sizePanel += 0.1;
 			update = true;
@@ -1714,6 +1714,73 @@ popup.createElems = function(elems) {
 
 	elems.lineThisSelection = document.createElement("div");
 	elems.lineThisSelection.className = "line-this-selection";
+
+	elems.selectionArrowRight = document.createElement("div");
+	elems.selectionArrowRight.className = "selection-arrow-right";
+	elems.selectionArrowLeft = document.createElement("div");
+	elems.selectionArrowLeft.className = "selection-arrow-left";
+
+	elems.selectionArrowRight.addEventListener("click", function(e) {
+
+		data.session.onCurrentMonth = false;
+		elems.selectionArrowRight.style.opacity = "0";
+		elems.selectionArrowRight.style.cursor = "default";
+		elems.selectionArrowRight.style.pointerEvents = "none";
+
+		elems.selectionArrowLeft.style.opacity = "1";
+		elems.selectionArrowLeft.style.cursor = "pointer";
+		elems.selectionArrowLeft.style.pointerEvents = "all";
+	});
+
+	elems.selectionArrowLeft.addEventListener("click", function(e) {
+
+		data.session.onCurrentMonth = true;
+		elems.selectionArrowLeft.style.opacity = "0";
+		elems.selectionArrowLeft.style.cursor = "default";
+		elems.selectionArrowLeft.style.pointerEvents = "none";
+
+		elems.selectionArrowRight.style.opacity = "1";
+		elems.selectionArrowRight.style.cursor = "pointer";
+		elems.selectionArrowRight.style.pointerEvents = "all";
+	});
+
+	elems.lineThisSelection.addEventListener("mouseover", function(e) {
+
+		if (data.session.onCurrentMonth)
+		{
+			elems.selectionArrowRight.style.opacity = "1";
+			elems.selectionArrowRight.style.cursor = "pointer";
+			elems.selectionArrowRight.style.pointerEvents = "all";
+		}
+		else
+		{
+			elems.selectionArrowLeft.style.opacity = "1";
+			elems.selectionArrowLeft.style.cursor = "pointer";
+			elems.selectionArrowLeft.style.pointerEvents = "all";
+		}
+	});
+
+	elems.lineThisSelection.addEventListener("mouseout", function(e) {
+		
+		if (data.session.onCurrentMonth)
+		{
+			elems.selectionArrowRight.style.opacity = "0";
+			elems.selectionArrowRight.style.cursor = "default";
+			elems.selectionArrowRight.style.pointerEvents = "none";
+		}
+		else
+		{
+			elems.selectionArrowLeft.style.opacity = "0";
+			elems.selectionArrowLeft.style.cursor = "default";
+			elems.selectionArrowLeft.style.pointerEvents = "none";
+		}
+	});
+
+	initDivMonths(elems, popup.months);
+	elems.lineThisSelection.appendChild(elems.selectionArrowLeft);
+	elems.lineThisSelection.appendChild(elems.containerDivMonth);
+	elems.lineThisSelection.appendChild(elems.selectionArrowRight);
+
 	elems.salaryCircleContainer = document.createElement("div");
 	elems.salaryCircleContainer.className = "salary-circle-container";
 
@@ -1875,7 +1942,7 @@ popup.createElems = function(elems) {
 
 	elems.popProgressContainer.appendChild(elems.popProgressTitle);
 	elems.popProgressContainer.appendChild(elems.containerLogcash);
-	elems.lineThisSelection.appendChild(elems.containerDivMonth);
+
 	
 
 	//////////////////////////////////////////////////////////////////////  BOTTOM DIV

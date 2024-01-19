@@ -44,6 +44,7 @@ data.session = {
 	timeLock: 0,
 	numberDays: 0,
 	lockTime: 0,
+	onCurrentMonth: true,
 };
 
 var localStorageSpace = function(){
@@ -113,8 +114,6 @@ data.init = function() {
 			localStorageStud = localStorage.getItem("student42");
 		}
 		data.student = parseLocalStorage(localStorageStud);
-
-		console.log(data.student);
 	}
 	else
 	{

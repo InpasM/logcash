@@ -550,6 +550,7 @@
 }
 
 .line-this-selection {
+	/* background-color: red; */
 	display: flex;
 	justify-content: center;
 }
@@ -563,6 +564,40 @@
 	color: rgb(155, 155, 155);
 	border: 1px solid rgb(51, 55, 67);
 	cursor: pointer;
+}
+
+.selection-arrow-right, .selection-arrow-left {
+	position: relative;
+	right: 0;
+	height: 100%;
+	/* width: 10px; */
+	aspect-ratio: 1;
+	/* background-color: pink; */
+	background-image: url("icons/arrow-up.svg");
+	background-size: 60%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-position-x: center;
+	border-radius: 50%;
+	opacity: 0;
+	/* cursor: default; */
+	/* cursor: pointer; */
+	/* pointer-events: ; */
+	transition: ease 0.4s opacity, ease 0.4s background;
+}
+
+/* .selection-arrow-right:hover, .selection-arrow-left:hover {
+	background-color: rgb(30, 33, 43);
+} */
+
+.selection-arrow-right {
+	transform: rotate(90deg);
+	margin-left: 8px;
+}
+
+.selection-arrow-left {
+	transform: rotate(-90deg);
+	margin-right: 8px;
 }
 
 .salary-circle-container {
