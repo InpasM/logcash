@@ -439,7 +439,8 @@ function initText(elems, text) {
 
 function updatePanelSize(elems) {
 
-	const	ratio_2 = 2 * data.student.sizePanel + "px",
+	const	ratio_1_5 = 1.5 * data.student.sizePanel + "px",
+			ratio_2 = 2 * data.student.sizePanel + "px",
 			ratio_3 = 3 * data.student.sizePanel + "px",
 			ratio_4 = 4 * data.student.sizePanel + "px",
 			ratio_6 = 6 * data.student.sizePanel + "px",
@@ -459,6 +460,7 @@ function updatePanelSize(elems) {
 			ratio_40 = 40 * data.student.sizePanel + "px",
 			ratio_43 = 43 * data.student.sizePanel + "px",
 			ratio_45 = 45 * data.student.sizePanel + "px",
+			ratio_48 = 48 * data.student.sizePanel + "px",
 			ratio_54 = 54 * data.student.sizePanel + "px",
 			ratio_90 = 90 * data.student.sizePanel + "px";
 
@@ -535,12 +537,12 @@ function updatePanelSize(elems) {
 	elems.resetCancelButton.style.borderRadius = ratio_16;
 
 	////////////////////////////////////////////// BUTTONS
-	elems.buttonBoostMin.style.fontSize = ratio_10;
-	elems.buttonBoostMin.style.width = ratio_40;
-	elems.buttonBoostMin.style.height = ratio_22;
-	elems.buttonBoostMax.style.fontSize = ratio_10;
-	elems.buttonBoostMax.style.width = ratio_40;
-	elems.buttonBoostMax.style.height = ratio_22;
+	// elems.buttonBoostMin.style.fontSize = ratio_10;
+	// elems.buttonBoostMin.style.width = ratio_40;
+	// elems.buttonBoostMin.style.height = ratio_22;
+	// elems.buttonBoostMax.style.fontSize = ratio_10;
+	// elems.buttonBoostMax.style.width = ratio_40;
+	// elems.buttonBoostMax.style.height = ratio_22;
 
 	/////////////////////////////////////////// INPUT
 	elems.inputSalary.style.fontSize = ratio_16;
@@ -557,7 +559,9 @@ function updatePanelSize(elems) {
 	{
 		elems.monthDayBoxes[i].style.fontSize = ratio_8;
 		elems.monthDayBoxes[i].style.width = ratio_20;
-		elems.monthDayBoxes[i].style.height = ratio_20;
+		elems.monthDayBoxes[i].style.height = ratio_20;1
+		elems.monthDayBoxes[i].style.borderWidth = ratio_2;
+		elems.monthDayBoxes[i].style.margin = "0 " + ratio_1_5;
 	}
 
 	for (var i = 0; i < elems.monthArray.length; i++)
@@ -567,13 +571,26 @@ function updatePanelSize(elems) {
 			elems.monthArray[i].checkboxes[j].style.fontSize = ratio_8;
 			elems.monthArray[i].checkboxes[j].style.width = ratio_20;
 			elems.monthArray[i].checkboxes[j].style.height = ratio_20;
+			elems.monthArray[i].checkboxes[j].style.borderWidth = ratio_2;
+			elems.monthArray[i].checkboxes[j].style.margin = "0 " + ratio_1_5;
 		}
 		elems.lineGraphs[i].style.maxHeight = ratio_40;
 
+		for (var j = 0; j < elems.monthArray[i].lines.length; j++)
+		 {
+			//  console.log(elems.monthArray[i].lines[j]);
+			 elems.monthArray[i].lines[j].style.marginTop = ratio_3;
+
+		 }
+		//  console.log(elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes);
 		for (var j = 0; j < elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes.length; j++)
 		{
 			elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.width = ratio_20;
 			elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.height = ratio_20;
+			elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.borderWidth = ratio_2;
+			elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.margin = "0 " + ratio_1_5;
+		// 	elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.backgroundColor = "red";
+		// 	// elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.borderWidth = ratio_2;
 		}
 
 		for (var j = 0; j < elems.lineGraphs[i].childNodes.length; j++)
@@ -600,6 +617,7 @@ function updatePanelSize(elems) {
 	for (var i = 0; i < elems.divMonths.length; i++)
 	{
 		elems.divMonths[i].style.fontSize = ratio_10;
+		elems.divMonths[i].style.borderWidth = ratio_1_5;
 		elems.divMonths[i].style.padding = paddingY + paddingX;
 	}
 
@@ -613,7 +631,6 @@ function updatePanelSize(elems) {
 	elems.blockLogtimeRight.style.minWidth = 74 * data.student.sizePanel + "px";
 
 	////////////////////////////////////////// TITLE SECTION
-	elems.titleBoost.style.fontSize = ratio_10;
 	elems.weeklySpan.style.fontSize = ratio_12;
 	elems.titleLogtime.style.fontSize = ratio_12;
 	elems.mainTitleInfo.style.fontSize = ratio_12;
@@ -621,7 +638,7 @@ function updatePanelSize(elems) {
 	elems.mainTitleDays.style.fontSize = ratio_12;
 	elems.mainTitleBoost.style.fontSize = ratio_12;
 	elems.mainTitleLogtime.style.fontSize = ratio_12;
-	elems.titleBoost.style.margin = "0 0 0 " + ratio_2;
+
 	elems.weeklySpan.style.margin = "0 0 0 " + ratio_2;
 	elems.titleLogtime.style.margin = "0 0 0 " + ratio_2;
 	elems.mainTitleInfo.style.margin = "0 0 0 " + ratio_2;
@@ -649,6 +666,7 @@ function updatePanelSize(elems) {
 
 	elems.salaryCircle.style.maxWidth = 90 * data.student.sizePanel + "px";
 	elems.salaryCircle.style.minWidth = 74 * data.student.sizePanel + "px";
+	elems.salaryCircle.style.borderWidth = ratio_1_5;
 
 	/////////////////////////////////////////// TOOLTIP QUESTION
 	elems.questionHours.style.height = ratio_11;
@@ -686,24 +704,35 @@ function updatePanelSize(elems) {
 		elems.resultLogtimeEach.style.fontSize = ratio_14;
 
 	//////////////////////////////////////////////// BOOST CONTAINER
-	elems.middleLine3.style.marginTop = ratio_4;
-	// elems.middleLine3.style.marginBottom = ratio_8;
-	// elems.blockBoost.style.marginTop = ratio_8;
-	elems.blockBoostLeft.style.margingLeft = ratio_4;
-	// elems.blockBoostLeft.style.paddingRight = ratio_8;
-	elems.blockBoostLeft.style.paddingRight = ratio_4;
-	// elems.blockBoostRight.style.margingRight = ratio_4;
-	// elems.blockBoostRight.style.paddingLeft = ratio_8;
-	elems.blockBoostRight.style.paddingLeft = ratio_4;
-	elems.buttonBoostMin.style.marginTop = ratio_3;
+	elems.middleLine3.style.marginTop = ratio_6;
+
+	elems.titleBoost.style.fontSize = ratio_9;
+	elems.titleBoost.style.lineHeight = ratio_10;
+	elems.titleBoost.style.width = ratio_48;
+	elems.titleBoost.style.margin = "0 " + ratio_8 + " 0 0";
+	
+	elems.blockBoostLeft.style.marginRight = ratio_6;
+	// elems.blockBoostLeft.style.margingLeft = ratio_4;
+	// elems.blockBoostLeft.style.paddingRight = ratio_4;
+	// elems.blockBoostRight.style.paddingLeft = ratio_4;
+
+	// elems.buttonBoostMin.style.marginTop = ratio_3;
 	elems.buttonBoostMin.style.borderRadius = ratio_20;
-	elems.buttonBoostMax.style.marginTop = ratio_3;
+	// elems.buttonBoostMax.style.marginTop = ratio_3;
 	elems.buttonBoostMax.style.borderRadius = ratio_20;
+
+	elems.buttonBoostMin.style.borderWidth = ratio_2;
+	elems.buttonBoostMin.style.fontSize = ratio_10;
+	elems.buttonBoostMin.style.padding = ratio_4 + " " + paddingX;
+
+	elems.buttonBoostMax.style.borderWidth = ratio_2;
+	elems.buttonBoostMax.style.fontSize = ratio_10;
+	elems.buttonBoostMax.style.padding = ratio_4 + " " + paddingX;
 	
 	//////////////////////////////////////////////// SALARY CONTAINER
 	elems.salaryGraphContainer.style.minHeight = ratio_40;
 	elems.salaryContainer.style.paddingTop = ratio_8;
-	elems.lineThisSelection.style.marginTop = ratio_16;
+	elems.lineThisSelection.style.marginTop = ratio_12;
 	elems.lineThisSelection.style.marginBottom = ratio_16;
 	elems.salaryCircleContainer.style.padding = ratio_12;
 
@@ -727,6 +756,9 @@ function updatePanelSize(elems) {
 	elems.logtimeContainer.style.marginBottom = ratio_8;
 	elems.logtimeContainer.style.padding = ratio_6;
 	elems.logtimeContainer.style.borderRadius = ratio_4;
+
+	elems.blockLogtime.style.marginTop = "8px";
+	elems.blockLogtime.style.paddingBottom = "8px";
 
 	elems.labelLogtimeRemaining.style.borderRadius = ratio_4;
 	elems.extraLogtimeSideLeft.style.padding = "0 " + ratio_2;
@@ -1216,6 +1248,7 @@ popup.createElems = function(elems) {
 
 	elems.titleBoost = document.createElement("p");
 	elems.titleBoost.className = "main-title-info";
+	elems.titleBoost.style.textAlign = "right";
 	elems.questionBoost = document.createElement("div");
 	elems.questionBoost.className = "question-logo";
 	elems.questionBoost.id = "1";
