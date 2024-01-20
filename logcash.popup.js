@@ -137,7 +137,7 @@ var questions = [
 			text: "Enter any hours you wish to deduct here.\n\
 			This can include days off, public holidays, medical exemptions, \
 			school announcements, etc.",
-			width: 125
+			width: 150
 		},
 		{	
 			text: "Include the extra time added to your logtime if leaving with a locked session at the end of the day.",
@@ -151,16 +151,17 @@ var questions = [
 			width: 170
 		},
 		{	
-			text: "When logged at school, you will be able to see the remaining time you have to do today to reach your monthly goal.",
+			text: "When logged at school, you will be able to see the remaining time you have to do today to reach your monthly goal.\n\
+			Boost lock include the extra time added to your logtime if leaving with a locked session at the end of the day.",
 			width: 150
 		},
 	],
 	[
 		{	
-			text: "Ajouter ici toutes les heures à deduire du mois.\n\
-			Congés, jours fériés, dispense médical, \
-			annonce de l'école...",
-			width: 125
+			text: "Ajouter toutes les heures que vous souhaitez déduire du mois.\n\
+			Cela inclus les congés, jours fériés, dispense médical, \
+			annonce de l'école, etc.",
+			width: 160
 		},
 		{	
 			text: "Ajouter à l'estimation le temps de Logtime qui s'écoule en laissant sa session verrouillée en fin de journée.",
@@ -170,11 +171,12 @@ var questions = [
 			text: "Selectionner chaque journée auquelle vous prevoyez d'assister.\n\
 			Cliquer sur les noms de jour pour selectionner toute une colonne.\n\
 			Si aucun jour n'est selectionné, l'estimation sera basé sur le nombre de jour ouvré restant.\n\
-			Double clique sur \"Presence Mensuelle\" pour reset le calendrier.",
-			width: 170
+			Double-clique sur \"Presence Mensuelle\" pour reset le calendrier.",
+			width: 160
 		},
 		{	
-			text: "Connecté à l'école, vous verrez le temps estimé restant à faire cette journée pour atteindre votre objectif mensuel.",
+			text: "Connecté à l'école, vous verrez le temps estimé restant à faire cette journée pour atteindre votre objectif mensuel.\n\
+			Boost lock permet d'inclure à l'estimation le temps de Logtime qui s'ajoute en laissant sa session verrouillée en fin de journée.",
 			width: 150
 		},
 	]
