@@ -611,7 +611,7 @@ function updatePanelSize(elems) {
 	elems.extraLogtimeSideLeft.style.fontSize = 7 * data.student.sizePanel + "px";
 	elems.extraLogtimeSideLeft.style.lineHeight = ratio_8;
 	elems.extraLogtimeSideLeft.style.width = ratio_40;
-	elems.extraLogtimeSideLeft.style.marginRight = ratio_2;
+	elems.extraLogtimeSideLeft.style.marginRight = ratio_3;
 	// elems.extraLogtimeSideRight.style.fontSize = ratio_10;
 	elems.extraLogtimeSideRight.style.lineHeight = ratio_8;
 	elems.extraLogtimeSideRight.style.width = ratio_30;
@@ -1465,7 +1465,8 @@ popup.createElems = function(elems) {
 		{
 			if (elems.monthArray[popup.months.indexArray].checkboxes[i].getAttribute("indexday") === id)
 			{
-				if (data.student.monthlyHabit[i] === conditionBool && (i + 1 !== popup.numberDay))
+				// if (data.student.monthlyHabit[i] === conditionBool && (i + 1 !== popup.numberDay))
+				if (data.student.monthlyHabit[i] === conditionBool)
 				{
 					update = true;
 					data.student.monthlyHabit[i] = newBool;
@@ -1484,7 +1485,8 @@ popup.createElems = function(elems) {
 		{
 			var allTrue = true, update = false;
 
-			for (var i = popup.numberDay; i < elems.monthArray[popup.months.indexArray].checkboxes.length; i++)
+			// for (var i = popup.numberDay; i < elems.monthArray[popup.months.indexArray].checkboxes.length; i++)
+			for (var i = popup.numberDay - 1; i < elems.monthArray[popup.months.indexArray].checkboxes.length; i++)
 			{
 				if (elems.monthArray[popup.months.indexArray].checkboxes[i].getAttribute("indexday") === e.target.id)
 				{
@@ -1510,13 +1512,31 @@ popup.createElems = function(elems) {
 	elems.monthContainer.appendChild(elems.monthLineDayName);
 
 	function mouseoverDayCircle(e) {
-		e.target.style.backgroundColor = "#282b34";
-		e.target.style.color = "rgba(236, 238, 244, 0.9)";
+
+		if (parseInt(e.target.id) === data.session.date.getDate())
+		{
+			e.target.style.backgroundColor = "#cecece";
+			e.target.style.color = "#000000";
+		}
+		else
+		{
+			e.target.style.backgroundColor = "#282b34";
+			e.target.style.color = "rgba(236, 238, 244, 0.9)";
+		}
 	}
 
 	function mouseoutDayCircle(e) {
-		e.target.style.backgroundColor = "#373c48";
-		e.target.style.color = "rgb(198, 198, 198)";
+
+		if (parseInt(e.target.id) === data.session.date.getDate())
+		{
+			e.target.style.backgroundColor = "white";
+			e.target.style.color = "#191919";
+		}
+		else
+		{
+			e.target.style.backgroundColor = "#373c48";
+			e.target.style.color = "rgb(198, 198, 198)";
+		}
 	}
 
 	elems.monthArray = [];
@@ -1560,8 +1580,8 @@ popup.createElems = function(elems) {
 				{
 					tmpDay.style.backgroundColor = "white";
 					tmpDay.style.color = "#191919";
-					tmpDay.style.cursor = "default";
-					tmpDay.style.pointerEvents = "none";
+					// tmpDay.style.cursor = "default";
+					// tmpDay.style.pointerEvents = "none";
 				}
 				tmpMonth.checkboxes.push(tmpDay);
 				tmpMonth.lines[i].appendChild(tmpDay);
@@ -2273,19 +2293,20 @@ function getOpenDays(numberYear, numberMonth, numberDay) {
 	var totalDays = 0;
 	var indexHabit = actualDay;
 
-	if (data.session.logAtSchool)
-	{
-		var i = numberDay - 1;
+	var i = numberDay - 1;
+	// if (data.session.logAtSchool)
+	// {
+	// 	var i = numberDay - 1;
 
-		if (useAll)
-		{
-			totalDays++; 
-			if (actualDay >= 1 && actualDay <= 5)
-			openDays++;
-		}
-	}
-	else
-		var i = numberDay;
+	// 	if (useAll)
+	// 	{
+	// 		totalDays++; 
+	// 		if (actualDay >= 1 && actualDay <= 5)
+	// 			openDays++;
+	// 	}
+	// }
+	// else
+	// 	var i = numberDay;
 
 	while (++i <= numberDaysInMonth)
 	{
@@ -2303,6 +2324,7 @@ function getOpenDays(numberYear, numberMonth, numberDay) {
 		indexHabit++;
 		actualDay++;
 	}
+	// console.log("DAYS/ OPEN:", openDays, "TOTAL:", totalDays);
 	if (!useAll)
 		return ({open: openDays, total: openDays});
 	return ({open: openDays, total: totalDays});
@@ -2557,7 +2579,8 @@ popup.setData = function(elems) {
 		}
 		else
 		{
-			if (i + 1 <= popup.numberDay)
+			// if (i + 1 <= popup.numberDay)
+			if (i + 1 < popup.numberDay)
 			{
 				data.student.monthlyHabit[i] = false;
 				needToUpdateData = true;
@@ -2606,18 +2629,27 @@ popup.setData = function(elems) {
 function clickMonthlyHabit(e) {
 	
 	const index = parseInt(e.target.id) - 1;
+	const dayNumber = data.session.date.getDate();
 
+	if (parseInt(e.target.id) === dayNumber)
+	{
+		e.target.style.backgroundColor = "#cecece";
+		e.target.style.color = "#000000";
+	}
+	else
+	{
+		e.target.style.backgroundColor = "#282b34";
+		e.target.style.color = "rgba(236, 238, 244, 0.9)";
+	}
 	if (data.student.monthlyHabit[index])
 	{
 		data.student.monthlyHabit[index] = false;
 		e.target.style.borderColor = "rgb(45, 49, 60)";
-		e.target.style.backgroundColor = "#373c48";
 	}
 	else
 	{
 		data.student.monthlyHabit[index] = true;
 		e.target.style.borderColor = "rgb(0, 186, 188)";
-		e.target.style.backgroundColor = "#373c48";
 	}
 	if (data.isHomePage === -1)
 		data.updateLocalStorage();
