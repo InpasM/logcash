@@ -458,6 +458,7 @@ function updatePanelSize(elems) {
 			ratio_20 = 20 * data.student.sizePanel + "px",
 			ratio_22 = 22 * data.student.sizePanel + "px",
 			ratio_24 = 24 * data.student.sizePanel + "px",
+			ratio_30 = 30 * data.student.sizePanel + "px",
 			ratio_35 = 35 * data.student.sizePanel + "px",
 			ratio_40 = 40 * data.student.sizePanel + "px",
 			ratio_43 = 43 * data.student.sizePanel + "px",
@@ -561,9 +562,10 @@ function updatePanelSize(elems) {
 	{
 		elems.monthDayBoxes[i].style.fontSize = ratio_8;
 		elems.monthDayBoxes[i].style.width = ratio_20;
-		elems.monthDayBoxes[i].style.height = ratio_20;1
+		elems.monthDayBoxes[i].style.height = ratio_20;
 		elems.monthDayBoxes[i].style.borderWidth = ratio_2;
-		elems.monthDayBoxes[i].style.margin = "0 " + ratio_1_5;
+		// elems.monthDayBoxes[i].style.margin = "0 " + ratio_1_5;
+		elems.monthDayBoxes[i].style.margin = "0 1px";
 	}
 
 	for (var i = 0; i < elems.monthArray.length; i++)
@@ -574,25 +576,24 @@ function updatePanelSize(elems) {
 			elems.monthArray[i].checkboxes[j].style.width = ratio_20;
 			elems.monthArray[i].checkboxes[j].style.height = ratio_20;
 			elems.monthArray[i].checkboxes[j].style.borderWidth = ratio_2;
-			elems.monthArray[i].checkboxes[j].style.margin = "0 " + ratio_1_5;
+			// elems.monthArray[i].checkboxes[j].style.margin = "0 " + ratio_1_5;
+			elems.monthArray[i].checkboxes[j].style.margin = "0 1px";
 		}
 		elems.lineGraphs[i].style.maxHeight = ratio_40;
 
 		for (var j = 0; j < elems.monthArray[i].lines.length; j++)
 		 {
-			//  console.log(elems.monthArray[i].lines[j]);
-			 elems.monthArray[i].lines[j].style.marginTop = ratio_3;
+			//  elems.monthArray[i].lines[j].style.marginTop = ratio_3;
+			 elems.monthArray[i].lines[j].style.marginTop = ratio_2;
 
 		 }
-		//  console.log(elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes);
 		for (var j = 0; j < elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes.length; j++)
 		{
 			elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.width = ratio_20;
 			elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.height = ratio_20;
 			elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.borderWidth = ratio_2;
-			elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.margin = "0 " + ratio_1_5;
-		// 	elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.backgroundColor = "red";
-		// 	// elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.borderWidth = ratio_2;
+			// elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.margin = "0 " + ratio_1_5;
+			elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.margin = "0 1px";
 		}
 
 		for (var j = 0; j < elems.lineGraphs[i].childNodes.length; j++)
@@ -610,9 +611,21 @@ function updatePanelSize(elems) {
 	elems.extraLogtimeSideLeft.style.fontSize = 7 * data.student.sizePanel + "px";
 	elems.extraLogtimeSideLeft.style.lineHeight = ratio_8;
 	elems.extraLogtimeSideLeft.style.width = ratio_40;
-	elems.extraLogtimeSideRight.style.fontSize = ratio_10;
+	elems.extraLogtimeSideLeft.style.marginRight = ratio_2;
+	// elems.extraLogtimeSideRight.style.fontSize = ratio_10;
 	elems.extraLogtimeSideRight.style.lineHeight = ratio_8;
-	elems.extraLogtimeSideRight.style.width = ratio_35;
+	elems.extraLogtimeSideRight.style.width = ratio_30;
+
+	if (elems.extraLogtimeSideRight.innerText.length > 5)
+	{
+		elems.extraLogtimeSideRight.style.fontSize = ratio_9;
+		// elems.extraLogtimeSideRight.style.width = 28 * data.student.sizePanel + "px";
+	}
+	else
+	{
+		elems.extraLogtimeSideRight.style.fontSize = ratio_10;
+		// elems.extraLogtimeSideRight.style.width = ratio_30;
+	}
 
 	var paddingY = 2 * data.student.sizePanel + "px ";
 	var paddingX = 6 * data.student.sizePanel + "px";
@@ -629,8 +642,9 @@ function updatePanelSize(elems) {
 	elems.panelLanguageButtonFrench.style.padding = paddingY + paddingX;
 	elems.panelLanguageButtonFrench.style.marginLeft = ratio_4;
 
-	elems.blockLogtimeLeft.style.minWidth = 74 * data.student.sizePanel + "px";
-	elems.blockLogtimeRight.style.minWidth = 74 * data.student.sizePanel + "px";
+	// elems.blockLogtimeLeft.style.minWidth = 74 * data.student.sizePanel + "px";
+	elems.blockLogtimeLeft.style.minWidth = 72 * data.student.sizePanel + "px";
+	elems.blockLogtimeRight.style.minWidth = 72 * data.student.sizePanel + "px";
 
 	////////////////////////////////////////// TITLE SECTION
 	elems.weeklySpan.style.fontSize = ratio_12;
@@ -697,7 +711,11 @@ function updatePanelSize(elems) {
 	elems.labelLogtimeNumberDay.style.fontSize = ratio_8;
 
 	elems.resultLogtimeRemaining.style.fontSize = ratio_14;
-	elems.resultLogtimeEstimation.style.fontSize = ratio_14;
+	// elems.resultLogtimeEstimation.style.fontSize = ratio_14;
+	if (data.session.timeLock === "IMPOSSIBLE")
+		elems.resultLogtimeEstimation.style.fontSize = ratio_10;
+	else
+		elems.resultLogtimeEstimation.style.fontSize = ratio_16;
 	elems.resultLogtimeNumberDay.style.fontSize = ratio_14;
 	
 	if (data.session.logAtSchool)
@@ -739,8 +757,8 @@ function updatePanelSize(elems) {
 	elems.salaryCircleContainer.style.padding = ratio_12;
 
 	// elems.salaryCircleContainer.style.padding = ratio_12;
-	elems.blockLogtimeLeft.style.paddingRight = ratio_8;
-	elems.blockLogtimeRight.style.paddingLeft = ratio_8;
+	elems.blockLogtimeLeft.style.paddingRight = ratio_6;
+	elems.blockLogtimeRight.style.paddingLeft = ratio_6;
 
 	for (var i = 0; i < elems.monthGraphs.length; i++)
 	{
@@ -763,8 +781,8 @@ function updatePanelSize(elems) {
 	elems.blockLogtime.style.paddingBottom = "8px";
 
 	elems.labelLogtimeRemaining.style.borderRadius = ratio_4;
-	elems.extraLogtimeSideLeft.style.padding = "0 " + ratio_2;
-	elems.extraLogtimeSideRight.style.padding = "0 " + ratio_2;
+	// elems.extraLogtimeSideLeft.style.padding = "0 " + ratio_2;
+	// elems.extraLogtimeSideRight.style.padding = "0 " + ratio_2;
 }
 
 function savePosition() {
@@ -2466,6 +2484,16 @@ function setLogtimeValue(remToday, eachDay, elems) {
 			elems.extraLogtimeSideRight.style.color = "rgb(140, 140, 140)";
 		}
 	}
+	if (elems.extraLogtimeSideRight.innerText.length > 5)
+	{
+		elems.extraLogtimeSideRight.style.fontSize = 9 * data.student.sizePanel + "px";
+		// elems.extraLogtimeSideRight.style.width = 28 * data.student.sizePanel + "px";
+	}
+	else
+	{
+		elems.extraLogtimeSideRight.style.fontSize = 10 * data.student.sizePanel + "px";
+		// elems.extraLogtimeSideRight.style.width = 30 * data.student.sizePanel + "px";
+	}
 	elems.resultLogtimeNumberDay.innerText = data.session.numberDays.total;
 	elems.resultLogtime1.innerText = getTimeFormat(eachDay, "h");
 }
@@ -2496,7 +2524,7 @@ function setLogtimeEstimation(elems) {
 	}
 	
 	if (data.session.timeLock === "IMPOSSIBLE")
-		elems.resultLogtimeEstimation.style.fontSize = 12 * data.student.sizePanel + "px";
+		elems.resultLogtimeEstimation.style.fontSize = 10 * data.student.sizePanel + "px";
 	else
 		elems.resultLogtimeEstimation.style.fontSize = 16 * data.student.sizePanel + "px";
 
