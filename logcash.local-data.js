@@ -16,15 +16,6 @@ data.updateLocalStorage = function() {
 	}
 }
 
-monthObj = {
-	yearIndex: 0,
-	nameShort: 0,
-	nameLong: 0,
-	salary: 0,
-	hoursDeducted: 0,
-	timeDone: 0,
-};
-
 data.student = {
 	pseudo: 0,
 	addBoostHalf: false,
@@ -32,7 +23,7 @@ data.student = {
 	showMore: false,
 	language: ENGLISH,
 	sizePanel: 1.0,
-	popupVisible: false,
+	popupVisible: true,
 	positionTop: 0,
 	percentPositionLeft: 0,
 
@@ -53,6 +44,8 @@ data.session = {
 	timeLock: 0,
 	numberDays: 0,
 	lockTime: 0,
+	onCurrentMonth: true,
+	date: new Date(),
 };
 
 var localStorageSpace = function(){
@@ -158,6 +151,14 @@ data.init = function() {
 	{
 		for (var i = 0; i < 4; i++)
 		{
+			var monthObj = {
+				yearIndex: 0,
+				nameShort: 0,
+				nameLong: 0,
+				salary: 0,
+				hoursDeducted: 0,
+				timeDone: 0,
+			};
 			data.student.months.push(monthObj);
 		}
 	}

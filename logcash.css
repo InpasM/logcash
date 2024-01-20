@@ -366,6 +366,9 @@
 
 .middle-line-3 {
 	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .block-boost {
@@ -380,7 +383,7 @@
 }
 
 .block-boost-left {
-	border-right: 1px solid rgb(45, 49, 60);
+	/* border-right: 1px solid rgb(45, 49, 60); */
 }
 
 .block-boost-right {
@@ -434,13 +437,14 @@
 /*******************************  BLOC WEEK/MONTH  ********************************/
 .habit-container {
 	width: fit-content;
+	height: 100%;
 }
 
 .week-container, .month-container {
 	width: fit-content;
 	display: flex;
 	flex-direction: column;
-	margin-top: 4px;
+	/* margin-top: 4px; */
 }
 
 .month-block {
@@ -471,7 +475,7 @@
 .line-habit {
 	width: 100%;
 	display: flex;
-	margin-top: 2px;
+	/* margin-top: 2px; */
 }
 
 .checkbox-habit {
@@ -504,7 +508,8 @@
 .block-logtime {
 	flex: 1;
 	display: flex;
-	margin: 8px 0 0 0;
+	/* margin: 8px 0 0 0; */
+	border-bottom: 1px solid rgb(45, 49, 60);
 }
 
 .block-logtime-side {
@@ -550,8 +555,11 @@
 }
 
 .line-this-selection {
+	/* background-color: red; */
 	display: flex;
-	justify-content: center;
+	/* justify-content: center; */
+	justify-content: space-between;
+	align-items: center;
 }
 
 .this-button {
@@ -563,6 +571,28 @@
 	color: rgb(155, 155, 155);
 	border: 1px solid rgb(51, 55, 67);
 	cursor: pointer;
+}
+
+.selection-arrow-right, .selection-arrow-left {
+	height: 100%;
+	aspect-ratio: 1;
+	/* background-color: pink; */
+	background-image: url("icons/arrow-up.svg");
+	background-size: 60%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-position-x: center;
+	border-radius: 50%;
+	opacity: 0;
+	transition: ease 0.4s opacity, ease 0.4s background;
+}
+
+.selection-arrow-right {
+	transform: rotate(90deg);
+}
+
+.selection-arrow-left {
+	transform: rotate(-90deg);
 }
 
 .salary-circle-container {
