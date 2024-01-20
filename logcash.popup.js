@@ -134,24 +134,24 @@ function clickBoostMax() {
 var questions = [
 	[
 		{	
-			text: "Add here all hours you want to deduct.\n\
-			Days off, public holiday, medical exemption, \
-			school announcement...",
+			text: "Enter any hours you wish to deduct here.\n\
+			This can include days off, public holidays, medical exemptions, \
+			school announcements, etc.",
 			width: 125
 		},
 		{	
-			text: "Add to estimation the extra time added to your Logtime when leaving with a lock session at the end of day.",
+			text: "Include the extra time added to your logtime if leaving with a locked session at the end of the day.",
 			width: 125
 		},
 		{	
-			text: "Select each day you plan to attend.\n\
-			Click on day's name to select alls same days remaining in the month.\n\
-			If none selected, the estimation will be based on remaining open days.\n\
-			Double click on \"Monthly Attendance\" to reset the calendar.",
+			text: "Select the days you plan to attend school.\n\
+			Clicking on the day's name will select the whole column.\n\
+			If no day is selected, the estimate will be based on the remaining open days.\n\
+			Double-clicking on \"Monthly Attendance\" will reset your calendar.",
 			width: 170
 		},
 		{	
-			text: "Log at School you will see the estimated time remaining you have to do today to reach your monthly goal.",
+			text: "When logged at school, you will be able to see the remaining time you have to do today to reach your monthly goal.",
 			width: 150
 		},
 	],
