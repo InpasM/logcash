@@ -1472,6 +1472,16 @@ popup.createElems = function(elems) {
 					data.student.monthlyHabit[i] = newBool;
 					elems.monthArray[popup.months.indexArray].checkboxes[i].style.borderColor = borderColor;
 				}
+				if (parseInt(elems.monthArray[popup.months.indexArray].checkboxes[i].id) === data.session.date.getDate())
+				{
+					elems.monthArray[popup.months.indexArray].checkboxes[i].style.backgroundColor = "white";
+					elems.monthArray[popup.months.indexArray].checkboxes[i].style.color = "#191919";
+				}
+				else
+				{
+					elems.monthArray[popup.months.indexArray].checkboxes[i].style.backgroundColor = "#373c48";
+					elems.monthArray[popup.months.indexArray].checkboxes[i].style.color = "rgb(198, 198, 198)";
+				}
 			}
 		}
 		if (data.isHomePage === -1 && update)
@@ -1485,7 +1495,6 @@ popup.createElems = function(elems) {
 		{
 			var allTrue = true, update = false;
 
-			// for (var i = popup.numberDay; i < elems.monthArray[popup.months.indexArray].checkboxes.length; i++)
 			for (var i = popup.numberDay - 1; i < elems.monthArray[popup.months.indexArray].checkboxes.length; i++)
 			{
 				if (elems.monthArray[popup.months.indexArray].checkboxes[i].getAttribute("indexday") === e.target.id)
@@ -1501,12 +1510,54 @@ popup.createElems = function(elems) {
 		}
 	}
 
+	function mouseoverDayBoxes(e) {
+	
+		for (var i = popup.numberDay - 1; i < elems.monthArray[popup.months.indexArray].checkboxes.length; i++)
+		{
+			if (elems.monthArray[popup.months.indexArray].checkboxes[i].getAttribute("indexday") === e.target.id)
+			{
+				if (parseInt(elems.monthArray[popup.months.indexArray].checkboxes[i].id) === data.session.date.getDate())
+				{
+					elems.monthArray[popup.months.indexArray].checkboxes[i].style.backgroundColor = "#cecece";
+					elems.monthArray[popup.months.indexArray].checkboxes[i].style.color = "#000000";
+				}
+				else
+				{
+					elems.monthArray[popup.months.indexArray].checkboxes[i].style.backgroundColor = "#282b34";
+					elems.monthArray[popup.months.indexArray].checkboxes[i].style.color = "rgba(236, 238, 244, 0.9)";
+				}
+			}
+		}
+	}
+
+	function mouseoutDayBoxes(e) {
+	
+		for (var i = popup.numberDay - 1; i < elems.monthArray[popup.months.indexArray].checkboxes.length; i++)
+		{
+			if (elems.monthArray[popup.months.indexArray].checkboxes[i].getAttribute("indexday") === e.target.id)
+			{
+				if (parseInt(elems.monthArray[popup.months.indexArray].checkboxes[i].id) === data.session.date.getDate())
+				{
+					elems.monthArray[popup.months.indexArray].checkboxes[i].style.backgroundColor = "white";
+					elems.monthArray[popup.months.indexArray].checkboxes[i].style.color = "#191919";
+				}
+				else
+				{
+					elems.monthArray[popup.months.indexArray].checkboxes[i].style.backgroundColor = "#373c48";
+					elems.monthArray[popup.months.indexArray].checkboxes[i].style.color = "rgb(198, 198, 198)";
+				}
+			}
+		}
+	}
+
 	for (var i = 0; i < 7; i++)
 	{
 		elems.monthDayBoxes[i] = document.createElement("div");
 		elems.monthDayBoxes[i].className = "days-name-box";
 		elems.monthDayBoxes[i].id = i;
 		elems.monthDayBoxes[i].addEventListener("click", selectAllSameDay);
+		elems.monthDayBoxes[i].addEventListener("mouseover", mouseoverDayBoxes);
+		elems.monthDayBoxes[i].addEventListener("mouseout", mouseoutDayBoxes);
 		elems.monthLineDayName.appendChild(elems.monthDayBoxes[i]);
 	}
 	elems.monthContainer.appendChild(elems.monthLineDayName);
@@ -2633,13 +2684,13 @@ function clickMonthlyHabit(e) {
 
 	if (parseInt(e.target.id) === dayNumber)
 	{
-		e.target.style.backgroundColor = "#cecece";
-		e.target.style.color = "#000000";
+		e.target.style.backgroundColor = "white";
+		e.target.style.color = "#191919";
 	}
 	else
 	{
-		e.target.style.backgroundColor = "#282b34";
-		e.target.style.color = "rgba(236, 238, 244, 0.9)";
+		e.target.style.backgroundColor = "#373c48";
+		e.target.style.color = "rgb(198, 198, 198)";
 	}
 	if (data.student.monthlyHabit[index])
 	{
