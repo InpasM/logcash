@@ -46,6 +46,7 @@ data.session = {
 	lockTime: 0,
 	onCurrentMonth: true,
 	date: new Date(),
+	// date: new Date("2024-02-01"),	// TESTS
 };
 
 var localStorageSpace = function(){
@@ -89,6 +90,26 @@ function parseLocalStorage(itemStudent) {
 		student.percentPositionLeft = 0;
 	if (!student.months)
 		student.months = [];
+	else
+	{
+		for (var i = 0; i < student.months.length; i++)
+		{
+			if (!student.months[i].yearIndex)
+				student.months[i].yearIndex = 0;
+			if (!student.months[i].monthIndex)
+				student.months[i].monthIndex = 0;
+			if (!student.months[i].nameShort)
+				student.months[i].nameShort = 0;
+			if (!student.months[i].nameLong)
+				student.months[i].nameLong = 0;
+			if (!student.months[i].salary)
+				student.months[i].salary = 0;
+			if (!student.months[i].hoursDeducted)
+				student.months[i].hoursDeducted = 0;
+			if (!student.months[i].timeDone)
+				student.months[i].timeDone = 0;
+		}
+	}
 	if (!student.monthlyHabit)
 		student.monthlyHabit = [];
 	return student;
@@ -153,6 +174,7 @@ data.init = function() {
 		{
 			var monthObj = {
 				yearIndex: 0,
+				monthIndex: 0,
 				nameShort: 0,
 				nameLong: 0,
 				salary: 0,
@@ -162,4 +184,47 @@ data.init = function() {
 			data.student.months.push(monthObj);
 		}
 	}
+
+	/////////////////////////////////////////////////// CHECK if yearIndex not define do it for all month
+	if (!data.student.months[0].yearIndex)
+	{
+		var yearIndex = data.session.date.getFullYear();
+		var monthIndex = data.session.date.getMonth();
+
+		for (var i = data.student.months.length - 1; i >= 0; i--)
+		{
+			data.student.months[i].yearIndex = yearIndex;
+			data.student.months[i].monthIndex = monthIndex;
+			monthIndex -= 1;
+			if (monthIndex < 0)
+			{
+				yearIndex--;
+				monthIndex = 11;
+			}
+		}
+	}
+
+	if (data.session.date.getDate() === 1)
+	{
+		var actualYearIndex = data.session.date.getFullYear();
+		var actualMonthIndex = data.session.date.getMonth();
+
+		if (!(actualYearIndex === data.student.months[data.student.months.length - 1].yearIndex && actualMonthIndex === data.student.months[data.student.months.length - 1].monthIndex))
+		{
+			displayMessage("NEW Month, update of Month ARRAY");
+			var monthObj = {
+				yearIndex: actualYearIndex,
+				monthIndex: actualMonthIndex,
+				nameShort: 0,
+				nameLong: 0,
+				salary: 0,
+				hoursDeducted: 0,
+				timeDone: 0,
+			};
+			data.student.months.shift();
+			data.student.months.push(monthObj);
+			data.student.monthlyHabit = [];
+		}
+	}
+	// console.log(data.student.months);
 }
