@@ -633,7 +633,17 @@ function updatePanelSize(elems) {
 	{
 		elems.divMonths[i].style.fontSize = ratio_10;
 		elems.divMonths[i].style.borderWidth = ratio_1_5;
-		elems.divMonths[i].style.padding = paddingY + paddingX;
+		// elems.divMonths[i].style.padding = paddingY + paddingX;
+		elems.divMonths[i].style.width = ratio_30;
+		elems.divMonths[i].style.height = ratio_16;
+		elems.divMonths[i].style.margin = "0 " + ratio_3;
+		
+		elems.divMonthsFutur[i].style.fontSize = ratio_10;
+		elems.divMonthsFutur[i].style.borderWidth = ratio_1_5;
+		// elems.divMonthsFutur[i].style.padding = paddingY + paddingX;;
+		elems.divMonthsFutur[i].style.width = ratio_30;
+		elems.divMonthsFutur[i].style.height = ratio_16;
+		elems.divMonthsFutur[i].style.margin = "0 " + ratio_3;
 	}
 
 	//////////////////////////////////////////////////////////////////// LANGUAGE BUTTON
@@ -1860,21 +1870,24 @@ popup.createElems = function(elems) {
 
 	elems.containerDivMonthFutur = document.createElement("div");
 	// elems.containerDivMonth.style.display = "flex";
-	// elems.containerDivMonth.style.justifyContent = "space-between";
 	elems.containerDivMonthFutur.style.display = "none";
+	elems.containerDivMonthFutur.style.justifyContent = "space-between";
 
 	elems.divMonthsFutur = [];
-	for (var i = 0; i < popup.months.nbMonth; i++)
+	for (var i = 0; i < data.student.monthsFuture.length; i++)
 	{
 		var tmpMonth = document.createElement("div");
 		tmpMonth.className = "this-button";
-		tmpMonth.innerText = popup.months[i].nameShort;
-		if (i == popup.months.indexArray)
-		{
-			tmpMonth.style.display = "flex";
-			tmpMonth.style.color = "#191919";
-			tmpMonth.style.backgroundColor = "white";
-		}
+		tmpMonth.innerText = arrayLanguages[data.student.language].arrayMonth[data.student.monthsFuture[i].monthIndex];
+		// if (i == popup.months.indexArray)
+		// {
+		// 	tmpMonth.style.display = "flex";
+		// 	tmpMonth.style.color = "#191919";
+		// 	tmpMonth.style.backgroundColor = "white";
+		// }
+		tmpMonth.setAttribute('id', i);
+		tmpMonth.addEventListener("mouseover", mOverMonth);
+		tmpMonth.addEventListener("mouseout", mOutMonth);
 		elems.divMonthsFutur.push(tmpMonth);
 		elems.containerDivMonthFutur.appendChild(tmpMonth);
 	}
@@ -2830,6 +2843,25 @@ popup.initPopup = function(elems, months) {
 	setTimeout(function() {
 		elems.popupRemaining.style.opacity = "1";
 	}, 200);
+
+	////////////////////////////////////////////////// DEV
+	var event = new CustomEvent("click", function(e) {
+
+		data.session.onCurrentMonth = false;
+		elems.selectionArrowRight.style.opacity = "0";
+		elems.selectionArrowRight.style.cursor = "default";
+		elems.selectionArrowRight.style.pointerEvents = "none";
+
+		elems.selectionArrowLeft.style.opacity = "1";
+		elems.selectionArrowLeft.style.cursor = "pointer";
+		elems.selectionArrowLeft.style.pointerEvents = "all";
+
+		elems.containerDivMonth.style.display = "none";
+		elems.containerDivMonthFutur.style.display = "flex";
+	});
+
+	// Dispatch/Trigger/Fire the event
+	elems.selectionArrowRight.dispatchEvent(event);
 }
 
 

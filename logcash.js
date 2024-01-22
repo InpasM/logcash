@@ -472,7 +472,7 @@ function initStyleProgressBar() {
 
 	for (var i = 0; i < months.nbMonth; i++)
 	{
-		elems.divMonths[i].style.margin = "0 3px";
+		// elems.divMonths[i].style.margin = "0 3px";
 		elems.divMonths[i].setAttribute('id', i);
 	}
 	elems.sideProgress.style.margin = 0;
