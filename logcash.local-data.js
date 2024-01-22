@@ -141,6 +141,7 @@ function parseLocalStorage(itemStudent) {
 				salary: 0,
 				hoursDeducted: 0,
 				timeDone: 0,
+				monthlyHabit: [],
 			};
 			student.monthsFuture.push(monthObj);
 		}
@@ -163,6 +164,8 @@ function parseLocalStorage(itemStudent) {
 				student.monthsFuture[i].hoursDeducted = 0;
 			if (!student.monthsFuture[i].timeDone)
 				student.monthsFuture[i].timeDone = 0;
+			if (!student.monthsFuture[i].monthlyHabit)
+				student.monthsFuture[i].monthlyHabit = [];
 		}
 	}
 
@@ -246,7 +249,7 @@ data.init = function() {
 	////////////////////////////////////// CHECK if yearIndex not define do it for all months before and actual
 	if (!data.student.months[0].yearIndex)
 	{
-		console.log("define actual months index");
+		// console.log("define actual months index");
 		var yearIndex = data.session.date.getFullYear();
 		var monthIndex = data.session.date.getMonth();
 
@@ -266,7 +269,7 @@ data.init = function() {
 	//////////////////////////////////////////// CHECK if yearIndex not define do it for all future months
 	if (!data.student.monthsFuture[0].yearIndex)
 	{
-		console.log("define future months index");
+		// console.log("define future months index");
 		var yearIndex = data.session.date.getFullYear();
 		var monthIndex = data.session.date.getMonth();
 
@@ -291,19 +294,21 @@ data.init = function() {
 		if (!(actualYearIndex === data.student.months[data.student.months.length - 1].yearIndex && actualMonthIndex === data.student.months[data.student.months.length - 1].monthIndex))
 		{
 			displayMessage("NEW Month, update of Month ARRAY");
-			var monthActualObj = {
-				yearIndex: actualYearIndex,
-				monthIndex: actualMonthIndex,
-				nameShort: 0,
-				nameLong: 0,
-				salary: 0,
-				hoursDeducted: 0,
-				timeDone: 0,
-			};
-			data.student.months.shift();
+			// var monthActualObj = {
+			// 	yearIndex: actualYearIndex,
+			// 	monthIndex: actualMonthIndex,
+			// 	nameShort: 0,
+			// 	nameLong: 0,
+			// 	salary: 0,
+			// 	hoursDeducted: 0,
+			// 	timeDone: 0,
+			// };
 			// console.log(data.student.monthsFuture[0]);
+
+			data.student.monthlyHabit = data.student.monthsFuture[0].monthlyHabit;
+			data.student.monthsFuture[0].monthlyHabit = 0;
+			data.student.months.shift();
 			data.student.months.push({...data.student.monthsFuture[0]});
-			data.student.monthlyHabit = [];
 
 			var futureYearIndex = data.student.monthsFuture[data.student.monthsFuture.length - 1].yearIndex;
 			var futureMonthIndex = data.student.monthsFuture[data.student.monthsFuture.length - 1].monthIndex;
@@ -327,6 +332,7 @@ data.init = function() {
 			data.student.monthsFuture.push(monthFutureObj);
 		}
 	}
-	// console.log(data.student.months);
-	// console.log(data.student.monthsFuture);
+	// console.log(data.student.months[data.student.months.length - 1]);
+	// console.log(data.student.monthsFuture[0]);
+	// console.log(localStorageSpace());
 }
