@@ -1601,8 +1601,6 @@ popup.createElems = function(elems) {
 	}
 
 	elems.monthArray = [];
-	elems.monthBlock = [];
-
 	for (var k = 0; k < popup.months.length; k++)
 	{
 		var tmpMonth = {
@@ -1641,8 +1639,6 @@ popup.createElems = function(elems) {
 				{
 					tmpDay.style.backgroundColor = "white";
 					tmpDay.style.color = "#191919";
-					// tmpDay.style.cursor = "default";
-					// tmpDay.style.pointerEvents = "none";
 				}
 				tmpMonth.checkboxes.push(tmpDay);
 				tmpMonth.lines[i].appendChild(tmpDay);
@@ -1692,7 +1688,86 @@ popup.createElems = function(elems) {
 		elems.monthBlock.push(tmpBlock)
 		elems.monthContainer.appendChild(elems.monthBlock[i]);
 	}
-	elems.monthBlock[popup.months.length - 1].style.display = "block";
+	// elems.monthBlock[popup.months.length - 1].style.display = "block";
+
+
+
+	elems.futureMonthArray = [];
+	function generateFutureMonthCalendar() {
+
+		// console.log(data.student.monthsFuture);
+		var tmpDate;
+
+		// for (var i = 0; i < data.student.monthsFuture.length; i++)
+		for (var i = 0; i < 1; i++)
+		{
+			var tmpMonth = {
+				checkboxes: [],
+				lines: [0, 0, 0, 0, 0, 0]
+			};
+
+			var nbDaysMonth = new Date(data.student.monthsFuture[i].yearIndex, data.student.monthsFuture[i].monthIndex + 1, 0).getDate();
+			var indexLine = -1;
+
+			for (var j = 0; j < nbDaysMonth; j++)
+			{
+				tmpDate = new Date(data.student.monthsFuture[i].yearIndex, data.student.monthsFuture[i].monthIndex + 1, j);
+
+				if (tmpDate.getDay() === 0 || j === 0)
+				{
+					indexLine++;
+					tmpMonth.lines[indexLine] = document.createElement("div");
+					tmpMonth.lines[indexLine].className = "line-habit";
+
+					// console.log("new week:", tmpDate.getDay());
+					elems.futureMonthArray.push(tmpMonth.lines[indexLine]);
+
+					// console.log(elems.futureMonthArray);
+				}
+
+				// console.log("indexDay:", tmpDate.getDay());
+			}
+			if (indexLine < 5)
+			{
+				tmpMonth.lines[++indexLine] = document.createElement("div");
+				tmpMonth.lines[indexLine].className = "line-habit";
+
+				var tmpDay = document.createElement("div");
+	
+				tmpDay.innerText = "0";
+				tmpDay.className = "checkbox-habit";
+				tmpDay.style.fontSize = 8 * data.student.sizePanel + "px";
+				tmpDay.style.width = 20 * data.student.sizePanel + "px";
+				tmpDay.style.height = 20 * data.student.sizePanel + "px";
+				tmpDay.style.opacity = "0";
+				tmpDay.style.cursor = "default";
+				tmpMonth.lines[indexLine].appendChild(tmpDay);
+			}
+			console.log("last index line:", tmpMonth.lines);
+		}
+	}
+	generateFutureMonthCalendar();
+
+	elems.monthFutureBlocks = [];
+	for (var i = 0; i < data.student.monthsFuture.length; i++)
+	{
+		tmpBlock = document.createElement("div");
+		tmpBlock.className = "month-block";
+
+		// console.log(elems.futureMonthArray[i].lines);
+
+		for (var j = 0; j < elems.futureMonthArray[i].length; j++)
+		{
+			console.log("lines:", j);
+			console.log(elems.futureMonthArray[i].lines);
+			// 	tmpBlock.appendChild(elems.futureMonthArray[i].lines[j]);
+		}
+
+		elems.monthFutureBlocks.push(tmpBlock)
+		elems.monthContainer.appendChild(elems.monthFutureBlocks[i]);
+	}
+	elems.monthFutureBlocks[0].style.display = "block";
+	// console.log(elems.monthFutureBlocks);
 
 
 	function mouseoverInfoContainer(e) {
