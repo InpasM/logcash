@@ -89,7 +89,7 @@ function parseLocalStorage(itemStudent) {
 		student.positionTop = 0;
 	if (!student.percentPositionLeft)
 		student.percentPositionLeft = 0;
-	if (!student.months.length)
+	if (!student.months)
 	{
 		student.months = [];
 
@@ -127,7 +127,7 @@ function parseLocalStorage(itemStudent) {
 				student.months[i].timeDone = 0;
 		}
 	}
-	if (!student.monthsFuture.length)
+	if (!student.monthsFuture)
 	{
 		student.monthsFuture = [];
 

@@ -646,7 +646,7 @@ function startDevMode() {
 	var refreshButtonActivator = document.querySelector(".dev-refresh-button");
 	var refreshButtonRemove = document.querySelector(".dev-remove-localStorage");
 	var refreshOn = true;
-	var cycleRefresh = setRefreshInterval();
+	// var cycleRefresh = setRefreshInterval();
 
 	// STYLE
 	var mainNavbar = document.querySelector(".main-navbar");

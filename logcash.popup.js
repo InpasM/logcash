@@ -1721,9 +1721,21 @@ popup.createElems = function(elems) {
 
 					// console.log("new week:", tmpDate.getDay());
 					elems.futureMonthArray.push(tmpMonth.lines[indexLine]);
-
 					// console.log(elems.futureMonthArray);
 				}
+
+				var tmpDay = document.createElement("div");
+
+				tmpDay.innerText = j;
+				tmpDay.className = "checkbox-habit";
+				tmpDay.style.fontSize = 8 * data.student.sizePanel + "px";
+				tmpDay.style.width = 20 * data.student.sizePanel + "px";
+				tmpDay.style.height = 20 * data.student.sizePanel + "px";
+				// tmpDay.style.opacity = "0";
+				tmpDay.style.cursor = "default";
+
+				tmpMonth.checkboxes.push(tmpDay);
+				tmpMonth.lines[indexLine].appendChild(tmpMonth.checkboxes[j]);
 
 				// console.log("indexDay:", tmpDate.getDay());
 			}
@@ -1754,13 +1766,14 @@ popup.createElems = function(elems) {
 		tmpBlock = document.createElement("div");
 		tmpBlock.className = "month-block";
 
-		// console.log(elems.futureMonthArray[i].lines);
+		// console.log(elems.futureMonthArray[i]);
+		console.log(elems.futureMonthArray[0]);
 
 		for (var j = 0; j < elems.futureMonthArray[i].length; j++)
 		{
-			console.log("lines:", j);
-			console.log(elems.futureMonthArray[i].lines);
-			// 	tmpBlock.appendChild(elems.futureMonthArray[i].lines[j]);
+			// console.log("lines:", j);
+			// console.log(elems.futureMonthArray[i]);
+			tmpBlock.appendChild(elems.futureMonthArray[i]);
 		}
 
 		elems.monthFutureBlocks.push(tmpBlock)
