@@ -428,6 +428,14 @@ function initText(elems, text) {
 				elems.divMonths[i].innerText = text.arrayMonth[j];
 		}
 	}
+	for (var i = 0; i < elems.divMonthsFutur.length; i++)
+	{
+		for (var j = 0; j < arrayMonth.length; j++)
+		{
+			if (elems.divMonthsFutur[i].innerText === arrayMonth[j])
+				elems.divMonthsFutur[i].innerText = text.arrayMonth[j];
+		}
+	}
 	// elems.panelDarkTitle.innerText = text.darkMode;
 	// elems.panelDeviseTitle.innerText = text.devise;
 	elems.panelLanguageTitle.innerText = text.language;
@@ -1692,17 +1700,13 @@ popup.createElems = function(elems) {
 
 	function clickFutureCheckbox(e) {
 
-		console.log(e.target.indexDay, e.target.indexMonth, data.student.monthsFuture[e.target.indexMonth]);
-
 		if (data.student.monthsFuture[e.target.indexMonth].monthlyHabit[e.target.indexDay])
 		{
-			console.log("true");
 			data.student.monthsFuture[e.target.indexMonth].monthlyHabit[e.target.indexDay] = false;
 			elems.futureMonthArray[e.target.indexMonth].checkboxes[e.target.indexDay].style.borderColor = "rgba(0, 186, 188, 0)";
 		}
 		else
 		{
-			console.log("false");
 			data.student.monthsFuture[e.target.indexMonth].monthlyHabit[e.target.indexDay] = true;
 			elems.futureMonthArray[e.target.indexMonth].checkboxes[e.target.indexDay].style.borderColor = "rgb(0, 186, 188)";
 		}
@@ -1714,8 +1718,7 @@ popup.createElems = function(elems) {
 
 		var tmpDate;
 
-		// for (var i = 0; i < data.student.monthsFuture.length; i++)
-		for (var i = 0; i < 1; i++)
+		for (var i = 0; i < data.student.monthsFuture.length; i++)
 		{
 			var tmpMonth = {
 				checkboxes: [],
@@ -1727,7 +1730,7 @@ popup.createElems = function(elems) {
 
 			for (var j = 0; j < nbDaysMonth; j++)
 			{
-				tmpDate = new Date(data.student.monthsFuture[i].yearIndex, data.student.monthsFuture[i].monthIndex + 1, j);
+				tmpDate = new Date(data.student.monthsFuture[i].yearIndex, data.student.monthsFuture[i].monthIndex, j + 1);
 
 				if (tmpDate.getDay() === 0 || j === 0)
 				{
@@ -1735,7 +1738,7 @@ popup.createElems = function(elems) {
 					tmpMonth.lines[indexLine] = document.createElement("div");
 					tmpMonth.lines[indexLine].className = "line-habit";
 					if (j === 0)
-						tmpMonth.lines[i].style.justifyContent = "flex-end";
+						tmpMonth.lines[indexLine].style.justifyContent = "flex-end";
 				}
 				var tmpDay = document.createElement("div");
 
@@ -1778,32 +1781,19 @@ popup.createElems = function(elems) {
 	}
 	generateFutureMonthCalendar();
 
-	// console.log(elems.futureMonthArray);
-
 	elems.monthFutureBlocks = [];
-	// for (var i = 0; i < data.student.monthsFuture.length; i++)
-	for (var i = 0; i < 1; i++)
+	for (var i = 0; i < data.student.monthsFuture.length; i++)
 	{
 		tmpBlock = document.createElement("div");
 		tmpBlock.className = "month-block";
-
-		// console.log(elems.futureMonthArray[i]);
-		console.log(elems.futureMonthArray[i]);
-
 		for (var j = 0; j < elems.futureMonthArray[i].lines.length; j++)
 		{
-			// console.log("lines:", j);
-			// console.log(elems.futureMonthArray[i]);
 			tmpBlock.appendChild(elems.futureMonthArray[i].lines[j]);
 		}
-
 		elems.monthFutureBlocks.push(tmpBlock)
-		// console.log(elems.monthFutureBlocks[i]);
 		elems.monthContainer.appendChild(elems.monthFutureBlocks[i]);
 	}
 	elems.monthFutureBlocks[0].style.display = "block";
-	// // console.log(elems.monthFutureBlocks);
-
 
 	function mouseoverInfoContainer(e) {
 		e.target.firstElementChild.lastElementChild.style.opacity = "1";
@@ -1983,21 +1973,86 @@ popup.createElems = function(elems) {
 	elems.containerDivMonthFutur.style.display = "none";
 	elems.containerDivMonthFutur.style.justifyContent = "space-between";
 
+	function mouseoverFutureMonth(e) {
+		
+		if (e.target.id != data.session.futureMonthIndex)
+		{
+			e.target.style.backgroundColor = "rgb(30, 33, 43)";
+			e.target.style.color = "rgba(236, 238, 244, 0.9)";
+		}
+	}
+
+	function mouseoutFutureMonth(e) {
+		
+		if (e.target.id != data.session.futureMonthIndex)
+		{
+			e.target.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+			e.target.style.color = "rgb(155, 155, 155)";
+		}
+	}
+
+	function clickFutureMonth(e) {
+
+		var id = parseInt(e.target.id);
+		var oldMonth = data.session.futureMonthIndex;
+		var disappear;
+		var appear;
+	
+		if (oldMonth > id)
+		{
+			disappear = "disappearRight";
+			appear = "appearRight";
+		}
+		else
+		{
+			disappear = "disappearLeft";
+			appear = "appearLeft";
+		}
+	
+		elems.monthFutureBlocks[oldMonth].style.animation = "0.2s " + disappear;
+		elems.monthFutureBlocks[oldMonth].style.animationFillMode = "forwards";
+	
+		elems.divMonthsFutur[oldMonth].style.backgroundColor = "rgba(37, 41, 50, 0.9)";
+		elems.divMonthsFutur[oldMonth].style.color = "rgb(155, 155, 155)";
+		
+		elems.divMonthsFutur[id].style.backgroundColor = "white";
+		elems.divMonthsFutur[id].style.color = "#191919";
+	
+		data.session.futureMonthIndex = id;
+	
+		// reGenerate(months[months.indexArray], elems);
+		// popup.setData(elems);
+	
+		setTimeout(function() {
+			elems.monthFutureBlocks[oldMonth].style.display = "none";
+			// elems.lineGraphs[oldMonth].style.display = "none";
+	
+			elems.monthFutureBlocks[id].style.display = "block";
+			elems.monthFutureBlocks[id].style.animation = "0.2s " + appear;
+			elems.monthFutureBlocks[id].style.animationFillMode = "forwards";
+	
+			// elems.lineGraphs[id].style.display = "flex";
+			// elems.lineGraphs[id].style.animation = "0.2s " + appear;
+			// elems.lineGraphs[id].style.animationFillMode = "forwards";
+		}, 200);
+	}
+
 	elems.divMonthsFutur = [];
 	for (var i = 0; i < data.student.monthsFuture.length; i++)
 	{
 		var tmpMonth = document.createElement("div");
 		tmpMonth.className = "this-button";
 		tmpMonth.innerText = arrayLanguages[data.student.language].arrayMonth[data.student.monthsFuture[i].monthIndex];
-		// if (i == popup.months.indexArray)
-		// {
-		// 	tmpMonth.style.display = "flex";
-		// 	tmpMonth.style.color = "#191919";
-		// 	tmpMonth.style.backgroundColor = "white";
-		// }
+		if (i == data.session.futureMonthIndex)
+		{
+			tmpMonth.style.display = "flex";
+			tmpMonth.style.color = "#191919";
+			tmpMonth.style.backgroundColor = "white";
+		}
 		tmpMonth.setAttribute('id', i);
-		tmpMonth.addEventListener("mouseover", mOverMonth);
-		tmpMonth.addEventListener("mouseout", mOutMonth);
+		tmpMonth.addEventListener("mouseover", mouseoverFutureMonth);
+		tmpMonth.addEventListener("mouseout", mouseoutFutureMonth);
+		tmpMonth.addEventListener("click", clickFutureMonth);
 		elems.divMonthsFutur.push(tmpMonth);
 		elems.containerDivMonthFutur.appendChild(tmpMonth);
 	}

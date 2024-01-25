@@ -46,6 +46,7 @@ data.session = {
 	numberDays: 0,
 	lockTime: 0,
 	onCurrentMonth: true,
+	futureMonthIndex: 0,
 	date: new Date(),
 	// date: new Date("2024-02-01"),	// TESTS
 };
