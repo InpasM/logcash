@@ -89,11 +89,14 @@ popup.calculFuture = function(elems, index) {
 	if (hourPerDay < 0)
 		hourPerDay = 0;
 
-	elems.resultLogtimeFuture.innerText = hourPerDay;
+	if (index === data.session.futureMonthIndex)
+	{
+		elems.resultLogtimeFuture.innerText = hourPerDay;
+	}
 
 	// data.student.monthsFuture[index].hoursRequired = openDays * 7;
 	// console.log("number hours required", data.student.monthsFuture[index].hoursRequired / numberSelected);
-	// console.log(hourPerDay);
+	console.log(hourPerDay);
 }
 
 popup.setAttributeDaySlide = function(elems, indexMonth) {
@@ -144,6 +147,7 @@ function clickBoostMin() {
 		elems.extraLogtimeLeft.style.opacity = "0";
 	data.updateLocalStorage();
 	popup.setData(elems);
+	popup.calculFuture(elems, data.session.futureMonthIndex);
 }
 
 function clickBoostMax() {
@@ -184,6 +188,7 @@ function clickBoostMax() {
 		elems.extraLogtimeLeft.style.opacity = "0";
 	data.updateLocalStorage();
 	popup.setData(elems);
+	popup.calculFuture(elems, data.session.futureMonthIndex);
 }
 
 var questions = [
@@ -1538,6 +1543,7 @@ popup.createElems = function(elems) {
 		{
 			data.updateLocalStorage();
 			popup.setData(elems);
+			popup.calculFuture(elems, data.session.futureMonthIndex);
 		}
 	});
 
@@ -1616,6 +1622,7 @@ popup.createElems = function(elems) {
 		if (data.isHomePage === -1 && update)
 			data.updateLocalStorage();
 		popup.setData(elems);
+		popup.calculFuture(elems, data.session.futureMonthIndex);
 	}
 
 	function selectAllSameDay(e) {
@@ -1842,6 +1849,7 @@ popup.createElems = function(elems) {
 			elems.futureMonthArray[e.target.indexMonth].checkboxes[e.target.indexDay].style.borderColor = "rgb(0, 186, 188)";
 		}
 		data.updateLocalStorage();
+		popup.calculFuture(elems, data.session.futureMonthIndex);
 	}
 
 	elems.futureMonthArray = [];
@@ -2195,6 +2203,8 @@ popup.createElems = function(elems) {
 	
 		data.session.futureMonthIndex = id;
 		elems.inputSalary.value = data.student.monthsFuture[data.session.futureMonthIndex].salary;
+
+		popup.calculFuture(elems, id);
 	
 		// reGenerate(months[months.indexArray], elems);
 		// popup.setData(elems);
