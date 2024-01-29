@@ -347,6 +347,7 @@
 	transform: translateY(0);
 	display: flex;
 	overflow: hidden;
+	border-bottom: 1px solid rgb(45, 49, 60);
 }
 
 .pop-middle-div-left {
@@ -503,6 +504,7 @@
 /**************************************** LOGTIME ****************************************/
 .logtime-container {
 	background-color: rgba(32, 35, 44, 0.8);
+	border-bottom: 1px solid rgb(45, 49, 60);
 }
 
 .block-logtime {
@@ -551,7 +553,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
-	border-top: 1px solid rgb(45, 49, 60);
+	/* border-top: 1px solid rgb(45, 49, 60); */
 }
 
 .line-this-selection {
@@ -769,7 +771,7 @@
 
 /***************************** PROGRESS *****************************/
 .pop-progress-container {
-	border-top: 1px solid rgb(45, 49, 60);
+	/* border-top: 1px solid rgb(45, 49, 60); */
 	padding: 8px;
 	display: flex;
 	flex-direction: column;

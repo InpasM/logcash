@@ -2107,6 +2107,14 @@ popup.createElems = function(elems) {
 		elems.monthBlocksContainer.style.display = "none";
 		elems.futureMonthBlocksContainer.style.display = "flex";
 
+		// change opacity to element unavailable
+		for (var i = 0; i < elems.monthGraphs[popup.months.indexArray].daySlideContainers.length; i++)
+		{
+			elems.monthGraphs[popup.months.indexArray].daySlideContainers[i].style.pointerEvents = "none";
+		}
+		elems.salaryContainer.style.opacity = "0.2";
+		elems.popProgressContainer.style.opacity = "0.2";
+
 		elems.weeklySpan.style.pointerEvents = "all";
 	});
 
@@ -2125,6 +2133,14 @@ popup.createElems = function(elems) {
 		elems.containerDivMonthFutur.style.display = "none";
 		elems.monthBlocksContainer.style.display = "flex";
 		elems.futureMonthBlocksContainer.style.display = "none";
+
+		// change opacity back to element
+		for (var i = 0; i < elems.monthGraphs[popup.months.indexArray].daySlideContainers.length; i++)
+		{
+			elems.monthGraphs[popup.months.indexArray].daySlideContainers[i].style.pointerEvents = "all";
+		}
+		elems.salaryContainer.style.opacity = "1";
+		elems.popProgressContainer.style.opacity = "1";
 
 		if (popup.months.indexArray !== popup.months.length - 1)
 			elems.weeklySpan.style.pointerEvents = "none";
