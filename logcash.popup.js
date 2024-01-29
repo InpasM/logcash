@@ -89,9 +89,11 @@ popup.calculFuture = function(elems, index) {
 	if (hourPerDay < 0)
 		hourPerDay = 0;
 
+	elems.resultLogtimeFuture.innerText = hourPerDay;
+
 	// data.student.monthsFuture[index].hoursRequired = openDays * 7;
 	// console.log("number hours required", data.student.monthsFuture[index].hoursRequired / numberSelected);
-	console.log(hourPerDay);
+	// console.log(hourPerDay);
 }
 
 popup.setAttributeDaySlide = function(elems, indexMonth) {
@@ -461,6 +463,7 @@ function initText(elems, text) {
 		elems.miniLogtimeTitleRemaining.innerText = arrayLanguages[data.student.language].labelLogtimeEach;
 		elems.miniLogtimeTitleLock.innerText = arrayLanguages[data.student.language].daysRemainingMini;
 	}
+	elems.labelLogtimeFuture.innerText = text.labelLogtimeEach;
 
 	if (elems.resultLogtimeRemaining.innerText === "DONE" || elems.resultLogtimeRemaining.innerText === "FAIT")
 		elems.resultLogtimeRemaining.innerText = arrayLanguages[data.student.language].done;
@@ -674,9 +677,16 @@ function updatePanelSize(elems) {
 	elems.extraLogtimeSideLeft.style.lineHeight = ratio_8;
 	elems.extraLogtimeSideLeft.style.width = ratio_40;
 	elems.extraLogtimeSideLeft.style.marginRight = ratio_3;
-	// elems.extraLogtimeSideRight.style.fontSize = ratio_10;
+
 	elems.extraLogtimeSideRight.style.lineHeight = ratio_8;
 	elems.extraLogtimeSideRight.style.width = ratio_30;
+	
+	elems.extraLogtimeSideFutureLeft.style.fontSize = 7 * data.student.sizePanel + "px";
+	elems.extraLogtimeSideFutureLeft.style.lineHeight = ratio_8;
+	elems.extraLogtimeSideFutureLeft.style.width = ratio_40;
+	elems.extraLogtimeSideFutureLeft.style.marginRight = ratio_3;
+	elems.extraLogtimeSideFutureRight.style.lineHeight = ratio_8;
+	elems.extraLogtimeSideFutureRight.style.width = ratio_30;
 
 	if (elems.extraLogtimeSideRight.innerText.length > 5)
 	{
@@ -688,6 +698,7 @@ function updatePanelSize(elems) {
 		elems.extraLogtimeSideRight.style.fontSize = ratio_10;
 		// elems.extraLogtimeSideRight.style.width = ratio_30;
 	}
+	elems.extraLogtimeSideFutureRight.style.fontSize = ratio_10;
 
 	var paddingY = 2 * data.student.sizePanel + "px ";
 	var paddingX = 6 * data.student.sizePanel + "px";
@@ -779,10 +790,12 @@ function updatePanelSize(elems) {
 	elems.labelSalary.style.fontSize = ratio_8;
 	elems.labelHours.style.fontSize = ratio_8;
 	elems.labelLogtimeRemaining.style.fontSize = ratio_8;
+	elems.labelLogtimeFuture.style.fontSize = ratio_8;
 	elems.labelLogtimeEstimation.style.fontSize = ratio_8;
 	elems.labelLogtimeNumberDay.style.fontSize = ratio_8;
 
 	elems.resultLogtimeRemaining.style.fontSize = ratio_14;
+	elems.resultLogtimeFuture.style.fontSize = ratio_14;
 	// elems.resultLogtimeEstimation.style.fontSize = ratio_14;
 	if (data.session.timeLock === "IMPOSSIBLE")
 		elems.resultLogtimeEstimation.style.fontSize = ratio_10;
@@ -1950,8 +1963,43 @@ popup.createElems = function(elems) {
 
 	elems.blockLogtimeFuture = document.createElement("div");
 	elems.blockLogtimeFuture.className = "block-logtime-future";
-	elems.blockLogtimeFuture = document.createElement("div");
-	elems.blockLogtimeFuture.className = "block-logtime-future";
+	elems.blockLogtimeFuture.style.display = "none";
+
+	elems.labelLogtimeFuture = document.createElement("p");
+	elems.labelLogtimeFuture.className = "small-title-info";
+	// elems.labelLogtimeFuture.style.display = "none";
+	elems.labelLogtimeFuture.style.display = "flex";
+	elems.labelLogtimeFuture.innerText = "Each Day";
+	
+	elems.resultLogtimeFuture = document.createElement("p");
+	// elems.resultLogtimeFuture.style.display = "none";
+	elems.resultLogtimeFuture.style.display = "flex";
+	elems.resultLogtimeFuture.className = "number-result";
+	// elems.resultLogtimeFuture.innerText = "10h20";
+
+	elems.extraLogtimeFuture = document.createElement("div");
+	elems.extraLogtimeFuture.className = "extra-logtime-left";
+	elems.extraLogtimeSideFutureLeft = document.createElement("div");
+	elems.extraLogtimeSideFutureLeft.className = "extra-logtime-side";
+	elems.extraLogtimeSideFutureLeft.innerText = "Without\nBoost Lock";	// TMP
+	elems.extraLogtimeSideFutureLeft.style.textAlign = "right";
+	
+	elems.extraLogtimeSideFutureRight = document.createElement("div");
+	elems.extraLogtimeSideFutureRight.className = "extra-logtime-side";
+	elems.extraLogtimeSideFutureRight.innerText = "0h00";
+	elems.extraLogtimeSideFutureRight.style.color = "rgb(140, 140, 140)";
+
+	elems.extraLogtimeFuture.style.opacity = "1";
+
+	elems.extraLogtimeFuture.appendChild(elems.extraLogtimeSideFutureLeft);
+	elems.extraLogtimeFuture.appendChild(elems.extraLogtimeSideFutureRight);
+
+	elems.blockLogtimeFuture.appendChild(elems.labelLogtimeFuture);
+	elems.blockLogtimeFuture.appendChild(elems.resultLogtimeFuture);
+	elems.blockLogtimeFuture.appendChild(elems.extraLogtimeFuture);
+	// elems.blockLogtimeFuture = document.createElement("div");
+	// elems.blockLogtimeFuture.className = "block-logtime-future";
+
 
 	elems.blockLogtimeLeft = document.createElement("div");
 	elems.blockLogtimeLeft.className = "block-logtime-side";
