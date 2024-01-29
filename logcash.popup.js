@@ -1452,6 +1452,18 @@ popup.createElems = function(elems) {
 				}
 			}
 		}
+		else
+		{
+			for (var i = 0; i < elems.futureMonthArray[data.session.futureMonthIndex].checkboxes.length; i++)
+			{
+				if (data.student.monthsFuture[data.session.futureMonthIndex].monthlyHabit[i] === true)
+				{
+					update = true;
+					data.student.monthsFuture[data.session.futureMonthIndex].monthlyHabit[i] = false;
+					elems.futureMonthArray[data.session.futureMonthIndex].checkboxes[i].style.borderColor = "rgb(45, 49, 60)";
+				}
+			}
+		}
 
 
 		if (data.isHomePage === -1 && update)
@@ -3052,7 +3064,7 @@ popup.initPopup = function(elems, months) {
 	});
 
 	// Dispatch/Trigger/Fire the event
-	// elems.selectionArrowRight.dispatchEvent(event);
+	elems.selectionArrowRight.dispatchEvent(event);
 }
 
 
