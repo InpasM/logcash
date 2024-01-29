@@ -1465,7 +1465,6 @@ popup.createElems = function(elems) {
 			}
 		}
 
-
 		if (data.isHomePage === -1 && update)
 		{
 			data.updateLocalStorage();
@@ -1503,26 +1502,45 @@ popup.createElems = function(elems) {
 
 		var update = false;
 
-		for (var i = popup.numberDay - 1; i < elems.monthArray[popup.months.indexArray].checkboxes.length; i++)
+		if (data.session.onCurrentMonth)
 		{
-			if (elems.monthArray[popup.months.indexArray].checkboxes[i].getAttribute("indexday") === id)
+			for (var i = popup.numberDay - 1; i < elems.monthArray[popup.months.indexArray].checkboxes.length; i++)
 			{
-				// if (data.student.monthlyHabit[i] === conditionBool && (i + 1 !== popup.numberDay))
-				if (data.student.monthlyHabit[i] === conditionBool)
+				if (elems.monthArray[popup.months.indexArray].checkboxes[i].getAttribute("indexday") === id)
 				{
-					update = true;
-					data.student.monthlyHabit[i] = newBool;
-					elems.monthArray[popup.months.indexArray].checkboxes[i].style.borderColor = borderColor;
+					if (data.student.monthlyHabit[i] === conditionBool)
+					{
+						update = true;
+						data.student.monthlyHabit[i] = newBool;
+						elems.monthArray[popup.months.indexArray].checkboxes[i].style.borderColor = borderColor;
+					}
+					if (parseInt(elems.monthArray[popup.months.indexArray].checkboxes[i].id) === data.session.date.getDate())
+					{
+						elems.monthArray[popup.months.indexArray].checkboxes[i].style.backgroundColor = "white";
+						elems.monthArray[popup.months.indexArray].checkboxes[i].style.color = "#191919";
+					}
+					else
+					{
+						elems.monthArray[popup.months.indexArray].checkboxes[i].style.backgroundColor = "#373c48";
+						elems.monthArray[popup.months.indexArray].checkboxes[i].style.color = "rgb(198, 198, 198)";
+					}
 				}
-				if (parseInt(elems.monthArray[popup.months.indexArray].checkboxes[i].id) === data.session.date.getDate())
+			}
+		}
+		else
+		{
+			for (var i = 0; i < elems.futureMonthArray[data.session.futureMonthIndex].checkboxes.length; i++)
+			{
+				if (elems.futureMonthArray[data.session.futureMonthIndex].checkboxes[i].dayNumber === id)
 				{
-					elems.monthArray[popup.months.indexArray].checkboxes[i].style.backgroundColor = "white";
-					elems.monthArray[popup.months.indexArray].checkboxes[i].style.color = "#191919";
-				}
-				else
-				{
-					elems.monthArray[popup.months.indexArray].checkboxes[i].style.backgroundColor = "#373c48";
-					elems.monthArray[popup.months.indexArray].checkboxes[i].style.color = "rgb(198, 198, 198)";
+					if (data.student.monthsFuture[data.session.futureMonthIndex].monthlyHabit[i] === conditionBool)
+					{
+						update = true;
+						data.student.monthsFuture[data.session.futureMonthIndex].monthlyHabit[i] = newBool;
+						elems.futureMonthArray[data.session.futureMonthIndex].checkboxes[i].style.borderColor = borderColor;
+					}
+					elems.futureMonthArray[data.session.futureMonthIndex].checkboxes[i].style.backgroundColor = "#373c48";
+					elems.futureMonthArray[data.session.futureMonthIndex].checkboxes[i].style.color = "rgb(198, 198, 198)";
 				}
 			}
 		}
@@ -1532,11 +1550,10 @@ popup.createElems = function(elems) {
 	}
 
 	function selectAllSameDay(e) {
+		var allTrue = true;
 
-		if (popup.months.indexArray === popup.months.length - 1)
+		if (data.session.onCurrentMonth && popup.months.indexArray === popup.months.length - 1)
 		{
-			var allTrue = true, update = false;
-
 			for (var i = popup.numberDay - 1; i < elems.monthArray[popup.months.indexArray].checkboxes.length; i++)
 			{
 				if (elems.monthArray[popup.months.indexArray].checkboxes[i].getAttribute("indexday") === e.target.id)
@@ -1549,6 +1566,24 @@ popup.createElems = function(elems) {
 				triggerSelect(e.target.id, true, false, "rgb(45, 49, 60)");
 			else
 				triggerSelect(e.target.id, false, true, "rgb(0, 186, 188)");
+		}
+		else if (!data.session.onCurrentMonth)
+		{
+			var targetId = parseInt(e.target.id);
+			for (var i = 0; i < elems.futureMonthArray[data.session.futureMonthIndex].checkboxes.length; i++)
+			{
+				if (elems.futureMonthArray[data.session.futureMonthIndex].checkboxes[i].dayNumber === targetId)
+				{
+					if (!data.student.monthsFuture[data.session.futureMonthIndex].monthlyHabit[i])
+					{
+						allTrue = false;
+					}
+				}
+			}
+			if (allTrue)
+				triggerSelect(targetId, true, false, "rgb(45, 49, 60)");
+			else
+				triggerSelect(targetId, false, true, "rgb(0, 186, 188)");
 		}
 	}
 
@@ -1771,6 +1806,7 @@ popup.createElems = function(elems) {
 
 				tmpDay.innerText = j + 1;
 				tmpDay.indexDay = j;
+				tmpDay.dayNumber = tmpDate.getDay();
 				tmpDay.indexMonth = i;
 				tmpDay.className = "checkbox-habit";
 				tmpDay.style.fontSize = 8 * data.student.sizePanel + "px";

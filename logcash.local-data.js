@@ -90,7 +90,7 @@ function parseLocalStorage(itemStudent) {
 		student.positionTop = 0;
 	if (!student.percentPositionLeft)
 		student.percentPositionLeft = 0;
-	if (!student.months)
+	if (!student.months || !student.months.length)
 	{
 		student.months = [];
 
@@ -128,7 +128,7 @@ function parseLocalStorage(itemStudent) {
 				student.months[i].timeDone = 0;
 		}
 	}
-	if (!student.monthsFuture)
+	if (!student.monthsFuture || !student.monthsFuture.length)
 	{
 		student.monthsFuture = [];
 
@@ -165,7 +165,7 @@ function parseLocalStorage(itemStudent) {
 				student.monthsFuture[i].hoursDeducted = 0;
 			if (!student.monthsFuture[i].timeDone)
 				student.monthsFuture[i].timeDone = 0;
-			if (!student.monthsFuture[i].monthlyHabit)
+			if (!student.monthsFuture[i].monthlyHabit || !student.monthsFuture[i].monthlyHabit.length)
 				student.monthsFuture[i].monthlyHabit = [];
 		}
 	}
@@ -270,11 +270,10 @@ data.init = function() {
 	//////////////////////////////////////////// CHECK if yearIndex not define do it for all future months
 	if (!data.student.monthsFuture[0].yearIndex)
 	{
-		// console.log("define future months index");
 		var yearIndex = data.session.date.getFullYear();
 		var monthIndex = data.session.date.getMonth();
 
-		for (var i = 0; i < data.student.months.length; i++)
+		for (var i = 0; i < data.student.monthsFuture.length; i++)
 		{
 			monthIndex += 1;
 			if (monthIndex > 11)
@@ -284,6 +283,15 @@ data.init = function() {
 			}
 			data.student.monthsFuture[i].yearIndex = yearIndex;
 			data.student.monthsFuture[i].monthIndex = monthIndex;
+
+			if (!data.student.monthsFuture[i].monthlyHabit.length)
+			{
+				var tmpDate = new Date(data.student.monthsFuture[i].yearIndex, data.student.monthsFuture[i].monthIndex + 1, 0);
+				for (var j = 0; j < tmpDate.getDate(); j++)
+				{
+					data.student.monthsFuture[i].monthlyHabit.push(false);
+				}
+			}
 		}
 	}
 
