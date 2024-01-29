@@ -41,6 +41,59 @@ popup.calculDays = function(elems, index) {
 	}
 }
 
+popup.initFuture = function() {
+
+	for (var index = 0; index < data.student.monthsFuture.length; index++)
+	{
+		var openDays = 0;
+		data.student.monthsFuture[index].date = new Date(data.student.monthsFuture[index].yearIndex, data.student.monthsFuture[index].monthIndex + 1, 0);
+		data.student.monthsFuture[index].numberDays = data.student.monthsFuture[index].date.getDate();
+
+		var actualDay = data.student.monthsFuture[index].date.getDay();
+		var numberDays = data.student.monthsFuture[index].numberDays;
+
+		for (var i = 0; i < numberDays; i++)
+		{
+			if (actualDay === 7)
+				actualDay = 0;
+			if (actualDay >= 1 && actualDay <= 5)
+				openDays++;
+			actualDay++;
+		}
+		data.student.monthsFuture[index].hoursRequired = openDays * 7;
+	}
+}
+
+popup.calculFuture = function(elems, index) {
+
+	var numberDays = data.student.monthsFuture[index].numberDays;
+	var numberSelected = 0;
+
+	for (var i = 0; i < numberDays; i++)
+	{
+		if (data.student.monthsFuture[index].monthlyHabit[i])
+			numberSelected++;
+	}
+	var hourPerDay = 0;
+
+	if (numberSelected === 0)
+		hourPerDay = data.student.monthsFuture[index].hoursRequired;
+	else
+		hourPerDay = data.student.monthsFuture[index].hoursRequired / numberSelected;
+
+	if (data.student.addBoostHalf)
+		hourPerDay -= 0.7;
+	else if (data.student.addBoostFull)
+		hourPerDay -= 1.4;
+
+	if (hourPerDay < 0)
+		hourPerDay = 0;
+
+	// data.student.monthsFuture[index].hoursRequired = openDays * 7;
+	// console.log("number hours required", data.student.monthsFuture[index].hoursRequired / numberSelected);
+	console.log(hourPerDay);
+}
+
 popup.setAttributeDaySlide = function(elems, indexMonth) {
 
 	for (var i = 0; i < elems.monthGraphs[indexMonth].daySlideContainers.length; i++)
@@ -473,7 +526,8 @@ function updatePanelSize(elems) {
 			ratio_45 = 45 * data.student.sizePanel + "px",
 			ratio_48 = 48 * data.student.sizePanel + "px",
 			ratio_54 = 54 * data.student.sizePanel + "px",
-			ratio_90 = 90 * data.student.sizePanel + "px";
+			ratio_90 = 90 * data.student.sizePanel + "px",
+			ratio_160 = 160 * data.student.sizePanel + "px";
 
 	///////////////////////////////////////////////// TOP LINE POPUP
 	elems.popupTopLeftText.style.fontSize = ratio_14;
@@ -797,6 +851,8 @@ function updatePanelSize(elems) {
 
 	elems.blockLogtime.style.marginTop = "8px";
 	elems.blockLogtime.style.paddingBottom = "8px";
+	elems.blockLogtime.style.height = ratio_48;
+	elems.blockLogtime.style.width = ratio_160;
 
 	elems.labelLogtimeRemaining.style.borderRadius = ratio_4;
 	// elems.extraLogtimeSideLeft.style.padding = "0 " + ratio_2;
@@ -1892,6 +1948,11 @@ popup.createElems = function(elems) {
 	elems.blockLogtime = document.createElement("div");
 	elems.blockLogtime.className = "block-logtime";
 
+	elems.blockLogtimeFuture = document.createElement("div");
+	elems.blockLogtimeFuture.className = "block-logtime-future";
+	elems.blockLogtimeFuture = document.createElement("div");
+	elems.blockLogtimeFuture.className = "block-logtime-future";
+
 	elems.blockLogtimeLeft = document.createElement("div");
 	elems.blockLogtimeLeft.className = "block-logtime-side";
 	elems.blockLogtimeLeft.style.borderRight = "1px solid rgb(45, 49, 60)";
@@ -1980,6 +2041,7 @@ popup.createElems = function(elems) {
 
 	elems.blockLogtime.appendChild(elems.blockLogtimeLeft);
 	elems.blockLogtime.appendChild(elems.blockLogtimeRight);
+	elems.blockLogtime.appendChild(elems.blockLogtimeFuture);
 
 	elems.logtimeContainer.appendChild(elems.lineLogtime);
 	elems.logtimeContainer.appendChild(elems.blockLogtime);
@@ -2143,6 +2205,10 @@ popup.createElems = function(elems) {
 		elems.monthBlocksContainer.style.display = "none";
 		elems.futureMonthBlocksContainer.style.display = "flex";
 
+		elems.blockLogtimeLeft.style.display = "none";
+		elems.blockLogtimeRight.style.display = "none";
+		elems.blockLogtimeFuture.style.display = "flex";
+
 		// change opacity to element unavailable
 		for (var i = 0; i < elems.monthGraphs[popup.months.indexArray].daySlideContainers.length; i++)
 		{
@@ -2169,6 +2235,10 @@ popup.createElems = function(elems) {
 		elems.containerDivMonthFutur.style.display = "none";
 		elems.monthBlocksContainer.style.display = "flex";
 		elems.futureMonthBlocksContainer.style.display = "none";
+
+		elems.blockLogtimeLeft.style.display = "flex";
+		elems.blockLogtimeRight.style.display = "flex";
+		elems.blockLogtimeFuture.style.display = "none";
 
 		// change opacity back to element
 		for (var i = 0; i < elems.monthGraphs[popup.months.indexArray].daySlideContainers.length; i++)
@@ -2323,6 +2393,11 @@ popup.createElems = function(elems) {
 
 	for (var i = 0; i < popup.months.length; i++)
 		popup.calculDays(elems, i);
+
+	for (var i = 0; i < data.student.monthsFuture.length; i++)
+	{
+		popup.calculFuture(elems, i);
+	}
 
 	elems.tooltipSalary = document.createElement("div");
 	elems.tooltipSalary.className = "tooltip-salary";
@@ -2544,6 +2619,7 @@ popup.createElems = function(elems) {
 
 	initText(elems, arrayLanguages[data.student.language]);
 	updatePanelSize(elems);
+	popup.initFuture();
 
 	if (!data.student.popupVisible)
 		hidePopup(elems);

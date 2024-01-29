@@ -48,6 +48,8 @@ data.session = {
 	onCurrentMonth: true,
 	futureMonthIndex: 0,
 	date: new Date(),
+
+	futureMonths: [],
 	// date: new Date("2024-02-01"),	// TESTS
 };
 
@@ -102,7 +104,10 @@ function parseLocalStorage(itemStudent) {
 				nameShort: 0,
 				nameLong: 0,
 				salary: 0,
+				date: 0,
+				numberDays: 0,
 				hoursDeducted: 0,
+				hoursRequired: 0,
 				timeDone: 0,
 			};
 			student.months.push(monthObj);
@@ -124,6 +129,8 @@ function parseLocalStorage(itemStudent) {
 				student.months[i].salary = 0;
 			if (!student.months[i].hoursDeducted)
 				student.months[i].hoursDeducted = 0;
+			if (!student.months[i].hoursRequired)
+				student.months[i].hoursRequired = 0;
 			if (!student.months[i].timeDone)
 				student.months[i].timeDone = 0;
 		}
@@ -140,7 +147,10 @@ function parseLocalStorage(itemStudent) {
 				nameShort: 0,
 				nameLong: 0,
 				salary: 0,
+				date: 0,
+				numberDays: 0,
 				hoursDeducted: 0,
+				hoursRequired: 0,
 				timeDone: 0,
 				monthlyHabit: [],
 			};
@@ -163,6 +173,8 @@ function parseLocalStorage(itemStudent) {
 				student.monthsFuture[i].salary = 0;
 			if (!student.monthsFuture[i].hoursDeducted)
 				student.monthsFuture[i].hoursDeducted = 0;
+			if (!student.monthsFuture[i].hoursRequired)
+				student.monthsFuture[i].hoursRequired = 0;
 			if (!student.monthsFuture[i].timeDone)
 				student.monthsFuture[i].timeDone = 0;
 			if (!student.monthsFuture[i].monthlyHabit || !student.monthsFuture[i].monthlyHabit.length)
@@ -258,6 +270,8 @@ data.init = function() {
 		{
 			data.student.months[i].yearIndex = yearIndex;
 			data.student.months[i].monthIndex = monthIndex;
+			// data.student.months[i].date = new Date(yearIndex, monthIndex + 1, 0);
+			// data.student.months[i].numberDays = data.student.months[i].date.getDate();
 			monthIndex -= 1;
 			if (monthIndex < 0)
 			{
@@ -283,6 +297,8 @@ data.init = function() {
 			}
 			data.student.monthsFuture[i].yearIndex = yearIndex;
 			data.student.monthsFuture[i].monthIndex = monthIndex;
+			// data.student.monthsFuture[i].date = new Date(yearIndex, monthIndex + 1, 0);
+			// data.student.monthsFuture[i].numberDays = data.student.monthsFuture[i].date.getDate();
 
 			if (!data.student.monthsFuture[i].monthlyHabit.length)
 			{
@@ -303,16 +319,6 @@ data.init = function() {
 		if (!(actualYearIndex === data.student.months[data.student.months.length - 1].yearIndex && actualMonthIndex === data.student.months[data.student.months.length - 1].monthIndex))
 		{
 			displayMessage("NEW Month, update of Month ARRAY");
-			// var monthActualObj = {
-			// 	yearIndex: actualYearIndex,
-			// 	monthIndex: actualMonthIndex,
-			// 	nameShort: 0,
-			// 	nameLong: 0,
-			// 	salary: 0,
-			// 	hoursDeducted: 0,
-			// 	timeDone: 0,
-			// };
-			// console.log(data.student.monthsFuture[0]);
 
 			data.student.monthlyHabit = data.student.monthsFuture[0].monthlyHabit;
 			data.student.monthsFuture[0].monthlyHabit = 0;
@@ -334,7 +340,10 @@ data.init = function() {
 				nameShort: 0,
 				nameLong: 0,
 				salary: 0,
+				// date: new Date(futureYearIndex, futureMonthIndex + 1, 0),
+				// numberDays: date.getDate(),
 				hoursDeducted: 0,
+				hoursRequired: 0,
 				timeDone: 0,
 			};
 			data.student.monthsFuture.shift();
