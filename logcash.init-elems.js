@@ -58,7 +58,7 @@ function initContainerLogcash(elems) {
 	elems.rowProgress.appendChild(elems.sideProgress);
 	elems.rowProgress.appendChild(elems.sideRemaining);
 	
-	elems.containerLogcash.appendChild(elems.containerDivMonth);
+	// elems.containerLogcash.appendChild(elems.containerDivMonth);
 	elems.containerLogcash.appendChild(elems.rowProgress);
 	elems.containerLogcash.appendChild(elems.miniLogtimePanel);
 }

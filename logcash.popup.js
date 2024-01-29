@@ -1440,15 +1440,20 @@ popup.createElems = function(elems) {
 
 		var update = false;
 
-		for (var i = popup.numberDay - 1; i < elems.monthArray[popup.months.length - 1].checkboxes.length; i++)
+		if (data.session.onCurrentMonth)
 		{
-			if (data.student.monthlyHabit[i] === true)
+			for (var i = popup.numberDay - 1; i < elems.monthArray[popup.months.length - 1].checkboxes.length; i++)
 			{
-				update = true;
-				data.student.monthlyHabit[i] = false;
-				elems.monthArray[popup.months.indexArray].checkboxes[i].style.borderColor = "rgb(45, 49, 60)";
+				if (data.student.monthlyHabit[i] === true)
+				{
+					update = true;
+					data.student.monthlyHabit[i] = false;
+					elems.monthArray[popup.months.indexArray].checkboxes[i].style.borderColor = "rgb(45, 49, 60)";
+				}
 			}
 		}
+
+
 		if (data.isHomePage === -1 && update)
 		{
 			data.updateLocalStorage();
@@ -1464,6 +1469,13 @@ popup.createElems = function(elems) {
 	
 	elems.monthContainer = document.createElement("div");
 	elems.monthContainer.className = "month-container";
+
+	elems.monthBlocksContainer = document.createElement("div");
+	elems.monthBlocksContainer.className = "month-container";
+	elems.futureMonthBlocksContainer = document.createElement("div");
+	elems.futureMonthBlocksContainer.className = "month-container";
+	elems.monthBlocksContainer.style.display = "flex";
+	elems.futureMonthBlocksContainer.style.display = "none";
 	
 	elems.lineLabelHabit.appendChild(elems.weeklySpan);
 	elems.lineLabelHabit.appendChild(elems.questionHabit);
@@ -1579,6 +1591,8 @@ popup.createElems = function(elems) {
 		elems.monthLineDayName.appendChild(elems.monthDayBoxes[i]);
 	}
 	elems.monthContainer.appendChild(elems.monthLineDayName);
+	elems.monthContainer.appendChild(elems.monthBlocksContainer);
+	elems.monthContainer.appendChild(elems.futureMonthBlocksContainer);
 
 	function mouseoverDayCircle(e) {
 
@@ -1694,9 +1708,10 @@ popup.createElems = function(elems) {
 			tmpBlock.appendChild(elems.monthArray[i].lines[j]);
 
 		elems.monthBlock.push(tmpBlock)
-		elems.monthContainer.appendChild(elems.monthBlock[i]);
+		// elems.monthContainer.appendChild(elems.monthBlock[i]);
+		elems.monthBlocksContainer.appendChild(elems.monthBlock[i]);
 	}
-	// elems.monthBlock[popup.months.length - 1].style.display = "block";
+	elems.monthBlock[popup.months.length - 1].style.display = "block";
 
 	function clickFutureCheckbox(e) {
 
@@ -1781,7 +1796,7 @@ popup.createElems = function(elems) {
 	}
 	generateFutureMonthCalendar();
 
-	elems.monthFutureBlocks = [];
+	elems.futureBlocks = [];
 	for (var i = 0; i < data.student.monthsFuture.length; i++)
 	{
 		tmpBlock = document.createElement("div");
@@ -1790,17 +1805,16 @@ popup.createElems = function(elems) {
 		{
 			tmpBlock.appendChild(elems.futureMonthArray[i].lines[j]);
 		}
-		elems.monthFutureBlocks.push(tmpBlock)
-		elems.monthContainer.appendChild(elems.monthFutureBlocks[i]);
+		elems.futureBlocks.push(tmpBlock)
+		elems.futureMonthBlocksContainer.appendChild(elems.futureBlocks[i]);
 	}
-	elems.monthFutureBlocks[0].style.display = "block";
+	elems.futureBlocks[data.session.futureMonthIndex].style.display = "block";
 
 	function mouseoverInfoContainer(e) {
 		e.target.firstElementChild.lastElementChild.style.opacity = "1";
 	}
 
 	function mouseoutInfoContainer(e) {
-
 		e.target.style.backgroundColor = "";
 		e.target.firstElementChild.lastElementChild.style.opacity = "0";
 	}
@@ -1973,6 +1987,9 @@ popup.createElems = function(elems) {
 	elems.containerDivMonthFutur.style.display = "none";
 	elems.containerDivMonthFutur.style.justifyContent = "space-between";
 
+	// elems.containerLogcash.appendChild(elems.containerDivMonthFutur);
+
+
 	function mouseoverFutureMonth(e) {
 		
 		if (e.target.id != data.session.futureMonthIndex)
@@ -2009,8 +2026,8 @@ popup.createElems = function(elems) {
 			appear = "appearLeft";
 		}
 	
-		elems.monthFutureBlocks[oldMonth].style.animation = "0.2s " + disappear;
-		elems.monthFutureBlocks[oldMonth].style.animationFillMode = "forwards";
+		elems.futureBlocks[oldMonth].style.animation = "0.2s " + disappear;
+		elems.futureBlocks[oldMonth].style.animationFillMode = "forwards";
 	
 		elems.divMonthsFutur[oldMonth].style.backgroundColor = "rgba(37, 41, 50, 0.9)";
 		elems.divMonthsFutur[oldMonth].style.color = "rgb(155, 155, 155)";
@@ -2024,12 +2041,12 @@ popup.createElems = function(elems) {
 		// popup.setData(elems);
 	
 		setTimeout(function() {
-			elems.monthFutureBlocks[oldMonth].style.display = "none";
+			elems.futureBlocks[oldMonth].style.display = "none";
 			// elems.lineGraphs[oldMonth].style.display = "none";
 	
-			elems.monthFutureBlocks[id].style.display = "block";
-			elems.monthFutureBlocks[id].style.animation = "0.2s " + appear;
-			elems.monthFutureBlocks[id].style.animationFillMode = "forwards";
+			elems.futureBlocks[id].style.display = "block";
+			elems.futureBlocks[id].style.animation = "0.2s " + appear;
+			elems.futureBlocks[id].style.animationFillMode = "forwards";
 	
 			// elems.lineGraphs[id].style.display = "flex";
 			// elems.lineGraphs[id].style.animation = "0.2s " + appear;
@@ -2075,6 +2092,10 @@ popup.createElems = function(elems) {
 
 		elems.containerDivMonth.style.display = "none";
 		elems.containerDivMonthFutur.style.display = "flex";
+		elems.monthBlocksContainer.style.display = "none";
+		elems.futureMonthBlocksContainer.style.display = "flex";
+
+		elems.weeklySpan.style.pointerEvents = "all";
 	});
 
 	elems.selectionArrowLeft.addEventListener("click", function(e) {
@@ -2090,9 +2111,14 @@ popup.createElems = function(elems) {
 
 		elems.containerDivMonth.style.display = "flex";
 		elems.containerDivMonthFutur.style.display = "none";
+		elems.monthBlocksContainer.style.display = "flex";
+		elems.futureMonthBlocksContainer.style.display = "none";
+
+		if (popup.months.indexArray !== popup.months.length - 1)
+			elems.weeklySpan.style.pointerEvents = "none";
 	});
 
-	elems.lineThisSelection.addEventListener("mouseover", function(e) {
+	elems.middleLine2.addEventListener("mouseover", function(e) {
 
 		if (data.session.onCurrentMonth)
 		{
@@ -2108,7 +2134,7 @@ popup.createElems = function(elems) {
 		}
 	});
 
-	elems.lineThisSelection.addEventListener("mouseout", function(e) {
+	elems.middleLine2.addEventListener("mouseout", function(e) {
 		
 		if (data.session.onCurrentMonth)
 		{
@@ -3026,7 +3052,7 @@ popup.initPopup = function(elems, months) {
 	});
 
 	// Dispatch/Trigger/Fire the event
-	elems.selectionArrowRight.dispatchEvent(event);
+	// elems.selectionArrowRight.dispatchEvent(event);
 }
 
 
