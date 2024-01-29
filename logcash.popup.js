@@ -2146,6 +2146,7 @@ popup.createElems = function(elems) {
 		elems.divMonthsFutur[id].style.color = "#191919";
 	
 		data.session.futureMonthIndex = id;
+		elems.inputSalary.value = data.student.monthsFuture[data.session.futureMonthIndex].salary;
 	
 		// reGenerate(months[months.indexArray], elems);
 		// popup.setData(elems);
@@ -2189,26 +2190,29 @@ popup.createElems = function(elems) {
 	elems.selectionArrowLeft = document.createElement("div");
 	elems.selectionArrowLeft.className = "selection-arrow-left";
 
-	elems.selectionArrowRight.addEventListener("click", function(e) {
+	function switchFutureMonthCalendar(e) {
 
 		data.session.onCurrentMonth = false;
 		elems.selectionArrowRight.style.opacity = "0";
 		elems.selectionArrowRight.style.cursor = "default";
 		elems.selectionArrowRight.style.pointerEvents = "none";
-
+	
 		elems.selectionArrowLeft.style.opacity = "1";
 		elems.selectionArrowLeft.style.cursor = "pointer";
 		elems.selectionArrowLeft.style.pointerEvents = "all";
-
+	
 		elems.containerDivMonth.style.display = "none";
 		elems.containerDivMonthFutur.style.display = "flex";
 		elems.monthBlocksContainer.style.display = "none";
 		elems.futureMonthBlocksContainer.style.display = "flex";
-
+	
 		elems.blockLogtimeLeft.style.display = "none";
 		elems.blockLogtimeRight.style.display = "none";
 		elems.blockLogtimeFuture.style.display = "flex";
-
+	
+		// change input value
+		elems.inputSalary.value = data.student.monthsFuture[data.session.futureMonthIndex].salary;
+	
 		// change opacity to element unavailable
 		for (var i = 0; i < elems.monthGraphs[popup.months.indexArray].daySlideContainers.length; i++)
 		{
@@ -2216,9 +2220,14 @@ popup.createElems = function(elems) {
 		}
 		elems.salaryContainer.style.opacity = "0.2";
 		elems.popProgressContainer.style.opacity = "0.2";
-
+	
 		elems.weeklySpan.style.pointerEvents = "all";
-	});
+	}
+
+	elems.selectionArrowRight.addEventListener("click", switchFutureMonthCalendar);
+	// elems.selectionArrowRight.addEventListener("click", function(e) {
+
+	// });
 
 	elems.selectionArrowLeft.addEventListener("click", function(e) {
 
@@ -2239,6 +2248,8 @@ popup.createElems = function(elems) {
 		elems.blockLogtimeLeft.style.display = "flex";
 		elems.blockLogtimeRight.style.display = "flex";
 		elems.blockLogtimeFuture.style.display = "none";
+
+		elems.inputSalary.value = data.student.months[popup.months.indexArray].salary;
 
 		// change opacity back to element
 		for (var i = 0; i < elems.monthGraphs[popup.months.indexArray].daySlideContainers.length; i++)
@@ -3127,15 +3138,26 @@ popup.initPopup = function(elems, months) {
 
 		if (isNaN(e.target.value) || !e.target.value || e.target.value < 0)
 			e.target.value = 0;
-		else
+
+		if (data.session.onCurrentMonth)
 		{
 			data.student.months[popup.months.indexArray].salary = e.target.value;
 			if (data.isHomePage === -1)
 				data.updateLocalStorage();
+			
+			popup.setData(elems);
+			popup.calculDays(elems, popup.months.indexArray);
+			popup.setAttributeDaySlide(elems, popup.months.indexArray);
 		}
-		popup.setData(elems);
-		popup.calculDays(elems, popup.months.indexArray);
-		popup.setAttributeDaySlide(elems, popup.months.indexArray);
+		else
+		{
+			data.student.monthsFuture[data.session.futureMonthIndex].salary = e.target.value;
+			console.log("new salary:", data.student.monthsFuture[data.session.futureMonthIndex].salary);
+
+			if (data.isHomePage === -1)
+				data.updateLocalStorage();
+			popup.calculFuture(elems, data.session.futureMonthIndex);
+		}
 	});
 
 	elems.inputDeducted.addEventListener("blur", function(e) {
@@ -3178,21 +3200,25 @@ popup.initPopup = function(elems, months) {
 	////////////////////////////////////////////////// DEV
 	var event = new CustomEvent("click", function(e) {
 
-		data.session.onCurrentMonth = false;
-		elems.selectionArrowRight.style.opacity = "0";
-		elems.selectionArrowRight.style.cursor = "default";
-		elems.selectionArrowRight.style.pointerEvents = "none";
-
-		elems.selectionArrowLeft.style.opacity = "1";
-		elems.selectionArrowLeft.style.cursor = "pointer";
-		elems.selectionArrowLeft.style.pointerEvents = "all";
-
-		elems.containerDivMonth.style.display = "none";
-		elems.containerDivMonthFutur.style.display = "flex";
+		switchFutureMonthCalendar(e);
 	});
+	// var event = new CustomEvent("click", function(e) {
+
+	// 	data.session.onCurrentMonth = false;
+	// 	elems.selectionArrowRight.style.opacity = "0";
+	// 	elems.selectionArrowRight.style.cursor = "default";
+	// 	elems.selectionArrowRight.style.pointerEvents = "none";
+
+	// 	elems.selectionArrowLeft.style.opacity = "1";
+	// 	elems.selectionArrowLeft.style.cursor = "pointer";
+	// 	elems.selectionArrowLeft.style.pointerEvents = "all";
+
+	// 	elems.containerDivMonth.style.display = "none";
+	// 	elems.containerDivMonthFutur.style.display = "flex";
+	// });
 
 	// Dispatch/Trigger/Fire the event
-	elems.selectionArrowRight.dispatchEvent(event);
+	// elems.selectionArrowRight.dispatchEvent(event);
 }
 
 
