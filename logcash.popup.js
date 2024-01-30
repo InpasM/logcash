@@ -85,11 +85,12 @@ popup.calculFuture = function(elems, index) {
 			numberSelected++;
 	}
 	var hourPerDay = 0;
+	var timeToDo = data.student.monthsFuture[index].hoursRequired - data.student.monthsFuture[index].hoursDeducted;
 
 	if (numberSelected === 0)
-		hourPerDay = data.student.monthsFuture[index].hoursRequired;
+		hourPerDay = timeToDo;
 	else
-		hourPerDay = data.student.monthsFuture[index].hoursRequired / numberSelected;
+		hourPerDay = timeToDo / numberSelected;
 
 	if (data.student.addBoostHalf)
 		hourPerDay -= 0.7;
@@ -107,10 +108,6 @@ popup.calculFuture = function(elems, index) {
 		else if (data.student.addBoostFull)
 			elems.extraLogtimeSideFutureRight.innerText = getTimeFormat(hourPerDay + 1.4, "h");
 	}
-
-	// data.student.monthsFuture[index].hoursRequired = openDays * 7;
-	// console.log("number hours required", data.student.monthsFuture[index].hoursRequired / numberSelected);
-	console.log(hourPerDay);
 }
 
 popup.setAttributeDaySlide = function(elems, indexMonth) {
@@ -2223,6 +2220,7 @@ popup.createElems = function(elems) {
 	
 		data.session.futureMonthIndex = id;
 		elems.inputSalary.value = data.student.monthsFuture[data.session.futureMonthIndex].salary;
+		elems.inputDeducted.value = data.student.monthsFuture[data.session.futureMonthIndex].hoursDeducted;
 
 		popup.calculFuture(elems, id);
 	
@@ -2290,6 +2288,7 @@ popup.createElems = function(elems) {
 	
 		// change input value
 		elems.inputSalary.value = data.student.monthsFuture[data.session.futureMonthIndex].salary;
+		elems.inputDeducted.value = data.student.monthsFuture[data.session.futureMonthIndex].hoursDeducted;
 	
 		// change opacity to element unavailable
 		for (var i = 0; i < elems.monthGraphs[popup.months.indexArray].daySlideContainers.length; i++)
@@ -2303,9 +2302,6 @@ popup.createElems = function(elems) {
 	}
 
 	elems.selectionArrowRight.addEventListener("click", switchFutureMonthCalendar);
-	// elems.selectionArrowRight.addEventListener("click", function(e) {
-
-	// });
 
 	elems.selectionArrowLeft.addEventListener("click", function(e) {
 
@@ -2328,6 +2324,7 @@ popup.createElems = function(elems) {
 		elems.blockLogtimeFuture.style.display = "none";
 
 		elems.inputSalary.value = data.student.months[popup.months.indexArray].salary;
+		elems.inputDeducted.value = data.student.months[popup.months.indexArray].hoursDeducted;
 
 		// change opacity back to element
 		for (var i = 0; i < elems.monthGraphs[popup.months.indexArray].daySlideContainers.length; i++)
@@ -3142,14 +3139,17 @@ function clickMonthlyHabit(e) {
 
 function setupInputValue(dataMonth, elems) {
 
-	if (!dataMonth.salary)
-		elems.inputSalary.value = 0;
-	else
-		elems.inputSalary.value = dataMonth.salary;
-	if (!dataMonth.hoursDeducted)
-		elems.inputDeducted.value = 0;
-	else
-		elems.inputDeducted.value = dataMonth.hoursDeducted;
+	if (data.session.onCurrentMonth)
+	{
+		if (!dataMonth.salary)
+			elems.inputSalary.value = 0;
+		else
+			elems.inputSalary.value = dataMonth.salary;
+		if (!dataMonth.hoursDeducted)
+			elems.inputDeducted.value = 0;
+		else
+			elems.inputDeducted.value = dataMonth.hoursDeducted;
+	}
 }
 
 popup.initPopup = function(elems, months) {
@@ -3230,7 +3230,7 @@ popup.initPopup = function(elems, months) {
 		else
 		{
 			data.student.monthsFuture[data.session.futureMonthIndex].salary = e.target.value;
-			console.log("new salary:", data.student.monthsFuture[data.session.futureMonthIndex].salary);
+			// console.log("new salary:", data.student.monthsFuture[data.session.futureMonthIndex].salary);
 
 			if (data.isHomePage === -1)
 				data.updateLocalStorage();
@@ -3240,9 +3240,10 @@ popup.initPopup = function(elems, months) {
 
 	elems.inputDeducted.addEventListener("blur", function(e) {
 
-		if (isNaN(e.target.value)  || !e.target.value || e.target.value < 0)
+		if (isNaN(e.target.value) || !e.target.value || e.target.value < 0)
 			e.target.value = 0;
-		else
+
+		if (data.session.onCurrentMonth)
 		{
 			var numberMonthHours = popup.months[popup.months.indexArray].openDaysTotal * 7;
 
@@ -3250,18 +3251,34 @@ popup.initPopup = function(elems, months) {
 				data.student.months[popup.months.indexArray].hoursDeducted = numberMonthHours;
 			else
 				data.student.months[popup.months.indexArray].hoursDeducted = e.target.value;
+
 			if (data.isHomePage === -1)
 				data.updateLocalStorage();
-		}
-		var newRequire = months[months.indexArray].openDaysTotal * 7 - e.target.value;
 
-		if (newRequire < 0)
-			months[months.indexArray].nbHourReq = 0;
+			var newRequire = months[months.indexArray].openDaysTotal * 7 - e.target.value;
+
+			if (newRequire < 0)
+				months[months.indexArray].nbHourReq = 0;
+			else
+				months[months.indexArray].nbHourReq = newRequire;
+			calculProgress(months[months.indexArray]);
+			reGenerate(months[months.indexArray], elems);
+			popup.setData(elems);
+		}
 		else
-			months[months.indexArray].nbHourReq = newRequire;
-		calculProgress(months[months.indexArray]);
-		reGenerate(months[months.indexArray], elems);
-		popup.setData(elems);
+		{
+			// console.log(parseInt(data.student.monthsFuture[data.session.futureMonthIndex].hoursRequired), parseInt(e.target.value));
+			if (parseInt(e.target.value) > parseInt(data.student.monthsFuture[data.session.futureMonthIndex].hoursRequired))
+				data.student.monthsFuture[data.session.futureMonthIndex].hoursDeducted = data.student.monthsFuture[data.session.futureMonthIndex].hoursRequired;
+			else
+				data.student.monthsFuture[data.session.futureMonthIndex].hoursDeducted = e.target.value;
+
+			e.target.value = data.student.monthsFuture[data.session.futureMonthIndex].hoursDeducted;
+
+			if (data.isHomePage === -1)
+				data.updateLocalStorage();
+			popup.calculFuture(elems, data.session.futureMonthIndex);
+		}
 	});
 
 	for (var i = 0; i < elems.monthArray[popup.months.length - 1].checkboxes.length; i++)
