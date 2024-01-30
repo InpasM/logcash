@@ -1298,9 +1298,13 @@ popup.createElems = function(elems) {
 			}
 		}
 
+		elems.extraLogtimeLeft.style.opacity = "0";
+		elems.extraLogtimeFuture.style.opacity = "0";
+
 		data.updateLocalStorage();
 		updatePanelSize(elems);
 		popup.setData(elems);
+		popup.calculFuture(elems, data.session.futureMonthIndex);
 	}
 
 	elems.resetConfirmButton.addEventListener("click", resetAllDatas);
