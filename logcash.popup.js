@@ -46,21 +46,31 @@ popup.initFuture = function() {
 	for (var index = 0; index < data.student.monthsFuture.length; index++)
 	{
 		var openDays = 0;
-		data.student.monthsFuture[index].date = new Date(data.student.monthsFuture[index].yearIndex, data.student.monthsFuture[index].monthIndex + 1, 0);
-		data.student.monthsFuture[index].numberDays = data.student.monthsFuture[index].date.getDate();
+		var yearIndex = data.student.monthsFuture[index].yearIndex;
+		var monthIndex = data.student.monthsFuture[index].monthIndex;
+		var numberDays = new Date(yearIndex, monthIndex + 1, 0).getDate();
 
-		var actualDay = data.student.monthsFuture[index].date.getDay();
-		var numberDays = data.student.monthsFuture[index].numberDays;
+		var fullDate = "";
+
+		fullDate += yearIndex + "-";
+		if (monthIndex + 1 < 10)
+			fullDate += "0";
+		fullDate += (monthIndex + 1) + "-01";
+
+		var actualDay = new Date(fullDate).getDay();
 
 		for (var i = 0; i < numberDays; i++)
 		{
 			if (actualDay === 7)
 				actualDay = 0;
 			if (actualDay >= 1 && actualDay <= 5)
+			{
 				openDays++;
+			}
 			actualDay++;
 		}
 		data.student.monthsFuture[index].hoursRequired = openDays * 7;
+		data.student.monthsFuture[index].numberDays = numberDays
 	}
 }
 
@@ -91,7 +101,11 @@ popup.calculFuture = function(elems, index) {
 
 	if (index === data.session.futureMonthIndex)
 	{
-		elems.resultLogtimeFuture.innerText = hourPerDay;
+		elems.resultLogtimeFuture.innerText = getTimeFormat(hourPerDay, "h");
+		if (data.student.addBoostHalf)
+			elems.extraLogtimeSideFutureRight.innerText = getTimeFormat(hourPerDay + 0.7, "h");
+		else if (data.student.addBoostFull)
+			elems.extraLogtimeSideFutureRight.innerText = getTimeFormat(hourPerDay + 1.4, "h");
 	}
 
 	// data.student.monthsFuture[index].hoursRequired = openDays * 7;
@@ -183,9 +197,15 @@ function clickBoostMax() {
 		elems.buttonBoostMax.style.color = "white";
 	}
 	if (data.student.addBoostHalf || data.student.addBoostFull)
+	{
 		elems.extraLogtimeLeft.style.opacity = "1";
+		elems.extraLogtimeFuture.style.opacity = "1";
+	}
 	else
+	{
 		elems.extraLogtimeLeft.style.opacity = "0";
+		elems.extraLogtimeFuture.style.opacity = "0";
+	}
 	data.updateLocalStorage();
 	popup.setData(elems);
 	popup.calculFuture(elems, data.session.futureMonthIndex);
