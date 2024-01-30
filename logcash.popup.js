@@ -453,6 +453,7 @@ function initText(elems, text) {
 	elems.labelHours.innerText = text.labelHours;
 	elems.weeklySpan.innerText = text.monthlyAttendance;
 	elems.extraLogtimeSideLeft.innerText = text.extraLogtimeSideLeft;
+	elems.extraLogtimeSideFutureLeft.innerText = text.extraLogtimeSideLeft;
 	elems.labelLogtimeNumberDay.innerText = text.daysRemaining;
 	elems.mainTitleInfo.innerText = text.mainTitleInfo;
 	elems.popProgressTitle.innerText = text.popProgressTitle;
@@ -2007,7 +2008,7 @@ popup.createElems = function(elems) {
 	elems.extraLogtimeFuture.className = "extra-logtime-left";
 	elems.extraLogtimeSideFutureLeft = document.createElement("div");
 	elems.extraLogtimeSideFutureLeft.className = "extra-logtime-side";
-	elems.extraLogtimeSideFutureLeft.innerText = "Without\nBoost Lock";	// TMP
+	// elems.extraLogtimeSideFutureLeft.innerText = "Without\nBoost Lock";	// TMP
 	elems.extraLogtimeSideFutureLeft.style.textAlign = "right";
 	
 	elems.extraLogtimeSideFutureRight = document.createElement("div");
