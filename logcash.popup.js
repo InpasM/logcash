@@ -655,44 +655,45 @@ function updatePanelSize(elems) {
 		elems.monthDayBoxes[i].style.margin = "0 1px";
 	}
 
-	for (var i = 0; i < elems.monthArray.length; i++)
-	{
-		for (var j = 0; j < elems.monthArray[i].checkboxes.length; j++)
+	function resizeCheckLines(elem) {
+
+		for (var j = 0; j < elem.checkboxes.length; j++)
 		{
-			elems.monthArray[i].checkboxes[j].style.fontSize = ratio_8;
-			elems.monthArray[i].checkboxes[j].style.width = ratio_20;
-			elems.monthArray[i].checkboxes[j].style.height = ratio_20;
-			elems.monthArray[i].checkboxes[j].style.borderWidth = ratio_2;
-			// elems.monthArray[i].checkboxes[j].style.margin = "0 " + ratio_1_5;
-			elems.monthArray[i].checkboxes[j].style.margin = "0 1px";
+			elem.checkboxes[j].style.fontSize = ratio_8;
+			elem.checkboxes[j].style.width = ratio_20;
+			elem.checkboxes[j].style.height = ratio_20;
+			elem.checkboxes[j].style.borderWidth = ratio_2;
+			elem.checkboxes[j].style.margin = "0 1px";
 		}
 		elems.lineGraphs[i].style.maxHeight = ratio_40;
 
-		for (var j = 0; j < elems.monthArray[i].lines.length; j++)
-		 {
-			//  elems.monthArray[i].lines[j].style.marginTop = ratio_3;
-			 elems.monthArray[i].lines[j].style.marginTop = ratio_2;
-
-		 }
-		for (var j = 0; j < elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes.length; j++)
+		for (var j = 0; j < elem.lines.length; j++)
+			elem.lines[j].style.marginTop = ratio_2;
+		for (var j = 0; j < elem.lines[elem.lines.length - 1].childNodes.length; j++)
 		{
-			elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.width = ratio_20;
-			elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.height = ratio_20;
-			elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.borderWidth = ratio_2;
-			// elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.margin = "0 " + ratio_1_5;
-			elems.monthArray[i].lines[elems.monthArray[i].lines.length - 1].childNodes[j].style.margin = "0 1px";
+			elem.lines[elem.lines.length - 1].childNodes[j].style.width = ratio_20;
+			elem.lines[elem.lines.length - 1].childNodes[j].style.height = ratio_20;
+			elem.lines[elem.lines.length - 1].childNodes[j].style.borderWidth = ratio_2;
+			elem.lines[elem.lines.length - 1].childNodes[j].style.margin = "0 1px";
 		}
+	}
 
+	for (var i = 0; i < elems.monthArray.length; i++)
+	{
+		resizeCheckLines(elems.monthArray[i]);
 		for (var j = 0; j < elems.lineGraphs[i].childNodes.length; j++)
 		{
 			for (var k = 0; k < elems.lineGraphs[i].childNodes[j].childNodes.length; k++)
 			{
 				if (elems.lineGraphs[i].childNodes[j].childNodes[k].className === "day-base")
-				{
 					elems.lineGraphs[i].childNodes[j].childNodes[k].style.height = ratio_2;
-				}
 			}
 		}
+	}
+
+	for (var i = 0; i < elems.futureMonthArray.length; i++)
+	{
+		resizeCheckLines(elems.futureMonthArray[i]);
 	}
 
 	elems.extraLogtimeSideLeft.style.fontSize = 7 * data.student.sizePanel + "px";
