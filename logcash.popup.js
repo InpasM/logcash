@@ -1260,6 +1260,7 @@ popup.createElems = function(elems) {
 		elems.panelLanguageButtonFrench.style.color = "rgb(155, 155, 155)";
 		elems.panelLanguageButtonFrench.style.backgroundColor = "rgba(37, 41, 50, 0.9)";
 
+		/////////////////////////////////////////////////// reset months
 		for (var i = 0; i < data.student.months.length; i++)
 		{
 			data.student.months[i].hoursDeducted = 0;
@@ -1274,6 +1275,29 @@ popup.createElems = function(elems) {
 		{
 			elems.monthArray[elems.monthArray.length - 1].checkboxes[i].style.borderColor = "rgb(45, 49, 60)";
 		}
+
+		/////////////////////////////////////////////////// reset future months
+		for (var i = 0; i < data.student.monthsFuture.length; i++)
+		{
+			data.student.monthsFuture[i].hoursDeducted = 0;
+			data.student.monthsFuture[i].salary = 0;
+		}
+
+		for (var i = 0; i < data.student.monthsFuture.length; i++)
+		{
+			for (var j = 0; j < data.student.monthsFuture[i].monthlyHabit.length; j++)
+			{
+				data.student.monthsFuture[i].monthlyHabit[j] = false;
+			}
+		}
+		for (var i = 0; i < elems.futureMonthArray.length; i++)
+		{
+			for (var j = 0; j < elems.futureMonthArray[i].checkboxes.length; j++)
+			{
+				elems.futureMonthArray[i].checkboxes[j].style.borderColor = "rgb(45, 49, 60)";
+			}
+		}
+
 		data.updateLocalStorage();
 		updatePanelSize(elems);
 		popup.setData(elems);
