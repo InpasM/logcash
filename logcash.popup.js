@@ -499,6 +499,7 @@ function initText(elems, text) {
 
 
 	const arrayMonth = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+	const arrayMonthFrench = ["Jan", "Fev", "Mar", "Avr", "Mai", "Jui", "Jui", "Aou", "Sep", "Oct", "Nov", "Dec"];
 	for (var i = 0; i < elems.divMonths.length; i++)
 	{
 		for (var j = 0; j < arrayMonth.length; j++)
@@ -511,7 +512,7 @@ function initText(elems, text) {
 	{
 		for (var j = 0; j < arrayMonth.length; j++)
 		{
-			if (elems.divMonthsFutur[i].innerText === arrayMonth[j])
+			if (elems.divMonthsFutur[i].innerText === arrayMonth[j] || elems.divMonthsFutur[i].innerText === arrayMonthFrench[j])
 				elems.divMonthsFutur[i].innerText = text.arrayMonth[j];
 		}
 	}
