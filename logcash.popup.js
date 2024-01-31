@@ -587,7 +587,6 @@ function updatePanelSize(elems) {
 	elems.miniLogtimeValueRemaining.style.fontSize = ratio_10;
 	elems.miniLogtimeValueLock.style.fontSize = ratio_10;
 	
-	
 	//////////////////////////////////////////////// SETTING PANEL
 	elems.topDivSettingPanel.style.padding = ratio_8;
 	elems.topDivSettingPanel.style.borderRadius = ratio_4;
@@ -627,14 +626,6 @@ function updatePanelSize(elems) {
 	elems.resetCancelButton.style.padding = ratio_6 + " " + ratio_10;
 	elems.resetCancelButton.style.borderRadius = ratio_16;
 
-	////////////////////////////////////////////// BUTTONS
-	// elems.buttonBoostMin.style.fontSize = ratio_10;
-	// elems.buttonBoostMin.style.width = ratio_40;
-	// elems.buttonBoostMin.style.height = ratio_22;
-	// elems.buttonBoostMax.style.fontSize = ratio_10;
-	// elems.buttonBoostMax.style.width = ratio_40;
-	// elems.buttonBoostMax.style.height = ratio_22;
-
 	/////////////////////////////////////////// INPUT
 	elems.inputSalary.style.fontSize = ratio_16;
 	elems.inputSalary.style.maxWidth = ratio_45;
@@ -652,7 +643,6 @@ function updatePanelSize(elems) {
 		elems.monthDayBoxes[i].style.width = ratio_20;
 		elems.monthDayBoxes[i].style.height = ratio_20;
 		elems.monthDayBoxes[i].style.borderWidth = ratio_2;
-		// elems.monthDayBoxes[i].style.margin = "0 " + ratio_1_5;
 		elems.monthDayBoxes[i].style.margin = "0 1px";
 	}
 
@@ -715,12 +705,10 @@ function updatePanelSize(elems) {
 	if (elems.extraLogtimeSideRight.innerText.length > 5)
 	{
 		elems.extraLogtimeSideRight.style.fontSize = ratio_9;
-		// elems.extraLogtimeSideRight.style.width = 28 * data.student.sizePanel + "px";
 	}
 	else
 	{
 		elems.extraLogtimeSideRight.style.fontSize = ratio_10;
-		// elems.extraLogtimeSideRight.style.width = ratio_30;
 	}
 	elems.extraLogtimeSideFutureRight.style.fontSize = ratio_10;
 
@@ -730,14 +718,12 @@ function updatePanelSize(elems) {
 	{
 		elems.divMonths[i].style.fontSize = ratio_10;
 		elems.divMonths[i].style.borderWidth = ratio_1_5;
-		// elems.divMonths[i].style.padding = paddingY + paddingX;
 		elems.divMonths[i].style.width = ratio_30;
 		elems.divMonths[i].style.height = ratio_16;
 		elems.divMonths[i].style.margin = "0 " + ratio_3;
 		
 		elems.divMonthsFutur[i].style.fontSize = ratio_10;
 		elems.divMonthsFutur[i].style.borderWidth = ratio_1_5;
-		// elems.divMonthsFutur[i].style.padding = paddingY + paddingX;;
 		elems.divMonthsFutur[i].style.width = ratio_30;
 		elems.divMonthsFutur[i].style.height = ratio_16;
 		elems.divMonthsFutur[i].style.margin = "0 " + ratio_3;
@@ -749,7 +735,6 @@ function updatePanelSize(elems) {
 	elems.panelLanguageButtonFrench.style.padding = paddingY + paddingX;
 	elems.panelLanguageButtonFrench.style.marginLeft = ratio_4;
 
-	// elems.blockLogtimeLeft.style.minWidth = 74 * data.student.sizePanel + "px";
 	elems.blockLogtimeLeft.style.minWidth = 72 * data.student.sizePanel + "px";
 	elems.blockLogtimeRight.style.minWidth = 72 * data.student.sizePanel + "px";
 
@@ -771,17 +756,6 @@ function updatePanelSize(elems) {
 	elems.mainTitleLogtime.style.margin = "0 0 0 " + ratio_2;
 
 	////////////////////////////////////////////// SALARY
-	// elems.selectionArrowRight.style.marginLeft = ratio_2;
-	// elems.selectionArrowLeft.style.marginRight = ratio_2;
-
-	// elems.salaryEuroSign.style.fontSize = ratio_10;
-	// elems.salaryInteger.style.fontSize = ratio_22;
-	// elems.salaryFloat.style.fontSize = ratio_12;
-	// elems.salaryPercent.style.fontSize = ratio_10;
-
-	// elems.salaryCircle.style.maxWidth = 100 * data.student.sizePanel + "px";
-	// elems.salaryCircle.style.minWidth = 84 * data.student.sizePanel + "px";
-
 	elems.salaryEuroSign.style.fontSize = ratio_8;
 	elems.salaryInteger.style.fontSize = ratio_20;
 	elems.salaryFloat.style.fontSize = ratio_10;
@@ -820,7 +794,6 @@ function updatePanelSize(elems) {
 
 	elems.resultLogtimeRemaining.style.fontSize = ratio_14;
 	elems.resultLogtimeFuture.style.fontSize = ratio_14;
-	// elems.resultLogtimeEstimation.style.fontSize = ratio_14;
 	if (data.session.timeLock === "IMPOSSIBLE")
 		elems.resultLogtimeEstimation.style.fontSize = ratio_10;
 	else
@@ -841,13 +814,9 @@ function updatePanelSize(elems) {
 	elems.titleBoost.style.margin = "0 " + ratio_8 + " 0 0";
 	
 	elems.blockBoostLeft.style.marginRight = ratio_6;
-	// elems.blockBoostLeft.style.margingLeft = ratio_4;
-	// elems.blockBoostLeft.style.paddingRight = ratio_4;
-	// elems.blockBoostRight.style.paddingLeft = ratio_4;
 
-	// elems.buttonBoostMin.style.marginTop = ratio_3;
+	/////////////////////////////////////////////////// BUTTONS
 	elems.buttonBoostMin.style.borderRadius = ratio_20;
-	// elems.buttonBoostMax.style.marginTop = ratio_3;
 	elems.buttonBoostMax.style.borderRadius = ratio_20;
 
 	elems.buttonBoostMin.style.borderWidth = ratio_2;
@@ -858,14 +827,13 @@ function updatePanelSize(elems) {
 	elems.buttonBoostMax.style.fontSize = ratio_10;
 	elems.buttonBoostMax.style.padding = ratio_4 + " " + paddingX;
 	
-	//////////////////////////////////////////////// SALARY CONTAINER
+	///////////////////////////////////////////////////// SALARY CONTAINER
 	elems.salaryGraphContainer.style.minHeight = ratio_40;
 	elems.salaryContainer.style.paddingTop = ratio_8;
 	elems.lineThisSelection.style.marginTop = ratio_12;
 	elems.lineThisSelection.style.marginBottom = ratio_16;
 	elems.salaryCircleContainer.style.padding = ratio_12;
 
-	// elems.salaryCircleContainer.style.padding = ratio_12;
 	elems.blockLogtimeLeft.style.paddingRight = ratio_6;
 	elems.blockLogtimeRight.style.paddingLeft = ratio_6;
 
@@ -892,8 +860,6 @@ function updatePanelSize(elems) {
 	elems.blockLogtime.style.width = ratio_160;
 
 	elems.labelLogtimeRemaining.style.borderRadius = ratio_4;
-	// elems.extraLogtimeSideLeft.style.padding = "0 " + ratio_2;
-	// elems.extraLogtimeSideRight.style.padding = "0 " + ratio_2;
 }
 
 function savePosition() {
