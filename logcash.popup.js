@@ -875,11 +875,6 @@ function savePosition() {
 }
 
 var resizeTimeout;
-// window.onresize = function() {
-
-// 	clearTimeout(resizeTimeout);
-// 	resizeTimeout = setTimeout(savePosition, 400);
-// }
 
 window.addEventListener("resize", function() {
 	clearTimeout(resizeTimeout);
@@ -986,7 +981,6 @@ popup.createElems = function(elems) {
 	elems.panelLanguageLine.className = "panel-line";
 	elems.panelLanguageTitle = document.createElement("div");
 	elems.panelLanguageTitle.className = "setting-panel-title";
-	// elems.panelLanguageTitle.innerText = "Language";
 
 	function mouseoverLanguage(e) {
 		
@@ -1092,7 +1086,6 @@ popup.createElems = function(elems) {
 	elems.panelSizeFontMax.className = "panel-size-font-button";
 	elems.panelSizeFontMax.innerText = "+";
 
-
 	function setFontSize(toAdd, e) {
 
 		var update = false;
@@ -1133,7 +1126,6 @@ popup.createElems = function(elems) {
 		}
 	}
 
-
 	elems.panelSizeFontMin.addEventListener("click", function(e) {
 		setFontSize(-0.1, e);
 	});
@@ -1148,7 +1140,6 @@ popup.createElems = function(elems) {
 
 	elems.panelSizeFontLine.appendChild(elems.panelSizeFontTitle);
 	elems.panelSizeFontLine.appendChild(elems.panelSizeFontBlock);
-
 
 	elems.panelResetLine = document.createElement("div");
 	elems.panelResetLine.className = "panel-reset-line";
@@ -2771,19 +2762,6 @@ function getOpenDays(numberYear, numberMonth, numberDay) {
 	var indexHabit = actualDay;
 
 	var i = numberDay - 1;
-	// if (data.session.logAtSchool)
-	// {
-	// 	var i = numberDay - 1;
-
-	// 	if (useAll)
-	// 	{
-	// 		totalDays++; 
-	// 		if (actualDay >= 1 && actualDay <= 5)
-	// 			openDays++;
-	// 	}
-	// }
-	// else
-	// 	var i = numberDay;
 
 	while (++i <= numberDaysInMonth)
 	{
@@ -2801,7 +2779,6 @@ function getOpenDays(numberYear, numberMonth, numberDay) {
 		indexHabit++;
 		actualDay++;
 	}
-	// console.log("DAYS/ OPEN:", openDays, "TOTAL:", totalDays);
 	if (!useAll)
 		return ({open: openDays, total: openDays});
 	return ({open: openDays, total: totalDays});
