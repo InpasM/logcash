@@ -1980,21 +1980,17 @@ popup.createElems = function(elems) {
 
 	elems.labelLogtimeFuture = document.createElement("p");
 	elems.labelLogtimeFuture.className = "small-title-info";
-	// elems.labelLogtimeFuture.style.display = "none";
 	elems.labelLogtimeFuture.style.display = "flex";
 	elems.labelLogtimeFuture.innerText = "Each Day";
 	
 	elems.resultLogtimeFuture = document.createElement("p");
-	// elems.resultLogtimeFuture.style.display = "none";
 	elems.resultLogtimeFuture.style.display = "flex";
 	elems.resultLogtimeFuture.className = "number-result";
-	// elems.resultLogtimeFuture.innerText = "10h20";
 
 	elems.extraLogtimeFuture = document.createElement("div");
 	elems.extraLogtimeFuture.className = "extra-logtime-left";
 	elems.extraLogtimeSideFutureLeft = document.createElement("div");
 	elems.extraLogtimeSideFutureLeft.className = "extra-logtime-side";
-	// elems.extraLogtimeSideFutureLeft.innerText = "Without\nBoost Lock";	// TMP
 	elems.extraLogtimeSideFutureLeft.style.textAlign = "right";
 	
 	elems.extraLogtimeSideFutureRight = document.createElement("div");
@@ -2010,19 +2006,14 @@ popup.createElems = function(elems) {
 	elems.blockLogtimeFuture.appendChild(elems.labelLogtimeFuture);
 	elems.blockLogtimeFuture.appendChild(elems.resultLogtimeFuture);
 	elems.blockLogtimeFuture.appendChild(elems.extraLogtimeFuture);
-	// elems.blockLogtimeFuture = document.createElement("div");
-	// elems.blockLogtimeFuture.className = "block-logtime-future";
-
 
 	elems.blockLogtimeLeft = document.createElement("div");
 	elems.blockLogtimeLeft.className = "block-logtime-side";
 	elems.blockLogtimeLeft.style.borderRight = "1px solid rgb(45, 49, 60)";
-
 	
 	elems.labelLogtimeRemaining = document.createElement("p");
 	elems.labelLogtimeRemaining.className = "small-title-info";
 	elems.labelLogtimeRemaining.style.display = "none";
-	
 
 	elems.resultLogtimeEach = document.createElement("p");
 	elems.resultLogtimeEach.style.display = "none";
@@ -2034,7 +2025,6 @@ popup.createElems = function(elems) {
 	elems.blockLogtimeLine.className = "block-logtime-line";
 	elems.blockLogtimeLine.appendChild(elems.resultLogtimeRemaining);
 	elems.blockLogtimeLine.appendChild(elems.resultLogtimeEach);
-
 
 	if (data.session.logAtSchool)
 	{
@@ -2071,7 +2061,6 @@ popup.createElems = function(elems) {
 	elems.blockLogtimeLeft.appendChild(elems.blockLogtimeLine);
 	elems.blockLogtimeLeft.appendChild(elems.extraLogtimeLeft);
 
-
 	elems.blockLogtimeRight = document.createElement("div");
 	elems.blockLogtimeRight.className = "block-logtime-side";
 
@@ -2090,7 +2079,6 @@ popup.createElems = function(elems) {
 	elems.resultLogtimeNumberDay.innerText = "0";
 	elems.labelLogtimeNumberDay.style.display = "none";
 	elems.resultLogtimeNumberDay.style.display = "none";
-
 
 	elems.blockLogtimeRight.appendChild(elems.labelLogtimeEstimation);
 	elems.blockLogtimeRight.appendChild(elems.resultLogtimeEstimation);
@@ -2137,7 +2125,6 @@ popup.createElems = function(elems) {
 		elems.extraLogtimeLeft.style.opacity = "0";
 	}
 	
-
 	//////////////////////////////////////////////////////////////////////  SALARY CONTAINER
 	elems.salaryContainer = document.createElement("div");
 	elems.salaryContainer.className = "salary-container";
@@ -2154,12 +2141,8 @@ popup.createElems = function(elems) {
 	elems.lineThisSelection.className = "line-this-selection";
 
 	elems.containerDivMonthFutur = document.createElement("div");
-	// elems.containerDivMonth.style.display = "flex";
 	elems.containerDivMonthFutur.style.display = "none";
 	elems.containerDivMonthFutur.style.justifyContent = "space-between";
-
-	// elems.containerLogcash.appendChild(elems.containerDivMonthFutur);
-
 
 	function mouseoverFutureMonth(e) {
 		
