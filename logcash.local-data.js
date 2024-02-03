@@ -242,27 +242,10 @@ data.init = function() {
 	}
 	if (!data.student.months)
 		localStorage.removeItem("student42");
-	// if (!data.student.months.length)
-	// {
-	// 	for (var i = 0; i < 4; i++)
-	// 	{
-	// 		var monthObj = {
-	// 			yearIndex: 0,
-	// 			monthIndex: 0,
-	// 			nameShort: 0,
-	// 			nameLong: 0,
-	// 			salary: 0,
-	// 			hoursDeducted: 0,
-	// 			timeDone: 0,
-	// 		};
-	// 		data.student.months.push(monthObj);
-	// 	}
-	// }
 
 	////////////////////////////////////// CHECK if yearIndex not define do it for all months before and actual
 	if (!data.student.months[0].yearIndex)
 	{
-		// console.log("define actual months index");
 		var yearIndex = data.session.date.getFullYear();
 		var monthIndex = data.session.date.getMonth();
 
@@ -270,8 +253,6 @@ data.init = function() {
 		{
 			data.student.months[i].yearIndex = yearIndex;
 			data.student.months[i].monthIndex = monthIndex;
-			// data.student.months[i].date = new Date(yearIndex, monthIndex + 1, 0);
-			// data.student.months[i].numberDays = data.student.months[i].date.getDate();
 			monthIndex -= 1;
 			if (monthIndex < 0)
 			{
@@ -297,9 +278,6 @@ data.init = function() {
 			}
 			data.student.monthsFuture[i].yearIndex = yearIndex;
 			data.student.monthsFuture[i].monthIndex = monthIndex;
-			// data.student.monthsFuture[i].date = new Date(yearIndex, monthIndex + 1, 0);
-			// data.student.monthsFuture[i].numberDays = data.student.monthsFuture[i].date.getDate();
-
 			if (!data.student.monthsFuture[i].monthlyHabit.length)
 			{
 				var tmpDate = new Date(data.student.monthsFuture[i].yearIndex, data.student.monthsFuture[i].monthIndex + 1, 0);
@@ -350,7 +328,4 @@ data.init = function() {
 			data.student.monthsFuture.push(monthFutureObj);
 		}
 	}
-	// console.log(data.student.months[data.student.months.length - 1]);
-	// console.log(data.student.monthsFuture[0]);
-	// console.log(localStorageSpace());
 }
