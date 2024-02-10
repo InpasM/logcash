@@ -318,8 +318,6 @@ data.init = function() {
 				nameShort: 0,
 				nameLong: 0,
 				salary: 0,
-				// date: new Date(futureYearIndex, futureMonthIndex + 1, 0),
-				// numberDays: date.getDate(),
 				hoursDeducted: 0,
 				hoursRequired: 0,
 				timeDone: 0,
