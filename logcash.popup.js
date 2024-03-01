@@ -857,7 +857,6 @@ function updatePanelSize(elems) {
 
 	elems.blockLogtime.style.marginTop = "8px";
 	elems.blockLogtime.style.paddingBottom = "8px";
-	elems.blockLogtime.style.height = ratio_48;
 	elems.blockLogtime.style.width = ratio_160;
 
 	elems.labelLogtimeRemaining.style.borderRadius = ratio_4;
