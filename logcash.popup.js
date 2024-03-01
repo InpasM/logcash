@@ -1899,12 +1899,19 @@ popup.createElems = function(elems) {
 				tmpDay.addEventListener("mouseover", mouseoverDayCircle);
 				tmpDay.addEventListener("mouseout", mouseoutDayCircle);
 
+				var update = false;
 				if (data.student.monthsFuture[i].monthlyHabit[j])
 					tmpDay.style.borderColor = "rgb(0, 186, 188)";
+				else {
+					data.student.monthsFuture[i].monthlyHabit[j] = false;
+					update = true;
+				}
 
 				tmpMonth.checkboxes.push(tmpDay);
 				tmpMonth.lines[indexLine].appendChild(tmpMonth.checkboxes[j]);
 			}
+			if (update)
+				data.updateLocalStorage();
 			if (indexLine < 5)
 			{
 				tmpMonth.lines[++indexLine] = document.createElement("div");
