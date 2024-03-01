@@ -641,8 +641,8 @@ function updatePanelSize(elems) {
 	for (var i = 0; i < 7; i++)
 	{
 		elems.monthDayBoxes[i].style.fontSize = ratio_8;
-		elems.monthDayBoxes[i].style.width = ratio_20;
-		elems.monthDayBoxes[i].style.height = ratio_20;
+		elems.monthDayBoxes[i].style.width = ratio_22;
+		elems.monthDayBoxes[i].style.height = ratio_22;
 		elems.monthDayBoxes[i].style.borderWidth = ratio_2;
 		elems.monthDayBoxes[i].style.margin = "0 1px";
 	}
@@ -652,8 +652,8 @@ function updatePanelSize(elems) {
 		for (var j = 0; j < elem.checkboxes.length; j++)
 		{
 			elem.checkboxes[j].style.fontSize = ratio_8;
-			elem.checkboxes[j].style.width = ratio_20;
-			elem.checkboxes[j].style.height = ratio_20;
+			elem.checkboxes[j].style.width = ratio_22;
+			elem.checkboxes[j].style.height = ratio_22;
 			elem.checkboxes[j].style.borderWidth = ratio_2;
 			elem.checkboxes[j].style.margin = "0 1px";
 		}
@@ -663,8 +663,8 @@ function updatePanelSize(elems) {
 			elem.lines[j].style.marginTop = ratio_2;
 		for (var j = 0; j < elem.lines[elem.lines.length - 1].childNodes.length; j++)
 		{
-			elem.lines[elem.lines.length - 1].childNodes[j].style.width = ratio_20;
-			elem.lines[elem.lines.length - 1].childNodes[j].style.height = ratio_20;
+			elem.lines[elem.lines.length - 1].childNodes[j].style.width = ratio_22;
+			elem.lines[elem.lines.length - 1].childNodes[j].style.height = ratio_22;
 			elem.lines[elem.lines.length - 1].childNodes[j].style.borderWidth = ratio_2;
 			elem.lines[elem.lines.length - 1].childNodes[j].style.margin = "0 1px";
 		}

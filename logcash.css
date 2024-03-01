@@ -431,6 +431,9 @@
 .habit-container {
 	width: fit-content;
 	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .week-container, .month-container {
