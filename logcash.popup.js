@@ -1510,6 +1510,7 @@ popup.createElems = function(elems) {
 
 	elems.lineLabelHabit = document.createElement("div");
 	elems.lineLabelHabit.className = "line-label";
+	elems.lineLabelHabit.style.width = "100%";
 
 	elems.weeklySpan = document.createElement("p");
 	elems.weeklySpan.className = "main-title-info";
