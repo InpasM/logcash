@@ -657,7 +657,8 @@ function updatePanelSize(elems) {
 			elem.checkboxes[j].style.borderWidth = ratio_2;
 			elem.checkboxes[j].style.margin = "0 1px";
 		}
-		elems.lineGraphs[i].style.maxHeight = ratio_40;
+		if (elems.lineGraphs[i])
+			elems.lineGraphs[i].style.maxHeight = ratio_40;
 
 		for (var j = 0; j < elem.lines.length; j++)
 			elem.lines[j].style.marginTop = ratio_2;
